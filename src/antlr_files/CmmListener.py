@@ -17,6 +17,33 @@ class CmmListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by CmmParser#functionDefinition.
+    def enterFunctionDefinition(self, ctx:CmmParser.FunctionDefinitionContext):
+        pass
+
+    # Exit a parse tree produced by CmmParser#functionDefinition.
+    def exitFunctionDefinition(self, ctx:CmmParser.FunctionDefinitionContext):
+        pass
+
+
+    # Enter a parse tree produced by CmmParser#compoundStatement.
+    def enterCompoundStatement(self, ctx:CmmParser.CompoundStatementContext):
+        pass
+
+    # Exit a parse tree produced by CmmParser#compoundStatement.
+    def exitCompoundStatement(self, ctx:CmmParser.CompoundStatementContext):
+        pass
+
+
+    # Enter a parse tree produced by CmmParser#declaration.
+    def enterDeclaration(self, ctx:CmmParser.DeclarationContext):
+        pass
+
+    # Exit a parse tree produced by CmmParser#declaration.
+    def exitDeclaration(self, ctx:CmmParser.DeclarationContext):
+        pass
+
+
     # Enter a parse tree produced by CmmParser#statement.
     def enterStatement(self, ctx:CmmParser.StatementContext):
         pass
@@ -26,12 +53,30 @@ class CmmListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by CmmParser#typeSpecifier.
+    def enterTypeSpecifier(self, ctx:CmmParser.TypeSpecifierContext):
+        pass
+
+    # Exit a parse tree produced by CmmParser#typeSpecifier.
+    def exitTypeSpecifier(self, ctx:CmmParser.TypeSpecifierContext):
+        pass
+
+
     # Enter a parse tree produced by CmmParser#expression.
     def enterExpression(self, ctx:CmmParser.ExpressionContext):
         pass
 
     # Exit a parse tree produced by CmmParser#expression.
     def exitExpression(self, ctx:CmmParser.ExpressionContext):
+        pass
+
+
+    # Enter a parse tree produced by CmmParser#assignment_expression.
+    def enterAssignment_expression(self, ctx:CmmParser.Assignment_expressionContext):
+        pass
+
+    # Exit a parse tree produced by CmmParser#assignment_expression.
+    def exitAssignment_expression(self, ctx:CmmParser.Assignment_expressionContext):
         pass
 
 
@@ -116,6 +161,15 @@ class CmmListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by CmmParser#cast_expression.
+    def enterCast_expression(self, ctx:CmmParser.Cast_expressionContext):
+        pass
+
+    # Exit a parse tree produced by CmmParser#cast_expression.
+    def exitCast_expression(self, ctx:CmmParser.Cast_expressionContext):
+        pass
+
+
     # Enter a parse tree produced by CmmParser#multiplicative_expression.
     def enterMultiplicative_expression(self, ctx:CmmParser.Multiplicative_expressionContext):
         pass
@@ -131,6 +185,15 @@ class CmmListener(ParseTreeListener):
 
     # Exit a parse tree produced by CmmParser#unary_expression.
     def exitUnary_expression(self, ctx:CmmParser.Unary_expressionContext):
+        pass
+
+
+    # Enter a parse tree produced by CmmParser#postfix_expression.
+    def enterPostfix_expression(self, ctx:CmmParser.Postfix_expressionContext):
+        pass
+
+    # Exit a parse tree produced by CmmParser#postfix_expression.
+    def exitPostfix_expression(self, ctx:CmmParser.Postfix_expressionContext):
         pass
 
 

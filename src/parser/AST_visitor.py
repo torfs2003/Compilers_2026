@@ -1,73 +1,97 @@
 from src.antlr_files.CmmVisitor import CmmVisitor
 from src.antlr_files.CmmParser import CmmParser
-from src.parser.AST import IntNode, BinOpNode, UnaryOpNode
+from src.parser.AST import *
 
 class ASTVisitor(CmmVisitor):
+    
+    # De main functie
     def visitCompilationUnit(self, ctx: CmmParser.CompilationUnitContext):
-        statements = []
+        return self.visit(ctx.functionDefinition())
+
+    # 2. Functie definitie (int main() { ... })
+    def visitFunctionDefinition(self, ctx: CmmParser.FunctionDefinitionContext):
+        return_type = ctx.typeSpecifier().getText()
+        name = ctx.MAIN().getText()
+        
+        body = self.visit(ctx.compoundStatement())
+        
+        return FunctionNode(return_type, name, body)
+
+    # 3. Code blokken ({ ... })
+    def visitCompoundStatement(self, ctx: CmmParser.CompoundStatementContext):
+        items = []
+        # Loop door alle statements/declaraties in het blok
         for child in ctx.children:
-            if child.getText() != "<EOF>":
-                statements.append(self.visit(child))
-        return statements
+            if child.getText() != '{' and child.getText() != '}':
+                node = self.visit(child)
+                if node: # Soms kan een statement leeg zijn
+                    items.append(node)
+        return CompoundNode(items)
 
+    # 4. Variabele Declaraties
+    def visitDeclaration(self, ctx: CmmParser.DeclarationContext):
+        is_const = ctx.CONST() is not None
+        type_spec = ctx.typeSpecifier().getText()
+        name = ctx.IDENTIFIER().getText()
+        
+        init_expr = None
+        if ctx.ASSIGN():
+            init_expr = self.visit(ctx.expression())
+            
+        return DeclNode(is_const, type_spec, name, init_expr)
+
+    # 5. Statements
     def visitStatement(self, ctx: CmmParser.StatementContext):
-        return self.visit(ctx.expression())
+        if ctx.expression():
+            return self.visit(ctx.expression())
+        elif ctx.compoundStatement():
+            return self.visit(ctx.compoundStatement())
+        return None
 
+    # 6. Expressies & Assignments
+    def visitExpression(self, ctx: CmmParser.ExpressionContext):
+        return self.visit(ctx.getChild(0))
+
+    def visitAssignment_expression(self, ctx: CmmParser.Assignment_expressionContext):
+        if ctx.getChildCount() == 3:
+            left = self.visit(ctx.getChild(0))
+            right = self.visit(ctx.getChild(2))
+            return AssignNode(left, right)
+        return self.visit(ctx.getChild(0))
+
+    # Helper voor binaire operatoren
     def _visit_binary_list(self, ctx):
-        """
-        Deze helper verwerkt regels zoals: A (OP A)*
-        Het zorgt voor correcte left-associativity (bijv. 10 - 5 - 2 wordt (10 - 5) - 2)
-        """
-        # Als er maar 1 kind is, is er geen operator. Schuif gewoon door naar beneden.
         if ctx.getChildCount() == 1:
             return self.visit(ctx.getChild(0))
         
-        # Als er meerdere kinderen zijn, bouwen we de boom van links naar rechts op.
         node = self.visit(ctx.getChild(0))
-        
-        # Loop over de rest van de kinderen
         for i in range(1, ctx.getChildCount(), 2):
             op = ctx.getChild(i).getText()
             right = self.visit(ctx.getChild(i+1))
             node = BinOpNode(node, op, right)
-            
         return node
 
-    #Presedence levels
-    def visitExpression(self, ctx: CmmParser.ExpressionContext):
+    # Precedence Levels
+    def visitLogical_or_expression(self, ctx: CmmParser.Logical_or_expressionContext): return self._visit_binary_list(ctx)
+    def visitLogical_and_expression(self, ctx: CmmParser.Logical_and_expressionContext): return self._visit_binary_list(ctx)
+    def visitInclusive_or_expression(self, ctx: CmmParser.Inclusive_or_expressionContext): return self._visit_binary_list(ctx)
+    def visitExclusive_or_expression(self, ctx: CmmParser.Exclusive_or_expressionContext): return self._visit_binary_list(ctx)
+    def visitAnd_expression(self, ctx: CmmParser.And_expressionContext): return self._visit_binary_list(ctx)
+    def visitEquality_expression(self, ctx: CmmParser.Equality_expressionContext): return self._visit_binary_list(ctx)
+    def visitRelational_expression(self, ctx: CmmParser.Relational_expressionContext): return self._visit_binary_list(ctx)
+    def visitShift_expression(self, ctx: CmmParser.Shift_expressionContext): return self._visit_binary_list(ctx)
+    def visitAdditive_expression(self, ctx: CmmParser.Additive_expressionContext): return self._visit_binary_list(ctx)
+    def visitMultiplicative_expression(self, ctx: CmmParser.Multiplicative_expressionContext): return self._visit_binary_list(ctx)
+
+    # 7. Casts
+    def visitCast_expression(self, ctx: CmmParser.Cast_expressionContext):
+        if ctx.getChildCount() == 4:
+            target_type = ctx.typeSpecifier().getText()
+            expr = self.visit(ctx.getChild(3))
+            return CastNode(target_type, expr)
         return self.visit(ctx.getChild(0))
 
-    def visitLogical_or_expression(self, ctx: CmmParser.Logical_or_expressionContext):
-        return self._visit_binary_list(ctx)
-
-    def visitLogical_and_expression(self, ctx: CmmParser.Logical_and_expressionContext):
-        return self._visit_binary_list(ctx)
-
-    def visitInclusive_or_expression(self, ctx: CmmParser.Inclusive_or_expressionContext):
-        return self._visit_binary_list(ctx)
-
-    def visitExclusive_or_expression(self, ctx: CmmParser.Exclusive_or_expressionContext):
-        return self._visit_binary_list(ctx)
-
-    def visitAnd_expression(self, ctx: CmmParser.And_expressionContext):
-        return self._visit_binary_list(ctx)
-
-    def visitEquality_expression(self, ctx: CmmParser.Equality_expressionContext):
-        return self._visit_binary_list(ctx)
-
-    def visitRelational_expression(self, ctx: CmmParser.Relational_expressionContext):
-        return self._visit_binary_list(ctx)
-
-    def visitShift_expression(self, ctx: CmmParser.Shift_expressionContext):
-        return self._visit_binary_list(ctx)
-
-    def visitAdditive_expression(self, ctx: CmmParser.Additive_expressionContext):
-        return self._visit_binary_list(ctx)
-
-    def visitMultiplicative_expression(self, ctx: CmmParser.Multiplicative_expressionContext):
-        return self._visit_binary_list(ctx)
-
-    # Unaire Expressies
+    # 8. Unaire operaties (+, -, !, ~, *, &, ++, --)
     def visitUnary_expression(self, ctx: CmmParser.Unary_expressionContext):
         if ctx.getChildCount() == 1:
             return self.visit(ctx.getChild(0))
@@ -76,22 +100,44 @@ class ASTVisitor(CmmVisitor):
             child_node = self.visit(ctx.getChild(1))
             return UnaryOpNode(op, child_node)
 
+    # 9. Postfix (++ en --)
+    def visitPostfix_expression(self, ctx: CmmParser.Postfix_expressionContext):
+        if ctx.getChildCount() == 1:
+            return self.visit(ctx.getChild(0))
+        else:
+            child_node = self.visit(ctx.getChild(0))
+            op = ctx.getChild(1).getText()
+            return UnaryOpNode(f"POST{op}", child_node) 
+
     # Primaire Expressies
     def visitPrimary_expression(self, ctx: CmmParser.Primary_expressionContext):
-        
+        # '( expression )'
         if ctx.getChildCount() == 3:
             return self.visit(ctx.getChild(1))
         
-        token_text = ctx.getText()
-        return self._parse_constant(token_text)
-
-    # Helper: Constanten Parsen
-    def _parse_constant(self, text: str):
-        clean_text = text.rstrip("uUlL")
+        # Variabelen
+        if ctx.IDENTIFIER():
+            return IdentifierNode(ctx.IDENTIFIER().getText())
         
+        # Literals
+        elif ctx.FLOAT_LITERAL():
+            return FloatNode(float(ctx.FLOAT_LITERAL().getText()))
+        
+        elif ctx.CHAR_LITERAL():
+            # Strip de quotes: 'a' wordt a
+            raw_text = ctx.CHAR_LITERAL().getText()
+            char_val = raw_text[1:-1] 
+            return CharNode(char_val)
+        
+        elif ctx.INT_LITERAL():
+            return self._parse_constant(ctx.INT_LITERAL().getText())
+
+    # Integer parsing
+    def _parse_constant(self, text: str):
+        clean_text = text.rstrip("uUlL") # Verwijder suffixes
         try:
             val = int(clean_text, 0)
             return IntNode(val)
         except ValueError:
-            print(f"Waarschuwing: Kon '{text}' niet parsen als integer.")
+            print(f"Warning: Could not parse integer '{text}'")
             return IntNode(0)

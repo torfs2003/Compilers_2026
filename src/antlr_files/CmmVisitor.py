@@ -14,13 +14,38 @@ class CmmVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by CmmParser#functionDefinition.
+    def visitFunctionDefinition(self, ctx:CmmParser.FunctionDefinitionContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by CmmParser#compoundStatement.
+    def visitCompoundStatement(self, ctx:CmmParser.CompoundStatementContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by CmmParser#declaration.
+    def visitDeclaration(self, ctx:CmmParser.DeclarationContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by CmmParser#statement.
     def visitStatement(self, ctx:CmmParser.StatementContext):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by CmmParser#typeSpecifier.
+    def visitTypeSpecifier(self, ctx:CmmParser.TypeSpecifierContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by CmmParser#expression.
     def visitExpression(self, ctx:CmmParser.ExpressionContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by CmmParser#assignment_expression.
+    def visitAssignment_expression(self, ctx:CmmParser.Assignment_expressionContext):
         return self.visitChildren(ctx)
 
 
@@ -69,6 +94,11 @@ class CmmVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by CmmParser#cast_expression.
+    def visitCast_expression(self, ctx:CmmParser.Cast_expressionContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by CmmParser#multiplicative_expression.
     def visitMultiplicative_expression(self, ctx:CmmParser.Multiplicative_expressionContext):
         return self.visitChildren(ctx)
@@ -76,6 +106,11 @@ class CmmVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by CmmParser#unary_expression.
     def visitUnary_expression(self, ctx:CmmParser.Unary_expressionContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by CmmParser#postfix_expression.
+    def visitPostfix_expression(self, ctx:CmmParser.Postfix_expressionContext):
         return self.visitChildren(ctx)
 
 

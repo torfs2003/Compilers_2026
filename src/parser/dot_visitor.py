@@ -1,9 +1,8 @@
-from src.parser.AST import IntNode, BinOpNode, UnaryOpNode
 from src.parser.base_visitor import BaseVisitor
+from src.parser.AST import *
 
 class DOTVisitor(BaseVisitor):
     def __init__(self):
-        # Lijst om DOT-regels te verzamelen
         self.dot_content = []
         self.node_count = 0
 
@@ -11,37 +10,94 @@ class DOTVisitor(BaseVisitor):
         self.node_count += 1
         return f"node{self.node_count}"
 
-    def visit_IntNode(self, node):
+    # Helper om labels met types te maken
+    def _get_label(self, node, main_text):
+        etype = getattr(node, 'eval_type', None)
+        if etype:
+            return f"{main_text}\\n({etype})"
+        return main_text
+
+    def visit_FunctionNode(self, node):
         node_id = self.generate_id()
-        # Getallen worden weergegeven in een box
-        self.dot_content.append(f'  {node_id} [label="{node.value}", shape=box];')
+        self.dot_content.append(f'  {node_id} [label="Func\\n{node.return_type} {node.name}()", shape=invhouse, style=filled, fillcolor=lightgreen];')
+        body_id = self.visit(node.body)
+        self.dot_content.append(f'  {node_id} -> {body_id};')
+        return node_id
+
+    def visit_CompoundNode(self, node):
+        node_id = self.generate_id()
+        self.dot_content.append(f'  {node_id} [label="Block", shape=diamond];')
+        for item in node.items:
+            child_id = self.visit(item)
+            self.dot_content.append(f'  {node_id} -> {child_id};')
+        return node_id
+
+    def visit_DeclNode(self, node):
+        node_id = self.generate_id()
+        const_str = "const " if node.is_const else ""
+        label = f"Decl\\n{const_str}{node.type_spec}\\n{node.name}"
+        self.dot_content.append(f'  {node_id} [label="{label}", shape=box, color=blue];')
+        if node.init_expr:
+            expr_id = self.visit(node.init_expr)
+            self.dot_content.append(f'  {node_id} -> {expr_id} [label=" init", fontcolor=blue];')
+        return node_id
+
+    def visit_AssignNode(self, node):
+        node_id = self.generate_id()
+        label = self._get_label(node, "=")
+        self.dot_content.append(f'  {node_id} [label="{label}", shape=circle];')
+        left_id = self.visit(node.left)
+        right_id = self.visit(node.right)
+        self.dot_content.append(f'  {node_id} -> {left_id};')
+        self.dot_content.append(f'  {node_id} -> {right_id};')
         return node_id
 
     def visit_BinOpNode(self, node):
         node_id = self.generate_id()
-        # Operatoren worden weergegeven in een cirkel
-        self.dot_content.append(f'  {node_id} [label="{node.op}", shape=circle];')
+        label = self._get_label(node, node.op)
+        self.dot_content.append(f'  {node_id} [label="{label}", shape=circle];')
         
-        # Bezoek recursief de linker- en rechterkinderen om hun ID's te krijgen
         left_id = self.visit(node.left)
         right_id = self.visit(node.right)
-        
-        # Trek de verbindingslijnen in de AST
         self.dot_content.append(f'  {node_id} -> {left_id};')
         self.dot_content.append(f'  {node_id} -> {right_id};')
         return node_id
 
     def visit_UnaryOpNode(self, node):
-        node_id = self.generate_id()            
-        self.dot_content.append(f'  {node_id} [label="{node.op}", shape=circle];')   
-
-        child_id = self.visit(node.child)            
+        node_id = self.generate_id()
+        label = self._get_label(node, node.op)
+        self.dot_content.append(f'  {node_id} [label="{label}", shape=circle];')
+        child_id = self.visit(node.child)
         self.dot_content.append(f'  {node_id} -> {child_id};')
         return node_id
-    
-    def get_dot_graph(self, ast_root):
-        """Zet de hele boom om in een string in DOT formaat."""
-        self.dot_content.append("digraph AST {")
-        self.visit(ast_root)
-        self.dot_content.append("}")
-        return "\n".join(self.dot_content)
+
+    def visit_CastNode(self, node):
+        node_id = self.generate_id()
+        self.dot_content.append(f'  {node_id} [label="Cast\\n({node.target_type})", shape=ellipse];')
+        child_id = self.visit(node.expr)
+        self.dot_content.append(f'  {node_id} -> {child_id};')
+        return node_id
+
+    def visit_IdentifierNode(self, node):
+        node_id = self.generate_id()
+        label = self._get_label(node, f"ID: {node.name}")
+        self.dot_content.append(f'  {node_id} [label="{label}", shape=box, style=filled, fillcolor=lightgrey];')
+        return node_id
+
+    def visit_IntNode(self, node):
+        node_id = self.generate_id()
+        label = self._get_label(node, str(node.value))
+        self.dot_content.append(f'  {node_id} [label="{label}", shape=box];')
+        return node_id
+
+    def visit_FloatNode(self, node):
+        node_id = self.generate_id()
+        label = self._get_label(node, str(node.value))
+        self.dot_content.append(f'  {node_id} [label="{label}", shape=box];')
+        return node_id
+
+    def visit_CharNode(self, node):
+        node_id = self.generate_id()
+        label = self._get_label(node, f"\'{node.value}\'")
+        self.dot_content.append(f'  {node_id} [label="{label}", shape=box];')
+        return node_id

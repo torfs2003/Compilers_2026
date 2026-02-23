@@ -7,9 +7,10 @@ from src.antlr_files.CmmParser import CmmParser
 from src.parser.AST_visitor import ASTVisitor
 from src.parser.dot_visitor import DOTVisitor
 from src.parser.optimizer import ConstantFoldingVisitor
+from src.parser.semantic_visitor import SemanticVisitor
 
 def main():
-    # 1. Argument Parser opzetten
+    # Argument Parser opzetten
     parser = argparse.ArgumentParser(description='Compiler Project 1: Expressions')
     parser.add_argument('--input', type=str, required=True, help='Path to the input C file')
     parser.add_argument('--render_ast', type=str, help='Path to render the AST as a .dot file')
@@ -17,13 +18,13 @@ def main():
     
     args = parser.parse_args()
 
-    # 2. ANTLR opstarten
+    # ANTLR opstarten
     input_stream = FileStream(args.input)
     lexer = CmmLexer(input_stream)
     stream = CommonTokenStream(lexer)
     parser_antlr = CmmParser(stream)
     
-    # 3. Parse Tree (CST) genereren
+    # Parse Tree (CST) genereren
     tree = parser_antlr.compilationUnit()
     
     # Check op syntax fouten
@@ -31,32 +32,37 @@ def main():
         print("Syntax errors found, stopping.")
         sys.exit(1)
 
-    # 4. CST omzetten naar AST
+    # CST omzetten naar AST
     visitor = ASTVisitor()
-    ast_root_list = visitor.visit(tree) 
+    ast_root = visitor.visit(tree) 
     
-    if not ast_root_list:
-        print("Geen expressies gevonden in het input bestand.")
+    if not ast_root:
+        print("Geen geldige AST gegenereerd.")
         return
+    
+    semantic_checker = SemanticVisitor()
+    semantic_checker.visit(ast_root)
 
-    # 5. Optimalisatie toepassen op ALLE expressies
-    final_asts = []
-    optimizer = ConstantFoldingVisitor()
+    # Controleer of de SemanticVisitor fouten heeft gevonden
+    if len(semantic_checker.errors) > 0:
+        print("Semantic errors found, stopping.")
+        for error in semantic_checker.errors:
+            print(error)
+        sys.exit(1)
 
-    for ast in ast_root_list:
-        # Als de gebruiker niet --no_opt heeft meegegeven, optimaliseer de boom
-        if not args.no_opt:
-            ast = optimizer.visit(ast)
-        final_asts.append(ast)
+    # Optimalisatie toepassen
+    if not args.no_opt:
+        optimizer = ConstantFoldingVisitor()
+        ast_root = optimizer.visit(ast_root)
 
-    # 6. Visualisatie
+
+    # Visualisatie
     if args.render_ast:
         dot_visitor = DOTVisitor()
         
         dot_content = ["digraph AST {"]
         
-        for ast in final_asts:
-            dot_visitor.visit(ast)
+        dot_visitor.visit(ast_root)
             
         dot_content.extend(dot_visitor.dot_content)
         dot_content.append("}")

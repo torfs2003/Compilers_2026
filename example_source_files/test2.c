@@ -1,5 +1,18 @@
-5*(3/10 + 9/10);
-6*2/( 2+1 * 2/3 +6) +8 * (8/4);
-(1
-+
-1);
+int main() {
+    int i = 42;
+    float f = 3.14;
+    char c = 'A';
+    const int x = 100;
+    int* p = &i;
+    int** pp = &p;
+    int value = **pp;
+    const float* f_ptr = &f;
+    f_ptr = &f;
+    int casted_float = (int)f;
+    p = p + 1;
+    int diff = pp - pp;
+    i++;
+    --i;
+    const int a = 5 * (10 / 2);
+    int b = a + 5;
+}
