@@ -3,7 +3,11 @@ from src.antlr_files.CmmParser import CmmParser
 from src.parser.AST import *
 
 class ASTVisitor(CmmVisitor):
-    
+
+    def getLoc_andLine(self, node, ctx):
+        node.line = ctx.start.line
+        node.column = ctx.start.column
+        return node
     # De main functie
     def visitCompilationUnit(self, ctx: CmmParser.CompilationUnitContext):
         return self.visit(ctx.functionDefinition())
@@ -14,8 +18,9 @@ class ASTVisitor(CmmVisitor):
         name = ctx.MAIN().getText()
         
         body = self.visit(ctx.compoundStatement())
-        
-        return FunctionNode(return_type, name, body)
+
+        node = FunctionNode(return_type, name, body)
+        return self.getLoc_andLine(node, ctx)
 
     # 3. Code blokken ({ ... })
     def visitCompoundStatement(self, ctx: CmmParser.CompoundStatementContext):
@@ -26,7 +31,8 @@ class ASTVisitor(CmmVisitor):
                 node = self.visit(child)
                 if node: # Soms kan een statement leeg zijn
                     items.append(node)
-        return CompoundNode(items)
+        node = CompoundNode(items)
+        return self.getLoc_andLine(node, ctx)
 
     # 4. Variabele Declaraties
     def visitDeclaration(self, ctx: CmmParser.DeclarationContext):
@@ -37,8 +43,8 @@ class ASTVisitor(CmmVisitor):
         init_expr = None
         if ctx.ASSIGN():
             init_expr = self.visit(ctx.expression())
-            
-        return DeclNode(is_const, type_spec, name, init_expr)
+        node = DeclNode(is_const, type_spec, name, init_expr)
+        return self.getLoc_andLine(node, ctx)
 
     # 5. Statements
     def visitStatement(self, ctx: CmmParser.StatementContext):
