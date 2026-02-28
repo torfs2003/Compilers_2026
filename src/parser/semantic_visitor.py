@@ -6,13 +6,22 @@ class SemanticVisitor(BaseVisitor):
     def __init__(self):
         self.symbol_table = SymbolTable()
         self.errors = []
+        self.warnings = []
         self.type_richness = {
             'char': 1,
             'int': 2,
             'float': 3
         }
 
+    def get_Error(self,node,error):
+        self.errors.append(f"[ Error ] line {node.line}, position {node.column}: {error}")
+
+    def get_Warning(self,node,warning):
+        self.warnings.append(f"[ Warning ] line {node.line}, position {node.column}: {warning}")
+
     def get_richness(self, type_str):
+        if not type_str:
+            return 0
         if '*' in type_str:
             return 4 
         return self.type_richness.get(type_str, 0)
@@ -42,7 +51,7 @@ class SemanticVisitor(BaseVisitor):
         })
         
         if not success:
-            self.errors.append(f"[ Error ] Redeclaratie van variabele '{node.name}'.")
+            self.get_Error(node,f"Redeclaratie van variabele '{node.name}'.")
 
         if node.init_expr:
             self.visit(node.init_expr)
@@ -51,7 +60,7 @@ class SemanticVisitor(BaseVisitor):
     def visit_IdentifierNode(self, node):
         symbol = self.symbol_table.get(node.name)
         if not symbol:
-            self.errors.append(f"[ Error ] Variabele '{node.name}' niet gedeclareerd.")
+            self.get_Error(node,f"Variabele '{node.name}' niet gedeclareerd.")
             node.eval_type = 'void'
         else:
             node.eval_type = symbol['type']
@@ -65,7 +74,7 @@ class SemanticVisitor(BaseVisitor):
 
         # Lvalue check (Identifier of Dereference)
         if not isinstance(node.left, (IdentifierNode, UnaryOpNode)):
-             self.errors.append("[ Error ] Toewijzing aan een rvalue is niet toegestaan.")
+             self.get_Error(node,f"Toewijzing aan een rvalue is niet toegestaan.")
              return
 
         # Schrijf je naar een dereference (*p = 10)?
@@ -73,16 +82,16 @@ class SemanticVisitor(BaseVisitor):
             target = node.left.child
             if isinstance(target, IdentifierNode):
                 if getattr(target, 'points_to_const', False):
-                    self.errors.append(f"[ Error ] Toewijzing aan de waarde waar '{target.name}' naar wijst is niet toegestaan (const).")
+                    self.get_Error(node,f"Toewijzing aan de waarde waar '{target.name}' naar wijst is niet toegestaan (const).")
 
         # Schrijf je naar een directe constante (x = 10)?
         elif isinstance(node.left, IdentifierNode):
             if getattr(node.left, 'is_const', False):
-                self.errors.append(f"[ Error ] Toewijzing aan const variabele '{node.left.name}' is niet toegestaan.")
+                self.get_Error(node,f"Toewijzing aan const variabele '{node.left.name}' is niet toegestaan.")
 
         # Richness Warning
         if self.get_richness(node.right.eval_type) > self.get_richness(node.left.eval_type):
-            print(f"[ Warning ] Informatieverlies bij toewijzing van {node.right.eval_type} aan {node.left.eval_type}.")
+            self.get_Warning(node,f"Informatieverlies bij toewijzing van {node.right.eval_type} aan {node.left.eval_type}.")
 
     # Pointer Arithmetic Logica
     def visit_BinOpNode(self, node):
@@ -98,7 +107,12 @@ class SemanticVisitor(BaseVisitor):
         elif l_type == 'int' and '*' in r_type:
             node.eval_type = r_type
         elif '*' in l_type and '*' in r_type and node.op == '-':
+            if l_type != r_type:
+                self.get_Error(node,f"Onmogelijke bewerking tussen 2 pointers {node.op}")
             node.eval_type = 'int' # Verschil tussen pointers is een integer
+        elif '*' in l_type and '*' in r_type:
+            self.get_Error(node,f"Deze bewerking is onmogelijk '{node.op}: '{l_type} en {r_type}")
+            node.eval_type = 'int'
         else:
             node.eval_type = l_type if self.get_richness(l_type) >= self.get_richness(r_type) else r_type
 
@@ -110,7 +124,7 @@ class SemanticVisitor(BaseVisitor):
             if '*' in node.child.eval_type:
                 node.eval_type = node.child.eval_type.replace("*", "", 1)
             else:
-                self.errors.append("[ Error ] Kan een niet-pointer type niet dereferencen.")
+                self.get_Error(node,f"Kan een niet-pointer type '{node.child.eval_type}' niet dereferencen.")
                 node.eval_type = 'void'
         else:
             node.eval_type = node.child.eval_type

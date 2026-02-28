@@ -62,19 +62,20 @@ class ASTVisitor(CmmVisitor):
         if ctx.getChildCount() == 3:
             left = self.visit(ctx.getChild(0))
             right = self.visit(ctx.getChild(2))
-            return AssignNode(left, right)
+            node = AssignNode(left,right)
+            return self.getLoc_andLine(node,ctx)
         return self.visit(ctx.getChild(0))
 
     # Helper voor binaire operatoren
     def _visit_binary_list(self, ctx):
         if ctx.getChildCount() == 1:
             return self.visit(ctx.getChild(0))
-        
         node = self.visit(ctx.getChild(0))
         for i in range(1, ctx.getChildCount(), 2):
             op = ctx.getChild(i).getText()
             right = self.visit(ctx.getChild(i+1))
             node = BinOpNode(node, op, right)
+            self.getLoc_andLine(node, ctx)
         return node
 
     # Precedence Levels
@@ -94,7 +95,8 @@ class ASTVisitor(CmmVisitor):
         if ctx.getChildCount() == 4:
             target_type = ctx.typeSpecifier().getText()
             expr = self.visit(ctx.getChild(3))
-            return CastNode(target_type, expr)
+            node = CastNode(target_type, expr)
+            return self.getLoc_andLine(node,ctx)
         return self.visit(ctx.getChild(0))
 
     # 8. Unaire operaties (+, -, !, ~, *, &, ++, --)
@@ -104,7 +106,8 @@ class ASTVisitor(CmmVisitor):
         else:
             op = ctx.getChild(0).getText()
             child_node = self.visit(ctx.getChild(1))
-            return UnaryOpNode(op, child_node)
+            node = UnaryOpNode(op,child_node)
+            return self.getLoc_andLine(node,ctx)
 
     # 9. Postfix (++ en --)
     def visitPostfix_expression(self, ctx: CmmParser.Postfix_expressionContext):
@@ -113,7 +116,8 @@ class ASTVisitor(CmmVisitor):
         else:
             child_node = self.visit(ctx.getChild(0))
             op = ctx.getChild(1).getText()
-            return UnaryOpNode(f"POST{op}", child_node) 
+            node = UnaryOpNode(f"POST{op}", child_node)
+            return self.getLoc_andLine(node,ctx)
 
     # Primaire Expressies
     def visitPrimary_expression(self, ctx: CmmParser.Primary_expressionContext):
@@ -123,20 +127,24 @@ class ASTVisitor(CmmVisitor):
         
         # Variabelen
         if ctx.IDENTIFIER():
-            return IdentifierNode(ctx.IDENTIFIER().getText())
+            node = IdentifierNode(ctx.IDENTIFIER().getText())
+            return self.getLoc_andLine(node,ctx)
         
         # Literals
         elif ctx.FLOAT_LITERAL():
-            return FloatNode(float(ctx.FLOAT_LITERAL().getText()))
+            node = FloatNode(float(ctx.FLOAT_LITERAL().getText()))
+            return self.getLoc_andLine(node,ctx)
         
         elif ctx.CHAR_LITERAL():
             # Strip de quotes: 'a' wordt a
             raw_text = ctx.CHAR_LITERAL().getText()
-            char_val = raw_text[1:-1] 
-            return CharNode(char_val)
+            char_val = raw_text[1:-1]
+            node = CharNode(char_val)
+            return self.getLoc_andLine(node,ctx)
         
         elif ctx.INT_LITERAL():
-            return self._parse_constant(ctx.INT_LITERAL().getText())
+            node = self._parse_constant(ctx.INT_LITERAL().getText())
+            return self.getLoc_andLine(node,ctx)
 
     # Integer parsing
     def _parse_constant(self, text: str):
