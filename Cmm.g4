@@ -123,6 +123,7 @@ primary_expression
     : INT_LITERAL
     | FLOAT_LITERAL
     | CHAR_LITERAL
+    | STRING_LITERAL
     | IDENTIFIER
     | LPAREN expression RPAREN
     ;
@@ -191,6 +192,11 @@ INT_LITERAL
     : HEX_LITERAL
     | OCT_LITERAL
     | DEC_LITERAL
+    ;
+
+//Strings
+STRING_LITERAL
+    : '"' ( ~[""\\] | '\\' . )* '"'
     ;
 
 fragment HEX_LITERAL

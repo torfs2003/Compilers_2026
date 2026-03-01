@@ -79,3 +79,4 @@ class CastNode(ASTNode):
         self.expr = expr
     def __repr__(self): 
         return f"CastNode(({self.target_type}) {self.expr})"
+#class StringNode(ASTNode):
