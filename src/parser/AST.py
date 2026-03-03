@@ -79,4 +79,13 @@ class CastNode(ASTNode):
         self.expr = expr
     def __repr__(self): 
         return f"CastNode(({self.target_type}) {self.expr})"
-#class StringNode(ASTNode):
+class CommentNode(ASTNode):
+    def __init__(self, text: str):
+        self.text = text
+    def __repr__(self):
+        return f"CommentNode('{self.text}')"
+class StringNode(ASTNode):
+    def __init__(self, value: str):
+        self.value = value
+    def __repr__(self):
+        return f"StringNode(\"{self.value}\")"

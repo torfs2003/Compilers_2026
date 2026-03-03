@@ -194,9 +194,9 @@ INT_LITERAL
     | DEC_LITERAL
     ;
 
-//Strings
+// Strings
 STRING_LITERAL
-    : '"' ( ~[""\\] | '\\' . )* '"'
+    : '"' ( ~["\\] | '\\' . )* '"'
     ;
 
 fragment HEX_LITERAL
@@ -212,6 +212,14 @@ fragment DEC_LITERAL
 
 IDENTIFIER
     : [a-zA-Z_] [a-zA-Z0-9_]*
+    ;
+
+SINGLE_LINE_COMMENT
+    : '//' ~[\r\n]* -> channel(HIDDEN)
+    ;
+
+MULTI_LINE_COMMENT
+    : '/*' .*? '*/' -> channel(HIDDEN)
     ;
 
 WS

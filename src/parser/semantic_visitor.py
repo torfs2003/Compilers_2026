@@ -133,6 +133,7 @@ class SemanticVisitor(BaseVisitor):
     def visit_IntNode(self, node): node.eval_type = 'int'
     def visit_FloatNode(self, node): node.eval_type = 'float'
     def visit_CharNode(self, node): node.eval_type = 'char'
+    def visit_StringNode(self, node): node.eval_type = 'char*'
     def visit_CastNode(self, node):
         self.visit(node.expr)
         node.eval_type = node.target_type # Expliciete cast overschrijft het type

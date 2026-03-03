@@ -28,6 +28,15 @@ class ASTVisitor(CmmVisitor):
         # Loop door alle statements/declaraties in het blok
         for child in ctx.children:
             if child.getText() != '{' and child.getText() != '}':
+                #check for comments!
+                try:
+                    hiddenTokens = ctx.parser.getTokenStream().getHiddenTokensToLeft(child.start.tokenIndex)
+                    if hiddenTokens:
+                        for token in hiddenTokens:
+                            comment_node = CommentNode(token.text)
+                            items.append(self.getLoc_andLine(comment_node, ctx))
+                except:
+                    pass
                 node = self.visit(child)
                 if node: # Soms kan een statement leeg zijn
                     items.append(node)
@@ -144,6 +153,13 @@ class ASTVisitor(CmmVisitor):
         
         elif ctx.INT_LITERAL():
             node = self._parse_constant(ctx.INT_LITERAL().getText())
+            return self.getLoc_andLine(node,ctx)
+
+        elif ctx.STRING_LITERAL():
+            # Strip de quotes: "a" wordt a
+            raw_text = ctx.STRING_LITERAL().getText()
+            string_val = raw_text[1:-1]
+            node = StringNode(string_val)
             return self.getLoc_andLine(node,ctx)
 
     # Integer parsing
