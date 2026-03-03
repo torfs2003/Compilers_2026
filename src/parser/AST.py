@@ -89,3 +89,15 @@ class StringNode(ASTNode):
         self.value = value
     def __repr__(self):
         return f"StringNode(\"{self.value}\")"
+class ArrayDeclNode(ASTNode):
+    def __init__(self, is_const: bool, type_spec: str, name: str, size_expr: ASTNode = None, init_expr: ASTNode = None):
+        self.is_const = is_const
+        self.type_spec = type_spec
+        self.name = name
+        self.size_expr = size_expr # Grootte van de array (kan None zijn voor onbepaalde grootte)
+        self.init_expr = init_expr # Initialisatie (kan None zijn)
+    def __repr__(self):
+        const_str = "const " if self.is_const else ""
+        size_str = f"[{self.size_expr}]" if self.size_expr else "[]"
+        init_str = f" = {self.init_expr}" if self.init_expr else ""
+        return f"ArrayDeclNode({const_str}{self.type_spec} {self.name}{size_str}{init_str})"

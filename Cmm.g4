@@ -17,7 +17,7 @@ compoundStatement
     ;
 
 declaration
-    : CONST? typeSpecifier IDENTIFIER (ASSIGN expression)? SEMI
+    : CONST? typeSpecifier IDENTIFIER (LBRACKET INT_LITERAL RBRACKET)* (ASSIGN (expression | array_initializer))? SEMI
     ;
 
 statement
@@ -117,6 +117,7 @@ postfix_expression
     : primary_expression
     | postfix_expression INC
     | postfix_expression DEC
+    | postfix_expression LBRACKET expression RBRACKET
     ;
 
 primary_expression
@@ -126,6 +127,11 @@ primary_expression
     | STRING_LITERAL
     | IDENTIFIER
     | LPAREN expression RPAREN
+    ;
+
+array_initializer
+    : LBRACE (expression (COMMA expression)*)? RBRACE
+    | LBRACE (array_initializer (COMMA array_initializer)*)? RBRACE
     ;
 
 // ==========================================
@@ -145,6 +151,9 @@ LPAREN    : '(' ;
 RPAREN    : ')' ;
 LBRACE    : '{' ;
 RBRACE    : '}' ;
+LBRACKET  : '[' ;
+RBRACKET  : ']' ;
+COMMA     : ',' ;
 SEMI      : ';' ;
 ASSIGN    : '=' ;
 
