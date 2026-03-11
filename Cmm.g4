@@ -17,7 +17,7 @@ compoundStatement
     ;
 
 declaration
-    : CONST? typeSpecifier IDENTIFIER (ASSIGN expression)? SEMI
+    : CONST? typeSpecifier IDENTIFIER (LBRACKET INT_LITERAL RBRACKET)* (ASSIGN (expression | array_initializer))? SEMI
     ;
 
 statement
@@ -117,14 +117,21 @@ postfix_expression
     : primary_expression
     | postfix_expression INC
     | postfix_expression DEC
+    | postfix_expression LBRACKET expression RBRACKET
     ;
 
 primary_expression
     : INT_LITERAL
     | FLOAT_LITERAL
     | CHAR_LITERAL
+    | STRING_LITERAL
     | IDENTIFIER
     | LPAREN expression RPAREN
+    ;
+
+array_initializer
+    : LBRACE (expression (COMMA expression)*)? RBRACE
+    | LBRACE (array_initializer (COMMA array_initializer)*)? RBRACE
     ;
 
 // ==========================================
@@ -144,6 +151,9 @@ LPAREN    : '(' ;
 RPAREN    : ')' ;
 LBRACE    : '{' ;
 RBRACE    : '}' ;
+LBRACKET  : '[' ;
+RBRACKET  : ']' ;
+COMMA     : ',' ;
 SEMI      : ';' ;
 ASSIGN    : '=' ;
 
@@ -193,6 +203,11 @@ INT_LITERAL
     | DEC_LITERAL
     ;
 
+// Strings
+STRING_LITERAL
+    : '"' ( ~["\\] | '\\' . )* '"'
+    ;
+
 fragment HEX_LITERAL
 	: '0' [xX] [a-fA-F0-9]+ [uUlL]*
 	;
@@ -206,6 +221,14 @@ fragment DEC_LITERAL
 
 IDENTIFIER
     : [a-zA-Z_] [a-zA-Z0-9_]*
+    ;
+
+SINGLE_LINE_COMMENT
+    : '//' ~[\r\n]* -> channel(HIDDEN)
+    ;
+
+MULTI_LINE_COMMENT
+    : '/*' .*? '*/' -> channel(HIDDEN)
     ;
 
 WS

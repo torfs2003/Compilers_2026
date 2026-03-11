@@ -43,6 +43,10 @@ def main():
     semantic_checker = SemanticVisitor()
     semantic_checker.visit(ast_root)
 
+    if len(semantic_checker.warnings) > 0:
+        for warning in semantic_checker.warnings:
+            print(warning)
+
     # Controleer of de SemanticVisitor fouten heeft gevonden
     if len(semantic_checker.errors) > 0:
         print("Semantic errors found, stopping.")
