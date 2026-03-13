@@ -13,7 +13,7 @@ functionDefinition
     ;
 
 compoundStatement
-    : LBRACE (declaration | statement)* RBRACE
+    : LBRACE declaration* statement* RBRACE
     ;
 
 declaration
