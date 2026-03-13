@@ -8,6 +8,7 @@ from src.parser.AST_visitor import ASTVisitor
 from src.parser.dot_visitor import DOTVisitor
 from src.parser.optimizer import ConstantFoldingVisitor
 from src.parser.semantic_visitor import SemanticVisitor
+from src.llvm_target.llvm import LLVM
 
 def main():
     # Argument Parser opzetten
@@ -81,6 +82,12 @@ def main():
         with open(args.render_ast, 'w') as f:
             f.write(final_dot_string)
         print(f"AST rendered to {args.render_ast}")
+
+    llvm = LLVM()
+
+    llvm.visit(ast_root)
+
+    llvm.dump()
 
 if __name__ == '__main__':
     main()
