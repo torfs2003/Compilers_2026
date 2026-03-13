@@ -6,7 +6,8 @@ class SymbolTable:
         self.scopes.append({})
 
     def exit_scope(self):
-        self.scopes.pop()
+        if len(self.scopes) > 1:
+            self.scopes.pop()
 
     def put(self, name, symbol_data):
         """Voeg een symbool toe aan de huidige scope."""

@@ -5,23 +5,33 @@ grammar Cmm;
 // ==========================================
 
 compilationUnit
-    : functionDefinition EOF
+    : includeDirective* functionDefinition* EOF
+    ;
+
+includeDirective
+    : INCLUDE HEADER
     ;
 
 functionDefinition
-    : typeSpecifier MAIN LPAREN RPAREN compoundStatement
+    : typeSpecifier (MAIN | IDENTIFIER) LPAREN parameterList? RPAREN compoundStatement
+    ;
+
+parameterList
+    : typeSpecifier IDENTIFIER (COMMA typeSpecifier IDENTIFIER)*
     ;
 
 compoundStatement
-    : LBRACE declaration* statement* RBRACE
+    : LBRACE declaration* statement* RBRACE  // C89 Strikte volgorde overgenomen uit Versie 2
     ;
 
 declaration
-    : CONST? typeSpecifier IDENTIFIER (LBRACKET INT_LITERAL RBRACKET)* (ASSIGN (expression | array_initializer))? SEMI
+    : CONST? typeSpecifier IDENTIFIER (LBRACKET INT_LITERAL? RBRACKET)* (ASSIGN (expression | array_initializer))? SEMI
     ;
-
+    
 statement
     : expression SEMI
+    | compoundStatement
+    | SEMI
     ;
 
 typeSpecifier
@@ -115,9 +125,14 @@ unary_expression
 
 postfix_expression
     : primary_expression
+    | postfix_expression LPAREN argumentList? RPAREN
     | postfix_expression INC
     | postfix_expression DEC
     | postfix_expression LBRACKET expression RBRACKET
+    ;
+
+argumentList
+    : expression (COMMA expression)*
     ;
 
 primary_expression
@@ -137,6 +152,10 @@ array_initializer
 // ==========================================
 // LEXER RULES
 // ==========================================
+
+// Preprocessor
+INCLUDE : '#include';
+HEADER  : '<' [a-zA-Z0-9._]+ '>';
 
 // Keywords
 CONST     : 'const';
@@ -221,10 +240,6 @@ fragment DEC_LITERAL
 
 IDENTIFIER
     : [a-zA-Z_] [a-zA-Z0-9_]*
-    ;
-
-SINGLE_LINE_COMMENT
-    : '//' ~[\r\n]* -> channel(HIDDEN)
     ;
 
 MULTI_LINE_COMMENT

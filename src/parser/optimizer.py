@@ -2,88 +2,108 @@ from src.parser.base_visitor import BaseVisitor
 from src.parser.AST import *
 
 class ConstantFoldingVisitor(BaseVisitor):
-    def __init__(self):
-        # Tabel om waarden van const-variabelen in op te slaan voor propagation
+    def __init__(self, enabled=True):
+        self.enabled = enabled
         self.constants = {} 
+        self.results = {}
 
-    # Traversal Logica
-    def visit_FunctionNode(self, node):
-        node.body = self.visit(node.body)
-        return node
+    def visit_IdentifierNode(self, node):
+        if not self.enabled:
+            self.results[id(node)] = node
+            return
 
-    def visit_CompoundNode(self, node):
-        optimized_items = []
-        for item in node.items:
-            res = self.visit(item)
-            if res:
-                optimized_items.append(res)
-        node.items = optimized_items
-        return node
-
+        if node.name in self.constants:
+            self.results[id(node)] = self.constants[node.name]
+        else:
+            self.results[id(node)] = node
 
     def visit_DeclNode(self, node):
         if node.init_expr:
-            node.init_expr = self.visit(node.init_expr)
+            node.init_expr = self.results.get(id(node.init_expr), node.init_expr)
             
             if node.is_const and isinstance(node.init_expr, (IntNode, FloatNode, CharNode)):
-                self.constants[node.name] = node.init_expr.value
+                self.constants[node.name] = node.init_expr
         
-        return node
-
-    def visit_IdentifierNode(self, node):
-        # Vervang de identifier door een literal als de waarde bekend is (propagation)
-        if node.name in self.constants:
-            val = self.constants[node.name]
-            if isinstance(val, int): return IntNode(val)
-            if isinstance(val, float): return FloatNode(val)
-            if isinstance(val, str): return CharNode(val)
-        return node
-
+        self.results[id(node)] = node
 
     def visit_BinOpNode(self, node):
-        node.left = self.visit(node.left)
-        node.right = self.visit(node.right)
+        left = self.results.get(id(node.left), node.left)
+        right = self.results.get(id(node.right), node.right)
+        node.left, node.right = left, right
 
-        # Ondersteun zowel IntNode als FloatNode
-        if isinstance(node.left, (IntNode, FloatNode)) and isinstance(node.right, (IntNode, FloatNode)):
-            l_val = node.left.value
-            r_val = node.right.value
-            
+        if self.enabled and isinstance(left, (IntNode, FloatNode)) and isinstance(right, (IntNode, FloatNode)):
+            l_val, r_val = left.value, right.value
+            res = None
+            op = node.op
+
             try:
-                if node.op == '+': res = l_val + r_val
-                elif node.op == '-': res = l_val - r_val
-                elif node.op == '*': res = l_val * r_val
-                elif node.op == '/': 
-                    # Integer division voor ints, normale division voor floats
-                    res = l_val // r_val if isinstance(l_val, int) and isinstance(r_val, int) else l_val / r_val
-                else: return node
+                if op == '+':   res = l_val + r_val
+                elif op == '-': res = l_val - r_val
+                elif op == '*': res = l_val * r_val
+                elif op == '/': res = int(l_val / r_val) if isinstance(l_val, int) and isinstance(r_val, int) else l_val / r_val
+                elif op == '%': res = l_val % r_val
+                elif op == '>':  res = 1 if l_val > r_val else 0
+                elif op == '<':  res = 1 if l_val < r_val else 0
+                elif op == '==': res = 1 if l_val == r_val else 0
+                elif op == '!=': res = 1 if l_val != r_val else 0
+                elif op == '&&': res = 1 if (l_val and r_val) else 0
+                elif op == '||': res = 1 if (l_val or r_val) else 0
+                elif op == '<<': res = l_val << r_val
+                elif op == '>>': res = l_val >> r_val
+                elif op == '>=': res = 1 if l_val >= r_val else 0
+                elif op == '<=': res = 1 if l_val <= r_val else 0
+                elif op == '&':  res = l_val & r_val
+                elif op == '|':  res = l_val | r_val
+                elif op == '^':  res = l_val ^ r_val
+            except (ZeroDivisionError, ValueError):
+                pass
 
-                # Retourneer de juiste node op basis van het resultaat
-                return FloatNode(float(res)) if isinstance(res, float) else IntNode(int(res))
-            except ZeroDivisionError:
-                return node 
+            if res is not None:
+                new_node = FloatNode(float(res)) if isinstance(res, float) else IntNode(int(res))
+                new_node.eval_type = "int" if isinstance(res, int) else "float"
+                self.results[id(node)] = new_node
+                return
 
-        return node
+        self.results[id(node)] = node
 
     def visit_UnaryOpNode(self, node):
-        node.child = self.visit(node.child)
-        if isinstance(node.child, (IntNode, FloatNode)):
+        node.child = self.results.get(id(node.child), node.child)
+        
+        if self.enabled and isinstance(node.child, (IntNode, FloatNode)):
             if node.op == '-':
                 node.child.value = -node.child.value
-                return node.child
+                self.results[id(node)] = node.child
+                return
             elif node.op == '+':
-                return node.child
-        return node
-
-
-    def visit_AssignNode(self, node):
-        node.right = self.visit(node.right)
-        return node
+                self.results[id(node)] = node.child
+                return
+            elif node.op == '!':
+                val = 1 if not node.child.value else 0
+                self.results[id(node)] = IntNode(val)
+                return
+            elif node.op == '~':
+                self.results[id(node)] = IntNode(~int(node.child.value))
+                return
+        
+        self.results[id(node)] = node
 
     def visit_CastNode(self, node):
-        node.expr = self.visit(node.expr)
-        return node
+        node.expr = self.results.get(id(node.expr), node.expr)
+        
+        if self.enabled and isinstance(node.expr, (IntNode, FloatNode)):
+            val = node.expr.value
+            if node.target_type == 'int':
+                self.results[id(node)] = IntNode(int(val))
+                return
+            elif node.target_type == 'float':
+                self.results[id(node)] = FloatNode(float(val))
+                return
+        
+        self.results[id(node)] = node
 
-    def visit_IntNode(self, node): return node
-    def visit_FloatNode(self, node): return node
-    def visit_CharNode(self, node): return node
+    def generic_visit(self, node):
+        if hasattr(node, 'body'): node.body = self.results.get(id(node.body), node.body)
+        if hasattr(node, 'items'): node.items = [self.results.get(id(i), i) for i in node.items]
+        if hasattr(node, 'right'): node.right = self.results.get(id(node.right), node.right)
+        
+        self.results[id(node)] = node

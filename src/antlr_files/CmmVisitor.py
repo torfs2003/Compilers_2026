@@ -14,8 +14,18 @@ class CmmVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by CmmParser#includeDirective.
+    def visitIncludeDirective(self, ctx:CmmParser.IncludeDirectiveContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by CmmParser#functionDefinition.
     def visitFunctionDefinition(self, ctx:CmmParser.FunctionDefinitionContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by CmmParser#parameterList.
+    def visitParameterList(self, ctx:CmmParser.ParameterListContext):
         return self.visitChildren(ctx)
 
 
@@ -114,8 +124,18 @@ class CmmVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by CmmParser#argumentList.
+    def visitArgumentList(self, ctx:CmmParser.ArgumentListContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by CmmParser#primary_expression.
     def visitPrimary_expression(self, ctx:CmmParser.Primary_expressionContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by CmmParser#array_initializer.
+    def visitArray_initializer(self, ctx:CmmParser.Array_initializerContext):
         return self.visitChildren(ctx)
 
 

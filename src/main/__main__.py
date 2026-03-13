@@ -8,19 +8,20 @@ from src.parser.AST_visitor import ASTVisitor
 from src.parser.dot_visitor import DOTVisitor
 from src.parser.optimizer import ConstantFoldingVisitor
 from src.parser.semantic_visitor import SemanticVisitor
-from src.llvm_target.llvm import LLVM
+from src.llvm_target.llvm_visitor import LLVMVisitor
 
 def main():
     # Argument Parser opzetten
-    parser = argparse.ArgumentParser(description='Compiler Project 1: Expressions')
+    parser = argparse.ArgumentParser(description='Compiler Project')
     parser.add_argument('--input', type=str, required=True, help='Path to the input C file')
     parser.add_argument('--render_ast', type=str, help='Path to render the AST as a .dot file')
     parser.add_argument('--no_opt', action='store_true', help='Disable constant folding optimization')
-    
+    parser.add_argument('--target_llvm', type=str, help='Path to save the LLVM IR as a.ll file')
+
     args = parser.parse_args()
 
     # ANTLR opstarten
-    input_stream = FileStream(args.input)
+    input_stream = FileStream(args.input, encoding='utf-8')   
     lexer = CmmLexer(input_stream)
     stream = CommonTokenStream(lexer)
     parser_antlr = CmmParser(stream)
@@ -33,8 +34,7 @@ def main():
         print("Syntax errors found, stopping.")
         sys.exit(1)
 
-    # CST omzetten naar AST
-    visitor = ASTVisitor()
+    visitor = ASTVisitor(stream)
     ast_root = visitor.visit(tree) 
     
     if not ast_root:
@@ -48,7 +48,6 @@ def main():
         for warning in semantic_checker.warnings:
             print(warning)
 
-    # Controleer of de SemanticVisitor fouten heeft gevonden
     if len(semantic_checker.errors) > 0:
         print("Semantic errors found, stopping.")
         for error in semantic_checker.errors:
@@ -58,36 +57,35 @@ def main():
     # Optimalisatie toepassen
     if not args.no_opt:
         optimizer = ConstantFoldingVisitor()
-        ast_root = optimizer.visit(ast_root)
-
+        optimizer.visit(ast_root)
+        ast_root = optimizer.results.get(id(ast_root), ast_root)
 
     # Visualisatie
     if args.render_ast:
         dot_visitor = DOTVisitor()
         
-        dot_content = ["digraph AST {"]
-        
-        dot_visitor.visit(ast_root)
-            
-        dot_content.extend(dot_visitor.dot_content)
-        dot_content.append("}")
-        
-        final_dot_string = "\n".join(dot_content)
+        final_dot_string = dot_visitor.generate(ast_root)
         
         output_dir = os.path.dirname(args.render_ast)
-        
+
         if output_dir:
             os.makedirs(output_dir, exist_ok=True)
         
         with open(args.render_ast, 'w') as f:
             f.write(final_dot_string)
         print(f"AST rendered to {args.render_ast}")
-
-    llvm = LLVM()
-
-    llvm.visit(ast_root)
-
-    llvm.dump()
+    
+    if args.target_llvm:
+        llvm_visitor = LLVMVisitor()
+        llvm_ir = llvm_visitor.generate(ast_root) 
+        
+        output_dir = os.path.dirname(args.target_llvm)
+        if output_dir:
+            os.makedirs(output_dir, exist_ok=True)
+        
+        with open(args.target_llvm, 'w') as f:
+            f.write(llvm_ir)
+        print(f"LLVM IR generated at {args.target_llvm}")
 
 if __name__ == '__main__':
     main()

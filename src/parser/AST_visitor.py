@@ -1,173 +1,237 @@
-from src.antlr_files.CmmVisitor import CmmVisitor
-from src.antlr_files.CmmParser import CmmParser
+from antlr4.tree.Tree import TerminalNodeImpl
+from antlr4 import Token
 from src.parser.AST import *
 
-class ASTVisitor(CmmVisitor):
+class ASTVisitor:
+    def __init__(self, token_stream):
+        self.token_stream = token_stream
 
-    def getLoc_andLine(self, node, ctx):
+    def get_loc(self, node, ctx):
         node.line = ctx.start.line
         node.column = ctx.start.column
         return node
-    # De main functie
-    def visitCompilationUnit(self, ctx: CmmParser.CompilationUnitContext):
-        return self.visit(ctx.functionDefinition())
 
-    # 2. Functie definitie (int main() { ... })
-    def visitFunctionDefinition(self, ctx: CmmParser.FunctionDefinitionContext):
-        return_type = ctx.typeSpecifier().getText()
-        name = ctx.MAIN().getText()
+    def _get_source_text(self, ctx):
+        """Haalt de originele broncode op inclusief originele spaties en inspringingen."""
+        if not self.token_stream or not ctx.start or not ctx.stop:
+            return ctx.getText()
+        return self.token_stream.getText(ctx.start.tokenIndex, ctx.stop.tokenIndex)
+
+    def _get_hidden_comments(self, ctx):
+        """Vist de comments (/* ... */) op die net voor deze node in de HIDDEN channel staan."""
+        if not self.token_stream or not ctx.start:
+            return []
         
-        body = self.visit(ctx.compoundStatement())
+        hidden_tokens = self.token_stream.getHiddenTokensToLeft(ctx.start.tokenIndex, channel=Token.HIDDEN_CHANNEL)
+        comments = []
+        if hidden_tokens:
+            for token in hidden_tokens:
+                text = token.text.strip()
+                if text.startswith("/*") or text.startswith("//"):
+                    comments.append(text)
+        return comments
 
-        node = FunctionNode(return_type, name, body)
-        return self.getLoc_andLine(node, ctx)
+    def visit(self, root_ctx):
+        stack = [(root_ctx, False)]
+        # Map to store generated AST nodes: id(CST_context) -> AST_node
+        results = {}
 
-    # 3. Code blokken ({ ... })
-    def visitCompoundStatement(self, ctx: CmmParser.CompoundStatementContext):
-        items = []
-        # Loop door alle statements/declaraties in het blok
-        for child in ctx.children:
-            if child.getText() != '{' and child.getText() != '}':
-                #check for comments!
-                try:
-                    hiddenTokens = ctx.parser.getTokenStream().getHiddenTokensToLeft(child.start.tokenIndex)
-                    if hiddenTokens:
-                        for token in hiddenTokens:
-                            comment_node = CommentNode(token.text)
-                            items.append(self.getLoc_andLine(comment_node, ctx))
-                except:
-                    pass
-                node = self.visit(child)
-                if node: # Soms kan een statement leeg zijn
-                    items.append(node)
-        node = CompoundNode(items)
-        return self.getLoc_andLine(node, ctx)
+        while stack:
+            ctx, is_post_order = stack.pop()
 
-    # 4. Variabele Declaraties
-    def visitDeclaration(self, ctx: CmmParser.DeclarationContext):
-        is_const = ctx.CONST() is not None
-        type_spec = ctx.typeSpecifier().getText()
-        name = ctx.IDENTIFIER().getText()
-        
-        init_expr = None
-        if ctx.ASSIGN():
-            init_expr = self.visit(ctx.expression())
-        node = DeclNode(is_const, type_spec, name, init_expr)
-        return self.getLoc_andLine(node, ctx)
+            if not is_post_order:
+                # PHASE 1: Pre-order (Discover children)
+                stack.append((ctx, True))
+                if hasattr(ctx, 'children') and ctx.children:
+                    for child in reversed(ctx.children):
+                        if not isinstance(child, TerminalNodeImpl):
+                            stack.append((child, False))
+            else:
+                # PHASE 2: Post-order (Build AST node)
+                class_name = type(ctx).__name__
+                res = None
 
-    # 5. Statements
-    def visitStatement(self, ctx: CmmParser.StatementContext):
-        if ctx.expression():
-            return self.visit(ctx.expression())
-        elif ctx.compoundStatement():
-            return self.visit(ctx.compoundStatement())
-        return None
+                # 1. High-level structures
+                if class_name == "CompilationUnitContext":
+                    nodes = []
+                    # Verzamel alle includes
+                    if hasattr(ctx, 'includeDirective'):
+                        for inc in ctx.includeDirective():
+                            nodes.append(results[id(inc)])
+                    
+                    # Verzamel alle functies
+                    if hasattr(ctx, 'functionDefinition'):
+                        for func in ctx.functionDefinition():
+                            nodes.append(results[id(func)])
+                    
+                    # Geef een ProgramNode terug met de hele lijst
+                    res = self.get_loc(ProgramNode(nodes), ctx)
 
-    # 6. Expressies & Assignments
-    def visitExpression(self, ctx: CmmParser.ExpressionContext):
-        return self.visit(ctx.getChild(0))
+                elif class_name == "FunctionDefinitionContext":
+                    name = ctx.MAIN().getText() if ctx.MAIN() else ctx.IDENTIFIER().getText()
+                    body = results[id(ctx.compoundStatement())]
+                    
+                    # Verzamel parameters: [(type, naam), ...]
+                    params = []
+                    if ctx.parameterList():
+                        p_list = ctx.parameterList()
+                        for i in range(len(p_list.IDENTIFIER())):
+                            p_type = p_list.typeSpecifier(i).getText()
+                            p_name = p_list.IDENTIFIER(i).getText()
+                            params.append((p_type, p_name))
+                        
+                    node = FunctionNode(ctx.typeSpecifier().getText(), name, body, params)
+                    res = self.get_loc(node, ctx)
 
-    def visitAssignment_expression(self, ctx: CmmParser.Assignment_expressionContext):
-        if ctx.getChildCount() == 3:
-            left = self.visit(ctx.getChild(0))
-            right = self.visit(ctx.getChild(2))
-            node = AssignNode(left,right)
-            return self.getLoc_andLine(node,ctx)
-        return self.visit(ctx.getChild(0))
+                elif class_name == "CompoundStatementContext":
+                    items = []
+                    if ctx.children:
+                        for child in ctx.children:
+                            if id(child) in results:
+                                items.append(results[id(child)])
+                    res = self.get_loc(CompoundNode(items), ctx)
+                
+                elif class_name == "IncludeDirectiveContext":
+                    header = ctx.HEADER().getText()[1:-1]
+                    res = self.get_loc(IncludeNode(header), ctx)
 
-    # Helper voor binaire operatoren
-    def _visit_binary_list(self, ctx):
+                # 2. Declarations
+                elif class_name == "DeclarationContext":
+                    sizes = []
+                    for lit in ctx.INT_LITERAL():
+                        sizes.append(int(lit.getText()))
+                    
+                    init = None
+                    if ctx.expression():
+                        init = results[id(ctx.expression())]
+                    elif ctx.array_initializer():
+                        init = results[id(ctx.array_initializer())]
+
+                    if sizes:
+                        node = ArrayDeclNode(ctx.CONST() is not None, ctx.typeSpecifier().getText(), 
+                                           ctx.IDENTIFIER().getText(), sizes, init)
+                    else:
+                        node = DeclNode(ctx.CONST() is not None, ctx.typeSpecifier().getText(), 
+                                      ctx.IDENTIFIER().getText(), init)
+                    
+                    res = self.get_loc(node, ctx)
+
+                elif class_name == "StatementContext":
+                    if ctx.expression():
+                        res = results.get(id(ctx.expression()))
+                    elif ctx.compoundStatement():
+                        res = results.get(id(ctx.compoundStatement()))
+
+                # 3. Expressions & Assignments
+                elif class_name == "ExpressionContext":
+                    res = results[id(ctx.assignment_expression())]
+
+                elif class_name == "Assignment_expressionContext":
+                    if ctx.getChildCount() == 3:
+                        left = results[id(ctx.unary_expression())]
+                        right = results[id(ctx.assignment_expression())]
+                        res = self.get_loc(AssignNode(left, right), ctx)
+                    else:
+                        res = results[id(ctx.logical_or_expression())]
+
+                # 4. Binary Operations
+                elif class_name in ["Logical_or_expressionContext", "Logical_and_expressionContext", 
+                                  "Inclusive_or_expressionContext", "Exclusive_or_expressionContext",
+                                  "And_expressionContext", "Equality_expressionContext", 
+                                  "Relational_expressionContext", "Shift_expressionContext", 
+                                  "Additive_expressionContext", "Multiplicative_expressionContext"]:
+                    res = self._handle_binary(ctx, results)
+
+                # 5. Casts
+                elif class_name == "Cast_expressionContext":
+                    if ctx.LPAREN():
+                        target = ctx.typeSpecifier().getText()
+                        inner = results[id(ctx.cast_expression())]
+                        res = self.get_loc(CastNode(target, inner), ctx)
+                    else:
+                        res = results[id(ctx.unary_expression())]
+
+                # 6. Unary Operations
+                elif class_name == "Unary_expressionContext":
+                    if ctx.getChildCount() == 1:
+                        res = results[id(ctx.postfix_expression())]
+                    else:
+                        if ctx.MUL() or ctx.BITAND():
+                            op = ctx.getChild(0).getText()
+                            inner_node = results[id(ctx.cast_expression())]
+                            res = self.get_loc(UnaryOpNode(op, inner_node), ctx)
+                        else:                           
+                            op = ctx.getChild(0).getText()
+                            inner_node = results[id(ctx.unary_expression())]
+                            res = self.get_loc(UnaryOpNode(op, inner_node), ctx)
+
+                # 7. Postfix
+                elif class_name == "Postfix_expressionContext":
+                    if ctx.getChildCount() == 1:
+                        res = results[id(ctx.primary_expression())]
+                    elif ctx.LPAREN():
+                        func_name_node = results[id(ctx.postfix_expression())]
+                        args = []
+                        if ctx.argumentList():
+                            arg_ctx = ctx.argumentList()
+                            for child in arg_ctx.getChildren():
+                                if id(child) in results:
+                                    args.append(results[id(child)])
+                        res = self.get_loc(FuncCallNode(func_name_node.name, args), ctx)
+
+                    elif ctx.LBRACKET():
+                        left = results[id(ctx.postfix_expression())]
+                        index = results[id(ctx.expression())]
+                        res = self.get_loc(BinOpNode(left, "[]", index), ctx)
+
+                    else:
+                        # Suffix INC/DEC (a++ or a--)
+                        op = ctx.getChild(1).getText()
+                        inner = results[id(ctx.postfix_expression())]
+                        res = self.get_loc(UnaryOpNode(f"POST{op}", inner), ctx)
+
+                # 8. Primary Expressions (Leaves)
+                elif class_name == "Primary_expressionContext":
+                    if ctx.LPAREN():
+                        res = results[id(ctx.expression())]
+                    elif ctx.IDENTIFIER():
+                        res = self.get_loc(IdentifierNode(ctx.IDENTIFIER().getText()), ctx)
+                    elif ctx.INT_LITERAL():
+                        val = int(ctx.INT_LITERAL().getText().rstrip("uUlL"), 0)
+                        res = self.get_loc(IntNode(val), ctx)
+                    elif ctx.FLOAT_LITERAL():
+                        res = self.get_loc(FloatNode(float(ctx.FLOAT_LITERAL().getText())), ctx)
+                    elif ctx.CHAR_LITERAL():
+                        res = self.get_loc(CharNode(ctx.CHAR_LITERAL().getText()[1:-1]), ctx)
+                    elif ctx.STRING_LITERAL():
+                        res = self.get_loc(StringNode(ctx.STRING_LITERAL().getText()[1:-1]), ctx)
+
+                elif class_name == "Array_initializerContext":
+                    values = []
+                    for child in ctx.children:
+                        if id(child) in results:
+                            values.append(results[id(child)])
+                    res = self.get_loc(ArrayInitNode(values), ctx)
+
+                if res:
+                    if class_name in ["DeclarationContext", "Assignment_expressionContext", "Postfix_expressionContext", "StatementContext"]:
+                        res.original_c_code = self._get_source_text(ctx)
+                        res.user_comments = self._get_hidden_comments(ctx)
+                    
+                    results[id(ctx)] = res
+
+        return results[id(root_ctx)]
+
+    def _handle_binary(self, ctx, results):
+        """Helper to flatten left-recursive binary operations iteratively."""
         if ctx.getChildCount() == 1:
-            return self.visit(ctx.getChild(0))
-        node = self.visit(ctx.getChild(0))
-        for i in range(1, ctx.getChildCount(), 2):
-            op = ctx.getChild(i).getText()
-            right = self.visit(ctx.getChild(i+1))
-            node = BinOpNode(node, op, right)
-            self.getLoc_andLine(node, ctx)
+            return results[id(ctx.getChild(0))]
+        
+        left = results[id(ctx.getChild(0))]
+        op = ctx.getChild(1).getText()
+        right = results[id(ctx.getChild(2))]
+        
+        node = BinOpNode(left, op, right)
+        node.line = ctx.start.line
+        node.column = ctx.start.column
         return node
-
-    # Precedence Levels
-    def visitLogical_or_expression(self, ctx: CmmParser.Logical_or_expressionContext): return self._visit_binary_list(ctx)
-    def visitLogical_and_expression(self, ctx: CmmParser.Logical_and_expressionContext): return self._visit_binary_list(ctx)
-    def visitInclusive_or_expression(self, ctx: CmmParser.Inclusive_or_expressionContext): return self._visit_binary_list(ctx)
-    def visitExclusive_or_expression(self, ctx: CmmParser.Exclusive_or_expressionContext): return self._visit_binary_list(ctx)
-    def visitAnd_expression(self, ctx: CmmParser.And_expressionContext): return self._visit_binary_list(ctx)
-    def visitEquality_expression(self, ctx: CmmParser.Equality_expressionContext): return self._visit_binary_list(ctx)
-    def visitRelational_expression(self, ctx: CmmParser.Relational_expressionContext): return self._visit_binary_list(ctx)
-    def visitShift_expression(self, ctx: CmmParser.Shift_expressionContext): return self._visit_binary_list(ctx)
-    def visitAdditive_expression(self, ctx: CmmParser.Additive_expressionContext): return self._visit_binary_list(ctx)
-    def visitMultiplicative_expression(self, ctx: CmmParser.Multiplicative_expressionContext): return self._visit_binary_list(ctx)
-
-    # 7. Casts
-    def visitCast_expression(self, ctx: CmmParser.Cast_expressionContext):
-        if ctx.getChildCount() == 4:
-            target_type = ctx.typeSpecifier().getText()
-            expr = self.visit(ctx.getChild(3))
-            node = CastNode(target_type, expr)
-            return self.getLoc_andLine(node,ctx)
-        return self.visit(ctx.getChild(0))
-
-    # 8. Unaire operaties (+, -, !, ~, *, &, ++, --)
-    def visitUnary_expression(self, ctx: CmmParser.Unary_expressionContext):
-        if ctx.getChildCount() == 1:
-            return self.visit(ctx.getChild(0))
-        else:
-            op = ctx.getChild(0).getText()
-            child_node = self.visit(ctx.getChild(1))
-            node = UnaryOpNode(op,child_node)
-            return self.getLoc_andLine(node,ctx)
-
-    # 9. Postfix (++ en --)
-    def visitPostfix_expression(self, ctx: CmmParser.Postfix_expressionContext):
-        if ctx.getChildCount() == 1:
-            return self.visit(ctx.getChild(0))
-        else:
-            child_node = self.visit(ctx.getChild(0))
-            op = ctx.getChild(1).getText()
-            node = UnaryOpNode(f"POST{op}", child_node)
-            return self.getLoc_andLine(node,ctx)
-
-    # Primaire Expressies
-    def visitPrimary_expression(self, ctx: CmmParser.Primary_expressionContext):
-        # '( expression )'
-        if ctx.getChildCount() == 3:
-            return self.visit(ctx.getChild(1))
-        
-        # Variabelen
-        if ctx.IDENTIFIER():
-            node = IdentifierNode(ctx.IDENTIFIER().getText())
-            return self.getLoc_andLine(node,ctx)
-        
-        # Literals
-        elif ctx.FLOAT_LITERAL():
-            node = FloatNode(float(ctx.FLOAT_LITERAL().getText()))
-            return self.getLoc_andLine(node,ctx)
-        
-        elif ctx.CHAR_LITERAL():
-            # Strip de quotes: 'a' wordt a
-            raw_text = ctx.CHAR_LITERAL().getText()
-            char_val = raw_text[1:-1]
-            node = CharNode(char_val)
-            return self.getLoc_andLine(node,ctx)
-        
-        elif ctx.INT_LITERAL():
-            node = self._parse_constant(ctx.INT_LITERAL().getText())
-            return self.getLoc_andLine(node,ctx)
-
-        elif ctx.STRING_LITERAL():
-            # Strip de quotes: "a" wordt a
-            raw_text = ctx.STRING_LITERAL().getText()
-            string_val = raw_text[1:-1]
-            node = StringNode(string_val)
-            return self.getLoc_andLine(node,ctx)
-
-    # Integer parsing
-    def _parse_constant(self, text: str):
-        clean_text = text.rstrip("uUlL") # Verwijder suffixes
-        try:
-            val = int(clean_text, 0)
-            return IntNode(val)
-        except ValueError:
-            print(f"Warning: Could not parse integer '{text}'")
-            return IntNode(0)

@@ -17,30 +17,12 @@ class CmmListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by CmmParser#includeDirective.
-    def enterIncludeDirective(self, ctx:CmmParser.IncludeDirectiveContext):
-        pass
-
-    # Exit a parse tree produced by CmmParser#includeDirective.
-    def exitIncludeDirective(self, ctx:CmmParser.IncludeDirectiveContext):
-        pass
-
-
     # Enter a parse tree produced by CmmParser#functionDefinition.
     def enterFunctionDefinition(self, ctx:CmmParser.FunctionDefinitionContext):
         pass
 
     # Exit a parse tree produced by CmmParser#functionDefinition.
     def exitFunctionDefinition(self, ctx:CmmParser.FunctionDefinitionContext):
-        pass
-
-
-    # Enter a parse tree produced by CmmParser#parameterList.
-    def enterParameterList(self, ctx:CmmParser.ParameterListContext):
-        pass
-
-    # Exit a parse tree produced by CmmParser#parameterList.
-    def exitParameterList(self, ctx:CmmParser.ParameterListContext):
         pass
 
 
@@ -212,15 +194,6 @@ class CmmListener(ParseTreeListener):
 
     # Exit a parse tree produced by CmmParser#postfix_expression.
     def exitPostfix_expression(self, ctx:CmmParser.Postfix_expressionContext):
-        pass
-
-
-    # Enter a parse tree produced by CmmParser#argumentList.
-    def enterArgumentList(self, ctx:CmmParser.ArgumentListContext):
-        pass
-
-    # Exit a parse tree produced by CmmParser#argumentList.
-    def exitArgumentList(self, ctx:CmmParser.ArgumentListContext):
         pass
 
 

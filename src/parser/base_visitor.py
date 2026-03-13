@@ -1,8 +1,44 @@
-class BaseVisitor:    
-    def visit(self, node):
-        method_name = 'visit_' + type(node).__name__
-        visitor = getattr(self, method_name, self.generic_visit)
-        return visitor(node)
+from src.parser.AST import *
+class BaseVisitor:
+    def get_children(self, node):
+        """Generieke methode om de kinderen van een ASTNode op te halen."""
+        if isinstance(node, ProgramNode): return node.children
+        if isinstance(node, FunctionNode): return [node.body]
+        if isinstance(node, CompoundNode): return node.items
+        if isinstance(node, (DeclNode, ArrayDeclNode)): 
+            return [node.init_expr] if getattr(node, 'init_expr', None) else []
+        if isinstance(node, AssignNode): return [node.left, node.right]
+        if isinstance(node, BinOpNode): return [node.left, node.right]
+        if isinstance(node, UnaryOpNode): return [node.child]
+        if isinstance(node, CastNode): return [node.expr]
+        if isinstance(node, FuncCallNode): return node.args
+        if isinstance(node, ArrayInitNode): return node.values
+        return []
+    
+    def visit(self, root_node):
+        stack = [(root_node, False)]
 
-    def generic_visit(self, node):
-        raise Exception(f'Geen {type(node).__name__} methode gedefinieerd in {self.__class__.__name__}!')
+        while stack:
+            node, is_post_order = stack.pop()
+
+            if not is_post_order:
+                # --- FASE 1: PRE-ORDER ---
+                pre_method_name = f"pre_visit_{type(node).__name__}"
+                pre_method = getattr(self, pre_method_name, None)
+                if pre_method:
+                    pre_method(node)
+
+                stack.append((node, True))
+
+                children = self.get_children(node)
+                for child in reversed(children):
+                    stack.append((child, False))
+
+            else:
+                # --- FASE 2: POST-ORDER ---
+                post_method_name = f"visit_{type(node).__name__}"
+                post_method = getattr(self, post_method_name, None)
+                if post_method:
+                    post_method(node)
+                    
+        return root_node

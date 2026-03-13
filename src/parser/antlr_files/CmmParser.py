@@ -10,148 +10,125 @@ else:
 
 def serializedATN():
     return [
-        4,1,46,388,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
+        4,1,45,329,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
         6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,2,13,7,13,
         2,14,7,14,2,15,7,15,2,16,7,16,2,17,7,17,2,18,7,18,2,19,7,19,2,20,
-        7,20,2,21,7,21,2,22,7,22,2,23,7,23,2,24,7,24,2,25,7,25,1,0,5,0,54,
-        8,0,10,0,12,0,57,9,0,1,0,5,0,60,8,0,10,0,12,0,63,9,0,1,0,1,0,1,1,
-        1,1,1,1,1,2,1,2,1,2,1,2,3,2,74,8,2,1,2,1,2,1,2,1,3,1,3,1,3,1,3,1,
-        3,1,3,5,3,85,8,3,10,3,12,3,88,9,3,1,4,1,4,5,4,92,8,4,10,4,12,4,95,
-        9,4,1,4,5,4,98,8,4,10,4,12,4,101,9,4,1,4,1,4,1,5,3,5,106,8,5,1,5,
-        1,5,1,5,1,5,3,5,112,8,5,1,5,5,5,115,8,5,10,5,12,5,118,9,5,1,5,1,
-        5,1,5,3,5,123,8,5,3,5,125,8,5,1,5,1,5,1,6,1,6,1,6,1,6,1,6,3,6,134,
-        8,6,1,7,1,7,1,7,1,7,1,7,3,7,141,8,7,1,7,1,7,5,7,145,8,7,10,7,12,
-        7,148,9,7,1,8,1,8,1,9,1,9,1,9,1,9,1,9,3,9,157,8,9,1,10,1,10,1,10,
-        1,10,1,10,1,10,5,10,165,8,10,10,10,12,10,168,9,10,1,11,1,11,1,11,
-        1,11,1,11,1,11,5,11,176,8,11,10,11,12,11,179,9,11,1,12,1,12,1,12,
-        1,12,1,12,1,12,5,12,187,8,12,10,12,12,12,190,9,12,1,13,1,13,1,13,
-        1,13,1,13,1,13,5,13,198,8,13,10,13,12,13,201,9,13,1,14,1,14,1,14,
-        1,14,1,14,1,14,5,14,209,8,14,10,14,12,14,212,9,14,1,15,1,15,1,15,
-        1,15,1,15,1,15,1,15,1,15,1,15,5,15,223,8,15,10,15,12,15,226,9,15,
-        1,16,1,16,1,16,1,16,1,16,1,16,1,16,1,16,1,16,1,16,1,16,1,16,1,16,
-        1,16,1,16,5,16,243,8,16,10,16,12,16,246,9,16,1,17,1,17,1,17,1,17,
-        1,17,1,17,1,17,1,17,1,17,5,17,257,8,17,10,17,12,17,260,9,17,1,18,
-        1,18,1,18,1,18,1,18,1,18,1,18,1,18,1,18,5,18,271,8,18,10,18,12,18,
-        274,9,18,1,19,1,19,1,19,1,19,1,19,1,19,3,19,282,8,19,1,20,1,20,1,
-        20,1,20,1,20,1,20,1,20,1,20,1,20,1,20,1,20,1,20,5,20,296,8,20,10,
-        20,12,20,299,9,20,1,21,1,21,1,21,1,21,1,21,1,21,1,21,1,21,1,21,1,
-        21,1,21,1,21,1,21,1,21,1,21,1,21,1,21,3,21,318,8,21,1,22,1,22,1,
-        22,1,22,1,22,1,22,3,22,326,8,22,1,22,1,22,1,22,1,22,1,22,1,22,1,
-        22,1,22,1,22,1,22,5,22,338,8,22,10,22,12,22,341,9,22,1,23,1,23,1,
-        23,5,23,346,8,23,10,23,12,23,349,9,23,1,24,1,24,1,24,1,24,1,24,1,
-        24,1,24,1,24,1,24,3,24,360,8,24,1,25,1,25,1,25,1,25,5,25,366,8,25,
-        10,25,12,25,369,9,25,3,25,371,8,25,1,25,1,25,1,25,1,25,1,25,5,25,
-        378,8,25,10,25,12,25,381,9,25,3,25,383,8,25,1,25,3,25,386,8,25,1,
-        25,0,12,14,20,22,24,26,28,30,32,34,36,40,44,26,0,2,4,6,8,10,12,14,
-        16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48,50,0,1,2,0,8,
-        8,44,44,422,0,55,1,0,0,0,2,66,1,0,0,0,4,69,1,0,0,0,6,78,1,0,0,0,
-        8,89,1,0,0,0,10,105,1,0,0,0,12,133,1,0,0,0,14,140,1,0,0,0,16,149,
-        1,0,0,0,18,156,1,0,0,0,20,158,1,0,0,0,22,169,1,0,0,0,24,180,1,0,
-        0,0,26,191,1,0,0,0,28,202,1,0,0,0,30,213,1,0,0,0,32,227,1,0,0,0,
-        34,247,1,0,0,0,36,261,1,0,0,0,38,281,1,0,0,0,40,283,1,0,0,0,42,317,
-        1,0,0,0,44,319,1,0,0,0,46,342,1,0,0,0,48,359,1,0,0,0,50,385,1,0,
-        0,0,52,54,3,2,1,0,53,52,1,0,0,0,54,57,1,0,0,0,55,53,1,0,0,0,55,56,
-        1,0,0,0,56,61,1,0,0,0,57,55,1,0,0,0,58,60,3,4,2,0,59,58,1,0,0,0,
-        60,63,1,0,0,0,61,59,1,0,0,0,61,62,1,0,0,0,62,64,1,0,0,0,63,61,1,
-        0,0,0,64,65,5,0,0,1,65,1,1,0,0,0,66,67,5,1,0,0,67,68,5,2,0,0,68,
-        3,1,0,0,0,69,70,3,14,7,0,70,71,7,0,0,0,71,73,5,9,0,0,72,74,3,6,3,
-        0,73,72,1,0,0,0,73,74,1,0,0,0,74,75,1,0,0,0,75,76,5,10,0,0,76,77,
-        3,8,4,0,77,5,1,0,0,0,78,79,3,14,7,0,79,86,5,44,0,0,80,81,5,15,0,
-        0,81,82,3,14,7,0,82,83,5,44,0,0,83,85,1,0,0,0,84,80,1,0,0,0,85,88,
-        1,0,0,0,86,84,1,0,0,0,86,87,1,0,0,0,87,7,1,0,0,0,88,86,1,0,0,0,89,
-        93,5,11,0,0,90,92,3,10,5,0,91,90,1,0,0,0,92,95,1,0,0,0,93,91,1,0,
-        0,0,93,94,1,0,0,0,94,99,1,0,0,0,95,93,1,0,0,0,96,98,3,12,6,0,97,
-        96,1,0,0,0,98,101,1,0,0,0,99,97,1,0,0,0,99,100,1,0,0,0,100,102,1,
-        0,0,0,101,99,1,0,0,0,102,103,5,12,0,0,103,9,1,0,0,0,104,106,5,3,
-        0,0,105,104,1,0,0,0,105,106,1,0,0,0,106,107,1,0,0,0,107,108,3,14,
-        7,0,108,116,5,44,0,0,109,111,5,13,0,0,110,112,5,42,0,0,111,110,1,
-        0,0,0,111,112,1,0,0,0,112,113,1,0,0,0,113,115,5,14,0,0,114,109,1,
-        0,0,0,115,118,1,0,0,0,116,114,1,0,0,0,116,117,1,0,0,0,117,124,1,
-        0,0,0,118,116,1,0,0,0,119,122,5,17,0,0,120,123,3,16,8,0,121,123,
-        3,50,25,0,122,120,1,0,0,0,122,121,1,0,0,0,123,125,1,0,0,0,124,119,
-        1,0,0,0,124,125,1,0,0,0,125,126,1,0,0,0,126,127,5,16,0,0,127,11,
-        1,0,0,0,128,129,3,16,8,0,129,130,5,16,0,0,130,134,1,0,0,0,131,134,
-        3,8,4,0,132,134,5,16,0,0,133,128,1,0,0,0,133,131,1,0,0,0,133,132,
-        1,0,0,0,134,13,1,0,0,0,135,136,6,7,-1,0,136,141,5,4,0,0,137,141,
-        5,5,0,0,138,141,5,6,0,0,139,141,5,7,0,0,140,135,1,0,0,0,140,137,
-        1,0,0,0,140,138,1,0,0,0,140,139,1,0,0,0,141,146,1,0,0,0,142,143,
-        10,1,0,0,143,145,5,20,0,0,144,142,1,0,0,0,145,148,1,0,0,0,146,144,
-        1,0,0,0,146,147,1,0,0,0,147,15,1,0,0,0,148,146,1,0,0,0,149,150,3,
-        18,9,0,150,17,1,0,0,0,151,157,3,20,10,0,152,153,3,42,21,0,153,154,
-        5,17,0,0,154,155,3,18,9,0,155,157,1,0,0,0,156,151,1,0,0,0,156,152,
-        1,0,0,0,157,19,1,0,0,0,158,159,6,10,-1,0,159,160,3,22,11,0,160,166,
-        1,0,0,0,161,162,10,1,0,0,162,163,5,30,0,0,163,165,3,22,11,0,164,
-        161,1,0,0,0,165,168,1,0,0,0,166,164,1,0,0,0,166,167,1,0,0,0,167,
-        21,1,0,0,0,168,166,1,0,0,0,169,170,6,11,-1,0,170,171,3,24,12,0,171,
-        177,1,0,0,0,172,173,10,1,0,0,173,174,5,29,0,0,174,176,3,24,12,0,
-        175,172,1,0,0,0,176,179,1,0,0,0,177,175,1,0,0,0,177,178,1,0,0,0,
-        178,23,1,0,0,0,179,177,1,0,0,0,180,181,6,12,-1,0,181,182,3,26,13,
-        0,182,188,1,0,0,0,183,184,10,1,0,0,184,185,5,33,0,0,185,187,3,26,
-        13,0,186,183,1,0,0,0,187,190,1,0,0,0,188,186,1,0,0,0,188,189,1,0,
-        0,0,189,25,1,0,0,0,190,188,1,0,0,0,191,192,6,13,-1,0,192,193,3,28,
-        14,0,193,199,1,0,0,0,194,195,10,1,0,0,195,196,5,34,0,0,196,198,3,
-        28,14,0,197,194,1,0,0,0,198,201,1,0,0,0,199,197,1,0,0,0,199,200,
-        1,0,0,0,200,27,1,0,0,0,201,199,1,0,0,0,202,203,6,14,-1,0,203,204,
-        3,30,15,0,204,210,1,0,0,0,205,206,10,1,0,0,206,207,5,32,0,0,207,
-        209,3,30,15,0,208,205,1,0,0,0,209,212,1,0,0,0,210,208,1,0,0,0,210,
-        211,1,0,0,0,211,29,1,0,0,0,212,210,1,0,0,0,213,214,6,15,-1,0,214,
-        215,3,32,16,0,215,224,1,0,0,0,216,217,10,2,0,0,217,218,5,27,0,0,
-        218,223,3,32,16,0,219,220,10,1,0,0,220,221,5,28,0,0,221,223,3,32,
-        16,0,222,216,1,0,0,0,222,219,1,0,0,0,223,226,1,0,0,0,224,222,1,0,
-        0,0,224,225,1,0,0,0,225,31,1,0,0,0,226,224,1,0,0,0,227,228,6,16,
-        -1,0,228,229,3,34,17,0,229,244,1,0,0,0,230,231,10,4,0,0,231,232,
-        5,23,0,0,232,243,3,34,17,0,233,234,10,3,0,0,234,235,5,24,0,0,235,
-        243,3,34,17,0,236,237,10,2,0,0,237,238,5,25,0,0,238,243,3,34,17,
-        0,239,240,10,1,0,0,240,241,5,26,0,0,241,243,3,34,17,0,242,230,1,
-        0,0,0,242,233,1,0,0,0,242,236,1,0,0,0,242,239,1,0,0,0,243,246,1,
-        0,0,0,244,242,1,0,0,0,244,245,1,0,0,0,245,33,1,0,0,0,246,244,1,0,
-        0,0,247,248,6,17,-1,0,248,249,3,36,18,0,249,258,1,0,0,0,250,251,
-        10,2,0,0,251,252,5,36,0,0,252,257,3,36,18,0,253,254,10,1,0,0,254,
-        255,5,37,0,0,255,257,3,36,18,0,256,250,1,0,0,0,256,253,1,0,0,0,257,
-        260,1,0,0,0,258,256,1,0,0,0,258,259,1,0,0,0,259,35,1,0,0,0,260,258,
-        1,0,0,0,261,262,6,18,-1,0,262,263,3,40,20,0,263,272,1,0,0,0,264,
-        265,10,2,0,0,265,266,5,18,0,0,266,271,3,40,20,0,267,268,10,1,0,0,
-        268,269,5,19,0,0,269,271,3,40,20,0,270,264,1,0,0,0,270,267,1,0,0,
-        0,271,274,1,0,0,0,272,270,1,0,0,0,272,273,1,0,0,0,273,37,1,0,0,0,
-        274,272,1,0,0,0,275,276,5,9,0,0,276,277,3,14,7,0,277,278,5,10,0,
-        0,278,279,3,38,19,0,279,282,1,0,0,0,280,282,3,42,21,0,281,275,1,
-        0,0,0,281,280,1,0,0,0,282,39,1,0,0,0,283,284,6,20,-1,0,284,285,3,
-        38,19,0,285,297,1,0,0,0,286,287,10,3,0,0,287,288,5,20,0,0,288,296,
-        3,38,19,0,289,290,10,2,0,0,290,291,5,21,0,0,291,296,3,38,19,0,292,
-        293,10,1,0,0,293,294,5,22,0,0,294,296,3,38,19,0,295,286,1,0,0,0,
-        295,289,1,0,0,0,295,292,1,0,0,0,296,299,1,0,0,0,297,295,1,0,0,0,
-        297,298,1,0,0,0,298,41,1,0,0,0,299,297,1,0,0,0,300,318,3,44,22,0,
-        301,302,5,18,0,0,302,318,3,42,21,0,303,304,5,19,0,0,304,318,3,42,
-        21,0,305,306,5,31,0,0,306,318,3,42,21,0,307,308,5,35,0,0,308,318,
-        3,42,21,0,309,310,5,20,0,0,310,318,3,38,19,0,311,312,5,32,0,0,312,
-        318,3,38,19,0,313,314,5,38,0,0,314,318,3,42,21,0,315,316,5,39,0,
-        0,316,318,3,42,21,0,317,300,1,0,0,0,317,301,1,0,0,0,317,303,1,0,
-        0,0,317,305,1,0,0,0,317,307,1,0,0,0,317,309,1,0,0,0,317,311,1,0,
-        0,0,317,313,1,0,0,0,317,315,1,0,0,0,318,43,1,0,0,0,319,320,6,22,
-        -1,0,320,321,3,48,24,0,321,339,1,0,0,0,322,323,10,4,0,0,323,325,
-        5,9,0,0,324,326,3,46,23,0,325,324,1,0,0,0,325,326,1,0,0,0,326,327,
-        1,0,0,0,327,338,5,10,0,0,328,329,10,3,0,0,329,338,5,38,0,0,330,331,
-        10,2,0,0,331,338,5,39,0,0,332,333,10,1,0,0,333,334,5,13,0,0,334,
-        335,3,16,8,0,335,336,5,14,0,0,336,338,1,0,0,0,337,322,1,0,0,0,337,
-        328,1,0,0,0,337,330,1,0,0,0,337,332,1,0,0,0,338,341,1,0,0,0,339,
-        337,1,0,0,0,339,340,1,0,0,0,340,45,1,0,0,0,341,339,1,0,0,0,342,347,
-        3,16,8,0,343,344,5,15,0,0,344,346,3,16,8,0,345,343,1,0,0,0,346,349,
-        1,0,0,0,347,345,1,0,0,0,347,348,1,0,0,0,348,47,1,0,0,0,349,347,1,
-        0,0,0,350,360,5,42,0,0,351,360,5,41,0,0,352,360,5,40,0,0,353,360,
-        5,43,0,0,354,360,5,44,0,0,355,356,5,9,0,0,356,357,3,16,8,0,357,358,
-        5,10,0,0,358,360,1,0,0,0,359,350,1,0,0,0,359,351,1,0,0,0,359,352,
-        1,0,0,0,359,353,1,0,0,0,359,354,1,0,0,0,359,355,1,0,0,0,360,49,1,
-        0,0,0,361,370,5,11,0,0,362,367,3,16,8,0,363,364,5,15,0,0,364,366,
-        3,16,8,0,365,363,1,0,0,0,366,369,1,0,0,0,367,365,1,0,0,0,367,368,
-        1,0,0,0,368,371,1,0,0,0,369,367,1,0,0,0,370,362,1,0,0,0,370,371,
-        1,0,0,0,371,372,1,0,0,0,372,386,5,12,0,0,373,382,5,11,0,0,374,379,
-        3,50,25,0,375,376,5,15,0,0,376,378,3,50,25,0,377,375,1,0,0,0,378,
-        381,1,0,0,0,379,377,1,0,0,0,379,380,1,0,0,0,380,383,1,0,0,0,381,
-        379,1,0,0,0,382,374,1,0,0,0,382,383,1,0,0,0,383,384,1,0,0,0,384,
-        386,5,12,0,0,385,361,1,0,0,0,385,373,1,0,0,0,386,51,1,0,0,0,42,55,
-        61,73,86,93,99,105,111,116,122,124,133,140,146,156,166,177,188,199,
-        210,222,224,242,244,256,258,270,272,281,295,297,317,325,337,339,
-        347,359,367,370,379,382,385
+        7,20,2,21,7,21,2,22,7,22,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,2,
+        1,2,1,2,5,2,59,8,2,10,2,12,2,62,9,2,1,2,1,2,1,3,3,3,67,8,3,1,3,1,
+        3,1,3,1,3,1,3,5,3,74,8,3,10,3,12,3,77,9,3,1,3,1,3,1,3,3,3,82,8,3,
+        3,3,84,8,3,1,3,1,3,1,4,1,4,1,4,1,5,1,5,1,5,1,5,1,5,3,5,96,8,5,1,
+        5,1,5,5,5,100,8,5,10,5,12,5,103,9,5,1,6,1,6,1,7,1,7,1,7,1,7,1,7,
+        3,7,112,8,7,1,8,1,8,1,8,1,8,1,8,1,8,5,8,120,8,8,10,8,12,8,123,9,
+        8,1,9,1,9,1,9,1,9,1,9,1,9,5,9,131,8,9,10,9,12,9,134,9,9,1,10,1,10,
+        1,10,1,10,1,10,1,10,5,10,142,8,10,10,10,12,10,145,9,10,1,11,1,11,
+        1,11,1,11,1,11,1,11,5,11,153,8,11,10,11,12,11,156,9,11,1,12,1,12,
+        1,12,1,12,1,12,1,12,5,12,164,8,12,10,12,12,12,167,9,12,1,13,1,13,
+        1,13,1,13,1,13,1,13,1,13,1,13,1,13,5,13,178,8,13,10,13,12,13,181,
+        9,13,1,14,1,14,1,14,1,14,1,14,1,14,1,14,1,14,1,14,1,14,1,14,1,14,
+        1,14,1,14,1,14,5,14,198,8,14,10,14,12,14,201,9,14,1,15,1,15,1,15,
+        1,15,1,15,1,15,1,15,1,15,1,15,5,15,212,8,15,10,15,12,15,215,9,15,
+        1,16,1,16,1,16,1,16,1,16,1,16,1,16,1,16,1,16,5,16,226,8,16,10,16,
+        12,16,229,9,16,1,17,1,17,1,17,1,17,1,17,1,17,3,17,237,8,17,1,18,
+        1,18,1,18,1,18,1,18,1,18,1,18,1,18,1,18,1,18,1,18,1,18,5,18,251,
+        8,18,10,18,12,18,254,9,18,1,19,1,19,1,19,1,19,1,19,1,19,1,19,1,19,
+        1,19,1,19,1,19,1,19,1,19,1,19,1,19,1,19,1,19,3,19,273,8,19,1,20,
+        1,20,1,20,1,20,1,20,1,20,1,20,1,20,1,20,1,20,1,20,1,20,5,20,287,
+        8,20,10,20,12,20,290,9,20,1,21,1,21,1,21,1,21,1,21,1,21,1,21,1,21,
+        1,21,3,21,301,8,21,1,22,1,22,1,22,1,22,5,22,307,8,22,10,22,12,22,
+        310,9,22,3,22,312,8,22,1,22,1,22,1,22,1,22,1,22,5,22,319,8,22,10,
+        22,12,22,322,9,22,3,22,324,8,22,1,22,3,22,327,8,22,1,22,0,12,10,
+        16,18,20,22,24,26,28,30,32,36,40,23,0,2,4,6,8,10,12,14,16,18,20,
+        22,24,26,28,30,32,34,36,38,40,42,44,0,0,356,0,46,1,0,0,0,2,49,1,
+        0,0,0,4,55,1,0,0,0,6,66,1,0,0,0,8,87,1,0,0,0,10,95,1,0,0,0,12,104,
+        1,0,0,0,14,111,1,0,0,0,16,113,1,0,0,0,18,124,1,0,0,0,20,135,1,0,
+        0,0,22,146,1,0,0,0,24,157,1,0,0,0,26,168,1,0,0,0,28,182,1,0,0,0,
+        30,202,1,0,0,0,32,216,1,0,0,0,34,236,1,0,0,0,36,238,1,0,0,0,38,272,
+        1,0,0,0,40,274,1,0,0,0,42,300,1,0,0,0,44,326,1,0,0,0,46,47,3,2,1,
+        0,47,48,5,0,0,1,48,1,1,0,0,0,49,50,3,10,5,0,50,51,5,6,0,0,51,52,
+        5,7,0,0,52,53,5,8,0,0,53,54,3,4,2,0,54,3,1,0,0,0,55,60,5,9,0,0,56,
+        59,3,6,3,0,57,59,3,8,4,0,58,56,1,0,0,0,58,57,1,0,0,0,59,62,1,0,0,
+        0,60,58,1,0,0,0,60,61,1,0,0,0,61,63,1,0,0,0,62,60,1,0,0,0,63,64,
+        5,10,0,0,64,5,1,0,0,0,65,67,5,1,0,0,66,65,1,0,0,0,66,67,1,0,0,0,
+        67,68,1,0,0,0,68,69,3,10,5,0,69,75,5,42,0,0,70,71,5,11,0,0,71,72,
+        5,40,0,0,72,74,5,12,0,0,73,70,1,0,0,0,74,77,1,0,0,0,75,73,1,0,0,
+        0,75,76,1,0,0,0,76,83,1,0,0,0,77,75,1,0,0,0,78,81,5,15,0,0,79,82,
+        3,12,6,0,80,82,3,44,22,0,81,79,1,0,0,0,81,80,1,0,0,0,82,84,1,0,0,
+        0,83,78,1,0,0,0,83,84,1,0,0,0,84,85,1,0,0,0,85,86,5,14,0,0,86,7,
+        1,0,0,0,87,88,3,12,6,0,88,89,5,14,0,0,89,9,1,0,0,0,90,91,6,5,-1,
+        0,91,96,5,2,0,0,92,96,5,3,0,0,93,96,5,4,0,0,94,96,5,5,0,0,95,90,
+        1,0,0,0,95,92,1,0,0,0,95,93,1,0,0,0,95,94,1,0,0,0,96,101,1,0,0,0,
+        97,98,10,1,0,0,98,100,5,18,0,0,99,97,1,0,0,0,100,103,1,0,0,0,101,
+        99,1,0,0,0,101,102,1,0,0,0,102,11,1,0,0,0,103,101,1,0,0,0,104,105,
+        3,14,7,0,105,13,1,0,0,0,106,112,3,16,8,0,107,108,3,38,19,0,108,109,
+        5,15,0,0,109,110,3,14,7,0,110,112,1,0,0,0,111,106,1,0,0,0,111,107,
+        1,0,0,0,112,15,1,0,0,0,113,114,6,8,-1,0,114,115,3,18,9,0,115,121,
+        1,0,0,0,116,117,10,1,0,0,117,118,5,28,0,0,118,120,3,18,9,0,119,116,
+        1,0,0,0,120,123,1,0,0,0,121,119,1,0,0,0,121,122,1,0,0,0,122,17,1,
+        0,0,0,123,121,1,0,0,0,124,125,6,9,-1,0,125,126,3,20,10,0,126,132,
+        1,0,0,0,127,128,10,1,0,0,128,129,5,27,0,0,129,131,3,20,10,0,130,
+        127,1,0,0,0,131,134,1,0,0,0,132,130,1,0,0,0,132,133,1,0,0,0,133,
+        19,1,0,0,0,134,132,1,0,0,0,135,136,6,10,-1,0,136,137,3,22,11,0,137,
+        143,1,0,0,0,138,139,10,1,0,0,139,140,5,31,0,0,140,142,3,22,11,0,
+        141,138,1,0,0,0,142,145,1,0,0,0,143,141,1,0,0,0,143,144,1,0,0,0,
+        144,21,1,0,0,0,145,143,1,0,0,0,146,147,6,11,-1,0,147,148,3,24,12,
+        0,148,154,1,0,0,0,149,150,10,1,0,0,150,151,5,32,0,0,151,153,3,24,
+        12,0,152,149,1,0,0,0,153,156,1,0,0,0,154,152,1,0,0,0,154,155,1,0,
+        0,0,155,23,1,0,0,0,156,154,1,0,0,0,157,158,6,12,-1,0,158,159,3,26,
+        13,0,159,165,1,0,0,0,160,161,10,1,0,0,161,162,5,30,0,0,162,164,3,
+        26,13,0,163,160,1,0,0,0,164,167,1,0,0,0,165,163,1,0,0,0,165,166,
+        1,0,0,0,166,25,1,0,0,0,167,165,1,0,0,0,168,169,6,13,-1,0,169,170,
+        3,28,14,0,170,179,1,0,0,0,171,172,10,2,0,0,172,173,5,25,0,0,173,
+        178,3,28,14,0,174,175,10,1,0,0,175,176,5,26,0,0,176,178,3,28,14,
+        0,177,171,1,0,0,0,177,174,1,0,0,0,178,181,1,0,0,0,179,177,1,0,0,
+        0,179,180,1,0,0,0,180,27,1,0,0,0,181,179,1,0,0,0,182,183,6,14,-1,
+        0,183,184,3,30,15,0,184,199,1,0,0,0,185,186,10,4,0,0,186,187,5,21,
+        0,0,187,198,3,30,15,0,188,189,10,3,0,0,189,190,5,22,0,0,190,198,
+        3,30,15,0,191,192,10,2,0,0,192,193,5,23,0,0,193,198,3,30,15,0,194,
+        195,10,1,0,0,195,196,5,24,0,0,196,198,3,30,15,0,197,185,1,0,0,0,
+        197,188,1,0,0,0,197,191,1,0,0,0,197,194,1,0,0,0,198,201,1,0,0,0,
+        199,197,1,0,0,0,199,200,1,0,0,0,200,29,1,0,0,0,201,199,1,0,0,0,202,
+        203,6,15,-1,0,203,204,3,32,16,0,204,213,1,0,0,0,205,206,10,2,0,0,
+        206,207,5,34,0,0,207,212,3,32,16,0,208,209,10,1,0,0,209,210,5,35,
+        0,0,210,212,3,32,16,0,211,205,1,0,0,0,211,208,1,0,0,0,212,215,1,
+        0,0,0,213,211,1,0,0,0,213,214,1,0,0,0,214,31,1,0,0,0,215,213,1,0,
+        0,0,216,217,6,16,-1,0,217,218,3,36,18,0,218,227,1,0,0,0,219,220,
+        10,2,0,0,220,221,5,16,0,0,221,226,3,36,18,0,222,223,10,1,0,0,223,
+        224,5,17,0,0,224,226,3,36,18,0,225,219,1,0,0,0,225,222,1,0,0,0,226,
+        229,1,0,0,0,227,225,1,0,0,0,227,228,1,0,0,0,228,33,1,0,0,0,229,227,
+        1,0,0,0,230,231,5,7,0,0,231,232,3,10,5,0,232,233,5,8,0,0,233,234,
+        3,34,17,0,234,237,1,0,0,0,235,237,3,38,19,0,236,230,1,0,0,0,236,
+        235,1,0,0,0,237,35,1,0,0,0,238,239,6,18,-1,0,239,240,3,34,17,0,240,
+        252,1,0,0,0,241,242,10,3,0,0,242,243,5,18,0,0,243,251,3,34,17,0,
+        244,245,10,2,0,0,245,246,5,19,0,0,246,251,3,34,17,0,247,248,10,1,
+        0,0,248,249,5,20,0,0,249,251,3,34,17,0,250,241,1,0,0,0,250,244,1,
+        0,0,0,250,247,1,0,0,0,251,254,1,0,0,0,252,250,1,0,0,0,252,253,1,
+        0,0,0,253,37,1,0,0,0,254,252,1,0,0,0,255,273,3,40,20,0,256,257,5,
+        16,0,0,257,273,3,38,19,0,258,259,5,17,0,0,259,273,3,38,19,0,260,
+        261,5,29,0,0,261,273,3,38,19,0,262,263,5,33,0,0,263,273,3,38,19,
+        0,264,265,5,18,0,0,265,273,3,34,17,0,266,267,5,30,0,0,267,273,3,
+        34,17,0,268,269,5,36,0,0,269,273,3,38,19,0,270,271,5,37,0,0,271,
+        273,3,38,19,0,272,255,1,0,0,0,272,256,1,0,0,0,272,258,1,0,0,0,272,
+        260,1,0,0,0,272,262,1,0,0,0,272,264,1,0,0,0,272,266,1,0,0,0,272,
+        268,1,0,0,0,272,270,1,0,0,0,273,39,1,0,0,0,274,275,6,20,-1,0,275,
+        276,3,42,21,0,276,288,1,0,0,0,277,278,10,3,0,0,278,287,5,36,0,0,
+        279,280,10,2,0,0,280,287,5,37,0,0,281,282,10,1,0,0,282,283,5,11,
+        0,0,283,284,3,12,6,0,284,285,5,12,0,0,285,287,1,0,0,0,286,277,1,
+        0,0,0,286,279,1,0,0,0,286,281,1,0,0,0,287,290,1,0,0,0,288,286,1,
+        0,0,0,288,289,1,0,0,0,289,41,1,0,0,0,290,288,1,0,0,0,291,301,5,40,
+        0,0,292,301,5,39,0,0,293,301,5,38,0,0,294,301,5,41,0,0,295,301,5,
+        42,0,0,296,297,5,7,0,0,297,298,3,12,6,0,298,299,5,8,0,0,299,301,
+        1,0,0,0,300,291,1,0,0,0,300,292,1,0,0,0,300,293,1,0,0,0,300,294,
+        1,0,0,0,300,295,1,0,0,0,300,296,1,0,0,0,301,43,1,0,0,0,302,311,5,
+        9,0,0,303,308,3,12,6,0,304,305,5,13,0,0,305,307,3,12,6,0,306,304,
+        1,0,0,0,307,310,1,0,0,0,308,306,1,0,0,0,308,309,1,0,0,0,309,312,
+        1,0,0,0,310,308,1,0,0,0,311,303,1,0,0,0,311,312,1,0,0,0,312,313,
+        1,0,0,0,313,327,5,10,0,0,314,323,5,9,0,0,315,320,3,44,22,0,316,317,
+        5,13,0,0,317,319,3,44,22,0,318,316,1,0,0,0,319,322,1,0,0,0,320,318,
+        1,0,0,0,320,321,1,0,0,0,321,324,1,0,0,0,322,320,1,0,0,0,323,315,
+        1,0,0,0,323,324,1,0,0,0,324,325,1,0,0,0,325,327,5,10,0,0,326,302,
+        1,0,0,0,326,314,1,0,0,0,327,45,1,0,0,0,34,58,60,66,75,81,83,95,101,
+        111,121,132,143,154,165,177,179,197,199,211,213,225,227,236,250,
+        252,272,286,288,300,308,311,320,323,326
     ]
 
 class CmmParser ( Parser ):
@@ -164,107 +141,102 @@ class CmmParser ( Parser ):
 
     sharedContextCache = PredictionContextCache()
 
-    literalNames = [ "<INVALID>", "'#include'", "<INVALID>", "'const'", 
-                     "'int'", "'float'", "'char'", "'void'", "'main'", "'('", 
-                     "')'", "'{'", "'}'", "'['", "']'", "','", "';'", "'='", 
-                     "'+'", "'-'", "'*'", "'/'", "'%'", "'<'", "'>'", "'<='", 
-                     "'>='", "'=='", "'!='", "'&&'", "'||'", "'!'", "'&'", 
-                     "'|'", "'^'", "'~'", "'<<'", "'>>'", "'++'", "'--'" ]
+    literalNames = [ "<INVALID>", "'const'", "'int'", "'float'", "'char'", 
+                     "'void'", "'main'", "'('", "')'", "'{'", "'}'", "'['", 
+                     "']'", "','", "';'", "'='", "'+'", "'-'", "'*'", "'/'", 
+                     "'%'", "'<'", "'>'", "'<='", "'>='", "'=='", "'!='", 
+                     "'&&'", "'||'", "'!'", "'&'", "'|'", "'^'", "'~'", 
+                     "'<<'", "'>>'", "'++'", "'--'" ]
 
-    symbolicNames = [ "<INVALID>", "INCLUDE", "HEADER", "CONST", "INT", 
-                      "FLOAT", "CHAR", "VOID", "MAIN", "LPAREN", "RPAREN", 
-                      "LBRACE", "RBRACE", "LBRACKET", "RBRACKET", "COMMA", 
-                      "SEMI", "ASSIGN", "PLUS", "MINUS", "MUL", "DIV", "MOD", 
-                      "LESS", "GREATER", "LESSEQ", "GREATEREQ", "EQ", "NEQ", 
-                      "AND", "OR", "NOT", "BITAND", "BITOR", "BITXOR", "BITNOT", 
-                      "LSHIFT", "RSHIFT", "INC", "DEC", "CHAR_LITERAL", 
-                      "FLOAT_LITERAL", "INT_LITERAL", "STRING_LITERAL", 
-                      "IDENTIFIER", "MULTI_LINE_COMMENT", "WS" ]
+    symbolicNames = [ "<INVALID>", "CONST", "INT", "FLOAT", "CHAR", "VOID", 
+                      "MAIN", "LPAREN", "RPAREN", "LBRACE", "RBRACE", "LBRACKET", 
+                      "RBRACKET", "COMMA", "SEMI", "ASSIGN", "PLUS", "MINUS", 
+                      "MUL", "DIV", "MOD", "LESS", "GREATER", "LESSEQ", 
+                      "GREATEREQ", "EQ", "NEQ", "AND", "OR", "NOT", "BITAND", 
+                      "BITOR", "BITXOR", "BITNOT", "LSHIFT", "RSHIFT", "INC", 
+                      "DEC", "CHAR_LITERAL", "FLOAT_LITERAL", "INT_LITERAL", 
+                      "STRING_LITERAL", "IDENTIFIER", "SINGLE_LINE_COMMENT", 
+                      "MULTI_LINE_COMMENT", "WS" ]
 
     RULE_compilationUnit = 0
-    RULE_includeDirective = 1
-    RULE_functionDefinition = 2
-    RULE_parameterList = 3
-    RULE_compoundStatement = 4
-    RULE_declaration = 5
-    RULE_statement = 6
-    RULE_typeSpecifier = 7
-    RULE_expression = 8
-    RULE_assignment_expression = 9
-    RULE_logical_or_expression = 10
-    RULE_logical_and_expression = 11
-    RULE_inclusive_or_expression = 12
-    RULE_exclusive_or_expression = 13
-    RULE_and_expression = 14
-    RULE_equality_expression = 15
-    RULE_relational_expression = 16
-    RULE_shift_expression = 17
-    RULE_additive_expression = 18
-    RULE_cast_expression = 19
-    RULE_multiplicative_expression = 20
-    RULE_unary_expression = 21
-    RULE_postfix_expression = 22
-    RULE_argumentList = 23
-    RULE_primary_expression = 24
-    RULE_array_initializer = 25
+    RULE_functionDefinition = 1
+    RULE_compoundStatement = 2
+    RULE_declaration = 3
+    RULE_statement = 4
+    RULE_typeSpecifier = 5
+    RULE_expression = 6
+    RULE_assignment_expression = 7
+    RULE_logical_or_expression = 8
+    RULE_logical_and_expression = 9
+    RULE_inclusive_or_expression = 10
+    RULE_exclusive_or_expression = 11
+    RULE_and_expression = 12
+    RULE_equality_expression = 13
+    RULE_relational_expression = 14
+    RULE_shift_expression = 15
+    RULE_additive_expression = 16
+    RULE_cast_expression = 17
+    RULE_multiplicative_expression = 18
+    RULE_unary_expression = 19
+    RULE_postfix_expression = 20
+    RULE_primary_expression = 21
+    RULE_array_initializer = 22
 
-    ruleNames =  [ "compilationUnit", "includeDirective", "functionDefinition", 
-                   "parameterList", "compoundStatement", "declaration", 
-                   "statement", "typeSpecifier", "expression", "assignment_expression", 
-                   "logical_or_expression", "logical_and_expression", "inclusive_or_expression", 
-                   "exclusive_or_expression", "and_expression", "equality_expression", 
-                   "relational_expression", "shift_expression", "additive_expression", 
-                   "cast_expression", "multiplicative_expression", "unary_expression", 
-                   "postfix_expression", "argumentList", "primary_expression", 
-                   "array_initializer" ]
+    ruleNames =  [ "compilationUnit", "functionDefinition", "compoundStatement", 
+                   "declaration", "statement", "typeSpecifier", "expression", 
+                   "assignment_expression", "logical_or_expression", "logical_and_expression", 
+                   "inclusive_or_expression", "exclusive_or_expression", 
+                   "and_expression", "equality_expression", "relational_expression", 
+                   "shift_expression", "additive_expression", "cast_expression", 
+                   "multiplicative_expression", "unary_expression", "postfix_expression", 
+                   "primary_expression", "array_initializer" ]
 
     EOF = Token.EOF
-    INCLUDE=1
-    HEADER=2
-    CONST=3
-    INT=4
-    FLOAT=5
-    CHAR=6
-    VOID=7
-    MAIN=8
-    LPAREN=9
-    RPAREN=10
-    LBRACE=11
-    RBRACE=12
-    LBRACKET=13
-    RBRACKET=14
-    COMMA=15
-    SEMI=16
-    ASSIGN=17
-    PLUS=18
-    MINUS=19
-    MUL=20
-    DIV=21
-    MOD=22
-    LESS=23
-    GREATER=24
-    LESSEQ=25
-    GREATEREQ=26
-    EQ=27
-    NEQ=28
-    AND=29
-    OR=30
-    NOT=31
-    BITAND=32
-    BITOR=33
-    BITXOR=34
-    BITNOT=35
-    LSHIFT=36
-    RSHIFT=37
-    INC=38
-    DEC=39
-    CHAR_LITERAL=40
-    FLOAT_LITERAL=41
-    INT_LITERAL=42
-    STRING_LITERAL=43
-    IDENTIFIER=44
-    MULTI_LINE_COMMENT=45
-    WS=46
+    CONST=1
+    INT=2
+    FLOAT=3
+    CHAR=4
+    VOID=5
+    MAIN=6
+    LPAREN=7
+    RPAREN=8
+    LBRACE=9
+    RBRACE=10
+    LBRACKET=11
+    RBRACKET=12
+    COMMA=13
+    SEMI=14
+    ASSIGN=15
+    PLUS=16
+    MINUS=17
+    MUL=18
+    DIV=19
+    MOD=20
+    LESS=21
+    GREATER=22
+    LESSEQ=23
+    GREATEREQ=24
+    EQ=25
+    NEQ=26
+    AND=27
+    OR=28
+    NOT=29
+    BITAND=30
+    BITOR=31
+    BITXOR=32
+    BITNOT=33
+    LSHIFT=34
+    RSHIFT=35
+    INC=36
+    DEC=37
+    CHAR_LITERAL=38
+    FLOAT_LITERAL=39
+    INT_LITERAL=40
+    STRING_LITERAL=41
+    IDENTIFIER=42
+    SINGLE_LINE_COMMENT=43
+    MULTI_LINE_COMMENT=44
+    WS=45
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
@@ -282,22 +254,12 @@ class CmmParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
+        def functionDefinition(self):
+            return self.getTypedRuleContext(CmmParser.FunctionDefinitionContext,0)
+
+
         def EOF(self):
             return self.getToken(CmmParser.EOF, 0)
-
-        def includeDirective(self, i:int=None):
-            if i is None:
-                return self.getTypedRuleContexts(CmmParser.IncludeDirectiveContext)
-            else:
-                return self.getTypedRuleContext(CmmParser.IncludeDirectiveContext,i)
-
-
-        def functionDefinition(self, i:int=None):
-            if i is None:
-                return self.getTypedRuleContexts(CmmParser.FunctionDefinitionContext)
-            else:
-                return self.getTypedRuleContext(CmmParser.FunctionDefinitionContext,i)
-
 
         def getRuleIndex(self):
             return CmmParser.RULE_compilationUnit
@@ -310,12 +272,6 @@ class CmmParser ( Parser ):
             if hasattr( listener, "exitCompilationUnit" ):
                 listener.exitCompilationUnit(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitCompilationUnit" ):
-                return visitor.visitCompilationUnit(self)
-            else:
-                return visitor.visitChildren(self)
-
 
 
 
@@ -323,83 +279,12 @@ class CmmParser ( Parser ):
 
         localctx = CmmParser.CompilationUnitContext(self, self._ctx, self.state)
         self.enterRule(localctx, 0, self.RULE_compilationUnit)
-        self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 55
-            self._errHandler.sync(self)
-            _la = self._input.LA(1)
-            while _la==1:
-                self.state = 52
-                self.includeDirective()
-                self.state = 57
-                self._errHandler.sync(self)
-                _la = self._input.LA(1)
-
-            self.state = 61
-            self._errHandler.sync(self)
-            _la = self._input.LA(1)
-            while (((_la) & ~0x3f) == 0 and ((1 << _la) & 240) != 0):
-                self.state = 58
-                self.functionDefinition()
-                self.state = 63
-                self._errHandler.sync(self)
-                _la = self._input.LA(1)
-
-            self.state = 64
+            self.state = 46
+            self.functionDefinition()
+            self.state = 47
             self.match(CmmParser.EOF)
-        except RecognitionException as re:
-            localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
-        finally:
-            self.exitRule()
-        return localctx
-
-
-    class IncludeDirectiveContext(ParserRuleContext):
-        __slots__ = 'parser'
-
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
-            self.parser = parser
-
-        def INCLUDE(self):
-            return self.getToken(CmmParser.INCLUDE, 0)
-
-        def HEADER(self):
-            return self.getToken(CmmParser.HEADER, 0)
-
-        def getRuleIndex(self):
-            return CmmParser.RULE_includeDirective
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterIncludeDirective" ):
-                listener.enterIncludeDirective(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitIncludeDirective" ):
-                listener.exitIncludeDirective(self)
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitIncludeDirective" ):
-                return visitor.visitIncludeDirective(self)
-            else:
-                return visitor.visitChildren(self)
-
-
-
-
-    def includeDirective(self):
-
-        localctx = CmmParser.IncludeDirectiveContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 2, self.RULE_includeDirective)
-        try:
-            self.enterOuterAlt(localctx, 1)
-            self.state = 66
-            self.match(CmmParser.INCLUDE)
-            self.state = 67
-            self.match(CmmParser.HEADER)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -420,6 +305,9 @@ class CmmParser ( Parser ):
             return self.getTypedRuleContext(CmmParser.TypeSpecifierContext,0)
 
 
+        def MAIN(self):
+            return self.getToken(CmmParser.MAIN, 0)
+
         def LPAREN(self):
             return self.getToken(CmmParser.LPAREN, 0)
 
@@ -428,16 +316,6 @@ class CmmParser ( Parser ):
 
         def compoundStatement(self):
             return self.getTypedRuleContext(CmmParser.CompoundStatementContext,0)
-
-
-        def MAIN(self):
-            return self.getToken(CmmParser.MAIN, 0)
-
-        def IDENTIFIER(self):
-            return self.getToken(CmmParser.IDENTIFIER, 0)
-
-        def parameterList(self):
-            return self.getTypedRuleContext(CmmParser.ParameterListContext,0)
 
 
         def getRuleIndex(self):
@@ -451,125 +329,25 @@ class CmmParser ( Parser ):
             if hasattr( listener, "exitFunctionDefinition" ):
                 listener.exitFunctionDefinition(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitFunctionDefinition" ):
-                return visitor.visitFunctionDefinition(self)
-            else:
-                return visitor.visitChildren(self)
-
 
 
 
     def functionDefinition(self):
 
         localctx = CmmParser.FunctionDefinitionContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 4, self.RULE_functionDefinition)
-        self._la = 0 # Token type
+        self.enterRule(localctx, 2, self.RULE_functionDefinition)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 69
+            self.state = 49
             self.typeSpecifier(0)
-            self.state = 70
-            _la = self._input.LA(1)
-            if not(_la==8 or _la==44):
-                self._errHandler.recoverInline(self)
-            else:
-                self._errHandler.reportMatch(self)
-                self.consume()
-            self.state = 71
+            self.state = 50
+            self.match(CmmParser.MAIN)
+            self.state = 51
             self.match(CmmParser.LPAREN)
-            self.state = 73
-            self._errHandler.sync(self)
-            _la = self._input.LA(1)
-            if (((_la) & ~0x3f) == 0 and ((1 << _la) & 240) != 0):
-                self.state = 72
-                self.parameterList()
-
-
-            self.state = 75
+            self.state = 52
             self.match(CmmParser.RPAREN)
-            self.state = 76
+            self.state = 53
             self.compoundStatement()
-        except RecognitionException as re:
-            localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
-        finally:
-            self.exitRule()
-        return localctx
-
-
-    class ParameterListContext(ParserRuleContext):
-        __slots__ = 'parser'
-
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
-            self.parser = parser
-
-        def typeSpecifier(self, i:int=None):
-            if i is None:
-                return self.getTypedRuleContexts(CmmParser.TypeSpecifierContext)
-            else:
-                return self.getTypedRuleContext(CmmParser.TypeSpecifierContext,i)
-
-
-        def IDENTIFIER(self, i:int=None):
-            if i is None:
-                return self.getTokens(CmmParser.IDENTIFIER)
-            else:
-                return self.getToken(CmmParser.IDENTIFIER, i)
-
-        def COMMA(self, i:int=None):
-            if i is None:
-                return self.getTokens(CmmParser.COMMA)
-            else:
-                return self.getToken(CmmParser.COMMA, i)
-
-        def getRuleIndex(self):
-            return CmmParser.RULE_parameterList
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterParameterList" ):
-                listener.enterParameterList(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitParameterList" ):
-                listener.exitParameterList(self)
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitParameterList" ):
-                return visitor.visitParameterList(self)
-            else:
-                return visitor.visitChildren(self)
-
-
-
-
-    def parameterList(self):
-
-        localctx = CmmParser.ParameterListContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 6, self.RULE_parameterList)
-        self._la = 0 # Token type
-        try:
-            self.enterOuterAlt(localctx, 1)
-            self.state = 78
-            self.typeSpecifier(0)
-            self.state = 79
-            self.match(CmmParser.IDENTIFIER)
-            self.state = 86
-            self._errHandler.sync(self)
-            _la = self._input.LA(1)
-            while _la==15:
-                self.state = 80
-                self.match(CmmParser.COMMA)
-                self.state = 81
-                self.typeSpecifier(0)
-                self.state = 82
-                self.match(CmmParser.IDENTIFIER)
-                self.state = 88
-                self._errHandler.sync(self)
-                _la = self._input.LA(1)
-
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -617,45 +395,41 @@ class CmmParser ( Parser ):
             if hasattr( listener, "exitCompoundStatement" ):
                 listener.exitCompoundStatement(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitCompoundStatement" ):
-                return visitor.visitCompoundStatement(self)
-            else:
-                return visitor.visitChildren(self)
-
 
 
 
     def compoundStatement(self):
 
         localctx = CmmParser.CompoundStatementContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 8, self.RULE_compoundStatement)
+        self.enterRule(localctx, 4, self.RULE_compoundStatement)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 89
+            self.state = 55
             self.match(CmmParser.LBRACE)
-            self.state = 93
+            self.state = 60
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while (((_la) & ~0x3f) == 0 and ((1 << _la) & 248) != 0):
-                self.state = 90
-                self.declaration()
-                self.state = 95
+            while (((_la) & ~0x3f) == 0 and ((1 << _la) & 8737574551742) != 0):
+                self.state = 58
+                self._errHandler.sync(self)
+                token = self._input.LA(1)
+                if token in [1, 2, 3, 4, 5]:
+                    self.state = 56
+                    self.declaration()
+                    pass
+                elif token in [7, 16, 17, 18, 29, 30, 33, 36, 37, 38, 39, 40, 41, 42]:
+                    self.state = 57
+                    self.statement()
+                    pass
+                else:
+                    raise NoViableAltException(self)
+
+                self.state = 62
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
-            self.state = 99
-            self._errHandler.sync(self)
-            _la = self._input.LA(1)
-            while (((_la) & ~0x3f) == 0 and ((1 << _la) & 34950298274304) != 0):
-                self.state = 96
-                self.statement()
-                self.state = 101
-                self._errHandler.sync(self)
-                _la = self._input.LA(1)
-
-            self.state = 102
+            self.state = 63
             self.match(CmmParser.RBRACE)
         except RecognitionException as re:
             localctx.exception = re
@@ -692,6 +466,12 @@ class CmmParser ( Parser ):
             else:
                 return self.getToken(CmmParser.LBRACKET, i)
 
+        def INT_LITERAL(self, i:int=None):
+            if i is None:
+                return self.getTokens(CmmParser.INT_LITERAL)
+            else:
+                return self.getToken(CmmParser.INT_LITERAL, i)
+
         def RBRACKET(self, i:int=None):
             if i is None:
                 return self.getTokens(CmmParser.RBRACKET)
@@ -709,12 +489,6 @@ class CmmParser ( Parser ):
             return self.getTypedRuleContext(CmmParser.Array_initializerContext,0)
 
 
-        def INT_LITERAL(self, i:int=None):
-            if i is None:
-                return self.getTokens(CmmParser.INT_LITERAL)
-            else:
-                return self.getToken(CmmParser.INT_LITERAL, i)
-
         def getRuleIndex(self):
             return CmmParser.RULE_declaration
 
@@ -726,69 +500,57 @@ class CmmParser ( Parser ):
             if hasattr( listener, "exitDeclaration" ):
                 listener.exitDeclaration(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitDeclaration" ):
-                return visitor.visitDeclaration(self)
-            else:
-                return visitor.visitChildren(self)
-
 
 
 
     def declaration(self):
 
         localctx = CmmParser.DeclarationContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 10, self.RULE_declaration)
+        self.enterRule(localctx, 6, self.RULE_declaration)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 105
+            self.state = 66
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==3:
-                self.state = 104
+            if _la==1:
+                self.state = 65
                 self.match(CmmParser.CONST)
 
 
-            self.state = 107
+            self.state = 68
             self.typeSpecifier(0)
-            self.state = 108
+            self.state = 69
             self.match(CmmParser.IDENTIFIER)
-            self.state = 116
+            self.state = 75
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while _la==13:
-                self.state = 109
+            while _la==11:
+                self.state = 70
                 self.match(CmmParser.LBRACKET)
-                self.state = 111
-                self._errHandler.sync(self)
-                _la = self._input.LA(1)
-                if _la==42:
-                    self.state = 110
-                    self.match(CmmParser.INT_LITERAL)
-
-
-                self.state = 113
+                self.state = 71
+                self.match(CmmParser.INT_LITERAL)
+                self.state = 72
                 self.match(CmmParser.RBRACKET)
-                self.state = 118
+                self.state = 77
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
-            self.state = 124
+            self.state = 83
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==17:
-                self.state = 119
+            if _la==15:
+                self.state = 78
                 self.match(CmmParser.ASSIGN)
-                self.state = 122
+                self.state = 81
                 self._errHandler.sync(self)
                 token = self._input.LA(1)
-                if token in [9, 18, 19, 20, 31, 32, 35, 38, 39, 40, 41, 42, 43, 44]:
-                    self.state = 120
+                if token in [7, 16, 17, 18, 29, 30, 33, 36, 37, 38, 39, 40, 41, 42]:
+                    self.state = 79
                     self.expression()
                     pass
-                elif token in [11]:
-                    self.state = 121
+                elif token in [9]:
+                    self.state = 80
                     self.array_initializer()
                     pass
                 else:
@@ -796,7 +558,7 @@ class CmmParser ( Parser ):
 
 
 
-            self.state = 126
+            self.state = 85
             self.match(CmmParser.SEMI)
         except RecognitionException as re:
             localctx.exception = re
@@ -821,10 +583,6 @@ class CmmParser ( Parser ):
         def SEMI(self):
             return self.getToken(CmmParser.SEMI, 0)
 
-        def compoundStatement(self):
-            return self.getTypedRuleContext(CmmParser.CompoundStatementContext,0)
-
-
         def getRuleIndex(self):
             return CmmParser.RULE_statement
 
@@ -836,43 +594,19 @@ class CmmParser ( Parser ):
             if hasattr( listener, "exitStatement" ):
                 listener.exitStatement(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitStatement" ):
-                return visitor.visitStatement(self)
-            else:
-                return visitor.visitChildren(self)
-
 
 
 
     def statement(self):
 
         localctx = CmmParser.StatementContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 12, self.RULE_statement)
+        self.enterRule(localctx, 8, self.RULE_statement)
         try:
-            self.state = 133
-            self._errHandler.sync(self)
-            token = self._input.LA(1)
-            if token in [9, 18, 19, 20, 31, 32, 35, 38, 39, 40, 41, 42, 43, 44]:
-                self.enterOuterAlt(localctx, 1)
-                self.state = 128
-                self.expression()
-                self.state = 129
-                self.match(CmmParser.SEMI)
-                pass
-            elif token in [11]:
-                self.enterOuterAlt(localctx, 2)
-                self.state = 131
-                self.compoundStatement()
-                pass
-            elif token in [16]:
-                self.enterOuterAlt(localctx, 3)
-                self.state = 132
-                self.match(CmmParser.SEMI)
-                pass
-            else:
-                raise NoViableAltException(self)
-
+            self.enterOuterAlt(localctx, 1)
+            self.state = 87
+            self.expression()
+            self.state = 88
+            self.match(CmmParser.SEMI)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -919,12 +653,6 @@ class CmmParser ( Parser ):
             if hasattr( listener, "exitTypeSpecifier" ):
                 listener.exitTypeSpecifier(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitTypeSpecifier" ):
-                return visitor.visitTypeSpecifier(self)
-            else:
-                return visitor.visitChildren(self)
-
 
 
     def typeSpecifier(self, _p:int=0):
@@ -932,36 +660,36 @@ class CmmParser ( Parser ):
         _parentState = self.state
         localctx = CmmParser.TypeSpecifierContext(self, self._ctx, _parentState)
         _prevctx = localctx
-        _startState = 14
-        self.enterRecursionRule(localctx, 14, self.RULE_typeSpecifier, _p)
+        _startState = 10
+        self.enterRecursionRule(localctx, 10, self.RULE_typeSpecifier, _p)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 140
+            self.state = 95
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [4]:
-                self.state = 136
+            if token in [2]:
+                self.state = 91
                 self.match(CmmParser.INT)
                 pass
-            elif token in [5]:
-                self.state = 137
+            elif token in [3]:
+                self.state = 92
                 self.match(CmmParser.FLOAT)
                 pass
-            elif token in [6]:
-                self.state = 138
+            elif token in [4]:
+                self.state = 93
                 self.match(CmmParser.CHAR)
                 pass
-            elif token in [7]:
-                self.state = 139
+            elif token in [5]:
+                self.state = 94
                 self.match(CmmParser.VOID)
                 pass
             else:
                 raise NoViableAltException(self)
 
             self._ctx.stop = self._input.LT(-1)
-            self.state = 146
+            self.state = 101
             self._errHandler.sync(self)
-            _alt = self._interp.adaptivePredict(self._input,13,self._ctx)
+            _alt = self._interp.adaptivePredict(self._input,7,self._ctx)
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                 if _alt==1:
                     if self._parseListeners is not None:
@@ -969,15 +697,15 @@ class CmmParser ( Parser ):
                     _prevctx = localctx
                     localctx = CmmParser.TypeSpecifierContext(self, _parentctx, _parentState)
                     self.pushNewRecursionContext(localctx, _startState, self.RULE_typeSpecifier)
-                    self.state = 142
+                    self.state = 97
                     if not self.precpred(self._ctx, 1):
                         from antlr4.error.Errors import FailedPredicateException
                         raise FailedPredicateException(self, "self.precpred(self._ctx, 1)")
-                    self.state = 143
+                    self.state = 98
                     self.match(CmmParser.MUL) 
-                self.state = 148
+                self.state = 103
                 self._errHandler.sync(self)
-                _alt = self._interp.adaptivePredict(self._input,13,self._ctx)
+                _alt = self._interp.adaptivePredict(self._input,7,self._ctx)
 
         except RecognitionException as re:
             localctx.exception = re
@@ -1010,22 +738,16 @@ class CmmParser ( Parser ):
             if hasattr( listener, "exitExpression" ):
                 listener.exitExpression(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitExpression" ):
-                return visitor.visitExpression(self)
-            else:
-                return visitor.visitChildren(self)
-
 
 
 
     def expression(self):
 
         localctx = CmmParser.ExpressionContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 16, self.RULE_expression)
+        self.enterRule(localctx, 12, self.RULE_expression)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 149
+            self.state = 104
             self.assignment_expression()
         except RecognitionException as re:
             localctx.exception = re
@@ -1069,36 +791,30 @@ class CmmParser ( Parser ):
             if hasattr( listener, "exitAssignment_expression" ):
                 listener.exitAssignment_expression(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitAssignment_expression" ):
-                return visitor.visitAssignment_expression(self)
-            else:
-                return visitor.visitChildren(self)
-
 
 
 
     def assignment_expression(self):
 
         localctx = CmmParser.Assignment_expressionContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 18, self.RULE_assignment_expression)
+        self.enterRule(localctx, 14, self.RULE_assignment_expression)
         try:
-            self.state = 156
+            self.state = 111
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,14,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,8,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 151
+                self.state = 106
                 self.logical_or_expression(0)
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 152
+                self.state = 107
                 self.unary_expression()
-                self.state = 153
+                self.state = 108
                 self.match(CmmParser.ASSIGN)
-                self.state = 154
+                self.state = 109
                 self.assignment_expression()
                 pass
 
@@ -1141,12 +857,6 @@ class CmmParser ( Parser ):
             if hasattr( listener, "exitLogical_or_expression" ):
                 listener.exitLogical_or_expression(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitLogical_or_expression" ):
-                return visitor.visitLogical_or_expression(self)
-            else:
-                return visitor.visitChildren(self)
-
 
 
     def logical_or_expression(self, _p:int=0):
@@ -1154,16 +864,16 @@ class CmmParser ( Parser ):
         _parentState = self.state
         localctx = CmmParser.Logical_or_expressionContext(self, self._ctx, _parentState)
         _prevctx = localctx
-        _startState = 20
-        self.enterRecursionRule(localctx, 20, self.RULE_logical_or_expression, _p)
+        _startState = 16
+        self.enterRecursionRule(localctx, 16, self.RULE_logical_or_expression, _p)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 159
+            self.state = 114
             self.logical_and_expression(0)
             self._ctx.stop = self._input.LT(-1)
-            self.state = 166
+            self.state = 121
             self._errHandler.sync(self)
-            _alt = self._interp.adaptivePredict(self._input,15,self._ctx)
+            _alt = self._interp.adaptivePredict(self._input,9,self._ctx)
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                 if _alt==1:
                     if self._parseListeners is not None:
@@ -1171,17 +881,17 @@ class CmmParser ( Parser ):
                     _prevctx = localctx
                     localctx = CmmParser.Logical_or_expressionContext(self, _parentctx, _parentState)
                     self.pushNewRecursionContext(localctx, _startState, self.RULE_logical_or_expression)
-                    self.state = 161
+                    self.state = 116
                     if not self.precpred(self._ctx, 1):
                         from antlr4.error.Errors import FailedPredicateException
                         raise FailedPredicateException(self, "self.precpred(self._ctx, 1)")
-                    self.state = 162
+                    self.state = 117
                     self.match(CmmParser.OR)
-                    self.state = 163
+                    self.state = 118
                     self.logical_and_expression(0) 
-                self.state = 168
+                self.state = 123
                 self._errHandler.sync(self)
-                _alt = self._interp.adaptivePredict(self._input,15,self._ctx)
+                _alt = self._interp.adaptivePredict(self._input,9,self._ctx)
 
         except RecognitionException as re:
             localctx.exception = re
@@ -1221,12 +931,6 @@ class CmmParser ( Parser ):
             if hasattr( listener, "exitLogical_and_expression" ):
                 listener.exitLogical_and_expression(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitLogical_and_expression" ):
-                return visitor.visitLogical_and_expression(self)
-            else:
-                return visitor.visitChildren(self)
-
 
 
     def logical_and_expression(self, _p:int=0):
@@ -1234,16 +938,16 @@ class CmmParser ( Parser ):
         _parentState = self.state
         localctx = CmmParser.Logical_and_expressionContext(self, self._ctx, _parentState)
         _prevctx = localctx
-        _startState = 22
-        self.enterRecursionRule(localctx, 22, self.RULE_logical_and_expression, _p)
+        _startState = 18
+        self.enterRecursionRule(localctx, 18, self.RULE_logical_and_expression, _p)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 170
+            self.state = 125
             self.inclusive_or_expression(0)
             self._ctx.stop = self._input.LT(-1)
-            self.state = 177
+            self.state = 132
             self._errHandler.sync(self)
-            _alt = self._interp.adaptivePredict(self._input,16,self._ctx)
+            _alt = self._interp.adaptivePredict(self._input,10,self._ctx)
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                 if _alt==1:
                     if self._parseListeners is not None:
@@ -1251,17 +955,17 @@ class CmmParser ( Parser ):
                     _prevctx = localctx
                     localctx = CmmParser.Logical_and_expressionContext(self, _parentctx, _parentState)
                     self.pushNewRecursionContext(localctx, _startState, self.RULE_logical_and_expression)
-                    self.state = 172
+                    self.state = 127
                     if not self.precpred(self._ctx, 1):
                         from antlr4.error.Errors import FailedPredicateException
                         raise FailedPredicateException(self, "self.precpred(self._ctx, 1)")
-                    self.state = 173
+                    self.state = 128
                     self.match(CmmParser.AND)
-                    self.state = 174
+                    self.state = 129
                     self.inclusive_or_expression(0) 
-                self.state = 179
+                self.state = 134
                 self._errHandler.sync(self)
-                _alt = self._interp.adaptivePredict(self._input,16,self._ctx)
+                _alt = self._interp.adaptivePredict(self._input,10,self._ctx)
 
         except RecognitionException as re:
             localctx.exception = re
@@ -1301,12 +1005,6 @@ class CmmParser ( Parser ):
             if hasattr( listener, "exitInclusive_or_expression" ):
                 listener.exitInclusive_or_expression(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitInclusive_or_expression" ):
-                return visitor.visitInclusive_or_expression(self)
-            else:
-                return visitor.visitChildren(self)
-
 
 
     def inclusive_or_expression(self, _p:int=0):
@@ -1314,16 +1012,16 @@ class CmmParser ( Parser ):
         _parentState = self.state
         localctx = CmmParser.Inclusive_or_expressionContext(self, self._ctx, _parentState)
         _prevctx = localctx
-        _startState = 24
-        self.enterRecursionRule(localctx, 24, self.RULE_inclusive_or_expression, _p)
+        _startState = 20
+        self.enterRecursionRule(localctx, 20, self.RULE_inclusive_or_expression, _p)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 181
+            self.state = 136
             self.exclusive_or_expression(0)
             self._ctx.stop = self._input.LT(-1)
-            self.state = 188
+            self.state = 143
             self._errHandler.sync(self)
-            _alt = self._interp.adaptivePredict(self._input,17,self._ctx)
+            _alt = self._interp.adaptivePredict(self._input,11,self._ctx)
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                 if _alt==1:
                     if self._parseListeners is not None:
@@ -1331,17 +1029,17 @@ class CmmParser ( Parser ):
                     _prevctx = localctx
                     localctx = CmmParser.Inclusive_or_expressionContext(self, _parentctx, _parentState)
                     self.pushNewRecursionContext(localctx, _startState, self.RULE_inclusive_or_expression)
-                    self.state = 183
+                    self.state = 138
                     if not self.precpred(self._ctx, 1):
                         from antlr4.error.Errors import FailedPredicateException
                         raise FailedPredicateException(self, "self.precpred(self._ctx, 1)")
-                    self.state = 184
+                    self.state = 139
                     self.match(CmmParser.BITOR)
-                    self.state = 185
+                    self.state = 140
                     self.exclusive_or_expression(0) 
-                self.state = 190
+                self.state = 145
                 self._errHandler.sync(self)
-                _alt = self._interp.adaptivePredict(self._input,17,self._ctx)
+                _alt = self._interp.adaptivePredict(self._input,11,self._ctx)
 
         except RecognitionException as re:
             localctx.exception = re
@@ -1381,12 +1079,6 @@ class CmmParser ( Parser ):
             if hasattr( listener, "exitExclusive_or_expression" ):
                 listener.exitExclusive_or_expression(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitExclusive_or_expression" ):
-                return visitor.visitExclusive_or_expression(self)
-            else:
-                return visitor.visitChildren(self)
-
 
 
     def exclusive_or_expression(self, _p:int=0):
@@ -1394,16 +1086,16 @@ class CmmParser ( Parser ):
         _parentState = self.state
         localctx = CmmParser.Exclusive_or_expressionContext(self, self._ctx, _parentState)
         _prevctx = localctx
-        _startState = 26
-        self.enterRecursionRule(localctx, 26, self.RULE_exclusive_or_expression, _p)
+        _startState = 22
+        self.enterRecursionRule(localctx, 22, self.RULE_exclusive_or_expression, _p)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 192
+            self.state = 147
             self.and_expression(0)
             self._ctx.stop = self._input.LT(-1)
-            self.state = 199
+            self.state = 154
             self._errHandler.sync(self)
-            _alt = self._interp.adaptivePredict(self._input,18,self._ctx)
+            _alt = self._interp.adaptivePredict(self._input,12,self._ctx)
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                 if _alt==1:
                     if self._parseListeners is not None:
@@ -1411,17 +1103,17 @@ class CmmParser ( Parser ):
                     _prevctx = localctx
                     localctx = CmmParser.Exclusive_or_expressionContext(self, _parentctx, _parentState)
                     self.pushNewRecursionContext(localctx, _startState, self.RULE_exclusive_or_expression)
-                    self.state = 194
+                    self.state = 149
                     if not self.precpred(self._ctx, 1):
                         from antlr4.error.Errors import FailedPredicateException
                         raise FailedPredicateException(self, "self.precpred(self._ctx, 1)")
-                    self.state = 195
+                    self.state = 150
                     self.match(CmmParser.BITXOR)
-                    self.state = 196
+                    self.state = 151
                     self.and_expression(0) 
-                self.state = 201
+                self.state = 156
                 self._errHandler.sync(self)
-                _alt = self._interp.adaptivePredict(self._input,18,self._ctx)
+                _alt = self._interp.adaptivePredict(self._input,12,self._ctx)
 
         except RecognitionException as re:
             localctx.exception = re
@@ -1461,12 +1153,6 @@ class CmmParser ( Parser ):
             if hasattr( listener, "exitAnd_expression" ):
                 listener.exitAnd_expression(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitAnd_expression" ):
-                return visitor.visitAnd_expression(self)
-            else:
-                return visitor.visitChildren(self)
-
 
 
     def and_expression(self, _p:int=0):
@@ -1474,16 +1160,16 @@ class CmmParser ( Parser ):
         _parentState = self.state
         localctx = CmmParser.And_expressionContext(self, self._ctx, _parentState)
         _prevctx = localctx
-        _startState = 28
-        self.enterRecursionRule(localctx, 28, self.RULE_and_expression, _p)
+        _startState = 24
+        self.enterRecursionRule(localctx, 24, self.RULE_and_expression, _p)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 203
+            self.state = 158
             self.equality_expression(0)
             self._ctx.stop = self._input.LT(-1)
-            self.state = 210
+            self.state = 165
             self._errHandler.sync(self)
-            _alt = self._interp.adaptivePredict(self._input,19,self._ctx)
+            _alt = self._interp.adaptivePredict(self._input,13,self._ctx)
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                 if _alt==1:
                     if self._parseListeners is not None:
@@ -1491,17 +1177,17 @@ class CmmParser ( Parser ):
                     _prevctx = localctx
                     localctx = CmmParser.And_expressionContext(self, _parentctx, _parentState)
                     self.pushNewRecursionContext(localctx, _startState, self.RULE_and_expression)
-                    self.state = 205
+                    self.state = 160
                     if not self.precpred(self._ctx, 1):
                         from antlr4.error.Errors import FailedPredicateException
                         raise FailedPredicateException(self, "self.precpred(self._ctx, 1)")
-                    self.state = 206
+                    self.state = 161
                     self.match(CmmParser.BITAND)
-                    self.state = 207
+                    self.state = 162
                     self.equality_expression(0) 
-                self.state = 212
+                self.state = 167
                 self._errHandler.sync(self)
-                _alt = self._interp.adaptivePredict(self._input,19,self._ctx)
+                _alt = self._interp.adaptivePredict(self._input,13,self._ctx)
 
         except RecognitionException as re:
             localctx.exception = re
@@ -1544,12 +1230,6 @@ class CmmParser ( Parser ):
             if hasattr( listener, "exitEquality_expression" ):
                 listener.exitEquality_expression(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitEquality_expression" ):
-                return visitor.visitEquality_expression(self)
-            else:
-                return visitor.visitChildren(self)
-
 
 
     def equality_expression(self, _p:int=0):
@@ -1557,54 +1237,54 @@ class CmmParser ( Parser ):
         _parentState = self.state
         localctx = CmmParser.Equality_expressionContext(self, self._ctx, _parentState)
         _prevctx = localctx
-        _startState = 30
-        self.enterRecursionRule(localctx, 30, self.RULE_equality_expression, _p)
+        _startState = 26
+        self.enterRecursionRule(localctx, 26, self.RULE_equality_expression, _p)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 214
+            self.state = 169
             self.relational_expression(0)
             self._ctx.stop = self._input.LT(-1)
-            self.state = 224
+            self.state = 179
             self._errHandler.sync(self)
-            _alt = self._interp.adaptivePredict(self._input,21,self._ctx)
+            _alt = self._interp.adaptivePredict(self._input,15,self._ctx)
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                 if _alt==1:
                     if self._parseListeners is not None:
                         self.triggerExitRuleEvent()
                     _prevctx = localctx
-                    self.state = 222
+                    self.state = 177
                     self._errHandler.sync(self)
-                    la_ = self._interp.adaptivePredict(self._input,20,self._ctx)
+                    la_ = self._interp.adaptivePredict(self._input,14,self._ctx)
                     if la_ == 1:
                         localctx = CmmParser.Equality_expressionContext(self, _parentctx, _parentState)
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_equality_expression)
-                        self.state = 216
+                        self.state = 171
                         if not self.precpred(self._ctx, 2):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 2)")
-                        self.state = 217
+                        self.state = 172
                         self.match(CmmParser.EQ)
-                        self.state = 218
+                        self.state = 173
                         self.relational_expression(0)
                         pass
 
                     elif la_ == 2:
                         localctx = CmmParser.Equality_expressionContext(self, _parentctx, _parentState)
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_equality_expression)
-                        self.state = 219
+                        self.state = 174
                         if not self.precpred(self._ctx, 1):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 1)")
-                        self.state = 220
+                        self.state = 175
                         self.match(CmmParser.NEQ)
-                        self.state = 221
+                        self.state = 176
                         self.relational_expression(0)
                         pass
 
              
-                self.state = 226
+                self.state = 181
                 self._errHandler.sync(self)
-                _alt = self._interp.adaptivePredict(self._input,21,self._ctx)
+                _alt = self._interp.adaptivePredict(self._input,15,self._ctx)
 
         except RecognitionException as re:
             localctx.exception = re
@@ -1653,12 +1333,6 @@ class CmmParser ( Parser ):
             if hasattr( listener, "exitRelational_expression" ):
                 listener.exitRelational_expression(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitRelational_expression" ):
-                return visitor.visitRelational_expression(self)
-            else:
-                return visitor.visitChildren(self)
-
 
 
     def relational_expression(self, _p:int=0):
@@ -1666,80 +1340,80 @@ class CmmParser ( Parser ):
         _parentState = self.state
         localctx = CmmParser.Relational_expressionContext(self, self._ctx, _parentState)
         _prevctx = localctx
-        _startState = 32
-        self.enterRecursionRule(localctx, 32, self.RULE_relational_expression, _p)
+        _startState = 28
+        self.enterRecursionRule(localctx, 28, self.RULE_relational_expression, _p)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 228
+            self.state = 183
             self.shift_expression(0)
             self._ctx.stop = self._input.LT(-1)
-            self.state = 244
+            self.state = 199
             self._errHandler.sync(self)
-            _alt = self._interp.adaptivePredict(self._input,23,self._ctx)
+            _alt = self._interp.adaptivePredict(self._input,17,self._ctx)
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                 if _alt==1:
                     if self._parseListeners is not None:
                         self.triggerExitRuleEvent()
                     _prevctx = localctx
-                    self.state = 242
+                    self.state = 197
                     self._errHandler.sync(self)
-                    la_ = self._interp.adaptivePredict(self._input,22,self._ctx)
+                    la_ = self._interp.adaptivePredict(self._input,16,self._ctx)
                     if la_ == 1:
                         localctx = CmmParser.Relational_expressionContext(self, _parentctx, _parentState)
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_relational_expression)
-                        self.state = 230
+                        self.state = 185
                         if not self.precpred(self._ctx, 4):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 4)")
-                        self.state = 231
+                        self.state = 186
                         self.match(CmmParser.LESS)
-                        self.state = 232
+                        self.state = 187
                         self.shift_expression(0)
                         pass
 
                     elif la_ == 2:
                         localctx = CmmParser.Relational_expressionContext(self, _parentctx, _parentState)
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_relational_expression)
-                        self.state = 233
+                        self.state = 188
                         if not self.precpred(self._ctx, 3):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 3)")
-                        self.state = 234
+                        self.state = 189
                         self.match(CmmParser.GREATER)
-                        self.state = 235
+                        self.state = 190
                         self.shift_expression(0)
                         pass
 
                     elif la_ == 3:
                         localctx = CmmParser.Relational_expressionContext(self, _parentctx, _parentState)
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_relational_expression)
-                        self.state = 236
+                        self.state = 191
                         if not self.precpred(self._ctx, 2):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 2)")
-                        self.state = 237
+                        self.state = 192
                         self.match(CmmParser.LESSEQ)
-                        self.state = 238
+                        self.state = 193
                         self.shift_expression(0)
                         pass
 
                     elif la_ == 4:
                         localctx = CmmParser.Relational_expressionContext(self, _parentctx, _parentState)
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_relational_expression)
-                        self.state = 239
+                        self.state = 194
                         if not self.precpred(self._ctx, 1):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 1)")
-                        self.state = 240
+                        self.state = 195
                         self.match(CmmParser.GREATEREQ)
-                        self.state = 241
+                        self.state = 196
                         self.shift_expression(0)
                         pass
 
              
-                self.state = 246
+                self.state = 201
                 self._errHandler.sync(self)
-                _alt = self._interp.adaptivePredict(self._input,23,self._ctx)
+                _alt = self._interp.adaptivePredict(self._input,17,self._ctx)
 
         except RecognitionException as re:
             localctx.exception = re
@@ -1782,12 +1456,6 @@ class CmmParser ( Parser ):
             if hasattr( listener, "exitShift_expression" ):
                 listener.exitShift_expression(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitShift_expression" ):
-                return visitor.visitShift_expression(self)
-            else:
-                return visitor.visitChildren(self)
-
 
 
     def shift_expression(self, _p:int=0):
@@ -1795,54 +1463,54 @@ class CmmParser ( Parser ):
         _parentState = self.state
         localctx = CmmParser.Shift_expressionContext(self, self._ctx, _parentState)
         _prevctx = localctx
-        _startState = 34
-        self.enterRecursionRule(localctx, 34, self.RULE_shift_expression, _p)
+        _startState = 30
+        self.enterRecursionRule(localctx, 30, self.RULE_shift_expression, _p)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 248
+            self.state = 203
             self.additive_expression(0)
             self._ctx.stop = self._input.LT(-1)
-            self.state = 258
+            self.state = 213
             self._errHandler.sync(self)
-            _alt = self._interp.adaptivePredict(self._input,25,self._ctx)
+            _alt = self._interp.adaptivePredict(self._input,19,self._ctx)
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                 if _alt==1:
                     if self._parseListeners is not None:
                         self.triggerExitRuleEvent()
                     _prevctx = localctx
-                    self.state = 256
+                    self.state = 211
                     self._errHandler.sync(self)
-                    la_ = self._interp.adaptivePredict(self._input,24,self._ctx)
+                    la_ = self._interp.adaptivePredict(self._input,18,self._ctx)
                     if la_ == 1:
                         localctx = CmmParser.Shift_expressionContext(self, _parentctx, _parentState)
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_shift_expression)
-                        self.state = 250
+                        self.state = 205
                         if not self.precpred(self._ctx, 2):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 2)")
-                        self.state = 251
+                        self.state = 206
                         self.match(CmmParser.LSHIFT)
-                        self.state = 252
+                        self.state = 207
                         self.additive_expression(0)
                         pass
 
                     elif la_ == 2:
                         localctx = CmmParser.Shift_expressionContext(self, _parentctx, _parentState)
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_shift_expression)
-                        self.state = 253
+                        self.state = 208
                         if not self.precpred(self._ctx, 1):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 1)")
-                        self.state = 254
+                        self.state = 209
                         self.match(CmmParser.RSHIFT)
-                        self.state = 255
+                        self.state = 210
                         self.additive_expression(0)
                         pass
 
              
-                self.state = 260
+                self.state = 215
                 self._errHandler.sync(self)
-                _alt = self._interp.adaptivePredict(self._input,25,self._ctx)
+                _alt = self._interp.adaptivePredict(self._input,19,self._ctx)
 
         except RecognitionException as re:
             localctx.exception = re
@@ -1885,12 +1553,6 @@ class CmmParser ( Parser ):
             if hasattr( listener, "exitAdditive_expression" ):
                 listener.exitAdditive_expression(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitAdditive_expression" ):
-                return visitor.visitAdditive_expression(self)
-            else:
-                return visitor.visitChildren(self)
-
 
 
     def additive_expression(self, _p:int=0):
@@ -1898,54 +1560,54 @@ class CmmParser ( Parser ):
         _parentState = self.state
         localctx = CmmParser.Additive_expressionContext(self, self._ctx, _parentState)
         _prevctx = localctx
-        _startState = 36
-        self.enterRecursionRule(localctx, 36, self.RULE_additive_expression, _p)
+        _startState = 32
+        self.enterRecursionRule(localctx, 32, self.RULE_additive_expression, _p)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 262
+            self.state = 217
             self.multiplicative_expression(0)
             self._ctx.stop = self._input.LT(-1)
-            self.state = 272
+            self.state = 227
             self._errHandler.sync(self)
-            _alt = self._interp.adaptivePredict(self._input,27,self._ctx)
+            _alt = self._interp.adaptivePredict(self._input,21,self._ctx)
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                 if _alt==1:
                     if self._parseListeners is not None:
                         self.triggerExitRuleEvent()
                     _prevctx = localctx
-                    self.state = 270
+                    self.state = 225
                     self._errHandler.sync(self)
-                    la_ = self._interp.adaptivePredict(self._input,26,self._ctx)
+                    la_ = self._interp.adaptivePredict(self._input,20,self._ctx)
                     if la_ == 1:
                         localctx = CmmParser.Additive_expressionContext(self, _parentctx, _parentState)
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_additive_expression)
-                        self.state = 264
+                        self.state = 219
                         if not self.precpred(self._ctx, 2):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 2)")
-                        self.state = 265
+                        self.state = 220
                         self.match(CmmParser.PLUS)
-                        self.state = 266
+                        self.state = 221
                         self.multiplicative_expression(0)
                         pass
 
                     elif la_ == 2:
                         localctx = CmmParser.Additive_expressionContext(self, _parentctx, _parentState)
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_additive_expression)
-                        self.state = 267
+                        self.state = 222
                         if not self.precpred(self._ctx, 1):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 1)")
-                        self.state = 268
+                        self.state = 223
                         self.match(CmmParser.MINUS)
-                        self.state = 269
+                        self.state = 224
                         self.multiplicative_expression(0)
                         pass
 
              
-                self.state = 274
+                self.state = 229
                 self._errHandler.sync(self)
-                _alt = self._interp.adaptivePredict(self._input,27,self._ctx)
+                _alt = self._interp.adaptivePredict(self._input,21,self._ctx)
 
         except RecognitionException as re:
             localctx.exception = re
@@ -1992,38 +1654,32 @@ class CmmParser ( Parser ):
             if hasattr( listener, "exitCast_expression" ):
                 listener.exitCast_expression(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitCast_expression" ):
-                return visitor.visitCast_expression(self)
-            else:
-                return visitor.visitChildren(self)
-
 
 
 
     def cast_expression(self):
 
         localctx = CmmParser.Cast_expressionContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 38, self.RULE_cast_expression)
+        self.enterRule(localctx, 34, self.RULE_cast_expression)
         try:
-            self.state = 281
+            self.state = 236
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,28,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,22,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 275
+                self.state = 230
                 self.match(CmmParser.LPAREN)
-                self.state = 276
+                self.state = 231
                 self.typeSpecifier(0)
-                self.state = 277
+                self.state = 232
                 self.match(CmmParser.RPAREN)
-                self.state = 278
+                self.state = 233
                 self.cast_expression()
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 280
+                self.state = 235
                 self.unary_expression()
                 pass
 
@@ -2072,12 +1728,6 @@ class CmmParser ( Parser ):
             if hasattr( listener, "exitMultiplicative_expression" ):
                 listener.exitMultiplicative_expression(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitMultiplicative_expression" ):
-                return visitor.visitMultiplicative_expression(self)
-            else:
-                return visitor.visitChildren(self)
-
 
 
     def multiplicative_expression(self, _p:int=0):
@@ -2085,67 +1735,67 @@ class CmmParser ( Parser ):
         _parentState = self.state
         localctx = CmmParser.Multiplicative_expressionContext(self, self._ctx, _parentState)
         _prevctx = localctx
-        _startState = 40
-        self.enterRecursionRule(localctx, 40, self.RULE_multiplicative_expression, _p)
+        _startState = 36
+        self.enterRecursionRule(localctx, 36, self.RULE_multiplicative_expression, _p)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 284
+            self.state = 239
             self.cast_expression()
             self._ctx.stop = self._input.LT(-1)
-            self.state = 297
+            self.state = 252
             self._errHandler.sync(self)
-            _alt = self._interp.adaptivePredict(self._input,30,self._ctx)
+            _alt = self._interp.adaptivePredict(self._input,24,self._ctx)
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                 if _alt==1:
                     if self._parseListeners is not None:
                         self.triggerExitRuleEvent()
                     _prevctx = localctx
-                    self.state = 295
+                    self.state = 250
                     self._errHandler.sync(self)
-                    la_ = self._interp.adaptivePredict(self._input,29,self._ctx)
+                    la_ = self._interp.adaptivePredict(self._input,23,self._ctx)
                     if la_ == 1:
                         localctx = CmmParser.Multiplicative_expressionContext(self, _parentctx, _parentState)
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_multiplicative_expression)
-                        self.state = 286
+                        self.state = 241
                         if not self.precpred(self._ctx, 3):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 3)")
-                        self.state = 287
+                        self.state = 242
                         self.match(CmmParser.MUL)
-                        self.state = 288
+                        self.state = 243
                         self.cast_expression()
                         pass
 
                     elif la_ == 2:
                         localctx = CmmParser.Multiplicative_expressionContext(self, _parentctx, _parentState)
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_multiplicative_expression)
-                        self.state = 289
+                        self.state = 244
                         if not self.precpred(self._ctx, 2):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 2)")
-                        self.state = 290
+                        self.state = 245
                         self.match(CmmParser.DIV)
-                        self.state = 291
+                        self.state = 246
                         self.cast_expression()
                         pass
 
                     elif la_ == 3:
                         localctx = CmmParser.Multiplicative_expressionContext(self, _parentctx, _parentState)
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_multiplicative_expression)
-                        self.state = 292
+                        self.state = 247
                         if not self.precpred(self._ctx, 1):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 1)")
-                        self.state = 293
+                        self.state = 248
                         self.match(CmmParser.MOD)
-                        self.state = 294
+                        self.state = 249
                         self.cast_expression()
                         pass
 
              
-                self.state = 299
+                self.state = 254
                 self._errHandler.sync(self)
-                _alt = self._interp.adaptivePredict(self._input,30,self._ctx)
+                _alt = self._interp.adaptivePredict(self._input,24,self._ctx)
 
         except RecognitionException as re:
             localctx.exception = re
@@ -2210,82 +1860,76 @@ class CmmParser ( Parser ):
             if hasattr( listener, "exitUnary_expression" ):
                 listener.exitUnary_expression(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitUnary_expression" ):
-                return visitor.visitUnary_expression(self)
-            else:
-                return visitor.visitChildren(self)
-
 
 
 
     def unary_expression(self):
 
         localctx = CmmParser.Unary_expressionContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 42, self.RULE_unary_expression)
+        self.enterRule(localctx, 38, self.RULE_unary_expression)
         try:
-            self.state = 317
+            self.state = 272
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [9, 40, 41, 42, 43, 44]:
+            if token in [7, 38, 39, 40, 41, 42]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 300
+                self.state = 255
                 self.postfix_expression(0)
                 pass
-            elif token in [18]:
+            elif token in [16]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 301
+                self.state = 256
                 self.match(CmmParser.PLUS)
-                self.state = 302
+                self.state = 257
                 self.unary_expression()
                 pass
-            elif token in [19]:
+            elif token in [17]:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 303
+                self.state = 258
                 self.match(CmmParser.MINUS)
-                self.state = 304
+                self.state = 259
                 self.unary_expression()
                 pass
-            elif token in [31]:
+            elif token in [29]:
                 self.enterOuterAlt(localctx, 4)
-                self.state = 305
+                self.state = 260
                 self.match(CmmParser.NOT)
-                self.state = 306
+                self.state = 261
                 self.unary_expression()
                 pass
-            elif token in [35]:
+            elif token in [33]:
                 self.enterOuterAlt(localctx, 5)
-                self.state = 307
+                self.state = 262
                 self.match(CmmParser.BITNOT)
-                self.state = 308
+                self.state = 263
                 self.unary_expression()
                 pass
-            elif token in [20]:
+            elif token in [18]:
                 self.enterOuterAlt(localctx, 6)
-                self.state = 309
+                self.state = 264
                 self.match(CmmParser.MUL)
-                self.state = 310
+                self.state = 265
                 self.cast_expression()
                 pass
-            elif token in [32]:
+            elif token in [30]:
                 self.enterOuterAlt(localctx, 7)
-                self.state = 311
+                self.state = 266
                 self.match(CmmParser.BITAND)
-                self.state = 312
+                self.state = 267
                 self.cast_expression()
                 pass
-            elif token in [38]:
+            elif token in [36]:
                 self.enterOuterAlt(localctx, 8)
-                self.state = 313
+                self.state = 268
                 self.match(CmmParser.INC)
-                self.state = 314
+                self.state = 269
                 self.unary_expression()
                 pass
-            elif token in [39]:
+            elif token in [37]:
                 self.enterOuterAlt(localctx, 9)
-                self.state = 315
+                self.state = 270
                 self.match(CmmParser.DEC)
-                self.state = 316
+                self.state = 271
                 self.unary_expression()
                 pass
             else:
@@ -2315,16 +1959,6 @@ class CmmParser ( Parser ):
             return self.getTypedRuleContext(CmmParser.Postfix_expressionContext,0)
 
 
-        def LPAREN(self):
-            return self.getToken(CmmParser.LPAREN, 0)
-
-        def RPAREN(self):
-            return self.getToken(CmmParser.RPAREN, 0)
-
-        def argumentList(self):
-            return self.getTypedRuleContext(CmmParser.ArgumentListContext,0)
-
-
         def INC(self):
             return self.getToken(CmmParser.INC, 0)
 
@@ -2352,12 +1986,6 @@ class CmmParser ( Parser ):
             if hasattr( listener, "exitPostfix_expression" ):
                 listener.exitPostfix_expression(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitPostfix_expression" ):
-                return visitor.visitPostfix_expression(self)
-            else:
-                return visitor.visitChildren(self)
-
 
 
     def postfix_expression(self, _p:int=0):
@@ -2365,87 +1993,65 @@ class CmmParser ( Parser ):
         _parentState = self.state
         localctx = CmmParser.Postfix_expressionContext(self, self._ctx, _parentState)
         _prevctx = localctx
-        _startState = 44
-        self.enterRecursionRule(localctx, 44, self.RULE_postfix_expression, _p)
-        self._la = 0 # Token type
+        _startState = 40
+        self.enterRecursionRule(localctx, 40, self.RULE_postfix_expression, _p)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 320
+            self.state = 275
             self.primary_expression()
             self._ctx.stop = self._input.LT(-1)
-            self.state = 339
+            self.state = 288
             self._errHandler.sync(self)
-            _alt = self._interp.adaptivePredict(self._input,34,self._ctx)
+            _alt = self._interp.adaptivePredict(self._input,27,self._ctx)
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                 if _alt==1:
                     if self._parseListeners is not None:
                         self.triggerExitRuleEvent()
                     _prevctx = localctx
-                    self.state = 337
+                    self.state = 286
                     self._errHandler.sync(self)
-                    la_ = self._interp.adaptivePredict(self._input,33,self._ctx)
+                    la_ = self._interp.adaptivePredict(self._input,26,self._ctx)
                     if la_ == 1:
                         localctx = CmmParser.Postfix_expressionContext(self, _parentctx, _parentState)
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_postfix_expression)
-                        self.state = 322
-                        if not self.precpred(self._ctx, 4):
+                        self.state = 277
+                        if not self.precpred(self._ctx, 3):
                             from antlr4.error.Errors import FailedPredicateException
-                            raise FailedPredicateException(self, "self.precpred(self._ctx, 4)")
-                        self.state = 323
-                        self.match(CmmParser.LPAREN)
-                        self.state = 325
-                        self._errHandler.sync(self)
-                        _la = self._input.LA(1)
-                        if (((_la) & ~0x3f) == 0 and ((1 << _la) & 34950298206720) != 0):
-                            self.state = 324
-                            self.argumentList()
-
-
-                        self.state = 327
-                        self.match(CmmParser.RPAREN)
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 3)")
+                        self.state = 278
+                        self.match(CmmParser.INC)
                         pass
 
                     elif la_ == 2:
                         localctx = CmmParser.Postfix_expressionContext(self, _parentctx, _parentState)
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_postfix_expression)
-                        self.state = 328
-                        if not self.precpred(self._ctx, 3):
+                        self.state = 279
+                        if not self.precpred(self._ctx, 2):
                             from antlr4.error.Errors import FailedPredicateException
-                            raise FailedPredicateException(self, "self.precpred(self._ctx, 3)")
-                        self.state = 329
-                        self.match(CmmParser.INC)
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 2)")
+                        self.state = 280
+                        self.match(CmmParser.DEC)
                         pass
 
                     elif la_ == 3:
                         localctx = CmmParser.Postfix_expressionContext(self, _parentctx, _parentState)
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_postfix_expression)
-                        self.state = 330
-                        if not self.precpred(self._ctx, 2):
-                            from antlr4.error.Errors import FailedPredicateException
-                            raise FailedPredicateException(self, "self.precpred(self._ctx, 2)")
-                        self.state = 331
-                        self.match(CmmParser.DEC)
-                        pass
-
-                    elif la_ == 4:
-                        localctx = CmmParser.Postfix_expressionContext(self, _parentctx, _parentState)
-                        self.pushNewRecursionContext(localctx, _startState, self.RULE_postfix_expression)
-                        self.state = 332
+                        self.state = 281
                         if not self.precpred(self._ctx, 1):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 1)")
-                        self.state = 333
+                        self.state = 282
                         self.match(CmmParser.LBRACKET)
-                        self.state = 334
+                        self.state = 283
                         self.expression()
-                        self.state = 335
+                        self.state = 284
                         self.match(CmmParser.RBRACKET)
                         pass
 
              
-                self.state = 341
+                self.state = 290
                 self._errHandler.sync(self)
-                _alt = self._interp.adaptivePredict(self._input,34,self._ctx)
+                _alt = self._interp.adaptivePredict(self._input,27,self._ctx)
 
         except RecognitionException as re:
             localctx.exception = re
@@ -2453,76 +2059,6 @@ class CmmParser ( Parser ):
             self._errHandler.recover(self, re)
         finally:
             self.unrollRecursionContexts(_parentctx)
-        return localctx
-
-
-    class ArgumentListContext(ParserRuleContext):
-        __slots__ = 'parser'
-
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
-            self.parser = parser
-
-        def expression(self, i:int=None):
-            if i is None:
-                return self.getTypedRuleContexts(CmmParser.ExpressionContext)
-            else:
-                return self.getTypedRuleContext(CmmParser.ExpressionContext,i)
-
-
-        def COMMA(self, i:int=None):
-            if i is None:
-                return self.getTokens(CmmParser.COMMA)
-            else:
-                return self.getToken(CmmParser.COMMA, i)
-
-        def getRuleIndex(self):
-            return CmmParser.RULE_argumentList
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterArgumentList" ):
-                listener.enterArgumentList(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitArgumentList" ):
-                listener.exitArgumentList(self)
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitArgumentList" ):
-                return visitor.visitArgumentList(self)
-            else:
-                return visitor.visitChildren(self)
-
-
-
-
-    def argumentList(self):
-
-        localctx = CmmParser.ArgumentListContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 46, self.RULE_argumentList)
-        self._la = 0 # Token type
-        try:
-            self.enterOuterAlt(localctx, 1)
-            self.state = 342
-            self.expression()
-            self.state = 347
-            self._errHandler.sync(self)
-            _la = self._input.LA(1)
-            while _la==15:
-                self.state = 343
-                self.match(CmmParser.COMMA)
-                self.state = 344
-                self.expression()
-                self.state = 349
-                self._errHandler.sync(self)
-                _la = self._input.LA(1)
-
-        except RecognitionException as re:
-            localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
-        finally:
-            self.exitRule()
         return localctx
 
 
@@ -2569,55 +2105,49 @@ class CmmParser ( Parser ):
             if hasattr( listener, "exitPrimary_expression" ):
                 listener.exitPrimary_expression(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitPrimary_expression" ):
-                return visitor.visitPrimary_expression(self)
-            else:
-                return visitor.visitChildren(self)
-
 
 
 
     def primary_expression(self):
 
         localctx = CmmParser.Primary_expressionContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 48, self.RULE_primary_expression)
+        self.enterRule(localctx, 42, self.RULE_primary_expression)
         try:
-            self.state = 359
+            self.state = 300
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [42]:
+            if token in [40]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 350
+                self.state = 291
                 self.match(CmmParser.INT_LITERAL)
                 pass
-            elif token in [41]:
+            elif token in [39]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 351
+                self.state = 292
                 self.match(CmmParser.FLOAT_LITERAL)
                 pass
-            elif token in [40]:
+            elif token in [38]:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 352
+                self.state = 293
                 self.match(CmmParser.CHAR_LITERAL)
                 pass
-            elif token in [43]:
+            elif token in [41]:
                 self.enterOuterAlt(localctx, 4)
-                self.state = 353
+                self.state = 294
                 self.match(CmmParser.STRING_LITERAL)
                 pass
-            elif token in [44]:
+            elif token in [42]:
                 self.enterOuterAlt(localctx, 5)
-                self.state = 354
+                self.state = 295
                 self.match(CmmParser.IDENTIFIER)
                 pass
-            elif token in [9]:
+            elif token in [7]:
                 self.enterOuterAlt(localctx, 6)
-                self.state = 355
+                self.state = 296
                 self.match(CmmParser.LPAREN)
-                self.state = 356
+                self.state = 297
                 self.expression()
-                self.state = 357
+                self.state = 298
                 self.match(CmmParser.RPAREN)
                 pass
             else:
@@ -2676,77 +2206,71 @@ class CmmParser ( Parser ):
             if hasattr( listener, "exitArray_initializer" ):
                 listener.exitArray_initializer(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitArray_initializer" ):
-                return visitor.visitArray_initializer(self)
-            else:
-                return visitor.visitChildren(self)
-
 
 
 
     def array_initializer(self):
 
         localctx = CmmParser.Array_initializerContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 50, self.RULE_array_initializer)
+        self.enterRule(localctx, 44, self.RULE_array_initializer)
         self._la = 0 # Token type
         try:
-            self.state = 385
+            self.state = 326
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,41,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,33,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 361
+                self.state = 302
                 self.match(CmmParser.LBRACE)
-                self.state = 370
+                self.state = 311
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if (((_la) & ~0x3f) == 0 and ((1 << _la) & 34950298206720) != 0):
-                    self.state = 362
+                if (((_la) & ~0x3f) == 0 and ((1 << _la) & 8737574551680) != 0):
+                    self.state = 303
                     self.expression()
-                    self.state = 367
+                    self.state = 308
                     self._errHandler.sync(self)
                     _la = self._input.LA(1)
-                    while _la==15:
-                        self.state = 363
+                    while _la==13:
+                        self.state = 304
                         self.match(CmmParser.COMMA)
-                        self.state = 364
+                        self.state = 305
                         self.expression()
-                        self.state = 369
+                        self.state = 310
                         self._errHandler.sync(self)
                         _la = self._input.LA(1)
 
 
 
-                self.state = 372
+                self.state = 313
                 self.match(CmmParser.RBRACE)
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 373
+                self.state = 314
                 self.match(CmmParser.LBRACE)
-                self.state = 382
+                self.state = 323
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if _la==11:
-                    self.state = 374
+                if _la==9:
+                    self.state = 315
                     self.array_initializer()
-                    self.state = 379
+                    self.state = 320
                     self._errHandler.sync(self)
                     _la = self._input.LA(1)
-                    while _la==15:
-                        self.state = 375
+                    while _la==13:
+                        self.state = 316
                         self.match(CmmParser.COMMA)
-                        self.state = 376
+                        self.state = 317
                         self.array_initializer()
-                        self.state = 381
+                        self.state = 322
                         self._errHandler.sync(self)
                         _la = self._input.LA(1)
 
 
 
-                self.state = 384
+                self.state = 325
                 self.match(CmmParser.RBRACE)
                 pass
 
@@ -2764,18 +2288,18 @@ class CmmParser ( Parser ):
     def sempred(self, localctx:RuleContext, ruleIndex:int, predIndex:int):
         if self._predicates == None:
             self._predicates = dict()
-        self._predicates[7] = self.typeSpecifier_sempred
-        self._predicates[10] = self.logical_or_expression_sempred
-        self._predicates[11] = self.logical_and_expression_sempred
-        self._predicates[12] = self.inclusive_or_expression_sempred
-        self._predicates[13] = self.exclusive_or_expression_sempred
-        self._predicates[14] = self.and_expression_sempred
-        self._predicates[15] = self.equality_expression_sempred
-        self._predicates[16] = self.relational_expression_sempred
-        self._predicates[17] = self.shift_expression_sempred
-        self._predicates[18] = self.additive_expression_sempred
-        self._predicates[20] = self.multiplicative_expression_sempred
-        self._predicates[22] = self.postfix_expression_sempred
+        self._predicates[5] = self.typeSpecifier_sempred
+        self._predicates[8] = self.logical_or_expression_sempred
+        self._predicates[9] = self.logical_and_expression_sempred
+        self._predicates[10] = self.inclusive_or_expression_sempred
+        self._predicates[11] = self.exclusive_or_expression_sempred
+        self._predicates[12] = self.and_expression_sempred
+        self._predicates[13] = self.equality_expression_sempred
+        self._predicates[14] = self.relational_expression_sempred
+        self._predicates[15] = self.shift_expression_sempred
+        self._predicates[16] = self.additive_expression_sempred
+        self._predicates[18] = self.multiplicative_expression_sempred
+        self._predicates[20] = self.postfix_expression_sempred
         pred = self._predicates.get(ruleIndex, None)
         if pred is None:
             raise Exception("No predicate with index:" + str(ruleIndex))
@@ -2871,18 +2395,14 @@ class CmmParser ( Parser ):
 
     def postfix_expression_sempred(self, localctx:Postfix_expressionContext, predIndex:int):
             if predIndex == 19:
-                return self.precpred(self._ctx, 4)
-         
-
-            if predIndex == 20:
                 return self.precpred(self._ctx, 3)
          
 
-            if predIndex == 21:
+            if predIndex == 20:
                 return self.precpred(self._ctx, 2)
          
 
-            if predIndex == 22:
+            if predIndex == 21:
                 return self.precpred(self._ctx, 1)
          
 
