@@ -197,8 +197,18 @@ class ASTVisitor:
                     elif ctx.IDENTIFIER():
                         res = self.get_loc(IdentifierNode(ctx.IDENTIFIER().getText()), ctx)
                     elif ctx.INT_LITERAL():
-                        val = int(ctx.INT_LITERAL().getText().rstrip("uUlL"), 0)
-                        res = self.get_loc(IntNode(val), ctx)
+                        text_val = ctx.INT_LITERAL().getText().rstrip("uUlL")
+                        try:
+                            # Check of het een C-stijl octaal is (begint met 0, langer dan 1 karakter, geen hex)
+                            if text_val.startswith('0') and len(text_val) > 1 and not text_val.lower().startswith('0x'):
+                                val = int(text_val, 8) # Forceer octaal (base 8)
+                            else:
+                                val = int(text_val, 0) # Base 0 is prima voor decimaal en hexadecimaal (0x...)
+                            res = self.get_loc(IntNode(val), ctx)
+                        except ValueError:
+                            print(f"[Error] line {ctx.start.line}, position {ctx.start.column}: Invalid integer literal '{text_val}'")
+                            import sys
+                            sys.exit(1)
                     elif ctx.FLOAT_LITERAL():
                         res = self.get_loc(FloatNode(float(ctx.FLOAT_LITERAL().getText())), ctx)
                     elif ctx.CHAR_LITERAL():

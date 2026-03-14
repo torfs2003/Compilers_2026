@@ -231,7 +231,7 @@ fragment HEX_LITERAL
 	: '0' [xX] [a-fA-F0-9]+ [uUlL]*
 	;
 fragment OCT_LITERAL
-	: '0' [0-9]+ [uUlL]*
+	: '0' [0-7]+ [uUlL]*
 	;
 fragment DEC_LITERAL
 	: '0'

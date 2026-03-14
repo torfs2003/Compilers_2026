@@ -46,14 +46,21 @@ class SemanticVisitor(BaseVisitor):
         if type_str == 'char' and isinstance(getattr(node, 'init_expr', None), StringNode):
             type_str = 'char*'
         
+        is_const_var = node.is_const
+        points_to_const = False
+        
+        if '*' in type_str and node.is_const:
+            is_const_var = False      # De pointer zelf mag je gewoon overschrijven
+            points_to_const = True    # Maar de data waar hij naar wijst mag NIET veranderen
+        
         success = self.symbol_table.put(node.name, {
             'type': type_str, 
-            'is_const': node.is_const,
-            'points_to_const': False
+            'is_const': is_const_var,
+            'points_to_const': points_to_const
         })
         if not success:
             self.get_Error(node, f"Variabele '{node.name}' is al gedeclareerd in deze scope.")
-
+            
     def pre_visit_ArrayDeclNode(self, node):
         num_dimensions = len(node.sizes) if hasattr(node, 'sizes') and node.sizes else 1
         type_str = node.type_spec + ("*" * num_dimensions)

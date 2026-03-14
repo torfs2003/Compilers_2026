@@ -67,7 +67,8 @@ class ConstantFoldingVisitor(BaseVisitor):
         self.results[id(node)] = node
 
     def visit_UnaryOpNode(self, node):
-        node.child = self.results.get(id(node.child), node.child)
+        if node.op != '&':
+            node.child = self.results.get(id(node.child), node.child)
         
         if self.enabled and isinstance(node.child, (IntNode, FloatNode)):
             if node.op == '-':

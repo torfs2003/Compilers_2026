@@ -180,6 +180,18 @@ class LLVMVisitor:
         elif isinstance(node, BinOpNode):
             left = self._ensure_result(node.left)
             right = self._ensure_result(node.right)
+
+            # --- IMPLICIETE TYPE CONVERSIE VOOR BINAIRE BEWERKINGEN ---
+            if node.op not in ['[]'] and not isinstance(left.type, ir.PointerType) and not isinstance(right.type, ir.PointerType):
+                # Als de types niet gelijk zijn, is één van de twee een float en de ander een int
+                if left.type != right.type:
+                    # Is left een int? Cast hem dan naar float (want float is 'richer')
+                    if isinstance(left.type, ir.IntType) and isinstance(right.type, ir.FloatType):
+                        left = self._apply_cast(left, ir.FloatType())
+                    # Anders is right de int, dus cast die naar float
+                    elif isinstance(right.type, ir.IntType) and isinstance(left.type, ir.FloatType):
+                        right = self._apply_cast(right, ir.FloatType())
+            
             
             # 1. Array Indexering ([])
             if node.op == '[]':
@@ -292,13 +304,17 @@ class LLVMVisitor:
                 self.results[id(node)] = self.builder.zext(res_i1, ir.IntType(32))
 
             elif node.op == '-':
-                self.results[id(node)] = self.builder.neg(child_val)
+                if isinstance(child_val.type, ir.FloatType):
+                    self.results[id(node)] = self.builder.fneg(child_val)
+                else:
+                    self.results[id(node)] = self.builder.neg(child_val)
 
             elif node.op == '~':
                 minus_one = ir.Constant(child_val.type, -1)
                 self.results[id(node)] = self.builder.xor(child_val, minus_one)
 
-            elif node.op in ['++', '--']:
+            elif node.op in ['++', '--', 'POST++', 'POST--']:
+                # Haal het adres op
                 addr = self.symbol_table.get(node.child.name) if isinstance(node.child, IdentifierNode) else self.results.get(f"addr_{id(node.child)}")
                 
                 current_val = self.builder.load(addr)
@@ -310,7 +326,28 @@ class LLVMVisitor:
                     new_val = self.builder.sub(current_val, increment)
                 
                 self.builder.store(new_val, addr)
-                self.results[id(node)] = new_val 
+                
+                if node.op.startswith('POST'):
+                    self.results[id(node)] = current_val
+                else:
+                    self.results[id(node)] = new_val
+
+        # 8. Expliciete Type Casts
+        elif isinstance(node, CastNode):
+            inner_val = self._ensure_result(node.expr)
+            
+            # Hier gebruiken we nu jouw exacte attribuutnaam: target_type
+            target_str = node.target_type 
+            
+            if "int" in target_str:
+                target_typ = ir.IntType(32)
+            elif "float" in target_str:
+                target_typ = ir.FloatType()
+            else:
+                target_typ = ir.IntType(8) # char
+                
+            # Roep je helper functie aan!
+            self.results[id(node)] = self._apply_cast(inner_val, target_typ)
 
         # 9. Commentary
         elif isinstance(node, CommentNode):
@@ -329,6 +366,13 @@ class LLVMVisitor:
             # Bitcast naar i8* (char*) voor printf
             self.results[id(node)] = self.builder.bitcast(global_str, ir.IntType(8).as_pointer())
         
+        elif isinstance(node, CharNode):
+            # Zet de string (bijv. 'a' of een escape sequence zoals '\n') om naar zijn ASCII integer waarde
+            char_str = node.value.encode('utf-8').decode('unicode_escape')
+            ascii_val = ord(char_str[0]) if char_str else 0
+            
+            # Een char in C is een 8-bit integer
+            self.results[id(node)] = ir.Constant(ir.IntType(8), ascii_val)
 
     def _apply_cast(self, val, target_typ):
         """Zet een waarde om naar het doeltype met de juiste LLVM instructies."""
