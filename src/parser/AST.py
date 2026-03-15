@@ -149,3 +149,45 @@ class CommentNode(ASTNode):
         self.text = text
     def __repr__(self):
         return f"CommentNode('{self.text[:20]}...')"
+
+class IfNode(ASTNode):
+    def __init__(self, condition, scope, else_scope=None):
+        super().__init__()
+        self.condition = condition
+        self.scope = scope
+        self.else_scope = else_scope
+    def __repr__(self):
+        return f"IfNode({self.condition}->{self.scope}, else {self.else_scope})"
+class WhileNode(ASTNode):
+    def __init__(self, condition, scope):
+        super().__init__()
+        self.condition = condition
+        self.scope = scope
+    def __repr__(self):
+        return f"WhileNode({self.condition}->{self.scope})"
+class ForNode(ASTNode):
+    def __init__(self, init, condition,update, scope):
+        super().__init__()
+        self.init = init
+        self.condition = condition
+        self.update = update
+        self.scope = scope
+    def __repr__(self):
+        return f"ForNode(({self.init};{self.condition};{self.update}->body={self.scope})"
+class BreakNode(ASTNode):
+    def __init__(self):
+        super().__init__()
+    def __repr__(self):
+        return "BreakNode()"
+class ContinueNode(ASTNode):
+    def __init__(self):
+        super().__init__()
+    def __repr__(self):
+        return "ContinueNode()"
+class EnumNode(ASTNode):
+    def __init__(self, name, values):
+        super().__init__()
+        self.name = name
+        self.values = values
+    def __repr__(self):
+        return f"EnumNode({self.name}: {self.values})"

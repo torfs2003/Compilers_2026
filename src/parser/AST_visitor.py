@@ -223,6 +223,40 @@ class ASTVisitor:
                             values.append(results[id(child)])
                     res = self.get_loc(ArrayInitNode(values), ctx)
 
+                elif class_name == "IfStatementContext":
+                    condition = results[id(ctx.expression())]
+                    scope = results[id(ctx.compoundStatement(0))]
+                    else_scope = None
+                    if ctx.ELSE():
+                        else_scope = results[id(ctx.compoundStatement(1))]
+                    res = self.get_loc(IfNode(condition,scope,else_scope),ctx)
+
+                elif class_name == "WhileStatementContext":
+                    condition = results[id(ctx.expression())]
+                    scope = results[id(ctx.compoundStatement())]
+                    res = self.get_loc(WhileNode(condition,scope),ctx)
+
+                elif class_name == "ForStatementContext":
+                    init = results[id(ctx.expression(0))] if ctx.expression(0) else None
+                    condition = results[id(ctx.expression(1))] if ctx.expression(1) else None
+                    update = results[id(ctx.expression(2))] if ctx.expression(2) else None
+                    body = results[id(ctx.compoundStatement())]
+                    res = self.get_loc(ForNode(init, condition, update, body), ctx)
+
+                elif class_name == "BreakStatementContext":
+                    res = self.get_loc(BreakNode(),ctx)
+
+                elif class_name == "ContinueStatementContext":
+                    res = self.get_loc(ContinueNode(),ctx)
+
+
+                elif class_name == "EnumDeclarationContext":
+                    name = ctx.IDENTIFIER().getText()
+                    values = []
+                    for id in ctx.enumList().IDENTIFIER():
+                        values.append(id.getText())
+                    res = self.get_loc(EnumNode(name, values),ctx)
+
                 if res:
                     if class_name in ["DeclarationContext", "Assignment_expressionContext", "Postfix_expressionContext", "StatementContext"]:
                         res.original_c_code = self._get_source_text(ctx)
