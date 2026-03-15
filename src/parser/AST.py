@@ -178,12 +178,12 @@ class BreakNode(ASTNode):
     def __init__(self):
         super().__init__()
     def __repr__(self):
-        return "BreakNode()"
+        return f"BreakNode()"
 class ContinueNode(ASTNode):
     def __init__(self):
         super().__init__()
     def __repr__(self):
-        return "ContinueNode()"
+        return f"ContinueNode()"
 class EnumNode(ASTNode):
     def __init__(self, name, values):
         super().__init__()
@@ -191,3 +191,11 @@ class EnumNode(ASTNode):
         self.values = values
     def __repr__(self):
         return f"EnumNode({self.name}: {self.values})"
+class SwitchNode(ASTNode):
+    def __init__(self, change, cases, default_case=None):
+        super().__init__()
+        self.change = change
+        self.cases = cases
+        self.default_case = default_case
+    def __repr__(self):
+        return f"SwitchNode({self.change},{len(self.cases)},{self.default_case})"

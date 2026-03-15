@@ -257,6 +257,26 @@ class ASTVisitor:
                         values.append(id.getText())
                     res = self.get_loc(EnumNode(name, values),ctx)
 
+                elif class_name == "SwitchStatementContext":
+                    change = results[id(ctx.expression())]
+                    cases = []
+                    default_case = None
+                    for case in ctx.caseBlock():
+                        if case.CASE():
+                            value = int(case.INT_LITERAL().getTesxt())
+                            body = results[id(case)]
+                            cases.append((value,body))
+                        elif case.DEFAULT():
+                            default_case = results[id(case)]
+                    res = self.get_loc(SwitchNode(change,cases,default_case),ctx)
+
+                elif class_name == "CaseBlockContext":
+                    statements = []
+                    for child in ctx.children:
+                        if id(child) in results:
+                            statements.append(results[id(child)])
+                    res = self.get_loc(CompoundNode(statements), ctx)
+
                 if res:
                     if class_name in ["DeclarationContext", "Assignment_expressionContext", "Postfix_expressionContext", "StatementContext"]:
                         res.original_c_code = self._get_source_text(ctx)

@@ -69,6 +69,15 @@ continueStatement
     : CONTINUE SEMI
     ;
 
+switchStatement
+    : SWITCH LPAREN expression RPAREN LBRACE caseBlock* RBRACE
+    ;
+
+caseBlock
+    : CASE INT_LITERAL COLON statement*
+    | DEFAULT COLON statement*
+    ;
+
 enumDeclaration
     : ENUM IDENTIFIER LBRACE enumList RBRACE SEMI
     ;
