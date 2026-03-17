@@ -1,0 +1,9 @@
+Syntax errors found, stopping.
+line 5:15 token recognition error at: ''ab'
+line 5:22 token recognition error at: '';\n'
+line 6:0 missing ';' at 'char'
+line 6:16 token recognition error at: ''xy'
+line 6:20 token recognition error at: '\'
+line 6:22 token recognition error at: '';\n'
+line 6:21 missing ';' at 'n'
+line 7:0 missing ';' at '}'

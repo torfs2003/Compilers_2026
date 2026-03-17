@@ -1,0 +1,8 @@
+Syntax errors found, stopping.
+line 2:0 token recognition error at: '#if'
+line 2:3 mismatched input 'ndef' expecting {<EOF>, '#include', 'int', 'float', 'char', 'void'}
+line 3:0 token recognition error at: '#d'
+line 8:0 token recognition error at: '#d'
+line 9:0 token recognition error at: '#d'
+line 10:0 token recognition error at: '#d'
+line 20:0 token recognition error at: '#e'

@@ -5,6 +5,7 @@ from src.parser.AST import *
 class ASTVisitor:
     def __init__(self, token_stream):
         self.token_stream = token_stream
+        self.warnings = []
 
     def get_loc(self, node, ctx):
         node.line = ctx.start.line
@@ -18,7 +19,7 @@ class ASTVisitor:
         return self.token_stream.getText(ctx.start.tokenIndex, ctx.stop.tokenIndex)
 
     def _get_hidden_comments(self, ctx):
-        """Vist de comments (/* ... */) op die net voor deze node in de HIDDEN channel staan."""
+        """Vist de comments (/* ... */ en //) op die net voor deze node in de HIDDEN channel staan."""
         if not self.token_stream or not ctx.start:
             return []
         
@@ -27,8 +28,14 @@ class ASTVisitor:
         if hidden_tokens:
             for token in hidden_tokens:
                 text = token.text.strip()
-                if text.startswith("/*") or text.startswith("//"):
+                if text.startswith("/*"):
                     comments.append(text)
+                elif text.startswith("//"):
+                    comments.append(text)
+                    
+                    warning_msg = f"[Warning] line {token.line}:{token.column}: Single-line comments (//) are a C99 extension."
+                    if warning_msg not in self.warnings:
+                        self.warnings.append(warning_msg)
         return comments
 
     def visit(self, root_ctx):
@@ -97,22 +104,50 @@ class ASTVisitor:
 
                 # 2. Declarations
                 elif class_name == "DeclarationContext":
-                    sizes = []
-                    for lit in ctx.INT_LITERAL():
-                        sizes.append(int(lit.getText()))
+                    base_type = ctx.typeSpecifier().getText()
+                    pointer_stars = "*" * len(ctx.MUL())
+                    full_type = base_type + pointer_stars
                     
+                    all_exprs = ctx.expression()
+                    sizes = []
                     init = None
-                    if ctx.expression():
-                        init = results[id(ctx.expression())]
-                    elif ctx.array_initializer():
-                        init = results[id(ctx.array_initializer())]
-
-                    if sizes:
-                        node = ArrayDeclNode(ctx.CONST() is not None, ctx.typeSpecifier().getText(), 
-                                           ctx.IDENTIFIER().getText(), sizes, init)
+                    
+                    if ctx.ASSIGN():
+                        if ctx.array_initializer():
+                            init = results[id(ctx.array_initializer())]
+                            dimension_exprs = all_exprs
+                        else:
+                            init = results[id(all_exprs[-1])]
+                            dimension_exprs = all_exprs[:-1]
                     else:
-                        node = DeclNode(ctx.CONST() is not None, ctx.typeSpecifier().getText(), 
-                                      ctx.IDENTIFIER().getText(), init)
+                        dimension_exprs = all_exprs
+                        
+                    for dim_ctx in dimension_exprs:
+                        sizes.append(results[id(dim_ctx)])
+                        
+                    const_tokens = ctx.CONST()
+                    is_const = False     
+                    is_const_ptr = False
+
+                    if len(const_tokens) == 2:
+                        is_const = True
+                        is_const_ptr = True
+                    elif len(const_tokens) == 1:
+                        const_token_idx = const_tokens[0].getSymbol().tokenIndex
+                        type_token_idx = ctx.typeSpecifier().start.tokenIndex
+                        if const_token_idx < type_token_idx:
+                            is_const = True
+                        else:
+                            is_const_ptr = True
+
+                    identifier = ctx.IDENTIFIER().getText()
+                    
+                    if sizes or ctx.LBRACKET(): 
+                        node = ArrayDeclNode(is_const, full_type, identifier, sizes, init)
+                    else:
+                        node = DeclNode(is_const, full_type, identifier, init)
+                    
+                    node.is_const_ptr = is_const_ptr
                     
                     res = self.get_loc(node, ctx)
 

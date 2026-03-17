@@ -1,0 +1,4 @@
+Syntax errors found, stopping.
+line 4:0 extraneous input 'typedef' expecting {<EOF>, '#include', 'int', 'float', 'char', 'void'}
+line 4:14 mismatched input 'int' expecting {'main', IDENTIFIER}
+line 4:17 mismatched input ';' expecting {'main', IDENTIFIER}

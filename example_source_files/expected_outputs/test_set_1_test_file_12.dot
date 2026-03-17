@@ -1,0 +1,22 @@
+digraph AST {
+  node [fontname="Arial"];
+  node2 [label="Include\n<stdio.h>", shape=note, fillcolor=lightyellow, style=filled];
+  node6 [label="'\n'\n(char)", shape=box];
+  node5 [label="Decl\nchar\nnl\n(char)", shape=box, color=blue];
+  node5 -> node6 [label=" init", fontcolor=blue];
+  node8 [label="'\t'\n(char)", shape=box];
+  node7 [label="Decl\nchar\ntab\n(char)", shape=box, color=blue];
+  node7 -> node8 [label=" init", fontcolor=blue];
+  node10 [label="'\0'\n(char)", shape=box];
+  node9 [label="Decl\nchar\ncharacter_null\n(char)", shape=box, color=blue];
+  node9 -> node10 [label=" init", fontcolor=blue];
+  node4 [label="Block", shape=diamond];
+  node4 -> node5;
+  node4 -> node7;
+  node4 -> node9;
+  node3 [label="Func\nint main()", shape=invhouse, style=filled, fillcolor=lightgreen];
+  node3 -> node4;
+  node1 [label="Program", shape=box, style=filled, fillcolor=lightblue];
+  node1 -> node2;
+  node1 -> node3;
+}

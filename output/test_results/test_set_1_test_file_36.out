@@ -1,0 +1,15 @@
+AST rendered to output/test_results\test_set_1_test_file_36.dot
+Traceback (most recent call last):
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\lib\runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\lib\runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 95, in <module>
+    main()
+  File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 84, in main
+    llvm_ir = llvm_visitor.generate(ast_root) 
+  File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\llvm_target\llvm_visitor.py", line 97, in generate
+    self._visit_node(node)
+  File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\llvm_target\llvm_visitor.py", line 174, in _visit_node
+    if addr is None: raise Exception(f"Variabele {node.name} niet gevonden.")
+Exception: Variabele z niet gevonden.

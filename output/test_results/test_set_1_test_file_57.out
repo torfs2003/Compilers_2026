@@ -1,0 +1,3 @@
+Syntax errors found, stopping.
+line 10:8 no viable alternative at input '*/'
+line 12:6 mismatched input '=' expecting '('

@@ -38,6 +38,25 @@ class LLVMVisitor:
         if node_id not in self.results:
             self._visit_node(node)
         return self.results[node_id]
+    
+    def _allocate_variable(self, node):
+        """Maakt de geheugenplek aan VOORDAT we de rest van de expressie evalueren."""
+        if node.name in self.symbol_table: return
+        
+        if "int" in node.type_spec: base_typ = ir.IntType(32)
+        elif "float" in node.type_spec: base_typ = ir.FloatType()
+        else: base_typ = ir.IntType(8) # char
+
+        typ = base_typ
+        if isinstance(node, ArrayDeclNode):
+            sizes = node.sizes if hasattr(node, 'sizes') else []
+            for size_node in reversed(sizes): 
+                typ = ir.ArrayType(typ, size_node.value)
+        else:
+            for _ in range(node.type_spec.count('*')): typ = typ.as_pointer()
+        
+        addr = self.builder.alloca(typ, name=node.name)
+        self.symbol_table[node.name] = addr
 
     def generate(self, root_node):
         stack = [(root_node, False)]
@@ -56,6 +75,9 @@ class LLVMVisitor:
                     func_type = ir.FunctionType(ir.IntType(32), [])
                     self.func = ir.Function(self.module, func_type, name=node.name)
                     self.builder = ir.IRBuilder(self.func.append_basic_block(name="entry"))
+
+                if isinstance(node, (DeclNode, ArrayDeclNode)):
+                    self._allocate_variable(node)
 
                 stack.append((node, True))
                 
@@ -110,20 +132,7 @@ class LLVMVisitor:
 
         # 2. Declaraties
         elif isinstance(node, (DeclNode, ArrayDeclNode)):
-            if "int" in node.type_spec: base_typ = ir.IntType(32)
-            elif "float" in node.type_spec: base_typ = ir.FloatType()
-            else: base_typ = ir.IntType(8) # char
-
-            typ = base_typ
-            if isinstance(node, ArrayDeclNode):
-                sizes = node.sizes if hasattr(node, 'sizes') else [node.size]
-                for size in reversed(sizes): typ = ir.ArrayType(typ, size)
-            else:
-                for _ in range(node.type_spec.count('*')): typ = typ.as_pointer()
-            
-            # Maak de plek op de stack
-            addr = self.builder.alloca(typ, name=node.name)
-            self.symbol_table[node.name] = addr
+            addr = self.symbol_table.get(node.name)
 
             if getattr(node, 'init_expr', None):
                 if isinstance(node.init_expr, ArrayInitNode):
@@ -254,7 +263,15 @@ class LLVMVisitor:
                     self.results[id(node)] = self.builder.sdiv(left, right)
             
             elif node.op in ['==', '!=', '<', '<=', '>', '>=']:
-                if isinstance(left.type, ir.IntType):
+                if isinstance(left.type, ir.PointerType) or isinstance(right.type, ir.PointerType):
+                    # Converteer pointers naar 32-bit integers voor de vergelijking
+                    left_cmp = self.builder.ptrtoint(left, ir.IntType(32)) if isinstance(left.type, ir.PointerType) else left
+                    right_cmp = self.builder.ptrtoint(right, ir.IntType(32)) if isinstance(right.type, ir.PointerType) else right
+                    
+                    # Gebruik unsigned vergelijking (geheugenadressen zijn altijd positief)
+                    res_i1 = self.builder.icmp_unsigned(node.op, left_cmp, right_cmp)
+                    self.results[id(node)] = self.builder.zext(res_i1, ir.IntType(32))
+                elif isinstance(left.type, ir.IntType):
                     res_i1 = self.builder.icmp_signed(node.op, left, right)
                     self.results[id(node)] = self.builder.zext(res_i1, ir.IntType(32))
                 elif isinstance(left.type, ir.FloatType):
@@ -335,8 +352,6 @@ class LLVMVisitor:
         # 8. Expliciete Type Casts
         elif isinstance(node, CastNode):
             inner_val = self._ensure_result(node.expr)
-            
-            # Hier gebruiken we nu jouw exacte attribuutnaam: target_type
             target_str = node.target_type 
             
             if "int" in target_str:
@@ -346,7 +361,10 @@ class LLVMVisitor:
             else:
                 target_typ = ir.IntType(8) # char
                 
-            # Roep je helper functie aan!
+            # Add this line to restore pointers for casts!
+            for _ in range(target_str.count('*')): 
+                target_typ = target_typ.as_pointer()
+                
             self.results[id(node)] = self._apply_cast(inner_val, target_typ)
 
         # 9. Commentary
@@ -397,5 +415,12 @@ class LLVMVisitor:
         
         if isinstance(val.type, ir.PointerType) and isinstance(target_typ, ir.PointerType):
             return self.builder.bitcast(val, target_typ)
-        
+                    
+        if isinstance(val.type, ir.IntType) and isinstance(target_typ, ir.PointerType):
+            return self.builder.inttoptr(val, target_typ)
+            
+        if isinstance(val.type, ir.PointerType) and isinstance(target_typ, ir.IntType):
+            return self.builder.ptrtoint(val, target_typ)
+            
+
         return val

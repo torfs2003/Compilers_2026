@@ -83,13 +83,15 @@ class DOTVisitor(BaseVisitor):
 
     def visit_ArrayDeclNode(self, node):
         my_id = self.node_ids[id(node)]
-        const_str = "const " if getattr(node, 'is_const', False) else ""
-        dims = "".join([f"[{s}]" for s in node.sizes])
-        label = self._get_label(node, f"ArrayDecl\\n{const_str}{node.type_spec}{dims}\\n{node.name}")
+        const_str = "const " if getattr(node, 'is_const', False) else ""        
+        dims_placeholder = "[]" * len(node.sizes)
+        label = self._get_label(node, f"ArrayDecl\\n{const_str}{node.type_spec}{dims_placeholder}\\n{node.name}")
         self.dot_content.append(f'  {my_id} [label="{label}", shape=box, color=blue];')
+        for idx, size_node in enumerate(node.sizes):
+            self.dot_content.append(f'  {my_id} -> {self.node_ids[id(size_node)]} [label=" dim{idx}"];')     
         if getattr(node, 'init_expr', None):
             self.dot_content.append(f'  {my_id} -> {self.node_ids[id(node.init_expr)]} [label=" init", fontcolor=blue];')
-
+            
     def visit_ArrayInitNode(self, node):
         my_id = self.node_ids[id(node)]
         self.dot_content.append(f'  {my_id} [label="ArrayInit", shape=box, style=dashed];')

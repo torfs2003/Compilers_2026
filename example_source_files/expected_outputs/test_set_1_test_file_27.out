@@ -1,0 +1,2 @@
+Semantic errors found, stopping.
+[ Error ] line 7, position 0: Incompatibele types bij initialisatie: 'int*' aan 'float'.

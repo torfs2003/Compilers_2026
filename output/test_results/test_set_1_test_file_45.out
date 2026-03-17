@@ -1,0 +1,3 @@
+Syntax errors found, stopping.
+line 5:2 mismatched input 'float' expecting ';'
+line 5:8 mismatched input '=' expecting {'main', IDENTIFIER}

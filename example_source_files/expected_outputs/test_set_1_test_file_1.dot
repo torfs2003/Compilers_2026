@@ -1,0 +1,20 @@
+digraph AST {
+  node [fontname="Arial"];
+  node2 [label="Include\n<stdio.h>", shape=note, fillcolor=lightyellow, style=filled];
+  node5 [label="216818703\n(int)", shape=box];
+  node6 [label="548416\n(int)", shape=box];
+  node7 [label="-3\n(int)", shape=box];
+  node8 [label="-9899563254\n(int)", shape=box];
+  node9 [label="998315\n(int)", shape=box];
+  node4 [label="Block", shape=diamond];
+  node4 -> node5;
+  node4 -> node6;
+  node4 -> node7;
+  node4 -> node8;
+  node4 -> node9;
+  node3 [label="Func\nint main()", shape=invhouse, style=filled, fillcolor=lightgreen];
+  node3 -> node4;
+  node1 [label="Program", shape=box, style=filled, fillcolor=lightblue];
+  node1 -> node2;
+  node1 -> node3;
+}

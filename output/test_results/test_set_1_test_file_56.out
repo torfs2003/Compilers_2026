@@ -1,0 +1,2 @@
+Syntax errors found, stopping.
+line 4:3 extraneous input '/' expecting {'const', 'int', 'float', 'char', 'void', '(', '{', '}', ';', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}

@@ -1,0 +1,8 @@
+Syntax errors found, stopping.
+line 2:9 mismatched input '"some_header.h"' expecting HEADER
+line 3:9 mismatched input '"some_header2.h"' expecting HEADER
+line 6:0 token recognition error at: '#d'
+line 4:9 mismatched input '"some_header.h"' expecting HEADER
+line 7:0 token recognition error at: '#d'
+line 7:8 mismatched input 'true' expecting '('
+line 8:0 token recognition error at: '#d'

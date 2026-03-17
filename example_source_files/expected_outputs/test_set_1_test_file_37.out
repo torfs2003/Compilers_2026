@@ -1,0 +1,3 @@
+Syntax errors found, stopping.
+line 5:15 token recognition error at: ''''
+line 5:17 mismatched input ';' expecting {'(', '{', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}

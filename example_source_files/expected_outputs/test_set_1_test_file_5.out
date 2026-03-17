@@ -1,0 +1,13 @@
+Syntax errors found, stopping.
+line 5:3 no viable alternative at input '1(/'
+line 5:8 mismatched input ')' expecting ';'
+line 6:13 missing ')' at ';'
+line 8:10 extraneous input '>' expecting {'(', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
+line 10:6 extraneous input '>' expecting {'(', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
+line 11:8 extraneous input '<' expecting {'(', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
+line 13:5 extraneous input '!=' expecting {'(', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
+line 15:0 extraneous input '|' expecting {'(', '{', '}', ';', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
+line 16:0 extraneous input '||' expecting {<EOF>, 'int', 'float', 'char', 'void', '(', '{', '}', ';', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
+line 17:4 extraneous input ';' expecting {'(', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
+line 18:6 extraneous input ';' expecting {'(', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
+line 19:1 mismatched input ';' expecting {'(', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}

@@ -1,0 +1,2 @@
+Syntax errors found, stopping.
+line 4:4 extraneous input 'const' expecting {'*', IDENTIFIER}

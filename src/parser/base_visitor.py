@@ -5,8 +5,13 @@ class BaseVisitor:
         if isinstance(node, ProgramNode): return node.children
         if isinstance(node, FunctionNode): return [node.body]
         if isinstance(node, CompoundNode): return node.items
-        if isinstance(node, (DeclNode, ArrayDeclNode)): 
-            return [node.init_expr] if getattr(node, 'init_expr', None) else []
+        if isinstance(node, DeclNode):
+            return [node.init_expr] if getattr(node, 'init_expr', None) else []  
+        if isinstance(node, ArrayDeclNode):
+            children = list(node.sizes) 
+            if getattr(node, 'init_expr', None):
+                children.append(node.init_expr)
+            return children
         if isinstance(node, AssignNode): return [node.left, node.right]
         if isinstance(node, BinOpNode): return [node.left, node.right]
         if isinstance(node, UnaryOpNode): return [node.child]

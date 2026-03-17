@@ -1,0 +1,2 @@
+Syntax errors found, stopping.
+line 4:0 mismatched input 'typedef' expecting {<EOF>, '#include', 'int', 'float', 'char', 'void'}

@@ -101,10 +101,43 @@ class ConstantFoldingVisitor(BaseVisitor):
                 return
         
         self.results[id(node)] = node
+    
+    def visit_ArrayDeclNode(self, node):
+        if node.init_expr:
+            node.init_expr = self.results.get(id(node.init_expr), node.init_expr)
+            
+        if hasattr(node, 'sizes'):
+            for i in range(len(node.sizes)):
+                node.sizes[i] = self.results.get(id(node.sizes[i]), node.sizes[i])
+                
+        self.results[id(node)] = node
 
-    def generic_visit(self, node):
-        if hasattr(node, 'body'): node.body = self.results.get(id(node.body), node.body)
-        if hasattr(node, 'items'): node.items = [self.results.get(id(i), i) for i in node.items]
-        if hasattr(node, 'right'): node.right = self.results.get(id(node.right), node.right)
+    def visit_AssignNode(self, node):
+        node.left = self.results.get(id(node.left), node.left)
+        node.right = self.results.get(id(node.right), node.right)
+        self.results[id(node)] = node
         
+    def visit_FuncCallNode(self, node):
+        for i in range(len(node.args)):
+            node.args[i] = self.results.get(id(node.args[i]), node.args[i])
+        self.results[id(node)] = node
+
+    def visit_ProgramNode(self, node):
+        for i in range(len(node.children)):
+            node.children[i] = self.results.get(id(node.children[i]), node.children[i])
+        self.results[id(node)] = node
+
+    def visit_CompoundNode(self, node):
+        for i in range(len(node.items)):
+            node.items[i] = self.results.get(id(node.items[i]), node.items[i])
+        self.results[id(node)] = node
+        
+    def visit_FunctionNode(self, node):
+        if hasattr(node, 'body'):
+            node.body = self.results.get(id(node.body), node.body)
+        self.results[id(node)] = node
+        
+    def visit_ArrayInitNode(self, node):
+        for i in range(len(node.values)):
+            node.values[i] = self.results.get(id(node.values[i]), node.values[i])
         self.results[id(node)] = node

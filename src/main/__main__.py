@@ -37,6 +37,10 @@ def main():
     visitor = ASTVisitor(stream)
     ast_root = visitor.visit(tree) 
     
+    if len(visitor.warnings) > 0:
+        for warning in visitor.warnings:
+            print(warning)
+            
     if not ast_root:
         print("Geen geldige AST gegenereerd.")
         return

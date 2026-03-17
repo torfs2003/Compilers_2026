@@ -25,7 +25,7 @@ compoundStatement
     ;
 
 declaration
-    : CONST? typeSpecifier IDENTIFIER (LBRACKET INT_LITERAL? RBRACKET)* (ASSIGN (expression | array_initializer))? SEMI
+    : CONST? typeSpecifier MUL* CONST? IDENTIFIER (LBRACKET expression? RBRACKET)* (ASSIGN (expression | array_initializer))? SEMI
     ;
     
 statement
@@ -36,7 +36,6 @@ statement
 
 typeSpecifier
     : INT | FLOAT | CHAR | VOID
-    | typeSpecifier MUL
     ;
 
 expression
@@ -244,6 +243,10 @@ IDENTIFIER
 
 MULTI_LINE_COMMENT
     : '/*' .*? '*/' -> channel(HIDDEN)
+    ;
+    
+SINGLE_LINE_COMMENT
+    : '//' ~[\r\n]* -> channel(HIDDEN)
     ;
 
 WS

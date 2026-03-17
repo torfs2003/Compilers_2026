@@ -1,0 +1,38 @@
+digraph AST {
+  node [fontname="Arial"];
+  node2 [label="Include\n<stdio.h>", shape=note, fillcolor=lightyellow, style=filled];
+  node6 [label="478\n(int)", shape=box];
+  node5 [label="Decl\nint\nx\n(int)", shape=box, color=blue];
+  node5 -> node6 [label=" init", fontcolor=blue];
+  node8 [label="-251454\n(int)", shape=box];
+  node7 [label="Decl\nint\nb\n(int)", shape=box, color=blue];
+  node7 -> node8 [label=" init", fontcolor=blue];
+  node11 [label="ID: b\n(int)", shape=box, style=filled, fillcolor=lightgrey];
+  node10 [label="&\n(int*)", shape=circle];
+  node10 -> node11;
+  node9 [label="Decl\nint*\nb_ptr\n(int*)", shape=box, color=blue];
+  node9 -> node10 [label=" init", fontcolor=blue];
+  node14 [label="ID: b_ptr\n(int*)", shape=box, style=filled, fillcolor=lightgrey];
+  node13 [label="&\n(int**)", shape=circle];
+  node13 -> node14;
+  node12 [label="Decl\nint**\nx_ptr\n(int**)", shape=box, color=blue];
+  node12 -> node13 [label=" init", fontcolor=blue];
+  node16 [label="ID: x_ptr\n(int**)", shape=box, style=filled, fillcolor=lightgrey];
+  node18 [label="ID: b\n(int)", shape=box, style=filled, fillcolor=lightgrey];
+  node17 [label="&\n(int*)", shape=circle];
+  node17 -> node18;
+  node15 [label="=", shape=circle];
+  node15 -> node16;
+  node15 -> node17;
+  node4 [label="Block", shape=diamond];
+  node4 -> node5;
+  node4 -> node7;
+  node4 -> node9;
+  node4 -> node12;
+  node4 -> node15;
+  node3 [label="Func\nint main()", shape=invhouse, style=filled, fillcolor=lightgreen];
+  node3 -> node4;
+  node1 [label="Program", shape=box, style=filled, fillcolor=lightblue];
+  node1 -> node2;
+  node1 -> node3;
+}
