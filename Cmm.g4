@@ -5,7 +5,7 @@ grammar Cmm;
 // ==========================================
 
 compilationUnit
-    : includeDirective* functionDefinition* EOF
+    : includeDirective* enumDeclaration* functionDefinition* EOF
     ;
 
 includeDirective
@@ -31,6 +31,11 @@ declaration
 statement
     : expression SEMI
     | compoundStatement
+    | ifStatement
+    | whileStatement
+    | forStatement
+    | breakStatement
+    | continueStatement
     | SEMI
     ;
 
@@ -40,6 +45,44 @@ typeSpecifier
 
 expression
     : assignment_expression
+    ;
+
+// Loops and Conditions
+ifStatement
+    : IF LPAREN expression RPAREN compoundStatement (ELSE compoundStatement)?
+    ;
+
+whileStatement
+    : WHILE LPAREN expression RPAREN compoundStatement
+    ;
+
+forStatement
+    : FOR LPAREN expression? SEMI expression? SEMI expression? RPAREN compoundStatement
+    ;
+
+breakStatement
+    : BREAK SEMI
+    ;
+
+continueStatement
+    : CONTINUE SEMI
+    ;
+
+switchStatement
+    : SWITCH LPAREN expression RPAREN LBRACE caseBlock* RBRACE
+    ;
+
+caseBlock
+    : CASE INT_LITERAL COLON statement*
+    | DEFAULT COLON statement*
+    ;
+
+enumDeclaration
+    : ENUM IDENTIFIER LBRACE enumList RBRACE SEMI
+    ;
+
+enumList
+    : IDENTIFIER (COMMA IDENTIFIER)*
     ;
 
 assignment_expression
@@ -157,6 +200,13 @@ INCLUDE : '#include';
 HEADER  : '<' [a-zA-Z0-9._]+ '>';
 
 // Keywords
+IF        : 'if';
+ELSE      : 'else';
+WHILE     : 'while';
+FOR       : 'for';
+BREAK     : 'break';
+CONTINUE  : 'continue';
+ENUM      : 'enum';
 CONST     : 'const';
 INT       : 'int';
 FLOAT     : 'float';
