@@ -111,10 +111,14 @@ class LLVMVisitor:
                     if self.builder:
                         if hasattr(node, 'user_comments') and node.user_comments:
                             for c in node.user_comments:
-                                self.builder.comment(f" User Comment: {c.strip()}")
+                                for line in c.splitlines():
+                                    if line.strip():
+                                        self.builder.comment(f" User Comment: {line.strip()}")
                         
                         if hasattr(node, 'original_c_code') and node.original_c_code:
-                            self.builder.comment(f" Source: {node.original_c_code.strip()}")
+                            for line in node.original_c_code.splitlines():
+                                if line.strip():
+                                    self.builder.comment(f" Source: {line.strip()}")
                     
                     self._visit_node(node)
                     
@@ -206,17 +210,17 @@ class LLVMVisitor:
             if node.op == '[]':
                 zero = ir.Constant(ir.IntType(32), 0)
                 
-                # Check of we een vaste array-structuur of een pointer indexeren
-                if isinstance(left.type, ir.PointerType) and isinstance(left.type.pointee, ir.ArrayType):
+                if not isinstance(left.type, ir.PointerType):
+                    raise Exception(f"Kan niet indexeren op non-pointer type: {left.type}")
+
+                if isinstance(left.type.pointee, ir.ArrayType):
                     ptr = self.builder.gep(left, [zero, right], name="gep_array")
                 else:
-                    # Dit is een pointer dereference
                     ptr = self.builder.gep(left, [right], name="gep_ptr")
                 
-                # L-value: het adres opslaan
+                # Sla het adres op (L-value)
                 self.results[f"addr_{id(node)}"] = ptr
                 
-                # R-value: de waarde laden
                 if isinstance(ptr.type.pointee, ir.ArrayType):
                     self.results[id(node)] = ptr
                 else:

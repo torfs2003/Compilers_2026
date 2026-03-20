@@ -288,8 +288,8 @@ class ASTVisitor:
                 elif class_name == "EnumDeclarationContext":
                     name = ctx.IDENTIFIER().getText()
                     values = []
-                    for id in ctx.enumList().IDENTIFIER():
-                        values.append(id.getText())
+                    for ident in ctx.enumList().IDENTIFIER():
+                        values.append(ident.getText())
                     res = self.get_loc(EnumNode(name, values),ctx)
 
                 elif class_name == "SwitchStatementContext":
@@ -298,7 +298,7 @@ class ASTVisitor:
                     default_case = None
                     for case in ctx.caseBlock():
                         if case.CASE():
-                            value = int(case.INT_LITERAL().getTesxt())
+                            value = int(case.INT_LITERAL().getText())
                             body = results[id(case)]
                             cases.append((value,body))
                         elif case.DEFAULT():

@@ -9,19 +9,19 @@ declare i32 @"scanf"(i8* %".1", ...)
 define i32 @"main"()
 {
 entry:
-  ;  Source: constcharc='a';
   %"c" = alloca i8
+  ;  Source: constcharc='a';
   store i8 97, i8* %"c"
+  %"chr_ptr" = alloca i8*
   ;  Source: c
   %"c.1" = load i8, i8* %"c"
   ;  Source: &c
   ;  Source: constchar*chr_ptr=&c;
-  %"chr_ptr" = alloca i8*
   store i8* %"c", i8** %"chr_ptr"
+  %"non_const_ptr" = alloca i8*
   ;  Source: chr_ptr
   %"chr_ptr.1" = load i8*, i8** %"chr_ptr"
   ;  Source: char*non_const_ptr=chr_ptr;
-  %"non_const_ptr" = alloca i8*
   store i8* %"chr_ptr.1", i8** %"non_const_ptr"
   ;  Source: non_const_ptr
   %"non_const_ptr.1" = load i8*, i8** %"non_const_ptr"

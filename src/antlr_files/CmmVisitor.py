@@ -54,6 +54,51 @@ class CmmVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by CmmParser#ifStatement.
+    def visitIfStatement(self, ctx:CmmParser.IfStatementContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by CmmParser#whileStatement.
+    def visitWhileStatement(self, ctx:CmmParser.WhileStatementContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by CmmParser#forStatement.
+    def visitForStatement(self, ctx:CmmParser.ForStatementContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by CmmParser#breakStatement.
+    def visitBreakStatement(self, ctx:CmmParser.BreakStatementContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by CmmParser#continueStatement.
+    def visitContinueStatement(self, ctx:CmmParser.ContinueStatementContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by CmmParser#switchStatement.
+    def visitSwitchStatement(self, ctx:CmmParser.SwitchStatementContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by CmmParser#caseBlock.
+    def visitCaseBlock(self, ctx:CmmParser.CaseBlockContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by CmmParser#enumDeclaration.
+    def visitEnumDeclaration(self, ctx:CmmParser.EnumDeclarationContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by CmmParser#enumList.
+    def visitEnumList(self, ctx:CmmParser.EnumListContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by CmmParser#assignment_expression.
     def visitAssignment_expression(self, ctx:CmmParser.Assignment_expressionContext):
         return self.visitChildren(ctx)

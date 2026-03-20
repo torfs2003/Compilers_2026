@@ -45,6 +45,12 @@ def main():
         print("Geen geldige AST gegenereerd.")
         return
     
+    # Optimalisatie toepassen
+    if not args.no_opt:
+        optimizer = ConstantFoldingVisitor()
+        optimizer.visit(ast_root)
+        ast_root = optimizer.results.get(id(ast_root), ast_root)
+        
     semantic_checker = SemanticVisitor()
     semantic_checker.visit(ast_root)
 
@@ -58,11 +64,6 @@ def main():
             print(error)
         sys.exit(1)
 
-    # Optimalisatie toepassen
-    if not args.no_opt:
-        optimizer = ConstantFoldingVisitor()
-        optimizer.visit(ast_root)
-        ast_root = optimizer.results.get(id(ast_root), ast_root)
 
     # Visualisatie
     if args.render_ast:

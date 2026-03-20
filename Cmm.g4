@@ -25,7 +25,7 @@ compoundStatement
     ;
 
 declaration
-    : CONST? typeSpecifier MUL* CONST? IDENTIFIER (LBRACKET expression? RBRACKET)* (ASSIGN (expression | array_initializer))? SEMI
+    : CONST? typeSpecifier CONST? MUL* CONST? IDENTIFIER (LBRACKET expression? RBRACKET)* (ASSIGN (expression | array_initializer))? SEMI
     ;
     
 statement
@@ -213,6 +213,9 @@ FLOAT     : 'float';
 CHAR      : 'char';
 VOID      : 'void';
 MAIN      : 'main';
+SWITCH    : 'switch';
+CASE      : 'case';
+DEFAULT   : 'default';
 
 // Operators
 LPAREN    : '(' ;
@@ -224,6 +227,7 @@ RBRACKET  : ']' ;
 COMMA     : ',' ;
 SEMI      : ';' ;
 ASSIGN    : '=' ;
+COLON     : ':' ;
 
 PLUS      : '+' ;
 MINUS     : '-' ;
