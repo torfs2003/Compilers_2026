@@ -128,8 +128,14 @@ class ConstantFoldingVisitor(BaseVisitor):
         self.results[id(node)] = node
 
     def visit_CompoundNode(self, node):
+        optimized_items = []
         for i in range(len(node.items)):
-            node.items[i] = self.results.get(id(node.items[i]), node.items[i])
+            optimized_item = self.results.get(id(node.items[i]), node.items[i])
+            optimized_items.append(optimized_item)
+            if isinstance(optimized_item, (ReturnNode, BreakNode, ContinueNode)):
+                break 
+
+        node.items = optimized_items
         self.results[id(node)] = node
         
     def visit_FunctionNode(self, node):
@@ -140,4 +146,67 @@ class ConstantFoldingVisitor(BaseVisitor):
     def visit_ArrayInitNode(self, node):
         for i in range(len(node.values)):
             node.values[i] = self.results.get(id(node.values[i]), node.values[i])
+        self.results[id(node)] = node
+
+    def visit_IfNode(self, node):
+        node.condition = self.results.get(id(node.condition), node.condition)
+        node.scope = self.results.get(id(node.scope), node.scope)
+        if getattr(node, 'else_scope', None):
+            node.else_scope = self.results.get(id(node.else_scope), node.else_scope)
+            
+        if self.enabled and isinstance(node.condition, (IntNode, FloatNode)):
+            if node.condition.value != 0:
+                self.results[id(node)] = node.scope
+                return
+            else:
+                self.results[id(node)] = node.else_scope if node.else_scope else CompoundNode([])
+                return
+
+        self.results[id(node)] = node
+
+    def visit_WhileNode(self, node):
+        node.condition = self.results.get(id(node.condition), node.condition)
+        node.scope = self.results.get(id(node.scope), node.scope)
+        
+        if self.enabled and isinstance(node.condition, (IntNode, FloatNode)):
+            if node.condition.value == 0:
+                self.results[id(node)] = CompoundNode([])
+                return
+                
+        self.results[id(node)] = node
+
+    def visit_ForNode(self, node):
+        if node.init:
+            node.init = self.results.get(id(node.init), node.init)
+        if node.condition:
+            node.condition = self.results.get(id(node.condition), node.condition)
+        if node.update:
+            node.update = self.results.get(id(node.update), node.update)
+        node.body = self.results.get(id(node.body), node.body)
+        self.results[id(node)] = node
+
+    def visit_SwitchNode(self, node):
+        node.condition = self.results.get(id(node.condition), node.condition)
+        for i in range(len(node.cases)):
+            val, body = node.cases[i]
+            node.cases[i] = (val, self.results.get(id(body), body))
+        if node.default_case:
+            node.default_case = self.results.get(id(node.default_case), node.default_case)
+        self.results[id(node)] = node
+
+    def visit_BreakNode(self, node):
+        self.results[id(node)] = node
+
+    def visit_ContinueNode(self, node):
+        self.results[id(node)] = node
+        
+    def visit_EnumNode(self, node):
+        self.results[id(node)] = node
+    
+    def visit_ReturnNode(self, node):
+        if node.expr:
+            node.expr = self.results.get(id(node.expr), node.expr)
+        self.results[id(node)] = node
+
+    def visit_FunctionDeclNode(self, node):
         self.results[id(node)] = node

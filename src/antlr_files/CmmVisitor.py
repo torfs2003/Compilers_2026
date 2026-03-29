@@ -24,8 +24,18 @@ class CmmVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by CmmParser#functionDeclaration.
+    def visitFunctionDeclaration(self, ctx:CmmParser.FunctionDeclarationContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by CmmParser#parameterList.
     def visitParameterList(self, ctx:CmmParser.ParameterListContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by CmmParser#parameterDeclaration.
+    def visitParameterDeclaration(self, ctx:CmmParser.ParameterDeclarationContext):
         return self.visitChildren(ctx)
 
 
@@ -36,6 +46,16 @@ class CmmVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by CmmParser#declaration.
     def visitDeclaration(self, ctx:CmmParser.DeclarationContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by CmmParser#structDeclaration.
+    def visitStructDeclaration(self, ctx:CmmParser.StructDeclarationContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by CmmParser#typedefDeclaration.
+    def visitTypedefDeclaration(self, ctx:CmmParser.TypedefDeclarationContext):
         return self.visitChildren(ctx)
 
 
@@ -81,6 +101,11 @@ class CmmVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by CmmParser#switchStatement.
     def visitSwitchStatement(self, ctx:CmmParser.SwitchStatementContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by CmmParser#returnStatement.
+    def visitReturnStatement(self, ctx:CmmParser.ReturnStatementContext):
         return self.visitChildren(ctx)
 
 

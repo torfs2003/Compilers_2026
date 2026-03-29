@@ -18,6 +18,46 @@ class BaseVisitor:
         if isinstance(node, CastNode): return [node.expr]
         if isinstance(node, FuncCallNode): return node.args
         if isinstance(node, ArrayInitNode): return node.values
+        if isinstance(node, IfNode):
+            children = [node.condition, node.scope]
+            if getattr(node, 'else_scope', None): 
+                children.append(node.else_scope)
+            return children
+        
+        if isinstance(node, WhileNode): 
+            return [node.condition, node.scope]
+        
+        if isinstance(node, ForNode):
+            children = []
+            if node.init: children.append(node.init)
+            if node.condition: children.append(node.condition)
+            if node.update: children.append(node.update)
+            children.append(node.body)
+            return children
+            
+        if isinstance(node, SwitchNode):
+            children = [node.condition]
+            for val, body in node.cases:
+                children.append(body)
+            if node.default_case:
+                children.append(node.default_case)
+            return children
+        
+        if isinstance(node, ReturnNode):
+            return [node.expr] if node.expr else []
+            
+        if isinstance(node, StructDeclNode):
+            return node.members
+            
+        if isinstance(node, MemberAccessNode):
+            return [node.expr]
+            
+        if isinstance(node, (FunctionDeclNode, TypedefNode)):
+            return []
+
+        if isinstance(node, (BreakNode, ContinueNode, EnumNode)):
+            return []
+            
         return []
     
     def visit(self, root_node):

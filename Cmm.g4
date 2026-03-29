@@ -5,7 +5,7 @@ grammar Cmm;
 // ==========================================
 
 compilationUnit
-    : includeDirective* enumDeclaration* functionDefinition* EOF
+    : (includeDirective | enumDeclaration | structDeclaration | typedefDeclaration | declaration | functionDeclaration | functionDefinition)* EOF
     ;
 
 includeDirective
@@ -13,11 +13,19 @@ includeDirective
     ;
 
 functionDefinition
-    : typeSpecifier (MAIN | IDENTIFIER) LPAREN parameterList? RPAREN compoundStatement
+    : typeSpecifier MUL* (MAIN | IDENTIFIER) LPAREN parameterList? RPAREN compoundStatement
+    ;
+
+functionDeclaration
+    : typeSpecifier MUL* (MAIN | IDENTIFIER) LPAREN parameterList? RPAREN SEMI
     ;
 
 parameterList
-    : typeSpecifier IDENTIFIER (COMMA typeSpecifier IDENTIFIER)*
+    : parameterDeclaration (COMMA parameterDeclaration)*
+    ;
+
+parameterDeclaration
+    : CONST? typeSpecifier MUL* CONST? IDENTIFIER
     ;
 
 compoundStatement
@@ -26,6 +34,15 @@ compoundStatement
 
 declaration
     : CONST? typeSpecifier CONST? MUL* CONST? IDENTIFIER (LBRACKET expression? RBRACKET)* (ASSIGN (expression | array_initializer))? SEMI
+    ;
+
+
+structDeclaration
+    : STRUCT IDENTIFIER LBRACE declaration* RBRACE SEMI
+    ;
+
+typedefDeclaration
+    : TYPEDEF typeSpecifier MUL* IDENTIFIER (LBRACKET INT_LITERAL RBRACKET)* SEMI
     ;
     
 statement
@@ -36,11 +53,19 @@ statement
     | forStatement
     | breakStatement
     | continueStatement
+    | switchStatement
+    | returnStatement
     | SEMI
     ;
 
 typeSpecifier
-    : INT | FLOAT | CHAR | VOID
+    : INT 
+    | FLOAT 
+    | CHAR 
+    | VOID 
+    | ENUM IDENTIFIER
+    | STRUCT IDENTIFIER
+    | IDENTIFIER
     ;
 
 expression
@@ -49,7 +74,7 @@ expression
 
 // Loops and Conditions
 ifStatement
-    : IF LPAREN expression RPAREN compoundStatement (ELSE compoundStatement)?
+    : IF LPAREN expression RPAREN compoundStatement (ELSE (compoundStatement | ifStatement))?
     ;
 
 whileStatement
@@ -72,6 +97,10 @@ switchStatement
     : SWITCH LPAREN expression RPAREN LBRACE caseBlock* RBRACE
     ;
 
+returnStatement
+    : RETURN expression? SEMI
+    ;
+
 caseBlock
     : CASE INT_LITERAL COLON statement*
     | DEFAULT COLON statement*
@@ -82,8 +111,9 @@ enumDeclaration
     ;
 
 enumList
-    : IDENTIFIER (COMMA IDENTIFIER)*
+    : IDENTIFIER (COMMA IDENTIFIER)* COMMA?
     ;
+
 
 assignment_expression
     : logical_or_expression
@@ -171,6 +201,8 @@ postfix_expression
     | postfix_expression INC
     | postfix_expression DEC
     | postfix_expression LBRACKET expression RBRACKET
+    | postfix_expression DOT IDENTIFIER
+    | postfix_expression ARROW IDENTIFIER
     ;
 
 argumentList
@@ -215,7 +247,10 @@ VOID      : 'void';
 MAIN      : 'main';
 SWITCH    : 'switch';
 CASE      : 'case';
+RETURN    : 'return';
 DEFAULT   : 'default';
+STRUCT    : 'struct';
+TYPEDEF   : 'typedef';
 
 // Operators
 LPAREN    : '(' ;
@@ -228,6 +263,8 @@ COMMA     : ',' ;
 SEMI      : ';' ;
 ASSIGN    : '=' ;
 COLON     : ':' ;
+DOT       : '.';
+ARROW     : '->';
 
 PLUS      : '+' ;
 MINUS     : '-' ;

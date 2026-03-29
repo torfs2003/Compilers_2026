@@ -2,6 +2,8 @@ import sys
 import os
 import argparse
 from antlr4 import *
+from src.preprocessor import Preprocessor
+from antlr4 import InputStream
 from src.antlr_files.CmmLexer import CmmLexer
 from src.antlr_files.CmmParser import CmmParser
 from src.parser.AST_visitor import ASTVisitor
@@ -20,8 +22,11 @@ def main():
 
     args = parser.parse_args()
 
+    preprocessor = Preprocessor()
+    processed_code = preprocessor.process_file(args.input)
+
     # ANTLR opstarten
-    input_stream = FileStream(args.input, encoding='utf-8')   
+    input_stream = InputStream(processed_code)   
     lexer = CmmLexer(input_stream)
     stream = CommonTokenStream(lexer)
     parser_antlr = CmmParser(stream)

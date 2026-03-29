@@ -143,6 +143,24 @@ class CastNode(ASTNode):
     def __repr__(self): 
         return f"CastNode(({self.target_type}) {self.expr})"
 
+class FunctionDeclNode(ASTNode):
+    def __init__(self, return_type: str, name: str, params: list = None):
+        super().__init__()
+        self.return_type = return_type
+        self.name = name
+        self.params = params or []
+    def __repr__(self):
+        return f"FunctionDeclNode({self.return_type} {self.name})"
+
+class ReturnNode(ASTNode):
+    def __init__(self, expr=None):
+        super().__init__()
+        self.expr = expr
+    def __repr__(self):
+        if self.expr:
+            return f"ReturnNode({self.expr})"
+        return "ReturnNode(void)"
+
 class CommentNode(ASTNode):
     def __init__(self, text: str):
         super().__init__()
@@ -166,14 +184,14 @@ class WhileNode(ASTNode):
     def __repr__(self):
         return f"WhileNode({self.condition}->{self.scope})"
 class ForNode(ASTNode):
-    def __init__(self, init, condition,update, scope):
+    def __init__(self, init, condition, update, body):
         super().__init__()
         self.init = init
         self.condition = condition
         self.update = update
-        self.scope = scope
+        self.body = body
     def __repr__(self):
-        return f"ForNode(({self.init};{self.condition};{self.update}->body={self.scope})"
+        return f"ForNode(({self.init};{self.condition};{self.update})->body={self.body})"
 class BreakNode(ASTNode):
     def __init__(self):
         super().__init__()
@@ -192,10 +210,37 @@ class EnumNode(ASTNode):
     def __repr__(self):
         return f"EnumNode({self.name}: {self.values})"
 class SwitchNode(ASTNode):
-    def __init__(self, change, cases, default_case=None):
+    def __init__(self, condition, cases, default_case=None):
         super().__init__()
-        self.change = change
+        self.condition = condition
         self.cases = cases
         self.default_case = default_case
     def __repr__(self):
-        return f"SwitchNode({self.change},{len(self.cases)},{self.default_case})"
+        return f"SwitchNode({self.condition},{len(self.cases)},{self.default_case})"
+class StructDeclNode(ASTNode):
+    def __init__(self, name, members):
+        super().__init__()
+        self.name = name
+        self.members = members
+    def __repr__(self):
+        return f"StructDeclNode({self.name}, {len(self.members)} members)"
+
+class TypedefNode(ASTNode):
+    def __init__(self, original_type, new_name, is_array=False, array_size=0):
+        super().__init__()
+        self.original_type = original_type
+        self.new_name = new_name
+        self.is_array = is_array
+        self.array_size = array_size
+    def __repr__(self):
+        return f"TypedefNode({self.original_type} -> {self.new_name})"
+
+class MemberAccessNode(ASTNode):
+    def __init__(self, expr, member_name, is_pointer=False):
+        super().__init__()
+        self.expr = expr
+        self.member_name = member_name
+        self.is_pointer = is_pointer
+    def __repr__(self):
+        op = "->" if self.is_pointer else "."
+        return f"MemberAccessNode({self.expr}{op}{self.member_name})"

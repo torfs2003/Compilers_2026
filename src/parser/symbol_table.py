@@ -23,3 +23,23 @@ class SymbolTable:
             if name in scope:
                 return scope[name]
         return None
+
+    def resolve_type(self, type_name):
+        """
+        Kijkt of een naam (bijv. 'leeftijd') een typedef is.
+        Als dat zo is, geeft hij het originele type (bijv. 'int') terug.
+        Werkt recursief (typedef A B; typedef B C;).
+        """
+        if not isinstance(type_name, str):
+            return type_name
+
+        base_type = type_name.replace('*', '').strip()
+        pointers = '*' * type_name.count('*')
+
+        symbol = self.get(base_type)
+        
+        if symbol and symbol.get('type') == 'typedef':
+            resolved_base = self.resolve_type(symbol.get('original_type'))
+            return resolved_base + pointers
+            
+        return type_name

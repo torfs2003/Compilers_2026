@@ -35,12 +35,30 @@ class CmmListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by CmmParser#functionDeclaration.
+    def enterFunctionDeclaration(self, ctx:CmmParser.FunctionDeclarationContext):
+        pass
+
+    # Exit a parse tree produced by CmmParser#functionDeclaration.
+    def exitFunctionDeclaration(self, ctx:CmmParser.FunctionDeclarationContext):
+        pass
+
+
     # Enter a parse tree produced by CmmParser#parameterList.
     def enterParameterList(self, ctx:CmmParser.ParameterListContext):
         pass
 
     # Exit a parse tree produced by CmmParser#parameterList.
     def exitParameterList(self, ctx:CmmParser.ParameterListContext):
+        pass
+
+
+    # Enter a parse tree produced by CmmParser#parameterDeclaration.
+    def enterParameterDeclaration(self, ctx:CmmParser.ParameterDeclarationContext):
+        pass
+
+    # Exit a parse tree produced by CmmParser#parameterDeclaration.
+    def exitParameterDeclaration(self, ctx:CmmParser.ParameterDeclarationContext):
         pass
 
 
@@ -59,6 +77,24 @@ class CmmListener(ParseTreeListener):
 
     # Exit a parse tree produced by CmmParser#declaration.
     def exitDeclaration(self, ctx:CmmParser.DeclarationContext):
+        pass
+
+
+    # Enter a parse tree produced by CmmParser#structDeclaration.
+    def enterStructDeclaration(self, ctx:CmmParser.StructDeclarationContext):
+        pass
+
+    # Exit a parse tree produced by CmmParser#structDeclaration.
+    def exitStructDeclaration(self, ctx:CmmParser.StructDeclarationContext):
+        pass
+
+
+    # Enter a parse tree produced by CmmParser#typedefDeclaration.
+    def enterTypedefDeclaration(self, ctx:CmmParser.TypedefDeclarationContext):
+        pass
+
+    # Exit a parse tree produced by CmmParser#typedefDeclaration.
+    def exitTypedefDeclaration(self, ctx:CmmParser.TypedefDeclarationContext):
         pass
 
 
@@ -140,6 +176,15 @@ class CmmListener(ParseTreeListener):
 
     # Exit a parse tree produced by CmmParser#switchStatement.
     def exitSwitchStatement(self, ctx:CmmParser.SwitchStatementContext):
+        pass
+
+
+    # Enter a parse tree produced by CmmParser#returnStatement.
+    def enterReturnStatement(self, ctx:CmmParser.ReturnStatementContext):
+        pass
+
+    # Exit a parse tree produced by CmmParser#returnStatement.
+    def exitReturnStatement(self, ctx:CmmParser.ReturnStatementContext):
         pass
 
 

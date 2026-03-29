@@ -61,17 +61,13 @@ class ASTVisitor:
                 # 1. High-level structures
                 if class_name == "CompilationUnitContext":
                     nodes = []
-                    # Verzamel alle includes
-                    if hasattr(ctx, 'includeDirective'):
-                        for inc in ctx.includeDirective():
-                            nodes.append(results[id(inc)])
                     
-                    # Verzamel alle functies
-                    if hasattr(ctx, 'functionDefinition'):
-                        for func in ctx.functionDefinition():
-                            nodes.append(results[id(func)])
-                    
-                    # Geef een ProgramNode terug met de hele lijst
+                    # Loop door alle blokken exact in de originele source code volgorde!
+                    if ctx.children:
+                        for child in ctx.children:
+                            if id(child) in results and results[id(child)] is not None:
+                                nodes.append(results[id(child)])
+                                
                     res = self.get_loc(ProgramNode(nodes), ctx)
 
                 elif class_name == "FunctionDefinitionContext":
@@ -82,25 +78,76 @@ class ASTVisitor:
                     params = []
                     if ctx.parameterList():
                         p_list = ctx.parameterList()
-                        for i in range(len(p_list.IDENTIFIER())):
-                            p_type = p_list.typeSpecifier(i).getText()
-                            p_name = p_list.IDENTIFIER(i).getText()
-                            params.append((p_type, p_name))
+                        for i in range(len(p_list.parameterDeclaration())):
+                            p_decl = p_list.parameterDeclaration(i)
+                            p_type = p_decl.typeSpecifier().getText()
+                            p_stars = "*" * len(p_decl.MUL())
+                            p_name = p_decl.IDENTIFIER().getText()
+                            params.append((p_type + p_stars, p_name))
                         
-                    node = FunctionNode(ctx.typeSpecifier().getText(), name, body, params)
+                    base_type = ctx.typeSpecifier().getText()
+                    stars = "*" * len(ctx.MUL())
+                    full_type = base_type + stars
+                    node = FunctionNode(full_type, name, body, params)
                     res = self.get_loc(node, ctx)
+
+                elif class_name == "FunctionDeclarationContext":
+                    name = ctx.MAIN().getText() if ctx.MAIN() else ctx.IDENTIFIER().getText()
+                    
+                    params = []
+                    if ctx.parameterList():
+                        p_list = ctx.parameterList()
+                        for i in range(len(p_list.parameterDeclaration())):
+                            p_decl = p_list.parameterDeclaration(i)
+                            p_type = p_decl.typeSpecifier().getText()
+                            p_stars = "*" * len(p_decl.MUL())
+                            p_name = p_decl.IDENTIFIER().getText()
+                            params.append((p_type + p_stars, p_name))
+                            
+                    base_type = ctx.typeSpecifier().getText()
+                    stars = "*" * len(ctx.MUL())
+                    full_type = base_type + stars
+                    res = self.get_loc(FunctionDeclNode(full_type, name, params), ctx)
 
                 elif class_name == "CompoundStatementContext":
                     items = []
                     if ctx.children:
                         for child in ctx.children:
-                            if id(child) in results:
+                            if id(child) in results and results[id(child)] is not None:
                                 items.append(results[id(child)])
                     res = self.get_loc(CompoundNode(items), ctx)
                 
                 elif class_name == "IncludeDirectiveContext":
                     header = ctx.HEADER().getText()[1:-1]
                     res = self.get_loc(IncludeNode(header), ctx)
+                
+                elif class_name == "StructDeclarationContext":
+                    name = ctx.IDENTIFIER().getText()
+                    members = []
+                    
+                    if hasattr(ctx, 'declaration'):
+                        for decl_ctx in ctx.declaration():
+                            decl_node = results.get(id(decl_ctx))
+                            if decl_node:
+                                if isinstance(decl_node, list):
+                                    members.extend(decl_node)
+                                else:
+                                    members.append(decl_node)
+                                    
+                    res = self.get_loc(StructDeclNode(name, members), ctx)
+
+                elif class_name == "TypedefDeclarationContext":
+                    original_type = ctx.typeSpecifier().getText()
+                    
+                    if ctx.MUL():
+                        original_type += "*" * len(ctx.MUL())
+                        
+                    new_name = ctx.IDENTIFIER().getText()
+                    
+                    is_array = ctx.LBRACKET() is not None and len(ctx.LBRACKET()) > 0
+                    array_size = int(ctx.INT_LITERAL(0).getText()) if is_array else 0
+                    
+                    res = self.get_loc(TypedefNode(original_type, new_name, is_array, array_size), ctx)
 
                 # 2. Declarations
                 elif class_name == "DeclarationContext":
@@ -156,6 +203,20 @@ class ASTVisitor:
                         res = results.get(id(ctx.expression()))
                     elif ctx.compoundStatement():
                         res = results.get(id(ctx.compoundStatement()))
+                    elif ctx.ifStatement():
+                        res = results.get(id(ctx.ifStatement()))
+                    elif ctx.whileStatement():
+                        res = results.get(id(ctx.whileStatement()))
+                    elif ctx.forStatement():
+                        res = results.get(id(ctx.forStatement()))
+                    elif ctx.breakStatement():
+                        res = results.get(id(ctx.breakStatement()))
+                    elif ctx.continueStatement():
+                        res = results.get(id(ctx.continueStatement()))
+                    elif ctx.switchStatement():
+                        res = results.get(id(ctx.switchStatement()))
+                    elif ctx.returnStatement():
+                        res = results.get(id(ctx.returnStatement()))
 
                 # 3. Expressions & Assignments
                 elif class_name == "ExpressionContext":
@@ -218,9 +279,18 @@ class ASTVisitor:
                         left = results[id(ctx.postfix_expression())]
                         index = results[id(ctx.expression())]
                         res = self.get_loc(BinOpNode(left, "[]", index), ctx)
+                        
+                    elif ctx.DOT():
+                        left = results[id(ctx.postfix_expression())]
+                        member = ctx.IDENTIFIER().getText()
+                        res = self.get_loc(MemberAccessNode(left, member, is_pointer=False), ctx)
+                        
+                    elif ctx.ARROW():
+                        left = results[id(ctx.postfix_expression())]
+                        member = ctx.IDENTIFIER().getText()
+                        res = self.get_loc(MemberAccessNode(left, member, is_pointer=True), ctx)
 
                     else:
-                        # Suffix INC/DEC (a++ or a--)
                         op = ctx.getChild(1).getText()
                         inner = results[id(ctx.postfix_expression())]
                         res = self.get_loc(UnaryOpNode(f"POST{op}", inner), ctx)
@@ -263,7 +333,10 @@ class ASTVisitor:
                     scope = results[id(ctx.compoundStatement(0))]
                     else_scope = None
                     if ctx.ELSE():
-                        else_scope = results[id(ctx.compoundStatement(1))]
+                        if len(ctx.compoundStatement()) > 1:
+                            else_scope = results[id(ctx.compoundStatement(1))]
+                        elif ctx.ifStatement():
+                            else_scope = results[id(ctx.ifStatement())]
                     res = self.get_loc(IfNode(condition,scope,else_scope),ctx)
 
                 elif class_name == "WhileStatementContext":
@@ -272,18 +345,37 @@ class ASTVisitor:
                     res = self.get_loc(WhileNode(condition,scope),ctx)
 
                 elif class_name == "ForStatementContext":
-                    init = results[id(ctx.expression(0))] if ctx.expression(0) else None
-                    condition = results[id(ctx.expression(1))] if ctx.expression(1) else None
-                    update = results[id(ctx.expression(2))] if ctx.expression(2) else None
+                    # Let op het gebruik van .get() omdat delen van de for-loop (zoals init) leeg kunnen zijn
+                    init = results.get(id(ctx.expression(0))) if ctx.expression(0) else None
+                    condition = results.get(id(ctx.expression(1))) if ctx.expression(1) else None
+                    update = results.get(id(ctx.expression(2))) if ctx.expression(2) else None
                     body = results[id(ctx.compoundStatement())]
-                    res = self.get_loc(ForNode(init, condition, update, body), ctx)
+
+                    # 1. Voeg de update toe aan het einde van de body (als die bestaat)
+                    if update:
+                        body.items.append(update)
+                    
+                    # 2. Maak de conditie (als er geen conditie is, is het een oneindige loop -> 1)
+                    if not condition:
+                        condition = IntNode(1)
+                        condition.eval_type = 'int'
+
+                    # 3. Maak de WhileNode (de for-loop is nu officieel een while-loop!)
+                    while_node = self.get_loc(WhileNode(condition, body), ctx)
+                    
+                    # 4. Stop alles in een Block (CompoundNode) met de init ervoor
+                    wrapper_items = []
+                    if init:
+                        wrapper_items.append(init)
+                    wrapper_items.append(while_node)
+                    
+                    res = self.get_loc(CompoundNode(wrapper_items), ctx)
 
                 elif class_name == "BreakStatementContext":
                     res = self.get_loc(BreakNode(),ctx)
 
                 elif class_name == "ContinueStatementContext":
                     res = self.get_loc(ContinueNode(),ctx)
-
 
                 elif class_name == "EnumDeclarationContext":
                     name = ctx.IDENTIFIER().getText()
@@ -293,17 +385,29 @@ class ASTVisitor:
                     res = self.get_loc(EnumNode(name, values),ctx)
 
                 elif class_name == "SwitchStatementContext":
-                    change = results[id(ctx.expression())]
-                    cases = []
+                    switch_expr = results[id(ctx.expression())]
                     default_case = None
-                    for case in ctx.caseBlock():
-                        if case.CASE():
-                            value = int(case.INT_LITERAL().getText())
-                            body = results[id(case)]
-                            cases.append((value,body))
-                        elif case.DEFAULT():
-                            default_case = results[id(case)]
-                    res = self.get_loc(SwitchNode(change,cases,default_case),ctx)
+                    
+                    for case_ctx in ctx.caseBlock():
+                        if case_ctx.DEFAULT():
+                            default_case = results[id(case_ctx)]
+
+                    current_if_else = default_case
+                    
+                    for case_ctx in reversed(ctx.caseBlock()):
+                        if case_ctx.CASE():
+                            val_node = IntNode(int(case_ctx.INT_LITERAL().getText()))
+                            case_body = results[id(case_ctx)]
+                            
+                            cond = BinOpNode(switch_expr, "==", val_node)
+                            
+                            current_if_else = self.get_loc(IfNode(cond, case_body, current_if_else), case_ctx)
+                    
+                    res = current_if_else if current_if_else else self.get_loc(CompoundNode([]), ctx)
+
+                elif class_name == "ReturnStatementContext":
+                    expr = results.get(id(ctx.expression())) if ctx.expression() else None
+                    res = self.get_loc(ReturnNode(expr), ctx)
 
                 elif class_name == "CaseBlockContext":
                     statements = []
