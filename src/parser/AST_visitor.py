@@ -360,7 +360,7 @@ class ASTVisitor:
                     update = results.get(id(ctx.expression(2))) if ctx.expression(2) else None
                     body = results[id(ctx.compoundStatement())]
 
-                    # 1. Voeg de update toe aan het einde van de body (als die bestaat)
+                    # 1. Voeg de update toe aan het einde van de body
                     if update:
                         body.items.append(update)
                     
@@ -369,7 +369,7 @@ class ASTVisitor:
                         condition = IntNode(1)
                         condition.eval_type = 'int'
 
-                    # 3. Maak de WhileNode (de for-loop is nu officieel een while-loop!)
+                    # 3. Maak de WhileNode
                     while_node = self.get_loc(WhileNode(condition, body), ctx)
                     
                     # 4. Stop alles in een Block (CompoundNode) met de init ervoor

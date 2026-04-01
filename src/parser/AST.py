@@ -62,7 +62,7 @@ class BinOpNode(ASTNode):
         self.op = op
         self.right = right
     def __repr__(self):
-        return f"BinOpNode({self.left}, '{self.op}', {self.right})"
+        return f"BinOpNode(op='{self.op}')"
 
 class UnaryOpNode(ASTNode):
     def __init__(self, op: str, child):
@@ -70,7 +70,7 @@ class UnaryOpNode(ASTNode):
         self.op = op
         self.child = child
     def __repr__(self):
-        return f"UnaryOpNode('{self.op}', {self.child})"
+        return f"UnaryOpNode('{self.op}')"
     
 class AssignNode(ASTNode):
     def __init__(self, left, right):
@@ -78,7 +78,7 @@ class AssignNode(ASTNode):
         self.left = left
         self.right = right
     def __repr__(self): 
-        return f"AssignNode({self.left} = {self.right})"
+        return "AssignNode(=)"
 
 class DeclNode(ASTNode):
     def __init__(self, is_const: bool, type_spec: str, name: str, init_expr=None):
@@ -141,7 +141,7 @@ class CastNode(ASTNode):
         self.target_type = target_type
         self.expr = expr
     def __repr__(self): 
-        return f"CastNode(({self.target_type}) {self.expr})"
+        return f"CastNode({self.target_type})"
 
 class FunctionDeclNode(ASTNode):
     def __init__(self, return_type: str, name: str, params: list = None):
@@ -158,7 +158,7 @@ class ReturnNode(ASTNode):
         self.expr = expr
     def __repr__(self):
         if self.expr:
-            return f"ReturnNode({self.expr})"
+            return "ReturnNode(with_expr)"
         return "ReturnNode(void)"
 
 class CommentNode(ASTNode):
@@ -175,23 +175,14 @@ class IfNode(ASTNode):
         self.scope = scope
         self.else_scope = else_scope
     def __repr__(self):
-        return f"IfNode({self.condition}->{self.scope}, else {self.else_scope})"
+        return "IfNode"
 class WhileNode(ASTNode):
     def __init__(self, condition, scope):
         super().__init__()
         self.condition = condition
         self.scope = scope
     def __repr__(self):
-        return f"WhileNode({self.condition}->{self.scope})"
-class ForNode(ASTNode):
-    def __init__(self, init, condition, update, body):
-        super().__init__()
-        self.init = init
-        self.condition = condition
-        self.update = update
-        self.body = body
-    def __repr__(self):
-        return f"ForNode(({self.init};{self.condition};{self.update})->body={self.body})"
+        return "WhileNode"
 class BreakNode(ASTNode):
     def __init__(self):
         super().__init__()
@@ -216,7 +207,7 @@ class SwitchNode(ASTNode):
         self.cases = cases
         self.default_case = default_case
     def __repr__(self):
-        return f"SwitchNode({self.condition},{len(self.cases)},{self.default_case})"
+        return f"SwitchNode({len(self.cases)} cases)"
 class StructDeclNode(ASTNode):
     def __init__(self, name, members):
         super().__init__()
@@ -243,4 +234,4 @@ class MemberAccessNode(ASTNode):
         self.is_pointer = is_pointer
     def __repr__(self):
         op = "->" if self.is_pointer else "."
-        return f"MemberAccessNode({self.expr}{op}{self.member_name})"
+        return f"MemberAccessNode({op}{self.member_name})"

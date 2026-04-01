@@ -28,18 +28,22 @@ class SymbolTable:
         """
         Kijkt of een naam (bijv. 'leeftijd') een typedef is.
         Als dat zo is, geeft hij het originele type (bijv. 'int') terug.
-        Werkt recursief (typedef A B; typedef B C;).
         """
         if not isinstance(type_name, str):
             return type_name
 
-        base_type = type_name.replace('*', '').strip()
-        pointers = '*' * type_name.count('*')
+        current_type = type_name
+        total_pointers = ""
 
-        symbol = self.get(base_type)
-        
-        if symbol and symbol.get('type') == 'typedef':
-            resolved_base = self.resolve_type(symbol.get('original_type'))
-            return resolved_base + pointers
+        while True:
+            # Splits de basisnaam en de sterretjes
+            base_type = current_type.replace('*', '').strip()
+            total_pointers += '*' * current_type.count('*')
+
+            # Zoek in de symbol table
+            symbol = self.get(base_type)
             
-        return type_name
+            if symbol and symbol.get('type') == 'typedef':
+                current_type = symbol.get('original_type')
+            else:
+                return base_type + total_pointers

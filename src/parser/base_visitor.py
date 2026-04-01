@@ -26,14 +26,7 @@ class BaseVisitor:
         
         if isinstance(node, WhileNode): 
             return [node.condition, node.scope]
-        
-        if isinstance(node, ForNode):
-            children = []
-            if node.init: children.append(node.init)
-            if node.condition: children.append(node.condition)
-            if node.update: children.append(node.update)
-            children.append(node.body)
-            return children
+
             
         if isinstance(node, SwitchNode):
             children = [node.condition]

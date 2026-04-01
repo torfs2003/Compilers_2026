@@ -175,15 +175,6 @@ class ConstantFoldingVisitor(BaseVisitor):
                 
         self.results[id(node)] = node
 
-    def visit_ForNode(self, node):
-        if node.init:
-            node.init = self.results.get(id(node.init), node.init)
-        if node.condition:
-            node.condition = self.results.get(id(node.condition), node.condition)
-        if node.update:
-            node.update = self.results.get(id(node.update), node.update)
-        node.body = self.results.get(id(node.body), node.body)
-        self.results[id(node)] = node
 
     def visit_SwitchNode(self, node):
         node.condition = self.results.get(id(node.condition), node.condition)

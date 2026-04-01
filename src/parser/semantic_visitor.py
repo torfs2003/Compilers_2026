@@ -210,10 +210,6 @@ class SemanticVisitor(BaseVisitor):
             self.get_Error(node, "Return statement buiten een functie.")
             return
 
-        if node.expr and getattr(node.expr, 'eval_type', None) is None:
-            if hasattr(self, 'visit'):
-                self.visit(node.expr)
-
         ret_type = getattr(node.expr, 'eval_type', 'void') if node.expr else 'void'
         
         if ret_type is None:

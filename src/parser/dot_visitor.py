@@ -63,7 +63,6 @@ class DOTVisitor(BaseVisitor):
     def pre_visit_StringNode(self, node): self.node_ids[id(node)] = self.generate_id()
     def pre_visit_IfNode(self, node): self.node_ids[id(node)] = self.generate_id()
     def pre_visit_WhileNode(self, node): self.node_ids[id(node)] = self.generate_id()
-    def pre_visit_ForNode(self, node): self.node_ids[id(node)] = self.generate_id()
     def pre_visit_BreakNode(self, node): self.node_ids[id(node)] = self.generate_id()
     def pre_visit_ContinueNode(self, node): self.node_ids[id(node)] = self.generate_id()
     def pre_visit_SwitchNode(self, node): self.node_ids[id(node)] = self.generate_id()
@@ -120,10 +119,9 @@ class DOTVisitor(BaseVisitor):
             self._add_edge(node, arg, label=f"arg{idx}")
 
     def visit_ReturnNode(self, node):
-        if node.expr and id(node.expr) not in self.node_ids:
-            if hasattr(self, 'visit'): self.visit(node.expr)
         self._add_node(node, "Return", shape="ellipse", fillcolor="lightpink")
-        if node.expr: self._add_edge(node, node.expr)
+        if node.expr: 
+            self._add_edge(node, node.expr)
 
     def visit_FunctionDeclNode(self, node):
         self._add_node(node, f"FuncDecl\\n{node.return_type} {node.name}()", shape="invhouse", fillcolor="lightgreen")
@@ -182,12 +180,6 @@ class DOTVisitor(BaseVisitor):
         self._add_edge(node, node.condition, label="cond")
         self._add_edge(node, node.scope, label="body")
 
-    def visit_ForNode(self, node):
-        self._add_node(node, "For", shape="hexagon", fillcolor="orange")
-        if node.init: self._add_edge(node, node.init, label="init")
-        if node.condition: self._add_edge(node, node.condition, label="cond")
-        if node.update: self._add_edge(node, node.update, label="update")
-        self._add_edge(node, node.body, label="body")
 
     def visit_SwitchNode(self, node):
         self._add_node(node, "Switch", shape="diamond", fillcolor="orange")
