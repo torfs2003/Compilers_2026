@@ -69,7 +69,6 @@ def run_tests_in_directory(test_dir, output_dir, expected_dir, generate_expected
         # Voer compiler uit
         result = subprocess.run(cmd, capture_output=True, text=True, encoding='utf-8')
         
-        # Sla ALTIJD de console output op in het .out bestand
         with open(out_txt, 'w', encoding='utf-8') as f:
             f.write(result.stdout)
             if result.stderr:
@@ -111,7 +110,6 @@ def main():
     parser.add_argument('--generate-expected', action='store_true', help='Genereer de verwachte bestanden')
     args = parser.parse_args()
 
-    # Mappen 2 en 3 zijn netjes in commentaar gezet!
     test_folders = [
         "example_source_files/test_set_1", 
         #"example_source_files/test_set_2", 

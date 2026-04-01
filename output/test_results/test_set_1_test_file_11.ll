@@ -9,11 +9,11 @@ declare i32 @"scanf"(i8* %".1", ...)
 define i32 @"main"()
 {
 entry:
-  ;  Source: charx='x';
   %"x" = alloca i8
+  ;  Source: charx='x';
   store i8 120, i8* %"x"
-  ;  Source: chardot='.';
   %"dot" = alloca i8
+  ;  Source: chardot='.';
   store i8 46, i8* %"dot"
   ret i32 0
 }

@@ -117,7 +117,7 @@ enumList
 
 assignment_expression
     : logical_or_expression
-    | unary_expression ASSIGN assignment_expression
+    | unary_expression (ASSIGN | PLUS_ASSIGN | MINUS_ASSIGN) assignment_expression
     ;
 
 logical_or_expression
@@ -261,7 +261,11 @@ LBRACKET  : '[' ;
 RBRACKET  : ']' ;
 COMMA     : ',' ;
 SEMI      : ';' ;
-ASSIGN    : '=' ;
+
+ASSIGN        : '=' ;
+PLUS_ASSIGN   : '+=' ;
+MINUS_ASSIGN  : '-=' ;
+
 COLON     : ':' ;
 DOT       : '.';
 ARROW     : '->';

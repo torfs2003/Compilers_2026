@@ -5,13 +5,31 @@ class Preprocessor:
     def __init__(self, base_dir="."):
         self.base_dir = base_dir
         self.defines = {}
+        self.errors = []
 
     def process_code(self, code: str) -> str:
         lines = code.splitlines()
         output_lines = []
+        skip_mode = False
 
         for line in lines:
             stripped_line = line.strip()
+
+            # 0. Handle #ifndef en #endif
+            if stripped_line.startswith("#ifndef"):
+                parts = stripped_line.split()
+                if len(parts) >= 2:
+                    macro_name = parts[1]
+                    if macro_name in self.defines:
+                        skip_mode = True
+                continue
+
+            elif stripped_line.startswith("#endif"):
+                skip_mode = False
+                continue
+
+            if skip_mode:
+                continue
 
             # 1. Handle #include "..."
             if stripped_line.startswith("#include") and '"' in stripped_line:
@@ -27,7 +45,7 @@ class Preprocessor:
                             output_lines.append(processed_include)
                     else:
                         print(f"[Warning] Preprocessor kon include bestand niet vinden: {full_path}")
-                        output_lines.append(line)
+                        self.errors.append(foutmelding)
                 else:
                     output_lines.append(line)
 
@@ -36,13 +54,16 @@ class Preprocessor:
                 parts = stripped_line.split()
                 
                 if len(parts) < 2:
-                    print(f"[Error] Preprocessor: #define zonder identifier.")
+                    foutmelding = "[Error] Preprocessor: #define zonder identifier."
+                    print(foutmelding)
+                    self.errors.append(foutmelding)
                     continue
 
                 macro_name = parts[1]
                 
                 if not re.match(r'^[a-zA-Z_][a-zA-Z0-9_]*$', macro_name):
-                    print(f"[Error] Preprocessor: '{macro_name}' is geen geldige macro identifier.")
+                    foutmelding = f"[Error] Preprocessor: '{macro_name}' is geen geldige macro identifier."
+                    self.errors.append(foutmelding)
                     continue
 
                 macro_value = " ".join(parts[2:]) if len(parts) >= 3 else ""

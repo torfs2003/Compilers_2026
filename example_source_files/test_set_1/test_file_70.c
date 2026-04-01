@@ -17,4 +17,8 @@ int some_func(int x, bool y) {
     }
 }
 
+int main() {
+    return 0;
+}
+
 #endif SOME_GUARD_HH_

@@ -1,5 +1,2 @@
-Syntax errors found, stopping.
-line 3:0 token recognition error at: '#d'
-line 3:2 mismatched input 'efine' expecting {<EOF>, '#include', 'int', 'float', 'char', 'void'}
-line 4:0 token recognition error at: '#d'
-line 5:0 token recognition error at: '#d'
+Semantic errors found, stopping.
+[ Error ] line 4, position 0: Missing 'main' function.

@@ -29,7 +29,7 @@ digraph AST {
   node28 [label="7360446\n(int)", shape=box];
   node29 [label="778\n(int)", shape=box];
   node30 [label="1018\n(int)", shape=box];
-  node31 [label="0", shape=box];
+  node31 [label="0\n(int)", shape=box];
   node3 [label="Block", shape=diamond];
   node3 -> node4;
   node3 -> node5;

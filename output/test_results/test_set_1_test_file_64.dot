@@ -1,0 +1,28 @@
+digraph AST {
+  node [fontname="Arial"];
+  node6 [label="ID: x\n(int)", shape=box, style=filled, fillcolor=lightgrey];
+  node7 [label="ID: y\n(int)", shape=box, style=filled, fillcolor=lightgrey];
+  node5 [label="*\n(int)", shape=circle];
+  node5 -> node6;
+  node5 -> node7;
+  node4 [label="Return", shape=ellipse, fillcolor=lightpink, style=filled];
+  node4 -> node5;
+  node3 [label="Block", shape=diamond];
+  node3 -> node4;
+  node2 [label="Func\nint some_func()", shape=invhouse, style=filled, fillcolor=lightgreen];
+  node2 -> node3;
+  node12 [label="5\n(int)", shape=box];
+  node13 [label="1\n(int)", shape=box];
+  node11 [label="Call: some_func()\n(int)", shape=ellipse, style=filled, fillcolor=lightpink];
+  node11 -> node12 [label=" arg0"];
+  node11 -> node13 [label=" arg1"];
+  node10 [label="Decl\nint\nx\n(int)", shape=box, color=blue];
+  node10 -> node11 [label=" init", fontcolor=blue];
+  node9 [label="Block", shape=diamond];
+  node9 -> node10;
+  node8 [label="Func\nint main()", shape=invhouse, style=filled, fillcolor=lightgreen];
+  node8 -> node9;
+  node1 [label="Program", shape=box, style=filled, fillcolor=lightblue];
+  node1 -> node2;
+  node1 -> node8;
+}

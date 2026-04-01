@@ -471,14 +471,14 @@ class SemanticVisitor(BaseVisitor):
             node.eval_type = 'void'
             return
 
-        # 5. Bestaat de gevraagde eigenschap (member) in de struct?
+        # 5. Bestaat de gevraagde member in de struct?
         members = struct_def.get('members', {})
         if node.member_name not in members:
             self.get_Error(node, f"Struct '{struct_name}' heeft geen member genaamd '{node.member_name}'.")
             node.eval_type = 'void'
             return
 
-        # 6. Alles klopt! Geef het type én de index van de member door.
+        # 6. Geef het type én de index van de member door.
         member_info = members[node.member_name]
         node.eval_type = member_info['type']
         node.member_index = member_info['index']

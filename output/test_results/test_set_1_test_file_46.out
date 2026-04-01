@@ -1,2 +1,2 @@
 Syntax errors found, stopping.
-line 4:6 missing {'int', 'float', 'char', 'void'} at 'x'
+line 4:8 mismatched input '=' expecting {'const', '*', IDENTIFIER}

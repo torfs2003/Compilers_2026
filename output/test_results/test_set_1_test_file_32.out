@@ -1,2 +1,4 @@
 Semantic errors found, stopping.
+[ Error ] line 6, position 0: Toewijzing aan een rvalue is niet toegestaan.
+[ Error ] line 8, position 0: Toewijzing aan een rvalue is niet toegestaan.
 [ Error ] line 8, position 0: Incompatibele types bij toewijzing: 'int' aan 'int*'.

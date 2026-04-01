@@ -9,28 +9,28 @@ declare i32 @"scanf"(i8* %".1", ...)
 define i32 @"main"()
 {
 entry:
-  ;  Source: intx=4;
   %"x" = alloca i32
+  ;  Source: intx=4;
   store i32 4, i32* %"x"
-  ;  Source: inty=5;
   %"y" = alloca i32
+  ;  Source: inty=5;
   store i32 5, i32* %"y"
+  %"ptr" = alloca i32*
   ;  Source: x
   %"x.1" = load i32, i32* %"x"
   ;  Source: &x
   ;  Source: int*ptr=&x;
-  %"ptr" = alloca i32*
   store i32* %"x", i32** %"ptr"
-  ;  Source: intis_x;
   %"is_x" = alloca i32
-  ;  Source: intis_y;
+  ;  Source: intis_x;
   %"is_y" = alloca i32
-  ;  Source: float*ptr2=0;
+  ;  Source: intis_y;
   %"ptr2" = alloca float*
+  ;  Source: float*ptr2=0;
   %".13" = inttoptr i32 0 to float*
   store float* %".13", float** %"ptr2"
-  ;  Source: intnum_skip_elements=4;
   %"num_skip_elements" = alloca i32
+  ;  Source: intnum_skip_elements=4;
   store i32 4, i32* %"num_skip_elements"
   ;  Source: ptr
   %"ptr.1" = load i32*, i32** %"ptr"

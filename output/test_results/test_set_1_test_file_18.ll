@@ -9,21 +9,21 @@ declare i32 @"scanf"(i8* %".1", ...)
 define i32 @"main"()
 {
 entry:
-  ;  Source: intx=-60;
   %"x" = alloca i32
+  ;  Source: intx=-60;
   store i32 -60, i32* %"x"
+  %"some_pointer" = alloca i32*
   ;  Source: x
   %"x.1" = load i32, i32* %"x"
   ;  Source: &x
   ;  Source: int*some_pointer=&x;
-  %"some_pointer" = alloca i32*
   store i32* %"x", i32** %"some_pointer"
-  ;  Source: int**another_pointer;
   %"another_pointer" = alloca i32**
-  ;  Source: int***triple_pointer;
+  ;  Source: int**another_pointer;
   %"triple_pointer" = alloca i32***
-  ;  Source: inty;
+  ;  Source: int***triple_pointer;
   %"y" = alloca i32
+  ;  Source: inty;
   ;  Source: some_pointer
   %"some_pointer.1" = load i32*, i32** %"some_pointer"
   %"deref_load" = load i32, i32* %"some_pointer.1"

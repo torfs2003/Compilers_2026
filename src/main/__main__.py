@@ -25,6 +25,12 @@ def main():
     preprocessor = Preprocessor()
     processed_code = preprocessor.process_file(args.input)
 
+    if hasattr(preprocessor, 'errors') and len(preprocessor.errors) > 0:
+        print("Preprocessor errors found, stopping.")
+        for error in preprocessor.errors:
+            print(error)
+        sys.exit(1)
+
     # ANTLR opstarten
     input_stream = InputStream(processed_code)   
     lexer = CmmLexer(input_stream)

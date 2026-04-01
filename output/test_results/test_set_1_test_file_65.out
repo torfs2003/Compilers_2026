@@ -1,4 +1,2 @@
-Syntax errors found, stopping.
-line 2:0 token recognition error at: '#d'
-line 2:8 token recognition error at: '#d'
-line 2:2 mismatched input 'efine' expecting {<EOF>, '#include', 'int', 'float', 'char', 'void'}
+Preprocessor errors found, stopping.
+[Error] Preprocessor: '#define' is geen geldige macro identifier.

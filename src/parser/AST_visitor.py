@@ -220,15 +220,24 @@ class ASTVisitor:
 
                 # 3. Expressions & Assignments
                 elif class_name == "ExpressionContext":
-                    res = results[id(ctx.assignment_expression())]
+                    res = results.get(id(ctx.assignment_expression()))
 
                 elif class_name == "Assignment_expressionContext":
                     if ctx.getChildCount() == 3:
-                        left = results[id(ctx.unary_expression())]
-                        right = results[id(ctx.assignment_expression())]
-                        res = self.get_loc(AssignNode(left, right), ctx)
+                        left = results.get(id(ctx.unary_expression()))
+                        right = results.get(id(ctx.assignment_expression()))
+                        operator = ctx.getChild(1).getText()
+
+                        if operator == '=':
+                            res = self.get_loc(AssignNode(left, right), ctx)
+                        elif operator == '+=':
+                            addition_node = self.get_loc(BinOpNode(left, '+', right), ctx)
+                            res = self.get_loc(AssignNode(left, addition_node), ctx)
+                        elif operator == '-=':
+                            subtraction_node = self.get_loc(BinOpNode(left, '-', right), ctx)
+                            res = self.get_loc(AssignNode(left, subtraction_node), ctx)
                     else:
-                        res = results[id(ctx.logical_or_expression())]
+                        res = results.get(id(ctx.logical_or_expression()))
 
                 # 4. Binary Operations
                 elif class_name in ["Logical_or_expressionContext", "Logical_and_expressionContext", 

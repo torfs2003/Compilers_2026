@@ -9,20 +9,20 @@ declare i32 @"scanf"(i8* %".1", ...)
 define i32 @"main"()
 {
 entry:
-  ;  Source: intx=5;
   %"x" = alloca i32
+  ;  Source: intx=5;
   store i32 5, i32* %"x"
+  %"f" = alloca float
   ;  Source: x
   %"x.1" = load i32, i32* %"x"
   ;  Source: floatf=x;
-  %"f" = alloca float
   %".6" = sitofp i32 %"x.1" to float
   store float %".6", float* %"f"
-  ;  Source: intz=-32682;
   %"z" = alloca i32
+  ;  Source: intz=-32682;
   store i32 -32682, i32* %"z"
-  ;  Source: intk;
   %"k" = alloca i32
+  ;  Source: intk;
   ;  Source: f
   %"f.1" = load float, float* %"f"
   ;  Source: z

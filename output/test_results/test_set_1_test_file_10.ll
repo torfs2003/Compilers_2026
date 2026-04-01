@@ -9,11 +9,11 @@ declare i32 @"scanf"(i8* %".1", ...)
 define i32 @"main"()
 {
 entry:
-  ;  Source: intnumber=-55;
   %"number" = alloca i32
+  ;  Source: intnumber=-55;
   store i32 -55, i32* %"number"
-  ;  Source: intn;
   %"n" = alloca i32
+  ;  Source: intn;
   ;  Source: number
   %"number.1" = load i32, i32* %"number"
   ;  Source: number++;

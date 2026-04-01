@@ -9,17 +9,17 @@ declare i32 @"scanf"(i8* %".1", ...)
 define i32 @"main"()
 {
 entry:
-  ;  Source: charx='a';
   %"x" = alloca i8
+  ;  Source: charx='a';
   store i8 97, i8* %"x"
+  %"chr_ptr" = alloca i8*
   ;  Source: x
   %"x.1" = load i8, i8* %"x"
   ;  Source: &x
   ;  Source: char*chr_ptr=&x;
-  %"chr_ptr" = alloca i8*
   store i8* %"x", i8** %"chr_ptr"
-  ;  Source: charanother_char;
   %"another_char" = alloca i8
+  ;  Source: charanother_char;
   ;  Source: chr_ptr
   %"chr_ptr.1" = load i8*, i8** %"chr_ptr"
   %"deref_load" = load i8, i8* %"chr_ptr.1"

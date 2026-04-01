@@ -1,17 +1,2 @@
 AST rendered to output/test_results\test_set_1_test_file_52.dot
-Traceback (most recent call last):
-  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\lib\runpy.py", line 196, in _run_module_as_main
-    return _run_code(code, main_globals, None,
-  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\lib\runpy.py", line 86, in _run_code
-    exec(code, run_globals)
-  File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 95, in <module>
-    main()
-  File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 84, in main
-    llvm_ir = llvm_visitor.generate(ast_root) 
-  File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\llvm_target\llvm_visitor.py", line 92, in generate
-    self.builder.comment(f" User Comment: {c.strip()}")
-  File "C:\Users\lasse\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\llvmlite\ir\builder.py", line 1057, in comment
-    inst = instructions.Comment(self.block, text)
-  File "C:\Users\lasse\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\llvmlite\ir\instructions.py", line 916, in __init__
-    assert "\n" not in text, "Comment cannot contain new line"
-AssertionError: Comment cannot contain new line
+LLVM IR generated at output/test_results\test_set_1_test_file_52.ll

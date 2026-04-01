@@ -1,3 +1,3 @@
 Syntax errors found, stopping.
 line 5:1 no viable alternative at input '*int'
-line 5:7 mismatched input '=' expecting '('
+line 7:0 extraneous input '}' expecting {<EOF>, '#include', 'enum', 'const', 'int', 'float', 'char', 'void', 'struct', 'typedef', IDENTIFIER}

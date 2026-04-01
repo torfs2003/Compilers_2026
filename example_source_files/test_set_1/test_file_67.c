@@ -15,4 +15,5 @@ int adjust_value(int x, bool y) {
     return new_value;
 }
 
+
 #endif
