@@ -20,8 +20,8 @@ def main():
     parser.add_argument('--render_ast', type=str, help='Path to render the AST as a .dot file')
     parser.add_argument('--no_opt', action='store_true', help='Disable constant folding optimization')
     parser.add_argument('--target_llvm', type=str, help='Path to save the LLVM IR as a.ll file')
-    parser.add_argument('--target_binary', type=str,help='Path to save the native binary executable (e.g. output/prog)')
-    parser.add_argument('--target_mips', type=str,help='Path to save the MIPS assembly file for use in SPIM or MARS (e.g. output/prog.s)')
+    parser.add_argument('--target_binary', type=str,help='Path to save the native binary executable (for example output/prog)')
+    parser.add_argument('--target_mips', type=str,help='Path to save the MIPS assembly file for use in SPIM or MARS (for example output/prog.s)')
 
     args = parser.parse_args()
 
