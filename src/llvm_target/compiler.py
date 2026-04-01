@@ -27,12 +27,12 @@ class Compiler:
 
         if not self.llc:
             print(
-                "Warning!: 'llc' not found.\n"
+                "[Warning] 'llc' not found.\n"
                 "sudo apt install llvm"
             )
         if not self.clang:
             print(
-                "Warning!: 'clang' not found. Falling back to llc + cc for binaries.\n"
+                "[Warning] 'clang' not found. Falling back to llc + cc for binaries.\n"
                 "sudo apt install clang"
             )
 
