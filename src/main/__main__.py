@@ -20,14 +20,14 @@ def main():
     parser.add_argument('--render_ast', type=str, help='Path to render the AST as a .dot file')
     parser.add_argument('--no_opt', action='store_true', help='Disable constant folding optimization')
     parser.add_argument('--target_llvm', type=str, help='Path to save the LLVM IR as a.ll file')
-    parser.add_argument('--target_binary', type=str,help='Path to save the native binary executable (for example: output/prog)')
+    parser.add_argument('--target_bin', type=str,help='Path to save the native binary executable (for example: output/prog)')
     parser.add_argument('--target_mips', type=str,help='Path to save the MIPS assembly file for use in SPIM or MARS (for example: output/prog.s)')
 
     args = parser.parse_args()
 
-    #We need the .ll disk first!
-    if (args.target_binary or args.target_mips) and not args.target_llvm:
-        print("[Error] --target_binary and --target_mips require --target_llvm")
+    #We need the .ll disk first! (LET OP: target_binary is hier gefixt naar target_bin)
+    if (args.target_bin or args.target_mips) and not args.target_llvm:
+        print("[Error] --target_bin and --target_mips require --target_llvm")
         sys.exit(1)
 
     preprocessor = Preprocessor()
@@ -111,10 +111,11 @@ def main():
             f.write(llvm_ir)
         print(f"LLVM IR generated at {args.target_llvm}")
 
-    if args.target_binary or args.target_mips:
+    # LET OP: target_binary is hier gefixt naar target_bin
+    if args.target_bin or args.target_mips:
         compiler = Compiler()
-        if args.target_binary:
-            compiler.compile_to_binary(args.target_llvm, args.target_binary)
+        if args.target_bin:
+            compiler.compile_to_binary(args.target_llvm, args.target_bin)
         if args.target_mips:
             compiler.compile_to_mips(args.target_llvm, args.target_mips)
 

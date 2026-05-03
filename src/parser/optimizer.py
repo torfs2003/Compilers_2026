@@ -67,7 +67,11 @@ class ConstantFoldingVisitor(BaseVisitor):
         self.results[id(node)] = node
 
     def visit_UnaryOpNode(self, node):
-        if node.op != '&':
+        if node.op == '&':
+            if isinstance(node.child, IdentifierNode):
+                if node.child.name in self.constants:
+                    del self.constants[node.child.name]
+        else:
             node.child = self.results.get(id(node.child), node.child)
         
         if self.enabled and isinstance(node.child, (IntNode, FloatNode)):
@@ -192,6 +196,11 @@ class ConstantFoldingVisitor(BaseVisitor):
         self.results[id(node)] = node
         
     def visit_EnumNode(self, node):
+        for i, val_name in enumerate(node.values):
+            int_val = IntNode(i)
+            int_val.eval_type = 'int'
+            self.constants[val_name] = int_val
+            
         self.results[id(node)] = node
     
     def visit_ReturnNode(self, node):

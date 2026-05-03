@@ -1,0 +1,32 @@
+digraph AST {
+  node [fontname="Arial"];
+  node2 [label="Include\n<stdio.h>", shape=note, style="filled", fillcolor="lightyellow", color="black", fontcolor="black"];
+  node6 [label="10\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node5 [label="Decl\nchar\na\n(char)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
+  node5 -> node6 [style="solid", color="black", label=" init", fontcolor="blue"];
+  node8 [label="245\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node7 [label="Decl\nchar\nb\n(char)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
+  node7 -> node8 [style="solid", color="black", label=" init", fontcolor="blue"];
+  node10 [label="\"%d\"\n(char*)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node12 [label="ID: a\n(char)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
+  node13 [label="ID: b\n(char)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
+  node11 [label="<\n(int)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node11 -> node12 [style="solid", color="black"];
+  node11 -> node13 [style="solid", color="black"];
+  node9 [label="Call: printf()\n(int)", shape=ellipse, style="filled", fillcolor="lightpink", color="black", fontcolor="black"];
+  node9 -> node10 [style="solid", color="black", label=" arg0", fontcolor="black"];
+  node9 -> node11 [style="solid", color="black", label=" arg1", fontcolor="black"];
+  node15 [label="0\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node14 [label="Return", shape=ellipse, style="filled", fillcolor="lightpink", color="black", fontcolor="black"];
+  node14 -> node15 [style="solid", color="black"];
+  node4 [label="Block", shape=diamond, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node4 -> node5 [style="solid", color="black"];
+  node4 -> node7 [style="solid", color="black"];
+  node4 -> node9 [style="solid", color="black"];
+  node4 -> node14 [style="solid", color="black"];
+  node3 [label="Func\nint main()", shape=invhouse, style="filled", fillcolor="lightgreen", color="black", fontcolor="black"];
+  node3 -> node4 [style="solid", color="black"];
+  node1 [label="Program", shape=box, style="filled", fillcolor="lightblue", color="black", fontcolor="black"];
+  node1 -> node2 [style="solid", color="black"];
+  node1 -> node3 [style="solid", color="black"];
+}

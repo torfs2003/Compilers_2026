@@ -1,0 +1,1722 @@
+
+--- Start testen in: example_source_files/test_set_1 (71 bestanden) ---
+Testen van: test_set_1/test_file_0.c... PASSED
+Testen van: test_set_1/test_file_1.c... PASSED
+Testen van: test_set_1/test_file_10.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: test_set_1/test_file_11.c... PASSED
+Testen van: test_set_1/test_file_12.c... PASSED
+Testen van: test_set_1/test_file_13.c... PASSED
+Testen van: test_set_1/test_file_14.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: test_set_1/test_file_15.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: test_set_1/test_file_16.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: test_set_1/test_file_17.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: test_set_1/test_file_18.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: test_set_1/test_file_19.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: test_set_1/test_file_2.c... PASSED
+Testen van: test_set_1/test_file_20.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: test_set_1/test_file_21.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: test_set_1/test_file_22.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: test_set_1/test_file_23.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_24.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_25.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+...
+
+Testen van: test_set_1/test_file_26.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+...
+
+Testen van: test_set_1/test_file_27.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_28.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_29.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_3.c... PASSED
+Testen van: test_set_1/test_file_30.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_31.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_32.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_33.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_34.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_35.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_36.c... PASSED
+Testen van: test_set_1/test_file_37.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_38.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 5:15 token recognition error at: ''ab'
+line 5:22 token recognition error at: '';\n'
+line 6:0 missing ';' at 'char'
+line 6:16 token recognition error at: ''xy'
+line 6:20 token recognition error at: '\'
+line 6:22 token recognition error at: '';\n'
+line 6:21 missing ';' at 'n'
+...
+
+Testen van: test_set_1/test_file_39.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_4.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_40.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_41.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_42.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_43.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_44.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_45.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_46.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 4:8 mismatched input '=' expecting {'const', '*', IDENTIFIER}
+...
+
+Testen van: test_set_1/test_file_47.c... PASSED
+Testen van: test_set_1/test_file_48.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_49.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_5.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_50.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: test_set_1/test_file_51.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: test_set_1/test_file_52.c... PASSED
+Testen van: test_set_1/test_file_53.c... FAILED (GCC gaf error, maar jouw compiler accepteerde de code!)
+Testen van: test_set_1/test_file_54.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: test_set_1/test_file_55.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_56.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_57.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_58.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_59.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_6.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: test_set_1/test_file_60.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_61.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_62.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: test_set_1/test_file_63.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_64.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: test_set_1/test_file_65.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_66.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_67.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_68.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: test_set_1/test_file_69.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: test_set_1/test_file_7.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: test_set_1/test_file_70.c... FAILED (GCC gaf error, maar jouw compiler accepteerde de code!)
+Testen van: test_set_1/test_file_8.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: test_set_1/test_file_9.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+
+--- Resultaten voor example_source_files/test_set_1: 44 Passed, 27 Failed ---
+
+
+--- Start testen in: example_source_files/test_set_2 (79 bestanden) ---
+Testen van: test_set_2/test_file_0.c... FAILED (GCC gaf error, maar jouw compiler accepteerde de code!)
+Testen van: test_set_2/test_file_1.c... FAILED (GCC gaf error, maar jouw compiler accepteerde de code!)
+Testen van: test_set_2/test_file_10.c... FAILED (GCC gaf error, maar jouw compiler accepteerde de code!)
+Testen van: test_set_2/test_file_11.c... FAILED (GCC gaf error, maar jouw compiler accepteerde de code!)
+Testen van: test_set_2/test_file_12.c... FAILED (GCC gaf error, maar jouw compiler accepteerde de code!)
+Testen van: test_set_2/test_file_13.c... FAILED (GCC gaf error, maar jouw compiler accepteerde de code!)
+Testen van: test_set_2/test_file_14.c... FAILED (GCC gaf error, maar jouw compiler accepteerde de code!)
+Testen van: test_set_2/test_file_15.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 5:8 mismatched input ',' expecting {'[', ';', '='}
+line 5:15 mismatched input ',' expecting ';'
+line 5:22 mismatched input ',' expecting ';'
+...
+
+Testen van: test_set_2/test_file_16.c... FAILED
+  --> EXPECTED:
+Hello World!
+
+ACTUAL:
+
+Testen van: test_set_2/test_file_17.c... FAILED
+  --> EXPECTED:
+Hello World!
+
+ACTUAL:
+
+Testen van: test_set_2/test_file_18.c... FAILED
+  --> EXPECTED:
+100.500000%
+ACTUAL:
+
+Testen van: test_set_2/test_file_19.c... FAILED
+  --> TIMEOUT (Mogelijke oneindige lus in de code)
+Testen van: test_set_2/test_file_2.c... FAILED (GCC gaf error, maar jouw compiler accepteerde de code!)
+Testen van: test_set_2/test_file_20.c... FAILED
+  --> TIMEOUT (Mogelijke oneindige lus in de code)
+Testen van: test_set_2/test_file_21.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_2/test_file_22.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_2/test_file_23.c... FAILED (GCC gaf error, maar jouw compiler accepteerde de code!)
+Testen van: test_set_2/test_file_24.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_2/test_file_25.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_2/test_file_26.c... FAILED (GCC gaf error, maar jouw compiler accepteerde de code!)
+Testen van: test_set_2/test_file_27.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_2/test_file_28.c... FAILED (GCC gaf error, maar jouw compiler accepteerde de code!)
+Testen van: test_set_2/test_file_29.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_2/test_file_3.c... FAILED (GCC gaf error, maar jouw compiler accepteerde de code!)
+Testen van: test_set_2/test_file_30.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_2/test_file_31.c... FAILED (GCC gaf error, maar jouw compiler accepteerde de code!)
+Testen van: test_set_2/test_file_32.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_2/test_file_33.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_2/test_file_34.c... PASSED
+Testen van: test_set_2/test_file_35.c... FAILED (GCC gaf error, maar jouw compiler accepteerde de code!)
+Testen van: test_set_2/test_file_36.c... FAILED (GCC gaf error, maar jouw compiler accepteerde de code!)
+Testen van: test_set_2/test_file_37.c... FAILED (GCC gaf error, maar jouw compiler accepteerde de code!)
+Testen van: test_set_2/test_file_38.c... FAILED (GCC gaf error, maar jouw compiler accepteerde de code!)
+Testen van: test_set_2/test_file_39.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_2/test_file_4.c... FAILED (GCC gaf error, maar jouw compiler accepteerde de code!)
+Testen van: test_set_2/test_file_40.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_2/test_file_41.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_2/test_file_42.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_2/test_file_43.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_2/test_file_44.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_2/test_file_45.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_2/test_file_46.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_2/test_file_47.c... FAILED
+  --> EXPECTED:
+test: 1 0.000000
+
+ACTUAL:
+
+Testen van: test_set_2/test_file_48.c... FAILED
+  --> EXPECTED:
+test: 1 0.500000
+
+ACTUAL:
+
+Testen van: test_set_2/test_file_49.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_2/test_file_5.c... FAILED (GCC gaf error, maar jouw compiler accepteerde de code!)
+Testen van: test_set_2/test_file_50.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_2/test_file_51.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_2/test_file_52.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    main()
+  File "C:\Users\l...
+
+Testen van: test_set_2/test_file_53.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    main()
+  File "C:\Users\l...
+
+Testen van: test_set_2/test_file_54.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_2/test_file_55.c... PASSED
+Testen van: test_set_2/test_file_56.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    main()
+  File "C:\Users\l...
+
+Testen van: test_set_2/test_file_57.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: test_set_2/test_file_58.c... PASSED
+Testen van: test_set_2/test_file_59.c... FAILED (GCC gaf error, maar jouw compiler accepteerde de code!)
+Testen van: test_set_2/test_file_6.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_2/test_file_60.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_2/test_file_61.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_2/test_file_62.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_2/test_file_63.c... FAILED (GCC gaf error, maar jouw compiler accepteerde de code!)
+Testen van: test_set_2/test_file_64.c... FAILED (GCC gaf error, maar jouw compiler accepteerde de code!)
+Testen van: test_set_2/test_file_65.c... FAILED (GCC gaf error, maar jouw compiler accepteerde de code!)
+Testen van: test_set_2/test_file_66.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_2/test_file_67.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_2/test_file_68.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+...
+
+Testen van: test_set_2/test_file_69.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_2/test_file_7.c... FAILED (GCC gaf error, maar jouw compiler accepteerde de code!)
+Testen van: test_set_2/test_file_70.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_2/test_file_71.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_2/test_file_72.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_2/test_file_73.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_2/test_file_74.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_2/test_file_75.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_2/test_file_76.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_2/test_file_77.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_2/test_file_78.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_2/test_file_8.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_2/test_file_9.c... FAILED (GCC gaf error, maar jouw compiler accepteerde de code!)
+
+--- Resultaten voor example_source_files/test_set_2: 41 Passed, 38 Failed ---
+
+
+--- Start testen in: example_source_files/test_set_3 (1551 bestanden) ---
+Testen van: ConstantFoldingTests/test1.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: ConstantFoldingTests/test10.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 64:1 extraneous input ';' expecting {<EOF>, '#include', 'enum', 'const', 'int', 'float', 'char', 'void', 'struct', 'typedef', IDENTIFIER}
+...
+
+Testen van: ConstantFoldingTests/test11.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: ConstantFoldingTests/test12.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: ConstantFoldingTests/test13.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: ConstantFoldingTests/test14.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    main()
+  File "C:\Users\l...
+
+Testen van: ConstantFoldingTests/test15.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 104:1 extraneous input ';' expecting {<EOF>, '#include', 'enum', 'const', 'int', 'float', 'char', 'void', 'struct', 'typedef', IDENTIFIER}
+...
+
+Testen van: ConstantFoldingTests/test16.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: ConstantFoldingTests/test2.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: ConstantFoldingTests/test3.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: ConstantFoldingTests/test4.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: ConstantFoldingTests/test5.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: ConstantFoldingTests/test6.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: ConstantFoldingTests/test7.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: ConstantFoldingTests/test8.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: ConstantFoldingTests/test9.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 13:1 extraneous input ';' expecting {<EOF>, '#include', 'enum', 'const', 'int', 'float', 'char', 'void', 'struct', 'typedef', IDENTIFIER}
+...
+
+Testen van: ConstraintsTests/test1.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: ConstraintsTests/test2.c... FAILED (GCC gaf error, maar jouw compiler accepteerde de code!)
+Testen van: ConstraintsTests/test3.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 2:2 no viable alternative at input 'x='
+...
+
+Testen van: ConstraintsTests/test4.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: ConstraintsTests/test5.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: ConstraintsTests/test6.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: ConstraintsTests/test7.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 6:5 no viable alternative at input 'appel;'
+...
+
+Testen van: ConversionTests/test1.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 5:20 no viable alternative at input '(const'
+line 5:30 extraneous input ')' expecting {'const', '*', IDENTIFIER}
+line 8:4 extraneous input 'return' expecting {<EOF>, '#include', 'enum', 'const', 'int', 'float', 'char', 'void', 'struct', 'typedef', IDENTIFIER}
+...
+
+Testen van: ConversionTests/test10.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 14:0 extraneous input 'int' expecting {'if', 'while', 'for', 'break', 'continue', 'switch', 'return', '(', '{', '}', ';', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
+line 15:4 extraneous input 'return' expecting {<EOF>, '#inclu...
+
+Testen van: ConversionTests/test11.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: ConversionTests/test12.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+...
+
+Testen van: ConversionTests/test13.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+...
+
+Testen van: ConversionTests/test14.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: ConversionTests/test15.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: ConversionTests/test16.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 3:10 no viable alternative at input 'unionkaas{'
+...
+
+Testen van: ConversionTests/test17.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: ConversionTests/test18.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: ConversionTests/test19.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: ConversionTests/test2.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: ConversionTests/test20.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 15:0 extraneous input 'int' expecting {'if', 'while', 'for', 'break', 'continue', 'switch', 'return', '(', '{', '}', ';', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
+line 18:5 no viable alternative at input 'kptr='
+...
+
+Testen van: ConversionTests/test3.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+...
+
+Testen van: ConversionTests/test4.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+...
+
+Testen van: ConversionTests/test5.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: ConversionTests/test6.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+...
+
+Testen van: ConversionTests/test7.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: ConversionTests/test8.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: ConversionTests/test9.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: DeadCodeRemoveTests/test1.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 9:12 extraneous input 'int' expecting {'if', 'while', 'for', 'break', 'continue', 'switch', 'return', '(', '{', '}', ';', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
+line 12:14 no viable alternative at input 'printf('
+...
+
+Testen van: DeadCodeRemoveTests/test2.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 9:12 extraneous input 'int' expecting {'if', 'while', 'for', 'break', 'continue', 'switch', 'return', '(', '{', '}', ';', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
+line 15:14 no viable alternative at input 'printf('
+...
+
+Testen van: DeadCodeRemoveTests/test3.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 8:8 extraneous input 'int' expecting {'if', 'while', 'for', 'break', 'continue', 'switch', 'return', '(', '{', '}', ';', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
+line 9:8 extraneous input 'if' expecting {<EOF>, '#include', '...
+
+Testen van: DeadCodeRemoveTests/test4.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 8:8 extraneous input 'int' expecting {'if', 'while', 'for', 'break', 'continue', 'switch', 'return', '(', '{', '}', ';', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
+line 10:8 extraneous input 'if' expecting {<EOF>, '#include', ...
+
+Testen van: DeadCodeRemoveTests/test5.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 8:8 extraneous input 'int' expecting {'if', 'while', 'for', 'break', 'continue', 'switch', 'return', '(', '{', '}', ';', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
+line 10:8 extraneous input 'if' expecting {<EOF>, '#include', ...
+
+Testen van: DeadCodeRemoveTests/test6.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 7:8 extraneous input 'int' expecting {'if', 'while', 'for', 'break', 'continue', 'switch', 'return', '(', '{', '}', ';', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
+line 9:8 extraneous input 'if' expecting {<EOF>, '#include', '...
+
+Testen van: DeadCodeRemoveTests/test7.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 8:4 extraneous input 'int' expecting {'if', 'while', 'for', 'break', 'continue', 'switch', 'return', '(', '{', '}', ';', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
+line 9:6 no viable alternative at input 'b='
+...
+
+Testen van: DeadCodeRemoveTests/test8.c... FAILED
+  --> EXPECTED:
+never executedexecuted
+ACTUAL:
+
+Testen van: DeadCodeRemoveTests/test9.c... FAILED
+  --> TIMEOUT (Mogelijke oneindige lus in de code)
+Testen van: SemanticErrorsTests/test1.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: SemanticErrorsTests/test10.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: SemanticErrorsTests/test11.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: SemanticErrorsTests/test12.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: SemanticErrorsTests/test13.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: SemanticErrorsTests/test14.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: SemanticErrorsTests/test15.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: SemanticErrorsTests/test16.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: SemanticErrorsTests/test17.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: SemanticErrorsTests/test18.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: SemanticErrorsTests/test19.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: SemanticErrorsTests/test2.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+...
+
+Testen van: SemanticErrorsTests/test20.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: SemanticErrorsTests/test21.c... FAILED (GCC gaf error, maar jouw compiler accepteerde de code!)
+Testen van: SemanticErrorsTests/test22.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: SemanticErrorsTests/test23.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: SemanticErrorsTests/test24.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: SemanticErrorsTests/test25.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: SemanticErrorsTests/test26.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 8:8 extraneous input 'int' expecting {'if', 'while', 'for', 'break', 'continue', 'switch', 'return', '(', '{', '}', ';', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
+line 9:4 extraneous input '}' expecting {<EOF>, '#include', 'e...
+
+Testen van: SemanticErrorsTests/test27.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: SemanticErrorsTests/test28.c... FAILED (GCC gaf error, maar jouw compiler accepteerde de code!)
+Testen van: SemanticErrorsTests/test29.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: SemanticErrorsTests/test3.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+...
+
+Testen van: SemanticErrorsTests/test30.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: SemanticErrorsTests/test31.c... FAILED (GCC gaf error, maar jouw compiler accepteerde de code!)
+Testen van: SemanticErrorsTests/test32.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: SemanticErrorsTests/test33.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: SemanticErrorsTests/test34.c... PASSED
+Testen van: SemanticErrorsTests/test35.c... PASSED
+Testen van: SemanticErrorsTests/test36.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: SemanticErrorsTests/test37.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: SemanticErrorsTests/test38.c... FAILED (GCC gaf error, maar jouw compiler accepteerde de code!)
+Testen van: SemanticErrorsTests/test39.c... FAILED (GCC gaf error, maar jouw compiler accepteerde de code!)
+Testen van: SemanticErrorsTests/test4.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: SemanticErrorsTests/test41.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: SemanticErrorsTests/test42.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: SemanticErrorsTests/test43.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 15:0 extraneous input 'int' expecting {'if', 'while', 'for', 'break', 'continue', 'switch', 'return', '(', '{', '}', ';', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
+line 18:5 no viable alternative at input 'kptr='
+...
+
+Testen van: SemanticErrorsTests/test44.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: SemanticErrorsTests/test45.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: SemanticErrorsTests/test46.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: SemanticErrorsTests/test5.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: SemanticErrorsTests/test6.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: SemanticErrorsTests/test7.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: SemanticErrorsTests/test8.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: SemanticErrorsTests/test9.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: SwitchTests/test1.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 10:12 extraneous input 'int' expecting {'case', 'default', '}'}
+line 11:12 extraneous input 'break' expecting {<EOF>, '#include', 'enum', 'const', 'int', 'float', 'char', 'void', 'struct', 'typedef', IDENTIFIER}
+line 14:12 extraneous input 'break' expecting {<EOF>, '#include', 'enum', 'const', ...
+
+Testen van: SwitchTests/test2.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 13:12 extraneous input 'int' expecting {'case', 'default', '}'}
+line 14:12 extraneous input 'break' expecting {<EOF>, '#include', 'enum', 'const', 'int', 'float', 'char', 'void', 'struct', 'typedef', IDENTIFIER}
+line 17:12 extraneous input 'break' expecting {<EOF>, '#include', 'enum', 'const', ...
+
+Testen van: SwitchTests/test3.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 16:12 extraneous input 'int' expecting {'case', 'default', '}'}
+line 17:12 extraneous input 'break' expecting {<EOF>, '#include', 'enum', 'const', 'int', 'float', 'char', 'void', 'struct', 'typedef', IDENTIFIER}
+...
+
+Testen van: SwitchTests/test4.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    main()
+  File "C:\Users\l...
+
+Testen van: SwitchTests/test5.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    main()
+  File "C:\Users\l...
+
+Testen van: TypedefTests/test1.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 8:1 extraneous input ';' expecting {<EOF>, '#include', 'enum', 'const', 'int', 'float', 'char', 'void', 'struct', 'typedef', IDENTIFIER}
+...
+
+Testen van: TypedefTests/test10.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 7:4 extraneous input 'typedef' expecting {'if', 'while', 'for', 'break', 'continue', 'enum', 'const', 'int', 'float', 'char', 'void', 'switch', 'return', 'struct', '(', '{', '}', ';', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}...
+
+Testen van: TypedefTests/test11.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: TypedefTests/test12.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: TypedefTests/test13.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: TypedefTests/test14.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 2:4 extraneous input 'typedef' expecting {'if', 'while', 'for', 'break', 'continue', 'enum', 'const', 'int', 'float', 'char', 'void', 'switch', 'return', 'struct', '(', '{', '}', ';', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}...
+
+Testen van: TypedefTests/test15.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 2:4 extraneous input 'typedef' expecting {'if', 'while', 'for', 'break', 'continue', 'enum', 'const', 'int', 'float', 'char', 'void', 'switch', 'return', 'struct', '(', '{', '}', ';', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}...
+
+Testen van: TypedefTests/test16.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 2:0 extraneous input 'const' expecting {'enum', 'int', 'float', 'char', 'void', 'struct', IDENTIFIER}
+line 6:1 extraneous input ';' expecting {<EOF>, '#include', 'enum', 'const', 'int', 'float', 'char', 'void', 'struct', 'typedef', IDENTIFIER}
+line 9:0 extraneous input 'const' expecting {'enum'...
+
+Testen van: TypedefTests/test19.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 5:8 extraneous input 'const' expecting {'enum', 'int', 'float', 'char', 'void', 'struct', IDENTIFIER}
+line 5:19 extraneous input 'const' expecting {'*', IDENTIFIER}
+line 9:1 extraneous input ';' expecting {<EOF>, '#include', 'enum', 'const', 'int', 'float', 'char', 'void', 'struct', 'typedef', ...
+
+Testen van: TypedefTests/test2.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: TypedefTests/test20.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: TypedefTests/test21.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 5:8 extraneous input 'const' expecting {'enum', 'int', 'float', 'char', 'void', 'struct', IDENTIFIER}
+line 11:1 extraneous input ';' expecting {<EOF>, '#include', 'enum', 'const', 'int', 'float', 'char', 'void', 'struct', 'typedef', IDENTIFIER}
+...
+
+Testen van: TypedefTests/test22.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: TypedefTests/test23.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 15:1 extraneous input ';' expecting {<EOF>, '#include', 'enum', 'const', 'int', 'float', 'char', 'void', 'struct', 'typedef', IDENTIFIER}
+...
+
+Testen van: TypedefTests/test24.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: TypedefTests/test25.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: TypedefTests/test26.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: TypedefTests/test3.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: TypedefTests/test4.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 12:1 extraneous input ';' expecting {<EOF>, '#include', 'enum', 'const', 'int', 'float', 'char', 'void', 'struct', 'typedef', IDENTIFIER}
+...
+
+Testen van: TypedefTests/test5.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 12:10 missing ';' at 'z'
+line 17:1 extraneous input ';' expecting {<EOF>, '#include', 'enum', 'const', 'int', 'float', 'char', 'void', 'struct', 'typedef', IDENTIFIER}
+...
+
+Testen van: TypedefTests/test6.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: TypedefTests/test7.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 5:0 extraneous input 'typedef' expecting {'if', 'while', 'for', 'break', 'continue', 'enum', 'const', 'int', 'float', 'char', 'void', 'switch', 'return', 'struct', '(', '{', '}', ';', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}...
+
+Testen van: TypedefTests/test8.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: TypedefTests/test9.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: ValueAdderTests/test1.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+...
+
+Testen van: ValueAdderTests/test10.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: ValueAdderTests/test11.c... FAILED
+  --> EXPECTED:
+5
+ACTUAL:
+
+Testen van: ValueAdderTests/test12.c... FAILED
+  --> EXPECTED:
+012345678910
+ACTUAL:
+
+Testen van: ValueAdderTests/test13.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 11:4 extraneous input 'int' expecting {'if', 'while', 'for', 'break', 'continue', 'switch', 'return', '(', '{', '}', ';', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
+line 13:4 extraneous input 'return' expecting {<EOF>, '#inclu...
+
+Testen van: ValueAdderTests/test14.c... FAILED
+  --> EXPECTED:
+Result 1: 110
+Result 2: 200
+
+ACTUAL:
+
+Testen van: ValueAdderTests/test15.c... FAILED
+  --> EXPECTED:
+Result: 25
+
+ACTUAL:
+
+Testen van: ValueAdderTests/test16.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: ValueAdderTests/test17.c... FAILED
+  --> EXPECTED:
+50
+ACTUAL:
+
+Testen van: ValueAdderTests/test18.c... FAILED
+  --> EXPECTED:
+50
+ACTUAL:
+
+Testen van: ValueAdderTests/test19.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: ValueAdderTests/test2.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: ValueAdderTests/test20.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: ValueAdderTests/test21.c... FAILED
+  --> EXPECTED:
+123456
+ACTUAL:
+
+Testen van: ValueAdderTests/test22.c... FAILED
+  --> TIMEOUT (Mogelijke oneindige lus in de code)
+Testen van: ValueAdderTests/test23.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: ValueAdderTests/test24.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: ValueAdderTests/test3.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: ValueAdderTests/test4.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 5:18 extraneous input '*' expecting ')'
+...
+
+Testen van: ValueAdderTests/test5.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: ValueAdderTests/test6.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: ValueAdderTests/test7.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    main()
+  File "C:\Users\l...
+
+Testen van: ValueAdderTests/test8.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    main()
+  File "C:\Users\l...
+
+Testen van: ValueAdderTests/test9.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+...
+
+Testen van: ArrayTests/test1.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+...
+
+Testen van: ArrayTests/test10.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+...
+
+Testen van: ArrayTests/test11.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    main()
+  File "C:\Users\l...
+
+Testen van: ArrayTests/test12.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+...
+
+Testen van: ArrayTests/test13.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: ArrayTests/test14.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+...
+
+Testen van: ArrayTests/test15.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+...
+
+Testen van: ArrayTests/test16.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 7:4 extraneous input 'int' expecting {'if', 'while', 'for', 'break', 'continue', 'switch', 'return', '(', '{', '}', ';', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
+line 11:5 no viable alternative at input 'x['
+...
+
+Testen van: ArrayTests/test17.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: ArrayTests/test18.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: ArrayTests/test19.c... FAILED
+  --> EXPECTED:
+cc
+ACTUAL:
+
+Testen van: ArrayTests/test2.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+...
+
+Testen van: ArrayTests/test20.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    main()
+  File "C:\Users\l...
+
+Testen van: ArrayTests/test21.c... FAILED
+  --> EXPECTED:
+5
+ACTUAL:
+
+Testen van: ArrayTests/test22.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    main()
+  File "C:\Users\l...
+
+Testen van: ArrayTests/test23.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    main()
+  File "C:\Users\l...
+
+Testen van: ArrayTests/test24.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    main()
+  File "C:\Users\l...
+
+Testen van: ArrayTests/test25.c... FAILED
+  --> EXPECTED:
+3.140000 3.140000 True  
+ 
+ACTUAL:
+
+Testen van: ArrayTests/test26.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: ArrayTests/test27.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: ArrayTests/test28.c... FAILED (GCC gaf error, maar jouw compiler accepteerde de code!)
+Testen van: ArrayTests/test29.c... FAILED
+  --> EXPECTED:
+1
+ACTUAL:
+
+Testen van: ArrayTests/test3.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+...
+
+Testen van: ArrayTests/test30.c... FAILED
+  --> EXPECTED:
+11
+ACTUAL:
+
+Testen van: ArrayTests/test31.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 6:1 extraneous input ';' expecting {<EOF>, '#include', 'enum', 'const', 'int', 'float', 'char', 'void', 'struct', 'typedef', IDENTIFIER}
+...
+
+Testen van: ArrayTests/test32.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+...
+
+Testen van: ArrayTests/test33.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: ArrayTests/test34.c... FAILED
+  --> EXPECTED:
+1
+ACTUAL:
+
+Testen van: ArrayTests/test35.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 15:4 extraneous input 'int' expecting {'if', 'while', 'for', 'break', 'continue', 'switch', 'return', '(', '{', '}', ';', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
+line 17:4 extraneous input 'return' expecting {<EOF>, '#inclu...
+
+Testen van: ArrayTests/test36.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+...
+
+Testen van: ArrayTests/test37.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+...
+
+Testen van: ArrayTests/test38.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+...
+
+Testen van: ArrayTests/test39.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+...
+
+Testen van: ArrayTests/test4.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+...
+
+Testen van: ArrayTests/test40.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    main()
+  File "C:\Users\l...
+
+Testen van: ArrayTests/test41.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 16:4 extraneous input 'int' expecting {'if', 'while', 'for', 'break', 'continue', 'switch', 'return', '(', '{', '}', ';', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
+line 18:6 no viable alternative at input 'k='
+...
+
+Testen van: ArrayTests/test42.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 16:4 extraneous input 'int' expecting {'if', 'while', 'for', 'break', 'continue', 'switch', 'return', '(', '{', '}', ';', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
+line 18:6 no viable alternative at input 'k='
+...
+
+Testen van: ArrayTests/test43.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+...
+
+Testen van: ArrayTests/test44.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+...
+
+Testen van: ArrayTests/test45.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+...
+
+Testen van: ArrayTests/test46.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 9:4 extraneous input 'int' expecting {'if', 'while', 'for', 'break', 'continue', 'switch', 'return', '(', '{', '}', ';', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
+line 12:10 no viable alternative at input 'printf('
+...
+
+Testen van: ArrayTests/test47.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 9:4 extraneous input 'int' expecting {'if', 'while', 'for', 'break', 'continue', 'switch', 'return', '(', '{', '}', ';', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
+line 13:10 no viable alternative at input 'printf('
+...
+
+Testen van: ArrayTests/test48.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 9:4 extraneous input 'int' expecting {'if', 'while', 'for', 'break', 'continue', 'switch', 'return', '(', '{', '}', ';', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
+line 13:10 no viable alternative at input 'printf('
+...
+
+Testen van: ArrayTests/test49.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+...
+
+Testen van: ArrayTests/test5.c... FAILED
+  --> EXPECTED:
+1234
+ACTUAL:
+
+Testen van: ArrayTests/test50.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: ArrayTests/test51.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: ArrayTests/test52.c... FAILED
+  --> EXPECTED:
+1 2 3 4 5 
+ACTUAL:
+
+Testen van: ArrayTests/test53.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    main()
+  File "C:\Users\l...
+
+Testen van: ArrayTests/test54.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: ArrayTests/test55.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: ArrayTests/test56.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: ArrayTests/test57.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: ArrayTests/test58.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 9:1 extraneous input ';' expecting {<EOF>, '#include', 'enum', 'const', 'int', 'float', 'char', 'void', 'struct', 'typedef', IDENTIFIER}
+...
+
+Testen van: ArrayTests/test59.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 9:1 extraneous input ';' expecting {<EOF>, '#include', 'enum', 'const', 'int', 'float', 'char', 'void', 'struct', 'typedef', IDENTIFIER}
+...
+
+Testen van: ArrayTests/test6.c... FAILED
+  --> EXPECTED:
+1234
+ACTUAL:
+
+Testen van: ArrayTests/test60.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+...
+
+Testen van: ArrayTests/test61.c... FAILED
+  --> EXPECTED:
+2
+ACTUAL:
+
+Testen van: ArrayTests/test62.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 8:4 extraneous input 'int' expecting {'if', 'while', 'for', 'break', 'continue', 'switch', 'return', '(', '{', '}', ';', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
+line 10:5 no viable alternative at input 'x['
+...
+
+Testen van: ArrayTests/test63.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+...
+
+Testen van: ArrayTests/test7.c... FAILED
+  --> EXPECTED:
+1230
+ACTUAL:
+
+Testen van: ArrayTests/test8.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 5:25 mismatched input '3' expecting '{'
+...
+
+Testen van: ArrayTests/test9.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: CalculationTests/test1.c... FAILED
+  --> EXPECTED:
+110127075010001666756121210111100993163842560736044677810180
+ACTUAL:
+
+Testen van: CalculationTests/test10.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 8:4 extraneous input 'int' expecting {'if', 'while', 'for', 'break', 'continue', 'switch', 'return', '(', '{', '}', ';', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
+line 11:10 no viable alternative at input 'printf('
+...
+
+Testen van: CalculationTests/test11.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 8:4 extraneous input 'char' expecting {'if', 'while', 'for', 'break', 'continue', 'switch', 'return', '(', '{', '}', ';', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
+line 10:4 extraneous input '*' expecting {<EOF>, '#include', ...
+
+Testen van: CalculationTests/test12.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 6:4 extraneous input 'const' expecting {'if', 'while', 'for', 'break', 'continue', 'switch', 'return', '(', '{', '}', ';', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
+line 7:10 no viable alternative at input 'printf('
+...
+
+Testen van: CalculationTests/test13.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 6:4 extraneous input 'int' expecting {'if', 'while', 'for', 'break', 'continue', 'switch', 'return', '(', '{', '}', ';', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
+line 7:10 no viable alternative at input 'printf('
+...
+
+Testen van: CalculationTests/test14.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 6:4 extraneous input 'int' expecting {'if', 'while', 'for', 'break', 'continue', 'switch', 'return', '(', '{', '}', ';', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
+line 7:10 no viable alternative at input 'printf('
+...
+
+Testen van: CalculationTests/test15.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 7:4 extraneous input 'int' expecting {'if', 'while', 'for', 'break', 'continue', 'switch', 'return', '(', '{', '}', ';', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
+line 8:10 no viable alternative at input 'printf('
+...
+
+Testen van: CalculationTests/test16.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: CalculationTests/test17.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 6:4 extraneous input 'const' expecting {'if', 'while', 'for', 'break', 'continue', 'switch', 'return', '(', '{', '}', ';', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
+line 7:14 no viable alternative at input 'printf('
+...
+
+Testen van: CalculationTests/test18.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 13:4 extraneous input 'int' expecting {'if', 'while', 'for', 'break', 'continue', 'switch', 'return', '(', '{', '}', ';', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
+line 15:14 no viable alternative at input 'printf('
+...
+
+Testen van: CalculationTests/test19.c... FAILED
+  --> EXPECTED:
+3.1492003.149200
+ACTUAL:
+
+Testen van: CalculationTests/test2.c... FAILED
+  --> EXPECTED:
+110127075216818703548416-3-1309628662998315
+ACTUAL:
+
+Testen van: CalculationTests/test20.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 10:4 extraneous input 'char' expecting {'if', 'while', 'for', 'break', 'continue', 'switch', 'return', '(', '{', '}', ';', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
+line 12:10 no viable alternative at input 'printf('
+...
+
+Testen van: CalculationTests/test21.c... FAILED
+  --> EXPECTED:
+1
+
+ACTUAL:
+
+Testen van: CalculationTests/test22.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: CalculationTests/test23.c... PASSED
+Testen van: CalculationTests/test24.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 10:4 extraneous input 'int' expecting {'if', 'while', 'for', 'break', 'continue', 'switch', 'return', '(', '{', '}', ';', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
+line 11:10 no viable alternative at input 'printf('
+...
+
+Testen van: CalculationTests/test25.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 17:0 extraneous input 'int' expecting {'if', 'while', 'for', 'break', 'continue', 'switch', 'return', '(', '{', '}', ';', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
+line 19:10 no viable alternative at input 'printf('
+...
+
+Testen van: CalculationTests/test26.c... FAILED
+  --> EXPECTED:
+1 0 1 0 
+ACTUAL:
+
+Testen van: CalculationTests/test27.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: CalculationTests/test28.c... FAILED (GCC gaf error, maar jouw compiler accepteerde de code!)
+Testen van: CalculationTests/test29.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: CalculationTests/test3.c... FAILED
+  --> EXPECTED:
+1101270752-69853150100487897-5110510445-165-3001155720-119940-314
+ACTUAL:
+
+Testen van: CalculationTests/test30.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: CalculationTests/test31.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 112:1 extraneous input ';' expecting {<EOF>, '#include', 'enum', 'const', 'int', 'float', 'char', 'void', 'struct', 'typedef', IDENTIFIER}
+...
+
+Testen van: CalculationTests/test32.c... FAILED
+  --> EXPECTED:
+5912240164077-43322111032247-4796421111637912006-2112454934
+ACTUAL:
+
+Testen van: CalculationTests/test33.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 20:1 extraneous input ';' expecting {<EOF>, '#include', 'enum', 'const', 'int', 'float', 'char', 'void', 'struct', 'typedef', IDENTIFIER}
+...
+
+Testen van: CalculationTests/test34.c... FAILED
+  --> EXPECTED:
+151010
+ACTUAL:
+
+Testen van: CalculationTests/test35.c... FAILED
+  --> EXPECTED:
+0
+ACTUAL:
+
+Testen van: CalculationTests/test36.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 8:4 extraneous input 'char' expecting {'if', 'while', 'for', 'break', 'continue', 'switch', 'return', '(', '{', '}', ';', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
+line 9:6 no viable alternative at input 'b='
+...
+
+Testen van: CalculationTests/test37.c... FAILED
+  --> EXPECTED:
+0
+ACTUAL:
+
+Testen van: CalculationTests/test38.c... FAILED (GCC gaf error, maar jouw compiler accepteerde de code!)
+Testen van: CalculationTests/test39.c... FAILED (GCC gaf error, maar jouw compiler accepteerde de code!)
+Testen van: CalculationTests/test4.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 7:4 extraneous input 'int' expecting {'if', 'while', 'for', 'break', 'continue', 'switch', 'return', '(', '{', '}', ';', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
+line 12:10 no viable alternative at input 'printf('
+...
+
+Testen van: CalculationTests/test40.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: CalculationTests/test41.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: CalculationTests/test42.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: CalculationTests/test43.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: CalculationTests/test44.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: CalculationTests/test45.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: CalculationTests/test46.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: CalculationTests/test47.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: CalculationTests/test48.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: CalculationTests/test49.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: CalculationTests/test5.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 7:4 extraneous input 'int' expecting {'if', 'while', 'for', 'break', 'continue', 'switch', 'return', '(', '{', '}', ';', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
+line 8:7 no viable alternative at input 'ptr++'
+...
+
+Testen van: CalculationTests/test50.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: CalculationTests/test51.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: CalculationTests/test52.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+...
+
+Testen van: CalculationTests/test53.c... FAILED
+  --> EXPECTED:
+
+ACTUAL:
+
+Testen van: CalculationTests/test54.c... FAILED
+  --> EXPECTED:
+010
+ACTUAL:
+
+Testen van: CalculationTests/test55.c... FAILED
+  --> EXPECTED:
+5
+ACTUAL:
+
+Testen van: CalculationTests/test56.c... FAILED
+  --> EXPECTED:
+5
+ACTUAL:
+
+Testen van: CalculationTests/test57.c... FAILED
+  --> EXPECTED:
+5
+ACTUAL:
+
+Testen van: CalculationTests/test58.c... FAILED
+  --> EXPECTED:
+5
+ACTUAL:
+
+Testen van: CalculationTests/test59.c... FAILED
+  --> EXPECTED:
+5
+ACTUAL:
+
+Testen van: CalculationTests/test6.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 12:4 extraneous input 'int' expecting {'if', 'while', 'for', 'break', 'continue', 'switch', 'return', '(', '{', '}', ';', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
+line 13:10 no viable alternative at input 'printf('
+...
+
+Testen van: CalculationTests/test60.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+...
+
+Testen van: CalculationTests/test61.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: CalculationTests/test62.c... FAILED
+  --> EXPECTED:
+10; 10
+11; 11
+
+ACTUAL:
+
+Testen van: CalculationTests/test63.c... FAILED
+  --> EXPECTED:
+42; 42
+43; 43
+44; 44
+45; 45
+
+ACTUAL:
+
+Testen van: CalculationTests/test64.c... FAILED
+  --> EXPECTED:
+10
+ACTUAL:
+
+Testen van: CalculationTests/test65.c... FAILED
+  --> EXPECTED:
+10; 10; 10
+ACTUAL:
+
+Testen van: CalculationTests/test66.c... FAILED
+  --> EXPECTED:
+1
+
+ACTUAL:
+
+Testen van: CalculationTests/test67.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 7:4 extraneous input 'int' expecting {'if', 'while', 'for', 'break', 'continue', 'switch', 'return', '(', '{', '}', ';', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
+line 8:6 no viable alternative at input 'b='
+...
+
+Testen van: CalculationTests/test68.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 8:4 extraneous input 'int' expecting {'if', 'while', 'for', 'break', 'continue', 'switch', 'return', '(', '{', '}', ';', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
+line 9:10 no viable alternative at input 'printf('
+...
+
+Testen van: CalculationTests/test69.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 8:4 extraneous input 'int' expecting {'if', 'while', 'for', 'break', 'continue', 'switch', 'return', '(', '{', '}', ';', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
+line 9:6 no viable alternative at input 'b='
+...
+
+Testen van: CalculationTests/test7.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 13:4 extraneous input 'int' expecting {'if', 'while', 'for', 'break', 'continue', 'switch', 'return', '(', '{', '}', ';', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
+line 14:10 no viable alternative at input 'printf('
+...
+
+Testen van: CalculationTests/test70.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 6:4 extraneous input 'int' expecting {'if', 'while', 'for', 'break', 'continue', 'switch', 'return', '(', '{', '}', ';', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
+line 7:10 no viable alternative at input 'printf('
+...
+
+Testen van: CalculationTests/test71.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 5:8 extraneous input 'const' expecting {'enum', 'int', 'float', 'char', 'void', 'struct', IDENTIFIER}
+line 6:8 extraneous input 'const' expecting {'enum', 'int', 'float', 'char', 'void', 'struct', IDENTIFIER}
+line 13:9 missing ';' at 'y'
+line 15:4 extraneous input 'int' expecting {'if', 'while'...
+
+Testen van: CalculationTests/test8.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 13:0 extraneous input 'int' expecting {'if', 'while', 'for', 'break', 'continue', 'switch', 'return', '(', '{', '}', ';', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
+line 14:6 no viable alternative at input 'printf('
+...
+
+Testen van: CalculationTests/test9.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 10:4 extraneous input 'char' expecting {'if', 'while', 'for', 'break', 'continue', 'switch', 'return', '(', '{', '}', ';', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
+line 11:10 no viable alternative at input 'printf('
+...
+
+Testen van: CombinedTests/test1.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: CombinedTests/test10.c... FAILED
+  --> EXPECTED:
+180.009995
+ACTUAL:
+
+Testen van: CombinedTests/test11.c... FAILED
+  --> EXPECTED:
+0.000000
+ACTUAL:
+
+Testen van: CombinedTests/test12.c... FAILED
+  --> EXPECTED:
+123456789101112
+ACTUAL:
+
+Testen van: CombinedTests/test13.c... FAILED
+  --> EXPECTED:
+1
+2
+3
+4
+5
+6
+7
+9
+10
+1
+2
+4
+5
+6
+7
+8
+9
+10
+
+ACTUAL:
+
+Testen van: CombinedTests/test14.c... FAILED
+  --> EXPECTED:
+10
+9
+7
+6
+5
+4
+3
+2
+1
+10
+9
+8
+7
+6
+5
+4
+2
+1
+
+ACTUAL:
+
+Testen van: CombinedTests/test15.c... FAILED
+  --> EXPECTED:
+10
+9
+7
+6
+5
+4
+3
+2
+1
+10
+9
+8
+7
+6
+5
+4
+2
+1
+
+ACTUAL:
+
+Testen van: CombinedTests/test16.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: CombinedTests/test2.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: CombinedTests/test3.c... FAILED
+  --> EXPECTED:
+ff
+ACTUAL:
+
+Testen van: CombinedTests/test4.c... FAILED
+  --> EXPECTED:
+*
+**
+***
+****
+*****
+
+ACTUAL:
+
+Testen van: CombinedTests/test5.c... FAILED (GCC gaf error, maar jouw compiler accepteerde de code!)
+Testen van: CombinedTests/test6.c... FAILED (GCC gaf error, maar jouw compiler accepteerde de code!)
+Testen van: CombinedTests/test7.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: CombinedTests/test8.c... FAILED
+  --> EXPECTED:
+854.153992
+ACTUAL:
+
+Testen van: CombinedTests/test9.c... FAILED
+  --> EXPECTED:
+180.000000
+ACTUAL:
+
+Testen van: DefineTests/cycle1.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: DefineTests/cycle2.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: DefineTests/cycle3.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: DefineTests/define1.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: DefineTests/define2.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: DefineTests/define23.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: DefineTests/define3.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: DefineTests/define4.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: DefineTests/define5.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: DefineTests/define6.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: DefineTests/define7.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: DefineTests/test1.c... FAILED
+  --> EXPECTED:
+2131
+ACTUAL:
+
+Testen van: DefineTests/test10.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: DefineTests/test11.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: DefineTests/test12.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: DefineTests/test13.c... FAILED (GCC gaf error, maar jouw compiler accepteerde de code!)
+Testen van: DefineTests/test14.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: DefineTests/test15.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: DefineTests/test16.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: DefineTests/test17.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    main()
+  File "C:\Users\l...
+
+Testen van: DefineTests/test18.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    main()
+  File "C:\Users\l...
+
+Testen van: DefineTests/test19.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    main()
+  File "C:\Users\l...
+
+Testen van: DefineTests/test2.c... FAILED
+  --> EXPECTED:
+20480.000000
+ACTUAL:
+
+Testen van: DefineTests/test20.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: DefineTests/test21.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: DefineTests/test22.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+...
+
+Testen van: DefineTests/test23.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: DefineTests/test24.c... FAILED
+  --> EXPECTED:
+2048
+ACTUAL:
+
+Testen van: DefineTests/test3.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: DefineTests/test4.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: DefineTests/test5.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 10:4 extraneous input 'int' expecting {'if', 'while', 'for', 'break', 'continue', 'switch', 'return', '(', '{', '}', ';', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
+line 15:9 no viable alternative at input 'area='
+...
+
+Testen van: DefineTests/test6.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: DefineTests/test7.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: DefineTests/test8.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: DefineTests/test9.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: DefineTests/yay1.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: DefineTests/yay2.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: DefineTests/yay3.c... PASSED (Expected failure: compiler ving de error op)
+Testen van: DynamicArrayTests/test1.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+...
+
+Testen van: DynamicArrayTests/test2.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 6:21 extraneous input '*' expecting ')'
+...
+
+Testen van: DynamicArrayTests/test3.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 5:19 extraneous input '*' expecting ')'
+...
+
+Testen van: DynamicArrayTests/test4.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 6:17 extraneous input '*' expecting ')'
+...
+
+Testen van: DynamicArrayTests/test5.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 6:19 extraneous input '*' expecting ')'
+...
+
+Testen van: DynamicArrayTests/test6.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 6:17 extraneous input '*' expecting ')'
+...
+
+Testen van: DynamicArrayTests/test7.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 6:17 extraneous input '*' expecting ')'
+line 13:12 extraneous input '*' expecting ')'
+line 18:12 extraneous input '*' expecting ')'
+...
+
+Testen van: DynamicArrayTests/test8.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+...
+
+Testen van: DynamicStructTests/test1.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 12:32 no viable alternative at input 'malloc(sizeof(struct'
+line 12:41 mismatched input ')' expecting {'(', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
+...
+
+Testen van: DynamicStructTests/test2.c... FAILED (Compiler Error)
+  --> Jouw compiler gaf een foutmelding:
+line 5:7 no viable alternative at input 'unionv{'
+...
+
+Testen van: DynamicStructTests/test3.c... 
