@@ -37,7 +37,7 @@
 |   | Array variables             | v |
 |   | multi-dimensional arrays      | v |
 |   | array initialisation              | v |
-|   | dynamic arrays/ calloc  | x |
+|   | dynamic arrays/ calloc  | ? |
 |   | strings as zero-terminated character arrays              | v |
 |   | including stdio.h                 | v |
 |   | Format string               | v |
