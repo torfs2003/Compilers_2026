@@ -8,6 +8,7 @@ class SemanticVisitor(BaseVisitor):
         self.errors = []
         self.warnings = []
         self.stdio_included = False
+        self.stdlib_included = False
         self.type_richness = {'void': 0, 'char': 1, 'int': 2, 'float': 3}
         self.current_function_return_type = None
 
@@ -199,6 +200,8 @@ class SemanticVisitor(BaseVisitor):
     def visit_IncludeNode(self, node):
         if hasattr(node, 'header') and node.header == "stdio.h":
             self.stdio_included = True
+        if hasattr(node, 'header') and node.header == "stdlib.h":
+            self.stdlib_included = True
     
     def visit_FunctionNode(self, node):
         self.symbol_table.exit_scope()
@@ -258,12 +261,15 @@ class SemanticVisitor(BaseVisitor):
             
         if node.init_expr:
             init_type = getattr(node.init_expr, 'eval_type', 'void')
+            print("DECL", node.name, node.eval_type, "init:", init_type)
             
             is_null_ptr = isinstance(node.init_expr, IntNode) and node.init_expr.value == 0
             
             if ('*' in node.eval_type or '*' in init_type) and not is_null_ptr:
                 if node.eval_type != init_type and not isinstance(node.init_expr, CastNode):
-                    self.get_Error(node, f"Incompatibele types bij initialisatie: '{init_type}' aan '{node.eval_type}'.")
+                    voidptr_ok = (node.eval_type == 'char*' and '*' in init_type) or (init_type == 'char*' and '*' in node.eval_type)
+                    if not voidptr_ok:
+                        self.get_Error(node, f"Incompatibele types bij initialisatie: '{init_type}' aan '{node.eval_type}'.")
             
             elif self.get_richness(init_type) > self.get_richness(node.eval_type) and not (node.eval_type == 'char*' and init_type == 'char*'):
                 self.get_Warning(node, f"Informatieverlies bij initialisatie van {node.name}: {init_type} naar {node.eval_type}.")
@@ -329,7 +335,9 @@ class SemanticVisitor(BaseVisitor):
         if l_type and r_type:
             if '*' in l_type or '*' in r_type:
                 if l_type != r_type and not isinstance(node.right, CastNode):
-                    self.get_Error(node, f"Incompatibele types bij toewijzing: '{r_type}' aan '{l_type}'.")
+                    voidptr_ok = (l_type == 'char*' and '*' in r_type) or (r_type == 'char*' and '*' in l_type)
+                    if not voidptr_ok:
+                        self.get_Error(node, f"Incompatibele types bij toewijzing: '{r_type}' aan '{l_type}'.")
             
             elif self.get_richness(r_type) > self.get_richness(l_type):
                 self.get_Warning(node, f"Informatieverlies bij toewijzing van {r_type} aan {l_type}.")
@@ -360,6 +368,7 @@ class SemanticVisitor(BaseVisitor):
             else:
                 self.get_Error(node, f"Type '{l_type}' kan niet worden geïndexeerd.")
                 node.eval_type = 'void'
+            return
         elif '*' in l_type and r_type == 'int':
             node.eval_type = l_type
         elif l_type == 'int' and '*' in r_type:
@@ -403,6 +412,40 @@ class SemanticVisitor(BaseVisitor):
                         if '*' not in arg_type:
                             self.get_Error(arg, f"Scanf verwacht een pointer (adres), kreeg '{arg_type}'.")
             return
+        if node.name in ['malloc', 'calloc', 'free']:
+            if not self.stdlib_included:
+                self.get_Error(node, f"Gebruik van '{node.name}' vereist #include <stdlib.h>.")
+            if node.name == 'malloc':
+                if len(node.args) != 1:
+                    self.get_Error(node, "malloc verwacht 1 argument.")
+                else:
+                    t0 = getattr(node.args[0], 'eval_type', 'void')
+                    if t0 != 'int':
+                        self.get_Warning(node, f"malloc size is normaal 'int', kreeg '{t0}'")
+                node.eval_type = 'char*'
+                return
+            if node.name == 'calloc':
+                if len(node.args) != 2:
+                    self.get_Error(node, "calloc verwacht 2 arguments. (num, size)")
+                else:
+                    t0 = getattr(node.args[0], 'eval_type', 'void')
+                    t1 = getattr(node.args[1], 'eval_type', 'void')
+
+                    if t0 != 'int':
+                        self.get_Warning(node, f"calloc num is normaal 'int', kreeg '{t0}'")
+                    if t1 != 'int':
+                        self.get_Warning(node, f"calloc size is normaal 'int', kreeg '{t1}'")
+                node.eval_type = 'char*'
+                return
+            if node.name == 'free':
+                if len(node.args) != 1:
+                    self.get_Error(node, "free verwacht 1 argument.")
+                else:
+                    ptype = getattr(node.args[0], 'eval_type', 'void')
+                    if '*' not in ptype and not (isinstance(node.args[0], IntNode) and node.args[0].value == 0):
+                        self.get_Error(node, f"free verwacht een pointer, kreeg '{ptype}'")
+                node.eval_type = 'void'
+                return
 
         func_sym = self.symbol_table.get(node.name)
         if not func_sym or func_sym.get('type') != 'function':

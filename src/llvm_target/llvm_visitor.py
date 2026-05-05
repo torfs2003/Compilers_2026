@@ -13,6 +13,10 @@ class LLVMVisitor:
         self.loop_stack = []
         self.enum_constants = {}
         self.struct_types = {}
+        self.stdlib_declared = False
+        self.malloc = None
+        self.calloc = None
+        self.free = None
 
     def _get_llvm_type(self, type_str):
         """Vertaalt een C-type string naar het bijbehorende LLVM IR type."""
@@ -59,6 +63,24 @@ class LLVMVisitor:
         scanf_ty = ir.FunctionType(ir.IntType(32), [voidptr_ty], var_arg=True)
         self.scanf = ir.Function(self.module, scanf_ty, name="scanf")
         self.stdio_declared = True
+
+    def _declare_stdlib(self):
+        if self.stdlib_declared:
+            return
+
+        i8ptr = ir.IntType(8).as_pointer()
+        i64 = ir.IntType(64)
+
+        malloc_ty = ir.FunctionType(i8ptr, [i64], var_arg=False)
+        self.malloc = ir.Function(self.module, malloc_ty, name="malloc")
+
+        calloc_ty = ir.FunctionType(i8ptr, [i64, i64], var_arg=False)
+        self.calloc = ir.Function(self.module, calloc_ty, name="calloc")
+
+        free_ty = ir.FunctionType(ir.VoidType(), [i8ptr], var_arg=False)
+        self.free = ir.Function(self.module, free_ty, name="free")
+
+        self.stdlib_declared = True
     
     def _ensure_result(self, node):
         """Controleert of een node al een resultaat heeft, zo niet: verwerk hem nu."""
@@ -103,6 +125,9 @@ class LLVMVisitor:
 
                 if isinstance(node, IncludeNode) and node.header == 'stdio.h':
                     self._declare_stdio()
+
+                if isinstance(node, IncludeNode) and node.header == 'stdlib.h':
+                    self._declare_stdlib()
                     
                 # 1. Forward Declarations
                 elif isinstance(node, FunctionDeclNode):
@@ -226,6 +251,66 @@ class LLVMVisitor:
         # 3. Functie aanroepen
         elif isinstance(node, FuncCallNode):
             args = []
+
+            if node.name == "malloc":
+                self._declare_stdlib()
+
+                if len(node.args) != 1:
+                    raise Exception("malloc expects exactly 1 argument")
+
+                size_val = self._ensure_result(node.args[0])
+
+                if size_val.type != ir.IntType(64):
+                    if isinstance(size_val.type, ir.IntType):
+                        size_val = self.builder.sext(size_val, ir.IntType(64))
+                    else:
+                        raise Exception(f"malloc size must be integer, got {size_val.type}")
+
+                self.results[id(node)] = self.builder.call(self.malloc, [size_val])
+                return
+
+            if node.name == "calloc":
+                self._declare_stdlib()
+
+                if len(node.args) != 2:
+                    raise Exception("calloc expects exactly 2 arguments: (num, size)")
+
+                num_val = self._ensure_result(node.args[0])
+                size_val = self._ensure_result(node.args[1])
+
+                if num_val.type != ir.IntType(64):
+                    if isinstance(num_val.type, ir.IntType):
+                        num_val = self.builder.sext(num_val, ir.IntType(64))
+                    else:
+                        raise Exception(f"calloc num must be integer, got {num_val.type}")
+                if size_val.type != ir.IntType(64):
+                    if isinstance(size_val.type, ir.IntType):
+                        size_val = self.builder.sext(size_val, ir.IntType(64))
+                    else:
+                        raise Exception(f"calloc size must be integer, got {size_val.type}")
+
+                self.results[id(node)] = self.builder.call(self.calloc, [num_val, size_val])
+                return
+
+            if node.name == "free":
+                self._declare_stdlib()
+
+                if len(node.args) != 1:
+                    raise Exception("free expects exactly 1 argument")
+
+                ptr_val = self._ensure_result(node.args[0])
+
+                i8ptr = ir.IntType(8).as_pointer()
+                if ptr_val.type != i8ptr:
+                    if isinstance(ptr_val.type, ir.PointerType):
+                        ptr_val = self.builder.sext(ptr_val, i8ptr)
+                    else:
+                        raise Exception(f"malloc size must be integer, got {ptr_val.type}")
+
+                self.builder.call(self.free, [ptr_val])
+                self.results[id(node)] = None
+                return
+
             func = self.module.globals.get(node.name)
             
             if node.name in ['printf', 'scanf']:
