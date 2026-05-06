@@ -1,9 +1,13 @@
 from llvmlite import ir
 from src.parser.AST import *
+import llvmlite.binding as llvm
 
 class LLVMVisitor:
     def __init__(self):
         self.module = ir.Module(name="cmm_module")
+        llvm.initialize_native_target()
+        llvm.initialize_native_asmparser()
+        self.module.triple = llvm.get_default_triple()
         self.builder = None
         self.func = None
         self.global_vars = {}
@@ -434,18 +438,31 @@ class LLVMVisitor:
                 self.results[id(node)] = self.builder.xor(child_val, minus_one)
 
             elif node.op in ['++', '--', 'POST++', 'POST--']:
-                addr = self._get_symbol(node.child.name) if isinstance(node.child, IdentifierNode) else self.results.get(f"addr_{id(node.child)}")
-                
+                addr = (self._get_symbol(node.child.name) if isinstance(node.child, IdentifierNode) else self.results.get(f"addr_{id(node.child)}")
+                )
+
+                if addr is None:
+                    raise Exception("++/-- toegepast op een niet-adresseerbare expressie")
+
                 current_val = self.builder.load(addr)
-                increment = ir.Constant(current_val.type, 1)
-                
-                if '++' in node.op:
-                    new_val = self.builder.add(current_val, increment)
+
+                if isinstance(current_val.type, ir.PointerType):
+                    one = ir.Constant(ir.IntType(32), 1)
+                    delta = one if '++' in node.op else ir.Constant(ir.IntType(32), -1)
+                    new_val = self.builder.gep(current_val, [delta], name="ptr_incdec")
                 else:
-                    new_val = self.builder.sub(current_val, increment)
-                
+                    increment = ir.Constant(current_val.type, 1)
+                    if '++' in node.op:
+                        if isinstance(current_val.type, ir.FloatType):
+                            new_val = self.builder.fadd(current_val, increment)
+                        else:
+                            new_val = self.builder.add(current_val, increment)
+                    else:
+                        if isinstance(current_val.type, ir.FloatType):
+                            new_val = self.builder.fsub(current_val, increment)
+                        else:
+                            new_val = self.builder.sub(current_val, increment)
                 self.builder.store(new_val, addr)
-                
                 if node.op.startswith('POST'):
                     self.results[id(node)] = current_val
                 else:
