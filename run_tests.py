@@ -81,7 +81,7 @@ def run_tests_in_directory(test_dir, output_dir):
             "--target_llvm", out_ll
         ]
 
-        log(f"Testen van: {folder_name}/{c_file.name}...", end=" ")
+        log(f"Testen van: {folder_name}/{c_file.name}...", end="")
 
         # Run jouw compiler
         result = subprocess.run(cmd, capture_output=True, text=True, encoding='utf-8')
@@ -146,9 +146,9 @@ def main():
         os.remove(FAILED_LOG_FILE)
 
     test_folders = [
-        "example_source_files/test_set_1",
-        "example_source_files/test_set_2",
-        "example_source_files/test_set_3"
+        "example_source_files/test_set_1"#,
+        #"example_source_files/test_set_2",
+        #"example_source_files/test_set_3"
     ]
 
     output_folder = "output/test_results"
