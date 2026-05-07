@@ -10,10 +10,8 @@ define i32 @"main"()
 {
 entry:
   %"a" = alloca i32
-  ;  Source: inta=1;
   store i32 1, i32* %"a"
   %"b" = alloca i32
-  ;  Source: intb=1;
   store i32 1, i32* %"b"
   ;  Source: a
   %"a.1" = load i32, i32* %"a"
@@ -26,15 +24,15 @@ entry:
   ;  Source: if(a||b){printf("%d",1);}
   %"a.2" = load i32, i32* %"a"
   %"b.2" = load i32, i32* %"b"
-  %".13" = icmp ne i32 %"a.2", 0
-  %".14" = icmp ne i32 %"b.2", 0
-  %".15" = or i1 %".13", %".14"
-  %".16" = zext i1 %".15" to i32
-  %"ifcond" = icmp ne i32 %".16", 0
+  %".11" = icmp ne i32 %"a.2", 0
+  %".12" = icmp ne i32 %"b.2", 0
+  %".13" = or i1 %".11", %".12"
+  %".14" = zext i1 %".13" to i32
+  %"ifcond" = icmp ne i32 %".14", 0
   br i1 %"ifcond", label %"if.then", label %"if.end"
 if.then:
-  %".18" = bitcast [3 x i8]* @"str" to i8*
-  %".19" = call i32 (i8*, ...) @"printf"(i8* %".18", i32 1)
+  %".16" = bitcast [3 x i8]* @"str" to i8*
+  %".17" = call i32 (i8*, ...) @"printf"(i8* %".16", i32 1)
   br label %"if.end"
 if.end:
   ;  Source: a
@@ -48,15 +46,15 @@ if.end:
   ;  Source: if(a||b){printf("%d",1);}
   %"a.4" = load i32, i32* %"a"
   %"b.4" = load i32, i32* %"b"
-  %".28" = icmp ne i32 %"a.4", 0
-  %".29" = icmp ne i32 %"b.4", 0
-  %".30" = or i1 %".28", %".29"
-  %".31" = zext i1 %".30" to i32
-  %"ifcond.1" = icmp ne i32 %".31", 0
+  %".26" = icmp ne i32 %"a.4", 0
+  %".27" = icmp ne i32 %"b.4", 0
+  %".28" = or i1 %".26", %".27"
+  %".29" = zext i1 %".28" to i32
+  %"ifcond.1" = icmp ne i32 %".29", 0
   br i1 %"ifcond.1", label %"if.then.1", label %"if.end.1"
 if.then.1:
-  %".33" = bitcast [3 x i8]* @"str.1" to i8*
-  %".34" = call i32 (i8*, ...) @"printf"(i8* %".33", i32 1)
+  %".31" = bitcast [3 x i8]* @"str.1" to i8*
+  %".32" = call i32 (i8*, ...) @"printf"(i8* %".31", i32 1)
   br label %"if.end.1"
 if.end.1:
   ;  Source: a
@@ -70,15 +68,15 @@ if.end.1:
   ;  Source: if(a||b){printf("%d",1);}
   %"a.6" = load i32, i32* %"a"
   %"b.6" = load i32, i32* %"b"
-  %".43" = icmp ne i32 %"a.6", 0
-  %".44" = icmp ne i32 %"b.6", 0
-  %".45" = or i1 %".43", %".44"
-  %".46" = zext i1 %".45" to i32
-  %"ifcond.2" = icmp ne i32 %".46", 0
+  %".41" = icmp ne i32 %"a.6", 0
+  %".42" = icmp ne i32 %"b.6", 0
+  %".43" = or i1 %".41", %".42"
+  %".44" = zext i1 %".43" to i32
+  %"ifcond.2" = icmp ne i32 %".44", 0
   br i1 %"ifcond.2", label %"if.then.2", label %"if.end.2"
 if.then.2:
-  %".48" = bitcast [3 x i8]* @"str.2" to i8*
-  %".49" = call i32 (i8*, ...) @"printf"(i8* %".48", i32 1)
+  %".46" = bitcast [3 x i8]* @"str.2" to i8*
+  %".47" = call i32 (i8*, ...) @"printf"(i8* %".46", i32 1)
   br label %"if.end.2"
 if.end.2:
   ;  Source: a
@@ -92,15 +90,15 @@ if.end.2:
   ;  Source: if(a||b){printf("%d",1);}
   %"a.8" = load i32, i32* %"a"
   %"b.8" = load i32, i32* %"b"
-  %".58" = icmp ne i32 %"a.8", 0
-  %".59" = icmp ne i32 %"b.8", 0
-  %".60" = or i1 %".58", %".59"
-  %".61" = zext i1 %".60" to i32
-  %"ifcond.3" = icmp ne i32 %".61", 0
+  %".56" = icmp ne i32 %"a.8", 0
+  %".57" = icmp ne i32 %"b.8", 0
+  %".58" = or i1 %".56", %".57"
+  %".59" = zext i1 %".58" to i32
+  %"ifcond.3" = icmp ne i32 %".59", 0
   br i1 %"ifcond.3", label %"if.then.3", label %"if.end.3"
 if.then.3:
-  %".63" = bitcast [3 x i8]* @"str.3" to i8*
-  %".64" = call i32 (i8*, ...) @"printf"(i8* %".63", i32 1)
+  %".61" = bitcast [3 x i8]* @"str.3" to i8*
+  %".62" = call i32 (i8*, ...) @"printf"(i8* %".61", i32 1)
   br label %"if.end.3"
 if.end.3:
   ;  Source: return0;

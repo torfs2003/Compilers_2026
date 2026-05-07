@@ -10,10 +10,9 @@ declare i32 @"scanf"(i8* %".1", ...)
 define i32 @"main"()
 {
 entry:
-  ;  Source: True
-  %"True" = load i32, i32* @"True"
-  ;  Source: intTrue=True;
-  store i32 %"True", i32* @"True"
+  %"True" = alloca i32
+  %"True.1" = load i32, i32* %"True"
+  store i32 %"True.1", i32* %"True"
   ;  Source: return0;
   ret i32 0
 }

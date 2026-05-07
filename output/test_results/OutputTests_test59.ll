@@ -10,36 +10,30 @@ define i32 @"main"()
 {
 entry:
   %"a" = alloca i32
-  ;  Source: inta=50;
   store i32 50, i32* %"a"
   %"b" = alloca i32
-  ;  Source: a
   %"a.1" = load i32, i32* %"a"
-  ;  Source: a+10
-  %".6" = add i32 %"a.1", 10
-  ;  Source: intb=a+10;
-  store i32 %".6", i32* %"b"
-  ;  Source: a
+  %".3" = add i32 %"a.1", 10
+  store i32 %".3", i32* %"b"
+  %"b.1" = alloca i32
   %"a.2" = load i32, i32* %"a"
-  ;  Source: a+20
-  %".11" = add i32 %"a.2", 20
-  ;  Source: intb=a+20;
-  store i32 %".11", i32* %"b"
-  %".14" = bitcast [4 x i8]* @"str" to i8*
+  %".5" = add i32 %"a.2", 20
+  store i32 %".5", i32* %"b.1"
+  %".7" = bitcast [4 x i8]* @"str" to i8*
   ;  Source: b
-  %"b.1" = load i32, i32* %"b"
+  %"b.2" = load i32, i32* %"b.1"
   ;  Source: printf("%d\n",b);
-  %".17" = call i32 (i8*, ...) @"printf"(i8* %".14", i32 %"b.1")
-  %".18" = bitcast [4 x i8]* @"str.1" to i8*
+  %".10" = call i32 (i8*, ...) @"printf"(i8* %".7", i32 %"b.2")
+  %".11" = bitcast [4 x i8]* @"str.1" to i8*
   ;  Source: b
-  %"b.2" = load i32, i32* %"b"
+  %"b.3" = load i32, i32* %"b.1"
   ;  Source: printf("%d\n",b);
-  %".21" = call i32 (i8*, ...) @"printf"(i8* %".18", i32 %"b.2")
-  %".22" = bitcast [4 x i8]* @"str.2" to i8*
+  %".14" = call i32 (i8*, ...) @"printf"(i8* %".11", i32 %"b.3")
+  %".15" = bitcast [4 x i8]* @"str.2" to i8*
   ;  Source: a
   %"a.3" = load i32, i32* %"a"
   ;  Source: printf("%d\n",a);
-  %".25" = call i32 (i8*, ...) @"printf"(i8* %".22", i32 %"a.3")
+  %".18" = call i32 (i8*, ...) @"printf"(i8* %".15", i32 %"a.3")
   ;  Source: return0;
   ret i32 0
 }

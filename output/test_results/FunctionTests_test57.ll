@@ -20,20 +20,14 @@ define i32 @"main"()
 {
 entry:
   %"x" = alloca i32
-  ;  Source: intx=5;
   store i32 5, i32* %"x"
   %"y" = alloca i32
-  ;  Source: inty=10;
   store i32 10, i32* %"y"
   %"result" = alloca i32
-  ;  Source: x
   %"x.1" = load i32, i32* %"x"
-  ;  Source: y
   %"y.1" = load i32, i32* %"y"
-  ;  Source: add(x,y)
-  %".9" = call i32 @"add"(i32 %"x.1", i32 %"y.1")
-  ;  Source: intresult=add(x,y);
-  store i32 %".9", i32* %"result"
+  %".4" = call i32 @"add"(i32 %"x.1", i32 %"y.1")
+  store i32 %".4", i32* %"result"
   ;  Source: return0;
   ret i32 0
 }

@@ -11,7 +11,6 @@ define i32 @"main"()
 {
 entry:
   %"x" = alloca i32
-  ;  Source: intx=3;
   store i32 3, i32* %"x"
   ;  Source: a
   ;  Source: a[0]
@@ -25,7 +24,7 @@ entry:
   %"array_element.1" = load i32, i32* %"gep_array.1"
   ;  Source: a[1]=2;
   store i32 2, i32* %"gep_array.1"
-  %".12" = bitcast [12 x i8]* @"str" to i8*
+  %".11" = bitcast [12 x i8]* @"str" to i8*
   ;  Source: a
   ;  Source: a[0]
   %"gep_array.2" = getelementptr [2 x i32], [2 x i32]* @"a", i32 0, i32 0
@@ -37,7 +36,7 @@ entry:
   ;  Source: x
   %"x.1" = load i32, i32* %"x"
   ;  Source: printf("%d; %d; %d;",a[0],a[1],x);
-  %".19" = call i32 (i8*, ...) @"printf"(i8* %".12", i32 %"array_element.2", i32 %"array_element.3", i32 %"x.1")
+  %".18" = call i32 (i8*, ...) @"printf"(i8* %".11", i32 %"array_element.2", i32 %"array_element.3", i32 %"x.1")
   ;  Source: return0;
   ret i32 0
 }

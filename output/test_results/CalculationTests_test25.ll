@@ -10,58 +10,54 @@ define i32 @"main"()
 {
 entry:
   %"number" = alloca i32
-  ;  Source: intnumber=-55;
   store i32 -55, i32* %"number"
-  %".4" = bitcast [3 x i8]* @"str" to i8*
+  %".3" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: number
   %"number.1" = load i32, i32* %"number"
   ;  Source: printf("%d",number);
-  %".7" = call i32 (i8*, ...) @"printf"(i8* %".4", i32 %"number.1")
+  %".6" = call i32 (i8*, ...) @"printf"(i8* %".3", i32 %"number.1")
   ;  Source: number
   %"number.2" = load i32, i32* %"number"
   ;  Source: number++;
-  %".10" = load i32, i32* %"number"
-  %".11" = add i32 %".10", 1
-  store i32 %".11", i32* %"number"
-  %".13" = bitcast [3 x i8]* @"str.1" to i8*
+  %".9" = load i32, i32* %"number"
+  %".10" = add i32 %".9", 1
+  store i32 %".10", i32* %"number"
+  %".12" = bitcast [3 x i8]* @"str.1" to i8*
   ;  Source: number
   %"number.3" = load i32, i32* %"number"
   ;  Source: printf("%d",number);
-  %".16" = call i32 (i8*, ...) @"printf"(i8* %".13", i32 %"number.3")
+  %".15" = call i32 (i8*, ...) @"printf"(i8* %".12", i32 %"number.3")
   ;  Source: number
   %"number.4" = load i32, i32* %"number"
   ;  Source: number
   %"number.5" = load i32, i32* %"number"
   ;  Source: number++
-  %".20" = load i32, i32* %"number"
-  %".21" = add i32 %".20", 1
-  store i32 %".21", i32* %"number"
-  ;  Source: number=number++;
+  %".19" = load i32, i32* %"number"
+  %".20" = add i32 %".19", 1
   store i32 %".20", i32* %"number"
-  %".25" = bitcast [3 x i8]* @"str.2" to i8*
+  ;  Source: number=number++;
+  store i32 %".19", i32* %"number"
+  %".24" = bitcast [3 x i8]* @"str.2" to i8*
   ;  Source: number
   %"number.6" = load i32, i32* %"number"
   ;  Source: printf("%d",number);
-  %".28" = call i32 (i8*, ...) @"printf"(i8* %".25", i32 %"number.6")
+  %".27" = call i32 (i8*, ...) @"printf"(i8* %".24", i32 %"number.6")
   %"n" = alloca i32
-  ;  Source: number
   %"number.7" = load i32, i32* %"number"
-  ;  Source: number++
-  %".31" = load i32, i32* %"number"
-  %".32" = add i32 %".31", 1
-  store i32 %".32", i32* %"number"
-  ;  Source: intn=number++;
-  store i32 %".31", i32* %"n"
-  %".36" = bitcast [3 x i8]* @"str.3" to i8*
+  %".28" = load i32, i32* %"number"
+  %".29" = add i32 %".28", 1
+  store i32 %".29", i32* %"number"
+  store i32 %".28", i32* %"n"
+  %".32" = bitcast [3 x i8]* @"str.3" to i8*
   ;  Source: number
   %"number.8" = load i32, i32* %"number"
   ;  Source: printf("%d",number);
-  %".39" = call i32 (i8*, ...) @"printf"(i8* %".36", i32 %"number.8")
-  %".40" = bitcast [3 x i8]* @"str.4" to i8*
+  %".35" = call i32 (i8*, ...) @"printf"(i8* %".32", i32 %"number.8")
+  %".36" = bitcast [3 x i8]* @"str.4" to i8*
   ;  Source: n
   %"n.1" = load i32, i32* %"n"
   ;  Source: printf("%d",n);
-  %".43" = call i32 (i8*, ...) @"printf"(i8* %".40", i32 %"n.1")
+  %".39" = call i32 (i8*, ...) @"printf"(i8* %".36", i32 %"n.1")
   ;  Source: return0;
   ret i32 0
 }

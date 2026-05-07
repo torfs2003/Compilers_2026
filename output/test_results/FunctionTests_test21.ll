@@ -12,13 +12,12 @@ entry:
   %"a" = alloca i32
   store i32 %".1", i32* %"a"
   %"name" = alloca i32
-  ;  Source: intname=0;
   store i32 0, i32* %"name"
-  %".6" = bitcast [4 x i8]* @"str" to i8*
+  %".5" = bitcast [4 x i8]* @"str" to i8*
   ;  Source: name
   %"name.1" = load i32, i32* %"name"
   ;  Source: printf("%d\n",name);
-  %".9" = call i32 (i8*, ...) @"printf"(i8* %".6", i32 %"name.1")
+  %".8" = call i32 (i8*, ...) @"printf"(i8* %".5", i32 %"name.1")
   ;  Source: return;
   ret void
 }
@@ -28,17 +27,16 @@ define i32 @"main"()
 {
 entry:
   %"b" = alloca i32
-  ;  Source: intb=5;
   store i32 5, i32* %"b"
   ;  Source: b
   %"b.1" = load i32, i32* %"b"
   ;  Source: name(b);
   call void @"name"(i32 %"b.1")
-  %".7" = bitcast [4 x i8]* @"str.1" to i8*
+  %".6" = bitcast [4 x i8]* @"str.1" to i8*
   ;  Source: b
   %"b.2" = load i32, i32* %"b"
   ;  Source: printf("%d\n",b);
-  %".10" = call i32 (i8*, ...) @"printf"(i8* %".7", i32 %"b.2")
+  %".9" = call i32 (i8*, ...) @"printf"(i8* %".6", i32 %"b.2")
   ;  Source: return0;
   ret i32 0
 }

@@ -11,24 +11,21 @@ define i32 @"innerFunction"()
 {
 entry:
   %"y" = alloca i32
-  ;  Source: x
   %"x" = load i32, i32* @"x"
-  ;  Source: x/4
-  %".4" = sdiv i32 %"x", 4
-  ;  Source: inty=x/4;
-  store i32 %".4", i32* %"y"
-  ;  Source: intx=25;
-  store i32 25, i32* @"x"
-  %".9" = bitcast [4 x i8]* @"str" to i8*
+  %".2" = sdiv i32 %"x", 4
+  store i32 %".2", i32* %"y"
+  %"x.1" = alloca i32
+  store i32 25, i32* %"x.1"
+  %".5" = bitcast [4 x i8]* @"str" to i8*
   ;  Source: y
   %"y.1" = load i32, i32* %"y"
   ;  Source: printf("%d\n",y);
-  %".12" = call i32 (i8*, ...) @"printf"(i8* %".9", i32 %"y.1")
-  %".13" = bitcast [4 x i8]* @"str.1" to i8*
+  %".8" = call i32 (i8*, ...) @"printf"(i8* %".5", i32 %"y.1")
+  %".9" = bitcast [4 x i8]* @"str.1" to i8*
   ;  Source: x
-  %"x.1" = load i32, i32* @"x"
+  %"x.2" = load i32, i32* %"x.1"
   ;  Source: printf("%d\n",x);
-  %".16" = call i32 (i8*, ...) @"printf"(i8* %".13", i32 %"x.1")
+  %".12" = call i32 (i8*, ...) @"printf"(i8* %".9", i32 %"x.2")
   ;  Source: return0;
   ret i32 0
 }
@@ -39,29 +36,26 @@ define i8 @"outerFunction"()
 {
 entry:
   %"y" = alloca i32
-  ;  Source: x
   %"x" = load i32, i32* @"x"
-  ;  Source: x/2
-  %".4" = sdiv i32 %"x", 2
-  ;  Source: inty=x/2;
-  store i32 %".4", i32* %"y"
-  ;  Source: intx=50;
-  store i32 50, i32* @"x"
-  %".9" = bitcast [4 x i8]* @"str.2" to i8*
+  %".2" = sdiv i32 %"x", 2
+  store i32 %".2", i32* %"y"
+  %"x.1" = alloca i32
+  store i32 50, i32* %"x.1"
+  %".5" = bitcast [4 x i8]* @"str.2" to i8*
   ;  Source: y
   %"y.1" = load i32, i32* %"y"
   ;  Source: printf("%d\n",y);
-  %".12" = call i32 (i8*, ...) @"printf"(i8* %".9", i32 %"y.1")
-  %".13" = bitcast [4 x i8]* @"str.3" to i8*
+  %".8" = call i32 (i8*, ...) @"printf"(i8* %".5", i32 %"y.1")
+  %".9" = bitcast [4 x i8]* @"str.3" to i8*
   ;  Source: x
-  %"x.1" = load i32, i32* @"x"
+  %"x.2" = load i32, i32* %"x.1"
   ;  Source: printf("%d\n",x);
-  %".16" = call i32 (i8*, ...) @"printf"(i8* %".13", i32 %"x.1")
+  %".12" = call i32 (i8*, ...) @"printf"(i8* %".9", i32 %"x.2")
   ;  Source: innerFunction();
-  %".18" = call i32 @"innerFunction"()
+  %".14" = call i32 @"innerFunction"()
   ;  Source: return0;
-  %".20" = trunc i32 0 to i8
-  ret i8 %".20"
+  %".16" = trunc i32 0 to i8
+  ret i8 %".16"
 }
 
 @"str.2" = internal constant [4 x i8] c"%d\0a\00"

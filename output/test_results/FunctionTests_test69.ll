@@ -37,35 +37,33 @@ define i32 @"main"()
 {
 entry:
   %"n" = alloca i32
-  ;  Source: intn;
-  %".3" = bitcast [16 x i8]* @"str" to i8*
+  %".2" = bitcast [16 x i8]* @"str" to i8*
   ;  Source: printf("Enter a number:");
-  %".5" = call i32 (i8*, ...) @"printf"(i8* %".3")
+  %".4" = call i32 (i8*, ...) @"printf"(i8* %".2")
   ;  Source: n
   %"n.1" = load i32, i32* %"n"
   ;  Source: n=20;
   store i32 20, i32* %"n"
   %"i" = alloca i32
-  ;  Source: inti=1;
   store i32 1, i32* %"i"
   ;  Source: while(i++<=n){printf("fib(%d)\t= %d;\n",i,f(i));}
   br label %"while.cond"
 while.cond:
   %"i.1" = load i32, i32* %"i"
-  %".13" = load i32, i32* %"i"
-  %".14" = add i32 %".13", 1
-  store i32 %".14", i32* %"i"
+  %".11" = load i32, i32* %"i"
+  %".12" = add i32 %".11", 1
+  store i32 %".12", i32* %"i"
   %"n.2" = load i32, i32* %"n"
-  %".16" = icmp sle i32 %".13", %"n.2"
-  %".17" = zext i1 %".16" to i32
-  %"whilecond" = icmp ne i32 %".17", 0
+  %".14" = icmp sle i32 %".11", %"n.2"
+  %".15" = zext i1 %".14" to i32
+  %"whilecond" = icmp ne i32 %".15", 0
   br i1 %"whilecond", label %"while.body", label %"while.end"
 while.body:
-  %".19" = bitcast [15 x i8]* @"str.1" to i8*
+  %".17" = bitcast [15 x i8]* @"str.1" to i8*
   %"i.2" = load i32, i32* %"i"
   %"i.3" = load i32, i32* %"i"
-  %".20" = call i32 @"f"(i32 %"i.3")
-  %".21" = call i32 (i8*, ...) @"printf"(i8* %".19", i32 %"i.2", i32 %".20")
+  %".18" = call i32 @"f"(i32 %"i.3")
+  %".19" = call i32 (i8*, ...) @"printf"(i8* %".17", i32 %"i.2", i32 %".18")
   br label %"while.cond"
 while.end:
   ;  Source: return0;

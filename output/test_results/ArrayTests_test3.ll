@@ -10,7 +10,6 @@ define i32 @"main"()
 {
 entry:
   %"x" = alloca [1 x [1 x [1 x [1 x [1 x [1 x [1 x [1 x i32]]]]]]]]
-  ;  Source: intx[1][1][1][1][1][1][1][1];
   ;  Source: x
   ;  Source: x[0]
   %"gep_array" = getelementptr [1 x [1 x [1 x [1 x [1 x [1 x [1 x [1 x i32]]]]]]]], [1 x [1 x [1 x [1 x [1 x [1 x [1 x [1 x i32]]]]]]]]* %"x", i32 0, i32 0
@@ -31,7 +30,7 @@ entry:
   %"array_element" = load i32, i32* %"gep_array.7"
   ;  Source: x[0][0][0][0][0][0][0][0]=0;
   store i32 0, i32* %"gep_array.7"
-  %".14" = bitcast [3 x i8]* @"str" to i8*
+  %".13" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: x
   ;  Source: x[0]
   %"gep_array.8" = getelementptr [1 x [1 x [1 x [1 x [1 x [1 x [1 x [1 x i32]]]]]]]], [1 x [1 x [1 x [1 x [1 x [1 x [1 x [1 x i32]]]]]]]]* %"x", i32 0, i32 0
@@ -51,7 +50,7 @@ entry:
   %"gep_array.15" = getelementptr [1 x i32], [1 x i32]* %"gep_array.14", i32 0, i32 0
   %"array_element.1" = load i32, i32* %"gep_array.15"
   ;  Source: printf("%d",x[0][0][0][0][0][0][0][0]);
-  %".25" = call i32 (i8*, ...) @"printf"(i8* %".14", i32 %"array_element.1")
+  %".24" = call i32 (i8*, ...) @"printf"(i8* %".13", i32 %"array_element.1")
   ;  Source: return0;
   ret i32 0
 }

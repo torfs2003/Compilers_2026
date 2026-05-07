@@ -10,10 +10,8 @@ define i32 @"main"()
 {
 entry:
   %"b" = alloca i32
-  ;  Source: constintb=5;
   store i32 5, i32* %"b"
   %"a" = alloca [3 x i32]
-  ;  Source: inta[1+2];
   ;  Source: return0;
   ret i32 0
 }

@@ -10,15 +10,14 @@ define i32 @"main"()
 {
 entry:
   %"a" = alloca i32
-  ;  Source: inta=5;
   store i32 5, i32* %"a"
   ;  Source: a
   %"a.1" = load i32, i32* %"a"
   ;  Source: (char)5
-  %".6" = trunc i32 5 to i8
+  %".5" = trunc i32 5 to i8
   ;  Source: a=(char)5;
-  %".8" = sext i8 %".6" to i32
-  store i32 %".8", i32* %"a"
+  %".7" = sext i8 %".5" to i32
+  store i32 %".7", i32* %"a"
   ;  Source: return0;
   ret i32 0
 }

@@ -72,7 +72,6 @@ define i32 @"main"()
 {
 entry:
   %"array" = alloca [2 x i32]
-  ;  Source: intarray[2];
   ;  Source: array
   ;  Source: array[0]
   %"gep_array" = getelementptr [2 x i32], [2 x i32]* %"array", i32 0, i32 0

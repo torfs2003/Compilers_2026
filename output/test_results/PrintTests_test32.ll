@@ -10,7 +10,6 @@ define i32 @"main"()
 {
 entry:
   %"a" = alloca [3 x i32]
-  ;  Source: inta[3];
   ;  Source: a
   ;  Source: a[0]
   %"gep_array" = getelementptr [3 x i32], [3 x i32]* %"a", i32 0, i32 0
@@ -29,7 +28,7 @@ entry:
   %"array_element.2" = load i32, i32* %"gep_array.2"
   ;  Source: a[2]=30;
   store i32 30, i32* %"gep_array.2"
-  %".15" = bitcast [11 x i8]* @"str" to i8*
+  %".14" = bitcast [11 x i8]* @"str" to i8*
   ;  Source: a
   ;  Source: a[0]
   %"gep_array.3" = getelementptr [3 x i32], [3 x i32]* %"a", i32 0, i32 0
@@ -43,7 +42,7 @@ entry:
   %"gep_array.5" = getelementptr [3 x i32], [3 x i32]* %"a", i32 0, i32 2
   %"array_element.5" = load i32, i32* %"gep_array.5"
   ;  Source: printf("%d; %d; %d",a[0],a[1],a[2]);
-  %".23" = call i32 (i8*, ...) @"printf"(i8* %".15", i32 %"array_element.3", i32 %"array_element.4", i32 %"array_element.5")
+  %".22" = call i32 (i8*, ...) @"printf"(i8* %".14", i32 %"array_element.3", i32 %"array_element.4", i32 %"array_element.5")
   ;  Source: return0;
   ret i32 0
 }

@@ -13,7 +13,6 @@ define i32 @"main"()
 {
 entry:
   %"v" = alloca %"union.grammar_rule_production"
-  ;  Source: uniongrammar_rule_productionv;
   ;  Source: return0;
   ret i32 0
 }

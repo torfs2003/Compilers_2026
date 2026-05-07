@@ -10,7 +10,7 @@
   [ConstantFoldingTests]
   ASTTests\ConstantFoldingTests\test1.c... PASSED
   ASTTests\ConstantFoldingTests\test10.c... PASSED
-  ASTTests\ConstantFoldingTests\test11.c... FAILED (Compiler Error)
+  ASTTests\ConstantFoldingTests\test11.c... PASSED
   ASTTests\ConstantFoldingTests\test12.c... PASSED
   ASTTests\ConstantFoldingTests\test13.c... PASSED
   ASTTests\ConstantFoldingTests\test14.c... PASSED
@@ -24,7 +24,7 @@
   ASTTests\ConstantFoldingTests\test7.c... PASSED
   ASTTests\ConstantFoldingTests\test8.c... PASSED
   ASTTests\ConstantFoldingTests\test9.c... PASSED
-    |__ ConstantFoldingTests: X  15 passed, 1 failed
+    |__ ConstantFoldingTests: V  16 passed, 0 failed
 
   [ConstraintsTests]
   ASTTests\ConstraintsTests\test1.c... PASSED (Expected failure)
@@ -40,16 +40,23 @@
   ASTTests\ConversionTests\test1.c... PASSED
   ASTTests\ConversionTests\test10.c... PASSED
   ASTTests\ConversionTests\test11.c... PASSED
-  ASTTests\ConversionTests\test12.c... PASSED
-  ASTTests\ConversionTests\test13.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
+  ASTTests\ConversionTests\test12.c... FAILED
+    --> EXPECTED (code 0):
+    
+    ACTUAL (code 1):
+    
+    [!] LLI STDERR:
+    lli.exe: lli: output/test_results\ConversionTests_test12.ll:17:34: error: integer constant must have integer type
+  ASTTests\ConversionTests\test13.c... FAILED
+    --> EXPECTED (code 0):
+    
+    ACTUAL (code 1):
+    
+    [!] LLI STDERR:
+    lli.exe: lli: output/test_results\ConversionTests_test13.ll:17:34: error: integer constant must have integer type
   ASTTests\ConversionTests\test14.c... PASSED
   ASTTests\ConversionTests\test15.c... PASSED
-  ASTTests\ConversionTests\test16.c... FAILED (Compiler Error)
+  ASTTests\ConversionTests\test16.c... PASSED
   ASTTests\ConversionTests\test17.c... PASSED
   ASTTests\ConversionTests\test18.c... PASSED
   ASTTests\ConversionTests\test19.c... PASSED
@@ -98,10 +105,10 @@
   ASTTests\SemanticErrorsTests\test23.c... PASSED (Expected failure)
   ASTTests\SemanticErrorsTests\test24.c... FAILED (Compiler accepteerde ongeldige C!)
   ASTTests\SemanticErrorsTests\test25.c... FAILED (Compiler accepteerde ongeldige C!)
-  ASTTests\SemanticErrorsTests\test26.c... PASSED
-  ASTTests\SemanticErrorsTests\test27.c... PASSED (Expected failure)
+  ASTTests\SemanticErrorsTests\test26.c... FAILED (Compiler Error)
+  ASTTests\SemanticErrorsTests\test27.c... FAILED (Compiler accepteerde ongeldige C!)
   ASTTests\SemanticErrorsTests\test28.c... PASSED
-  ASTTests\SemanticErrorsTests\test29.c... PASSED
+  ASTTests\SemanticErrorsTests\test29.c... FAILED (Compiler Error)
   ASTTests\SemanticErrorsTests\test3.c... PASSED
   ASTTests\SemanticErrorsTests\test30.c... PASSED
   ASTTests\SemanticErrorsTests\test31.c... PASSED
@@ -118,7 +125,12 @@
   ASTTests\SemanticErrorsTests\test41.c... PASSED (Expected failure)
   ASTTests\SemanticErrorsTests\test42.c... FAILED (Compiler accepteerde ongeldige C!)
   ASTTests\SemanticErrorsTests\test43.c... PASSED
-  ASTTests\SemanticErrorsTests\test44.c... PASSED
+  ASTTests\SemanticErrorsTests\test44.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   ASTTests\SemanticErrorsTests\test45.c... PASSED (Expected failure)
   ASTTests\SemanticErrorsTests\test46.c... PASSED (Expected failure)
   ASTTests\SemanticErrorsTests\test5.c... PASSED (Expected failure)
@@ -126,7 +138,7 @@
   ASTTests\SemanticErrorsTests\test7.c... PASSED (Expected failure)
   ASTTests\SemanticErrorsTests\test8.c... PASSED (Expected failure)
   ASTTests\SemanticErrorsTests\test9.c... PASSED (Expected failure)
-    |__ SemanticErrorsTests: X  34 passed, 11 failed
+    |__ SemanticErrorsTests: X  30 passed, 15 failed
 
   [SwitchTests]
   ASTTests\SwitchTests\test1.c... PASSED
@@ -195,117 +207,212 @@
     |__ ValueAdderTests: X  22 passed, 2 failed
 
 
-  |== ASTTests TOTAAL: 130 passed, 20 failed  [20 GEFAALD] ==|
+  |== ASTTests TOTAAL: 127 passed, 23 failed  [23 GEFAALD] ==|
 
 ──────────────────────────────────────────────────
   [LLVMTests]
 ──────────────────────────────────────────────────
   [ArrayTests]
-  LLVMTests\ArrayTests\test1.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
-  LLVMTests\ArrayTests\test10.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
+  LLVMTests\ArrayTests\test1.c... PASSED
+  LLVMTests\ArrayTests\test10.c... PASSED
   LLVMTests\ArrayTests\test11.c... FAILED (Compiler Error)
     --> Traceback (most recent call last):
     -->   File "<frozen runpy>", line 198, in _run_module_as_main
     -->   File "<frozen runpy>", line 88, in _run_code
     -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
     -->     main()
-  LLVMTests\ArrayTests\test12.c... PASSED
+  LLVMTests\ArrayTests\test12.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   LLVMTests\ArrayTests\test13.c... PASSED (Expected failure)
   LLVMTests\ArrayTests\test14.c... PASSED
   LLVMTests\ArrayTests\test15.c... PASSED
   LLVMTests\ArrayTests\test16.c... FAILED (Compiler Error)
     --> Traceback (most recent call last):
-    -->   File "C:\msys64\mingw64\lib\python3.12\site-packages\llvmlite\ir\_utils.py", line 46, in __str__
-    -->     return self.__cached_str
-    -->            ^^^^^^^^^^^^^^^^^
-    --> AttributeError: 'AllocaInstr' object has no attribute '_StrCaching__cached_str'
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   LLVMTests\ArrayTests\test17.c... PASSED (Expected failure)
   LLVMTests\ArrayTests\test18.c... PASSED (Expected failure)
-  LLVMTests\ArrayTests\test19.c... PASSED
-  LLVMTests\ArrayTests\test2.c... FAILED (Compiler Error)
+  LLVMTests\ArrayTests\test19.c... FAILED (Compiler Error)
     --> Traceback (most recent call last):
     -->   File "<frozen runpy>", line 198, in _run_module_as_main
     -->   File "<frozen runpy>", line 88, in _run_code
     -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
     -->     main()
+  LLVMTests\ArrayTests\test2.c... PASSED
   LLVMTests\ArrayTests\test20.c... FAILED (Compiler Error)
-  LLVMTests\ArrayTests\test21.c... PASSED
+  LLVMTests\ArrayTests\test21.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   LLVMTests\ArrayTests\test22.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   LLVMTests\ArrayTests\test23.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   LLVMTests\ArrayTests\test24.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   LLVMTests\ArrayTests\test25.c... PASSED
   LLVMTests\ArrayTests\test26.c... PASSED (Expected failure)
   LLVMTests\ArrayTests\test27.c... PASSED (Expected failure)
   LLVMTests\ArrayTests\test28.c... PASSED (Expected failure)
-  LLVMTests\ArrayTests\test29.c... PASSED
-  LLVMTests\ArrayTests\test3.c... FAILED (Compiler Error)
+  LLVMTests\ArrayTests\test29.c... FAILED (Compiler Error)
     --> Traceback (most recent call last):
     -->   File "<frozen runpy>", line 198, in _run_module_as_main
     -->   File "<frozen runpy>", line 88, in _run_code
     -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
     -->     main()
-  LLVMTests\ArrayTests\test30.c... PASSED
+  LLVMTests\ArrayTests\test3.c... PASSED
+  LLVMTests\ArrayTests\test30.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   LLVMTests\ArrayTests\test31.c... PASSED
   LLVMTests\ArrayTests\test32.c... PASSED
-  LLVMTests\ArrayTests\test33.c... PASSED
-  LLVMTests\ArrayTests\test34.c... PASSED
-  LLVMTests\ArrayTests\test35.c... PASSED
-  LLVMTests\ArrayTests\test36.c... PASSED
-  LLVMTests\ArrayTests\test37.c... PASSED
-  LLVMTests\ArrayTests\test38.c... PASSED
-  LLVMTests\ArrayTests\test39.c... FAILED (Compiler Error)
+  LLVMTests\ArrayTests\test33.c... FAILED (Compiler Error)
     --> Traceback (most recent call last):
     -->   File "<frozen runpy>", line 198, in _run_module_as_main
     -->   File "<frozen runpy>", line 88, in _run_code
     -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
     -->     main()
-  LLVMTests\ArrayTests\test4.c... FAILED (Compiler Error)
+  LLVMTests\ArrayTests\test34.c... FAILED (Compiler Error)
     --> Traceback (most recent call last):
     -->   File "<frozen runpy>", line 198, in _run_module_as_main
     -->   File "<frozen runpy>", line 88, in _run_code
     -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
     -->     main()
-  LLVMTests\ArrayTests\test40.c... PASSED
-  LLVMTests\ArrayTests\test41.c... PASSED
+  LLVMTests\ArrayTests\test35.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
+  LLVMTests\ArrayTests\test36.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
+  LLVMTests\ArrayTests\test37.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
+  LLVMTests\ArrayTests\test38.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
+  LLVMTests\ArrayTests\test39.c... PASSED
+  LLVMTests\ArrayTests\test4.c... PASSED
+  LLVMTests\ArrayTests\test40.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
+  LLVMTests\ArrayTests\test41.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   LLVMTests\ArrayTests\test42.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   LLVMTests\ArrayTests\test43.c... PASSED
   LLVMTests\ArrayTests\test44.c... PASSED
   LLVMTests\ArrayTests\test45.c... PASSED
-  LLVMTests\ArrayTests\test46.c... PASSED
-  LLVMTests\ArrayTests\test47.c... PASSED
-  LLVMTests\ArrayTests\test48.c... PASSED
-  LLVMTests\ArrayTests\test49.c... PASSED
+  LLVMTests\ArrayTests\test46.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
+  LLVMTests\ArrayTests\test47.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
+  LLVMTests\ArrayTests\test48.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
+  LLVMTests\ArrayTests\test49.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   LLVMTests\ArrayTests\test5.c... FAILED (Compiler Error)
     --> Traceback (most recent call last):
     -->   File "<frozen runpy>", line 198, in _run_module_as_main
     -->   File "<frozen runpy>", line 88, in _run_code
     -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
     -->     main()
-  LLVMTests\ArrayTests\test50.c... PASSED
-  LLVMTests\ArrayTests\test51.c... FAILED (Compiler accepteerde ongeldige C!)
-  LLVMTests\ArrayTests\test52.c... PASSED
-  LLVMTests\ArrayTests\test53.c... PASSED
+  LLVMTests\ArrayTests\test50.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
+  LLVMTests\ArrayTests\test51.c... PASSED (Expected failure)
+  LLVMTests\ArrayTests\test52.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
+  LLVMTests\ArrayTests\test53.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   LLVMTests\ArrayTests\test54.c... PASSED (Expected failure)
   LLVMTests\ArrayTests\test55.c... PASSED (Expected failure)
   LLVMTests\ArrayTests\test56.c... PASSED (Expected failure)
-  LLVMTests\ArrayTests\test57.c... PASSED
+  LLVMTests\ArrayTests\test57.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   LLVMTests\ArrayTests\test58.c... PASSED
   LLVMTests\ArrayTests\test59.c... FAILED (Compiler Error)
     --> Traceback (most recent call last):
-    -->   File "C:\msys64\mingw64\lib\python3.12\site-packages\llvmlite\ir\_utils.py", line 46, in __str__
-    -->     return self.__cached_str
-    -->            ^^^^^^^^^^^^^^^^^
-    --> AttributeError: 'AllocaInstr' object has no attribute '_StrCaching__cached_str'
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   LLVMTests\ArrayTests\test6.c... FAILED (Compiler Error)
     --> Traceback (most recent call last):
     -->   File "<frozen runpy>", line 198, in _run_module_as_main
@@ -313,14 +420,23 @@
     -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
     -->     main()
   LLVMTests\ArrayTests\test60.c... PASSED
-  LLVMTests\ArrayTests\test61.c... PASSED
-  LLVMTests\ArrayTests\test62.c... FAILED (Compiler Error)
+  LLVMTests\ArrayTests\test61.c... FAILED (Compiler Error)
     --> Traceback (most recent call last):
     -->   File "<frozen runpy>", line 198, in _run_module_as_main
     -->   File "<frozen runpy>", line 88, in _run_code
     -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
     -->     main()
-  LLVMTests\ArrayTests\test63.c... PASSED
+  LLVMTests\ArrayTests\test62.c... FAILED
+    --> EXPECTED (code 0):
+    971
+    ACTUAL (code 0):
+    -7990619191
+  LLVMTests\ArrayTests\test63.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   LLVMTests\ArrayTests\test7.c... FAILED (Compiler Error)
     --> Traceback (most recent call last):
     -->   File "<frozen runpy>", line 198, in _run_module_as_main
@@ -334,12 +450,20 @@
     -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
     -->     main()
   LLVMTests\ArrayTests\test9.c... PASSED (Expected failure)
-    |__ ArrayTests: X  43 passed, 20 failed
+    |__ ArrayTests: X  27 passed, 36 failed
 
   [CalculationTests]
-  LLVMTests\CalculationTests\test1.c... FAILED (Compiler Error)
+  LLVMTests\CalculationTests\test1.c... FAILED
+    --> EXPECTED (code 0):
+    110127075010001666756121210111100993163842563736044677810180
+    ACTUAL (code 0):
+    110127075010001666756121210111100993163842562081423360736044677810180
   LLVMTests\CalculationTests\test10.c... PASSED
-  LLVMTests\CalculationTests\test11.c... PASSED
+  LLVMTests\CalculationTests\test11.c... FAILED
+    --> EXPECTED (code 0):
+    9798
+    ACTUAL (code 0):
+    17607683531755906146
   LLVMTests\CalculationTests\test12.c... PASSED
   LLVMTests\CalculationTests\test13.c... PASSED
   LLVMTests\CalculationTests\test14.c... PASSED
@@ -356,7 +480,7 @@
     3.1492000.789000
     ACTUAL (code 0):
     3.1492003.149200
-  LLVMTests\CalculationTests\test2.c... FAILED (Compiler Error)
+  LLVMTests\CalculationTests\test2.c... PASSED
   LLVMTests\CalculationTests\test20.c... PASSED
   LLVMTests\CalculationTests\test21.c... PASSED
   LLVMTests\CalculationTests\test22.c... PASSED (Expected failure)
@@ -367,10 +491,14 @@
   LLVMTests\CalculationTests\test27.c... PASSED (Expected failure)
   LLVMTests\CalculationTests\test28.c... FAILED (Compiler accepteerde ongeldige C!)
   LLVMTests\CalculationTests\test29.c... PASSED (Expected failure)
-  LLVMTests\CalculationTests\test3.c... FAILED (Compiler Error)
+  LLVMTests\CalculationTests\test3.c... FAILED
+    --> EXPECTED (code 0):
+    1101270752-69853150100487897-5110510445-165-3001155720319940-314
+    ACTUAL (code 0):
+    1101270752-69853150100487897-5110510445-165-3001155720-31267225619940-314
   LLVMTests\CalculationTests\test30.c... PASSED (Expected failure)
   LLVMTests\CalculationTests\test31.c... PASSED
-  LLVMTests\CalculationTests\test32.c... FAILED (Compiler Error)
+  LLVMTests\CalculationTests\test32.c... PASSED
   LLVMTests\CalculationTests\test33.c... PASSED
   LLVMTests\CalculationTests\test34.c... PASSED
   LLVMTests\CalculationTests\test35.c... FAILED (Compiler Error)
@@ -392,7 +520,12 @@
   LLVMTests\CalculationTests\test5.c... PASSED
   LLVMTests\CalculationTests\test50.c... PASSED
   LLVMTests\CalculationTests\test51.c... PASSED
-  LLVMTests\CalculationTests\test52.c... PASSED
+  LLVMTests\CalculationTests\test52.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   LLVMTests\CalculationTests\test53.c... PASSED
   LLVMTests\CalculationTests\test54.c... PASSED
   LLVMTests\CalculationTests\test55.c... PASSED
@@ -419,23 +552,43 @@
     |__ CalculationTests: X  60 passed, 11 failed
 
   [CombinedTests]
-  LLVMTests\CombinedTests\test1.c... PASSED
+  LLVMTests\CombinedTests\test1.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   LLVMTests\CombinedTests\test10.c... PASSED
   LLVMTests\CombinedTests\test11.c... PASSED
-  LLVMTests\CombinedTests\test12.c... PASSED
+  LLVMTests\CombinedTests\test12.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   LLVMTests\CombinedTests\test13.c... PASSED
   LLVMTests\CombinedTests\test14.c... PASSED
   LLVMTests\CombinedTests\test15.c... PASSED
   LLVMTests\CombinedTests\test16.c... FAILED (Compiler accepteerde ongeldige C!)
   LLVMTests\CombinedTests\test2.c... PASSED
-  LLVMTests\CombinedTests\test3.c... PASSED
+  LLVMTests\CombinedTests\test3.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   LLVMTests\CombinedTests\test4.c... PASSED
   LLVMTests\CombinedTests\test5.c... PASSED
-  LLVMTests\CombinedTests\test6.c... PASSED
+  LLVMTests\CombinedTests\test6.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   LLVMTests\CombinedTests\test7.c... PASSED
   LLVMTests\CombinedTests\test8.c... PASSED
   LLVMTests\CombinedTests\test9.c... PASSED
-    |__ CombinedTests: X  15 passed, 1 failed
+    |__ CombinedTests: X  11 passed, 5 failed
 
   [DefineTests]
   LLVMTests\DefineTests\cycle1.c... PASSED (Expected failure)
@@ -478,12 +631,7 @@
   LLVMTests\DefineTests\test2.c... PASSED
   LLVMTests\DefineTests\test20.c... PASSED (Expected failure)
   LLVMTests\DefineTests\test21.c... PASSED (Expected failure)
-  LLVMTests\DefineTests\test22.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
+  LLVMTests\DefineTests\test22.c... PASSED
   LLVMTests\DefineTests\test23.c... PASSED (Expected failure)
   LLVMTests\DefineTests\test24.c... PASSED
   LLVMTests\DefineTests\test3.c... PASSED (Expected failure)
@@ -496,7 +644,7 @@
   LLVMTests\DefineTests\yay1.c... PASSED (Expected failure)
   LLVMTests\DefineTests\yay2.c... PASSED (Expected failure)
   LLVMTests\DefineTests\yay3.c... PASSED (Expected failure)
-    |__ DefineTests: X  34 passed, 4 failed
+    |__ DefineTests: X  35 passed, 3 failed
 
   [DynamicArrayTests]
   LLVMTests\DynamicArrayTests\test1.c... PASSED
@@ -505,58 +653,46 @@
   LLVMTests\DynamicArrayTests\test4.c... PASSED
   LLVMTests\DynamicArrayTests\test5.c... PASSED
   LLVMTests\DynamicArrayTests\test6.c... PASSED
-  LLVMTests\DynamicArrayTests\test7.c... FAILED
-    --> EXPECTED (code 0):
-    555
-    ACTUAL (code 0):
-    550
+  LLVMTests\DynamicArrayTests\test7.c... PASSED
   LLVMTests\DynamicArrayTests\test8.c... PASSED
-    |__ DynamicArrayTests: X  7 passed, 1 failed
+    |__ DynamicArrayTests: V  8 passed, 0 failed
 
   [DynamicStructTests]
-  LLVMTests\DynamicStructTests\test1.c... FAILED (Compiler Error)
-    --> line 12:32 no viable alternative at input 'malloc(sizeof(struct'
-    --> line 12:32 mismatched input 'struct' expecting '*'
-  LLVMTests\DynamicStructTests\test2.c... FAILED (Compiler Error)
-    --> line 13:31 no viable alternative at input 'malloc(sizeof(union'
-    --> line 13:31 mismatched input 'union' expecting '*'
-  LLVMTests\DynamicStructTests\test3.c... FAILED (Compiler Error)
-    --> line 11:62 no viable alternative at input 'sizeof(struct'
-    --> line 11:62 mismatched input 'struct' expecting '*'
-  LLVMTests\DynamicStructTests\test4.c... FAILED (Compiler Error)
-  LLVMTests\DynamicStructTests\test5.c... FAILED (Compiler Error)
-    --> line 19:34 no viable alternative at input 'malloc(sizeof(struct'
-    --> line 19:34 mismatched input 'struct' expecting '*'
+  LLVMTests\DynamicStructTests\test1.c... PASSED
+  LLVMTests\DynamicStructTests\test2.c... PASSED
+  LLVMTests\DynamicStructTests\test3.c... PASSED
+  LLVMTests\DynamicStructTests\test4.c... PASSED
+  LLVMTests\DynamicStructTests\test5.c... PASSED
   LLVMTests\DynamicStructTests\test6.c... FAILED (Compiler Error)
-    --> line 40:44 no viable alternative at input 'realloc(map->nodes,sizeof(struct'
-    --> line 40:35 mismatched input ',' expecting ';'
-    --> line 40:44 mismatched input 'struct' expecting '*'
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   LLVMTests\DynamicStructTests\test7.c... FAILED (Compiler Error)
-    --> line 40:44 no viable alternative at input 'realloc(map->nodes,sizeof(struct'
-    --> line 40:35 mismatched input ',' expecting ';'
-    --> line 40:44 mismatched input 'struct' expecting '*'
-  LLVMTests\DynamicStructTests\test8.c... FAILED (Compiler Error)
-    --> line 13:44 no viable alternative at input 'sizeof(struct'
-    --> line 13:44 mismatched input 'struct' expecting '*'
-  LLVMTests\DynamicStructTests\test9.c... FAILED (Compiler Error)
-    --> line 13:42 no viable alternative at input 'sizeof(union'
-    --> line 13:42 mismatched input 'union' expecting '*'
-    |__ DynamicStructTests: X  0 passed, 9 failed
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
+  LLVMTests\DynamicStructTests\test8.c... PASSED
+  LLVMTests\DynamicStructTests\test9.c... PASSED
+    |__ DynamicStructTests: X  7 passed, 2 failed
 
   [EnumTests]
-  LLVMTests\EnumTests\test1.c... FAILED (Compiler Error)
-  LLVMTests\EnumTests\test10.c... FAILED (Compiler Error)
+  LLVMTests\EnumTests\test1.c... PASSED
+  LLVMTests\EnumTests\test10.c... PASSED
   LLVMTests\EnumTests\test11.c... FAILED (Compiler Error)
-  LLVMTests\EnumTests\test12.c... FAILED (Compiler Error)
+  LLVMTests\EnumTests\test12.c... PASSED
   LLVMTests\EnumTests\test2.c... PASSED
   LLVMTests\EnumTests\test3.c... PASSED
   LLVMTests\EnumTests\test4.c... PASSED
-  LLVMTests\EnumTests\test5.c... FAILED (Compiler Error)
+  LLVMTests\EnumTests\test5.c... PASSED
   LLVMTests\EnumTests\test6.c... PASSED (Expected failure)
   LLVMTests\EnumTests\test7.c... PASSED (Expected failure)
-  LLVMTests\EnumTests\test8.c... FAILED (Compiler Error)
-  LLVMTests\EnumTests\test9.c... FAILED (Compiler Error)
-    |__ EnumTests: X  5 passed, 7 failed
+  LLVMTests\EnumTests\test8.c... PASSED
+  LLVMTests\EnumTests\test9.c... PASSED
+    |__ EnumTests: X  11 passed, 1 failed
 
   [FileIOTests]
   LLVMTests\FileIOTests\test1.c... FAILED (Compiler Error)
@@ -669,13 +805,7 @@
   LLVMTests\FunctionTests\test19.c... PASSED
   LLVMTests\FunctionTests\test2.c... PASSED (Expected failure)
   LLVMTests\FunctionTests\test20.c... PASSED (Expected failure)
-  LLVMTests\FunctionTests\test21.c... FAILED
-    --> EXPECTED (code 0):
-    0
-    5
-    
-    ACTUAL (code 0):
-    1111687168
+  LLVMTests\FunctionTests\test21.c... PASSED
   LLVMTests\FunctionTests\test22.c... PASSED
   LLVMTests\FunctionTests\test23.c... PASSED
   LLVMTests\FunctionTests\test24.c... PASSED (Expected failure)
@@ -733,18 +863,8 @@
     --> line 3:18 mismatched input '(' expecting ';'
     --> line 5:0 extraneous input '}' expecting {<EOF>, '#include', 'union', 'enum', 'const', 'int', 'float', 'char', 'void', 'struct', 'typedef', ';', IDENTIFIER}
   LLVMTests\FunctionTests\test62.c... PASSED (Expected failure)
-  LLVMTests\FunctionTests\test63.c... FAILED
-    --> EXPECTED (code 0):
-    3.140000
-    3
-    
-    ACTUAL (code 0):
-    0.000000
-  LLVMTests\FunctionTests\test64.c... FAILED
-    --> EXPECTED (code 0):
-    22
-    ACTUAL (code 0):
-    -491192320-491192320
+  LLVMTests\FunctionTests\test63.c... FAILED (Compiler Error)
+  LLVMTests\FunctionTests\test64.c... FAILED (Compiler Error)
   LLVMTests\FunctionTests\test65.c... FAILED (Compiler Error)
     --> line 10:9 no viable alternative at input 'charmain'
     --> line 15:8 no viable alternative at input 'intmain'
@@ -760,7 +880,7 @@
   LLVMTests\FunctionTests\test72.c... PASSED
   LLVMTests\FunctionTests\test8.c... PASSED (Expected failure)
   LLVMTests\FunctionTests\test9.c... PASSED (Expected failure)
-    |__ FunctionTests: X  59 passed, 13 failed
+    |__ FunctionTests: X  60 passed, 12 failed
 
   [GlobalTests]
   LLVMTests\GlobalTests\test1.c... PASSED
@@ -860,13 +980,7 @@
     
     ACTUAL (code 0):
     20
-  LLVMTests\OutputTests\test24.c... FAILED
-    --> EXPECTED (code 0):
-    100
-    50
-    50
-    25
-    25
+  LLVMTests\OutputTests\test24.c... PASSED
   LLVMTests\OutputTests\test25.c... PASSED
   LLVMTests\OutputTests\test26.c... PASSED (Expected failure)
   LLVMTests\OutputTests\test27.c... PASSED (Expected failure)
@@ -880,8 +994,18 @@
   LLVMTests\OutputTests\test34.c... PASSED (Expected failure)
   LLVMTests\OutputTests\test35.c... PASSED (Expected failure)
   LLVMTests\OutputTests\test36.c... PASSED (Expected failure)
-  LLVMTests\OutputTests\test37.c... PASSED
-  LLVMTests\OutputTests\test38.c... PASSED
+  LLVMTests\OutputTests\test37.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
+  LLVMTests\OutputTests\test38.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   LLVMTests\OutputTests\test39.c... PASSED
   LLVMTests\OutputTests\test4.c... PASSED
   LLVMTests\OutputTests\test40.c... FAILED
@@ -890,15 +1014,34 @@
     ACTUAL (code 0):
     2
   LLVMTests\OutputTests\test41.c... PASSED
-  LLVMTests\OutputTests\test42.c... PASSED
+  LLVMTests\OutputTests\test42.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   LLVMTests\OutputTests\test43.c... PASSED
   LLVMTests\OutputTests\test44.c... PASSED
-  LLVMTests\OutputTests\test45.c... FAILED (Compiler Error)
-    --> line 4:17 no viable alternative at input 'structPoint{'
-  LLVMTests\OutputTests\test46.c... PASSED
-  LLVMTests\OutputTests\test47.c... PASSED
+  LLVMTests\OutputTests\test45.c... PASSED
+  LLVMTests\OutputTests\test46.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
+  LLVMTests\OutputTests\test47.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   LLVMTests\OutputTests\test48.c... PASSED
-  LLVMTests\OutputTests\test49.c... PASSED
+  LLVMTests\OutputTests\test49.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   LLVMTests\OutputTests\test5.c... PASSED
   LLVMTests\OutputTests\test50.c... FAILED
     --> EXPECTED (code 0):
@@ -910,8 +1053,18 @@
   LLVMTests\OutputTests\test52.c... FAILED (Compiler Error)
     --> line 3:18 mismatched input '(' expecting ';'
     --> line 5:0 extraneous input '}' expecting {<EOF>, '#include', 'union', 'enum', 'const', 'int', 'float', 'char', 'void', 'struct', 'typedef', ';', IDENTIFIER}
-  LLVMTests\OutputTests\test53.c... PASSED
-  LLVMTests\OutputTests\test54.c... PASSED
+  LLVMTests\OutputTests\test53.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
+  LLVMTests\OutputTests\test54.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   LLVMTests\OutputTests\test55.c... PASSED
   LLVMTests\OutputTests\test56.c... PASSED
   LLVMTests\OutputTests\test57.c... PASSED
@@ -928,7 +1081,7 @@
   LLVMTests\OutputTests\test7.c... PASSED
   LLVMTests\OutputTests\test8.c... PASSED
   LLVMTests\OutputTests\test9.c... PASSED
-    |__ OutputTests: X  50 passed, 10 failed
+    |__ OutputTests: X  44 passed, 16 failed
 
   [PrintTests]
   LLVMTests\PrintTests\test1.c... PASSED
@@ -939,8 +1092,18 @@
   LLVMTests\PrintTests\test14.c... PASSED
   LLVMTests\PrintTests\test15.c... PASSED
   LLVMTests\PrintTests\test16.c... PASSED
-  LLVMTests\PrintTests\test17.c... PASSED
-  LLVMTests\PrintTests\test18.c... PASSED
+  LLVMTests\PrintTests\test17.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
+  LLVMTests\PrintTests\test18.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   LLVMTests\PrintTests\test19.c... PASSED
   LLVMTests\PrintTests\test2.c... PASSED
   LLVMTests\PrintTests\test20.c... PASSED
@@ -1001,15 +1164,23 @@
     
     ACTUAL (code 0):
   LLVMTests\PrintTests\test49.c... PASSED
-  LLVMTests\PrintTests\test5.c... PASSED
+  LLVMTests\PrintTests\test5.c... FAILED
+    --> EXPECTED (code 0):
+    79
+    ACTUAL (code 0):
+    c93c0479
   LLVMTests\PrintTests\test50.c... PASSED
   LLVMTests\PrintTests\test51.c... PASSED
   LLVMTests\PrintTests\test52.c... PASSED
   LLVMTests\PrintTests\test6.c... PASSED
-  LLVMTests\PrintTests\test7.c... PASSED
+  LLVMTests\PrintTests\test7.c... FAILED
+    --> EXPECTED (code 0):
+    5.20000061a6
+    ACTUAL (code 0):
+    5.2000009eb80061a6
   LLVMTests\PrintTests\test8.c... PASSED
   LLVMTests\PrintTests\test9.c... PASSED
-    |__ PrintTests: X  46 passed, 6 failed
+    |__ PrintTests: X  42 passed, 10 failed
 
   [ReturnTests]
   LLVMTests\ReturnTests\test1.c... PASSED
@@ -1039,7 +1210,12 @@
   LLVMTests\ScanTests\test10.c... PASSED
   LLVMTests\ScanTests\test11.c... PASSED
   LLVMTests\ScanTests\test12.c... PASSED
-  LLVMTests\ScanTests\test13.c... PASSED
+  LLVMTests\ScanTests\test13.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   LLVMTests\ScanTests\test14.c... PASSED
   LLVMTests\ScanTests\test15.c... PASSED
   LLVMTests\ScanTests\test16.c... FAILED (Compiler Error)
@@ -1052,7 +1228,7 @@
     --> EXPECTED (code 0):
     0.0000003.1400000.0000003.1400003.140000
     ACTUAL (code 0):
-    0.0000000.0000000.0000000.0000000.000000
+    0.0000003.1400000.0000003.1400000.000000
   LLVMTests\ScanTests\test3.c... PASSED
   LLVMTests\ScanTests\test4.c... PASSED
   LLVMTests\ScanTests\test5.c... PASSED
@@ -1060,7 +1236,7 @@
   LLVMTests\ScanTests\test7.c... PASSED
   LLVMTests\ScanTests\test8.c... PASSED
   LLVMTests\ScanTests\test9.c... PASSED
-    |__ ScanTests: X  13 passed, 3 failed
+    |__ ScanTests: X  12 passed, 4 failed
 
   [StringTests]
   LLVMTests\StringTests\test1.c... FAILED (Compiler Error)
@@ -1116,109 +1292,61 @@
     --> EXPECTED (code 0):
     1
     ACTUAL (code 0):
-    0
+    1831403520
     |__ StringTests: X  5 passed, 10 failed
 
   [StructTests]
   LLVMTests\StructTests\test1.c... PASSED
   LLVMTests\StructTests\test10.c... PASSED
-  LLVMTests\StructTests\test11.c... FAILED (Compiler Error)
-    --> line 6:15 no viable alternative at input 'structkaas{'
-  LLVMTests\StructTests\test12.c... FAILED (Compiler Error)
-    --> line 10:15 no viable alternative at input 'structkaas{'
+  LLVMTests\StructTests\test11.c... PASSED
+  LLVMTests\StructTests\test12.c... PASSED
   LLVMTests\StructTests\test13.c... PASSED
   LLVMTests\StructTests\test14.c... PASSED
-  LLVMTests\StructTests\test15.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
-  LLVMTests\StructTests\test16.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
+  LLVMTests\StructTests\test15.c... PASSED
+  LLVMTests\StructTests\test16.c... PASSED
   LLVMTests\StructTests\test17.c... PASSED (Expected failure)
   LLVMTests\StructTests\test18.c... PASSED (Expected failure)
-  LLVMTests\StructTests\test19.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
+  LLVMTests\StructTests\test19.c... PASSED
   LLVMTests\StructTests\test2.c... PASSED
-  LLVMTests\StructTests\test20.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
-  LLVMTests\StructTests\test21.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
-  LLVMTests\StructTests\test22.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
+  LLVMTests\StructTests\test20.c... PASSED
+  LLVMTests\StructTests\test21.c... PASSED
+  LLVMTests\StructTests\test22.c... PASSED
   LLVMTests\StructTests\test23.c... PASSED (Expected failure)
   LLVMTests\StructTests\test24.c... PASSED (Expected failure)
-  LLVMTests\StructTests\test25.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
+  LLVMTests\StructTests\test25.c... PASSED
   LLVMTests\StructTests\test26.c... FAILED (Compiler Error)
-  LLVMTests\StructTests\test27.c... FAILED (Compiler Error)
-  LLVMTests\StructTests\test28.c... FAILED (Compiler Error)
-  LLVMTests\StructTests\test29.c... FAILED (Compiler Error)
     --> Traceback (most recent call last):
     -->   File "<frozen runpy>", line 198, in _run_module_as_main
     -->   File "<frozen runpy>", line 88, in _run_code
     -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
     -->     main()
+  LLVMTests\StructTests\test27.c... PASSED
+  LLVMTests\StructTests\test28.c... PASSED
+  LLVMTests\StructTests\test29.c... PASSED
   LLVMTests\StructTests\test3.c... PASSED
-  LLVMTests\StructTests\test30.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
-  LLVMTests\StructTests\test31.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
+  LLVMTests\StructTests\test30.c... PASSED
+  LLVMTests\StructTests\test31.c... PASSED
   LLVMTests\StructTests\test32.c... PASSED (Expected failure)
-  LLVMTests\StructTests\test33.c... FAILED (Compiler Error)
-    --> line 12:15 no viable alternative at input 'structkaas{'
-  LLVMTests\StructTests\test34.c... FAILED (Compiler Error)
-    --> line 12:15 no viable alternative at input 'structkaas{'
-  LLVMTests\StructTests\test35.c... FAILED (Compiler Error)
-    --> line 12:15 no viable alternative at input 'structkaas{'
-  LLVMTests\StructTests\test36.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
-  LLVMTests\StructTests\test37.c... FAILED (Compiler Error)
-  LLVMTests\StructTests\test38.c... FAILED (Compiler Error)
-  LLVMTests\StructTests\test39.c... FAILED (Compiler Error)
-  LLVMTests\StructTests\test4.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
+  LLVMTests\StructTests\test33.c... PASSED
+  LLVMTests\StructTests\test34.c... PASSED
+  LLVMTests\StructTests\test35.c... PASSED
+  LLVMTests\StructTests\test36.c... PASSED
+  LLVMTests\StructTests\test37.c... PASSED
+  LLVMTests\StructTests\test38.c... FAILED
+    --> EXPECTED (code 0):
+    97
+    ACTUAL (code 3221225477):
+    
+    [!] LLI STDERR:
+    PLEASE submit a bug report to https://github.com/llvm/llvm-project/issues/ and include the crash backtrace.
+  LLVMTests\StructTests\test39.c... FAILED
+    --> EXPECTED (code 0):
+    gouda.as_integer: a
+    ACTUAL (code 3221225477):
+    
+    [!] LLI STDERR:
+    PLEASE submit a bug report to https://github.com/llvm/llvm-project/issues/ and include the crash backtrace.
+  LLVMTests\StructTests\test4.c... PASSED
   LLVMTests\StructTests\test40.c... PASSED (Expected failure)
   LLVMTests\StructTests\test41.c... PASSED (Expected failure)
   LLVMTests\StructTests\test42.c... FAILED (Compiler Error)
@@ -1226,88 +1354,47 @@
   LLVMTests\StructTests\test44.c... FAILED (Compiler Error)
   LLVMTests\StructTests\test45.c... FAILED (Compiler Error)
   LLVMTests\StructTests\test46.c... FAILED (Compiler Error)
-  LLVMTests\StructTests\test47.c... FAILED (Compiler Error)
+  LLVMTests\StructTests\test47.c... FAILED
+    --> EXPECTED (code 0):
+    5a
+    ACTUAL (code 3221225477):
+    5
+    [!] LLI STDERR:
+    PLEASE submit a bug report to https://github.com/llvm/llvm-project/issues/ and include the crash backtrace.
   LLVMTests\StructTests\test48.c... PASSED (Expected failure)
   LLVMTests\StructTests\test49.c... PASSED (Expected failure)
-  LLVMTests\StructTests\test5.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
-  LLVMTests\StructTests\test50.c... PASSED (Expected failure)
-  LLVMTests\StructTests\test51.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
+  LLVMTests\StructTests\test5.c... PASSED
+  LLVMTests\StructTests\test50.c... FAILED (Compiler accepteerde ongeldige C!)
+  LLVMTests\StructTests\test51.c... PASSED
   LLVMTests\StructTests\test52.c... PASSED (Expected failure)
-  LLVMTests\StructTests\test53.c... FAILED (Compiler Error)
-    --> line 9:31 no viable alternative at input 'malloc(sizeof(struct'
-    --> line 9:31 mismatched input 'struct' expecting '*'
-  LLVMTests\StructTests\test54.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
-  LLVMTests\StructTests\test55.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
-  LLVMTests\StructTests\test56.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
+  LLVMTests\StructTests\test53.c... PASSED
+  LLVMTests\StructTests\test54.c... PASSED
+  LLVMTests\StructTests\test55.c... PASSED
+  LLVMTests\StructTests\test56.c... PASSED
   LLVMTests\StructTests\test57.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   LLVMTests\StructTests\test58.c... PASSED
-  LLVMTests\StructTests\test59.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
-  LLVMTests\StructTests\test6.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
-  LLVMTests\StructTests\test60.c... FAILED (Compiler Error)
-  LLVMTests\StructTests\test61.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
+  LLVMTests\StructTests\test59.c... PASSED
+  LLVMTests\StructTests\test6.c... PASSED
+  LLVMTests\StructTests\test60.c... PASSED
+  LLVMTests\StructTests\test61.c... PASSED
   LLVMTests\StructTests\test62.c... PASSED (Expected failure)
-  LLVMTests\StructTests\test63.c... FAILED (Compiler accepteerde ongeldige C!)
-  LLVMTests\StructTests\test64.c... FAILED (Compiler accepteerde ongeldige C!)
+  LLVMTests\StructTests\test63.c... PASSED (Expected failure)
+  LLVMTests\StructTests\test64.c... PASSED (Expected failure)
   LLVMTests\StructTests\test65.c... PASSED
-  LLVMTests\StructTests\test66.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
-  LLVMTests\StructTests\test67.c... FAILED (Compiler accepteerde ongeldige C!)
-  LLVMTests\StructTests\test68.c... FAILED (Compiler accepteerde ongeldige C!)
+  LLVMTests\StructTests\test66.c... PASSED
+  LLVMTests\StructTests\test67.c... PASSED (Expected failure)
+  LLVMTests\StructTests\test68.c... PASSED (Expected failure)
   LLVMTests\StructTests\test69.c... PASSED
   LLVMTests\StructTests\test7.c... PASSED
-  LLVMTests\StructTests\test70.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
+  LLVMTests\StructTests\test70.c... PASSED
   LLVMTests\StructTests\test8.c... PASSED
   LLVMTests\StructTests\test9.c... PASSED
-    |__ StructTests: X  24 passed, 46 failed
+    |__ StructTests: X  59 passed, 11 failed
 
   [SwitchTests]
   LLVMTests\SwitchTests\test1.c... PASSED
@@ -1403,7 +1490,7 @@
   LLVMTests\WhileTests\test1.c... PASSED
   LLVMTests\WhileTests\test10.c... PASSED
   LLVMTests\WhileTests\test11.c... PASSED
-  LLVMTests\WhileTests\test12.c... FAILED (Compiler accepteerde ongeldige C!)
+  LLVMTests\WhileTests\test12.c... PASSED (Expected failure)
   LLVMTests\WhileTests\test13.c... PASSED
   LLVMTests\WhileTests\test14.c... PASSED
   LLVMTests\WhileTests\test15.c... PASSED
@@ -1412,7 +1499,7 @@
   LLVMTests\WhileTests\test18.c... PASSED
   LLVMTests\WhileTests\test19.c... PASSED (Expected failure)
   LLVMTests\WhileTests\test2.c... PASSED
-  LLVMTests\WhileTests\test20.c... FAILED (Compiler accepteerde ongeldige C!)
+  LLVMTests\WhileTests\test20.c... PASSED (Expected failure)
   LLVMTests\WhileTests\test21.c... PASSED
   LLVMTests\WhileTests\test22.c... PASSED
   LLVMTests\WhileTests\test23.c... PASSED
@@ -1424,117 +1511,202 @@
   LLVMTests\WhileTests\test7.c... PASSED
   LLVMTests\WhileTests\test8.c... PASSED
   LLVMTests\WhileTests\test9.c... PASSED
-    |__ WhileTests: X  22 passed, 2 failed
+    |__ WhileTests: V  24 passed, 0 failed
 
 
-  |== LLVMTests TOTAAL: 520 passed, 173 failed  [173 GEFAALD] ==|
+  |== LLVMTests TOTAAL: 542 passed, 151 failed  [151 GEFAALD] ==|
 
 ──────────────────────────────────────────────────
   [MipsTests]
 ──────────────────────────────────────────────────
   [ArrayTests]
-  MipsTests\ArrayTests\test1.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
-  MipsTests\ArrayTests\test10.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
+  MipsTests\ArrayTests\test1.c... PASSED
+  MipsTests\ArrayTests\test10.c... PASSED
   MipsTests\ArrayTests\test11.c... FAILED (Compiler Error)
     --> Traceback (most recent call last):
     -->   File "<frozen runpy>", line 198, in _run_module_as_main
     -->   File "<frozen runpy>", line 88, in _run_code
     -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
     -->     main()
-  MipsTests\ArrayTests\test12.c... PASSED
+  MipsTests\ArrayTests\test12.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   MipsTests\ArrayTests\test13.c... PASSED (Expected failure)
   MipsTests\ArrayTests\test14.c... PASSED
   MipsTests\ArrayTests\test15.c... PASSED
   MipsTests\ArrayTests\test16.c... FAILED (Compiler Error)
     --> Traceback (most recent call last):
-    -->   File "C:\msys64\mingw64\lib\python3.12\site-packages\llvmlite\ir\_utils.py", line 46, in __str__
-    -->     return self.__cached_str
-    -->            ^^^^^^^^^^^^^^^^^
-    --> AttributeError: 'AllocaInstr' object has no attribute '_StrCaching__cached_str'
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   MipsTests\ArrayTests\test17.c... PASSED (Expected failure)
   MipsTests\ArrayTests\test18.c... PASSED (Expected failure)
-  MipsTests\ArrayTests\test19.c... PASSED
-  MipsTests\ArrayTests\test2.c... FAILED (Compiler Error)
+  MipsTests\ArrayTests\test19.c... FAILED (Compiler Error)
     --> Traceback (most recent call last):
     -->   File "<frozen runpy>", line 198, in _run_module_as_main
     -->   File "<frozen runpy>", line 88, in _run_code
     -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
     -->     main()
+  MipsTests\ArrayTests\test2.c... PASSED
   MipsTests\ArrayTests\test20.c... FAILED (Compiler Error)
-  MipsTests\ArrayTests\test21.c... PASSED
+  MipsTests\ArrayTests\test21.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   MipsTests\ArrayTests\test22.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   MipsTests\ArrayTests\test23.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   MipsTests\ArrayTests\test24.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   MipsTests\ArrayTests\test26.c... PASSED (Expected failure)
   MipsTests\ArrayTests\test27.c... PASSED (Expected failure)
   MipsTests\ArrayTests\test28.c... PASSED (Expected failure)
-  MipsTests\ArrayTests\test29.c... PASSED
-  MipsTests\ArrayTests\test3.c... FAILED (Compiler Error)
+  MipsTests\ArrayTests\test29.c... FAILED (Compiler Error)
     --> Traceback (most recent call last):
     -->   File "<frozen runpy>", line 198, in _run_module_as_main
     -->   File "<frozen runpy>", line 88, in _run_code
     -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
     -->     main()
-  MipsTests\ArrayTests\test30.c... PASSED
+  MipsTests\ArrayTests\test3.c... PASSED
+  MipsTests\ArrayTests\test30.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   MipsTests\ArrayTests\test31.c... PASSED
   MipsTests\ArrayTests\test32.c... PASSED
-  MipsTests\ArrayTests\test33.c... PASSED
-  MipsTests\ArrayTests\test35.c... PASSED
-  MipsTests\ArrayTests\test36.c... PASSED
-  MipsTests\ArrayTests\test37.c... PASSED
-  MipsTests\ArrayTests\test38.c... PASSED
-  MipsTests\ArrayTests\test39.c... FAILED (Compiler Error)
+  MipsTests\ArrayTests\test33.c... FAILED (Compiler Error)
     --> Traceback (most recent call last):
     -->   File "<frozen runpy>", line 198, in _run_module_as_main
     -->   File "<frozen runpy>", line 88, in _run_code
     -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
     -->     main()
-  MipsTests\ArrayTests\test4.c... FAILED (Compiler Error)
+  MipsTests\ArrayTests\test35.c... FAILED (Compiler Error)
     --> Traceback (most recent call last):
     -->   File "<frozen runpy>", line 198, in _run_module_as_main
     -->   File "<frozen runpy>", line 88, in _run_code
     -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
     -->     main()
-  MipsTests\ArrayTests\test40.c... PASSED
-  MipsTests\ArrayTests\test41.c... PASSED
+  MipsTests\ArrayTests\test36.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
+  MipsTests\ArrayTests\test37.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
+  MipsTests\ArrayTests\test38.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
+  MipsTests\ArrayTests\test39.c... PASSED
+  MipsTests\ArrayTests\test4.c... PASSED
+  MipsTests\ArrayTests\test40.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
+  MipsTests\ArrayTests\test41.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   MipsTests\ArrayTests\test43.c... PASSED
   MipsTests\ArrayTests\test44.c... PASSED
   MipsTests\ArrayTests\test45.c... PASSED
-  MipsTests\ArrayTests\test46.c... PASSED
-  MipsTests\ArrayTests\test47.c... PASSED
-  MipsTests\ArrayTests\test48.c... PASSED
-  MipsTests\ArrayTests\test49.c... PASSED
+  MipsTests\ArrayTests\test46.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
+  MipsTests\ArrayTests\test47.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
+  MipsTests\ArrayTests\test48.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
+  MipsTests\ArrayTests\test49.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   MipsTests\ArrayTests\test5.c... FAILED (Compiler Error)
     --> Traceback (most recent call last):
     -->   File "<frozen runpy>", line 198, in _run_module_as_main
     -->   File "<frozen runpy>", line 88, in _run_code
     -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
     -->     main()
-  MipsTests\ArrayTests\test50.c... PASSED
-  MipsTests\ArrayTests\test51.c... FAILED (Compiler accepteerde ongeldige C!)
-  MipsTests\ArrayTests\test52.c... PASSED
-  MipsTests\ArrayTests\test53.c... PASSED
+  MipsTests\ArrayTests\test50.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
+  MipsTests\ArrayTests\test51.c... PASSED (Expected failure)
+  MipsTests\ArrayTests\test52.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
+  MipsTests\ArrayTests\test53.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   MipsTests\ArrayTests\test54.c... PASSED (Expected failure)
   MipsTests\ArrayTests\test55.c... PASSED (Expected failure)
   MipsTests\ArrayTests\test56.c... PASSED (Expected failure)
-  MipsTests\ArrayTests\test57.c... PASSED
+  MipsTests\ArrayTests\test57.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   MipsTests\ArrayTests\test58.c... PASSED
   MipsTests\ArrayTests\test59.c... FAILED (Compiler Error)
     --> Traceback (most recent call last):
-    -->   File "C:\msys64\mingw64\lib\python3.12\site-packages\llvmlite\ir\_utils.py", line 46, in __str__
-    -->     return self.__cached_str
-    -->            ^^^^^^^^^^^^^^^^^
-    --> AttributeError: 'AllocaInstr' object has no attribute '_StrCaching__cached_str'
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   MipsTests\ArrayTests\test6.c... FAILED (Compiler Error)
     --> Traceback (most recent call last):
     -->   File "<frozen runpy>", line 198, in _run_module_as_main
@@ -1542,15 +1714,29 @@
     -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
     -->     main()
   MipsTests\ArrayTests\test60.c... PASSED
-  MipsTests\ArrayTests\test61.c... PASSED
-  MipsTests\ArrayTests\test62.c... FAILED (Compiler Error)
+  MipsTests\ArrayTests\test61.c... FAILED (Compiler Error)
     --> Traceback (most recent call last):
     -->   File "<frozen runpy>", line 198, in _run_module_as_main
     -->   File "<frozen runpy>", line 88, in _run_code
     -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
     -->     main()
-  MipsTests\ArrayTests\test63.c... PASSED
-  MipsTests\ArrayTests\test64.c... PASSED
+  MipsTests\ArrayTests\test62.c... FAILED
+    --> EXPECTED (code 0):
+    971
+    ACTUAL (code 0):
+    -19526255671
+  MipsTests\ArrayTests\test63.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
+  MipsTests\ArrayTests\test64.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   MipsTests\ArrayTests\test7.c... FAILED (Compiler Error)
     --> Traceback (most recent call last):
     -->   File "<frozen runpy>", line 198, in _run_module_as_main
@@ -1564,12 +1750,20 @@
     -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
     -->     main()
   MipsTests\ArrayTests\test9.c... PASSED (Expected failure)
-    |__ ArrayTests: X  42 passed, 19 failed
+    |__ ArrayTests: X  26 passed, 35 failed
 
   [CalculationTests]
-  MipsTests\CalculationTests\test1.c... FAILED (Compiler Error)
+  MipsTests\CalculationTests\test1.c... FAILED
+    --> EXPECTED (code 0):
+    110127075010001666756121210111100993163842563736044677810180
+    ACTUAL (code 0):
+    11012707501000166675612121011110099316384256-639696896736044677810180
   MipsTests\CalculationTests\test10.c... PASSED
-  MipsTests\CalculationTests\test11.c... PASSED
+  MipsTests\CalculationTests\test11.c... FAILED
+    --> EXPECTED (code 0):
+    9798
+    ACTUAL (code 0):
+    12221282251217265762
   MipsTests\CalculationTests\test12.c... PASSED
   MipsTests\CalculationTests\test13.c... PASSED
   MipsTests\CalculationTests\test14.c... PASSED
@@ -1582,7 +1776,7 @@
     291
     
   MipsTests\CalculationTests\test18.c... PASSED
-  MipsTests\CalculationTests\test2.c... FAILED (Compiler Error)
+  MipsTests\CalculationTests\test2.c... PASSED
   MipsTests\CalculationTests\test20.c... PASSED
   MipsTests\CalculationTests\test21.c... PASSED
   MipsTests\CalculationTests\test22.c... PASSED (Expected failure)
@@ -1593,10 +1787,14 @@
   MipsTests\CalculationTests\test27.c... PASSED (Expected failure)
   MipsTests\CalculationTests\test28.c... FAILED (Compiler accepteerde ongeldige C!)
   MipsTests\CalculationTests\test29.c... PASSED (Expected failure)
-  MipsTests\CalculationTests\test3.c... FAILED (Compiler Error)
+  MipsTests\CalculationTests\test3.c... FAILED
+    --> EXPECTED (code 0):
+    1101270752-69853150100487897-5110510445-165-3001155720319940-314
+    ACTUAL (code 0):
+    1101270752-69853150100487897-5110510445-165-3001155720172530073619940-314
   MipsTests\CalculationTests\test30.c... PASSED (Expected failure)
   MipsTests\CalculationTests\test31.c... PASSED
-  MipsTests\CalculationTests\test32.c... FAILED (Compiler Error)
+  MipsTests\CalculationTests\test32.c... PASSED
   MipsTests\CalculationTests\test33.c... PASSED
   MipsTests\CalculationTests\test34.c... PASSED
   MipsTests\CalculationTests\test35.c... FAILED (Compiler Error)
@@ -1618,7 +1816,12 @@
   MipsTests\CalculationTests\test5.c... PASSED
   MipsTests\CalculationTests\test50.c... PASSED
   MipsTests\CalculationTests\test51.c... PASSED
-  MipsTests\CalculationTests\test52.c... PASSED
+  MipsTests\CalculationTests\test52.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   MipsTests\CalculationTests\test53.c... PASSED
   MipsTests\CalculationTests\test54.c... PASSED
   MipsTests\CalculationTests\test55.c... PASSED
@@ -1645,23 +1848,43 @@
     |__ CalculationTests: X  59 passed, 10 failed
 
   [CombinedTests]
-  MipsTests\CombinedTests\test1.c... PASSED
+  MipsTests\CombinedTests\test1.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   MipsTests\CombinedTests\test10.c... PASSED
   MipsTests\CombinedTests\test11.c... PASSED
-  MipsTests\CombinedTests\test12.c... PASSED
+  MipsTests\CombinedTests\test12.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   MipsTests\CombinedTests\test13.c... PASSED
   MipsTests\CombinedTests\test14.c... PASSED
   MipsTests\CombinedTests\test15.c... PASSED
   MipsTests\CombinedTests\test16.c... FAILED (Compiler accepteerde ongeldige C!)
   MipsTests\CombinedTests\test2.c... PASSED
-  MipsTests\CombinedTests\test3.c... PASSED
+  MipsTests\CombinedTests\test3.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   MipsTests\CombinedTests\test4.c... PASSED
   MipsTests\CombinedTests\test5.c... PASSED
-  MipsTests\CombinedTests\test6.c... PASSED
+  MipsTests\CombinedTests\test6.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   MipsTests\CombinedTests\test7.c... PASSED
   MipsTests\CombinedTests\test8.c... PASSED
   MipsTests\CombinedTests\test9.c... PASSED
-    |__ CombinedTests: X  15 passed, 1 failed
+    |__ CombinedTests: X  11 passed, 5 failed
 
   [CommentTests]
   MipsTests\CommentTests\test1.c... PASSED
@@ -1707,12 +1930,7 @@
   MipsTests\DefineTests\test2.c... PASSED
   MipsTests\DefineTests\test20.c... PASSED
   MipsTests\DefineTests\test21.c... PASSED (Expected failure)
-  MipsTests\DefineTests\test22.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
+  MipsTests\DefineTests\test22.c... PASSED
   MipsTests\DefineTests\test24.c... PASSED
   MipsTests\DefineTests\test3.c... FAILED (Compiler Error)
     --> Traceback (most recent call last):
@@ -1751,7 +1969,7 @@
   MipsTests\DefineTests\includes\yay3.c... PASSED (Expected failure)
       |__ includes: V  14 passed, 0 failed
 
-    |__ DefineTests: X  27 passed, 10 failed
+    |__ DefineTests: X  28 passed, 9 failed
 
   [DynamicArrayTests]
   MipsTests\DynamicArrayTests\test1.c... PASSED
@@ -1765,38 +1983,28 @@
     |__ DynamicArrayTests: V  8 passed, 0 failed
 
   [DynamicStructTests]
-  MipsTests\DynamicStructTests\test1.c... FAILED (Compiler Error)
-    --> line 12:32 no viable alternative at input 'malloc(sizeof(struct'
-    --> line 12:32 mismatched input 'struct' expecting '*'
-  MipsTests\DynamicStructTests\test2.c... FAILED (Compiler Error)
-    --> line 13:31 no viable alternative at input 'malloc(sizeof(union'
-    --> line 13:31 mismatched input 'union' expecting '*'
-  MipsTests\DynamicStructTests\test3.c... FAILED (Compiler Error)
-    --> line 11:62 no viable alternative at input 'sizeof(struct'
-    --> line 11:62 mismatched input 'struct' expecting '*'
-  MipsTests\DynamicStructTests\test4.c... FAILED (Compiler Error)
-  MipsTests\DynamicStructTests\test5.c... FAILED (Compiler Error)
-    --> line 19:34 no viable alternative at input 'malloc(sizeof(struct'
-    --> line 19:34 mismatched input 'struct' expecting '*'
-  MipsTests\DynamicStructTests\test6.c... FAILED (Compiler Error)
-    --> line 13:44 no viable alternative at input 'sizeof(struct'
-    --> line 13:44 mismatched input 'struct' expecting '*'
-    |__ DynamicStructTests: X  0 passed, 6 failed
+  MipsTests\DynamicStructTests\test1.c... PASSED
+  MipsTests\DynamicStructTests\test2.c... PASSED
+  MipsTests\DynamicStructTests\test3.c... PASSED
+  MipsTests\DynamicStructTests\test4.c... PASSED
+  MipsTests\DynamicStructTests\test5.c... PASSED
+  MipsTests\DynamicStructTests\test6.c... PASSED
+    |__ DynamicStructTests: V  6 passed, 0 failed
 
   [EnumTests]
-  MipsTests\EnumTests\test1.c... FAILED (Compiler Error)
-  MipsTests\EnumTests\test10.c... FAILED (Compiler Error)
+  MipsTests\EnumTests\test1.c... PASSED
+  MipsTests\EnumTests\test10.c... PASSED
   MipsTests\EnumTests\test11.c... FAILED (Compiler Error)
-  MipsTests\EnumTests\test12.c... FAILED (Compiler Error)
+  MipsTests\EnumTests\test12.c... PASSED
   MipsTests\EnumTests\test2.c... PASSED
   MipsTests\EnumTests\test3.c... PASSED
   MipsTests\EnumTests\test4.c... PASSED
-  MipsTests\EnumTests\test5.c... FAILED (Compiler Error)
+  MipsTests\EnumTests\test5.c... PASSED
   MipsTests\EnumTests\test6.c... PASSED (Expected failure)
   MipsTests\EnumTests\test7.c... PASSED (Expected failure)
-  MipsTests\EnumTests\test8.c... FAILED (Compiler Error)
-  MipsTests\EnumTests\test9.c... FAILED (Compiler Error)
-    |__ EnumTests: X  5 passed, 7 failed
+  MipsTests\EnumTests\test8.c... PASSED
+  MipsTests\EnumTests\test9.c... PASSED
+    |__ EnumTests: X  11 passed, 1 failed
 
   [ExtraMipsBasicTests]
   MipsTests\ExtraMipsBasicTests\test1.c... PASSED
@@ -1819,20 +2027,41 @@
   MipsTests\ExtraMipsBasicTests\test26.c... PASSED
   MipsTests\ExtraMipsBasicTests\test27.c... PASSED
   MipsTests\ExtraMipsBasicTests\test28.c... PASSED
-  MipsTests\ExtraMipsBasicTests\test29.c... PASSED
+  MipsTests\ExtraMipsBasicTests\test29.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   MipsTests\ExtraMipsBasicTests\test3.c... PASSED
-  MipsTests\ExtraMipsBasicTests\test30.c... PASSED
+  MipsTests\ExtraMipsBasicTests\test30.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   MipsTests\ExtraMipsBasicTests\test32.c... FAILED (Compiler Error)
     --> Traceback (most recent call last):
     -->   File "<frozen runpy>", line 198, in _run_module_as_main
     -->   File "<frozen runpy>", line 88, in _run_code
     -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
     -->     main()
-  MipsTests\ExtraMipsBasicTests\test33.c... PASSED
+  MipsTests\ExtraMipsBasicTests\test33.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   MipsTests\ExtraMipsBasicTests\test34.c... PASSED
   MipsTests\ExtraMipsBasicTests\test35.c... PASSED
   MipsTests\ExtraMipsBasicTests\test36.c... PASSED
-  MipsTests\ExtraMipsBasicTests\test37.c... FAILED (Compiler Error)
+  MipsTests\ExtraMipsBasicTests\test37.c... FAILED
+    --> EXPECTED (code 0):
+    55
+    ACTUAL (code 3221225477):
+    5
+    [!] LLI STDERR:
+    PLEASE submit a bug report to https://github.com/llvm/llvm-project/issues/ and include the crash backtrace.
   MipsTests\ExtraMipsBasicTests\test38.c... PASSED
   MipsTests\ExtraMipsBasicTests\test39.c... PASSED
   MipsTests\ExtraMipsBasicTests\test4.c... PASSED
@@ -1854,39 +2083,33 @@
   MipsTests\ExtraMipsBasicTests\test5.c... PASSED
   MipsTests\ExtraMipsBasicTests\test50.c... PASSED
   MipsTests\ExtraMipsBasicTests\test51.c... PASSED
-  MipsTests\ExtraMipsBasicTests\test52.c... PASSED
-  MipsTests\ExtraMipsBasicTests\test53.c... FAILED
+  MipsTests\ExtraMipsBasicTests\test52.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
+  MipsTests\ExtraMipsBasicTests\test53.c... PASSED
+  MipsTests\ExtraMipsBasicTests\test54.c... PASSED
+  MipsTests\ExtraMipsBasicTests\test55.c... FAILED
     --> EXPECTED (code 0):
-    55
+    5
     ACTUAL (code 3221225477):
     5
     [!] LLI STDERR:
     PLEASE submit a bug report to https://github.com/llvm/llvm-project/issues/ and include the crash backtrace.
-  MipsTests\ExtraMipsBasicTests\test54.c... PASSED
-  MipsTests\ExtraMipsBasicTests\test55.c... FAILED (Compiler Error)
-  MipsTests\ExtraMipsBasicTests\test56.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
-  MipsTests\ExtraMipsBasicTests\test57.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
-  MipsTests\ExtraMipsBasicTests\test58.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
+  MipsTests\ExtraMipsBasicTests\test56.c... PASSED
+  MipsTests\ExtraMipsBasicTests\test57.c... PASSED
+  MipsTests\ExtraMipsBasicTests\test58.c... PASSED
   MipsTests\ExtraMipsBasicTests\test59.c... PASSED
   MipsTests\ExtraMipsBasicTests\test6.c... PASSED
   MipsTests\ExtraMipsBasicTests\test60.c... PASSED
   MipsTests\ExtraMipsBasicTests\test61.c... PASSED
-  MipsTests\ExtraMipsBasicTests\test62.c... PASSED
+  MipsTests\ExtraMipsBasicTests\test62.c... FAILED
+    --> EXPECTED (code 0):
+     68
+    ACTUAL (code 0):
+    1a340768
   MipsTests\ExtraMipsBasicTests\test63.c... PASSED
   MipsTests\ExtraMipsBasicTests\test64.c... PASSED
   MipsTests\ExtraMipsBasicTests\test65.c... PASSED
@@ -1901,25 +2124,39 @@
   MipsTests\ExtraMipsBasicTests\test73.c... PASSED
   MipsTests\ExtraMipsBasicTests\test74.c... PASSED
   MipsTests\ExtraMipsBasicTests\test75.c... PASSED
-  MipsTests\ExtraMipsBasicTests\test76.c... PASSED
+  MipsTests\ExtraMipsBasicTests\test76.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   MipsTests\ExtraMipsBasicTests\test77.c... PASSED
   MipsTests\ExtraMipsBasicTests\test78.c... PASSED
-  MipsTests\ExtraMipsBasicTests\test79.c... FAILED (Compiler Error)
-    --> line 6:29 no viable alternative at input 'calloc(5,sizeof(int'
-    --> line 6:20 mismatched input ',' expecting ';'
-    --> line 6:29 mismatched input 'int' expecting '*'
+  MipsTests\ExtraMipsBasicTests\test79.c... PASSED
   MipsTests\ExtraMipsBasicTests\test8.c... PASSED
-  MipsTests\ExtraMipsBasicTests\test80.c... FAILED (Compiler Error)
-    --> line 6:29 no viable alternative at input 'calloc(5,sizeof(int'
-    --> line 6:20 mismatched input ',' expecting ';'
-    --> line 6:29 mismatched input 'int' expecting '*'
+  MipsTests\ExtraMipsBasicTests\test80.c... PASSED
   MipsTests\ExtraMipsBasicTests\test81.c... PASSED
   MipsTests\ExtraMipsBasicTests\test82.c... PASSED
-  MipsTests\ExtraMipsBasicTests\test83.c... PASSED
-  MipsTests\ExtraMipsBasicTests\test84.c... PASSED
-  MipsTests\ExtraMipsBasicTests\test85.c... PASSED
+  MipsTests\ExtraMipsBasicTests\test83.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
+  MipsTests\ExtraMipsBasicTests\test84.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
+  MipsTests\ExtraMipsBasicTests\test85.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   MipsTests\ExtraMipsBasicTests\test9.c... PASSED
-    |__ ExtraMipsBasicTests: X  73 passed, 10 failed
+    |__ ExtraMipsBasicTests: X  70 passed, 13 failed
 
   [FileIOTests]
   MipsTests\FileIOTests\test1.c... FAILED (Compiler Error)
@@ -2032,13 +2269,7 @@
   MipsTests\FunctionTests\test19.c... PASSED
   MipsTests\FunctionTests\test2.c... PASSED (Expected failure)
   MipsTests\FunctionTests\test20.c... PASSED (Expected failure)
-  MipsTests\FunctionTests\test21.c... FAILED
-    --> EXPECTED (code 0):
-    0
-    5
-    
-    ACTUAL (code 0):
-    888274944
+  MipsTests\FunctionTests\test21.c... PASSED
   MipsTests\FunctionTests\test22.c... PASSED
   MipsTests\FunctionTests\test23.c... PASSED
   MipsTests\FunctionTests\test24.c... PASSED (Expected failure)
@@ -2096,18 +2327,8 @@
     --> line 3:18 mismatched input '(' expecting ';'
     --> line 5:0 extraneous input '}' expecting {<EOF>, '#include', 'union', 'enum', 'const', 'int', 'float', 'char', 'void', 'struct', 'typedef', ';', IDENTIFIER}
   MipsTests\FunctionTests\test62.c... PASSED (Expected failure)
-  MipsTests\FunctionTests\test63.c... FAILED
-    --> EXPECTED (code 0):
-    3
-    3
-    
-    ACTUAL (code 0):
-    -910360576
-  MipsTests\FunctionTests\test64.c... FAILED
-    --> EXPECTED (code 0):
-    22
-    ACTUAL (code 0):
-    -137691136-137691136
+  MipsTests\FunctionTests\test63.c... FAILED (Compiler Error)
+  MipsTests\FunctionTests\test64.c... FAILED (Compiler Error)
   MipsTests\FunctionTests\test65.c... FAILED (Compiler Error)
     --> line 10:9 no viable alternative at input 'charmain'
     --> line 15:8 no viable alternative at input 'intmain'
@@ -2123,7 +2344,7 @@
   MipsTests\FunctionTests\test72.c... PASSED
   MipsTests\FunctionTests\test8.c... PASSED (Expected failure)
   MipsTests\FunctionTests\test9.c... PASSED (Expected failure)
-    |__ FunctionTests: X  59 passed, 13 failed
+    |__ FunctionTests: X  60 passed, 12 failed
 
   [GlobalTests]
   MipsTests\GlobalTests\test1.c... PASSED
@@ -2223,13 +2444,7 @@
     
     ACTUAL (code 0):
     20
-  MipsTests\OutputTests\test24.c... FAILED
-    --> EXPECTED (code 0):
-    100
-    50
-    50
-    25
-    25
+  MipsTests\OutputTests\test24.c... PASSED
   MipsTests\OutputTests\test25.c... PASSED
   MipsTests\OutputTests\test26.c... PASSED (Expected failure)
   MipsTests\OutputTests\test27.c... PASSED (Expected failure)
@@ -2243,8 +2458,18 @@
   MipsTests\OutputTests\test34.c... PASSED (Expected failure)
   MipsTests\OutputTests\test35.c... PASSED (Expected failure)
   MipsTests\OutputTests\test36.c... PASSED (Expected failure)
-  MipsTests\OutputTests\test37.c... PASSED
-  MipsTests\OutputTests\test38.c... PASSED
+  MipsTests\OutputTests\test37.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
+  MipsTests\OutputTests\test38.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   MipsTests\OutputTests\test39.c... PASSED
   MipsTests\OutputTests\test4.c... PASSED
   MipsTests\OutputTests\test40.c... FAILED
@@ -2253,15 +2478,34 @@
     ACTUAL (code 0):
     2
   MipsTests\OutputTests\test41.c... PASSED
-  MipsTests\OutputTests\test42.c... PASSED
+  MipsTests\OutputTests\test42.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   MipsTests\OutputTests\test43.c... PASSED
   MipsTests\OutputTests\test44.c... PASSED
-  MipsTests\OutputTests\test45.c... FAILED (Compiler Error)
-    --> line 4:17 no viable alternative at input 'structPoint{'
-  MipsTests\OutputTests\test46.c... PASSED
-  MipsTests\OutputTests\test47.c... PASSED
+  MipsTests\OutputTests\test45.c... PASSED
+  MipsTests\OutputTests\test46.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
+  MipsTests\OutputTests\test47.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   MipsTests\OutputTests\test48.c... PASSED
-  MipsTests\OutputTests\test49.c... PASSED
+  MipsTests\OutputTests\test49.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   MipsTests\OutputTests\test5.c... PASSED
   MipsTests\OutputTests\test50.c... FAILED
     --> EXPECTED (code 0):
@@ -2273,8 +2517,18 @@
   MipsTests\OutputTests\test52.c... FAILED (Compiler Error)
     --> line 3:18 mismatched input '(' expecting ';'
     --> line 5:0 extraneous input '}' expecting {<EOF>, '#include', 'union', 'enum', 'const', 'int', 'float', 'char', 'void', 'struct', 'typedef', ';', IDENTIFIER}
-  MipsTests\OutputTests\test53.c... PASSED
-  MipsTests\OutputTests\test54.c... PASSED
+  MipsTests\OutputTests\test53.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
+  MipsTests\OutputTests\test54.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   MipsTests\OutputTests\test55.c... PASSED
   MipsTests\OutputTests\test56.c... PASSED
   MipsTests\OutputTests\test57.c... PASSED
@@ -2291,7 +2545,7 @@
   MipsTests\OutputTests\test7.c... PASSED
   MipsTests\OutputTests\test8.c... PASSED
   MipsTests\OutputTests\test9.c... PASSED
-    |__ OutputTests: X  50 passed, 10 failed
+    |__ OutputTests: X  44 passed, 16 failed
 
   [PrintTests]
   MipsTests\PrintTests\test1.c... PASSED
@@ -2302,8 +2556,18 @@
   MipsTests\PrintTests\test14.c... PASSED
   MipsTests\PrintTests\test15.c... PASSED
   MipsTests\PrintTests\test16.c... PASSED
-  MipsTests\PrintTests\test17.c... PASSED
-  MipsTests\PrintTests\test18.c... PASSED
+  MipsTests\PrintTests\test17.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
+  MipsTests\PrintTests\test18.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   MipsTests\PrintTests\test19.c... PASSED
   MipsTests\PrintTests\test2.c... PASSED
   MipsTests\PrintTests\test20.c... PASSED
@@ -2364,14 +2628,22 @@
     
     ACTUAL (code 0):
   MipsTests\PrintTests\test49.c... PASSED
-  MipsTests\PrintTests\test5.c... PASSED
+  MipsTests\PrintTests\test5.c... FAILED
+    --> EXPECTED (code 0):
+    79
+    ACTUAL (code 0):
+    c0da0479
   MipsTests\PrintTests\test50.c... PASSED
   MipsTests\PrintTests\test51.c... PASSED
   MipsTests\PrintTests\test6.c... PASSED
-  MipsTests\PrintTests\test7.c... PASSED
+  MipsTests\PrintTests\test7.c... FAILED
+    --> EXPECTED (code 0):
+    61a6
+    ACTUAL (code 0):
+    32d82861a6
   MipsTests\PrintTests\test8.c... PASSED
   MipsTests\PrintTests\test9.c... PASSED
-    |__ PrintTests: X  45 passed, 6 failed
+    |__ PrintTests: X  41 passed, 10 failed
 
   [ReturnTests]
   MipsTests\ReturnTests\test1.c... PASSED
@@ -2406,14 +2678,21 @@
     -->   File "<frozen runpy>", line 88, in _run_code
     -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
     -->     main()
-  MipsTests\ScanTests\test13.c... PASSED
+  MipsTests\ScanTests\test13.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   MipsTests\ScanTests\test14.c... PASSED
   MipsTests\ScanTests\test15.c... PASSED
   MipsTests\ScanTests\test2.c... FAILED
     --> EXPECTED (code 0):
     03
-    ACTUAL (code 0):
-    00
+    ACTUAL (code 3221225477):
+    
+    [!] LLI STDERR:
+    PLEASE submit a bug report to https://github.com/llvm/llvm-project/issues/ and include the crash backtrace.
   MipsTests\ScanTests\test3.c... FAILED (Compiler Error)
     --> Traceback (most recent call last):
     -->   File "<frozen runpy>", line 198, in _run_module_as_main
@@ -2426,7 +2705,7 @@
   MipsTests\ScanTests\test7.c... PASSED
   MipsTests\ScanTests\test8.c... PASSED
   MipsTests\ScanTests\test9.c... PASSED
-    |__ ScanTests: X  11 passed, 4 failed
+    |__ ScanTests: X  10 passed, 5 failed
 
   [StringTests]
   MipsTests\StringTests\test1.c... FAILED (Compiler Error)
@@ -2482,109 +2761,69 @@
     --> EXPECTED (code 0):
     1
     ACTUAL (code 0):
-    0
+    -1417478144
     |__ StringTests: X  5 passed, 10 failed
 
   [StructTests]
   MipsTests\StructTests\test1.c... PASSED
   MipsTests\StructTests\test10.c... PASSED
-  MipsTests\StructTests\test11.c... FAILED (Compiler Error)
-    --> line 6:15 no viable alternative at input 'structkaas{'
-  MipsTests\StructTests\test12.c... FAILED (Compiler Error)
-    --> line 10:15 no viable alternative at input 'structkaas{'
-  MipsTests\StructTests\test13.c... PASSED
-  MipsTests\StructTests\test14.c... PASSED
-  MipsTests\StructTests\test15.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
-  MipsTests\StructTests\test16.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
+  MipsTests\StructTests\test11.c... PASSED
+  MipsTests\StructTests\test12.c... PASSED
+  MipsTests\StructTests\test13.c... FAILED
+    --> EXPECTED (code 0):
+    100 18 l l
+    ACTUAL (code 0):
+    100 -1196516846 l l
+  MipsTests\StructTests\test14.c... FAILED
+    --> EXPECTED (code 0):
+    1 98 l l
+    ACTUAL (code 0):
+    1 -814770334 l l
+  MipsTests\StructTests\test15.c... PASSED
+  MipsTests\StructTests\test16.c... PASSED
   MipsTests\StructTests\test17.c... PASSED (Expected failure)
   MipsTests\StructTests\test18.c... PASSED (Expected failure)
-  MipsTests\StructTests\test19.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
+  MipsTests\StructTests\test19.c... PASSED
   MipsTests\StructTests\test2.c... PASSED
-  MipsTests\StructTests\test20.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
-  MipsTests\StructTests\test21.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
-  MipsTests\StructTests\test22.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
+  MipsTests\StructTests\test20.c... PASSED
+  MipsTests\StructTests\test21.c... PASSED
+  MipsTests\StructTests\test22.c... PASSED
   MipsTests\StructTests\test23.c... PASSED (Expected failure)
   MipsTests\StructTests\test24.c... PASSED (Expected failure)
-  MipsTests\StructTests\test25.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
+  MipsTests\StructTests\test25.c... PASSED
   MipsTests\StructTests\test26.c... FAILED (Compiler Error)
-  MipsTests\StructTests\test27.c... FAILED (Compiler Error)
-  MipsTests\StructTests\test28.c... FAILED (Compiler Error)
-  MipsTests\StructTests\test29.c... FAILED (Compiler Error)
     --> Traceback (most recent call last):
     -->   File "<frozen runpy>", line 198, in _run_module_as_main
     -->   File "<frozen runpy>", line 88, in _run_code
     -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
     -->     main()
+  MipsTests\StructTests\test27.c... PASSED
+  MipsTests\StructTests\test28.c... PASSED
+  MipsTests\StructTests\test29.c... PASSED
   MipsTests\StructTests\test3.c... PASSED
-  MipsTests\StructTests\test30.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
-  MipsTests\StructTests\test31.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
+  MipsTests\StructTests\test30.c... PASSED
+  MipsTests\StructTests\test31.c... PASSED
   MipsTests\StructTests\test32.c... PASSED (Expected failure)
-  MipsTests\StructTests\test33.c... FAILED (Compiler Error)
-    --> line 12:15 no viable alternative at input 'structkaas{'
-  MipsTests\StructTests\test34.c... FAILED (Compiler Error)
-    --> line 12:15 no viable alternative at input 'structkaas{'
-  MipsTests\StructTests\test35.c... FAILED (Compiler Error)
-    --> line 12:15 no viable alternative at input 'structkaas{'
-  MipsTests\StructTests\test36.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
-  MipsTests\StructTests\test37.c... FAILED (Compiler Error)
-  MipsTests\StructTests\test38.c... FAILED (Compiler Error)
-  MipsTests\StructTests\test39.c... FAILED (Compiler Error)
-  MipsTests\StructTests\test4.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
+  MipsTests\StructTests\test33.c... PASSED
+  MipsTests\StructTests\test34.c... PASSED
+  MipsTests\StructTests\test35.c... PASSED
+  MipsTests\StructTests\test36.c... PASSED
+  MipsTests\StructTests\test37.c... PASSED
+  MipsTests\StructTests\test38.c... FAILED
+    --> EXPECTED (code 0):
+    97
+    ACTUAL (code 3221225477):
+    
+    [!] LLI STDERR:
+    PLEASE submit a bug report to https://github.com/llvm/llvm-project/issues/ and include the crash backtrace.
+  MipsTests\StructTests\test39.c... FAILED
+    --> EXPECTED (code 0):
+    gouda.as_integer: a
+    ACTUAL (code 3221225477):
+    
+    [!] LLI STDERR:
+    PLEASE submit a bug report to https://github.com/llvm/llvm-project/issues/ and include the crash backtrace.
+  MipsTests\StructTests\test4.c... PASSED
   MipsTests\StructTests\test40.c... PASSED (Expected failure)
   MipsTests\StructTests\test41.c... PASSED (Expected failure)
   MipsTests\StructTests\test42.c... FAILED (Compiler Error)
@@ -2592,88 +2831,47 @@
   MipsTests\StructTests\test44.c... FAILED (Compiler Error)
   MipsTests\StructTests\test45.c... FAILED (Compiler Error)
   MipsTests\StructTests\test46.c... FAILED (Compiler Error)
-  MipsTests\StructTests\test47.c... FAILED (Compiler Error)
+  MipsTests\StructTests\test47.c... FAILED
+    --> EXPECTED (code 0):
+    5a
+    ACTUAL (code 3221225477):
+    5
+    [!] LLI STDERR:
+    PLEASE submit a bug report to https://github.com/llvm/llvm-project/issues/ and include the crash backtrace.
   MipsTests\StructTests\test48.c... PASSED (Expected failure)
   MipsTests\StructTests\test49.c... PASSED (Expected failure)
-  MipsTests\StructTests\test5.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
-  MipsTests\StructTests\test50.c... PASSED (Expected failure)
-  MipsTests\StructTests\test51.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
+  MipsTests\StructTests\test5.c... PASSED
+  MipsTests\StructTests\test50.c... FAILED (Compiler accepteerde ongeldige C!)
+  MipsTests\StructTests\test51.c... PASSED
   MipsTests\StructTests\test52.c... PASSED (Expected failure)
-  MipsTests\StructTests\test53.c... FAILED (Compiler Error)
-    --> line 9:31 no viable alternative at input 'malloc(sizeof(struct'
-    --> line 9:31 mismatched input 'struct' expecting '*'
-  MipsTests\StructTests\test54.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
-  MipsTests\StructTests\test55.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
-  MipsTests\StructTests\test56.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
+  MipsTests\StructTests\test53.c... PASSED
+  MipsTests\StructTests\test54.c... PASSED
+  MipsTests\StructTests\test55.c... PASSED
+  MipsTests\StructTests\test56.c... PASSED
   MipsTests\StructTests\test57.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   MipsTests\StructTests\test58.c... PASSED
-  MipsTests\StructTests\test59.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
-  MipsTests\StructTests\test6.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
-  MipsTests\StructTests\test60.c... FAILED (Compiler Error)
-  MipsTests\StructTests\test61.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
+  MipsTests\StructTests\test59.c... PASSED
+  MipsTests\StructTests\test6.c... PASSED
+  MipsTests\StructTests\test60.c... PASSED
+  MipsTests\StructTests\test61.c... PASSED
   MipsTests\StructTests\test62.c... PASSED (Expected failure)
-  MipsTests\StructTests\test63.c... FAILED (Compiler accepteerde ongeldige C!)
-  MipsTests\StructTests\test64.c... FAILED (Compiler accepteerde ongeldige C!)
+  MipsTests\StructTests\test63.c... PASSED (Expected failure)
+  MipsTests\StructTests\test64.c... PASSED (Expected failure)
   MipsTests\StructTests\test65.c... PASSED
-  MipsTests\StructTests\test66.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
-  MipsTests\StructTests\test67.c... FAILED (Compiler accepteerde ongeldige C!)
-  MipsTests\StructTests\test68.c... FAILED (Compiler accepteerde ongeldige C!)
+  MipsTests\StructTests\test66.c... PASSED
+  MipsTests\StructTests\test67.c... PASSED (Expected failure)
+  MipsTests\StructTests\test68.c... PASSED (Expected failure)
   MipsTests\StructTests\test69.c... PASSED
   MipsTests\StructTests\test7.c... PASSED
-  MipsTests\StructTests\test70.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
+  MipsTests\StructTests\test70.c... PASSED
   MipsTests\StructTests\test8.c... PASSED
   MipsTests\StructTests\test9.c... PASSED
-    |__ StructTests: X  24 passed, 46 failed
+    |__ StructTests: X  57 passed, 13 failed
 
   [SwitchTests]
   MipsTests\SwitchTests\test10.c... PASSED
@@ -2700,7 +2898,7 @@
   MipsTests\WhileTests\test1.c... PASSED
   MipsTests\WhileTests\test10.c... PASSED
   MipsTests\WhileTests\test11.c... PASSED
-  MipsTests\WhileTests\test12.c... FAILED (Compiler accepteerde ongeldige C!)
+  MipsTests\WhileTests\test12.c... PASSED (Expected failure)
   MipsTests\WhileTests\test13.c... PASSED
   MipsTests\WhileTests\test14.c... PASSED
   MipsTests\WhileTests\test15.c... PASSED
@@ -2709,7 +2907,7 @@
   MipsTests\WhileTests\test18.c... PASSED
   MipsTests\WhileTests\test19.c... PASSED (Expected failure)
   MipsTests\WhileTests\test2.c... PASSED
-  MipsTests\WhileTests\test20.c... FAILED (Compiler accepteerde ongeldige C!)
+  MipsTests\WhileTests\test20.c... PASSED (Expected failure)
   MipsTests\WhileTests\test21.c... PASSED
   MipsTests\WhileTests\test22.c... PASSED
   MipsTests\WhileTests\test23.c... PASSED
@@ -2721,12 +2919,12 @@
   MipsTests\WhileTests\test7.c... PASSED
   MipsTests\WhileTests\test8.c... PASSED
   MipsTests\WhileTests\test9.c... PASSED
-    |__ WhileTests: X  22 passed, 2 failed
+    |__ WhileTests: V  24 passed, 0 failed
 
 
-  |== MipsTests TOTAAL: 527 passed, 181 failed  [181 GEFAALD] ==|
+  |== MipsTests TOTAAL: 542 passed, 166 failed  [166 GEFAALD] ==|
 
 ============================================================
-  EINDTOTAAL: 1177 passed, 374 failed
+  EINDTOTAAL: 1211 passed, 340 failed
 ============================================================
 

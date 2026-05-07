@@ -11,9 +11,7 @@ define i32 @"main"()
 {
 entry:
   %"c" = alloca %"struct.a"
-  ;  Source: structac;
   %"d" = alloca %"struct.a"
-  ;  Source: structad;
   ;  Source: d.v
   %"gep_v" = getelementptr inbounds %"struct.a", %"struct.a"* %"d", i32 0, i32 1
   %"load_v" = load i32, i32* %"gep_v"
@@ -26,15 +24,15 @@ entry:
   ;  Source: &d
   ;  Source: c.b=&d;
   store %"struct.a"* %"d", %"struct.a"** %"gep_b"
-  %".12" = bitcast [3 x i8]* @"str" to i8*
+  %".10" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: c.b->v
   %"gep_b.1" = getelementptr inbounds %"struct.a", %"struct.a"* %"c", i32 0, i32 0
   %"load_b.1" = load %"struct.a"*, %"struct.a"** %"gep_b.1"
-  %".14" = load %"struct.a"*, %"struct.a"** %"gep_b.1"
-  %"gep_v.1" = getelementptr inbounds %"struct.a", %"struct.a"* %".14", i32 0, i32 1
+  %".12" = load %"struct.a"*, %"struct.a"** %"gep_b.1"
+  %"gep_v.1" = getelementptr inbounds %"struct.a", %"struct.a"* %".12", i32 0, i32 1
   %"load_v.1" = load i32, i32* %"gep_v.1"
   ;  Source: printf("%d",c.b->v);
-  %".16" = call i32 (i8*, ...) @"printf"(i8* %".12", i32 %"load_v.1")
+  %".14" = call i32 (i8*, ...) @"printf"(i8* %".10", i32 %"load_v.1")
   ;  Source: return0;
   ret i32 0
 }

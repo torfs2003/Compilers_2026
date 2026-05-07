@@ -19,13 +19,10 @@ define i32 @"main"()
 {
 entry:
   %"gouda" = alloca %"struct.cheese"
-  ;  Source: structcheesegouda;
   %"a" = alloca i32
-  ;  Source: sizeof(gouda)
-  %".4" = getelementptr i32, i32* null, i32 1
-  %".5" = ptrtoint i32* %".4" to i32
-  ;  Source: inta=sizeof(gouda);
-  store i32 %".5", i32* %"a"
+  %".2" = getelementptr i32, i32* null, i32 1
+  %".3" = ptrtoint i32* %".2" to i32
+  store i32 %".3", i32* %"a"
   ;  Source: return0;
   ret i32 0
 }

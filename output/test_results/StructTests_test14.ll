@@ -11,7 +11,6 @@ define i32 @"main"()
 {
 entry:
   %"ementaler" = alloca %"struct.kaas"
-  ;  Source: structkaasementaler;
   ;  Source: ementaler.melk
   %"gep_melk" = getelementptr inbounds %"struct.kaas", %"struct.kaas"* %"ementaler", i32 0, i32 0
   %"load_melk" = load i32, i32* %"gep_melk"
@@ -28,28 +27,30 @@ entry:
   ;  Source: ementaler.lol='l';
   store i8 108, i8* %"gep_lol"
   %"b" = alloca i8
-  ;  Source: ementaler.lol
   %"gep_lol.1" = getelementptr inbounds %"struct.kaas", %"struct.kaas"* %"ementaler", i32 0, i32 2
   %"load_lol.1" = load i8, i8* %"gep_lol.1"
-  ;  Source: charb=ementaler.lol;
   store i8 %"load_lol.1", i8* %"b"
-  %".15" = bitcast [12 x i8]* @"str" to i8*
+  %".12" = bitcast [12 x i8]* @"str" to i8*
   ;  Source: ementaler.melk
   %"gep_melk.1" = getelementptr inbounds %"struct.kaas", %"struct.kaas"* %"ementaler", i32 0, i32 0
   %"load_melk.1" = load i32, i32* %"gep_melk.1"
   ;  Source: ementaler.fermtented
   %"gep_fermtented.1" = getelementptr inbounds %"struct.kaas", %"struct.kaas"* %"ementaler", i32 0, i32 1
   %"load_fermtented.1" = load float, float* %"gep_fermtented.1"
+  ;  Source: (ementaler.fermtented*100)
+  %".16" = sitofp i32 100 to float
+  %".17" = fmul float %"load_fermtented.1", %".16"
+  ;  Source: (char)(ementaler.fermtented*100)
+  %".19" = fptosi float %".17" to i8
   ;  Source: ementaler.lol
   %"gep_lol.2" = getelementptr inbounds %"struct.kaas", %"struct.kaas"* %"ementaler", i32 0, i32 2
   %"load_lol.2" = load i8, i8* %"gep_lol.2"
   ;  Source: b
   %"b.1" = load i8, i8* %"b"
-  ;  Source: printf("%d %f %c %c",ementaler.melk,ementaler.fermtented,ementaler.lol,b);
-  %".21" = fpext float %"load_fermtented.1" to double
-  %".22" = call i32 (i8*, ...) @"printf"(i8* %".15", i32 %"load_melk.1", double %".21", i8 %"load_lol.2", i8 %"b.1")
+  ;  Source: printf("%d %d %c %c",ementaler.melk,(char)(ementaler.fermtented*100),ementaler.lol,b);
+  %".23" = call i32 (i8*, ...) @"printf"(i8* %".12", i32 %"load_melk.1", i8 %".19", i8 %"load_lol.2", i8 %"b.1")
   ;  Source: return0;
   ret i32 0
 }
 
-@"str" = internal constant [12 x i8] c"%d %f %c %c\00"
+@"str" = internal constant [12 x i8] c"%d %d %c %c\00"

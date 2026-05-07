@@ -10,47 +10,37 @@ define i32 @"main"()
 {
 entry:
   %"x" = alloca i32
-  ;  Source: intx=4;
   store i32 4, i32* %"x"
   ;  Source: x
   %"x.1" = load i32, i32* %"x"
   ;  Source: x=1;
   store i32 1, i32* %"x"
   %"ptr" = alloca i32*
-  ;  Source: x
-  %"x.2" = load i32, i32* %"x"
-  ;  Source: &x
-  ;  Source: int*ptr=&x;
   store i32* %"x", i32** %"ptr"
   ;  Source: ptr
   %"ptr.1" = load i32*, i32** %"ptr"
   ;  Source: ptr++;
-  %".13" = load i32*, i32** %"ptr"
-  %"ptr_incdec" = getelementptr i32, i32* %".13", i32 1
+  %".9" = load i32*, i32** %"ptr"
+  %"ptr_incdec" = getelementptr i32, i32* %".9", i32 1
   store i32* %"ptr_incdec", i32** %"ptr"
   ;  Source: ptr
   %"ptr.2" = load i32*, i32** %"ptr"
   ;  Source: ptr--;
-  %".17" = load i32*, i32** %"ptr"
-  %"ptr_incdec.1" = getelementptr i32, i32* %".17", i32 -1
+  %".13" = load i32*, i32** %"ptr"
+  %"ptr_incdec.1" = getelementptr i32, i32* %".13", i32 -1
   store i32* %"ptr_incdec.1", i32** %"ptr"
   %"is_x" = alloca i32
-  ;  Source: ptr
   %"ptr.3" = load i32*, i32** %"ptr"
-  ;  Source: x
-  %"x.3" = load i32, i32* %"x"
-  ;  Source: (ptr==&x)
-  %".22" = ptrtoint i32* %"ptr.3" to i32
-  %".23" = ptrtoint i32* %"x" to i32
-  %".24" = icmp eq i32 %".22", %".23"
-  %".25" = zext i1 %".24" to i32
-  ;  Source: intis_x=(ptr==&x);
-  store i32 %".25", i32* %"is_x"
-  %".28" = bitcast [3 x i8]* @"str" to i8*
+  %".15" = ptrtoint i32* %"ptr.3" to i32
+  %".16" = ptrtoint i32* %"x" to i32
+  %".17" = icmp eq i32 %".15", %".16"
+  %".18" = zext i1 %".17" to i32
+  store i32 %".18", i32* %"is_x"
+  %".20" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: is_x
   %"is_x.1" = load i32, i32* %"is_x"
   ;  Source: printf("%d",is_x);
-  %".31" = call i32 (i8*, ...) @"printf"(i8* %".28", i32 %"is_x.1")
+  %".23" = call i32 (i8*, ...) @"printf"(i8* %".20", i32 %"is_x.1")
   ;  Source: return0;
   ret i32 0
 }

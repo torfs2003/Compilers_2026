@@ -6,14 +6,6 @@ declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
 
-declare i8* @"fopen"(i8* %".1", i8* %".2")
-
-declare i32 @"fclose"(i8* %".1")
-
-declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
-
-declare i32 @"fputs"(i8* %".1", i8* %".2")
-
 declare i8* @"malloc"(i32 %".1")
 
 declare i8* @"calloc"(i32 %".1", i32 %".2")
@@ -26,10 +18,8 @@ define i32 @"main"()
 {
 entry:
   %"c" = alloca i8*
-  ;  Source: malloc(5)
-  %".3" = call i8* @"malloc"(i32 5)
-  ;  Source: char*c=malloc(5);
-  store i8* %".3", i8** %"c"
+  %".2" = call i8* @"malloc"(i32 5)
+  store i8* %".2", i8** %"c"
   ;  Source: c
   %"c.1" = load i8*, i8** %"c"
   %"deref_load" = load i8, i8* %"c.1"
@@ -38,28 +28,26 @@ entry:
   ;  Source: c
   %"c.2" = load i8*, i8** %"c"
   ;  Source: (c+1)
-  %".11" = getelementptr i8, i8* %"c.2", i32 1
-  %"deref_load.1" = load i8, i8* %".11"
+  %".9" = getelementptr i8, i8* %"c.2", i32 1
+  %"deref_load.1" = load i8, i8* %".9"
   ;  Source: *(c+1)='b';
-  store i8 98, i8* %".11"
-  %".14" = bitcast [3 x i8]* @"str" to i8*
+  store i8 98, i8* %".9"
+  %".12" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: c
   %"c.3" = load i8*, i8** %"c"
   ;  Source: *c
   %"deref_load.2" = load i8, i8* %"c.3"
   ;  Source: printf("%c",*c);
-  %".18" = zext i8 %"deref_load.2" to i32
-  %".19" = call i32 (i8*, ...) @"printf"(i8* %".14", i32 %".18")
-  %".20" = bitcast [3 x i8]* @"str.1" to i8*
+  %".16" = call i32 (i8*, ...) @"printf"(i8* %".12", i8 %"deref_load.2")
+  %".17" = bitcast [3 x i8]* @"str.1" to i8*
   ;  Source: c
   %"c.4" = load i8*, i8** %"c"
   ;  Source: (c+1)
-  %".23" = getelementptr i8, i8* %"c.4", i32 1
+  %".20" = getelementptr i8, i8* %"c.4", i32 1
   ;  Source: *(c+1)
-  %"deref_load.3" = load i8, i8* %".23"
+  %"deref_load.3" = load i8, i8* %".20"
   ;  Source: printf("%c",*(c+1));
-  %".26" = zext i8 %"deref_load.3" to i32
-  %".27" = call i32 (i8*, ...) @"printf"(i8* %".20", i32 %".26")
+  %".23" = call i32 (i8*, ...) @"printf"(i8* %".17", i8 %"deref_load.3")
   ;  Source: c
   %"c.5" = load i8*, i8** %"c"
   ;  Source: free(c);

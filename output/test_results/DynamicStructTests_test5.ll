@@ -32,17 +32,14 @@ define %"struct.map"* @"create_map"()
 {
 entry:
   %"m" = alloca %"struct.map"*
-  ;  Source: sizeof(structmap)
-  %".3" = getelementptr i32, i32* null, i32 1
-  %".4" = ptrtoint i32* %".3" to i32
-  ;  Source: malloc(sizeof(structmap))
-  %".6" = call i8* @"malloc"(i32 %".4")
-  ;  Source: structmap*m=malloc(sizeof(structmap));
-  %".8" = bitcast i8* %".6" to %"struct.map"*
-  store %"struct.map"* %".8", %"struct.map"** %"m"
+  %".2" = getelementptr i32, i32* null, i32 1
+  %".3" = ptrtoint i32* %".2" to i32
+  %".4" = call i8* @"malloc"(i32 %".3")
+  %".5" = bitcast i8* %".4" to %"struct.map"*
+  store %"struct.map"* %".5", %"struct.map"** %"m"
   ;  Source: m->size
-  %".11" = load %"struct.map"*, %"struct.map"** %"m"
-  %"gep_size" = getelementptr inbounds %"struct.map", %"struct.map"* %".11", i32 0, i32 1
+  %".8" = load %"struct.map"*, %"struct.map"** %"m"
+  %"gep_size" = getelementptr inbounds %"struct.map", %"struct.map"* %".8", i32 0, i32 1
   %"load_size" = load i32, i32* %"gep_size"
   ;  Source: m->size=0;
   store i32 0, i32* %"gep_size"
@@ -55,22 +52,20 @@ define i32 @"main"()
 {
 entry:
   %"m" = alloca %"struct.map"*
-  ;  Source: create_map()
-  %".3" = call %"struct.map"* @"create_map"()
-  ;  Source: structmap*m=create_map();
-  store %"struct.map"* %".3", %"struct.map"** %"m"
-  %".6" = bitcast [3 x i8]* @"str" to i8*
+  %".2" = call %"struct.map"* @"create_map"()
+  store %"struct.map"* %".2", %"struct.map"** %"m"
+  %".4" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: m->size
-  %".8" = load %"struct.map"*, %"struct.map"** %"m"
-  %"gep_size" = getelementptr inbounds %"struct.map", %"struct.map"* %".8", i32 0, i32 1
+  %".6" = load %"struct.map"*, %"struct.map"** %"m"
+  %"gep_size" = getelementptr inbounds %"struct.map", %"struct.map"* %".6", i32 0, i32 1
   %"load_size" = load i32, i32* %"gep_size"
   ;  Source: printf("%d",m->size);
-  %".10" = call i32 (i8*, ...) @"printf"(i8* %".6", i32 %"load_size")
+  %".8" = call i32 (i8*, ...) @"printf"(i8* %".4", i32 %"load_size")
   ;  Source: m
   %"m.1" = load %"struct.map"*, %"struct.map"** %"m"
   ;  Source: free(m);
-  %".13" = bitcast %"struct.map"* %"m.1" to i8*
-  call void @"free"(i8* %".13")
+  %".11" = bitcast %"struct.map"* %"m.1" to i8*
+  call void @"free"(i8* %".11")
   ;  Source: return0;
   ret i32 0
 }

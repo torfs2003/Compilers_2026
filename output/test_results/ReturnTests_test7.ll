@@ -24,27 +24,25 @@ define i32 @"main"()
 {
 entry:
   %"a" = alloca i32
-  ;  Source: d()
-  %".3" = call i32 @"d"()
-  ;  Source: inta=d();
-  store i32 %".3", i32* %"a"
-  %".6" = bitcast [3 x i8]* @"str" to i8*
+  %".2" = call i32 @"d"()
+  store i32 %".2", i32* %"a"
+  %".4" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: a
   %"a.1" = load i32, i32* %"a"
   ;  Source: printf("%d",a);
-  %".9" = call i32 (i8*, ...) @"printf"(i8* %".6", i32 %"a.1")
+  %".7" = call i32 (i8*, ...) @"printf"(i8* %".4", i32 %"a.1")
   ;  Source: a
   %"a.2" = load i32, i32* %"a"
   ;  Source: e()
-  %".12" = call float @"e"()
+  %".10" = call float @"e"()
   ;  Source: a=e();
-  %".14" = fptosi float %".12" to i32
-  store i32 %".14", i32* %"a"
-  %".16" = bitcast [3 x i8]* @"str.1" to i8*
+  %".12" = fptosi float %".10" to i32
+  store i32 %".12", i32* %"a"
+  %".14" = bitcast [3 x i8]* @"str.1" to i8*
   ;  Source: a
   %"a.3" = load i32, i32* %"a"
   ;  Source: printf("%d",a);
-  %".19" = call i32 (i8*, ...) @"printf"(i8* %".16", i32 %"a.3")
+  %".17" = call i32 (i8*, ...) @"printf"(i8* %".14", i32 %"a.3")
   ;  Source: return0;
   ret i32 0
 }

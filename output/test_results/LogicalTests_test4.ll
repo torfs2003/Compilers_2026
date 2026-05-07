@@ -10,13 +10,10 @@ define i32 @"main"()
 {
 entry:
   %"a" = alloca i32
-  ;  Source: inta=5;
   store i32 5, i32* %"a"
   %"b" = alloca i32
-  ;  Source: intb=9;
   store i32 9, i32* %"b"
   %"c" = alloca i32
-  ;  Source: intc=6;
   store i32 6, i32* %"c"
   ;  Source: a
   %"a.1" = load i32, i32* %"a"
@@ -31,33 +28,27 @@ entry:
   ;  Source: c=6;
   store i32 6, i32* %"c"
   %"d" = alloca i32
-  ;  Source: a
   %"a.2" = load i32, i32* %"a"
-  ;  Source: b
   %"b.2" = load i32, i32* %"b"
-  %".19" = icmp eq i32 %"b.2", 0
-  %".20" = zext i1 %".19" to i32
-  %".21" = icmp ne i32 %"a.2", 0
-  %".22" = icmp ne i32 %".20", 0
-  %".23" = and i1 %".21", %".22"
-  %".24" = zext i1 %".23" to i32
-  ;  Source: c
+  %".14" = icmp eq i32 %"b.2", 0
+  %".15" = zext i1 %".14" to i32
+  %".16" = icmp ne i32 %"a.2", 0
+  %".17" = icmp ne i32 %".15", 0
+  %".18" = and i1 %".16", %".17"
+  %".19" = zext i1 %".18" to i32
   %"c.2" = load i32, i32* %"c"
-  ;  Source: (a&&!b||c)
-  %".27" = icmp ne i32 %".24", 0
-  %".28" = icmp ne i32 %"c.2", 0
-  %".29" = or i1 %".27", %".28"
-  %".30" = zext i1 %".29" to i32
-  ;  Source: !(a&&!b||c)
-  %".32" = icmp eq i32 %".30", 0
-  %".33" = zext i1 %".32" to i32
-  ;  Source: intd=!(a&&!b||c);
-  store i32 %".33", i32* %"d"
-  %".36" = bitcast [3 x i8]* @"str" to i8*
+  %".20" = icmp ne i32 %".19", 0
+  %".21" = icmp ne i32 %"c.2", 0
+  %".22" = or i1 %".20", %".21"
+  %".23" = zext i1 %".22" to i32
+  %".24" = icmp eq i32 %".23", 0
+  %".25" = zext i1 %".24" to i32
+  store i32 %".25", i32* %"d"
+  %".27" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: d
   %"d.1" = load i32, i32* %"d"
   ;  Source: printf("%d",d);
-  %".39" = call i32 (i8*, ...) @"printf"(i8* %".36", i32 %"d.1")
+  %".30" = call i32 (i8*, ...) @"printf"(i8* %".27", i32 %"d.1")
   ;  Source: return0;
   ret i32 0
 }

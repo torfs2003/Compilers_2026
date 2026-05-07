@@ -29,7 +29,6 @@ define i32 @"main"()
 {
 entry:
   %"gouda" = alloca %"struct.kaas"
-  ;  Source: structkaasgouda;
   ;  Source: gouda.melk
   %"gep_melk" = getelementptr inbounds %"struct.kaas", %"struct.kaas"* %"gouda", i32 0, i32 0
   %"load_melk" = load i32, i32* %"gep_melk"
@@ -40,20 +39,21 @@ entry:
   %"load_yoghurt" = load float, float* %"gep_yoghurt"
   ;  Source: gouda.yoghurt=3.14;
   store float 0x40091eb860000000, float* %"gep_yoghurt"
-  %".9" = bitcast [16 x i8]* @"str" to i8*
+  %".8" = bitcast [16 x i8]* @"str" to i8*
   ;  Source: gouda.melk
   %"gep_melk.1" = getelementptr inbounds %"struct.kaas", %"struct.kaas"* %"gouda", i32 0, i32 0
   %"load_melk.1" = load i32, i32* %"gep_melk.1"
   ;  Source: gouda.yoghurt
   %"gep_yoghurt.1" = getelementptr inbounds %"struct.kaas", %"struct.kaas"* %"gouda", i32 0, i32 1
   %"load_yoghurt.1" = load float, float* %"gep_yoghurt.1"
-  ;  Source: printf("%d %f       lol",gouda.melk,gouda.yoghurt);
-  %".13" = fpext float %"load_yoghurt.1" to double
-  %".14" = call i32 (i8*, ...) @"printf"(i8* %".9", i32 %"load_melk.1", double %".13")
+  ;  Source: (gouda.yoghurt*1000)
+  %".12" = sitofp i32 1000 to float
+  %".13" = fmul float %"load_yoghurt.1", %".12"
+  ;  Source: (int)(gouda.yoghurt*1000)
+  %".15" = fptosi float %".13" to i32
+  ;  Source: printf("%d %d       lol",gouda.melk,(int)(gouda.yoghurt*1000));
+  %".17" = call i32 (i8*, ...) @"printf"(i8* %".8", i32 %"load_melk.1", i32 %".15")
   %"ptr" = alloca %"struct.kaas"*
-  ;  Source: gouda
-  ;  Source: &gouda
-  ;  Source: structkaas*ptr=&gouda;
   store %"struct.kaas"* %"gouda", %"struct.kaas"** %"ptr"
   %".19" = bitcast [3 x i8]* @"str.1" to i8*
   ;  Source: ptr
@@ -66,5 +66,5 @@ entry:
   ret i32 0
 }
 
-@"str" = internal constant [16 x i8] c"%d %f       lol\00"
+@"str" = internal constant [16 x i8] c"%d %d       lol\00"
 @"str.1" = internal constant [3 x i8] c"%d\00"

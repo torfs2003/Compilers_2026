@@ -52,7 +52,7 @@ class LLVMVisitor:
         
         for i, val_node in enumerate(array_node.values):
             idx = ir.Constant(ir.IntType(32), i)
-            path = [zero] + current_indices + [idx]
+            path = [zero] + current_indices + [idx] 
             
             if isinstance(val_node, ArrayInitNode):
                 self._init_array(base_ptr, val_node, current_indices + [idx])
@@ -102,7 +102,6 @@ class LLVMVisitor:
     
     def _allocate_variable(self, node):
         """Maakt de geheugenplek aan VOORDAT we de rest van de expressie evalueren."""
-        if self._get_symbol(node.name) and self.builder is not None: return
         
         typ = self._get_llvm_type(node.type_spec)
         
@@ -131,6 +130,7 @@ class LLVMVisitor:
             
             if not is_post_order:
                 # --- PRE-ORDER: Discovery ---
+                stack.append((node, True))
                 if isinstance(node, (IntNode, FloatNode, CharNode, StringNode, StructDeclNode, UnionDeclNode, TypedefNode)):
                     self._visit_node(node)
 
@@ -176,15 +176,17 @@ class LLVMVisitor:
 
                 if isinstance(node, (DeclNode, ArrayDeclNode)):
                     self._allocate_variable(node)
-
-                stack.append((node, True))
-                
-                if isinstance(node, ProgramNode):
+                    if getattr(node, 'init_expr', None):
+                        self._visit_node(node)
+                elif isinstance(node, ProgramNode):
                     for child in reversed(node.children): stack.append((child, False))
                 elif isinstance(node, FunctionNode): 
                     stack.append((node.body, False))
-                elif isinstance(node, CompoundNode) and not is_post_order:
-                    for item in reversed(node.items): stack.append((item, False))
+                elif isinstance(node, CompoundNode):
+                    for item in reversed(node.items):
+                        stack.append((item, False))
+                elif isinstance(node, SwitchNode):
+                    self._visit_node(node)
                 elif isinstance(node, (BinOpNode, AssignNode)):
                     stack.append((node.right, False))
                     stack.append((node.left, False))
@@ -199,6 +201,7 @@ class LLVMVisitor:
                 elif isinstance(node, (DeclNode, ArrayDeclNode)) and getattr(node, 'init_expr', None):
                     stack.append((node.init_expr, False))
                 
+                
             else:
                 # --- POST-ORDER: Genereren ---
                 if isinstance(node, FunctionNode):
@@ -209,8 +212,11 @@ class LLVMVisitor:
                             self.builder.ret(ir.Constant(self.func.return_value.type, 0))
                     self.builder = None # Reset de builder zodat code erna globaal is
                 
-                elif not isinstance(node, (CompoundNode, IncludeNode, IntNode, FloatNode, CharNode, StringNode, FunctionDeclNode, StructDeclNode, UnionDeclNode, TypedefNode)):
+                elif not isinstance(node, (CompoundNode, IncludeNode, IntNode, FloatNode, CharNode,
+                           StringNode, FunctionDeclNode, StructDeclNode, UnionDeclNode,
+                           TypedefNode, SwitchNode, DeclNode, ArrayDeclNode)):
                     if self.builder:
+
                         if hasattr(node, 'user_comments') and node.user_comments:
                             for c in node.user_comments:
                                 for line in c.splitlines():
@@ -307,6 +313,11 @@ class LLVMVisitor:
         elif isinstance(node, ReturnNode):
             if node.expr:
                 val = self._ensure_result(node.expr)
+                
+                if val is None:
+                    op_info = f" met operator '{node.expr.op}'" if hasattr(node.expr, 'op') else ""
+                    raise Exception(f"Fout in LLVMVisitor: Kon expressie {type(node.expr).__name__}{op_info} niet evalueren. Ontbreekt deze implementatie?")
+                
                 expected_type = self.func.return_value.type
                 if val.type != expected_type:
                     val = self._apply_cast(val, expected_type)
@@ -447,6 +458,20 @@ class LLVMVisitor:
                 elif isinstance(left.type, ir.FloatType):
                     res_i1 = self.builder.fcmp_ordered(node.op, left, right)
                     self.results[id(node)] = self.builder.zext(res_i1, ir.IntType(32))
+            
+            # Modulo (%)
+            elif node.op == '%':
+                if isinstance(left.type, ir.FloatType) or isinstance(right.type, ir.FloatType):
+                    self.results[id(node)] = self.builder.frem(left, right)
+                else:
+                    self.results[id(node)] = self.builder.srem(left, right)
+            
+            # Bitwise Shifts (<< en >>)
+            elif node.op == '<<':
+                self.results[id(node)] = self.builder.shl(left, right)
+            elif node.op == '>>':
+                # ashr = arithmetic shift right (behoudt het tekenbit voor signed integers)
+                self.results[id(node)] = self.builder.ashr(left, right)
 
             # Logische operatoren (&& en ||)
             elif node.op in ['&&', '||']:
@@ -631,6 +656,70 @@ class LLVMVisitor:
 
             self.builder.position_at_end(end_bb)
         
+        # 10.5 Switch-Statements
+        elif isinstance(node, SwitchNode):
+            # 1. Evalueer de conditie
+            switch_val = self._ensure_result(node.condition)
+            
+            # 2. Maak merge blok aan
+            merge_bb = self.func.append_basic_block(name="switch.merge")
+            
+            # Controle: zijn er überhaupt cases?
+            if not hasattr(node, 'ordered_cases') or not node.ordered_cases:
+                self.builder.branch(merge_bb)
+                self.builder.position_at_end(merge_bb)
+                return
+
+            case_blocks = []
+            default_bb = None
+            
+            # 3. Maak alle basic blocks aan
+            for item in node.ordered_cases:
+                # Veilige unpacking voor het geval ASTVisitor iets anders teruggeeft
+                val = item[0] if isinstance(item, tuple) and len(item) > 0 else None
+                
+                if val is None:
+                    default_bb = self.func.append_basic_block(name="switch.default")
+                    case_blocks.append((None, default_bb))
+                else:
+                    bb = self.func.append_basic_block(name=f"switch.case{val}")
+                    case_blocks.append((val, bb))
+
+            if default_bb is None:
+                default_bb = merge_bb
+
+            # 4. LLVM instructie
+            switch_inst = self.builder.switch(switch_val, default_bb)
+            for val, bb in case_blocks:
+                if val is not None:
+                    switch_inst.add_case(ir.Constant(ir.IntType(32), val), bb)
+
+            # 5. Genereer code
+            self.loop_stack.append((None, merge_bb)) 
+            
+            for i, item in enumerate(node.ordered_cases):
+                val = item[0] if isinstance(item, tuple) and len(item) > 0 else None
+                # Haal de body op (kan op index 1 of 2 staan afhankelijk van je AST)
+                body_node = item[-1] if isinstance(item, tuple) else item
+                
+                curr_bb = case_blocks[i][1]
+                self.builder.position_at_end(curr_bb)
+                
+                # Zorg dat de body code gegenereerd wordt
+                if body_node:
+                    self._ensure_result(body_node)
+                
+                # Fall-through logica
+                if not self.builder.block.is_terminated:
+                    if i + 1 < len(case_blocks):
+                        next_bb = case_blocks[i+1][1]
+                        self.builder.branch(next_bb)
+                    else:
+                        self.builder.branch(merge_bb)
+            
+            self.loop_stack.pop()
+            self.builder.position_at_end(merge_bb)
+                
         # 11. While-Loops
         elif isinstance(node, WhileNode):
             cond_bb = self.func.append_basic_block(name="while.cond")
@@ -660,10 +749,10 @@ class LLVMVisitor:
 
         # 12. Break & Continue
         elif isinstance(node, BreakNode):
-            if not self.loop_stack: raise Exception("Break statement outside of a loop!")
+            if not self.loop_stack: raise Exception("Break statement outside of loop/switch!")
             _, end_bb = self.loop_stack[-1]
             self.builder.branch(end_bb)
-
+        
         elif isinstance(node, ContinueNode):
             if not self.loop_stack: raise Exception("Continue statement outside of a loop!")
             cond_bb, _ = self.loop_stack[-1]

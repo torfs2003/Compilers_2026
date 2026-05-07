@@ -25,12 +25,11 @@ define i32 @"main"()
 {
 entry:
   %"c" = alloca i32
-  ;  Source: intc=2;
   store i32 2, i32* %"c"
   ;  Source: c
   %"c.1" = load i32, i32* %"c"
   ;  Source: a(c);
-  %".6" = call i32 @"a"(i32 %"c.1")
+  %".5" = call i32 @"a"(i32 %"c.1")
   ;  Source: return0;
   ret i32 0
 }

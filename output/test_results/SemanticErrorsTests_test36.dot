@@ -7,12 +7,12 @@ digraph AST {
   node9 [label="ID: a\n(int)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
   node8 [label="&\n(int*)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node8 -> node9 [style="solid", color="black"];
-  node7 [label="Decl\nconst int*\nb\n(int*)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
+  node7 [label="Decl\nint*\nb\n(int*)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
   node7 -> node8 [style="solid", color="black", label=" init", fontcolor="blue"];
   node12 [label="ID: b\n(int*)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
   node11 [label="&\n(int**)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node11 -> node12 [style="solid", color="black"];
-  node10 [label="Decl\nconst int**\nc\n(int**)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
+  node10 [label="Decl\nint**\nc\n(int**)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
   node10 -> node11 [style="solid", color="black", label=" init", fontcolor="blue"];
   node14 [label="ID: c\n(int**)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
   node15 [label="0\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];

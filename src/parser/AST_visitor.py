@@ -475,37 +475,29 @@ class ASTVisitor:
 
 
                 elif class_name == "SwitchStatementContext":
-
                     switch_expr = results[id(ctx.expression())]
-
-                    cases = []
-
-                    default_body = None
-
-                    ordered_cases = []  # (val_or_None, body) in source volgorde
+                    ordered_cases = [] 
 
                     for case_ctx in ctx.caseBlock():
-
                         case_body = results[id(case_ctx)]
-
+                        
                         if case_ctx.CASE():
-
-                            val = int(case_ctx.INT_LITERAL().getText())
-
-                            cases.append((val, case_body))
-
+                            # Haal de tekst op en parse deze slim (ondersteunt 0x, 0, etc.)
+                            val_str = case_ctx.INT_LITERAL().getText().rstrip("uUlL")
+                            try:
+                                val = int(val_str, 0) # De '0' herkent automatisch hex/octaal/decimaal
+                            except ValueError:
+                                # Als het geen int is, is het misschien een CHAR_LITERAL?
+                                # (Pas dit aan op basis van jouw specifieke grammatica)
+                                val = ord(val_str[1]) if len(val_str) >= 3 else 0
+                            
                             ordered_cases.append((val, case_body))
-
+                            
                         elif case_ctx.DEFAULT():
+                            ordered_cases.append((None, case_body)) 
 
-                            default_body = case_body
-
-                            ordered_cases.append((None, case_body))  # None = default
-
-                    node = SwitchNode(switch_expr, cases, default_body)
-
-                    node.ordered_cases = ordered_cases  # bewaar source volgorde
-
+                    node = SwitchNode(switch_expr, [], None) # De oude 'cases' en 'default' mag je laten vervallen
+                    node.ordered_cases = ordered_cases 
                     res = self.get_loc(node, ctx)
 
                 elif class_name == "ReturnStatementContext":

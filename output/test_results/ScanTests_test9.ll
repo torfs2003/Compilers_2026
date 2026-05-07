@@ -37,37 +37,35 @@ define i32 @"main"()
 {
 entry:
   %"n" = alloca i32
-  ;  Source: intn;
-  %".3" = bitcast [16 x i8]* @"str" to i8*
+  %".2" = bitcast [16 x i8]* @"str" to i8*
   ;  Source: printf("Enter a number:");
-  %".5" = call i32 (i8*, ...) @"printf"(i8* %".3")
-  %".6" = bitcast [3 x i8]* @"str.1" to i8*
+  %".4" = call i32 (i8*, ...) @"printf"(i8* %".2")
+  %".5" = bitcast [3 x i8]* @"str.1" to i8*
   ;  Source: n
   %"n.1" = load i32, i32* %"n"
   ;  Source: &n
   ;  Source: scanf("%d",&n);
-  %".10" = call i32 (i8*, ...) @"scanf"(i8* %".6", i32* %"n")
+  %".9" = call i32 (i8*, ...) @"scanf"(i8* %".5", i32* %"n")
   %"i" = alloca i32
-  ;  Source: inti=1;
   store i32 1, i32* %"i"
   ;  Source: while(i++<=n){printf("fib(%d)\t= %d;\n",i,f(i));}
   br label %"while.cond"
 while.cond:
   %"i.1" = load i32, i32* %"i"
-  %".15" = load i32, i32* %"i"
-  %".16" = add i32 %".15", 1
-  store i32 %".16", i32* %"i"
+  %".13" = load i32, i32* %"i"
+  %".14" = add i32 %".13", 1
+  store i32 %".14", i32* %"i"
   %"n.2" = load i32, i32* %"n"
-  %".18" = icmp sle i32 %".15", %"n.2"
-  %".19" = zext i1 %".18" to i32
-  %"whilecond" = icmp ne i32 %".19", 0
+  %".16" = icmp sle i32 %".13", %"n.2"
+  %".17" = zext i1 %".16" to i32
+  %"whilecond" = icmp ne i32 %".17", 0
   br i1 %"whilecond", label %"while.body", label %"while.end"
 while.body:
-  %".21" = bitcast [15 x i8]* @"str.2" to i8*
+  %".19" = bitcast [15 x i8]* @"str.2" to i8*
   %"i.2" = load i32, i32* %"i"
   %"i.3" = load i32, i32* %"i"
-  %".22" = call i32 @"f"(i32 %"i.3")
-  %".23" = call i32 (i8*, ...) @"printf"(i8* %".21", i32 %"i.2", i32 %".22")
+  %".20" = call i32 @"f"(i32 %"i.3")
+  %".21" = call i32 (i8*, ...) @"printf"(i8* %".19", i32 %"i.2", i32 %".20")
   br label %"while.cond"
 while.end:
   ;  Source: return0;

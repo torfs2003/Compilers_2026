@@ -486,11 +486,10 @@ class SemanticVisitor(BaseVisitor):
                 # 1. Check Pointers
                 if '*' in node.eval_type or '*' in init_type:
                     is_null_ptr = isinstance(node.init_expr, IntNode) and node.init_expr.value == 0
-                    # Check of een van de pointers 'void*' is. Zo ja, niet waarschuwen!
                     is_void_ptr = init_type == 'void*' or node.eval_type == 'void*'
                     if not is_null_ptr and not is_void_ptr:
-                        self.get_Error(node, f"Incompatibele types bij initialisatie: '{init_type}' aan '{node.eval_type}'.")                
-                
+                        self.get_Warning(node, f"Incompatibele types bij initialisatie: '{init_type}' aan '{node.eval_type}'.")
+
                 # 2. Check Informatieverlies (Richness)
                 elif self.get_richness(init_type) > self.get_richness(node.eval_type):
                     # Specifieke check voor char overflow
@@ -658,9 +657,8 @@ class SemanticVisitor(BaseVisitor):
         # --- 1. Bitwise Shift Checks (ANSI C89) ---
         if node.op in ['<<', '>>']:
             if hasattr(node.right, 'value') and node.right.value < 0:
-                self.get_Error(node, "Semantic Error: Bitwise shift by a negative amount is invalid C89!")
-                # GEEN sys.exit(1) - laat de compiler de fout rapporteren en doorgaan
-
+                self.get_Warning(node, "Bitwise shift by a negative amount is undefined behavior in C!")
+        
         # --- 2. Pointer Rekenkunde ---
         if '*' in l_type or '*' in r_type:
             bitwise_ops = ['&', '|', '^', '<<', '>>', '%']

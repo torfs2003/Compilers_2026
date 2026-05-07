@@ -10,20 +10,18 @@ define i32 @"main"()
 {
 entry:
   %"b" = alloca i32
-  ;  Source: intb=5;
   store i32 5, i32* %"b"
   %"a" = alloca i32
-  ;  Source: inta=3;
   store i32 3, i32* %"a"
   ;  Source: a
   %"a.1" = load i32, i32* %"a"
   ;  Source: b
   %"b.1" = load i32, i32* %"b"
   ;  Source: a||b;
-  %".9" = icmp ne i32 %"a.1", 0
-  %".10" = icmp ne i32 %"b.1", 0
-  %".11" = or i1 %".9", %".10"
-  %".12" = zext i1 %".11" to i32
+  %".7" = icmp ne i32 %"a.1", 0
+  %".8" = icmp ne i32 %"b.1", 0
+  %".9" = or i1 %".7", %".8"
+  %".10" = zext i1 %".9" to i32
   ;  Source: return0;
   ret i32 0
 }

@@ -15,7 +15,6 @@ entry:
   %"yoghurt" = alloca float
   store float %".2", float* %"yoghurt"
   %"gouda" = alloca %"struct.kaas"
-  ;  Source: structkaasgouda;
   ;  Source: gouda.melk
   %"gep_melk" = getelementptr inbounds %"struct.kaas", %"struct.kaas"* %"gouda", i32 0, i32 0
   %"load_melk" = load i32, i32* %"gep_melk"
@@ -31,9 +30,6 @@ entry:
   ;  Source: gouda.yoghurt=yoghurt;
   store float %"yoghurt.1", float* %"gep_yoghurt"
   %"ptr" = alloca %"struct.kaas"*
-  ;  Source: gouda
-  ;  Source: &gouda
-  ;  Source: structkaas*ptr=&gouda;
   store %"struct.kaas"* %"gouda", %"struct.kaas"** %"ptr"
   ;  Source: returnptr;
   %"ptr.1" = load %"struct.kaas"*, %"struct.kaas"** %"ptr"
@@ -44,27 +40,27 @@ define i32 @"main"()
 {
 entry:
   %"ptr" = alloca %"struct.kaas"*
-  ;  Source: structkaas*ptr;
   ;  Source: ptr
   %"ptr.1" = load %"struct.kaas"*, %"struct.kaas"** %"ptr"
   ;  Source: structCreator(10,20.0)
-  %".5" = call %"struct.kaas"* @"structCreator"(i32 10, float 0x4034000000000000)
+  %".4" = call %"struct.kaas"* @"structCreator"(i32 10, float 0x4034000000000000)
   ;  Source: ptr=structCreator(10,20.0);
-  store %"struct.kaas"* %".5", %"struct.kaas"** %"ptr"
-  %".8" = bitcast [7 x i8]* @"str" to i8*
+  store %"struct.kaas"* %".4", %"struct.kaas"** %"ptr"
+  %".7" = bitcast [7 x i8]* @"str" to i8*
   ;  Source: ptr->melk
-  %".10" = load %"struct.kaas"*, %"struct.kaas"** %"ptr"
-  %"gep_melk" = getelementptr inbounds %"struct.kaas", %"struct.kaas"* %".10", i32 0, i32 0
+  %".9" = load %"struct.kaas"*, %"struct.kaas"** %"ptr"
+  %"gep_melk" = getelementptr inbounds %"struct.kaas", %"struct.kaas"* %".9", i32 0, i32 0
   %"load_melk" = load i32, i32* %"gep_melk"
   ;  Source: ptr->yoghurt
-  %".12" = load %"struct.kaas"*, %"struct.kaas"** %"ptr"
-  %"gep_yoghurt" = getelementptr inbounds %"struct.kaas", %"struct.kaas"* %".12", i32 0, i32 1
+  %".11" = load %"struct.kaas"*, %"struct.kaas"** %"ptr"
+  %"gep_yoghurt" = getelementptr inbounds %"struct.kaas", %"struct.kaas"* %".11", i32 0, i32 1
   %"load_yoghurt" = load float, float* %"gep_yoghurt"
-  ;  Source: printf("%d %f ",ptr->melk,ptr->yoghurt);
-  %".14" = fpext float %"load_yoghurt" to double
-  %".15" = call i32 (i8*, ...) @"printf"(i8* %".8", i32 %"load_melk", double %".14")
+  ;  Source: (int)ptr->yoghurt
+  %".13" = fptosi float %"load_yoghurt" to i32
+  ;  Source: printf("%d %d ",ptr->melk,(int)ptr->yoghurt);
+  %".15" = call i32 (i8*, ...) @"printf"(i8* %".7", i32 %"load_melk", i32 %".13")
   ;  Source: return0;
   ret i32 0
 }
 
-@"str" = internal constant [7 x i8] c"%d %f \00"
+@"str" = internal constant [7 x i8] c"%d %d \00"

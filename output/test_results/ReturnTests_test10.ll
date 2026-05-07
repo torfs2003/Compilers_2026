@@ -41,45 +41,37 @@ define i32 @"main"()
 {
 entry:
   %"c" = alloca i32
-  ;  Source: intc=5;
   store i32 5, i32* %"c"
   %"b" = alloca i32*
-  ;  Source: c
-  %"c.1" = load i32, i32* %"c"
-  ;  Source: &c
-  ;  Source: int*b=&c;
   store i32* %"c", i32** %"b"
   %"a" = alloca i32
-  ;  Source: b
   %"b.1" = load i32*, i32** %"b"
-  ;  Source: d(b)
-  %".10" = call i32 @"d"(i32* %"b.1")
-  ;  Source: inta=d(b);
-  store i32 %".10", i32* %"a"
-  %".13" = bitcast [3 x i8]* @"str.1" to i8*
+  %".4" = call i32 @"d"(i32* %"b.1")
+  store i32 %".4", i32* %"a"
+  %".6" = bitcast [3 x i8]* @"str.1" to i8*
   ;  Source: b
   %"b.2" = load i32*, i32** %"b"
   ;  Source: *b
   %"deref_load" = load i32, i32* %"b.2"
   ;  Source: printf("%d",*b);
-  %".17" = call i32 (i8*, ...) @"printf"(i8* %".13", i32 %"deref_load")
-  %".18" = bitcast [3 x i8]* @"str.2" to i8*
+  %".10" = call i32 (i8*, ...) @"printf"(i8* %".6", i32 %"deref_load")
+  %".11" = bitcast [3 x i8]* @"str.2" to i8*
   ;  Source: a
   %"a.1" = load i32, i32* %"a"
   ;  Source: printf("%d",a);
-  %".21" = call i32 (i8*, ...) @"printf"(i8* %".18", i32 %"a.1")
+  %".14" = call i32 (i8*, ...) @"printf"(i8* %".11", i32 %"a.1")
   ;  Source: a
   %"a.2" = load i32, i32* %"a"
   ;  Source: e()
-  %".24" = call float @"e"()
+  %".17" = call float @"e"()
   ;  Source: a=e();
-  %".26" = fptosi float %".24" to i32
-  store i32 %".26", i32* %"a"
-  %".28" = bitcast [3 x i8]* @"str.3" to i8*
+  %".19" = fptosi float %".17" to i32
+  store i32 %".19", i32* %"a"
+  %".21" = bitcast [3 x i8]* @"str.3" to i8*
   ;  Source: a
   %"a.3" = load i32, i32* %"a"
   ;  Source: printf("%d",a);
-  %".31" = call i32 (i8*, ...) @"printf"(i8* %".28", i32 %"a.3")
+  %".24" = call i32 (i8*, ...) @"printf"(i8* %".21", i32 %"a.3")
   ;  Source: return0;
   ret i32 0
 }

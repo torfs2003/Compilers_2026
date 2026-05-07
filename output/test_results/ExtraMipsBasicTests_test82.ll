@@ -6,14 +6,6 @@ declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
 
-declare i8* @"fopen"(i8* %".1", i8* %".2")
-
-declare i32 @"fclose"(i8* %".1")
-
-declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
-
-declare i32 @"fputs"(i8* %".1", i8* %".2")
-
 declare i8* @"malloc"(i32 %".1")
 
 declare i8* @"calloc"(i32 %".1", i32 %".2")
@@ -30,7 +22,6 @@ entry:
   %"b" = alloca i8*
   store i8* %".2", i8** %"b"
   %"index" = alloca i32
-  ;  Source: intindex=0;
   store i32 0, i32* %"index"
   ;  Source: while(1){chara_char=*(a+index);charb_char=*(b+index);if(a_char=='\0'&&b_char=='\0'){return1;}if(a_char=='\0'||b_char=='\0'){return0;}if(a_char!=b_char){return0;}index++;}
   br label %"while.cond"
@@ -41,26 +32,26 @@ while.body:
   %"a_char" = alloca i8
   %"a.1" = load i8*, i8** %"a"
   %"index.1" = load i32, i32* %"index"
-  %".11" = getelementptr i8, i8* %"a.1", i32 %"index.1"
-  %"deref_load" = load i8, i8* %".11"
+  %".10" = getelementptr i8, i8* %"a.1", i32 %"index.1"
+  %"deref_load" = load i8, i8* %".10"
   store i8 %"deref_load", i8* %"a_char"
   %"b_char" = alloca i8
   %"b.1" = load i8*, i8** %"b"
   %"index.2" = load i32, i32* %"index"
-  %".13" = getelementptr i8, i8* %"b.1", i32 %"index.2"
-  %"deref_load.1" = load i8, i8* %".13"
+  %".12" = getelementptr i8, i8* %"b.1", i32 %"index.2"
+  %"deref_load.1" = load i8, i8* %".12"
   store i8 %"deref_load.1", i8* %"b_char"
   %"a_char.1" = load i8, i8* %"a_char"
-  %".15" = icmp eq i8 %"a_char.1", 0
-  %".16" = zext i1 %".15" to i32
+  %".14" = icmp eq i8 %"a_char.1", 0
+  %".15" = zext i1 %".14" to i32
   %"b_char.1" = load i8, i8* %"b_char"
-  %".17" = icmp eq i8 %"b_char.1", 0
-  %".18" = zext i1 %".17" to i32
-  %".19" = icmp ne i32 %".16", 0
-  %".20" = icmp ne i32 %".18", 0
-  %".21" = and i1 %".19", %".20"
-  %".22" = zext i1 %".21" to i32
-  %"ifcond" = icmp ne i32 %".22", 0
+  %".16" = icmp eq i8 %"b_char.1", 0
+  %".17" = zext i1 %".16" to i32
+  %".18" = icmp ne i32 %".15", 0
+  %".19" = icmp ne i32 %".17", 0
+  %".20" = and i1 %".18", %".19"
+  %".21" = zext i1 %".20" to i32
+  %"ifcond" = icmp ne i32 %".21", 0
   br i1 %"ifcond", label %"if.then", label %"if.end"
 while.end:
   ret i32 0
@@ -68,33 +59,33 @@ if.then:
   ret i32 1
 if.end:
   %"a_char.2" = load i8, i8* %"a_char"
-  %".25" = icmp eq i8 %"a_char.2", 0
-  %".26" = zext i1 %".25" to i32
+  %".24" = icmp eq i8 %"a_char.2", 0
+  %".25" = zext i1 %".24" to i32
   %"b_char.2" = load i8, i8* %"b_char"
-  %".27" = icmp eq i8 %"b_char.2", 0
-  %".28" = zext i1 %".27" to i32
-  %".29" = icmp ne i32 %".26", 0
-  %".30" = icmp ne i32 %".28", 0
-  %".31" = or i1 %".29", %".30"
-  %".32" = zext i1 %".31" to i32
-  %"ifcond.1" = icmp ne i32 %".32", 0
+  %".26" = icmp eq i8 %"b_char.2", 0
+  %".27" = zext i1 %".26" to i32
+  %".28" = icmp ne i32 %".25", 0
+  %".29" = icmp ne i32 %".27", 0
+  %".30" = or i1 %".28", %".29"
+  %".31" = zext i1 %".30" to i32
+  %"ifcond.1" = icmp ne i32 %".31", 0
   br i1 %"ifcond.1", label %"if.then.1", label %"if.end.1"
 if.then.1:
   ret i32 0
 if.end.1:
   %"a_char.3" = load i8, i8* %"a_char"
   %"b_char.3" = load i8, i8* %"b_char"
-  %".35" = icmp ne i8 %"a_char.3", %"b_char.3"
-  %".36" = zext i1 %".35" to i32
-  %"ifcond.2" = icmp ne i32 %".36", 0
+  %".34" = icmp ne i8 %"a_char.3", %"b_char.3"
+  %".35" = zext i1 %".34" to i32
+  %"ifcond.2" = icmp ne i32 %".35", 0
   br i1 %"ifcond.2", label %"if.then.2", label %"if.end.2"
 if.then.2:
   ret i32 0
 if.end.2:
   %"index.3" = load i32, i32* %"index"
-  %".39" = load i32, i32* %"index"
-  %".40" = add i32 %".39", 1
-  store i32 %".40", i32* %"index"
+  %".38" = load i32, i32* %"index"
+  %".39" = add i32 %".38", 1
+  store i32 %".39", i32* %"index"
   br label %"while.cond"
 }
 

@@ -47,15 +47,13 @@ define i32 @"main"()
 {
 entry:
   %"boolean" = alloca i32
-  ;  Source: forLoopCheck(5,10)
-  %".3" = call i32 @"forLoopCheck"(i32 5, i32 10)
-  ;  Source: intboolean=forLoopCheck(5,10);
-  store i32 %".3", i32* %"boolean"
-  %".6" = bitcast [3 x i8]* @"str" to i8*
+  %".2" = call i32 @"forLoopCheck"(i32 5, i32 10)
+  store i32 %".2", i32* %"boolean"
+  %".4" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: boolean
   %"boolean.1" = load i32, i32* %"boolean"
   ;  Source: printf("%d",boolean);
-  %".9" = call i32 (i8*, ...) @"printf"(i8* %".6", i32 %"boolean.1")
+  %".7" = call i32 (i8*, ...) @"printf"(i8* %".4", i32 %"boolean.1")
   ;  Source: return0;
   ret i32 0
 }

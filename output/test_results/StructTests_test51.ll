@@ -12,20 +12,19 @@ define i32 @"main"()
 {
 entry:
   %"h" = alloca %"struct.c"
-  ;  Source: structch;
   ;  Source: h.w.b
   %"gep_w" = getelementptr inbounds %"struct.c", %"struct.c"* %"h", i32 0, i32 0
   %"gep_b" = getelementptr inbounds %"struct.a", %"struct.a"* %"gep_w", i32 0, i32 0
   %"load_b" = load i32, i32* %"gep_b"
   ;  Source: h.w.b=5;
   store i32 5, i32* %"gep_b"
-  %".6" = bitcast [3 x i8]* @"str" to i8*
+  %".5" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: h.w.b
   %"gep_w.1" = getelementptr inbounds %"struct.c", %"struct.c"* %"h", i32 0, i32 0
   %"gep_b.1" = getelementptr inbounds %"struct.a", %"struct.a"* %"gep_w.1", i32 0, i32 0
   %"load_b.1" = load i32, i32* %"gep_b.1"
   ;  Source: printf("%d",h.w.b);
-  %".9" = call i32 (i8*, ...) @"printf"(i8* %".6", i32 %"load_b.1")
+  %".8" = call i32 (i8*, ...) @"printf"(i8* %".5", i32 %"load_b.1")
   ;  Source: return0;
   ret i32 0
 }

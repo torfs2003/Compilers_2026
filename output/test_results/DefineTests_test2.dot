@@ -9,7 +9,7 @@ digraph AST {
   node7 [label="Call: printf()\n(int)", shape=ellipse, style="filled", fillcolor="lightpink", color="black", fontcolor="black"];
   node7 -> node8 [style="solid", color="black", label=" arg0", fontcolor="black"];
   node7 -> node9 [style="solid", color="black", label=" arg1", fontcolor="black"];
-  node11 [label="\"%f\"\n(char*)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node11 [label="\"%d\"\n(char*)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node12 [label="ID: x\n(int)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
   node10 [label="Call: printf()\n(int)", shape=ellipse, style="filled", fillcolor="lightpink", color="black", fontcolor="black"];
   node10 -> node11 [style="solid", color="black", label=" arg0", fontcolor="black"];

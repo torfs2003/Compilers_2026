@@ -11,22 +11,16 @@ define i32 @"main"()
 {
 entry:
   %"intValue" = alloca i32
-  ;  Source: intintValue=12345;
   store i32 12345, i32* %"intValue"
   %"myStruct" = alloca %"struct.MyStruct"
+  %".3" = bitcast i32* %"intValue" to %"struct.MyStruct"*
+  %".4" = load %"struct.MyStruct", %"struct.MyStruct"* %".3"
+  store %"struct.MyStruct" %".4", %"struct.MyStruct"* %"myStruct"
+  %".6" = bitcast [19 x i8]* @"str" to i8*
   ;  Source: intValue
   %"intValue.1" = load i32, i32* %"intValue"
-  ;  Source: ((structMyStruct*)&intValue)
-  %".6" = bitcast i32* %"intValue" to %"struct.MyStruct"*
-  ;  Source: *((structMyStruct*)&intValue)
-  ;  Source: structMyStructmyStruct=*((structMyStruct*)&intValue);
-  %".9" = load %"struct.MyStruct", %"struct.MyStruct"* %".6"
-  store %"struct.MyStruct" %".9", %"struct.MyStruct"* %"myStruct"
-  %".11" = bitcast [19 x i8]* @"str" to i8*
-  ;  Source: intValue
-  %"intValue.2" = load i32, i32* %"intValue"
   ;  Source: printf("Integer value: %d\n",intValue);
-  %".14" = call i32 (i8*, ...) @"printf"(i8* %".11", i32 %"intValue.2")
+  %".9" = call i32 (i8*, ...) @"printf"(i8* %".6", i32 %"intValue.1")
   ;  Source: return0;
   ret i32 0
 }

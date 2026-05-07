@@ -19,70 +19,62 @@ define i32 @"main"()
 {
 entry:
   %"v" = alloca %"union.a"*
-  ;  Source: sizeof(uniona)
-  %".3" = getelementptr i32, i32* null, i32 1
-  %".4" = ptrtoint i32* %".3" to i32
-  ;  Source: malloc(sizeof(uniona))
-  %".6" = call i8* @"malloc"(i32 %".4")
-  ;  Source: (uniona*)malloc(sizeof(uniona))
-  %".8" = bitcast i8* %".6" to %"union.a"*
-  ;  Source: uniona*v=(uniona*)malloc(sizeof(uniona));
-  store %"union.a"* %".8", %"union.a"** %"v"
+  %".2" = getelementptr i32, i32* null, i32 1
+  %".3" = ptrtoint i32* %".2" to i32
+  %".4" = call i8* @"malloc"(i32 %".3")
+  %".5" = bitcast i8* %".4" to %"union.a"*
+  store %"union.a"* %".5", %"union.a"** %"v"
   %"w" = alloca %"union.a"*
-  ;  Source: sizeof(uniona)
-  %".12" = getelementptr i32, i32* null, i32 1
-  %".13" = ptrtoint i32* %".12" to i32
-  ;  Source: malloc(sizeof(uniona))
-  %".15" = call i8* @"malloc"(i32 %".13")
-  ;  Source: (uniona*)malloc(sizeof(uniona))
-  %".17" = bitcast i8* %".15" to %"union.a"*
-  ;  Source: uniona*w=(uniona*)malloc(sizeof(uniona));
-  store %"union.a"* %".17", %"union.a"** %"w"
+  %".7" = getelementptr i32, i32* null, i32 1
+  %".8" = ptrtoint i32* %".7" to i32
+  %".9" = call i8* @"malloc"(i32 %".8")
+  %".10" = bitcast i8* %".9" to %"union.a"*
+  store %"union.a"* %".10", %"union.a"** %"w"
   ;  Source: w->v
-  %".21" = load %"union.a"*, %"union.a"** %"w"
-  %"gep_v" = getelementptr inbounds %"union.a", %"union.a"* %".21", i32 0, i32 0
+  %".13" = load %"union.a"*, %"union.a"** %"w"
+  %"gep_v" = getelementptr inbounds %"union.a", %"union.a"* %".13", i32 0, i32 0
   %"load_v" = load i32, i32* %"gep_v"
   ;  Source: w->v=5;
   store i32 5, i32* %"gep_v"
   ;  Source: v->b
-  %".25" = load %"union.a"*, %"union.a"** %"v"
-  %"gep_b" = getelementptr inbounds %"union.a", %"union.a"* %".25", i32 0, i32 0
+  %".17" = load %"union.a"*, %"union.a"** %"v"
+  %"gep_b" = getelementptr inbounds %"union.a", %"union.a"* %".17", i32 0, i32 0
   %"union_cast_b" = bitcast i32* %"gep_b" to %"union.a"**
   %"load_b" = load %"union.a"*, %"union.a"** %"union_cast_b"
   ;  Source: w
   %"w.1" = load %"union.a"*, %"union.a"** %"w"
   ;  Source: v->b=w;
   store %"union.a"* %"w.1", %"union.a"** %"union_cast_b"
-  %".29" = bitcast [3 x i8]* @"str" to i8*
+  %".21" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: w->v
-  %".31" = load %"union.a"*, %"union.a"** %"w"
-  %"gep_v.1" = getelementptr inbounds %"union.a", %"union.a"* %".31", i32 0, i32 0
+  %".23" = load %"union.a"*, %"union.a"** %"w"
+  %"gep_v.1" = getelementptr inbounds %"union.a", %"union.a"* %".23", i32 0, i32 0
   %"load_v.1" = load i32, i32* %"gep_v.1"
   ;  Source: printf("%d",w->v);
-  %".33" = call i32 (i8*, ...) @"printf"(i8* %".29", i32 %"load_v.1")
-  %".34" = bitcast [3 x i8]* @"str.1" to i8*
+  %".25" = call i32 (i8*, ...) @"printf"(i8* %".21", i32 %"load_v.1")
+  %".26" = bitcast [3 x i8]* @"str.1" to i8*
   ;  Source: v->b->v
-  %".36" = load %"union.a"*, %"union.a"** %"v"
-  %"gep_b.1" = getelementptr inbounds %"union.a", %"union.a"* %".36", i32 0, i32 0
+  %".28" = load %"union.a"*, %"union.a"** %"v"
+  %"gep_b.1" = getelementptr inbounds %"union.a", %"union.a"* %".28", i32 0, i32 0
   %"union_cast_b.1" = bitcast i32* %"gep_b.1" to %"union.a"**
   %"load_b.1" = load %"union.a"*, %"union.a"** %"union_cast_b.1"
-  %".37" = load %"union.a"*, %"union.a"** %"union_cast_b.1"
-  %"gep_v.2" = getelementptr inbounds %"union.a", %"union.a"* %".37", i32 0, i32 0
+  %".29" = load %"union.a"*, %"union.a"** %"union_cast_b.1"
+  %"gep_v.2" = getelementptr inbounds %"union.a", %"union.a"* %".29", i32 0, i32 0
   %"load_v.2" = load i32, i32* %"gep_v.2"
   ;  Source: printf("%d",v->b->v);
-  %".39" = call i32 (i8*, ...) @"printf"(i8* %".34", i32 %"load_v.2")
+  %".31" = call i32 (i8*, ...) @"printf"(i8* %".26", i32 %"load_v.2")
   ;  Source: v
   %"v.1" = load %"union.a"*, %"union.a"** %"v"
   ;  Source: (char*)v
-  %".42" = bitcast %"union.a"* %"v.1" to i8*
+  %".34" = bitcast %"union.a"* %"v.1" to i8*
   ;  Source: free((char*)v);
-  call void @"free"(i8* %".42")
+  call void @"free"(i8* %".34")
   ;  Source: w
   %"w.2" = load %"union.a"*, %"union.a"** %"w"
   ;  Source: (char*)w
-  %".47" = bitcast %"union.a"* %"w.2" to i8*
+  %".39" = bitcast %"union.a"* %"w.2" to i8*
   ;  Source: free((char*)w);
-  call void @"free"(i8* %".47")
+  call void @"free"(i8* %".39")
   ;  Source: return0;
   ret i32 0
 }

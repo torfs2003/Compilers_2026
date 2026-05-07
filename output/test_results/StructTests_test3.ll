@@ -13,7 +13,6 @@ define i32 @"main"()
 {
 entry:
   %"ementaler" = alloca %"struct.kaas"
-  ;  Source: structkaasementaler;
   ;  Source: ementaler.melk
   %"gep_melk" = getelementptr inbounds %"struct.kaas", %"struct.kaas"* %"ementaler", i32 0, i32 0
   %"load_melk" = load i32, i32* %"gep_melk"
@@ -24,20 +23,19 @@ entry:
   %"load_fermtented" = load i32, i32* %"gep_fermtented"
   ;  Source: ementaler.fermtented=18;
   store i32 18, i32* %"gep_fermtented"
-  %".9" = bitcast [3 x i8]* @"str" to i8*
+  %".8" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: ementaler.melk
   %"gep_melk.1" = getelementptr inbounds %"struct.kaas", %"struct.kaas"* %"ementaler", i32 0, i32 0
   %"load_melk.1" = load i32, i32* %"gep_melk.1"
   ;  Source: printf("%d",ementaler.melk);
-  %".12" = call i32 (i8*, ...) @"printf"(i8* %".9", i32 %"load_melk.1")
-  %".13" = bitcast [3 x i8]* @"str.1" to i8*
+  %".11" = call i32 (i8*, ...) @"printf"(i8* %".8", i32 %"load_melk.1")
+  %".12" = bitcast [3 x i8]* @"str.1" to i8*
   ;  Source: ementaler.fermtented
   %"gep_fermtented.1" = getelementptr inbounds %"struct.kaas", %"struct.kaas"* %"ementaler", i32 0, i32 1
   %"load_fermtented.1" = load i32, i32* %"gep_fermtented.1"
   ;  Source: printf("%d",ementaler.fermtented);
-  %".16" = call i32 (i8*, ...) @"printf"(i8* %".13", i32 %"load_fermtented.1")
+  %".15" = call i32 (i8*, ...) @"printf"(i8* %".12", i32 %"load_fermtented.1")
   %"gouda" = alloca %"struct.kaas"
-  ;  Source: structkaasgouda;
   ;  Source: gouda.melk
   %"gep_melk.2" = getelementptr inbounds %"struct.kaas", %"struct.kaas"* %"gouda", i32 0, i32 0
   %"load_melk.2" = load i32, i32* %"gep_melk.2"
@@ -48,20 +46,19 @@ entry:
   %"load_fermtented.2" = load i32, i32* %"gep_fermtented.2"
   ;  Source: gouda.fermtented=9;
   store i32 9, i32* %"gep_fermtented.2"
-  %".24" = bitcast [3 x i8]* @"str.2" to i8*
+  %".22" = bitcast [3 x i8]* @"str.2" to i8*
   ;  Source: gouda.melk
   %"gep_melk.3" = getelementptr inbounds %"struct.kaas", %"struct.kaas"* %"gouda", i32 0, i32 0
   %"load_melk.3" = load i32, i32* %"gep_melk.3"
   ;  Source: printf("%d",gouda.melk);
-  %".27" = call i32 (i8*, ...) @"printf"(i8* %".24", i32 %"load_melk.3")
-  %".28" = bitcast [3 x i8]* @"str.3" to i8*
+  %".25" = call i32 (i8*, ...) @"printf"(i8* %".22", i32 %"load_melk.3")
+  %".26" = bitcast [3 x i8]* @"str.3" to i8*
   ;  Source: gouda.fermtented
   %"gep_fermtented.3" = getelementptr inbounds %"struct.kaas", %"struct.kaas"* %"gouda", i32 0, i32 1
   %"load_fermtented.3" = load i32, i32* %"gep_fermtented.3"
   ;  Source: printf("%d",gouda.fermtented);
-  %".31" = call i32 (i8*, ...) @"printf"(i8* %".28", i32 %"load_fermtented.3")
+  %".29" = call i32 (i8*, ...) @"printf"(i8* %".26", i32 %"load_fermtented.3")
   %"beemster" = alloca %"struct.kaas2"
-  ;  Source: structkaas2beemster;
   ;  Source: beemster.melk
   %"gep_melk.4" = getelementptr inbounds %"struct.kaas2", %"struct.kaas2"* %"beemster", i32 0, i32 0
   %"load_melk.4" = load i32, i32* %"gep_melk.4"
@@ -72,18 +69,18 @@ entry:
   %"load_fermtented.4" = load i32, i32* %"gep_fermtented.4"
   ;  Source: beemster.fermtented=5;
   store i32 5, i32* %"gep_fermtented.4"
-  %".39" = bitcast [3 x i8]* @"str.4" to i8*
+  %".36" = bitcast [3 x i8]* @"str.4" to i8*
   ;  Source: beemster.melk
   %"gep_melk.5" = getelementptr inbounds %"struct.kaas2", %"struct.kaas2"* %"beemster", i32 0, i32 0
   %"load_melk.5" = load i32, i32* %"gep_melk.5"
   ;  Source: printf("%d",beemster.melk);
-  %".42" = call i32 (i8*, ...) @"printf"(i8* %".39", i32 %"load_melk.5")
-  %".43" = bitcast [3 x i8]* @"str.5" to i8*
+  %".39" = call i32 (i8*, ...) @"printf"(i8* %".36", i32 %"load_melk.5")
+  %".40" = bitcast [3 x i8]* @"str.5" to i8*
   ;  Source: beemster.fermtented
   %"gep_fermtented.5" = getelementptr inbounds %"struct.kaas2", %"struct.kaas2"* %"beemster", i32 0, i32 1
   %"load_fermtented.5" = load i32, i32* %"gep_fermtented.5"
   ;  Source: printf("%d",beemster.fermtented);
-  %".46" = call i32 (i8*, ...) @"printf"(i8* %".43", i32 %"load_fermtented.5")
+  %".43" = call i32 (i8*, ...) @"printf"(i8* %".40", i32 %"load_fermtented.5")
   ;  Source: return0;
   ret i32 0
 }

@@ -11,7 +11,6 @@ define i8* @"d"()
 entry:
   %"c" = alloca i8*
   %".2" = bitcast [7 x i8]* @"str" to i8*
-  ;  Source: char*c="blabla";
   store i8* %".2", i8** %"c"
   ;  Source: returnc;
   %"c.1" = load i8*, i8** %"c"
@@ -24,19 +23,18 @@ define i32 @"main"()
 entry:
   %"c" = alloca i8*
   %".2" = bitcast [2 x i8]* @"str.1" to i8*
-  ;  Source: char*c="t";
   store i8* %".2", i8** %"c"
   ;  Source: c
   %"c.1" = load i8*, i8** %"c"
   ;  Source: d()
-  %".7" = call i8* @"d"()
+  %".6" = call i8* @"d"()
   ;  Source: c=d();
-  store i8* %".7", i8** %"c"
-  %".10" = bitcast [3 x i8]* @"str.2" to i8*
+  store i8* %".6", i8** %"c"
+  %".9" = bitcast [3 x i8]* @"str.2" to i8*
   ;  Source: c
   %"c.2" = load i8*, i8** %"c"
   ;  Source: printf("%s",c);
-  %".13" = call i32 (i8*, ...) @"printf"(i8* %".10", i8* %"c.2")
+  %".12" = call i32 (i8*, ...) @"printf"(i8* %".9", i8* %"c.2")
   ;  Source: return0;
   ret i32 0
 }

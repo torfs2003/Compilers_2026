@@ -34,18 +34,17 @@ define i32 @"main"()
 {
 entry:
   %"biggest" = alloca float
-  ;  Source: smallest(180.1,180.01)
-  %".3" = call float @"smallest"(float 0x4066833340000000, float 0x40668051e0000000)
-  ;  Source: floatbiggest=smallest(180.1,180.01);
-  store float %".3", float* %"biggest"
-  %".6" = bitcast [3 x i8]* @"str" to i8*
+  %".2" = call float @"smallest"(float 0x4066833340000000, float 0x40668051e0000000)
+  store float %".2", float* %"biggest"
+  %".4" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: biggest
   %"biggest.1" = load float, float* %"biggest"
-  ;  Source: printf("%f",biggest);
-  %".9" = fpext float %"biggest.1" to double
-  %".10" = call i32 (i8*, ...) @"printf"(i8* %".6", double %".9")
+  ;  Source: (int)biggest
+  %".7" = fptosi float %"biggest.1" to i32
+  ;  Source: printf("%d",(int)biggest);
+  %".9" = call i32 (i8*, ...) @"printf"(i8* %".4", i32 %".7")
   ;  Source: return0;
   ret i32 0
 }
 
-@"str" = internal constant [3 x i8] c"%f\00"
+@"str" = internal constant [3 x i8] c"%d\00"

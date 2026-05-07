@@ -30,13 +30,12 @@ define i32 @"main"()
 {
 entry:
   %"b" = alloca i32
-  ;  Source: intb=5;
   store i32 5, i32* %"b"
-  %".4" = bitcast [4 x i8]* @"str" to i8*
+  %".3" = bitcast [4 x i8]* @"str" to i8*
   ;  Source: name(5)
-  %".6" = call i32 @"name"(i32 5)
+  %".5" = call i32 @"name"(i32 5)
   ;  Source: printf("%d\n",name(5));
-  %".8" = call i32 (i8*, ...) @"printf"(i8* %".4", i32 %".6")
+  %".7" = call i32 (i8*, ...) @"printf"(i8* %".3", i32 %".5")
   ;  Source: return0;
   ret i32 0
 }

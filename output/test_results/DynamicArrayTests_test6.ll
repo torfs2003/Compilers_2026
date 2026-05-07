@@ -18,33 +18,30 @@ define i32 @"main"()
 {
 entry:
   %"f" = alloca i32*
-  ;  Source: calloc(10,4)
-  %".3" = call i8* @"calloc"(i32 10, i32 4)
-  ;  Source: (int*)calloc(10,4)
-  %".5" = bitcast i8* %".3" to i32*
-  ;  Source: int*f=(int*)calloc(10,4);
-  store i32* %".5", i32** %"f"
+  %".2" = call i8* @"calloc"(i32 10, i32 4)
+  %".3" = bitcast i8* %".2" to i32*
+  store i32* %".3", i32** %"f"
   ;  Source: f
   %"f.1" = load i32*, i32** %"f"
   ;  Source: (f+9)
-  %".10" = getelementptr i32, i32* %"f.1", i32 9
-  %"deref_load" = load i32, i32* %".10"
+  %".7" = getelementptr i32, i32* %"f.1", i32 9
+  %"deref_load" = load i32, i32* %".7"
   ;  Source: *(f+9)=5;
-  store i32 5, i32* %".10"
-  %".13" = bitcast [3 x i8]* @"str" to i8*
+  store i32 5, i32* %".7"
+  %".10" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: f
   %"f.2" = load i32*, i32** %"f"
   ;  Source: (f+9)
-  %".16" = getelementptr i32, i32* %"f.2", i32 9
+  %".13" = getelementptr i32, i32* %"f.2", i32 9
   ;  Source: *(f+9)
-  %"deref_load.1" = load i32, i32* %".16"
+  %"deref_load.1" = load i32, i32* %".13"
   ;  Source: printf("%d",*(f+9));
-  %".19" = call i32 (i8*, ...) @"printf"(i8* %".13", i32 %"deref_load.1")
+  %".16" = call i32 (i8*, ...) @"printf"(i8* %".10", i32 %"deref_load.1")
   ;  Source: f
   %"f.3" = load i32*, i32** %"f"
   ;  Source: free(f);
-  %".22" = bitcast i32* %"f.3" to i8*
-  call void @"free"(i8* %".22")
+  %".19" = bitcast i32* %"f.3" to i8*
+  call void @"free"(i8* %".19")
   ;  Source: return0;
   ret i32 0
 }

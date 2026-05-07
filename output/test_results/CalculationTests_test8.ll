@@ -10,85 +10,80 @@ define i32 @"main"()
 {
 entry:
   %"number" = alloca i32
-  ;  Source: intnumber=-55;
   store i32 -55, i32* %"number"
   %"a" = alloca i32
-  ;  Source: inta=1;
   store i32 1, i32* %"a"
   ;  Source: a
   %"a.1" = load i32, i32* %"a"
   ;  Source: number
   %"number.1" = load i32, i32* %"number"
   ;  Source: number++
-  %".9" = load i32, i32* %"number"
-  %".10" = add i32 %".9", 1
-  store i32 %".10", i32* %"number"
+  %".7" = load i32, i32* %"number"
+  %".8" = add i32 %".7", 1
+  store i32 %".8", i32* %"number"
   ;  Source: a=number++;
-  store i32 %".9", i32* %"a"
-  %".14" = bitcast [3 x i8]* @"str" to i8*
+  store i32 %".7", i32* %"a"
+  %".12" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: a
   %"a.2" = load i32, i32* %"a"
   ;  Source: printf("%d",a);
-  %".17" = call i32 (i8*, ...) @"printf"(i8* %".14", i32 %"a.2")
-  %".18" = bitcast [3 x i8]* @"str.1" to i8*
+  %".15" = call i32 (i8*, ...) @"printf"(i8* %".12", i32 %"a.2")
+  %".16" = bitcast [3 x i8]* @"str.1" to i8*
   ;  Source: number
   %"number.2" = load i32, i32* %"number"
   ;  Source: printf("%d",number);
-  %".21" = call i32 (i8*, ...) @"printf"(i8* %".18", i32 %"number.2")
+  %".19" = call i32 (i8*, ...) @"printf"(i8* %".16", i32 %"number.2")
   ;  Source: number
   %"number.3" = load i32, i32* %"number"
   ;  Source: number
   %"number.4" = load i32, i32* %"number"
   ;  Source: number++
-  %".25" = load i32, i32* %"number"
-  %".26" = add i32 %".25", 1
-  store i32 %".26", i32* %"number"
+  %".23" = load i32, i32* %"number"
+  %".24" = add i32 %".23", 1
+  store i32 %".24", i32* %"number"
   ;  Source: number=number++;
-  store i32 %".25", i32* %"number"
-  %".30" = bitcast [3 x i8]* @"str.2" to i8*
+  store i32 %".23", i32* %"number"
+  %".28" = bitcast [3 x i8]* @"str.2" to i8*
   ;  Source: number
   %"number.5" = load i32, i32* %"number"
   ;  Source: printf("%d",number);
-  %".33" = call i32 (i8*, ...) @"printf"(i8* %".30", i32 %"number.5")
+  %".31" = call i32 (i8*, ...) @"printf"(i8* %".28", i32 %"number.5")
   %"n" = alloca i32
-  ;  Source: number
   %"number.6" = load i32, i32* %"number"
-  ;  Source: number++
-  %".36" = load i32, i32* %"number"
-  %".37" = add i32 %".36", 1
-  store i32 %".37", i32* %"number"
-  ;  Source: intn=number++;
-  store i32 %".36", i32* %"n"
-  %".41" = bitcast [3 x i8]* @"str.3" to i8*
+  %".32" = load i32, i32* %"number"
+  %".33" = add i32 %".32", 1
+  store i32 %".33", i32* %"number"
+  store i32 %".32", i32* %"n"
+  %".36" = bitcast [3 x i8]* @"str.3" to i8*
   ;  Source: number
   %"number.7" = load i32, i32* %"number"
   ;  Source: printf("%d",number);
-  %".44" = call i32 (i8*, ...) @"printf"(i8* %".41", i32 %"number.7")
-  %".45" = bitcast [3 x i8]* @"str.4" to i8*
+  %".39" = call i32 (i8*, ...) @"printf"(i8* %".36", i32 %"number.7")
+  %".40" = bitcast [3 x i8]* @"str.4" to i8*
   ;  Source: n
   %"n.1" = load i32, i32* %"n"
   ;  Source: printf("%d",n);
-  %".48" = call i32 (i8*, ...) @"printf"(i8* %".45", i32 %"n.1")
+  %".43" = call i32 (i8*, ...) @"printf"(i8* %".40", i32 %"n.1")
   ;  Source: a
   %"a.3" = load i32, i32* %"a"
   ;  Source: n
   %"n.2" = load i32, i32* %"n"
   ;  Source: ++n
-  %".52" = load i32, i32* %"n"
-  %".53" = add i32 %".52", 1
-  store i32 %".53", i32* %"n"
+  %".47" = load i32, i32* %"n"
+  %".48" = add i32 %".47", 1
+  store i32 %".48", i32* %"n"
   ;  Source: a=++n;
-  store i32 %".53", i32* %"a"
-  %".57" = bitcast [3 x i8]* @"str.5" to i8*
+  store i32 %".48", i32* %"a"
+  %".52" = bitcast [3 x i8]* @"str.5" to i8*
   ;  Source: a
   %"a.4" = load i32, i32* %"a"
   ;  Source: printf("%d",a);
-  %".60" = call i32 (i8*, ...) @"printf"(i8* %".57", i32 %"a.4")
-  %".61" = bitcast [3 x i8]* @"str.6" to i8*
+  %".55" = call i32 (i8*, ...) @"printf"(i8* %".52", i32 %"a.4")
+  %".56" = bitcast [3 x i8]* @"str.6" to i8*
   ;  Source: n
   %"n.3" = load i32, i32* %"n"
   ;  Source: printf("%d",n);
-  %".64" = call i32 (i8*, ...) @"printf"(i8* %".61", i32 %"n.3")
+  %".59" = call i32 (i8*, ...) @"printf"(i8* %".56", i32 %"n.3")
   ;  Source: return0;
   ret i32 0
 }

@@ -10,57 +10,58 @@ define i32 @"main"()
 {
 entry:
   %"x" = alloca float
-  ;  Source: floatx=0.478984;
   store float 0x3fdea7ac80000000, float* %"x"
   %"y" = alloca float
-  ;  Source: floaty=5489451.245847;
   store float 0x4154f0cac0000000, float* %"y"
   %"f" = alloca float
-  ;  Source: floatf=1654.0000;
   store float 0x4099d80000000000, float* %"f"
   %"z" = alloca float
-  ;  Source: floatz=0000.00000;
   store float              0x0, float* %"z"
-  %".10" = bitcast [3 x i8]* @"str" to i8*
+  %".6" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: z
   %"z.1" = load float, float* %"z"
-  ;  Source: printf("%f",z);
-  %".13" = fpext float %"z.1" to double
-  %".14" = call i32 (i8*, ...) @"printf"(i8* %".10", double %".13")
+  ;  Source: (int)z
+  %".9" = fptosi float %"z.1" to i32
+  ;  Source: printf("%d",(int)z);
+  %".11" = call i32 (i8*, ...) @"printf"(i8* %".6", i32 %".9")
   ;  Source: z
   %"z.2" = load float, float* %"z"
   ;  Source: z=-565.21547;
   store float 0xc081a9b940000000, float* %"z"
-  %".18" = bitcast [3 x i8]* @"str.1" to i8*
+  %".15" = bitcast [3 x i8]* @"str.1" to i8*
   ;  Source: x
   %"x.1" = load float, float* %"x"
-  ;  Source: printf("%f",x);
-  %".21" = fpext float %"x.1" to double
-  %".22" = call i32 (i8*, ...) @"printf"(i8* %".18", double %".21")
-  %".23" = bitcast [3 x i8]* @"str.2" to i8*
+  ;  Source: (int)x
+  %".18" = fptosi float %"x.1" to i32
+  ;  Source: printf("%d",(int)x);
+  %".20" = call i32 (i8*, ...) @"printf"(i8* %".15", i32 %".18")
+  %".21" = bitcast [3 x i8]* @"str.2" to i8*
   ;  Source: y
   %"y.1" = load float, float* %"y"
-  ;  Source: printf("%f",y);
-  %".26" = fpext float %"y.1" to double
-  %".27" = call i32 (i8*, ...) @"printf"(i8* %".23", double %".26")
-  %".28" = bitcast [3 x i8]* @"str.3" to i8*
+  ;  Source: (int)y
+  %".24" = fptosi float %"y.1" to i32
+  ;  Source: printf("%d",(int)y);
+  %".26" = call i32 (i8*, ...) @"printf"(i8* %".21", i32 %".24")
+  %".27" = bitcast [3 x i8]* @"str.3" to i8*
   ;  Source: f
   %"f.1" = load float, float* %"f"
-  ;  Source: printf("%f",f);
-  %".31" = fpext float %"f.1" to double
-  %".32" = call i32 (i8*, ...) @"printf"(i8* %".28", double %".31")
+  ;  Source: (int)f
+  %".30" = fptosi float %"f.1" to i32
+  ;  Source: printf("%d",(int)f);
+  %".32" = call i32 (i8*, ...) @"printf"(i8* %".27", i32 %".30")
   %".33" = bitcast [3 x i8]* @"str.4" to i8*
   ;  Source: z
   %"z.3" = load float, float* %"z"
-  ;  Source: printf("%f",z);
-  %".36" = fpext float %"z.3" to double
-  %".37" = call i32 (i8*, ...) @"printf"(i8* %".33", double %".36")
+  ;  Source: (int)z
+  %".36" = fptosi float %"z.3" to i32
+  ;  Source: printf("%d",(int)z);
+  %".38" = call i32 (i8*, ...) @"printf"(i8* %".33", i32 %".36")
   ;  Source: return0;
   ret i32 0
 }
 
-@"str" = internal constant [3 x i8] c"%f\00"
-@"str.1" = internal constant [3 x i8] c"%f\00"
-@"str.2" = internal constant [3 x i8] c"%f\00"
-@"str.3" = internal constant [3 x i8] c"%f\00"
-@"str.4" = internal constant [3 x i8] c"%f\00"
+@"str" = internal constant [3 x i8] c"%d\00"
+@"str.1" = internal constant [3 x i8] c"%d\00"
+@"str.2" = internal constant [3 x i8] c"%d\00"
+@"str.3" = internal constant [3 x i8] c"%d\00"
+@"str.4" = internal constant [3 x i8] c"%d\00"

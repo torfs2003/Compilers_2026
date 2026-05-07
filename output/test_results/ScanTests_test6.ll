@@ -10,24 +10,23 @@ define i32 @"main"()
 {
 entry:
   %"k" = alloca i8
-  ;  Source: chark='0';
   store i8 48, i8* %"k"
-  %".4" = bitcast [3 x i8]* @"str" to i8*
+  %".3" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: k
   %"k.1" = load i8, i8* %"k"
   ;  Source: printf("%c",k);
-  %".7" = call i32 (i8*, ...) @"printf"(i8* %".4", i8 %"k.1")
-  %".8" = bitcast [3 x i8]* @"str.1" to i8*
+  %".6" = call i32 (i8*, ...) @"printf"(i8* %".3", i8 %"k.1")
+  %".7" = bitcast [3 x i8]* @"str.1" to i8*
   ;  Source: k
   %"k.2" = load i8, i8* %"k"
   ;  Source: &k
   ;  Source: scanf("%c",&k);
-  %".12" = call i32 (i8*, ...) @"scanf"(i8* %".8", i8* %"k")
-  %".13" = bitcast [3 x i8]* @"str.2" to i8*
+  %".11" = call i32 (i8*, ...) @"scanf"(i8* %".7", i8* %"k")
+  %".12" = bitcast [3 x i8]* @"str.2" to i8*
   ;  Source: k
   %"k.3" = load i8, i8* %"k"
   ;  Source: printf("%c",k);
-  %".16" = call i32 (i8*, ...) @"printf"(i8* %".13", i8 %"k.3")
+  %".15" = call i32 (i8*, ...) @"printf"(i8* %".12", i8 %"k.3")
   ;  Source: return0;
   ret i32 0
 }

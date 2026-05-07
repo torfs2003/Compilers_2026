@@ -1,8 +1,8 @@
 digraph AST {
   node [fontname="Arial"];
   node2 [label="Include\n<stdio.h>", shape=note, style="filled", fillcolor="lightyellow", color="black", fontcolor="black"];
-  node5 [label="Decl\nuniona\nc\n(uniona)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
-  node9 [label="ID: c\n(uniona)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
+  node5 [label="Decl\nunion a\nc\n(union a)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
+  node9 [label="ID: c\n(union a)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
   node8 [label="Access\n.b\n(int*)", shape=ellipse, style="filled", fillcolor="lightblue", color="black", fontcolor="black"];
   node8 -> node9 [style="solid", color="black"];
   node10 [label="2\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
@@ -14,7 +14,7 @@ digraph AST {
   node6 -> node7 [style="solid", color="black"];
   node6 -> node11 [style="solid", color="black"];
   node13 [label="\"%d\"\n(char*)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
-  node16 [label="ID: c\n(uniona)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
+  node16 [label="ID: c\n(union a)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
   node15 [label="Access\n.b\n(int*)", shape=ellipse, style="filled", fillcolor="lightblue", color="black", fontcolor="black"];
   node15 -> node16 [style="solid", color="black"];
   node17 [label="2\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];

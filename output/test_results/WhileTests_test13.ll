@@ -10,10 +10,8 @@ define i32 @"main"()
 {
 entry:
   %"i" = alloca i32
-  ;  Source: inti=0;
   store i32 0, i32* %"i"
   %"j" = alloca i32
-  ;  Source: intj;
   ;  Source: j
   %"j.1" = load i32, i32* %"j"
   ;  Source: j=0
@@ -21,18 +19,18 @@ entry:
   br label %"while.cond"
 while.cond:
   %"j.2" = load i32, i32* %"j"
-  %".9" = icmp slt i32 %"j.2", 10
-  %".10" = zext i1 %".9" to i32
-  %"whilecond" = icmp ne i32 %".10", 0
+  %".7" = icmp slt i32 %"j.2", 10
+  %".8" = zext i1 %".7" to i32
+  %"whilecond" = icmp ne i32 %".8", 0
   br i1 %"whilecond", label %"while.body", label %"while.end"
 while.body:
-  %".12" = bitcast [3 x i8]* @"str" to i8*
+  %".10" = bitcast [3 x i8]* @"str" to i8*
   %"j.3" = load i32, i32* %"j"
-  %".13" = call i32 (i8*, ...) @"printf"(i8* %".12", i32 %"j.3")
+  %".11" = call i32 (i8*, ...) @"printf"(i8* %".10", i32 %"j.3")
   %"j.4" = load i32, i32* %"j"
-  %".14" = load i32, i32* %"j"
-  %".15" = add i32 %".14", 1
-  store i32 %".15", i32* %"j"
+  %".12" = load i32, i32* %"j"
+  %".13" = add i32 %".12", 1
+  store i32 %".13", i32* %"j"
   br label %"while.cond"
 while.end:
   ;  Source: return0;

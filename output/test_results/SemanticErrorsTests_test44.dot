@@ -32,7 +32,7 @@ digraph AST {
   node16 [label="+\n(int)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node16 -> node17 [style="solid", color="black"];
   node16 -> node20 [style="solid", color="black"];
-  node15 [label="Decl\nint\na\n(int)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
+  node15 [label="ArrayDecl\nint\na\n(int*)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
   node15 -> node16 [style="solid", color="black", label=" init", fontcolor="blue"];
   node24 [label="0\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node23 [label="Return", shape=ellipse, style="filled", fillcolor="lightpink", color="black", fontcolor="black"];

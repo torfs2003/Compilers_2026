@@ -12,13 +12,10 @@ define i32 @"main"()
 {
 entry:
   %"y" = alloca i32
-  ;  Source: inty=5;
   store i32 5, i32* %"y"
   %"u" = alloca i32
-  ;  Source: intu=10;
   store i32 10, i32* %"u"
   %"c" = alloca i32
-  ;  Source: intc;
   ;  Source: c
   %"c.1" = load i32, i32* %"c"
   ;  Source: y
@@ -26,14 +23,14 @@ entry:
   ;  Source: u
   %"u.1" = load i32, i32* %"u"
   ;  Source: func(y,u)
-  %".11" = call i32 @"func"(i32 %"y.1", i32 %"u.1")
+  %".8" = call i32 @"func"(i32 %"y.1", i32 %"u.1")
   ;  Source: c=func(y,u);
-  store i32 %".11", i32* %"c"
-  %".14" = bitcast [4 x i8]* @"str" to i8*
+  store i32 %".8", i32* %"c"
+  %".11" = bitcast [4 x i8]* @"str" to i8*
   ;  Source: c
   %"c.2" = load i32, i32* %"c"
   ;  Source: printf("%d\n",c);
-  %".17" = call i32 (i8*, ...) @"printf"(i8* %".14", i32 %"c.2")
+  %".14" = call i32 (i8*, ...) @"printf"(i8* %".11", i32 %"c.2")
   ;  Source: returny;
   %"y.2" = load i32, i32* %"y"
   ret i32 %"y.2"

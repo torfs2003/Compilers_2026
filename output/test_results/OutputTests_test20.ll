@@ -10,45 +10,29 @@ define i32 @"main"()
 {
 entry:
   %"line_of_code" = alloca i32
-  ;  User Comment: /*
-  ;  User Comment: * This is a comment
-  ;  User Comment: *
-  ;  User Comment: */
-  ;  Source: intline_of_code=5;
   store i32 5, i32* %"line_of_code"
   %"f" = alloca float
-  ;  User Comment: /**
-  ;  User Comment: * Another Comment
-  ;  User Comment: ***** /
-  ;  User Comment: /**
-  ;  User Comment: *
-  ;  User Comment: *
-  ;  User Comment: **/
-  ;  Source: floatf=45;
-  %".16" = sitofp i32 45 to float
-  store float %".16", float* %"f"
+  %".3" = sitofp i32 45 to float
+  store float %".3", float* %"f"
   %"c" = alloca i8
-  ;  User Comment: /* /// ** ** // // //  */
-  ;  Source: charc='b';
   store i8 98, i8* %"c"
   %"x" = alloca i32
-  ;  Source: intx=5;
   store i32 5, i32* %"x"
-  %".23" = bitcast [3 x i8]* @"str" to i8*
+  %".7" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: x
   %"x.1" = load i32, i32* %"x"
   ;  Source: printf("%d",x);
-  %".26" = call i32 (i8*, ...) @"printf"(i8* %".23", i32 %"x.1")
-  %".27" = bitcast [3 x i8]* @"str.1" to i8*
+  %".10" = call i32 (i8*, ...) @"printf"(i8* %".7", i32 %"x.1")
+  %".11" = bitcast [3 x i8]* @"str.1" to i8*
   ;  Source: line_of_code
   %"line_of_code.1" = load i32, i32* %"line_of_code"
   ;  Source: printf("%d",line_of_code);
-  %".30" = call i32 (i8*, ...) @"printf"(i8* %".27", i32 %"line_of_code.1")
-  %".31" = bitcast [3 x i8]* @"str.2" to i8*
+  %".14" = call i32 (i8*, ...) @"printf"(i8* %".11", i32 %"line_of_code.1")
+  %".15" = bitcast [3 x i8]* @"str.2" to i8*
   ;  Source: c
   %"c.1" = load i8, i8* %"c"
   ;  Source: printf("%c",c);
-  %".34" = call i32 (i8*, ...) @"printf"(i8* %".31", i8 %"c.1")
+  %".18" = call i32 (i8*, ...) @"printf"(i8* %".15", i8 %"c.1")
   ;  Source: return0;
   ret i32 0
 }

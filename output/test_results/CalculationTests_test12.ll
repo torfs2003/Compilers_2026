@@ -10,39 +10,33 @@ define i32 @"main"()
 {
 entry:
   %"b" = alloca i32
-  ;  Source: constintb=-6250;
   store i32 -6250, i32* %"b"
-  %".4" = bitcast [3 x i8]* @"str" to i8*
+  %".3" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: b
   %"b.1" = load i32, i32* %"b"
   ;  Source: printf("%d",b);
-  %".7" = call i32 (i8*, ...) @"printf"(i8* %".4", i32 %"b.1")
+  %".6" = call i32 (i8*, ...) @"printf"(i8* %".3", i32 %"b.1")
   %"x" = alloca i32
-  ;  Source: constintx=5;
   store i32 5, i32* %"x"
-  %".10" = bitcast [3 x i8]* @"str.1" to i8*
+  %".8" = bitcast [3 x i8]* @"str.1" to i8*
   ;  Source: x
   %"x.1" = load i32, i32* %"x"
   ;  Source: printf("%d",x);
-  %".13" = call i32 (i8*, ...) @"printf"(i8* %".10", i32 %"x.1")
+  %".11" = call i32 (i8*, ...) @"printf"(i8* %".8", i32 %"x.1")
   %"non_const_pointer" = alloca i32*
-  ;  Source: x
-  %"x.2" = load i32, i32* %"x"
-  ;  Source: &x
-  ;  Source: int*non_const_pointer=&x;
   store i32* %"x", i32** %"non_const_pointer"
   ;  Source: non_const_pointer
   %"non_const_pointer.1" = load i32*, i32** %"non_const_pointer"
   %"deref_load" = load i32, i32* %"non_const_pointer.1"
   ;  Source: *non_const_pointer=36941;
   store i32 36941, i32* %"non_const_pointer.1"
-  %".21" = bitcast [3 x i8]* @"str.2" to i8*
+  %".16" = bitcast [3 x i8]* @"str.2" to i8*
   ;  Source: non_const_pointer
   %"non_const_pointer.2" = load i32*, i32** %"non_const_pointer"
   ;  Source: *non_const_pointer
   %"deref_load.1" = load i32, i32* %"non_const_pointer.2"
   ;  Source: printf("%d",*non_const_pointer);
-  %".25" = call i32 (i8*, ...) @"printf"(i8* %".21", i32 %"deref_load.1")
+  %".20" = call i32 (i8*, ...) @"printf"(i8* %".16", i32 %"deref_load.1")
   ;  Source: non_const_pointer
   %"non_const_pointer.3" = load i32*, i32** %"non_const_pointer"
   ;  Source: b
@@ -50,54 +44,48 @@ entry:
   ;  Source: &b
   ;  Source: non_const_pointer=&b;
   store i32* %"b", i32** %"non_const_pointer"
-  %".31" = bitcast [3 x i8]* @"str.3" to i8*
+  %".26" = bitcast [3 x i8]* @"str.3" to i8*
   ;  Source: non_const_pointer
   %"non_const_pointer.4" = load i32*, i32** %"non_const_pointer"
   ;  Source: *non_const_pointer
   %"deref_load.2" = load i32, i32* %"non_const_pointer.4"
   ;  Source: printf("%d",*non_const_pointer);
-  %".35" = call i32 (i8*, ...) @"printf"(i8* %".31", i32 %"deref_load.2")
+  %".30" = call i32 (i8*, ...) @"printf"(i8* %".26", i32 %"deref_load.2")
   %"c" = alloca i8
-  ;  Source: charc='x';
   store i8 120, i8* %"c"
-  %".38" = bitcast [3 x i8]* @"str.4" to i8*
+  %".32" = bitcast [3 x i8]* @"str.4" to i8*
   ;  Source: c
   %"c.1" = load i8, i8* %"c"
   ;  Source: printf("%c",c);
-  %".41" = call i32 (i8*, ...) @"printf"(i8* %".38", i8 %"c.1")
+  %".35" = call i32 (i8*, ...) @"printf"(i8* %".32", i8 %"c.1")
   %"nl" = alloca i8
-  ;  Source: charnl='\n';
   store i8 10, i8* %"nl"
-  %".44" = bitcast [3 x i8]* @"str.5" to i8*
+  %".37" = bitcast [3 x i8]* @"str.5" to i8*
   ;  Source: nl
   %"nl.1" = load i8, i8* %"nl"
   ;  Source: printf("%c",nl);
-  %".47" = call i32 (i8*, ...) @"printf"(i8* %".44", i8 %"nl.1")
+  %".40" = call i32 (i8*, ...) @"printf"(i8* %".37", i8 %"nl.1")
   %"char_ptr" = alloca i8*
-  ;  Source: c
-  %"c.2" = load i8, i8* %"c"
-  ;  Source: &c
-  ;  Source: char*char_ptr=&c;
   store i8* %"c", i8** %"char_ptr"
-  %".52" = bitcast [3 x i8]* @"str.6" to i8*
+  %".42" = bitcast [3 x i8]* @"str.6" to i8*
   ;  Source: char_ptr
   %"char_ptr.1" = load i8*, i8** %"char_ptr"
   ;  Source: *char_ptr
   %"deref_load.3" = load i8, i8* %"char_ptr.1"
   ;  Source: printf("%c",*char_ptr);
-  %".56" = call i32 (i8*, ...) @"printf"(i8* %".52", i8 %"deref_load.3")
+  %".46" = call i32 (i8*, ...) @"printf"(i8* %".42", i8 %"deref_load.3")
   ;  Source: char_ptr
   %"char_ptr.2" = load i8*, i8** %"char_ptr"
   %"deref_load.4" = load i8, i8* %"char_ptr.2"
   ;  Source: *char_ptr='\t';
   store i8 9, i8* %"char_ptr.2"
-  %".60" = bitcast [3 x i8]* @"str.7" to i8*
+  %".50" = bitcast [3 x i8]* @"str.7" to i8*
   ;  Source: char_ptr
   %"char_ptr.3" = load i8*, i8** %"char_ptr"
   ;  Source: *char_ptr
   %"deref_load.5" = load i8, i8* %"char_ptr.3"
   ;  Source: printf("%c",*char_ptr);
-  %".64" = call i32 (i8*, ...) @"printf"(i8* %".60", i8 %"deref_load.5")
+  %".54" = call i32 (i8*, ...) @"printf"(i8* %".50", i8 %"deref_load.5")
   ;  Source: char_ptr
   %"char_ptr.4" = load i8*, i8** %"char_ptr"
   ;  Source: nl
@@ -105,13 +93,13 @@ entry:
   ;  Source: &nl
   ;  Source: char_ptr=&nl;
   store i8* %"nl", i8** %"char_ptr"
-  %".70" = bitcast [3 x i8]* @"str.8" to i8*
+  %".60" = bitcast [3 x i8]* @"str.8" to i8*
   ;  Source: char_ptr
   %"char_ptr.5" = load i8*, i8** %"char_ptr"
   ;  Source: *char_ptr
   %"deref_load.6" = load i8, i8* %"char_ptr.5"
   ;  Source: printf("%c",*char_ptr);
-  %".74" = call i32 (i8*, ...) @"printf"(i8* %".70", i8 %"deref_load.6")
+  %".64" = call i32 (i8*, ...) @"printf"(i8* %".60", i8 %"deref_load.6")
   ;  Source: return0;
   ret i32 0
 }

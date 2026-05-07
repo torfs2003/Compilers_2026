@@ -11,13 +11,12 @@ define i32 @"main"()
 entry:
   %"s" = alloca i8*
   %".2" = bitcast [10 x i8]* @"str" to i8*
-  ;  Source: char*s="string he";
   store i8* %".2", i8** %"s"
-  %".5" = bitcast [3 x i8]* @"str.1" to i8*
+  %".4" = bitcast [3 x i8]* @"str.1" to i8*
   ;  Source: s
   %"s.1" = load i8*, i8** %"s"
   ;  Source: printf("%s",s);
-  %".8" = call i32 (i8*, ...) @"printf"(i8* %".5", i8* %"s.1")
+  %".7" = call i32 (i8*, ...) @"printf"(i8* %".4", i8* %"s.1")
   ;  Source: return0;
   ret i32 0
 }

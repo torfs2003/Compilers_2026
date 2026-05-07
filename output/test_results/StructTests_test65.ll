@@ -11,14 +11,9 @@ define i32 @"main"()
 {
 entry:
   %"myStruct" = alloca %"struct.MyStruct"
-  ;  Source: structMyStructmyStruct;
   %"intValue" = alloca i32
-  ;  Source: myStruct
-  ;  Source: ((int*)&myStruct)
-  %".5" = bitcast %"struct.MyStruct"* %"myStruct" to i32*
-  ;  Source: *((int*)&myStruct)
-  %"deref_load" = load i32, i32* %".5"
-  ;  Source: intintValue=*((int*)&myStruct);
+  %".2" = bitcast %"struct.MyStruct"* %"myStruct" to i32*
+  %"deref_load" = load i32, i32* %".2"
   store i32 %"deref_load", i32* %"intValue"
   ;  Source: return0;
   ret i32 0

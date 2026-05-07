@@ -17,22 +17,22 @@ define i32 @"main"()
 {
 entry:
   %"a" = alloca float
-  ;  Source: floata=0.5;
   store float 0x3fe0000000000000, float* %"a"
   ;  Source: a
   %"a.1" = load float, float* %"a"
   ;  Source: d()
-  %".6" = call float @"d"()
+  %".5" = call float @"d"()
   ;  Source: a=d();
-  store float %".6", float* %"a"
-  %".9" = bitcast [3 x i8]* @"str" to i8*
+  store float %".5", float* %"a"
+  %".8" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: a
   %"a.2" = load float, float* %"a"
-  ;  Source: printf("%f",a);
-  %".12" = fpext float %"a.2" to double
-  %".13" = call i32 (i8*, ...) @"printf"(i8* %".9", double %".12")
+  ;  Source: (int)a
+  %".11" = fptosi float %"a.2" to i32
+  ;  Source: printf("%d",(int)a);
+  %".13" = call i32 (i8*, ...) @"printf"(i8* %".8", i32 %".11")
   ;  Source: return0;
   ret i32 0
 }
 
-@"str" = internal constant [3 x i8] c"%f\00"
+@"str" = internal constant [3 x i8] c"%d\00"

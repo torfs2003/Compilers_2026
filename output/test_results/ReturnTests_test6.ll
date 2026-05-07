@@ -17,15 +17,13 @@ define i32 @"main"()
 {
 entry:
   %"a" = alloca i32
-  ;  Source: d()
-  %".3" = call i32 @"d"()
-  ;  Source: inta=d();
-  store i32 %".3", i32* %"a"
-  %".6" = bitcast [3 x i8]* @"str" to i8*
+  %".2" = call i32 @"d"()
+  store i32 %".2", i32* %"a"
+  %".4" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: a
   %"a.1" = load i32, i32* %"a"
   ;  Source: printf("%d",a);
-  %".9" = call i32 (i8*, ...) @"printf"(i8* %".6", i32 %"a.1")
+  %".7" = call i32 (i8*, ...) @"printf"(i8* %".4", i32 %"a.1")
   ;  Source: return0;
   ret i32 0
 }

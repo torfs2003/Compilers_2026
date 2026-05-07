@@ -33,19 +33,18 @@ define i32 @"main"()
 {
 entry:
   %"boolean" = alloca float
-  ;  Source: vergelijken('a',20)
-  %".3" = sext i8 97 to i32
-  %".4" = call float @"vergelijken"(i32 %".3", i32 20)
-  ;  Source: floatboolean=vergelijken('a',20);
-  store float %".4", float* %"boolean"
-  %".7" = bitcast [3 x i8]* @"str" to i8*
+  %".2" = sext i8 97 to i32
+  %".3" = call float @"vergelijken"(i32 %".2", i32 20)
+  store float %".3", float* %"boolean"
+  %".5" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: boolean
   %"boolean.1" = load float, float* %"boolean"
-  ;  Source: printf("%f",boolean);
-  %".10" = fpext float %"boolean.1" to double
-  %".11" = call i32 (i8*, ...) @"printf"(i8* %".7", double %".10")
+  ;  Source: (int)boolean
+  %".8" = fptosi float %"boolean.1" to i32
+  ;  Source: printf("%d",(int)boolean);
+  %".10" = call i32 (i8*, ...) @"printf"(i8* %".5", i32 %".8")
   ;  Source: return0;
   ret i32 0
 }
 
-@"str" = internal constant [3 x i8] c"%f\00"
+@"str" = internal constant [3 x i8] c"%d\00"

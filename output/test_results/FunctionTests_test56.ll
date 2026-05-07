@@ -20,10 +20,8 @@ define i32 @"main"()
 {
 entry:
   %"result" = alloca i32
-  ;  Source: multiply(3,4)
-  %".3" = call i32 @"multiply"(i32 3, i32 4)
-  ;  Source: intresult=multiply(3,4);
-  store i32 %".3", i32* %"result"
+  %".2" = call i32 @"multiply"(i32 3, i32 4)
+  store i32 %".2", i32* %"result"
   ;  Source: return0;
   ret i32 0
 }

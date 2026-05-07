@@ -10,40 +10,34 @@ define i32 @"main"()
 {
 entry:
   %"c" = alloca i8
-  ;  User Comment: // line 1
-  ;  Source: charc='\n';
-  store i8 10, i8* %"c"
+  store i8 115, i8* %"c"
   %"f" = alloca float
-  ;  Source: floatf=33.1;
   store float 0x40408cccc0000000, float* %"f"
   %"final_line" = alloca float
-  ;  User Comment: // another line
-  ;  User Comment: /////// some documentation
-  ;  User Comment: /////////////////////////////////////
-  ;  User Comment: // abcdef 123 //////////
-  ;  Source: floatfinal_line=33.99895;
   store float 0x4040ffdda0000000, float* %"final_line"
-  %".13" = bitcast [3 x i8]* @"str" to i8*
+  %".5" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: final_line
   %"final_line.1" = load float, float* %"final_line"
-  ;  Source: printf("%f",final_line);
-  %".16" = fpext float %"final_line.1" to double
-  %".17" = call i32 (i8*, ...) @"printf"(i8* %".13", double %".16")
-  %".18" = bitcast [3 x i8]* @"str.1" to i8*
+  ;  Source: (int)final_line
+  %".8" = fptosi float %"final_line.1" to i32
+  ;  Source: printf("%d",(int)final_line);
+  %".10" = call i32 (i8*, ...) @"printf"(i8* %".5", i32 %".8")
+  %".11" = bitcast [3 x i8]* @"str.1" to i8*
   ;  Source: f
   %"f.1" = load float, float* %"f"
-  ;  Source: printf("%f",f);
-  %".21" = fpext float %"f.1" to double
-  %".22" = call i32 (i8*, ...) @"printf"(i8* %".18", double %".21")
-  %".23" = bitcast [3 x i8]* @"str.2" to i8*
+  ;  Source: (int)f
+  %".14" = fptosi float %"f.1" to i32
+  ;  Source: printf("%d",(int)f);
+  %".16" = call i32 (i8*, ...) @"printf"(i8* %".11", i32 %".14")
+  %".17" = bitcast [3 x i8]* @"str.2" to i8*
   ;  Source: c
   %"c.1" = load i8, i8* %"c"
   ;  Source: printf("%c",c);
-  %".26" = call i32 (i8*, ...) @"printf"(i8* %".23", i8 %"c.1")
+  %".20" = call i32 (i8*, ...) @"printf"(i8* %".17", i8 %"c.1")
   ;  Source: return0;
   ret i32 0
 }
 
-@"str" = internal constant [3 x i8] c"%f\00"
-@"str.1" = internal constant [3 x i8] c"%f\00"
+@"str" = internal constant [3 x i8] c"%d\00"
+@"str.1" = internal constant [3 x i8] c"%d\00"
 @"str.2" = internal constant [3 x i8] c"%c\00"

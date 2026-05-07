@@ -15,8 +15,8 @@ entry:
   %"x" = load i32, i32* @"x"
   ;  Source: printf("%d",x);
   %".5" = call i32 (i8*, ...) @"printf"(i8* %".2", i32 %"x")
-  ;  Source: intx=2;
-  store i32 2, i32* @"x"
+  %"x.1" = alloca i32
+  store i32 2, i32* %"x.1"
   ;  Source: return0;
   ret i32 0
 }

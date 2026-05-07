@@ -27,7 +27,6 @@ define i32 @"main"()
 {
 entry:
   %"a" = alloca i8
-  ;  Source: chara='x';
   store i8 120, i8* %"a"
   ;  Source: a
   %"a.1" = load i8, i8* %"a"
@@ -44,6 +43,5 @@ define void @"hey"()
 {
 entry:
   %"y" = alloca i32
-  ;  Source: inty;
   ret void
 }

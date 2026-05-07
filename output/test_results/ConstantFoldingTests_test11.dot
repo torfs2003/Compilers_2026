@@ -25,8 +25,8 @@ digraph AST {
   node26 [label="1\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node27 [label="1\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node28 [label="1\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
-  node29 [label="11111111101111111110\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
-  node30 [label="-1234567890123456790\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node29 [label="-2657055290\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node30 [label="-2112454934\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node32 [label="0\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node31 [label="Return", shape=ellipse, style="filled", fillcolor="lightpink", color="black", fontcolor="black"];
   node31 -> node32 [style="solid", color="black"];

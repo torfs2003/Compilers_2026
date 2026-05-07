@@ -34,15 +34,14 @@ define i32 @"main"()
 {
 entry:
   %"n" = alloca i32
-  ;  Source: intn=5;
   store i32 5, i32* %"n"
-  %".4" = bitcast [4 x i8]* @"str" to i8*
+  %".3" = bitcast [4 x i8]* @"str" to i8*
   ;  Source: n
   %"n.1" = load i32, i32* %"n"
   ;  Source: factorial(n)
-  %".7" = call i32 @"factorial"(i32 %"n.1")
+  %".6" = call i32 @"factorial"(i32 %"n.1")
   ;  Source: printf("%d\n",factorial(n));
-  %".9" = call i32 (i8*, ...) @"printf"(i8* %".4", i32 %".7")
+  %".8" = call i32 (i8*, ...) @"printf"(i8* %".3", i32 %".6")
   ;  Source: return0;
   ret i32 0
 }

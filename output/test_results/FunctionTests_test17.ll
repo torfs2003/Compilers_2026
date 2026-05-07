@@ -10,17 +10,16 @@ define void @"increment"()
 {
 entry:
   %"count" = alloca i32
-  ;  Source: intcount=0;
   store i32 0, i32* %"count"
-  %".4" = bitcast [4 x i8]* @"str" to i8*
+  %".3" = bitcast [4 x i8]* @"str" to i8*
   ;  Source: count
   %"count.1" = load i32, i32* %"count"
   ;  Source: ++count
-  %".7" = load i32, i32* %"count"
-  %".8" = add i32 %".7", 1
-  store i32 %".8", i32* %"count"
+  %".6" = load i32, i32* %"count"
+  %".7" = add i32 %".6", 1
+  store i32 %".7", i32* %"count"
   ;  Source: printf("%d\n",++count);
-  %".11" = call i32 (i8*, ...) @"printf"(i8* %".4", i32 %".8")
+  %".10" = call i32 (i8*, ...) @"printf"(i8* %".3", i32 %".7")
   ret void
 }
 

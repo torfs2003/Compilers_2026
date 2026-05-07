@@ -10,20 +10,19 @@ define i32 @"main"()
 {
 entry:
   %"x" = alloca i32
-  ;  Source: intx=10;
   store i32 10, i32* %"x"
-  ;  Source: intx=20;
-  store i32 20, i32* %"x"
-  %".6" = bitcast [4 x i8]* @"str" to i8*
+  %"x.1" = alloca i32
+  store i32 20, i32* %"x.1"
+  %".4" = bitcast [4 x i8]* @"str" to i8*
   ;  Source: x
-  %"x.1" = load i32, i32* %"x"
+  %"x.2" = load i32, i32* %"x.1"
   ;  Source: printf("%d\n",x);
-  %".9" = call i32 (i8*, ...) @"printf"(i8* %".6", i32 %"x.1")
-  %".10" = bitcast [4 x i8]* @"str.1" to i8*
+  %".7" = call i32 (i8*, ...) @"printf"(i8* %".4", i32 %"x.2")
+  %".8" = bitcast [4 x i8]* @"str.1" to i8*
   ;  Source: x
-  %"x.2" = load i32, i32* %"x"
+  %"x.3" = load i32, i32* %"x.1"
   ;  Source: printf("%d\n",x);
-  %".13" = call i32 (i8*, ...) @"printf"(i8* %".10", i32 %"x.2")
+  %".11" = call i32 (i8*, ...) @"printf"(i8* %".8", i32 %"x.3")
   ;  Source: return0;
   ret i32 0
 }

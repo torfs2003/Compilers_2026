@@ -11,7 +11,6 @@ define i32 @"main"()
 {
 entry:
   %"gouda" = alloca %"union.NotTypeSafe"
-  ;  Source: unionNotTypeSafegouda;
   ;  Source: gouda.as_integer
   %"gep_as_integer" = getelementptr inbounds %"union.NotTypeSafe", %"union.NotTypeSafe"* %"gouda", i32 0, i32 0
   %"load_as_integer" = load i32, i32* %"gep_as_integer"
@@ -26,12 +25,12 @@ entry:
   %"array_element" = load i8, i8* %"gep_ptr"
   ;  Source: gouda.as_str[0]='a';
   store i8 97, i8* %"gep_ptr"
-  %".10" = bitcast [21 x i8]* @"str" to i8*
+  %".9" = bitcast [21 x i8]* @"str" to i8*
   ;  Source: gouda.as_integer
   %"gep_as_integer.1" = getelementptr inbounds %"union.NotTypeSafe", %"union.NotTypeSafe"* %"gouda", i32 0, i32 0
   %"load_as_integer.1" = load i32, i32* %"gep_as_integer.1"
   ;  Source: printf("gouda.as_integer: %c",gouda.as_integer);
-  %".13" = call i32 (i8*, ...) @"printf"(i8* %".10", i32 %"load_as_integer.1")
+  %".12" = call i32 (i8*, ...) @"printf"(i8* %".9", i32 %"load_as_integer.1")
   ;  Source: return0;
   ret i32 0
 }

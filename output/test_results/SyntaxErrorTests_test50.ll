@@ -6,35 +6,34 @@ define i32 @"main"()
 {
 entry:
   %"x" = alloca i32
-  ;  Source: intx;
   ;  Source: x
   %"x.1" = load i32, i32* %"x"
   ;  Source: 5+'a'
-  %".5" = sext i8 97 to i32
-  %".6" = add i32 5, %".5"
+  %".4" = sext i8 97 to i32
+  %".5" = add i32 5, %".4"
   ;  Source: x=5+'a';
-  store i32 %".6", i32* %"x"
+  store i32 %".5", i32* %"x"
   ;  Source: x
   %"x.2" = load i32, i32* %"x"
   ;  Source: 5-'a'
-  %".11" = sext i8 97 to i32
-  %".12" = sub i32 5, %".11"
+  %".10" = sext i8 97 to i32
+  %".11" = sub i32 5, %".10"
   ;  Source: x=5-'a';
-  store i32 %".12", i32* %"x"
+  store i32 %".11", i32* %"x"
   ;  Source: x
   %"x.3" = load i32, i32* %"x"
   ;  Source: 5*'a'
-  %".17" = sext i8 97 to i32
-  %".18" = mul i32 5, %".17"
+  %".16" = sext i8 97 to i32
+  %".17" = mul i32 5, %".16"
   ;  Source: x=5*'a';
-  store i32 %".18", i32* %"x"
+  store i32 %".17", i32* %"x"
   ;  Source: x
   %"x.4" = load i32, i32* %"x"
   ;  Source: 5/'a'
-  %".23" = sext i8 97 to i32
-  %".24" = sdiv i32 5, %".23"
+  %".22" = sext i8 97 to i32
+  %".23" = sdiv i32 5, %".22"
   ;  Source: x=5/'a';
-  store i32 %".24", i32* %"x"
+  store i32 %".23", i32* %"x"
   ;  Source: return0;
   ret i32 0
 }

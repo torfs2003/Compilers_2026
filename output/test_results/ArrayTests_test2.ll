@@ -10,7 +10,6 @@ define i32 @"main"()
 {
 entry:
   %"x" = alloca [2 x [3 x i32]]
-  ;  Source: intx[2][3];
   ;  Source: x
   ;  Source: x[0]
   %"gep_array" = getelementptr [2 x [3 x i32]], [2 x [3 x i32]]* %"x", i32 0, i32 0
@@ -59,7 +58,7 @@ entry:
   %"array_element.5" = load i32, i32* %"gep_array.11"
   ;  Source: x[1][2]=5;
   store i32 5, i32* %"gep_array.11"
-  %".33" = bitcast [3 x i8]* @"str" to i8*
+  %".32" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: x
   ;  Source: x[0]
   %"gep_array.12" = getelementptr [2 x [3 x i32]], [2 x [3 x i32]]* %"x", i32 0, i32 0
@@ -67,8 +66,8 @@ entry:
   %"gep_array.13" = getelementptr [3 x i32], [3 x i32]* %"gep_array.12", i32 0, i32 0
   %"array_element.6" = load i32, i32* %"gep_array.13"
   ;  Source: printf("%d",x[0][0]);
-  %".38" = call i32 (i8*, ...) @"printf"(i8* %".33", i32 %"array_element.6")
-  %".39" = bitcast [3 x i8]* @"str.1" to i8*
+  %".37" = call i32 (i8*, ...) @"printf"(i8* %".32", i32 %"array_element.6")
+  %".38" = bitcast [3 x i8]* @"str.1" to i8*
   ;  Source: x
   ;  Source: x[0]
   %"gep_array.14" = getelementptr [2 x [3 x i32]], [2 x [3 x i32]]* %"x", i32 0, i32 0
@@ -76,8 +75,8 @@ entry:
   %"gep_array.15" = getelementptr [3 x i32], [3 x i32]* %"gep_array.14", i32 0, i32 1
   %"array_element.7" = load i32, i32* %"gep_array.15"
   ;  Source: printf("%d",x[0][1]);
-  %".44" = call i32 (i8*, ...) @"printf"(i8* %".39", i32 %"array_element.7")
-  %".45" = bitcast [3 x i8]* @"str.2" to i8*
+  %".43" = call i32 (i8*, ...) @"printf"(i8* %".38", i32 %"array_element.7")
+  %".44" = bitcast [3 x i8]* @"str.2" to i8*
   ;  Source: x
   ;  Source: x[0]
   %"gep_array.16" = getelementptr [2 x [3 x i32]], [2 x [3 x i32]]* %"x", i32 0, i32 0
@@ -85,8 +84,8 @@ entry:
   %"gep_array.17" = getelementptr [3 x i32], [3 x i32]* %"gep_array.16", i32 0, i32 2
   %"array_element.8" = load i32, i32* %"gep_array.17"
   ;  Source: printf("%d",x[0][2]);
-  %".50" = call i32 (i8*, ...) @"printf"(i8* %".45", i32 %"array_element.8")
-  %".51" = bitcast [3 x i8]* @"str.3" to i8*
+  %".49" = call i32 (i8*, ...) @"printf"(i8* %".44", i32 %"array_element.8")
+  %".50" = bitcast [3 x i8]* @"str.3" to i8*
   ;  Source: x
   ;  Source: x[1]
   %"gep_array.18" = getelementptr [2 x [3 x i32]], [2 x [3 x i32]]* %"x", i32 0, i32 1
@@ -94,8 +93,8 @@ entry:
   %"gep_array.19" = getelementptr [3 x i32], [3 x i32]* %"gep_array.18", i32 0, i32 0
   %"array_element.9" = load i32, i32* %"gep_array.19"
   ;  Source: printf("%d",x[1][0]);
-  %".56" = call i32 (i8*, ...) @"printf"(i8* %".51", i32 %"array_element.9")
-  %".57" = bitcast [3 x i8]* @"str.4" to i8*
+  %".55" = call i32 (i8*, ...) @"printf"(i8* %".50", i32 %"array_element.9")
+  %".56" = bitcast [3 x i8]* @"str.4" to i8*
   ;  Source: x
   ;  Source: x[1]
   %"gep_array.20" = getelementptr [2 x [3 x i32]], [2 x [3 x i32]]* %"x", i32 0, i32 1
@@ -103,8 +102,8 @@ entry:
   %"gep_array.21" = getelementptr [3 x i32], [3 x i32]* %"gep_array.20", i32 0, i32 1
   %"array_element.10" = load i32, i32* %"gep_array.21"
   ;  Source: printf("%d",x[1][1]);
-  %".62" = call i32 (i8*, ...) @"printf"(i8* %".57", i32 %"array_element.10")
-  %".63" = bitcast [3 x i8]* @"str.5" to i8*
+  %".61" = call i32 (i8*, ...) @"printf"(i8* %".56", i32 %"array_element.10")
+  %".62" = bitcast [3 x i8]* @"str.5" to i8*
   ;  Source: x
   ;  Source: x[1]
   %"gep_array.22" = getelementptr [2 x [3 x i32]], [2 x [3 x i32]]* %"x", i32 0, i32 1
@@ -112,7 +111,7 @@ entry:
   %"gep_array.23" = getelementptr [3 x i32], [3 x i32]* %"gep_array.22", i32 0, i32 2
   %"array_element.11" = load i32, i32* %"gep_array.23"
   ;  Source: printf("%d",x[1][2]);
-  %".68" = call i32 (i8*, ...) @"printf"(i8* %".63", i32 %"array_element.11")
+  %".67" = call i32 (i8*, ...) @"printf"(i8* %".62", i32 %"array_element.11")
   ;  Source: x
   ;  Source: x[0]
   %"gep_array.24" = getelementptr [2 x [3 x i32]], [2 x [3 x i32]]* %"x", i32 0, i32 0
@@ -132,10 +131,10 @@ entry:
   %"gep_array.29" = getelementptr [3 x i32], [3 x i32]* %"gep_array.28", i32 0, i32 0
   %"array_element.14" = load i32, i32* %"gep_array.29"
   ;  Source: x[1][2]+x[1][0]
-  %".79" = add i32 %"array_element.13", %"array_element.14"
+  %".78" = add i32 %"array_element.13", %"array_element.14"
   ;  Source: x[0][2]=x[1][2]+x[1][0];
-  store i32 %".79", i32* %"gep_array.25"
-  %".82" = bitcast [3 x i8]* @"str.6" to i8*
+  store i32 %".78", i32* %"gep_array.25"
+  %".81" = bitcast [3 x i8]* @"str.6" to i8*
   ;  Source: x
   ;  Source: x[0]
   %"gep_array.30" = getelementptr [2 x [3 x i32]], [2 x [3 x i32]]* %"x", i32 0, i32 0
@@ -143,8 +142,8 @@ entry:
   %"gep_array.31" = getelementptr [3 x i32], [3 x i32]* %"gep_array.30", i32 0, i32 2
   %"array_element.15" = load i32, i32* %"gep_array.31"
   ;  Source: printf("%d",x[0][2]);
-  %".87" = call i32 (i8*, ...) @"printf"(i8* %".82", i32 %"array_element.15")
-  %".88" = bitcast [3 x i8]* @"str.7" to i8*
+  %".86" = call i32 (i8*, ...) @"printf"(i8* %".81", i32 %"array_element.15")
+  %".87" = bitcast [3 x i8]* @"str.7" to i8*
   ;  Source: x
   ;  Source: x[1]
   %"gep_array.32" = getelementptr [2 x [3 x i32]], [2 x [3 x i32]]* %"x", i32 0, i32 1
@@ -152,8 +151,8 @@ entry:
   %"gep_array.33" = getelementptr [3 x i32], [3 x i32]* %"gep_array.32", i32 0, i32 2
   %"array_element.16" = load i32, i32* %"gep_array.33"
   ;  Source: printf("%d",x[1][2]);
-  %".93" = call i32 (i8*, ...) @"printf"(i8* %".88", i32 %"array_element.16")
-  %".94" = bitcast [3 x i8]* @"str.8" to i8*
+  %".92" = call i32 (i8*, ...) @"printf"(i8* %".87", i32 %"array_element.16")
+  %".93" = bitcast [3 x i8]* @"str.8" to i8*
   ;  Source: x
   ;  Source: x[1]
   %"gep_array.34" = getelementptr [2 x [3 x i32]], [2 x [3 x i32]]* %"x", i32 0, i32 1
@@ -161,7 +160,7 @@ entry:
   %"gep_array.35" = getelementptr [3 x i32], [3 x i32]* %"gep_array.34", i32 0, i32 0
   %"array_element.17" = load i32, i32* %"gep_array.35"
   ;  Source: printf("%d",x[1][0]);
-  %".99" = call i32 (i8*, ...) @"printf"(i8* %".94", i32 %"array_element.17")
+  %".98" = call i32 (i8*, ...) @"printf"(i8* %".93", i32 %"array_element.17")
   ;  Source: return0;
   ret i32 0
 }

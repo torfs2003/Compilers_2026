@@ -20,9 +20,7 @@ define i32 @"main"()
 {
 entry:
   %"x" = alloca i32
-  ;  Source: some_func(5,1)
-  %".3" = call i32 @"some_func"(i32 5, i32 1)
-  ;  Source: intx=some_func(5,1);
-  store i32 %".3", i32* %"x"
+  %".2" = call i32 @"some_func"(i32 5, i32 1)
+  store i32 %".2", i32* %"x"
   ret i32 0
 }

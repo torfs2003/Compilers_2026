@@ -6,7 +6,6 @@ define i32 @"main"()
 {
 entry:
   %"a" = alloca i32
-  ;  Source: inta=0;
   store i32 0, i32* %"a"
   ;  Source: if(a){}else{return0;}
   %"a.1" = load i32, i32* %"a"
