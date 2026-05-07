@@ -2,7 +2,7 @@ digraph AST {
   node [fontname="Arial"];
   node2 [label="Include\n<stdio.h>", shape=note, style="filled", fillcolor="lightyellow", color="black", fontcolor="black"];
   node6 [label="5\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
-  node5 [label="Decl\nconst int\nincr\n(int)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
+  node5 [label="Decl\nint\nincr\n(int)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
   node5 -> node6 [style="solid", color="black", label=" init", fontcolor="blue"];
   node8 [label="0\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node7 [label="Decl\nint\nsum\n(int)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
@@ -20,7 +20,7 @@ digraph AST {
   node15 -> node17 [style="solid", color="black"];
   node20 [label="ID: sum\n(int)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
   node22 [label="ID: sum\n(int)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
-  node23 [label="5\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node23 [label="ID: incr\n(int)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
   node21 [label="+\n(int)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node21 -> node22 [style="solid", color="black"];
   node21 -> node23 [style="solid", color="black"];

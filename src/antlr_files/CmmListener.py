@@ -107,21 +107,21 @@ class CmmListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by CmmParser#structDeclaration.
-    def enterStructDeclaration(self, ctx:CmmParser.StructDeclarationContext):
-        pass
-
-    # Exit a parse tree produced by CmmParser#structDeclaration.
-    def exitStructDeclaration(self, ctx:CmmParser.StructDeclarationContext):
-        pass
-
-
     # Enter a parse tree produced by CmmParser#typedefDeclaration.
     def enterTypedefDeclaration(self, ctx:CmmParser.TypedefDeclarationContext):
         pass
 
     # Exit a parse tree produced by CmmParser#typedefDeclaration.
     def exitTypedefDeclaration(self, ctx:CmmParser.TypedefDeclarationContext):
+        pass
+
+
+    # Enter a parse tree produced by CmmParser#structDeclaration.
+    def enterStructDeclaration(self, ctx:CmmParser.StructDeclarationContext):
+        pass
+
+    # Exit a parse tree produced by CmmParser#structDeclaration.
+    def exitStructDeclaration(self, ctx:CmmParser.StructDeclarationContext):
         pass
 
 

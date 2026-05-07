@@ -1,15 +1,15 @@
 digraph AST {
   node [fontname="Arial"];
   node5 [label="4\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
-  node4 [label="Decl\nconst int\nx\n(int)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
+  node4 [label="Decl\nint\nx\n(int)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
   node4 -> node5 [style="solid", color="black", label=" init", fontcolor="blue"];
   node7 [label="9632\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
-  node6 [label="Decl\nconst int\nb\n(int)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
+  node6 [label="Decl\nint\nb\n(int)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
   node6 -> node7 [style="solid", color="black", label=" init", fontcolor="blue"];
   node10 [label="ID: b\n(int)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
   node9 [label="&\n(int*)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node9 -> node10 [style="solid", color="black"];
-  node8 [label="Decl\nconst int*\nx_ptr\n(int*)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
+  node8 [label="Decl\nint*\nx_ptr\n(int*)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
   node8 -> node9 [style="solid", color="black", label=" init", fontcolor="blue"];
   node12 [label="ID: x_ptr\n(int*)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
   node14 [label="ID: x\n(int)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];

@@ -1,9 +1,5 @@
 ; ModuleID = "cmm_module"
-<<<<<<< HEAD
 target triple = "x86_64-w64-windows-gnu"
-=======
-target triple = "x86_64-unknown-linux-gnu"
->>>>>>> origin/main
 target datalayout = ""
 
 declare i32 @"printf"(i8* %".1", ...)
@@ -34,13 +30,11 @@ entry:
   ;  Source: a
   ;  Source: &a
   ;  Source: scanf("%5s",&a);
-  %".10" = getelementptr inbounds [5 x i8], [5 x i8]* %"a", i32 0, i32 0
-  %".11" = call i32 (i8*, ...) @"scanf"(i8* %".6", i8* %".10")
-  %".12" = bitcast [3 x i8]* @"str.2" to i8*
+  %".10" = call i32 (i8*, ...) @"scanf"(i8* %".6", [5 x i8]* %"a")
+  %".11" = bitcast [3 x i8]* @"str.2" to i8*
   ;  Source: a
   ;  Source: printf("%s",a);
-  %".15" = getelementptr inbounds [5 x i8], [5 x i8]* %"a", i32 0, i32 0
-  %".16" = call i32 (i8*, ...) @"printf"(i8* %".12", i8* %".15")
+  %".14" = call i32 (i8*, ...) @"printf"(i8* %".11", [5 x i8]* %"a")
   ;  Source: return0;
   ret i32 0
 }

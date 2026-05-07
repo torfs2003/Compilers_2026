@@ -1,9 +1,5 @@
 ; ModuleID = "cmm_module"
-<<<<<<< HEAD
 target triple = "x86_64-w64-windows-gnu"
-=======
-target triple = "x86_64-unknown-linux-gnu"
->>>>>>> origin/main
 target datalayout = ""
 
 define i32 @"main"()
@@ -31,13 +27,17 @@ while.body:
 while.end:
   ret i32 0
 while.cond.1:
-  %"whilecond.1" = icmp ne i32 1, 0
+  %"j.1" = load i32, i32* %"j"
+  %".14" = icmp eq i32 %"j.1", 5
+  %".15" = zext i1 %".14" to i32
+  %"whilecond.1" = icmp ne i32 %".15", 0
   br i1 %"whilecond.1", label %"while.body.1", label %"while.end.1"
 while.body.1:
   %"i.3" = load i32, i32* %"i"
-  %".15" = icmp sgt i32 %"i.3", 5
-  %".16" = zext i1 %".15" to i32
-  %"ifcond" = icmp ne i32 %".16", 0
+  %"j.2" = load i32, i32* %"j"
+  %".17" = icmp sgt i32 %"i.3", %"j.2"
+  %".18" = zext i1 %".17" to i32
+  %"ifcond" = icmp ne i32 %".18", 0
   br i1 %"ifcond", label %"if.then", label %"if.end"
 while.end.1:
   br label %"while.cond"

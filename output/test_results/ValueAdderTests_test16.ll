@@ -1,9 +1,5 @@
 ; ModuleID = "cmm_module"
-<<<<<<< HEAD
 target triple = "x86_64-w64-windows-gnu"
-=======
-target triple = "x86_64-unknown-linux-gnu"
->>>>>>> origin/main
 target datalayout = ""
 
 declare i32 @"printf"(i8* %".1", ...)
@@ -29,19 +25,21 @@ entry:
   ;  Source: constintx=1;
   store i32 1, i32* %"x"
   %"y" = alloca i32
-  ;  Source: inty=x;
-  store i32 1, i32* %"y"
-  %"ptr" = alloca i32*
   ;  Source: x
   %"x.1" = load i32, i32* %"x"
+  ;  Source: inty=x;
+  store i32 %"x.1", i32* %"y"
+  %"ptr" = alloca i32*
+  ;  Source: x
+  %"x.2" = load i32, i32* %"x"
   ;  Source: &x
   ;  Source: int*ptr=&x;
   store i32* %"x", i32** %"ptr"
   %"z" = alloca i32
   ;  Source: x
-  %"x.2" = load i32, i32* %"x"
+  %"x.3" = load i32, i32* %"x"
   ;  Source: intz=x;
-  store i32 %"x.2", i32* %"z"
+  store i32 %"x.3", i32* %"z"
   ;  Source: return0;
   ret i32 0
 }

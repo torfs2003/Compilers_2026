@@ -1,9 +1,5 @@
 ; ModuleID = "cmm_module"
-<<<<<<< HEAD
 target triple = "x86_64-w64-windows-gnu"
-=======
-target triple = "x86_64-unknown-linux-gnu"
->>>>>>> origin/main
 target datalayout = ""
 
 declare i32 @"printf"(i8* %".1", ...)
@@ -39,7 +35,6 @@ entry:
   %"appel.1" = load i32*, i32** %"appel"
   ;  Source: --appel;
   %".11" = load i32*, i32** %"appel"
-<<<<<<< HEAD
   %".12" = getelementptr i32, i32* %".11", i32 -1
   store i32* %".12", i32** %"appel"
   ;  Source: appel
@@ -55,78 +50,55 @@ entry:
   %".22" = getelementptr i32, i32* %".21", i32 1
   store i32* %".22", i32** %"appel"
   %".24" = bitcast [4 x i8]* @"str" to i8*
-=======
-  %"ptr_incdec" = getelementptr i32, i32* %".11", i32 -1
-  store i32* %"ptr_incdec", i32** %"appel"
-  ;  Source: appel
-  %"appel.2" = load i32*, i32** %"appel"
-  ;  Source: appel++;
-  %".15" = load i32*, i32** %"appel"
-  %"ptr_incdec.1" = getelementptr i32, i32* %".15", i32 1
-  store i32* %"ptr_incdec.1", i32** %"appel"
-  ;  Source: appel
-  %"appel.3" = load i32*, i32** %"appel"
-  ;  Source: ++appel;
-  %".19" = load i32*, i32** %"appel"
-  %"ptr_incdec.2" = getelementptr i32, i32* %".19", i32 1
-  store i32* %"ptr_incdec.2", i32** %"appel"
-  %".21" = bitcast [4 x i8]* @"str" to i8*
->>>>>>> origin/main
   ;  Source: peer
   %"peer.2" = load i32, i32* %"peer"
   ;  Source: printf("%d ",peer);
-  %".24" = call i32 (i8*, ...) @"printf"(i8* %".21", i32 %"peer.2")
+  %".27" = call i32 (i8*, ...) @"printf"(i8* %".24", i32 %"peer.2")
   ;  Source: appel
   %"appel.4" = load i32*, i32** %"appel"
   ;  Source: (*appel)
   %"deref_load" = load i32, i32* %"appel.4"
   ;  Source: (*appel)--;
-  %".28" = load i32, i32* %"appel.4"
-  %".29" = sub i32 %".28", 1
-  store i32 %".29", i32* %"appel.4"
-  %".31" = bitcast [4 x i8]* @"str.1" to i8*
+  %".31" = load i32, i32* %"appel.4"
+  %".32" = sub i32 %".31", 1
+  store i32 %".32", i32* %"appel.4"
+  %".34" = bitcast [4 x i8]* @"str.1" to i8*
   ;  Source: peer
   %"peer.3" = load i32, i32* %"peer"
   ;  Source: printf("%d ",peer);
-  %".34" = call i32 (i8*, ...) @"printf"(i8* %".31", i32 %"peer.3")
+  %".37" = call i32 (i8*, ...) @"printf"(i8* %".34", i32 %"peer.3")
   ;  Source: appel
   %"appel.5" = load i32*, i32** %"appel"
   ;  Source: (*appel)
   %"deref_load.1" = load i32, i32* %"appel.5"
   ;  Source: (*appel)++;
-  %".38" = load i32, i32* %"appel.5"
-  %".39" = add i32 %".38", 1
-  store i32 %".39", i32* %"appel.5"
-  %".41" = bitcast [4 x i8]* @"str.2" to i8*
+  %".41" = load i32, i32* %"appel.5"
+  %".42" = add i32 %".41", 1
+  store i32 %".42", i32* %"appel.5"
+  %".44" = bitcast [4 x i8]* @"str.2" to i8*
   ;  Source: peer
   %"peer.4" = load i32, i32* %"peer"
   ;  Source: printf("%d ",peer);
-  %".44" = call i32 (i8*, ...) @"printf"(i8* %".41", i32 %"peer.4")
+  %".47" = call i32 (i8*, ...) @"printf"(i8* %".44", i32 %"peer.4")
   ;  Source: appel
   %"appel.6" = load i32*, i32** %"appel"
   ;  Source: (*appel)
   %"deref_load.2" = load i32, i32* %"appel.6"
   ;  Source: --(*appel);
-  %".48" = load i32, i32* %"appel.6"
-  %".49" = sub i32 %".48", 1
-  store i32 %".49", i32* %"appel.6"
-  %".51" = bitcast [4 x i8]* @"str.3" to i8*
+  %".51" = load i32, i32* %"appel.6"
+  %".52" = sub i32 %".51", 1
+  store i32 %".52", i32* %"appel.6"
+  %".54" = bitcast [4 x i8]* @"str.3" to i8*
   ;  Source: peer
   %"peer.5" = load i32, i32* %"peer"
   ;  Source: printf("%d ",peer);
-  %".54" = call i32 (i8*, ...) @"printf"(i8* %".51", i32 %"peer.5")
+  %".57" = call i32 (i8*, ...) @"printf"(i8* %".54", i32 %"peer.5")
   ;  Source: appel
   %"appel.7" = load i32*, i32** %"appel"
   ;  Source: --appel;
-<<<<<<< HEAD
   %".60" = load i32*, i32** %"appel"
   %".61" = getelementptr i32, i32* %".60", i32 -1
   store i32* %".61", i32** %"appel"
-=======
-  %".57" = load i32*, i32** %"appel"
-  %"ptr_incdec.3" = getelementptr i32, i32* %".57", i32 -1
-  store i32* %"ptr_incdec.3", i32** %"appel"
->>>>>>> origin/main
   ;  User Comment: /* --(peer+peer); This is not allowed /
   ;  User Comment: --(peer);
   ;  User Comment: --(appel);

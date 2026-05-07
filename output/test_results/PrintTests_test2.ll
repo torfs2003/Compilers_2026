@@ -22,10 +22,11 @@ define i32 @"main"()
 {
 entry:
   %".2" = bitcast [3 x i8]* @"str" to i8*
-  ;  Source: printf("%d",(int)5.2);
-  %".4" = call i32 (i8*, ...) @"printf"(i8* %".2", i32 5)
+  ;  Source: printf("%f",5.2);
+  %".4" = fpext float 0x4014ccccc0000000 to double
+  %".5" = call i32 (i8*, ...) @"printf"(i8* %".2", double %".4")
   ;  Source: return0;
   ret i32 0
 }
 
-@"str" = internal constant [3 x i8] c"%d\00"
+@"str" = internal constant [3 x i8] c"%f\00"

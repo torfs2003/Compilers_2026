@@ -1,9 +1,5 @@
 ; ModuleID = "cmm_module"
-<<<<<<< HEAD
 target triple = "x86_64-w64-windows-gnu"
-=======
-target triple = "x86_64-unknown-linux-gnu"
->>>>>>> origin/main
 target datalayout = ""
 
 declare i32 @"printf"(i8* %".1", ...)
@@ -48,19 +44,14 @@ while.body:
   %".15" = bitcast [3 x i8]* @"str" to i8*
   %"arr.1" = load i32*, i32** %"arr"
   %".16" = load i32*, i32** %"arr"
-<<<<<<< HEAD
   %".17" = getelementptr i32, i32* %".16", i32 1
   store i32* %".17", i32** %"arr"
-=======
-  %"ptr_incdec" = getelementptr i32, i32* %".16", i32 1
-  store i32* %"ptr_incdec", i32** %"arr"
->>>>>>> origin/main
   %"deref_load" = load i32, i32* %".16"
-  %".18" = call i32 (i8*, ...) @"printf"(i8* %".15", i32 %"deref_load")
+  %".19" = call i32 (i8*, ...) @"printf"(i8* %".15", i32 %"deref_load")
   %"i.3" = load i32, i32* %"i"
-  %".19" = load i32, i32* %"i"
-  %".20" = add i32 %".19", 1
-  store i32 %".20", i32* %"i"
+  %".20" = load i32, i32* %"i"
+  %".21" = add i32 %".20", 1
+  store i32 %".21", i32* %"i"
   br label %"while.cond"
 while.end:
   ret void

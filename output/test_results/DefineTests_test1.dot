@@ -9,7 +9,7 @@ digraph AST {
   node7 -> node8 [style="solid", color="black", label=" init", fontcolor="blue"];
   node9 [label="Decl\nint\narea\n(int)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
   node11 [label="1\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
-  node10 [label="Decl\nconst int\nsuccess\n(int)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
+  node10 [label="Decl\nint\nsuccess\n(int)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
   node10 -> node11 [style="solid", color="black", label=" init", fontcolor="blue"];
   node13 [label="ID: area\n(int)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
   node14 [label="3.14\n(float)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
@@ -19,7 +19,7 @@ digraph AST {
   node16 [label="\"%d%d%d\"\n(char*)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node17 [label="ID: radius\n(int)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
   node18 [label="ID: area\n(int)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
-  node19 [label="1\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node19 [label="ID: success\n(int)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
   node15 [label="Call: printf()\n(int)", shape=ellipse, style="filled", fillcolor="lightpink", color="black", fontcolor="black"];
   node15 -> node16 [style="solid", color="black", label=" arg0", fontcolor="black"];
   node15 -> node17 [style="solid", color="black", label=" arg1", fontcolor="black"];

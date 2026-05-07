@@ -1,9 +1,5 @@
 ; ModuleID = "cmm_module"
-<<<<<<< HEAD
 target triple = "x86_64-w64-windows-gnu"
-=======
-target triple = "x86_64-unknown-linux-gnu"
->>>>>>> origin/main
 target datalayout = ""
 
 declare i32 @"printf"(i8* %".1", ...)
@@ -27,14 +23,18 @@ define i32 @"computeSomething"()
 {
 entry:
   ;  Source: returnglobalConst+10;
-  ret i32 110
+  %"globalConst" = load i32, i32* @"globalConst"
+  %".3" = add i32 %"globalConst", 10
+  ret i32 %".3"
 }
 
 define i32 @"computeSomethingElse"()
 {
 entry:
   ;  Source: returnglobalConst*2;
-  ret i32 200
+  %"globalConst" = load i32, i32* @"globalConst"
+  %".3" = mul i32 %"globalConst", 2
+  ret i32 %".3"
 }
 
 define i32 @"main"()

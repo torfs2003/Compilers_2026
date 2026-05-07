@@ -1,9 +1,5 @@
 ; ModuleID = "cmm_module"
-<<<<<<< HEAD
 target triple = "x86_64-w64-windows-gnu"
-=======
-target triple = "x86_64-unknown-linux-gnu"
->>>>>>> origin/main
 target datalayout = ""
 
 define i32 @"main"()
@@ -13,22 +9,25 @@ entry:
   ;  Source: constintx=1;
   store i32 1, i32* %"x"
   %"y" = alloca i32
+  ;  Source: x
+  %"x.1" = load i32, i32* %"x"
   ;  Source: inty=x;
-  store i32 1, i32* %"y"
+  store i32 %"x.1", i32* %"y"
   ;  Source: while(x){y++;if(y>3){break;}}
   br label %"while.cond"
 while.cond:
-  %"whilecond" = icmp ne i32 1, 0
+  %"x.2" = load i32, i32* %"x"
+  %"whilecond" = icmp ne i32 %"x.2", 0
   br i1 %"whilecond", label %"while.body", label %"while.end"
 while.body:
   %"y.1" = load i32, i32* %"y"
-  %".9" = load i32, i32* %"y"
-  %".10" = add i32 %".9", 1
-  store i32 %".10", i32* %"y"
+  %".10" = load i32, i32* %"y"
+  %".11" = add i32 %".10", 1
+  store i32 %".11", i32* %"y"
   %"y.2" = load i32, i32* %"y"
-  %".12" = icmp sgt i32 %"y.2", 3
-  %".13" = zext i1 %".12" to i32
-  %"ifcond" = icmp ne i32 %".13", 0
+  %".13" = icmp sgt i32 %"y.2", 3
+  %".14" = zext i1 %".13" to i32
+  %"ifcond" = icmp ne i32 %".14", 0
   br i1 %"ifcond", label %"if.then", label %"if.end"
 while.end:
   ;  Source: return0;

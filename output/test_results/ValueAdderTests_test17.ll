@@ -1,9 +1,5 @@
 ; ModuleID = "cmm_module"
-<<<<<<< HEAD
 target triple = "x86_64-w64-windows-gnu"
-=======
-target triple = "x86_64-unknown-linux-gnu"
->>>>>>> origin/main
 target datalayout = ""
 
 declare i32 @"printf"(i8* %".1", ...)
@@ -46,7 +42,8 @@ while.cond:
   br i1 %"whilecond", label %"while.body", label %"while.end"
 while.body:
   %"sum.1" = load i32, i32* %"sum"
-  %".14" = add i32 %"sum.1", 5
+  %"incr.1" = load i32, i32* %"incr"
+  %".14" = add i32 %"sum.1", %"incr.1"
   %"sum.2" = load i32, i32* %"sum"
   store i32 %".14", i32* %"sum"
   %"i.3" = load i32, i32* %"i"

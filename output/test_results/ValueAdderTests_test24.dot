@@ -8,7 +8,7 @@ digraph AST {
   node2 [label="Func\nint foo()", shape=invhouse, style="filled", fillcolor="lightgreen", color="black", fontcolor="black"];
   node2 -> node3 [style="solid", color="black"];
   node9 [label="Call: foo()\n(int)", shape=ellipse, style="filled", fillcolor="lightpink", color="black", fontcolor="black"];
-  node8 [label="Decl\nconst int\nx\n(int)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
+  node8 [label="Decl\nint\nx\n(int)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
   node8 -> node9 [style="solid", color="black", label=" init", fontcolor="blue"];
   node11 [label="ID: x\n(int)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
   node10 [label="Decl\nint\ny\n(int)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];

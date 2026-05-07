@@ -53,6 +53,10 @@ typedefDeclaration
     : TYPEDEF typeSpecifier MUL* IDENTIFIER (LBRACKET INT_LITERAL RBRACKET)* SEMI
     ;
 
+structDeclaration
+    : STRUCT IDENTIFIER LBRACE declaration* RBRACE SEMI
+    ;
+
 unionDeclaration
     : UNION IDENTIFIER LBRACE declaration* RBRACE SEMI
     ;

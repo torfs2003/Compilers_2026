@@ -122,11 +122,12 @@ def clang_accepts_c_file(c_file: Path):
         # In de Clang versie: geen speciale uitzondering meer voor C90 // comments
         return False, "INVALID_C_FILE"
     finally:
-        if ref_exe.exists():
-            ref_exe.unlink() # Pathlib manier om te verwijderen
+        if os.path.exists(ref_exe):
+            os.remove(ref_exe)
 
 def run_tests_in_directory(test_dir, output_dir):
     path = Path(test_dir)
+    # folder_name = path.name  <-- Deze hebben we niet meer nodig
     c_files = list(path.rglob("*.c"))
     log(f"\n--- Start testen in: {test_dir} ({len(c_files)} bestanden) ---")
 
@@ -138,27 +139,26 @@ def run_tests_in_directory(test_dir, output_dir):
         out_ll = os.path.join(output_dir, f"{unique_name}.ll")
         out_dot = os.path.join(output_dir, f"{unique_name}.dot")
 
-        # Aanroep van jouw compiler
         cmd = [
             sys.executable, "-m", "src.main",
             "--input", str(c_file),
             "--render_ast", out_dot,
             "--target_llvm", out_ll,
         ]
+        
+        # We gebruiken display_path voor de terminal én voor het logbestand
+        display_path = c_file.relative_to(path.parent)
+        log(f"Testen van: {display_path}...", end="")
 
-        log(f"Testen van: {folder_name}/{c_file.name}...", end="")
-
-        # Run jouw compiler
         result = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8")
 
         if result.returncode != 0:
             clang_ok, _ = clang_accepts_c_file(c_file)
-
             if clang_ok:
                 log("FAILED (Compiler Error on valid C)")
-                log(f"  --> Jouw compiler gaf een foutmelding:\n{result.stderr[:300]}...\n")
                 failed += 1
-                failed_tests.append(f"{folder_name}/{c_file.name} -> Compiler Error (but Clang accepts)")
+                # Gebruik display_path hier:
+                failed_tests.append(f"{display_path} -> Compiler Error (but Clang accepts)")
             else:
                 log("PASSED (Expected failure: compiler ving de error op)")
                 passed += 1
@@ -167,13 +167,12 @@ def run_tests_in_directory(test_dir, output_dir):
         if not os.path.exists(out_ll):
             log("FAILED (Geen .ll bestand gemaakt)")
             failed += 1
-            failed_tests.append(f"{folder_name}/{c_file.name} -> No .ll output")
+            # Gebruik display_path hier:
+            failed_tests.append(f"{display_path} -> No .ll output")
             continue
 
-        # 2. Vergelijk met Clang referentie
         match, msg = test_execution(c_file, out_ll)
 
-        # Clang faalt → check of jouw compiler dit correct afvangt
         if msg == "INVALID_C_FILE":
             if result.returncode != 0:
                 log("PASSED (Expected failure: compiler ving de error op)")
@@ -181,30 +180,23 @@ def run_tests_in_directory(test_dir, output_dir):
             else:
                 log("FAILED (Clang gaf error, maar jouw compiler accepteerde de code!)")
                 failed += 1
-                failed_tests.append(f"{folder_name}/{c_file.name} -> Clang mismatch")
+                # Gebruik display_path hier:
+                failed_tests.append(f"{display_path} -> Clang mismatch (Should have failed)")
             continue
 
         elif match:
             log("PASSED")
             passed += 1
         else:
-            # Als jouw compiler faalt op legale C code
-            if my_compiler_res.returncode != 0 and msg != "INVALID_C89_FILE":
-                log("FAILED (Compiler Error on legal C)")
-                log(f"  --> {my_compiler_res.stderr.strip()[:200]}")
-                failed += 1
-                failed_tests.append(f"{c_file.name}: Compiler Error")
-            else:
-                log(f"FAILED ({msg})")
-                failed += 1
-                failed_tests.append(f"{c_file.name}: {msg}")
+            log(f"FAILED ({msg})")
+            failed += 1
+            # Gebruik display_path hier:
+            failed_tests.append(f"{display_path} -> {msg}")
 
     log(f"--- Resultaten: {passed} Passed, {failed} Failed ---\n")
-    # ... rest van je logging code ...
+    
     if failed_tests:
-        log("\nGefaalde tests (zie apart bestand)")
-
-        # Schrijf naar apart bestand
+        # Schrijf naar het bestand 'output/failed_tests.txt'
         with open(FAILED_LOG_FILE, "a", encoding="utf-8") as f:
             f.write(f"\n--- Gefaalde tests in {test_dir} ---\n")
             for test in failed_tests:
@@ -220,9 +212,9 @@ def main():
         os.remove(FAILED_LOG_FILE)
 
     test_folders = [
-        "example_source_files/test_set_1",
-        "example_source_files/test_set_2"#,
-        #"example_source_files/test_set_3"#,
+        #"example_source_files/test_set_1",
+        #"example_source_files/test_set_2"#,
+        "example_source_files/test_set_3"#,
     ]
 
     output_folder = "output/test_results"

@@ -1,9 +1,5 @@
 ; ModuleID = "cmm_module"
-<<<<<<< HEAD
 target triple = "x86_64-w64-windows-gnu"
-=======
-target triple = "x86_64-unknown-linux-gnu"
->>>>>>> origin/main
 target datalayout = ""
 
 declare i32 @"printf"(i8* %".1", ...)
@@ -46,8 +42,10 @@ entry:
   %"radius.1" = load i32, i32* %"radius"
   ;  Source: area
   %"area.2" = load i32, i32* %"area"
+  ;  Source: success
+  %"success.1" = load i32, i32* %"success"
   ;  Source: printf("%d%d%d",radius,area,success);
-  %".17" = call i32 (i8*, ...) @"printf"(i8* %".13", i32 %"radius.1", i32 %"area.2", i32 1)
+  %".18" = call i32 (i8*, ...) @"printf"(i8* %".13", i32 %"radius.1", i32 %"area.2", i32 %"success.1")
   ;  Source: return0;
   ret i32 0
 }

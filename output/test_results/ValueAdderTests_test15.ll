@@ -1,9 +1,5 @@
 ; ModuleID = "cmm_module"
-<<<<<<< HEAD
 target triple = "x86_64-w64-windows-gnu"
-=======
-target triple = "x86_64-unknown-linux-gnu"
->>>>>>> origin/main
 target datalayout = ""
 
 declare i32 @"printf"(i8* %".1", ...)
@@ -34,31 +30,31 @@ entry:
   %"i" = alloca i32
   ;  Source: inti=0;
   store i32 0, i32* %"i"
-  ;  Source: i
-  %"i.1" = load i32, i32* %"i"
-  ;  Source: i<loopConst
-  %".10" = icmp slt i32 %"i.1", 5
-  %".11" = zext i1 %".10" to i32
   br label %"while.cond"
 while.cond:
-  %"i.2" = load i32, i32* %"i"
-  %".13" = load i32, i32* %"i"
-  %".14" = add i32 %".13", 1
-  store i32 %".14", i32* %"i"
-  %"whilecond" = icmp ne i32 %".14", 0
+  %"i.1" = load i32, i32* %"i"
+  %"loopConst.1" = load i32, i32* %"loopConst"
+  %".9" = icmp slt i32 %"i.1", %"loopConst.1"
+  %".10" = zext i1 %".9" to i32
+  %"whilecond" = icmp ne i32 %".10", 0
   br i1 %"whilecond", label %"while.body", label %"while.end"
 while.body:
   %"result.1" = load i32, i32* %"result"
-  %".17" = add i32 %"result.1", 5
+  %"loopConst.2" = load i32, i32* %"loopConst"
+  %".12" = add i32 %"result.1", %"loopConst.2"
   %"result.2" = load i32, i32* %"result"
-  store i32 %".17", i32* %"result"
+  store i32 %".12", i32* %"result"
+  %"i.2" = load i32, i32* %"i"
+  %".14" = load i32, i32* %"i"
+  %".15" = add i32 %".14", 1
+  store i32 %".15", i32* %"i"
   br label %"while.cond"
 while.end:
-  %".20" = bitcast [12 x i8]* @"str" to i8*
+  %".18" = bitcast [12 x i8]* @"str" to i8*
   ;  Source: result
   %"result.3" = load i32, i32* %"result"
   ;  Source: printf("Result: %d\n",result);
-  %".23" = call i32 (i8*, ...) @"printf"(i8* %".20", i32 %"result.3")
+  %".21" = call i32 (i8*, ...) @"printf"(i8* %".18", i32 %"result.3")
   ;  Source: return0;
   ret i32 0
 }

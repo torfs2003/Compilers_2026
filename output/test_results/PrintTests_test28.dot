@@ -1,9 +1,9 @@
 digraph AST {
   node [fontname="Arial"];
   node2 [label="Include\n<stdio.h>", shape=note, style="filled", fillcolor="lightyellow", color="black", fontcolor="black"];
-  node6 [label="\"%d%d%c\"\n(char*)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node6 [label="\"%d%f%c\"\n(char*)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node7 [label="10\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
-  node8 [label="0\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node8 [label="0.5\n(float)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node9 [label="'%'\n(char)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node5 [label="Call: printf()\n(int)", shape=ellipse, style="filled", fillcolor="lightpink", color="black", fontcolor="black"];
   node5 -> node6 [style="solid", color="black", label=" arg0", fontcolor="black"];

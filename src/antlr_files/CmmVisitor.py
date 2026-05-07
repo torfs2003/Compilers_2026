@@ -64,13 +64,13 @@ class CmmVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by CmmParser#structDeclaration.
-    def visitStructDeclaration(self, ctx:CmmParser.StructDeclarationContext):
+    # Visit a parse tree produced by CmmParser#typedefDeclaration.
+    def visitTypedefDeclaration(self, ctx:CmmParser.TypedefDeclarationContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by CmmParser#typedefDeclaration.
-    def visitTypedefDeclaration(self, ctx:CmmParser.TypedefDeclarationContext):
+    # Visit a parse tree produced by CmmParser#structDeclaration.
+    def visitStructDeclaration(self, ctx:CmmParser.StructDeclarationContext):
         return self.visitChildren(ctx)
 
 
