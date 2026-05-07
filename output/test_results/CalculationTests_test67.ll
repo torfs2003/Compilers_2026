@@ -1,26 +1,10 @@
 ; ModuleID = "cmm_module"
-target triple = "x86_64-unknown-linux-gnu"
+target triple = "x86_64-w64-windows-gnu"
 target datalayout = ""
 
 declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
-
-declare i8* @"fopen"(i8* %".1", i8* %".2")
-
-declare i32 @"fclose"(i8* %".1")
-
-declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
-
-declare i32 @"fputs"(i8* %".1", i8* %".2")
-
-declare i8* @"malloc"(i32 %".1")
-
-declare i8* @"calloc"(i32 %".1", i32 %".2")
-
-declare i8* @"realloc"(i8* %".1", i32 %".2")
-
-declare void @"free"(i8* %".1")
 
 define i32 @"main"()
 {
@@ -191,40 +175,34 @@ entry:
   ;  Source: b
   %"b.12" = load i32, i32* %"b"
   ;  Source: a%b
-  %".121" = srem i32 %"a.12", %"b.12"
   ;  Source: intm=a%b;
-  store i32 %".121", i32* %"m"
-  %".124" = bitcast [3 x i8]* @"str.10" to i8*
+  %".122" = bitcast [3 x i8]* @"str.10" to i8*
   ;  Source: m
   %"m.1" = load i32, i32* %"m"
   ;  Source: printf("%d",m);
-  %".127" = call i32 (i8*, ...) @"printf"(i8* %".124", i32 %"m.1")
+  %".125" = call i32 (i8*, ...) @"printf"(i8* %".122", i32 %"m.1")
   %"n" = alloca i32
   ;  Source: a
   %"a.13" = load i32, i32* %"a"
   ;  Source: b
   %"b.13" = load i32, i32* %"b"
   ;  Source: a<<b
-  %".131" = shl i32 %"a.13", %"b.13"
   ;  Source: intn=a<<b;
-  store i32 %".131", i32* %"n"
-  %".134" = bitcast [3 x i8]* @"str.11" to i8*
+  %".130" = bitcast [3 x i8]* @"str.11" to i8*
   ;  Source: n
   %"n.1" = load i32, i32* %"n"
   ;  Source: printf("%d",n);
-  %".137" = call i32 (i8*, ...) @"printf"(i8* %".134", i32 %"n.1")
+  %".133" = call i32 (i8*, ...) @"printf"(i8* %".130", i32 %"n.1")
   %"o" = alloca i32
   ;  Source: a
   %"a.14" = load i32, i32* %"a"
   ;  Source: b
   %"b.14" = load i32, i32* %"b"
   ;  Source: a>>b
-  %".141" = ashr i32 %"a.14", %"b.14"
   ;  Source: into=a>>b;
-  store i32 %".141", i32* %"o"
-  %".144" = bitcast [3 x i8]* @"str.12" to i8*
+  %".138" = bitcast [3 x i8]* @"str.12" to i8*
   ;  Source: printf("%d",0);
-  %".146" = call i32 (i8*, ...) @"printf"(i8* %".144", i32 0)
+  %".140" = call i32 (i8*, ...) @"printf"(i8* %".138", i32 0)
   ;  Source: return0;
   ret i32 0
 }

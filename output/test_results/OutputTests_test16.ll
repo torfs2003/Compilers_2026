@@ -1,26 +1,10 @@
 ; ModuleID = "cmm_module"
-target triple = "x86_64-unknown-linux-gnu"
+target triple = "x86_64-w64-windows-gnu"
 target datalayout = ""
 
 declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
-
-declare i8* @"fopen"(i8* %".1", i8* %".2")
-
-declare i32 @"fclose"(i8* %".1")
-
-declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
-
-declare i32 @"fputs"(i8* %".1", i8* %".2")
-
-declare i8* @"malloc"(i32 %".1")
-
-declare i8* @"calloc"(i32 %".1", i32 %".2")
-
-declare i8* @"realloc"(i8* %".1", i32 %".2")
-
-declare void @"free"(i8* %".1")
 
 define i32 @"main"()
 {
@@ -116,18 +100,16 @@ entry:
   ;  Source: c
   %"c.1" = load i8, i8* %"c"
   ;  Source: printf("%c",c);
-  %".70" = zext i8 %"c.1" to i32
-  %".71" = call i32 (i8*, ...) @"printf"(i8* %".67", i32 %".70")
+  %".70" = call i32 (i8*, ...) @"printf"(i8* %".67", i8 %"c.1")
   ;  Source: c
   %"c.2" = load i8, i8* %"c"
   ;  Source: c='b';
   store i8 98, i8* %"c"
-  %".75" = bitcast [3 x i8]* @"str.7" to i8*
+  %".74" = bitcast [3 x i8]* @"str.7" to i8*
   ;  Source: c
   %"c.3" = load i8, i8* %"c"
   ;  Source: printf("%c",c);
-  %".78" = zext i8 %"c.3" to i32
-  %".79" = call i32 (i8*, ...) @"printf"(i8* %".75", i32 %".78")
+  %".77" = call i32 (i8*, ...) @"printf"(i8* %".74", i8 %"c.3")
   ;  Source: return0;
   ret i32 0
 }

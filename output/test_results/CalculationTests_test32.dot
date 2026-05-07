@@ -80,10 +80,10 @@ digraph AST {
   node56 [label="1\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node55 [label="Decl\nint\nz\n(int)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
   node55 -> node56 [style="solid", color="black", label=" init", fontcolor="blue"];
-  node58 [label="11111111101111111110\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node58 [label="-2657055290\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node57 [label="Decl\nint\nsofa\n(int)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
   node57 -> node58 [style="solid", color="black", label=" init", fontcolor="blue"];
-  node60 [label="-1234567890123456790\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node60 [label="-2112454934\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node59 [label="Decl\nint\nappel\n(int)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
   node59 -> node60 [style="solid", color="black", label=" init", fontcolor="blue"];
   node62 [label="\"%d\"\n(char*)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];

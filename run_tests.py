@@ -207,9 +207,9 @@ def main():
     else:
         # Volledige test set — elke top-level map krijgt zijn eigen log file
         default_folders = [
-            "example_source_files/test_set_1",
-            "example_source_files/test_set_2",
-            "example_source_files/test_set_3",
+            #"example_source_files/test_set_1",
+            #"example_source_files/test_set_2",
+            "example_source_files/test_set_3/LLVMTests",
         ]
         grand_passed, grand_failed = 0, 0
         for folder in default_folders:

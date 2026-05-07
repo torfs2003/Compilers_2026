@@ -1,27 +1,11 @@
 ; ModuleID = "cmm_module"
-target triple = "x86_64-unknown-linux-gnu"
+target triple = "x86_64-w64-windows-gnu"
 target datalayout = ""
 
 %"struct.kaas" = type {i32, float, i8, i8*}
 declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
-
-declare i8* @"fopen"(i8* %".1", i8* %".2")
-
-declare i32 @"fclose"(i8* %".1")
-
-declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
-
-declare i32 @"fputs"(i8* %".1", i8* %".2")
-
-declare i8* @"malloc"(i32 %".1")
-
-declare i8* @"calloc"(i32 %".1", i32 %".2")
-
-declare i8* @"realloc"(i8* %".1", i32 %".2")
-
-declare void @"free"(i8* %".1")
 
 define i32 @"main"()
 {
@@ -69,9 +53,7 @@ entry:
   %"deref_load" = load i8, i8* %"load_zeta.1"
   ;  Source: printf("%d %f %c %c",ementaler.melk,ementaler.fermtented,ementaler.lol,*(ementaler.zeta));
   %".24" = fpext float %"load_fermtented.1" to double
-  %".25" = zext i8 %"load_lol.2" to i32
-  %".26" = zext i8 %"deref_load" to i32
-  %".27" = call i32 (i8*, ...) @"printf"(i8* %".17", i32 %"load_melk.1", double %".24", i32 %".25", i32 %".26")
+  %".25" = call i32 (i8*, ...) @"printf"(i8* %".17", i32 %"load_melk.1", double %".24", i8 %"load_lol.2", i8 %"deref_load")
   ;  Source: return0;
   ret i32 0
 }

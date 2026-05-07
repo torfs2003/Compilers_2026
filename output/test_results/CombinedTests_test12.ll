@@ -1,26 +1,10 @@
 ; ModuleID = "cmm_module"
-target triple = "x86_64-unknown-linux-gnu"
+target triple = "x86_64-w64-windows-gnu"
 target datalayout = ""
 
 declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
-
-declare i8* @"fopen"(i8* %".1", i8* %".2")
-
-declare i32 @"fclose"(i8* %".1")
-
-declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
-
-declare i32 @"fputs"(i8* %".1", i8* %".2")
-
-declare i8* @"malloc"(i32 %".1")
-
-declare i8* @"calloc"(i32 %".1", i32 %".2")
-
-declare i8* @"realloc"(i8* %".1", i32 %".2")
-
-declare void @"free"(i8* %".1")
 
 define void @"printArr"(i32* %".1", i32 %".2")
 {
@@ -48,14 +32,14 @@ while.body:
   %".15" = bitcast [3 x i8]* @"str" to i8*
   %"arr.1" = load i32*, i32** %"arr"
   %".16" = load i32*, i32** %"arr"
-  %".17" = getelementptr i32, i32* %".16", i32 1
-  store i32* %".17", i32** %"arr"
+  %"ptr_incdec" = getelementptr i32, i32* %".16", i32 1
+  store i32* %"ptr_incdec", i32** %"arr"
   %"deref_load" = load i32, i32* %".16"
-  %".19" = call i32 (i8*, ...) @"printf"(i8* %".15", i32 %"deref_load")
+  %".18" = call i32 (i8*, ...) @"printf"(i8* %".15", i32 %"deref_load")
   %"i.3" = load i32, i32* %"i"
-  %".20" = load i32, i32* %"i"
-  %".21" = add i32 %".20", 1
-  store i32 %".21", i32* %"i"
+  %".19" = load i32, i32* %"i"
+  %".20" = add i32 %".19", 1
+  store i32 %".20", i32* %"i"
   br label %"while.cond"
 while.end:
   ret void

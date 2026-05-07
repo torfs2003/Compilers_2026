@@ -1,5 +1,0 @@
-
-============================================================
-  TEST MAP : example_source_files/test_set_3/LLVMTests/DynamicArrayTests/test1.c
-  Log file : output\test1.c.txt
-============================================================

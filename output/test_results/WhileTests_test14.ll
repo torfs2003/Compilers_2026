@@ -1,26 +1,10 @@
 ; ModuleID = "cmm_module"
-target triple = "x86_64-unknown-linux-gnu"
+target triple = "x86_64-w64-windows-gnu"
 target datalayout = ""
 
 declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
-
-declare i8* @"fopen"(i8* %".1", i8* %".2")
-
-declare i32 @"fclose"(i8* %".1")
-
-declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
-
-declare i32 @"fputs"(i8* %".1", i8* %".2")
-
-declare i8* @"malloc"(i32 %".1")
-
-declare i8* @"calloc"(i32 %".1", i32 %".2")
-
-declare i8* @"realloc"(i8* %".1", i32 %".2")
-
-declare void @"free"(i8* %".1")
 
 define i32 @"main"()
 {
@@ -50,8 +34,7 @@ entry:
   ;  Source: c
   %"c.1" = load i8, i8* %"c"
   ;  Source: printf("%c",c);
-  %".21" = zext i8 %"c.1" to i32
-  %".22" = call i32 (i8*, ...) @"printf"(i8* %".18", i32 %".21")
+  %".21" = call i32 (i8*, ...) @"printf"(i8* %".18", i8 %"c.1")
   ;  Source: return0;
   ret i32 0
 }

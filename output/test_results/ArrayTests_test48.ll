@@ -1,26 +1,10 @@
 ; ModuleID = "cmm_module"
-target triple = "x86_64-unknown-linux-gnu"
+target triple = "x86_64-w64-windows-gnu"
 target datalayout = ""
 
 declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
-
-declare i8* @"fopen"(i8* %".1", i8* %".2")
-
-declare i32 @"fclose"(i8* %".1")
-
-declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
-
-declare i32 @"fputs"(i8* %".1", i8* %".2")
-
-declare i8* @"malloc"(i32 %".1")
-
-declare i8* @"calloc"(i32 %".1", i32 %".2")
-
-declare i8* @"realloc"(i8* %".1", i32 %".2")
-
-declare void @"free"(i8* %".1")
 
 define i32 @"main"()
 {
@@ -60,8 +44,7 @@ entry:
   %"e" = alloca i32
   ;  Source: a
   ;  Source: 5==a
-  %"decay_right" = getelementptr [4 x i32], [4 x i32]* %"a", i32 0, i32 0
-  %".29" = ptrtoint i32* %"decay_right" to i32
+  %".29" = ptrtoint [4 x i32]* %"a" to i32
   %".30" = icmp eq i32 5, %".29"
   %".31" = zext i1 %".30" to i32
   ;  Source: inte=5==a;
@@ -69,8 +52,7 @@ entry:
   %"t" = alloca i32
   ;  Source: a
   ;  Source: a!=5
-  %"decay_left" = getelementptr [4 x i32], [4 x i32]* %"a", i32 0, i32 0
-  %".36" = ptrtoint i32* %"decay_left" to i32
+  %".36" = ptrtoint [4 x i32]* %"a" to i32
   %".37" = icmp ne i32 %".36", 5
   %".38" = zext i1 %".37" to i32
   ;  Source: intt=a!=5;
@@ -80,9 +62,8 @@ entry:
   %"k.4" = load i32*, i32** %"k"
   ;  Source: a
   ;  Source: k!=a
-  %"decay_right.1" = getelementptr [4 x i32], [4 x i32]* %"a", i32 0, i32 0
   %".44" = ptrtoint i32* %"k.4" to i32
-  %".45" = ptrtoint i32* %"decay_right.1" to i32
+  %".45" = ptrtoint [4 x i32]* %"a" to i32
   %".46" = icmp ne i32 %".44", %".45"
   %".47" = zext i1 %".46" to i32
   ;  Source: intp=k!=a;

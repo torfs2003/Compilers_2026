@@ -1,37 +1,39 @@
 ; ModuleID = "cmm_module"
-target triple = "x86_64-unknown-linux-gnu"
+target triple = "x86_64-w64-windows-gnu"
 target datalayout = ""
 
 define i32 @"main"()
 {
 entry:
-  %"x" = alloca i32
-  ;  Source: boolx=1;
-  store i32 1, i32* %"x"
-  %"y" = alloca i32
-  ;  Source: booly=0;
-  store i32 0, i32* %"y"
-  %"z" = alloca i32
-  ;  Source: x
-  %"x.1" = load i32, i32* %"x"
-  ;  Source: y
-  %"y.1" = load i32, i32* %"y"
-  ;  Source: x&&y
-  %".9" = icmp ne i32 %"x.1", 0
-  %".10" = icmp ne i32 %"y.1", 0
-  %".11" = and i1 %".9", %".10"
-  %".12" = zext i1 %".11" to i32
-  ;  Source: intz=x&&y;
-  store i32 %".12", i32* %"z"
-  %"b" = alloca i32
-  ;  Source: y
-  %"y.2" = load i32, i32* %"y"
-  ;  Source: z
-  %"z.1" = load i32, i32* %"z"
-  %".17" = mul i32 %"y.2", %"z.1"
-  ;  Source: y*z*57809
-  %".19" = mul i32 %".17", 57809
-  ;  Source: boolb=y*z*57809;
-  store i32 %".19", i32* %"b"
-  ret i32 0
+  %"sum" = alloca i32
+  ;  Source: intsum=0;
+  store i32 0, i32* %"sum"
+  %"i" = alloca i32
+  ;  Source: inti;
+  ;  Source: i
+  %"i.1" = load i32, i32* %"i"
+  ;  Source: i=0
+  store i32 0, i32* %"i"
+  br label %"while.cond"
+while.cond:
+  %"i.2" = load i32, i32* %"i"
+  %".9" = icmp slt i32 %"i.2", 5
+  %".10" = zext i1 %".9" to i32
+  %"whilecond" = icmp ne i32 %".10", 0
+  br i1 %"whilecond", label %"while.body", label %"while.end"
+while.body:
+  %"sum.1" = load i32, i32* %"sum"
+  %"i.3" = load i32, i32* %"i"
+  %".12" = add i32 %"sum.1", %"i.3"
+  %"sum.2" = load i32, i32* %"sum"
+  store i32 %".12", i32* %"sum"
+  %"i.4" = load i32, i32* %"i"
+  %".14" = add i32 %"i.4", 1
+  %"i.5" = load i32, i32* %"i"
+  store i32 %".14", i32* %"i"
+  br label %"while.cond"
+while.end:
+  ;  Source: returnsum;
+  %"sum.3" = load i32, i32* %"sum"
+  ret i32 %"sum.3"
 }

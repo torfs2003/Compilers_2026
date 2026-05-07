@@ -16,7 +16,7 @@ digraph AST {
   node12 [label="Decl\nchar*\nc\n(char*)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
   node12 -> node13 [style="solid", color="black", label=" init", fontcolor="blue"];
   node16 [label="ID: c\n(char*)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
-  node15 [label="Cast\n(structcheese*)", shape=ellipse, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node15 [label="Cast\n(struct cheese*)", shape=ellipse, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node15 -> node16 [style="solid", color="black"];
   node14 [label="Decl\nstruct cheese*\ngouda_ptr\n(struct cheese*)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
   node14 -> node15 [style="solid", color="black", label=" init", fontcolor="blue"];

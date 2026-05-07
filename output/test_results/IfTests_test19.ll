@@ -1,26 +1,10 @@
 ; ModuleID = "cmm_module"
-target triple = "x86_64-unknown-linux-gnu"
+target triple = "x86_64-w64-windows-gnu"
 target datalayout = ""
 
 declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
-
-declare i8* @"fopen"(i8* %".1", i8* %".2")
-
-declare i32 @"fclose"(i8* %".1")
-
-declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
-
-declare i32 @"fputs"(i8* %".1", i8* %".2")
-
-declare i8* @"malloc"(i32 %".1")
-
-declare i8* @"calloc"(i32 %".1", i32 %".2")
-
-declare i8* @"realloc"(i8* %".1", i32 %".2")
-
-declare void @"free"(i8* %".1")
 
 define i32 @"main"()
 {
@@ -43,19 +27,17 @@ if.then:
   store i8 97, i8* %"z"
   %".11" = bitcast [3 x i8]* @"str" to i8*
   %"z.1" = load i8, i8* %"z"
-  %".12" = zext i8 %"z.1" to i32
-  %".13" = call i32 (i8*, ...) @"printf"(i8* %".11", i32 %".12")
+  %".12" = call i32 (i8*, ...) @"printf"(i8* %".11", i8 %"z.1")
   br label %"if.end"
 if.end:
   ;  Source: return0;
   ret i32 0
 if.else:
-  %".15" = trunc i32 5 to i8
-  store i8 %".15", i8* %"z"
-  %".17" = bitcast [3 x i8]* @"str.1" to i8*
+  %".14" = trunc i32 5 to i8
+  store i8 %".14", i8* %"z"
+  %".16" = bitcast [3 x i8]* @"str.1" to i8*
   %"z.2" = load i8, i8* %"z"
-  %".18" = zext i8 %"z.2" to i32
-  %".19" = call i32 (i8*, ...) @"printf"(i8* %".17", i32 %".18")
+  %".17" = call i32 (i8*, ...) @"printf"(i8* %".16", i8 %"z.2")
   br label %"if.end"
 }
 

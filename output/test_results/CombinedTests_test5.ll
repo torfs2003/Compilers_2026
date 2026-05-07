@@ -1,26 +1,10 @@
 ; ModuleID = "cmm_module"
-target triple = "x86_64-unknown-linux-gnu"
+target triple = "x86_64-w64-windows-gnu"
 target datalayout = ""
 
 declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
-
-declare i8* @"fopen"(i8* %".1", i8* %".2")
-
-declare i32 @"fclose"(i8* %".1")
-
-declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
-
-declare i32 @"fputs"(i8* %".1", i8* %".2")
-
-declare i8* @"malloc"(i32 %".1")
-
-declare i8* @"calloc"(i32 %".1", i32 %".2")
-
-declare i8* @"realloc"(i8* %".1", i32 %".2")
-
-declare void @"free"(i8* %".1")
 
 define void @"pattern"(i32 %".1")
 {
@@ -78,60 +62,55 @@ while.body.1:
   %"ifcond" = icmp ne i32 %".26", 0
   br i1 %"ifcond", label %"if.then", label %"if.else"
 while.end.1:
-  %".52" = bitcast [4 x i8]* @"str.4" to i8*
+  %".48" = bitcast [4 x i8]* @"str.4" to i8*
   %"space.3" = load i8, i8* %"space"
-  %".53" = zext i8 %"space.3" to i32
-  %".54" = call i32 (i8*, ...) @"printf"(i8* %".52", i32 %".53")
+  %".49" = call i32 (i8*, ...) @"printf"(i8* %".48", i8 %"space.3")
   %"i.5" = load i32, i32* %"i"
-  %".55" = load i32, i32* %"i"
-  %".56" = add i32 %".55", 1
-  store i32 %".56", i32* %"i"
+  %".50" = load i32, i32* %"i"
+  %".51" = add i32 %".50", 1
+  store i32 %".51", i32* %"i"
   br label %"while.cond"
 if.then:
   %".28" = bitcast [3 x i8]* @"str" to i8*
   %"space.1" = load i8, i8* %"space"
-  %".29" = zext i8 %"space.1" to i32
-  %".30" = call i32 (i8*, ...) @"printf"(i8* %".28", i32 %".29")
+  %".29" = call i32 (i8*, ...) @"printf"(i8* %".28", i8 %"space.1")
   br label %"if.end"
 if.end:
   %"i.4" = load i32, i32* %"i"
   %"n.4" = load i32, i32* %"n"
-  %".36" = add i32 %"i.4", %"n.4"
+  %".34" = add i32 %"i.4", %"n.4"
   %"j.4" = load i32, i32* %"j"
-  %".37" = icmp sgt i32 %".36", %"j.4"
-  %".38" = zext i1 %".37" to i32
-  %"ifcond.1" = icmp ne i32 %".38", 0
+  %".35" = icmp sgt i32 %".34", %"j.4"
+  %".36" = zext i1 %".35" to i32
+  %"ifcond.1" = icmp ne i32 %".36", 0
   br i1 %"ifcond.1", label %"if.then.1", label %"if.else.1"
 if.else:
-  %".32" = bitcast [3 x i8]* @"str.1" to i8*
+  %".31" = bitcast [3 x i8]* @"str.1" to i8*
   %"star.1" = load i8, i8* %"star"
-  %".33" = zext i8 %"star.1" to i32
-  %".34" = call i32 (i8*, ...) @"printf"(i8* %".32", i32 %".33")
+  %".32" = call i32 (i8*, ...) @"printf"(i8* %".31", i8 %"star.1")
   br label %"if.end"
 if.then.1:
-  %".40" = bitcast [3 x i8]* @"str.2" to i8*
+  %".38" = bitcast [3 x i8]* @"str.2" to i8*
   %"space.2" = load i8, i8* %"space"
-  %".41" = zext i8 %"space.2" to i32
-  %".42" = call i32 (i8*, ...) @"printf"(i8* %".40", i32 %".41")
+  %".39" = call i32 (i8*, ...) @"printf"(i8* %".38", i8 %"space.2")
   br label %"if.end.1"
 if.end.1:
   %"j.5" = load i32, i32* %"j"
-  %".48" = load i32, i32* %"j"
-  %".49" = add i32 %".48", 1
-  store i32 %".49", i32* %"j"
+  %".44" = load i32, i32* %"j"
+  %".45" = add i32 %".44", 1
+  store i32 %".45", i32* %"j"
   br label %"while.cond.1"
 if.else.1:
-  %".44" = bitcast [3 x i8]* @"str.3" to i8*
+  %".41" = bitcast [3 x i8]* @"str.3" to i8*
   %"star.2" = load i8, i8* %"star"
-  %".45" = zext i8 %"star.2" to i32
-  %".46" = call i32 (i8*, ...) @"printf"(i8* %".44", i32 %".45")
+  %".42" = call i32 (i8*, ...) @"printf"(i8* %".41", i8 %"star.2")
   br label %"if.end.1"
 while.cond.2:
   %"i.7" = load i32, i32* %"i"
   %"n.5" = load i32, i32* %"n"
-  %".63" = icmp sle i32 %"i.7", %"n.5"
-  %".64" = zext i1 %".63" to i32
-  %"whilecond.2" = icmp ne i32 %".64", 0
+  %".58" = icmp sle i32 %"i.7", %"n.5"
+  %".59" = zext i1 %".58" to i32
+  %"whilecond.2" = icmp ne i32 %".59", 0
   br i1 %"whilecond.2", label %"while.body.2", label %"while.end.2"
 while.body.2:
   %"j.6" = load i32, i32* %"j"
@@ -142,67 +121,62 @@ while.end.2:
 while.cond.3:
   %"j.7" = load i32, i32* %"j"
   %"n.6" = load i32, i32* %"n"
-  %".68" = mul i32 2, %"n.6"
-  %".69" = icmp sle i32 %"j.7", %".68"
-  %".70" = zext i1 %".69" to i32
-  %"whilecond.3" = icmp ne i32 %".70", 0
+  %".63" = mul i32 2, %"n.6"
+  %".64" = icmp sle i32 %"j.7", %".63"
+  %".65" = zext i1 %".64" to i32
+  %"whilecond.3" = icmp ne i32 %".65", 0
   br i1 %"whilecond.3", label %"while.body.3", label %"while.end.3"
 while.body.3:
   %"i.8" = load i32, i32* %"i"
   %"j.8" = load i32, i32* %"j"
-  %".72" = icmp slt i32 %"i.8", %"j.8"
-  %".73" = zext i1 %".72" to i32
-  %"ifcond.2" = icmp ne i32 %".73", 0
+  %".67" = icmp slt i32 %"i.8", %"j.8"
+  %".68" = zext i1 %".67" to i32
+  %"ifcond.2" = icmp ne i32 %".68", 0
   br i1 %"ifcond.2", label %"if.then.2", label %"if.else.2"
 while.end.3:
-  %".100" = bitcast [4 x i8]* @"str.9" to i8*
+  %".91" = bitcast [4 x i8]* @"str.9" to i8*
   %"space.6" = load i8, i8* %"space"
-  %".101" = zext i8 %"space.6" to i32
-  %".102" = call i32 (i8*, ...) @"printf"(i8* %".100", i32 %".101")
+  %".92" = call i32 (i8*, ...) @"printf"(i8* %".91", i8 %"space.6")
   %"i.10" = load i32, i32* %"i"
-  %".103" = load i32, i32* %"i"
-  %".104" = add i32 %".103", 1
-  store i32 %".104", i32* %"i"
+  %".93" = load i32, i32* %"i"
+  %".94" = add i32 %".93", 1
+  store i32 %".94", i32* %"i"
   br label %"while.cond.2"
 if.then.2:
-  %".75" = bitcast [3 x i8]* @"str.5" to i8*
+  %".70" = bitcast [3 x i8]* @"str.5" to i8*
   %"space.4" = load i8, i8* %"space"
-  %".76" = zext i8 %"space.4" to i32
-  %".77" = call i32 (i8*, ...) @"printf"(i8* %".75", i32 %".76")
+  %".71" = call i32 (i8*, ...) @"printf"(i8* %".70", i8 %"space.4")
   br label %"if.end.2"
 if.end.2:
   %"i.9" = load i32, i32* %"i"
   %"n.7" = load i32, i32* %"n"
-  %".83" = mul i32 2, %"n.7"
+  %".76" = mul i32 2, %"n.7"
   %"j.9" = load i32, i32* %"j"
-  %".84" = sub i32 %".83", %"j.9"
-  %".85" = icmp sle i32 %"i.9", %".84"
-  %".86" = zext i1 %".85" to i32
-  %"ifcond.3" = icmp ne i32 %".86", 0
+  %".77" = sub i32 %".76", %"j.9"
+  %".78" = icmp sle i32 %"i.9", %".77"
+  %".79" = zext i1 %".78" to i32
+  %"ifcond.3" = icmp ne i32 %".79", 0
   br i1 %"ifcond.3", label %"if.then.3", label %"if.else.3"
 if.else.2:
-  %".79" = bitcast [3 x i8]* @"str.6" to i8*
+  %".73" = bitcast [3 x i8]* @"str.6" to i8*
   %"star.3" = load i8, i8* %"star"
-  %".80" = zext i8 %"star.3" to i32
-  %".81" = call i32 (i8*, ...) @"printf"(i8* %".79", i32 %".80")
+  %".74" = call i32 (i8*, ...) @"printf"(i8* %".73", i8 %"star.3")
   br label %"if.end.2"
 if.then.3:
-  %".88" = bitcast [3 x i8]* @"str.7" to i8*
+  %".81" = bitcast [3 x i8]* @"str.7" to i8*
   %"space.5" = load i8, i8* %"space"
-  %".89" = zext i8 %"space.5" to i32
-  %".90" = call i32 (i8*, ...) @"printf"(i8* %".88", i32 %".89")
+  %".82" = call i32 (i8*, ...) @"printf"(i8* %".81", i8 %"space.5")
   br label %"if.end.3"
 if.end.3:
   %"j.10" = load i32, i32* %"j"
-  %".96" = load i32, i32* %"j"
-  %".97" = add i32 %".96", 1
-  store i32 %".97", i32* %"j"
+  %".87" = load i32, i32* %"j"
+  %".88" = add i32 %".87", 1
+  store i32 %".88", i32* %"j"
   br label %"while.cond.3"
 if.else.3:
-  %".92" = bitcast [3 x i8]* @"str.8" to i8*
+  %".84" = bitcast [3 x i8]* @"str.8" to i8*
   %"star.4" = load i8, i8* %"star"
-  %".93" = zext i8 %"star.4" to i32
-  %".94" = call i32 (i8*, ...) @"printf"(i8* %".92", i32 %".93")
+  %".85" = call i32 (i8*, ...) @"printf"(i8* %".84", i8 %"star.4")
   br label %"if.end.3"
 }
 

@@ -1,5 +1,5 @@
 ; ModuleID = "cmm_module"
-target triple = "x86_64-unknown-linux-gnu"
+target triple = "x86_64-w64-windows-gnu"
 target datalayout = ""
 
 %"struct.kaas" = type {i32, float}
@@ -7,23 +7,7 @@ declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
 
-declare i8* @"fopen"(i8* %".1", i8* %".2")
-
-declare i32 @"fclose"(i8* %".1")
-
-declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
-
-declare i32 @"fputs"(i8* %".1", i8* %".2")
-
-declare i8* @"malloc"(i32 %".1")
-
-declare i8* @"calloc"(i32 %".1", i32 %".2")
-
-declare i8* @"realloc"(i8* %".1", i32 %".2")
-
-declare void @"free"(i8* %".1")
-
-define i32* @"structCreator"(i32 %".1", float %".2")
+define %"struct.kaas"* @"structCreator"(i32 %".1", float %".2")
 {
 entry:
   %"melk" = alloca i32
@@ -53,8 +37,7 @@ entry:
   store %"struct.kaas"* %"gouda", %"struct.kaas"** %"ptr"
   ;  Source: returnptr;
   %"ptr.1" = load %"struct.kaas"*, %"struct.kaas"** %"ptr"
-  %".20" = bitcast %"struct.kaas"* %"ptr.1" to i32*
-  ret i32* %".20"
+  ret %"struct.kaas"* %"ptr.1"
 }
 
 define i32 @"main"()
@@ -65,22 +48,21 @@ entry:
   ;  Source: ptr
   %"ptr.1" = load %"struct.kaas"*, %"struct.kaas"** %"ptr"
   ;  Source: structCreator(10,20.0)
-  %".5" = call i32* @"structCreator"(i32 10, float 0x4034000000000000)
+  %".5" = call %"struct.kaas"* @"structCreator"(i32 10, float 0x4034000000000000)
   ;  Source: ptr=structCreator(10,20.0);
-  %".7" = bitcast i32* %".5" to %"struct.kaas"*
-  store %"struct.kaas"* %".7", %"struct.kaas"** %"ptr"
-  %".9" = bitcast [7 x i8]* @"str" to i8*
+  store %"struct.kaas"* %".5", %"struct.kaas"** %"ptr"
+  %".8" = bitcast [7 x i8]* @"str" to i8*
   ;  Source: ptr->melk
-  %".11" = load %"struct.kaas"*, %"struct.kaas"** %"ptr"
-  %"gep_melk" = getelementptr inbounds %"struct.kaas", %"struct.kaas"* %".11", i32 0, i32 0
+  %".10" = load %"struct.kaas"*, %"struct.kaas"** %"ptr"
+  %"gep_melk" = getelementptr inbounds %"struct.kaas", %"struct.kaas"* %".10", i32 0, i32 0
   %"load_melk" = load i32, i32* %"gep_melk"
   ;  Source: ptr->yoghurt
-  %".13" = load %"struct.kaas"*, %"struct.kaas"** %"ptr"
-  %"gep_yoghurt" = getelementptr inbounds %"struct.kaas", %"struct.kaas"* %".13", i32 0, i32 1
+  %".12" = load %"struct.kaas"*, %"struct.kaas"** %"ptr"
+  %"gep_yoghurt" = getelementptr inbounds %"struct.kaas", %"struct.kaas"* %".12", i32 0, i32 1
   %"load_yoghurt" = load float, float* %"gep_yoghurt"
   ;  Source: printf("%d %f ",ptr->melk,ptr->yoghurt);
-  %".15" = fpext float %"load_yoghurt" to double
-  %".16" = call i32 (i8*, ...) @"printf"(i8* %".9", i32 %"load_melk", double %".15")
+  %".14" = fpext float %"load_yoghurt" to double
+  %".15" = call i32 (i8*, ...) @"printf"(i8* %".8", i32 %"load_melk", double %".14")
   ;  Source: return0;
   ret i32 0
 }

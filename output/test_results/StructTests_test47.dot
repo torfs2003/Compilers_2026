@@ -1,8 +1,8 @@
 digraph AST {
   node [fontname="Arial"];
   node2 [label="Include\n<stdio.h>", shape=note, style="filled", fillcolor="lightyellow", color="black", fontcolor="black"];
-  node5 [label="Decl\nunionNotTypeSafe\ngouda\n(unionNotTypeSafe)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
-  node8 [label="ID: gouda\n(unionNotTypeSafe)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
+  node5 [label="Decl\nunion NotTypeSafe\ngouda\n(union NotTypeSafe)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
+  node8 [label="ID: gouda\n(union NotTypeSafe)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
   node7 [label="Access\n.as_integer\n(int)", shape=ellipse, style="filled", fillcolor="lightblue", color="black", fontcolor="black"];
   node7 -> node8 [style="solid", color="black"];
   node9 [label="5\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
@@ -26,13 +26,13 @@ digraph AST {
   node17 -> node18 [style="solid", color="black"];
   node17 -> node19 [style="solid", color="black"];
   node21 [label="\"%d\"\n(char*)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
-  node23 [label="ID: gouda\n(unionNotTypeSafe)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
+  node23 [label="ID: gouda\n(union NotTypeSafe)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
   node22 [label="Access\n.as_integer\n(int)", shape=ellipse, style="filled", fillcolor="lightblue", color="black", fontcolor="black"];
   node22 -> node23 [style="solid", color="black"];
   node20 [label="Call: printf()\n(int)", shape=ellipse, style="filled", fillcolor="lightpink", color="black", fontcolor="black"];
   node20 -> node21 [style="solid", color="black", label=" arg0", fontcolor="black"];
   node20 -> node22 [style="solid", color="black", label=" arg1", fontcolor="black"];
-  node27 [label="ID: gouda\n(unionNotTypeSafe)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
+  node27 [label="ID: gouda\n(union NotTypeSafe)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
   node26 [label="Access\n.as_str\n(char*)", shape=ellipse, style="filled", fillcolor="lightblue", color="black", fontcolor="black"];
   node26 -> node27 [style="solid", color="black"];
   node28 [label="0\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
@@ -44,7 +44,7 @@ digraph AST {
   node24 -> node25 [style="solid", color="black"];
   node24 -> node29 [style="solid", color="black"];
   node31 [label="\"%c\"\n(char*)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
-  node34 [label="ID: gouda\n(unionNotTypeSafe)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
+  node34 [label="ID: gouda\n(union NotTypeSafe)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
   node33 [label="Access\n.as_str\n(char*)", shape=ellipse, style="filled", fillcolor="lightblue", color="black", fontcolor="black"];
   node33 -> node34 [style="solid", color="black"];
   node35 [label="0\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];

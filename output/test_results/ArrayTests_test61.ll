@@ -1,26 +1,10 @@
 ; ModuleID = "cmm_module"
-target triple = "x86_64-unknown-linux-gnu"
+target triple = "x86_64-w64-windows-gnu"
 target datalayout = ""
 
 declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
-
-declare i8* @"fopen"(i8* %".1", i8* %".2")
-
-declare i32 @"fclose"(i8* %".1")
-
-declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
-
-declare i32 @"fputs"(i8* %".1", i8* %".2")
-
-declare i8* @"malloc"(i32 %".1")
-
-declare i8* @"calloc"(i32 %".1", i32 %".2")
-
-declare i8* @"realloc"(i8* %".1", i32 %".2")
-
-declare void @"free"(i8* %".1")
 
 define i32 @"main"()
 {
@@ -76,15 +60,15 @@ entry:
   %"passed.1" = load i32*, i32** %"passed"
   ;  Source: passed++;
   %".49" = load i32*, i32** %"passed"
-  %".50" = getelementptr i32, i32* %".49", i32 1
-  store i32* %".50", i32** %"passed"
-  %".52" = bitcast [3 x i8]* @"str" to i8*
+  %"ptr_incdec" = getelementptr i32, i32* %".49", i32 1
+  store i32* %"ptr_incdec", i32** %"passed"
+  %".51" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: passed
   %"passed.2" = load i32*, i32** %"passed"
   ;  Source: *passed
   %"deref_load" = load i32, i32* %"passed.2"
   ;  Source: printf("%d",*passed);
-  %".56" = call i32 (i8*, ...) @"printf"(i8* %".52", i32 %"deref_load")
+  %".55" = call i32 (i8*, ...) @"printf"(i8* %".51", i32 %"deref_load")
   ;  Source: return0;
   ret i32 0
 }

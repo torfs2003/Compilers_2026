@@ -1,26 +1,10 @@
 ; ModuleID = "cmm_module"
-target triple = "x86_64-unknown-linux-gnu"
+target triple = "x86_64-w64-windows-gnu"
 target datalayout = ""
 
 declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
-
-declare i8* @"fopen"(i8* %".1", i8* %".2")
-
-declare i32 @"fclose"(i8* %".1")
-
-declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
-
-declare i32 @"fputs"(i8* %".1", i8* %".2")
-
-declare i8* @"malloc"(i32 %".1")
-
-declare i8* @"calloc"(i32 %".1", i32 %".2")
-
-declare i8* @"realloc"(i8* %".1", i32 %".2")
-
-declare void @"free"(i8* %".1")
 
 define i32 @"main"()
 {
@@ -43,7 +27,7 @@ entry:
   ;  Source: s
   %"s.1" = load float*, float** %"s"
   ;  Source: scanf("%f",s);
-  %".14" = call i32 (i8*, ...) @"scanf"(i8* %".11", float* %"s.1")
+  %".14" = call i32 (i8*, ...) @"scanf"(i8* %".11", float** %"s")
   %".15" = bitcast [3 x i8]* @"str.1" to i8*
   ;  Source: s
   %"s.2" = load float*, float** %"s"
@@ -60,7 +44,7 @@ entry:
   ;  Source: q
   %"q.2" = load float*, float** %"q"
   ;  Source: scanf("%f",q);
-  %".28" = call i32 (i8*, ...) @"scanf"(i8* %".25", float* %"q.2")
+  %".28" = call i32 (i8*, ...) @"scanf"(i8* %".25", float** %"q")
   %".29" = bitcast [3 x i8]* @"str.4" to i8*
   ;  Source: q
   %"q.3" = load float*, float** %"q"

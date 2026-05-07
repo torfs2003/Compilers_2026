@@ -6,50 +6,25 @@ declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
 
-declare i8* @"fopen"(i8* %".1", i8* %".2")
-
-declare i32 @"fclose"(i8* %".1")
-
-declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
-
-declare i32 @"fputs"(i8* %".1", i8* %".2")
-
-declare i8* @"malloc"(i32 %".1")
-
-declare i8* @"calloc"(i32 %".1", i32 %".2")
-
-declare i8* @"realloc"(i8* %".1", i32 %".2")
-
-declare void @"free"(i8* %".1")
-
 define i32 @"main"()
 {
 entry:
-  %"x" = alloca i32
-  ;  Source: intx=478;
-  store i32 478, i32* %"x"
+  %"a" = alloca i32
+  ;  Source: inta=0;
+  store i32 0, i32* %"a"
   %"b" = alloca i32
-  ;  Source: intb=-251454;
-  store i32 -251454, i32* %"b"
-  %"b_ptr" = alloca i32*
-  ;  Source: b
-  %"b.1" = load i32, i32* %"b"
-  ;  Source: &b
-  ;  Source: int*b_ptr=&b;
-  store i32* %"b", i32** %"b_ptr"
-  %"x_ptr" = alloca i32**
-  ;  Source: b_ptr
-  %"b_ptr.1" = load i32*, i32** %"b_ptr"
-  ;  Source: &b_ptr
-  ;  Source: int**x_ptr=&b_ptr;
-  store i32** %"b_ptr", i32*** %"x_ptr"
-  ;  Source: x_ptr
-  %"x_ptr.1" = load i32**, i32*** %"x_ptr"
-  ;  Source: b
-  %"b.2" = load i32, i32* %"b"
-  ;  Source: &b
-  ;  Source: x_ptr=&b;
-  %".18" = bitcast i32* %"b" to i32**
-  store i32** %".18", i32*** %"x_ptr"
+  ;  Source: intb=0;
+  store i32 0, i32* %"b"
+  ;  Source: a
+  %"a.1" = load i32, i32* %"a"
+  ;  Source: a=1;
+  store i32 1, i32* %"a"
+  ;  Source: switch(a){case1:b=1;printf("%d",1);case6:b=6;printf("%d",6);case2:b=2;printf("%d",2);break;default:b=3;printf("%d",3);break;}
+  %".10" = bitcast [3 x i8]* @"str" to i8*
+  ;  Source: printf("%d",4);
+  %".12" = call i32 (i8*, ...) @"printf"(i8* %".10", i32 4)
+  ;  Source: return0;
   ret i32 0
 }
+
+@"str" = internal constant [3 x i8] c"%d\00"

@@ -1,26 +1,10 @@
 ; ModuleID = "cmm_module"
-target triple = "x86_64-unknown-linux-gnu"
+target triple = "x86_64-w64-windows-gnu"
 target datalayout = ""
 
 declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
-
-declare i8* @"fopen"(i8* %".1", i8* %".2")
-
-declare i32 @"fclose"(i8* %".1")
-
-declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
-
-declare i32 @"fputs"(i8* %".1", i8* %".2")
-
-declare i8* @"malloc"(i32 %".1")
-
-declare i8* @"calloc"(i32 %".1", i32 %".2")
-
-declare i8* @"realloc"(i8* %".1", i32 %".2")
-
-declare void @"free"(i8* %".1")
 
 define i32 @"main"()
 {
@@ -88,21 +72,19 @@ entry:
   ;  Source: *char_ptr
   %"deref_load.4" = load i8, i8* %"char_ptr.1"
   ;  Source: printf("%c",*char_ptr);
-  %".45" = zext i8 %"deref_load.4" to i32
-  %".46" = call i32 (i8*, ...) @"printf"(i8* %".41", i32 %".45")
+  %".45" = call i32 (i8*, ...) @"printf"(i8* %".41", i8 %"deref_load.4")
   ;  Source: char_ptr
   %"char_ptr.2" = load i8*, i8** %"char_ptr"
   %"deref_load.5" = load i8, i8* %"char_ptr.2"
   ;  Source: *char_ptr='\t';
   store i8 9, i8* %"char_ptr.2"
-  %".50" = bitcast [3 x i8]* @"str.4" to i8*
+  %".49" = bitcast [3 x i8]* @"str.4" to i8*
   ;  Source: char_ptr
   %"char_ptr.3" = load i8*, i8** %"char_ptr"
   ;  Source: *char_ptr
   %"deref_load.6" = load i8, i8* %"char_ptr.3"
   ;  Source: printf("%c",*char_ptr);
-  %".54" = zext i8 %"deref_load.6" to i32
-  %".55" = call i32 (i8*, ...) @"printf"(i8* %".50", i32 %".54")
+  %".53" = call i32 (i8*, ...) @"printf"(i8* %".49", i8 %"deref_load.6")
   ;  Source: char_ptr
   %"char_ptr.4" = load i8*, i8** %"char_ptr"
   ;  Source: nl
@@ -110,14 +92,13 @@ entry:
   ;  Source: &nl
   ;  Source: char_ptr=&nl;
   store i8* %"nl", i8** %"char_ptr"
-  %".61" = bitcast [3 x i8]* @"str.5" to i8*
+  %".59" = bitcast [3 x i8]* @"str.5" to i8*
   ;  Source: char_ptr
   %"char_ptr.5" = load i8*, i8** %"char_ptr"
   ;  Source: *char_ptr
   %"deref_load.7" = load i8, i8* %"char_ptr.5"
   ;  Source: printf("%c",*char_ptr);
-  %".65" = zext i8 %"deref_load.7" to i32
-  %".66" = call i32 (i8*, ...) @"printf"(i8* %".61", i32 %".65")
+  %".63" = call i32 (i8*, ...) @"printf"(i8* %".59", i8 %"deref_load.7")
   ;  Source: return0;
   ret i32 0
 }

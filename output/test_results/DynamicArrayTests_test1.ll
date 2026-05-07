@@ -6,14 +6,6 @@ declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
 
-declare i8* @"fopen"(i8* %".1", i8* %".2")
-
-declare i32 @"fclose"(i8* %".1")
-
-declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
-
-declare i32 @"fputs"(i8* %".1", i8* %".2")
-
 declare i8* @"malloc"(i32 %".1")
 
 declare i8* @"calloc"(i32 %".1", i32 %".2")
@@ -45,8 +37,7 @@ entry:
   ;  Source: *(ptr+4)
   %"deref_load.1" = load i8, i8* %".14"
   ;  Source: printf("%c",*(ptr+4));
-  %".17" = zext i8 %"deref_load.1" to i32
-  %".18" = call i32 (i8*, ...) @"printf"(i8* %".11", i32 %".17")
+  %".17" = call i32 (i8*, ...) @"printf"(i8* %".11", i8 %"deref_load.1")
   ;  Source: return0;
   ret i32 0
 }

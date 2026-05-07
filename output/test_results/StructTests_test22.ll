@@ -1,5 +1,5 @@
 ; ModuleID = "cmm_module"
-target triple = "x86_64-unknown-linux-gnu"
+target triple = "x86_64-w64-windows-gnu"
 target datalayout = ""
 
 %"struct.kaas" = type {i32, float, i8, i8*}
@@ -7,18 +7,6 @@ target datalayout = ""
 declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
-
-declare i8* @"fopen"(i8* %".1", i8* %".2")
-
-declare i32 @"fclose"(i8* %".1")
-
-declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
-
-declare i32 @"fputs"(i8* %".1", i8* %".2")
-
-declare i8* @"malloc"(i32 %".1")
-
-declare void @"free"(i8* %".1")
 
 define i32 @"main"()
 {
@@ -52,21 +40,17 @@ entry:
   ;  Source: (*ptr.kaas_ptr).lol
   %"gep_kaas_ptr.1" = getelementptr inbounds %"struct.pointer", %"struct.pointer"* %"ptr", i32 0, i32 0
   %"load_kaas_ptr.1" = load %"struct.kaas"*, %"struct.kaas"** %"gep_kaas_ptr.1"
-  %"deref_load" = load %"struct.kaas", %"struct.kaas"* %"load_kaas_ptr.1"
   %"gep_lol.2" = getelementptr inbounds %"struct.kaas", %"struct.kaas"* %"load_kaas_ptr.1", i32 0, i32 2
   %"load_lol.2" = load i8, i8* %"gep_lol.2"
   ;  Source: (*ptr.kaas_ptr).zeta
   %"gep_kaas_ptr.2" = getelementptr inbounds %"struct.pointer", %"struct.pointer"* %"ptr", i32 0, i32 0
   %"load_kaas_ptr.2" = load %"struct.kaas"*, %"struct.kaas"** %"gep_kaas_ptr.2"
-  %"deref_load.1" = load %"struct.kaas", %"struct.kaas"* %"load_kaas_ptr.2"
   %"gep_zeta.1" = getelementptr inbounds %"struct.kaas", %"struct.kaas"* %"load_kaas_ptr.2", i32 0, i32 3
   %"load_zeta.1" = load i8*, i8** %"gep_zeta.1"
   ;  Source: *(*ptr.kaas_ptr).zeta
-  %"deref_load.2" = load i8, i8* %"load_zeta.1"
+  %"deref_load" = load i8, i8* %"load_zeta.1"
   ;  Source: printf("%c %c",(*ptr.kaas_ptr).lol,*(*ptr.kaas_ptr).zeta);
-  %".22" = zext i8 %"load_lol.2" to i32
-  %".23" = zext i8 %"deref_load.2" to i32
-  %".24" = call i32 (i8*, ...) @"printf"(i8* %".17", i32 %".22", i32 %".23")
+  %".22" = call i32 (i8*, ...) @"printf"(i8* %".17", i8 %"load_lol.2", i8 %"deref_load")
   ;  Source: return0;
   ret i32 0
 }

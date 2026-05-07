@@ -1,26 +1,10 @@
 ; ModuleID = "cmm_module"
-target triple = "x86_64-unknown-linux-gnu"
+target triple = "x86_64-w64-windows-gnu"
 target datalayout = ""
 
 declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
-
-declare i8* @"fopen"(i8* %".1", i8* %".2")
-
-declare i32 @"fclose"(i8* %".1")
-
-declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
-
-declare i32 @"fputs"(i8* %".1", i8* %".2")
-
-declare i8* @"malloc"(i32 %".1")
-
-declare i8* @"calloc"(i32 %".1", i32 %".2")
-
-declare i8* @"realloc"(i8* %".1", i32 %".2")
-
-declare void @"free"(i8* %".1")
 
 define i32 @"main"()
 {
@@ -47,16 +31,15 @@ entry:
   ;  Source: p
   %"p.4" = load float, float* %"p"
   ;  Source: printf("%% %c %f %x %f  kappa kappa",'a',p,12,p);
-  %".18" = zext i8 97 to i32
-  %".19" = fpext float %"p.3" to double
-  %".20" = fpext float %"p.4" to double
-  %".21" = call i32 (i8*, ...) @"printf"(i8* %".14", i32 %".18", double %".19", i32 12, double %".20")
-  %".22" = bitcast [3 x i8]* @"str.2" to i8*
+  %".18" = fpext float %"p.3" to double
+  %".19" = fpext float %"p.4" to double
+  %".20" = call i32 (i8*, ...) @"printf"(i8* %".14", i8 97, double %".18", i32 12, double %".19")
+  %".21" = bitcast [3 x i8]* @"str.2" to i8*
   ;  Source: p
   %"p.5" = load float, float* %"p"
   ;  Source: printf("%f",p);
-  %".25" = fpext float %"p.5" to double
-  %".26" = call i32 (i8*, ...) @"printf"(i8* %".22", double %".25")
+  %".24" = fpext float %"p.5" to double
+  %".25" = call i32 (i8*, ...) @"printf"(i8* %".21", double %".24")
   ;  Source: return0;
   ret i32 0
 }

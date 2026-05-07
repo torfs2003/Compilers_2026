@@ -1,5 +1,5 @@
 ; ModuleID = "cmm_module"
-target triple = "x86_64-unknown-linux-gnu"
+target triple = "x86_64-w64-windows-gnu"
 target datalayout = ""
 
 %"struct.kaas" = type {i32, i32}
@@ -7,18 +7,6 @@ target datalayout = ""
 declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
-
-declare i8* @"fopen"(i8* %".1", i8* %".2")
-
-declare i32 @"fclose"(i8* %".1")
-
-declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
-
-declare i32 @"fputs"(i8* %".1", i8* %".2")
-
-declare i8* @"malloc"(i32 %".1")
-
-declare void @"free"(i8* %".1")
 
 define i32 @"main"()
 {
@@ -79,7 +67,6 @@ entry:
   %".36" = bitcast [6 x i8]* @"str.4" to i8*
   ;  Source: (*gouda_ptr).melk
   %"gouda_ptr.1" = load %"struct.kaas"*, %"struct.kaas"** %"gouda_ptr"
-  %"deref_load" = load %"struct.kaas", %"struct.kaas"* %"gouda_ptr.1"
   %"gep_melk.4" = getelementptr inbounds %"struct.kaas", %"struct.kaas"* %"gouda_ptr.1", i32 0, i32 0
   %"load_melk.4" = load i32, i32* %"gep_melk.4"
   ;  Source: printf("%d   ",(*gouda_ptr).melk);

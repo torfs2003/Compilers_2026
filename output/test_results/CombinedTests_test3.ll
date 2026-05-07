@@ -1,26 +1,10 @@
 ; ModuleID = "cmm_module"
-target triple = "x86_64-unknown-linux-gnu"
+target triple = "x86_64-w64-windows-gnu"
 target datalayout = ""
 
 declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
-
-declare i8* @"fopen"(i8* %".1", i8* %".2")
-
-declare i32 @"fclose"(i8* %".1")
-
-declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
-
-declare i32 @"fputs"(i8* %".1", i8* %".2")
-
-declare i8* @"malloc"(i32 %".1")
-
-declare i8* @"calloc"(i32 %".1", i32 %".2")
-
-declare i8* @"realloc"(i8* %".1", i32 %".2")
-
-declare void @"free"(i8* %".1")
 
 define void @"printPositive"(float %".1")
 {
@@ -72,9 +56,8 @@ while.cond:
   br i1 %"whilecond", label %"while.body", label %"while.end"
 while.body:
   %"i.2" = load i32, i32* %"i"
-  %"decay_left" = getelementptr [5 x float], [5 x float]* %"arr", i32 0, i32 0
-  %"gep_ptr" = getelementptr float, float* %"decay_left", i32 %"i.2"
-  %"array_element" = load float, float* %"gep_ptr"
+  %"gep_array" = getelementptr [5 x float], [5 x float]* %"arr", i32 0, i32 %"i.2"
+  %"array_element" = load float, float* %"gep_array"
   call void @"printPositive"(float %"array_element")
   %"i.3" = load i32, i32* %"i"
   %".21" = load i32, i32* %"i"

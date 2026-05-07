@@ -78,18 +78,17 @@ class ASTVisitor:
                     name = ctx.MAIN().getText() if ctx.MAIN() else ctx.IDENTIFIER().getText()
                     body = results[id(ctx.compoundStatement())]
                     
-                    # Verzamel parameters: [(type, naam), ...]
                     params = []
                     if ctx.parameterList():
                         p_list = ctx.parameterList()
                         for i in range(len(p_list.parameterDeclaration())):
                             p_decl = p_list.parameterDeclaration(i)
-                            p_type = p_decl.typeSpecifier().getText()
+                            p_type = p_decl.typeSpecifier().getText().replace("struct", "struct ").replace("union", "union ")
                             p_stars = "*" * len(p_decl.MUL())
                             p_name = p_decl.IDENTIFIER().getText()
                             params.append((p_type + p_stars, p_name))
                         
-                    base_type = ctx.typeSpecifier().getText()
+                    base_type = ctx.typeSpecifier().getText().replace("struct", "struct ").replace("union", "union ")
                     stars = "*" * len(ctx.MUL())
                     full_type = base_type + stars
                     node = FunctionNode(full_type, name, body, params)
@@ -103,12 +102,14 @@ class ASTVisitor:
                         p_list = ctx.parameterList()
                         for i in range(len(p_list.parameterDeclaration())):
                             p_decl = p_list.parameterDeclaration(i)
-                            p_type = p_decl.typeSpecifier().getText()
+                            # --- FIX: Spaties voor struct/union in parameters ---
+                            p_type = p_decl.typeSpecifier().getText().replace("struct", "struct ").replace("union", "union ")
                             p_stars = "*" * len(p_decl.MUL())
                             p_name = p_decl.IDENTIFIER().getText()
                             params.append((p_type + p_stars, p_name))
                             
-                    base_type = ctx.typeSpecifier().getText()
+                    # --- FIX: Spaties voor struct/union in return type ---
+                    base_type = ctx.typeSpecifier().getText().replace("struct", "struct ").replace("union", "union ")
                     stars = "*" * len(ctx.MUL())
                     full_type = base_type + stars
                     res = self.get_loc(FunctionDeclNode(full_type, name, params), ctx)
@@ -182,45 +183,50 @@ class ASTVisitor:
                         pointer_stars = "*" * len(decl_ctx.MUL())
                         full_type = base_type + pointer_stars
 
-                        all_exprs = decl_ctx.expression()
+                        # --- NIEUWE LOGICA VOOR DIMENSIES ---
+                        # We zoeken alle expressies die tussen [ ] staan in de hele declarator
                         sizes = []
+                        # Zoek in alle kinderen van de declarator naar expressies
+                        # (Dit werkt beter bij multi-dimensionele arrays zoals [30][2])
+                        all_children = []
+                        def collect_exprs(curr_ctx):
+                            if hasattr(curr_ctx, 'expression') and callable(curr_ctx.expression):
+                                # Alleen expressies die NIET na een '=' komen zijn dimensies
+                                # We checken of er een ASSIGN in de buurt is
+                                pass 
+                        
+                        # Simpeler alternatief: gebruik de bestaande results map
+                        all_expr_ids = [id(e) for e in decl_ctx.expression()]
                         init = None
+                        dimension_exprs = []
 
                         if decl_ctx.ASSIGN():
+                            # De laatste expressie is de initialisatie (bv. = 'a')
                             if decl_ctx.array_initializer():
                                 init = results[id(decl_ctx.array_initializer())]
-                                dimension_exprs = all_exprs
+                                dimension_exprs = decl_ctx.expression()
                             else:
-                                init = results[id(all_exprs[-1])]
-                                dimension_exprs = all_exprs[:-1]
+                                exprs = decl_ctx.expression()
+                                init = results[id(exprs[-1])]
+                                dimension_exprs = exprs[:-1]
                         else:
-                            dimension_exprs = all_exprs
+                            dimension_exprs = decl_ctx.expression()
 
                         for dim_ctx in dimension_exprs:
                             sizes.append(results[id(dim_ctx)])
+                        # ------------------------------------
 
-                        const_tokens = decl_ctx.CONST()
-                        is_const = False
-                        is_const_ptr = False
-
-                        if len(const_tokens) == 2:
-                            is_const = True
-                            is_const_ptr = True
-                        elif len(const_tokens) == 1:
-                            const_token_idx = const_tokens[0].getSymbol().tokenIndex
-                            ident_token_idx = decl_ctx.IDENTIFIER().getSymbol().tokenIndex
-                            if const_token_idx < ident_token_idx:
-                                is_const = True
-                            else:
-                                is_const_ptr = True
                         identifier = decl_ctx.IDENTIFIER().getText()
+                        
+                        # Check of het een array is (heeft het brackets in de broncode?)
+                        is_array = "[" in decl_ctx.getText()
 
-                        if sizes or decl_ctx.LBRACKET():
-                            node = ArrayDeclNode(is_const, full_type, identifier, sizes, init)
+                        if is_array:
+                            node = self.get_loc(ArrayDeclNode(False, full_type, identifier, sizes, init), decl_ctx)
                         else:
-                            node = DeclNode(is_const, full_type, identifier, init)
-                        node.is_const_ptr = is_const_ptr
-                        nodes.append(self.get_loc(node,decl_ctx))
+                            node = self.get_loc(DeclNode(False, full_type, identifier, init), decl_ctx)
+                        
+                        nodes.append(node)
                     res = nodes[0] if len(nodes) == 1 else nodes
 
                 elif class_name == "StatementContext":
@@ -363,7 +369,7 @@ class ASTVisitor:
                                 val = val & 0xFFFFFFFF
                                 if val > 2147483647:
                                     val -= 4294967296
-                                    
+
                             res = self.get_loc(IntNode(val), ctx)
                         except ValueError:
                             print(f"[Error] line {ctx.start.line}, position {ctx.start.column}: Invalid integer literal '{text_val}'")

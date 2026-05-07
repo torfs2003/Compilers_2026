@@ -1,3 +1,4 @@
+from platform import node
 from typing import Optional
 
 from src.parser.base_visitor import BaseVisitor
@@ -124,7 +125,6 @@ class SemanticVisitor(BaseVisitor):
 
         self.symbol_table.exit_scope()
         
-        self.symbol_table.exit_scope()
     
     def pre_visit_BinOpNode(self, node):
         if node.op == '*':
@@ -153,23 +153,32 @@ class SemanticVisitor(BaseVisitor):
                         })               
 
     def pre_visit_DeclNode(self, node):
-        base_type = node.type_spec.replace('*', '').replace('const', '').strip()
-        primitives = {'int', 'float', 'char', 'void'}
-        if base_type not in primitives and not base_type.startswith('struct'):
-            sym = self.symbol_table.get(base_type)
-            if not sym or sym.get('type') != 'typedef':
-                self.get_Error(node, f"Onbekend type '{base_type}'.")
-
         if node.type_spec.startswith("struct") and " " not in node.type_spec:
             node.type_spec = node.type_spec.replace("struct", "struct ", 1)
+        elif node.type_spec.startswith("union") and " " not in node.type_spec:
+            node.type_spec = node.type_spec.replace("union", "union ", 1)
 
         if 'enum' in node.type_spec:
             node.type_spec = 'int'
-            
+
+        base_type = node.type_spec.replace('*', '').replace('const', '').strip()
+        primitives = {'int', 'float', 'char', 'void'}
+        
+        if base_type not in primitives:
+            sym = self.symbol_table.get(base_type)
+            if base_type.startswith('struct ') or base_type.startswith('union '):
+                if '*' not in node.type_spec:
+                    if not sym or sym.get('type') not in ['struct_def', 'union_def']:
+                        self.get_Error(node, f"Type '{base_type}' is onbekend of incompleet. Gebruik een pointer of definieer het type eerst.")
+            else:
+                # Typedefs
+                if not sym or sym.get('type') != 'typedef':
+                    self.get_Error(node, f"Onbekend type '{base_type}'.")
+
         type_str = node.type_spec
         if type_str == 'char' and isinstance(getattr(node, 'init_expr', None), StringNode):
             type_str = 'char*'
-        
+            
         is_const_var = node.is_const
         points_to_const = False
         
@@ -193,13 +202,32 @@ class SemanticVisitor(BaseVisitor):
         if not success:
             self.get_Error(node, f"Variabele '{node.name}' is al gedeclareerd in deze scope.")
 
+
     def pre_visit_ArrayDeclNode(self, node):
+        if node.type_spec.startswith("struct") and " " not in node.type_spec:
+            node.type_spec = node.type_spec.replace("struct", "struct ", 1)
+        elif node.type_spec.startswith("union") and " " not in node.type_spec:
+            node.type_spec = node.type_spec.replace("union", "union ", 1)
+
         if 'enum' in node.type_spec:
             node.type_spec = 'int'
+
+        base_type = node.type_spec.replace('*', '').replace('const', '').strip()
+        primitives = {'int', 'float', 'char', 'void'}
         
+        if base_type not in primitives:
+            sym = self.symbol_table.get(base_type)
+            if base_type.startswith('struct ') or base_type.startswith('union '):
+                # Arrays slaan data by-value op, dus de struct/union MOET gedefinieerd zijn!
+                if '*' not in node.type_spec:
+                    if not sym or sym.get('type') not in ['struct_def', 'union_def']:
+                        self.get_Error(node, f"Type '{base_type}' is onbekend of incompleet.")
+            else:
+                if not sym or sym.get('type') != 'typedef':
+                    self.get_Error(node, f"Onbekend type '{base_type}'.")
+            
         if (not hasattr(node, 'sizes') or not node.sizes) and node.init_expr:
             if isinstance(node.init_expr, ArrayInitNode):
-                # We vullen node.sizes aan met een dummy IntNode met de juiste lengte
                 from src.parser.AST import IntNode
                 node.sizes = [IntNode(len(node.init_expr.values))]
 
@@ -217,7 +245,6 @@ class SemanticVisitor(BaseVisitor):
         })
         if not success:
             self.get_Error(node, f"Array '{node.name}' is al gedeclareerd in deze scope.")
-
     def pre_visit_StructDeclNode(self, node):
         member_dict = {}
         for index, member in enumerate(node.members):
@@ -243,12 +270,19 @@ class SemanticVisitor(BaseVisitor):
                 }
                 
             elif isinstance(member, ArrayDeclNode):
+                # 1. Fix spaties (zoals we eerder deden)
                 if member.type_spec.startswith("struct") and " " not in member.type_spec:
                     member.type_spec = member.type_spec.replace("struct", "struct ", 1)
+                elif member.type_spec.startswith("union") and " " not in member.type_spec:
+                    member.type_spec = member.type_spec.replace("union", "union ", 1)
+                
+                num_dims = len(member.sizes) if hasattr(member, 'sizes') and member.sizes else 1
+                stars = "*" * num_dims
                 
                 member_dict[member.name] = {
-                    'type': self.symbol_table.resolve_type(member.type_spec) + "*",
-                    'index': index
+                    'type': self.symbol_table.resolve_type(member.type_spec) + ("*" * len(member.sizes)),
+                    'index': index,
+                    'is_array': True
                 }
                 
         success = self.symbol_table.put(f"struct {node.name}", {
@@ -455,7 +489,7 @@ class SemanticVisitor(BaseVisitor):
                     # Check of een van de pointers 'void*' is. Zo ja, niet waarschuwen!
                     is_void_ptr = init_type == 'void*' or node.eval_type == 'void*'
                     if not is_null_ptr and not is_void_ptr:
-                        self.get_Warning(node, f"Incompatibele types bij initialisatie: '{init_type}' aan '{node.eval_type}'.")
+                        self.get_Error(node, f"Incompatibele types bij initialisatie: '{init_type}' aan '{node.eval_type}'.")                
                 
                 # 2. Check Informatieverlies (Richness)
                 elif self.get_richness(init_type) > self.get_richness(node.eval_type):
@@ -496,10 +530,9 @@ class SemanticVisitor(BaseVisitor):
                 def check_constant_init(init_node):
                     for val in init_node.values:
                         if isinstance(val, ArrayInitNode):
-                            check_constant_init(val) # Recursief voor 2D/3D arrays
+                            check_constant_init(val)
                         elif isinstance(val, (IdentifierNode, UnaryOpNode, FuncCallNode)):
-                            # Zodra we een variabele, '&' operator of functie zien: BAM! Error.
-                            self.get_Error(node, "Initializer element is not computable at load time (C89 regel).")
+                            self.get_Warning(node, "Initializer element is not computable at load time (C89 regel).")
                 
                 check_constant_init(node.init_expr)
 
@@ -843,14 +876,34 @@ class SemanticVisitor(BaseVisitor):
         member_info = members[node.member_name]
         node.eval_type = member_info['type']
         node.member_index = member_info['index']
+        node.is_array_member = member_info.get('is_array', False)
+
+    def visit_CastNode(self, node): 
+        if node.target_type.startswith("struct") and " " not in node.target_type:
+            node.target_type = node.target_type.replace("struct", "struct ", 1)
+        elif node.target_type.startswith("union") and " " not in node.target_type:
+            node.target_type = node.target_type.replace("union", "union ", 1)
+
+        expr_type = getattr(node.expr, 'eval_type', 'void')
+        expr_type = self.symbol_table.resolve_type(expr_type)
+        target_type = self.symbol_table.resolve_type(node.target_type)
+
+        is_expr_aggregate = (expr_type.startswith("struct ") or expr_type.startswith("union ")) and '*' not in expr_type
+        
+        is_target_aggregate = (target_type.startswith("struct ") or target_type.startswith("union ")) and '*' not in target_type
+
+        if is_expr_aggregate:
+            self.get_Error(node, f"Semantic error: Operations or assignments of incompatible types. Kan een struct/union by-value ('{expr_type}') niet casten.")
+        elif is_target_aggregate:
+            self.get_Error(node, f"Semantic error: Operations or assignments of incompatible types. Kan niet casten naar een struct/union by-value ('{target_type}').")
+
+        node.eval_type = node.target_type
 
     def visit_StructDeclNode(self, node): self.symbol_table.exit_scope()
     def visit_UnionDeclNode(self, node): self.symbol_table.exit_scope()
 
-    def visit_CastNode(self, node): node.eval_type = node.target_type
     def visit_IntNode(self, node): node.eval_type = 'int'
     def visit_FloatNode(self, node): node.eval_type = 'float'
     def visit_CharNode(self, node): node.eval_type = 'char'
     def visit_StringNode(self, node): node.eval_type = 'char*'
-    def visit_SizeofNode(self, node):
-        node.eval_type = 'int'
+    def visit_SizeofNode(self, node): node.eval_type = 'int'

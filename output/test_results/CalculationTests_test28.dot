@@ -8,7 +8,7 @@ digraph AST {
   node10 [label="ID: peer\n(int)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
   node9 [label="&\n(int*)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node9 -> node10 [style="solid", color="black"];
-  node8 [label="Decl\nconst int*\nappel\n(int*)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
+  node8 [label="Decl\nint*\nappel\n(int*)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
   node8 -> node9 [style="solid", color="black", label=" init", fontcolor="blue"];
   node12 [label="ID: appel\n(int*)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
   node11 [label="--\n(int*)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];

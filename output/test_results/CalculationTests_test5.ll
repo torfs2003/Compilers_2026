@@ -1,26 +1,10 @@
 ; ModuleID = "cmm_module"
-target triple = "x86_64-unknown-linux-gnu"
+target triple = "x86_64-w64-windows-gnu"
 target datalayout = ""
 
 declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
-
-declare i8* @"fopen"(i8* %".1", i8* %".2")
-
-declare i32 @"fclose"(i8* %".1")
-
-declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
-
-declare i32 @"fputs"(i8* %".1", i8* %".2")
-
-declare i8* @"malloc"(i32 %".1")
-
-declare i8* @"calloc"(i32 %".1", i32 %".2")
-
-declare i8* @"realloc"(i8* %".1", i32 %".2")
-
-declare void @"free"(i8* %".1")
 
 define i32 @"main"()
 {
@@ -42,31 +26,31 @@ entry:
   %"ptr.1" = load i32*, i32** %"ptr"
   ;  Source: ptr++;
   %".13" = load i32*, i32** %"ptr"
-  %".14" = getelementptr i32, i32* %".13", i32 1
-  store i32* %".14", i32** %"ptr"
+  %"ptr_incdec" = getelementptr i32, i32* %".13", i32 1
+  store i32* %"ptr_incdec", i32** %"ptr"
   ;  Source: ptr
   %"ptr.2" = load i32*, i32** %"ptr"
   ;  Source: ptr--;
-  %".18" = load i32*, i32** %"ptr"
-  %".19" = getelementptr i32, i32* %".18", i32 -1
-  store i32* %".19", i32** %"ptr"
+  %".17" = load i32*, i32** %"ptr"
+  %"ptr_incdec.1" = getelementptr i32, i32* %".17", i32 -1
+  store i32* %"ptr_incdec.1", i32** %"ptr"
   %"is_x" = alloca i32
   ;  Source: ptr
   %"ptr.3" = load i32*, i32** %"ptr"
   ;  Source: x
   %"x.3" = load i32, i32* %"x"
   ;  Source: (ptr==&x)
-  %".24" = ptrtoint i32* %"ptr.3" to i32
-  %".25" = ptrtoint i32* %"x" to i32
-  %".26" = icmp eq i32 %".24", %".25"
-  %".27" = zext i1 %".26" to i32
+  %".22" = ptrtoint i32* %"ptr.3" to i32
+  %".23" = ptrtoint i32* %"x" to i32
+  %".24" = icmp eq i32 %".22", %".23"
+  %".25" = zext i1 %".24" to i32
   ;  Source: intis_x=(ptr==&x);
-  store i32 %".27", i32* %"is_x"
-  %".30" = bitcast [3 x i8]* @"str" to i8*
+  store i32 %".25", i32* %"is_x"
+  %".28" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: is_x
   %"is_x.1" = load i32, i32* %"is_x"
   ;  Source: printf("%d",is_x);
-  %".33" = call i32 (i8*, ...) @"printf"(i8* %".30", i32 %"is_x.1")
+  %".31" = call i32 (i8*, ...) @"printf"(i8* %".28", i32 %"is_x.1")
   ;  Source: return0;
   ret i32 0
 }

@@ -8,7 +8,7 @@ digraph AST {
   node3 -> node4 [style="solid", color="black"];
   node3 -> node5 [style="solid", color="black"];
   node3 -> node6 [style="solid", color="black"];
-  node9 [label="Decl\nunionv\na\n(unionv)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
+  node9 [label="Decl\nunion v\na\n(union v)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
   node11 [label="0\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node10 [label="Return", shape=ellipse, style="filled", fillcolor="lightpink", color="black", fontcolor="black"];
   node10 -> node11 [style="solid", color="black"];

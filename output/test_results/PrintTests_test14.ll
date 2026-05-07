@@ -1,26 +1,10 @@
 ; ModuleID = "cmm_module"
-target triple = "x86_64-unknown-linux-gnu"
+target triple = "x86_64-w64-windows-gnu"
 target datalayout = ""
 
 declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
-
-declare i8* @"fopen"(i8* %".1", i8* %".2")
-
-declare i32 @"fclose"(i8* %".1")
-
-declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
-
-declare i32 @"fputs"(i8* %".1", i8* %".2")
-
-declare i8* @"malloc"(i32 %".1")
-
-declare i8* @"calloc"(i32 %".1", i32 %".2")
-
-declare i8* @"realloc"(i8* %".1", i32 %".2")
-
-declare void @"free"(i8* %".1")
 
 define i32 @"main"()
 {
@@ -47,41 +31,40 @@ entry:
   ;  Source: p
   %"p.4" = load float, float* %"p"
   ;  Source: printf("%% %c %f %x %f  kappa kappa",'a',p,12,p);
-  %".18" = zext i8 97 to i32
-  %".19" = fpext float %"p.3" to double
-  %".20" = fpext float %"p.4" to double
-  %".21" = call i32 (i8*, ...) @"printf"(i8* %".14", i32 %".18", double %".19", i32 12, double %".20")
-  %".22" = bitcast [5 x i8]* @"str.2" to i8*
+  %".18" = fpext float %"p.3" to double
+  %".19" = fpext float %"p.4" to double
+  %".20" = call i32 (i8*, ...) @"printf"(i8* %".14", i8 97, double %".18", i32 12, double %".19")
+  %".21" = bitcast [5 x i8]* @"str.2" to i8*
   ;  Source: printf("%x,f",5);
-  %".24" = call i32 (i8*, ...) @"printf"(i8* %".22", i32 5)
-  %".25" = bitcast [4 x i8]* @"str.3" to i8*
+  %".23" = call i32 (i8*, ...) @"printf"(i8* %".21", i32 5)
+  %".24" = bitcast [4 x i8]* @"str.3" to i8*
   ;  Source: p
   %"p.5" = load float, float* %"p"
   ;  Source: printf("%f ",p);
-  %".28" = fpext float %"p.5" to double
-  %".29" = call i32 (i8*, ...) @"printf"(i8* %".25", double %".28")
-  %".30" = bitcast [4 x i8]* @"str.4" to i8*
+  %".27" = fpext float %"p.5" to double
+  %".28" = call i32 (i8*, ...) @"printf"(i8* %".24", double %".27")
+  %".29" = bitcast [4 x i8]* @"str.4" to i8*
   ;  Source: p
   %"p.6" = load float, float* %"p"
   ;  Source: printf("%f ",p);
-  %".33" = fpext float %"p.6" to double
-  %".34" = call i32 (i8*, ...) @"printf"(i8* %".30", double %".33")
-  %".35" = bitcast [6 x i8]* @"str.5" to i8*
+  %".32" = fpext float %"p.6" to double
+  %".33" = call i32 (i8*, ...) @"printf"(i8* %".29", double %".32")
+  %".34" = bitcast [6 x i8]* @"str.5" to i8*
   ;  Source: p
   %"p.7" = load float, float* %"p"
   ;  Source: printf("a%fa ",p);
-  %".38" = fpext float %"p.7" to double
-  %".39" = call i32 (i8*, ...) @"printf"(i8* %".35", double %".38")
-  %".40" = bitcast [3 x i8]* @"str.6" to i8*
+  %".37" = fpext float %"p.7" to double
+  %".38" = call i32 (i8*, ...) @"printf"(i8* %".34", double %".37")
+  %".39" = bitcast [3 x i8]* @"str.6" to i8*
   ;  Source: p
   %"p.8" = load float, float* %"p"
   ;  Source: printf("%f",p);
-  %".43" = fpext float %"p.8" to double
-  %".44" = call i32 (i8*, ...) @"printf"(i8* %".40", double %".43")
-  %".45" = bitcast [3 x i8]* @"str.7" to i8*
-  %".46" = bitcast [28 x i8]* @"str.8" to i8*
+  %".42" = fpext float %"p.8" to double
+  %".43" = call i32 (i8*, ...) @"printf"(i8* %".39", double %".42")
+  %".44" = bitcast [3 x i8]* @"str.7" to i8*
+  %".45" = bitcast [28 x i8]* @"str.8" to i8*
   ;  Source: printf("%s","This is a beautifull string");
-  %".48" = call i32 (i8*, ...) @"printf"(i8* %".45", i8* %".46")
+  %".47" = call i32 (i8*, ...) @"printf"(i8* %".44", i8* %".45")
   ;  Source: return0;
   ret i32 0
 }

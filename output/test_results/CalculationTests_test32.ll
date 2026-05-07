@@ -1,26 +1,10 @@
 ; ModuleID = "cmm_module"
-<<<<<<< HEAD
 target triple = "x86_64-w64-windows-gnu"
-=======
-target triple = "x86_64-unknown-linux-gnu"
->>>>>>> origin/main
 target datalayout = ""
 
 declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
-
-declare i8* @"fopen"(i8* %".1", i8* %".2")
-
-declare i32 @"fclose"(i8* %".1")
-
-declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
-
-declare i32 @"fputs"(i8* %".1", i8* %".2")
-
-declare i8* @"malloc"(i32 %".1")
-
-declare void @"free"(i8* %".1")
 
 define i32 @"main"()
 {
@@ -106,10 +90,10 @@ entry:
   store i32 1, i32* %"z"
   %"sofa" = alloca i32
   ;  Source: intsofa=9876543210123456789+1234567890987654321;
-  store i32 11111111101111111110, i32* %"sofa"
+  store i32 -2657055290, i32* %"sofa"
   %"appel" = alloca i32
   ;  Source: intappel=~1234567890123456789;
-  store i32 -1234567890123456790, i32* %"appel"
+  store i32 -2112454934, i32* %"appel"
   %".59" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: a
   %"a.2" = load i32, i32* %"a"

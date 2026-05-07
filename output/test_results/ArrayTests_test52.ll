@@ -1,26 +1,10 @@
 ; ModuleID = "cmm_module"
-target triple = "x86_64-unknown-linux-gnu"
+target triple = "x86_64-w64-windows-gnu"
 target datalayout = ""
 
 declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
-
-declare i8* @"fopen"(i8* %".1", i8* %".2")
-
-declare i32 @"fclose"(i8* %".1")
-
-declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
-
-declare i32 @"fputs"(i8* %".1", i8* %".2")
-
-declare i8* @"malloc"(i32 %".1")
-
-declare i8* @"calloc"(i32 %".1", i32 %".2")
-
-declare i8* @"realloc"(i8* %".1", i32 %".2")
-
-declare void @"free"(i8* %".1")
 
 define i32 @"main"()
 {
@@ -53,9 +37,8 @@ while.cond:
 while.body:
   %".21" = bitcast [4 x i8]* @"str" to i8*
   %"i.3" = load i32, i32* %"i"
-  %"decay_left" = getelementptr [5 x i32], [5 x i32]* %"array_2", i32 0, i32 0
-  %"gep_ptr" = getelementptr i32, i32* %"decay_left", i32 %"i.3"
-  %"array_element" = load i32, i32* %"gep_ptr"
+  %"gep_array" = getelementptr [5 x i32], [5 x i32]* %"array_2", i32 0, i32 %"i.3"
+  %"array_element" = load i32, i32* %"gep_array"
   %".22" = call i32 (i8*, ...) @"printf"(i8* %".21", i32 %"array_element")
   %"i.4" = load i32, i32* %"i"
   %".23" = load i32, i32* %"i"

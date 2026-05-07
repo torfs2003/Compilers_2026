@@ -6,10 +6,10 @@ digraph AST {
   node3 [label="StructDef\nkaas", shape=box, style="filled", fillcolor="lightpink", color="black", fontcolor="black"];
   node3 -> node4 [style="solid", color="black"];
   node3 -> node5 [style="solid", color="black"];
-  node11 [label="ID: a\n(structkaas*)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
+  node11 [label="ID: a\n(struct kaas*)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
   node10 [label="Access\n->melk\n(int)", shape=ellipse, style="filled", fillcolor="lightblue", color="black", fontcolor="black"];
   node10 -> node11 [style="solid", color="black"];
-  node13 [label="ID: a\n(structkaas*)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
+  node13 [label="ID: a\n(struct kaas*)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
   node12 [label="Access\n->yoghurt\n(float)", shape=ellipse, style="filled", fillcolor="lightblue", color="black", fontcolor="black"];
   node12 -> node13 [style="solid", color="black"];
   node9 [label="*\n(float)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];

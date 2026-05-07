@@ -1,26 +1,10 @@
 ; ModuleID = "cmm_module"
-target triple = "x86_64-unknown-linux-gnu"
+target triple = "x86_64-w64-windows-gnu"
 target datalayout = ""
 
 declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
-
-declare i8* @"fopen"(i8* %".1", i8* %".2")
-
-declare i32 @"fclose"(i8* %".1")
-
-declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
-
-declare i32 @"fputs"(i8* %".1", i8* %".2")
-
-declare i8* @"malloc"(i32 %".1")
-
-declare i8* @"calloc"(i32 %".1", i32 %".2")
-
-declare i8* @"realloc"(i8* %".1", i32 %".2")
-
-declare void @"free"(i8* %".1")
 
 define void @"comparePointers"(i32* %".1", i32* %".2")
 {
@@ -91,18 +75,16 @@ entry:
   ;  Source: intarray[2];
   ;  Source: array
   ;  Source: array[0]
-  %"decay_left" = getelementptr [2 x i32], [2 x i32]* %"array", i32 0, i32 0
-  %"gep_ptr" = getelementptr i32, i32* %"decay_left", i32 0
-  %"array_element" = load i32, i32* %"gep_ptr"
+  %"gep_array" = getelementptr [2 x i32], [2 x i32]* %"array", i32 0, i32 0
+  %"array_element" = load i32, i32* %"gep_array"
   ;  Source: &array[0]
   ;  Source: array
   ;  Source: array[1]
-  %"decay_left.1" = getelementptr [2 x i32], [2 x i32]* %"array", i32 0, i32 0
-  %"gep_ptr.1" = getelementptr i32, i32* %"decay_left.1", i32 1
-  %"array_element.1" = load i32, i32* %"gep_ptr.1"
+  %"gep_array.1" = getelementptr [2 x i32], [2 x i32]* %"array", i32 0, i32 1
+  %"array_element.1" = load i32, i32* %"gep_array.1"
   ;  Source: &array[1]
   ;  Source: comparePointers(&array[0],&array[1]);
-  call void @"comparePointers"(i32* %"gep_ptr", i32* %"gep_ptr.1")
+  call void @"comparePointers"(i32* %"gep_array", i32* %"gep_array.1")
   ;  Source: return0;
   ret i32 0
 }

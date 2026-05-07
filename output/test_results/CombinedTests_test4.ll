@@ -1,26 +1,10 @@
 ; ModuleID = "cmm_module"
-target triple = "x86_64-unknown-linux-gnu"
+target triple = "x86_64-w64-windows-gnu"
 target datalayout = ""
 
 declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
-
-declare i8* @"fopen"(i8* %".1", i8* %".2")
-
-declare i32 @"fclose"(i8* %".1")
-
-declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
-
-declare i32 @"fputs"(i8* %".1", i8* %".2")
-
-declare i8* @"malloc"(i32 %".1")
-
-declare i8* @"calloc"(i32 %".1", i32 %".2")
-
-declare i8* @"realloc"(i8* %".1", i32 %".2")
-
-declare void @"free"(i8* %".1")
 
 define void @"printPyramid"(i32 %".1", i8 %".2")
 {
@@ -57,22 +41,20 @@ while.cond.1:
 while.body.1:
   %".18" = bitcast [3 x i8]* @"str" to i8*
   %"toPrint.1" = load i8, i8* %"toPrint"
-  %".19" = zext i8 %"toPrint.1" to i32
-  %".20" = call i32 (i8*, ...) @"printf"(i8* %".18", i32 %".19")
+  %".19" = call i32 (i8*, ...) @"printf"(i8* %".18", i8 %"toPrint.1")
   %"j.2" = load i32, i32* %"j"
-  %".21" = load i32, i32* %"j"
-  %".22" = add i32 %".21", 1
-  store i32 %".22", i32* %"j"
+  %".20" = load i32, i32* %"j"
+  %".21" = add i32 %".20", 1
+  store i32 %".21", i32* %"j"
   br label %"while.cond.1"
 while.end.1:
-  %".25" = bitcast [4 x i8]* @"str.1" to i8*
+  %".24" = bitcast [4 x i8]* @"str.1" to i8*
   %"toPrint.2" = load i8, i8* %"toPrint"
-  %".26" = zext i8 %"toPrint.2" to i32
-  %".27" = call i32 (i8*, ...) @"printf"(i8* %".25", i32 %".26")
+  %".25" = call i32 (i8*, ...) @"printf"(i8* %".24", i8 %"toPrint.2")
   %"i.3" = load i32, i32* %"i"
-  %".28" = load i32, i32* %"i"
-  %".29" = add i32 %".28", 1
-  store i32 %".29", i32* %"i"
+  %".26" = load i32, i32* %"i"
+  %".27" = add i32 %".26", 1
+  store i32 %".27", i32* %"i"
   br label %"while.cond"
 }
 

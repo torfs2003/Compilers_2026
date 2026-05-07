@@ -1,15 +1,15 @@
 digraph AST {
   node [fontname="Arial"];
   node2 [label="Include\n<stdio.h>", shape=note, style="filled", fillcolor="lightyellow", color="black", fontcolor="black"];
-  node5 [label="Decl\nunionNotTypeSafe\ngouda\n(unionNotTypeSafe)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
-  node8 [label="ID: gouda\n(unionNotTypeSafe)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
+  node5 [label="Decl\nunion NotTypeSafe\ngouda\n(union NotTypeSafe)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
+  node8 [label="ID: gouda\n(union NotTypeSafe)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
   node7 [label="Access\n.as_integer\n(int)", shape=ellipse, style="filled", fillcolor="lightblue", color="black", fontcolor="black"];
   node7 -> node8 [style="solid", color="black"];
   node9 [label="5\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node6 [label="=", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node6 -> node7 [style="solid", color="black"];
   node6 -> node9 [style="solid", color="black"];
-  node13 [label="ID: gouda\n(unionNotTypeSafe)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
+  node13 [label="ID: gouda\n(union NotTypeSafe)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
   node12 [label="Access\n.as_str\n(char*)", shape=ellipse, style="filled", fillcolor="lightblue", color="black", fontcolor="black"];
   node12 -> node13 [style="solid", color="black"];
   node14 [label="0\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
@@ -20,7 +20,7 @@ digraph AST {
   node10 [label="=", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node10 -> node11 [style="solid", color="black"];
   node10 -> node15 [style="solid", color="black"];
-  node18 [label="ID: gouda\n(unionNotTypeSafe)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
+  node18 [label="ID: gouda\n(union NotTypeSafe)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
   node17 [label="Access\n.as_integer\n(int)", shape=ellipse, style="filled", fillcolor="lightblue", color="black", fontcolor="black"];
   node17 -> node18 [style="solid", color="black"];
   node16 [label="Decl\nint\nq\n(int)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];

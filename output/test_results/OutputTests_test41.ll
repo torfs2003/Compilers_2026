@@ -1,5 +1,5 @@
 ; ModuleID = "cmm_module"
-target triple = "x86_64-unknown-linux-gnu"
+target triple = "x86_64-w64-windows-gnu"
 target datalayout = ""
 
 declare i32 @"printf"(i8* %".1", ...)
@@ -136,16 +136,9 @@ entry:
   %"deref_load" = load float*, float** %"pieter.1"
   ;  Source: **pieter
   %"deref_load.1" = load float, float* %"deref_load"
-<<<<<<< HEAD
-  ;  Source: (int)**pieter
-  %".78" = fptosi float %"deref_load.1" to i32
-  ;  Source: printf("%d",(int)**pieter);
-  %".80" = call i32 (i8*, ...) @"printf"(i8* %".75", i32 %".78")
-=======
   ;  Source: printf("%f",**pieter);
-  %".80" = fpext float %"deref_load.1" to double
-  %".81" = call i32 (i8*, ...) @"printf"(i8* %".76", double %".80")
->>>>>>> origin/optionals
+  %".79" = fpext float %"deref_load.1" to double
+  %".80" = call i32 (i8*, ...) @"printf"(i8* %".75", double %".79")
   ;  Source: return0;
   ret i32 0
 }
