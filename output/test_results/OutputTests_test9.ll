@@ -6,6 +6,14 @@ declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
 
+declare i8* @"fopen"(i8* %".1", i8* %".2")
+
+declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
+
+declare i32 @"fputs"(i8* %".1", i8* %".2")
+
+declare i32 @"fclose"(i8* %".1")
+
 define i32 @"main"()
 {
 entry:
@@ -49,20 +57,19 @@ entry:
   %".26" = bitcast [3 x i8]* @"str.4" to i8*
   ;  Source: a
   %"a.1" = load float, float* %"a"
-  ;  Source: (int)a
-  %".29" = fptosi float %"a.1" to i32
-  ;  Source: printf("%d",(int)a);
-  %".31" = call i32 (i8*, ...) @"printf"(i8* %".26", i32 %".29")
+  ;  Source: printf("%f",a);
+  %".29" = fpext float %"a.1" to double
+  %".30" = call i32 (i8*, ...) @"printf"(i8* %".26", double %".29")
   %"a_ptr" = alloca float*
   store float* %"a", float** %"a_ptr"
-  %".33" = bitcast [3 x i8]* @"str.5" to i8*
+  %".32" = bitcast [3 x i8]* @"str.5" to i8*
   ;  Source: a_ptr
   %"a_ptr.1" = load float*, float** %"a_ptr"
+  ;  Source: *a_ptr
   %"deref_load.4" = load float, float* %"a_ptr.1"
-  ;  Source: (int)*a_ptr
-  %".36" = fptosi float %"deref_load.4" to i32
-  ;  Source: printf("%d",(int)*a_ptr);
-  %".38" = call i32 (i8*, ...) @"printf"(i8* %".33", i32 %".36")
+  ;  Source: printf("%f",*a_ptr);
+  %".36" = fpext float %"deref_load.4" to double
+  %".37" = call i32 (i8*, ...) @"printf"(i8* %".32", double %".36")
   ;  Source: return0;
   ret i32 0
 }
@@ -71,5 +78,5 @@ entry:
 @"str.1" = internal constant [3 x i8] c"%x\00"
 @"str.2" = internal constant [3 x i8] c"%x\00"
 @"str.3" = internal constant [3 x i8] c"%x\00"
-@"str.4" = internal constant [3 x i8] c"%d\00"
-@"str.5" = internal constant [3 x i8] c"%d\00"
+@"str.4" = internal constant [3 x i8] c"%f\00"
+@"str.5" = internal constant [3 x i8] c"%f\00"

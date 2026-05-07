@@ -6,6 +6,14 @@ declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
 
+declare i8* @"fopen"(i8* %".1", i8* %".2")
+
+declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
+
+declare i32 @"fputs"(i8* %".1", i8* %".2")
+
+declare i32 @"fclose"(i8* %".1")
+
 define i32 @"main"()
 {
 entry:
@@ -20,14 +28,13 @@ entry:
   %"x.1" = load i32, i32* %"x"
   ;  Source: y
   %"y.1" = load float, float* %"y"
-  ;  Source: (int)y
-  %".9" = fptosi float %"y.1" to i32
   ;  Source: c
   %"c.1" = load i8, i8* %"c"
-  ;  Source: printf("%d; %d; %c",x,(int)y,c);
-  %".12" = call i32 (i8*, ...) @"printf"(i8* %".5", i32 %"x.1", i32 %".9", i8 %"c.1")
+  ;  Source: printf("%d; %f; %c",x,y,c);
+  %".10" = fpext float %"y.1" to double
+  %".11" = call i32 (i8*, ...) @"printf"(i8* %".5", i32 %"x.1", double %".10", i8 %"c.1")
   ;  Source: return0;
   ret i32 0
 }
 
-@"str" = internal constant [11 x i8] c"%d; %d; %c\00"
+@"str" = internal constant [11 x i8] c"%d; %f; %c\00"

@@ -7,6 +7,14 @@ declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
 
+declare i8* @"fopen"(i8* %".1", i8* %".2")
+
+declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
+
+declare i32 @"fputs"(i8* %".1", i8* %".2")
+
+declare i32 @"fclose"(i8* %".1")
+
 define i32 @"mul"(%"struct.kaas"* %".1")
 {
 entry:
@@ -46,25 +54,21 @@ entry:
   ;  Source: gouda.yoghurt
   %"gep_yoghurt.1" = getelementptr inbounds %"struct.kaas", %"struct.kaas"* %"gouda", i32 0, i32 1
   %"load_yoghurt.1" = load float, float* %"gep_yoghurt.1"
-  ;  Source: (gouda.yoghurt*1000)
-  %".12" = sitofp i32 1000 to float
-  %".13" = fmul float %"load_yoghurt.1", %".12"
-  ;  Source: (int)(gouda.yoghurt*1000)
-  %".15" = fptosi float %".13" to i32
-  ;  Source: printf("%d %d       lol",gouda.melk,(int)(gouda.yoghurt*1000));
-  %".17" = call i32 (i8*, ...) @"printf"(i8* %".8", i32 %"load_melk.1", i32 %".15")
+  ;  Source: printf("%d %f       lol",gouda.melk,gouda.yoghurt);
+  %".12" = fpext float %"load_yoghurt.1" to double
+  %".13" = call i32 (i8*, ...) @"printf"(i8* %".8", i32 %"load_melk.1", double %".12")
   %"ptr" = alloca %"struct.kaas"*
   store %"struct.kaas"* %"gouda", %"struct.kaas"** %"ptr"
-  %".19" = bitcast [3 x i8]* @"str.1" to i8*
+  %".15" = bitcast [3 x i8]* @"str.1" to i8*
   ;  Source: ptr
   %"ptr.1" = load %"struct.kaas"*, %"struct.kaas"** %"ptr"
   ;  Source: mul(ptr)
-  %".22" = call i32 @"mul"(%"struct.kaas"* %"ptr.1")
+  %".18" = call i32 @"mul"(%"struct.kaas"* %"ptr.1")
   ;  Source: printf("%d",mul(ptr));
-  %".24" = call i32 (i8*, ...) @"printf"(i8* %".19", i32 %".22")
+  %".20" = call i32 (i8*, ...) @"printf"(i8* %".15", i32 %".18")
   ;  Source: return0;
   ret i32 0
 }
 
-@"str" = internal constant [16 x i8] c"%d %d       lol\00"
+@"str" = internal constant [16 x i8] c"%d %f       lol\00"
 @"str.1" = internal constant [3 x i8] c"%d\00"

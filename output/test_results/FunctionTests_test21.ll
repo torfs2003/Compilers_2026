@@ -6,6 +6,14 @@ declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
 
+declare i8* @"fopen"(i8* %".1", i8* %".2")
+
+declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
+
+declare i32 @"fputs"(i8* %".1", i8* %".2")
+
+declare i32 @"fclose"(i8* %".1")
+
 define void @"name"(i32 %".1")
 {
 entry:
@@ -22,7 +30,6 @@ entry:
   ret void
 }
 
-@"str" = internal constant [4 x i8] c"%d\0a\00"
 define i32 @"main"()
 {
 entry:
@@ -41,4 +48,5 @@ entry:
   ret i32 0
 }
 
+@"str" = internal constant [4 x i8] c"%d\0a\00"
 @"str.1" = internal constant [4 x i8] c"%d\0a\00"

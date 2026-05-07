@@ -1,0 +1,25 @@
+
+============================================================
+  TEST MAP : example_source_files/test_set_3/LLVMTests/DynamicStructTests
+  Log file : output\DynamicStructTests.txt
+============================================================
+  test1.c... PASSED
+  test2.c... PASSED
+  test3.c... PASSED
+  test4.c... PASSED
+  test5.c... PASSED
+  test6.c... PASSED
+  test7.c... FAILED
+    --> EXPECTED (code 0):
+    15-1
+    ACTUAL (code 3221225477):
+    
+    [!] LLI STDERR:
+    PLEASE submit a bug report to https://github.com/llvm/llvm-project/issues/ and include the crash backtrace.
+  test8.c... PASSED
+  test9.c... PASSED
+
+============================================================
+  EINDTOTAAL: 8 passed, 1 failed
+============================================================
+

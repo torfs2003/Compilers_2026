@@ -6,34 +6,41 @@ declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
 
+declare i8* @"fopen"(i8* %".1", i8* %".2")
+
+declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
+
+declare i32 @"fputs"(i8* %".1", i8* %".2")
+
+declare i32 @"fclose"(i8* %".1")
+
 define i32 @"main"()
 {
 entry:
   %"k" = alloca [2 x i8]
-  ;  Source: chark[2]={'b','b'};
-  %".3" = getelementptr [2 x i8], [2 x i8]* %"k", i32 0, i32 0
-  store i8 98, i8* %".3"
-  %".5" = getelementptr [2 x i8], [2 x i8]* %"k", i32 0, i32 1
-  store i8 98, i8* %".5"
-  %".7" = bitcast [3 x i8]* @"str" to i8*
+  %".2" = getelementptr [2 x i8], [2 x i8]* %"k", i32 0, i32 0
+  store i8 98, i8* %".2"
+  %".4" = getelementptr [2 x i8], [2 x i8]* %"k", i32 0, i32 1
+  store i8 98, i8* %".4"
+  %".6" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: k
   ;  Source: *k
   ;  Source: printf("%c",*k);
-  %".11" = getelementptr inbounds [2 x i8], [2 x i8]* %"k", i32 0, i32 0
-  %".12" = call i32 (i8*, ...) @"printf"(i8* %".7", i8* %".11")
-  %".13" = bitcast [5 x i8]* @"str.1" to i8*
+  %".10" = getelementptr inbounds [2 x i8], [2 x i8]* %"k", i32 0, i32 0
+  %".11" = call i32 (i8*, ...) @"printf"(i8* %".6", i8* %".10")
+  %".12" = bitcast [5 x i8]* @"str.1" to i8*
   ;  Source: k
   ;  Source: k
   ;  Source: scanf("%c%c",k,k);
+  %".16" = getelementptr inbounds [2 x i8], [2 x i8]* %"k", i32 0, i32 0
   %".17" = getelementptr inbounds [2 x i8], [2 x i8]* %"k", i32 0, i32 0
-  %".18" = getelementptr inbounds [2 x i8], [2 x i8]* %"k", i32 0, i32 0
-  %".19" = call i32 (i8*, ...) @"scanf"(i8* %".13", i8* %".17", i8* %".18")
-  %".20" = bitcast [3 x i8]* @"str.2" to i8*
+  %".18" = call i32 (i8*, ...) @"scanf"(i8* %".12", i8* %".16", i8* %".17")
+  %".19" = bitcast [3 x i8]* @"str.2" to i8*
   ;  Source: k
   ;  Source: *k
   ;  Source: printf("%c",*k);
-  %".24" = getelementptr inbounds [2 x i8], [2 x i8]* %"k", i32 0, i32 0
-  %".25" = call i32 (i8*, ...) @"printf"(i8* %".20", i8* %".24")
+  %".23" = getelementptr inbounds [2 x i8], [2 x i8]* %"k", i32 0, i32 0
+  %".24" = call i32 (i8*, ...) @"printf"(i8* %".19", i8* %".23")
   ;  Source: return0;
   ret i32 0
 }

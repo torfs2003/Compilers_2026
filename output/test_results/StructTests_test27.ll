@@ -7,6 +7,14 @@ declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
 
+declare i8* @"fopen"(i8* %".1", i8* %".2")
+
+declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
+
+declare i32 @"fputs"(i8* %".1", i8* %".2")
+
+declare i32 @"fclose"(i8* %".1")
+
 define i32 @"main"()
 {
 entry:
@@ -33,16 +41,19 @@ entry:
   %"gep_yoghurt.1" = getelementptr inbounds %"union.kaas", %"union.kaas"* %"gouda", i32 0, i32 0
   %"union_cast_yoghurt.1" = bitcast i32* %"gep_yoghurt.1" to float*
   %"load_yoghurt.1" = load float, float* %"union_cast_yoghurt.1"
-  ;  Source: (gouda.yoghurt*1000)
-  %".15" = sitofp i32 1000 to float
-  %".16" = fmul float %"load_yoghurt.1", %".15"
-  ;  Source: (int)(gouda.yoghurt*1000)
-  %".18" = fptosi float %".16" to i32
-  ;  Source: printf("%d\n",(int)(gouda.yoghurt*1000));
-  %".20" = call i32 (i8*, ...) @"printf"(i8* %".12", i32 %".18")
+  ;  Source: printf("%f\n",gouda.yoghurt);
+  %".15" = fpext float %"load_yoghurt.1" to double
+  %".16" = call i32 (i8*, ...) @"printf"(i8* %".12", double %".15")
+  %".17" = bitcast [4 x i8]* @"str.2" to i8*
+  ;  Source: gouda.melk
+  %"gep_melk.2" = getelementptr inbounds %"union.kaas", %"union.kaas"* %"gouda", i32 0, i32 0
+  %"load_melk.2" = load i32, i32* %"gep_melk.2"
+  ;  Source: printf("%f\n",gouda.melk);
+  %".20" = call i32 (i8*, ...) @"printf"(i8* %".17", i32 %"load_melk.2")
   ;  Source: return0;
   ret i32 0
 }
 
 @"str" = internal constant [4 x i8] c"%d\0a\00"
-@"str.1" = internal constant [4 x i8] c"%d\0a\00"
+@"str.1" = internal constant [4 x i8] c"%f\0a\00"
+@"str.2" = internal constant [4 x i8] c"%f\0a\00"

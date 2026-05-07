@@ -2,7 +2,7 @@ digraph AST {
   node [fontname="Arial"];
   node2 [label="Include\n<stdio.h>", shape=note, style="filled", fillcolor="lightyellow", color="black", fontcolor="black"];
   node3 [label="Include\n<stdlib.h>", shape=note, style="filled", fillcolor="lightyellow", color="black", fontcolor="black"];
-  node9 [label="20\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node9 [label="5\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node8 [label="Call: malloc()\n(void*)", shape=ellipse, style="filled", fillcolor="lightpink", color="black", fontcolor="black"];
   node8 -> node9 [style="solid", color="black", label=" arg0", fontcolor="black"];
   node7 [label="Cast\n(int*)", shape=ellipse, style="filled", fillcolor="none", color="black", fontcolor="black"];

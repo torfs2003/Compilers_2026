@@ -6,6 +6,14 @@ declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
 
+declare i8* @"fopen"(i8* %".1", i8* %".2")
+
+declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
+
+declare i32 @"fputs"(i8* %".1", i8* %".2")
+
+declare i32 @"fclose"(i8* %".1")
+
 define i32 @"main"()
 {
 entry:
@@ -22,13 +30,10 @@ entry:
   %"p.2" = load i32, i32* %"p"
   ;  Source: q
   %"q.1" = load float*, float** %"q"
-  %"deref_load" = load float, float* %"q.1"
-  ;  Source: (int)*q
-  %".11" = fptosi float %"deref_load" to i32
-  ;  Source: printf("%% %d %x %d  kappa kappa",p,p,(int)*q);
-  %".13" = call i32 (i8*, ...) @"printf"(i8* %".6", i32 %"p.1", i32 %"p.2", i32 %".11")
+  ;  Source: printf("%% %d %x %f  kappa kappa",p,p,q);
+  %".11" = call i32 (i8*, ...) @"printf"(i8* %".6", i32 %"p.1", i32 %"p.2", float* %"q.1")
   ;  Source: return0;
   ret i32 0
 }
 
-@"str" = internal constant [25 x i8] c"%% %d %x %d  kappa kappa\00"
+@"str" = internal constant [25 x i8] c"%% %d %x %f  kappa kappa\00"

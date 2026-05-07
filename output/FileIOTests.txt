@@ -1,0 +1,18 @@
+
+============================================================
+  TEST MAP : example_source_files/test_set_3/LLVMTests/FileIOTests
+  Log file : output\FileIOTests.txt
+============================================================
+  test1.c... PASSED
+  test2.c... PASSED
+  test3.c... PASSED
+  test4.c... PASSED
+  test5.c... PASSED
+  test6.c... PASSED
+  test7.c... PASSED
+  test8.c... PASSED
+
+============================================================
+  EINDTOTAAL: 8 passed, 0 failed
+============================================================
+

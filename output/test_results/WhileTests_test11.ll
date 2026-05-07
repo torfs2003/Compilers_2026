@@ -6,7 +6,14 @@ declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
 
-@"True" = internal global i32 1
+declare i8* @"fopen"(i8* %".1", i8* %".2")
+
+declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
+
+declare i32 @"fputs"(i8* %".1", i8* %".2")
+
+declare i32 @"fclose"(i8* %".1")
+
 define i32 @"main"()
 {
 entry:
@@ -42,4 +49,5 @@ if.end:
   br label %"while.cond"
 }
 
+@"True" = internal global i32 1
 @"str" = internal constant [3 x i8] c"%d\00"

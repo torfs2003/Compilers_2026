@@ -7,6 +7,14 @@ declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
 
+declare i8* @"fopen"(i8* %".1", i8* %".2")
+
+declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
+
+declare i32 @"fputs"(i8* %".1", i8* %".2")
+
+declare i32 @"fclose"(i8* %".1")
+
 define i32 @"main"()
 {
 entry:
@@ -37,20 +45,16 @@ entry:
   ;  Source: ementaler.fermtented
   %"gep_fermtented.1" = getelementptr inbounds %"struct.kaas", %"struct.kaas"* %"ementaler", i32 0, i32 1
   %"load_fermtented.1" = load float, float* %"gep_fermtented.1"
-  ;  Source: (ementaler.fermtented*100)
-  %".16" = sitofp i32 100 to float
-  %".17" = fmul float %"load_fermtented.1", %".16"
-  ;  Source: (char)(ementaler.fermtented*100)
-  %".19" = fptosi float %".17" to i8
   ;  Source: ementaler.lol
   %"gep_lol.2" = getelementptr inbounds %"struct.kaas", %"struct.kaas"* %"ementaler", i32 0, i32 2
   %"load_lol.2" = load i8, i8* %"gep_lol.2"
   ;  Source: b
   %"b.1" = load i8, i8* %"b"
-  ;  Source: printf("%d %d %c %c",ementaler.melk,(char)(ementaler.fermtented*100),ementaler.lol,b);
-  %".23" = call i32 (i8*, ...) @"printf"(i8* %".12", i32 %"load_melk.1", i8 %".19", i8 %"load_lol.2", i8 %"b.1")
+  ;  Source: printf("%d %f %c %c",ementaler.melk,ementaler.fermtented,ementaler.lol,b);
+  %".18" = fpext float %"load_fermtented.1" to double
+  %".19" = call i32 (i8*, ...) @"printf"(i8* %".12", i32 %"load_melk.1", double %".18", i8 %"load_lol.2", i8 %"b.1")
   ;  Source: return0;
   ret i32 0
 }
 
-@"str" = internal constant [12 x i8] c"%d %d %c %c\00"
+@"str" = internal constant [12 x i8] c"%d %f %c %c\00"

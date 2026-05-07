@@ -8,13 +8,19 @@ declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
 
+declare i8* @"fopen"(i8* %".1", i8* %".2")
+
+declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
+
+declare i32 @"fputs"(i8* %".1", i8* %".2")
+
+declare i32 @"fclose"(i8* %".1")
+
 define i32 @"main"()
 {
 entry:
   %"gouda" = alloca %"struct.kaas"
-  ;  Source: structkaasgouda;
   %"beemster" = alloca %"struct.kaas"
-  ;  Source: structkaasbeemster;
   ;  Source: beemster.melk
   %"gep_melk" = getelementptr inbounds %"struct.kaas", %"struct.kaas"* %"beemster", i32 0, i32 0
   %"load_melk" = load i32, i32* %"gep_melk"
@@ -26,16 +32,13 @@ entry:
   ;  Source: gouda.melk=88;
   store i32 88, i32* %"gep_melk.1"
   %"z" = alloca [2 x %"struct.kaas"]
-  ;  Source: gouda
-  ;  Source: beemster
-  ;  Source: structkaasz[2]={gouda,beemster};
-  %".13" = getelementptr [2 x %"struct.kaas"], [2 x %"struct.kaas"]* %"z", i32 0, i32 0
-  %".14" = load %"struct.kaas", %"struct.kaas"* %"gouda"
-  store %"struct.kaas" %".14", %"struct.kaas"* %".13"
-  %".16" = getelementptr [2 x %"struct.kaas"], [2 x %"struct.kaas"]* %"z", i32 0, i32 1
-  %".17" = load %"struct.kaas", %"struct.kaas"* %"beemster"
-  store %"struct.kaas" %".17", %"struct.kaas"* %".16"
-  %".19" = bitcast [6 x i8]* @"str" to i8*
+  %".8" = getelementptr [2 x %"struct.kaas"], [2 x %"struct.kaas"]* %"z", i32 0, i32 0
+  %".9" = load %"struct.kaas", %"struct.kaas"* %"gouda"
+  store %"struct.kaas" %".9", %"struct.kaas"* %".8"
+  %".11" = getelementptr [2 x %"struct.kaas"], [2 x %"struct.kaas"]* %"z", i32 0, i32 1
+  %".12" = load %"struct.kaas", %"struct.kaas"* %"beemster"
+  store %"struct.kaas" %".12", %"struct.kaas"* %".11"
+  %".14" = bitcast [6 x i8]* @"str" to i8*
   ;  Source: (z[0]).melk
   %"gep_array" = getelementptr [2 x %"struct.kaas"], [2 x %"struct.kaas"]* %"z", i32 0, i32 0
   %"array_element" = load %"struct.kaas", %"struct.kaas"* %"gep_array"
@@ -47,7 +50,7 @@ entry:
   %"gep_melk.3" = getelementptr inbounds %"struct.kaas", %"struct.kaas"* %"gep_array.1", i32 0, i32 0
   %"load_melk.3" = load i32, i32* %"gep_melk.3"
   ;  Source: printf("%d %d",(z[0]).melk,(z[1]).melk);
-  %".23" = call i32 (i8*, ...) @"printf"(i8* %".19", i32 %"load_melk.2", i32 %"load_melk.3")
+  %".18" = call i32 (i8*, ...) @"printf"(i8* %".14", i32 %"load_melk.2", i32 %"load_melk.3")
   ;  Source: return0;
   ret i32 0
 }

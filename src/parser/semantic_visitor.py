@@ -11,6 +11,7 @@ class SemanticVisitor(BaseVisitor):
         self.symbol_table = SymbolTable()
         self.errors = []
         self.warnings = []
+        self.warned_lines = set()
         self.stdio_included = False
         self.type_richness = {'void': 0, 'char': 1, 'int': 2, 'float': 3}
         self.current_function_return_type = None
@@ -35,11 +36,11 @@ class SemanticVisitor(BaseVisitor):
         self.symbol_table.enter_scope()
 
     def pre_visit_FunctionDeclNode(self, node):
-        # Sla een forward declaration op in de symbol table
+        # Controleer op dubbele namen (jouw bestaande code)
         seen = set()
         for p_type, p_name in node.params:
             if p_name in seen:
-                self.get_Error(node, f"variabele '{p_name}' in functie '{node.name}' wordt meer keer gebruikt.")
+                self.get_Error(node, f"Variabele '{p_name}' in functie '{node.name}' wordt vaker gebruikt.")
                 break
             seen.add(p_name)
 
@@ -99,7 +100,16 @@ class SemanticVisitor(BaseVisitor):
         # 3. Open de scope en voeg parameters toe als lokale variabelen
         self.symbol_table.enter_scope()
         for p_type, p_name in node.params:
-            self.symbol_table.put(p_name, {'type': p_type, 'is_const': False})
+            # Check of 'const' voorkomt in de type string (bijv. "const int")
+            is_p_const = "const" in p_type
+            
+            clean_type = p_type.replace("const", "").strip()
+
+            self.symbol_table.put(p_name, {
+                'type': clean_type, 
+                'is_const': is_p_const,
+                'points_to_const': False
+        })
 
     def visit_CompoundNode(self, node):
         self.symbol_table.enter_scope()
@@ -162,7 +172,7 @@ class SemanticVisitor(BaseVisitor):
             node.type_spec = 'int'
 
         base_type = node.type_spec.replace('*', '').replace('const', '').strip()
-        primitives = {'int', 'float', 'char', 'void'}
+        primitives = {'int', 'float', 'char', 'void', 'FILE'}
         
         if base_type not in primitives:
             sym = self.symbol_table.get(base_type)
@@ -633,23 +643,26 @@ class SemanticVisitor(BaseVisitor):
         r_type = getattr(node.right, 'eval_type', 'void')
 
         if l_type != r_type and not isinstance(node.right, CastNode):
-            # Check pointers (wees mild voor Folder 3 -> Warning)
+            # Check pointers
             if '*' in l_type or '*' in r_type:
                 is_null_ptr = isinstance(node.right, IntNode) and node.right.value == 0
-                if not is_null_ptr:
-                    self.get_Warning(node, f"Incompatibele types bij toewijzing: '{r_type}' aan '{l_type}'.")
+                # void* is de enige pointer die we als Warning (of stilzwijgend) accepteren
+                is_void_ptr = (l_type == 'void*' or r_type == 'void*')
+                
+                if not is_null_ptr and not is_void_ptr:
+                    # VERANDERD VAN Warning NAAR Error voor test16.c
+                    self.get_Error(node, f"Incompatibele types bij toewijzing: '{r_type}' aan '{l_type}'.")
+                else:
+                    self.get_Warning(node, f"Pointer mismatch: '{r_type}' aan '{l_type}'.")
             
-            # Check informatieverlies (bijv. float -> int of int -> char)
+            # Check informatieverlies (numeriek)
             elif self.get_richness(r_type) > self.get_richness(l_type):
-                # Jouw specifieke char overflow check
                 if l_type == 'char' and r_type == 'int' and isinstance(node.right, IntNode):
                     val = node.right.value
                     if val < -128 or val > 127:
-                        # Error loggen, maar GEEN sys.exit! De compiler moet blijven draaien.
-                        self.get_Error(node, f"Overflow: Waarde {val} past niet in een 'char' (-128 tot 127).")
+                        self.get_Error(node, f"Overflow: Waarde {val} past niet in een 'char'.")
                 else:
                     self.get_Warning(node, f"Informatieverlies bij toewijzing van {r_type} naar {l_type}.")
-    
     def visit_BinOpNode(self, node):
         l_type = getattr(node.left, 'eval_type', 'void') or 'void'
         r_type = getattr(node.right, 'eval_type', 'void') or 'void'
@@ -768,39 +781,57 @@ class SemanticVisitor(BaseVisitor):
     def visit_UnaryOpNode(self, node):
         child_type = getattr(node.child, 'eval_type', 'void') or 'void'
         
+        # 1. Adres-of operator (&)
         if node.op == '&':
             node.eval_type = child_type + "*"
+            # CRUCIAAL: Als de variabele zelf const is, wijst de pointer nu naar een const!
+            node.points_to_const = getattr(node.child, 'is_const', False)
+            node.is_lvalue = False
+
+        # 2. Dereference operator (*)
         elif node.op == '*':
             if '*' in child_type:
                 node.eval_type = child_type.rsplit('*', 1)[0]
+                # Als de pointer naar een const wijst, is de gedereferenceerde waarde ook const
                 node.is_const = getattr(node.child, 'points_to_const', False)
                 node.is_lvalue = True 
             else:
                 self.get_Error(node, f"Kan type '{child_type}' niet dereferencen.")
                 node.eval_type = 'void'
+
+        # 3. Increment / Decrement (++, --, POST++, POST--)
+        elif node.op in ['++', '--', 'POST++', 'POST--']:
+            if getattr(node.child, 'is_const', False):
+                name = getattr(node.child, 'name', "variabele")
+                self.get_Error(node, f"Poging om constante '{name}' te wijzigen met '{node.op}'.")
+            node.eval_type = child_type
+            node.is_lvalue = False
+
+        # 4. Logische en overige operatoren
         elif node.op == '!':
             node.eval_type = 'int'
-            
         elif node.op == '~':
             if '*' in child_type:
                 self.get_Error(node, f"Bitwise operator '~' is niet toegestaan op pointer type '{child_type}'.")
-                import sys
-                sys.exit(1)
             node.eval_type = child_type
-            
         else:
             node.eval_type = child_type
 
     def visit_FuncCallNode(self, node):
-        if node.name in ['printf', 'scanf', 'malloc', 'calloc', 'realloc', 'free', 'fgets', 'fputs']:
-            if node.name in ['printf', 'scanf', 'fgets', 'fputs'] and not self.stdio_included:
+        # 1. Voeg fopen toe aan de lijst van ingebouwde functies
+        if node.name in ['printf', 'scanf', 'malloc', 'calloc', 'realloc', 'free', 'fgets', 'fputs', 'fopen', 'fclose']:            
+            # 2. Check voor stdio.h
+            if node.name in ['printf', 'scanf', 'fgets', 'fputs', 'fopen', 'fclose'] and not self.stdio_included:
                 self.get_Error(node, f"Gebruik van '{node.name}' vereist #include <stdio.h>.")
             
+            # 3. Vertel de compiler wat de return types zijn
             if node.name in ['malloc', 'calloc', 'realloc']: node.eval_type = 'void*'
             elif node.name == 'free': node.eval_type = 'void'
             elif node.name == 'fgets': node.eval_type = 'char*'
-            elif node.name == 'fputs': node.eval_type = 'void'
-            else: node.eval_type = 'int' # printf/scanf
+            elif node.name == 'fputs': node.eval_type = 'int'            
+            elif node.name == 'fopen': node.eval_type = 'FILE*'
+            elif node.name == 'fclose': node.eval_type = 'int'
+            else: node.eval_type = 'int'
             return
 
         func_sym = self.symbol_table.get(node.name)

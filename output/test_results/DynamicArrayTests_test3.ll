@@ -6,6 +6,14 @@ declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
 
+declare i8* @"fopen"(i8* %".1", i8* %".2")
+
+declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
+
+declare i32 @"fputs"(i8* %".1", i8* %".2")
+
+declare i32 @"fclose"(i8* %".1")
+
 declare i8* @"malloc"(i32 %".1")
 
 declare i8* @"calloc"(i32 %".1", i32 %".2")
@@ -18,7 +26,7 @@ define i32 @"main"()
 {
 entry:
   %"ptr" = alloca i32*
-  %".2" = call i8* @"malloc"(i32 20)
+  %".2" = call i8* @"malloc"(i32 5)
   %".3" = bitcast i8* %".2" to i32*
   store i32* %".3", i32** %"ptr"
   ;  Source: ptr

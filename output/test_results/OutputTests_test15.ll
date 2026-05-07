@@ -6,6 +6,14 @@ declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
 
+declare i8* @"fopen"(i8* %".1", i8* %".2")
+
+declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
+
+declare i32 @"fputs"(i8* %".1", i8* %".2")
+
+declare i32 @"fclose"(i8* %".1")
+
 define i32 @"main"()
 {
 entry:
@@ -33,13 +41,12 @@ entry:
   %".14" = bitcast [3 x i8]* @"str.1" to i8*
   ;  Source: z
   %"z.1" = load float, float* %"z"
-  ;  Source: (int)z
-  %".17" = fptosi float %"z.1" to i32
-  ;  Source: printf("%d",(int)z);
-  %".19" = call i32 (i8*, ...) @"printf"(i8* %".14", i32 %".17")
+  ;  Source: printf("%f",z);
+  %".17" = fpext float %"z.1" to double
+  %".18" = call i32 (i8*, ...) @"printf"(i8* %".14", double %".17")
   ;  Source: return0;
   ret i32 0
 }
 
 @"str" = internal constant [3 x i8] c"%x\00"
-@"str.1" = internal constant [3 x i8] c"%d\00"
+@"str.1" = internal constant [3 x i8] c"%f\00"

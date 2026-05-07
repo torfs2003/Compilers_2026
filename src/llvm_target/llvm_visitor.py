@@ -35,6 +35,7 @@ class LLVMVisitor:
         elif base == 'float': t = ir.FloatType()
         elif base == 'char': t = ir.IntType(8)
         elif base == 'void': t = ir.VoidType()
+        elif base == 'FILE': t = ir.IntType(8)
         else: t = ir.IntType(32)
         
         for _ in range(type_str.count('*')):
@@ -58,9 +59,12 @@ class LLVMVisitor:
                 self._init_array(base_ptr, val_node, current_indices + [idx])
             else:
                 ptr = self.builder.gep(base_ptr, path)
-                val = self.results[id(val_node)]
+                val = self._ensure_result(val_node)
                 
                 target_type = ptr.type.pointee
+                
+                if val.type != target_type:
+                    val = self._apply_cast(val, target_type)
                 
                 if not isinstance(target_type, (ir.IntType, ir.FloatType, ir.PointerType)):
                     loaded_struct = self.builder.load(val)
@@ -71,10 +75,30 @@ class LLVMVisitor:
     def _declare_stdio(self):
         if self.stdio_declared: return
         voidptr_ty = ir.IntType(8).as_pointer()
+        
+        # Bestaande printf en scanf
         printf_ty = ir.FunctionType(ir.IntType(32), [voidptr_ty], var_arg=True)
         self.printf = ir.Function(self.module, printf_ty, name="printf")
+        
         scanf_ty = ir.FunctionType(ir.IntType(32), [voidptr_ty], var_arg=True)
         self.scanf = ir.Function(self.module, scanf_ty, name="scanf")
+        
+        # FILE *fopen(const char *filename, const char *mode)
+        fopen_ty = ir.FunctionType(voidptr_ty, [voidptr_ty, voidptr_ty])
+        self.fopen = ir.Function(self.module, fopen_ty, name="fopen")
+        
+        # char *fgets(char *str, int n, FILE *stream)
+        fgets_ty = ir.FunctionType(voidptr_ty, [voidptr_ty, ir.IntType(32), voidptr_ty])
+        self.fgets = ir.Function(self.module, fgets_ty, name="fgets")
+
+        # int fputs(const char *str, FILE *stream)
+        fputs_ty = ir.FunctionType(ir.IntType(32), [voidptr_ty, voidptr_ty])
+        self.fputs = ir.Function(self.module, fputs_ty, name="fputs")
+
+        # int fclose(FILE *stream)
+        fclose_ty = ir.FunctionType(ir.IntType(32), [voidptr_ty])
+        self.fclose = ir.Function(self.module, fclose_ty, name="fclose")
+        
         self.stdio_declared = True
     
     def _declare_stdlib(self):
@@ -124,6 +148,29 @@ class LLVMVisitor:
         return addr
 
     def generate(self, root_node):
+        # === PASS 0: Includes ===
+        for child in root_node.children:
+            if isinstance(child, IncludeNode):
+                if child.header == 'stdio.h':
+                    self._declare_stdio()
+                elif child.header == 'stdlib.h':
+                    self._declare_stdlib()
+
+        # === PASS 0.5: Structs & Unions EERST ===
+        for child in root_node.children:
+            if isinstance(child, (StructDeclNode, UnionDeclNode)):
+                self._visit_node(child)  # Registreert in self.struct_types
+
+        # === PASS 1: Function signatures (NU werkt struct map*) ===
+        for child in root_node.children:
+            if isinstance(child, (FunctionNode, FunctionDeclNode)):
+                ret_type = self._get_llvm_type(child.return_type)
+                param_types = [self._get_llvm_type(p[0]) for p in child.params]
+                func_type = ir.FunctionType(ret_type, param_types)
+                if child.name not in self.module.globals:
+                    ir.Function(self.module, func_type, name=child.name)
+
+        # === PASS 2: Normale traversal (jouw bestaande stack-based loop) ===
         stack = [(root_node, False)]
         while stack:
             node, is_post_order = stack.pop()
@@ -260,17 +307,27 @@ class LLVMVisitor:
                     val = self._ensure_result(node.init_expr)
                     if val is not None:
                         target_type = addr.type.pointee
-                        
-                        if not isinstance(target_type, (ir.IntType, ir.FloatType, ir.PointerType)):
+
+                        if (isinstance(target_type, ir.ArrayType)
+                                and target_type.element == ir.IntType(8)
+                                and isinstance(val.type, ir.PointerType)
+                                and val.type.pointee == ir.IntType(8)):
+                            zero = ir.Constant(ir.IntType(32), 0)
+                            for i in range(target_type.count):
+                                src_ptr = self.builder.gep(val, [ir.Constant(ir.IntType(32), i)], name=f"str_src_{i}")
+                                dst_ptr = self.builder.gep(addr, [zero, ir.Constant(ir.IntType(32), i)], name=f"str_dst_{i}")
+                                ch = self.builder.load(src_ptr, name=f"ch_{i}")
+                                self.builder.store(ch, dst_ptr)
+
+                        elif not isinstance(target_type, (ir.IntType, ir.FloatType, ir.PointerType)):
                             if self.builder is not None:
                                 loaded_struct = self.builder.load(val)
                                 self.builder.store(loaded_struct, addr)
                             else:
-                                addr.initializer = val 
+                                addr.initializer = val
                         else:
                             if val.type != target_type:
                                 val = self._apply_cast(val, target_type)
-                            
                             if self.builder is None:
                                 addr.initializer = val
                             else:
@@ -281,8 +338,8 @@ class LLVMVisitor:
             args = []
             func = self.module.globals.get(node.name)
 
-            if node.name in ['printf', 'scanf']:
-                func = self.printf if node.name == 'printf' else self.scanf
+            if node.name in ['printf', 'scanf', 'fopen', 'fgets', 'fputs', 'fclose']:
+                func = getattr(self, node.name, self.module.globals.get(node.name))
                 for arg_node in node.args:
                     if node.name == 'scanf' and isinstance(arg_node, IdentifierNode):
                         arg_val = self._get_symbol(arg_node.name)

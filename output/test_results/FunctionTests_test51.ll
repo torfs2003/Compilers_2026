@@ -7,6 +7,14 @@ declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
 
+declare i8* @"fopen"(i8* %".1", i8* %".2")
+
+declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
+
+declare i32 @"fputs"(i8* %".1", i8* %".2")
+
+declare i32 @"fclose"(i8* %".1")
+
 define %"struct.kaas"* @"structCreator"(i32 %".1", float %".2")
 {
 entry:
@@ -55,12 +63,11 @@ entry:
   %".11" = load %"struct.kaas"*, %"struct.kaas"** %"ptr"
   %"gep_yoghurt" = getelementptr inbounds %"struct.kaas", %"struct.kaas"* %".11", i32 0, i32 1
   %"load_yoghurt" = load float, float* %"gep_yoghurt"
-  ;  Source: (int)ptr->yoghurt
-  %".13" = fptosi float %"load_yoghurt" to i32
-  ;  Source: printf("%d %d ",ptr->melk,(int)ptr->yoghurt);
-  %".15" = call i32 (i8*, ...) @"printf"(i8* %".7", i32 %"load_melk", i32 %".13")
+  ;  Source: printf("%d %f ",ptr->melk,ptr->yoghurt);
+  %".13" = fpext float %"load_yoghurt" to double
+  %".14" = call i32 (i8*, ...) @"printf"(i8* %".7", i32 %"load_melk", double %".13")
   ;  Source: return0;
   ret i32 0
 }
 
-@"str" = internal constant [7 x i8] c"%d %d \00"
+@"str" = internal constant [7 x i8] c"%d %f \00"
