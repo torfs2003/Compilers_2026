@@ -1,5 +1,9 @@
 ; ModuleID = "cmm_module"
+<<<<<<< HEAD
 target triple = "x86_64-w64-windows-gnu"
+=======
+target triple = "x86_64-unknown-linux-gnu"
+>>>>>>> origin/main
 target datalayout = ""
 
 define void @"f"(i32 %".1")

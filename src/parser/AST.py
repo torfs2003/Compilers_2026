@@ -253,3 +253,10 @@ class MemberAccessNode(ASTNode):
     def __repr__(self):
         op = "->" if self.is_pointer else "."
         return f"MemberAccessNode({op}{self.member_name})"
+
+class ForInitNode(ASTNode):
+    def __init__(self, value):
+        super().__init__()
+        self.value = value
+    def __repr__(self):
+        return f"ForInitNode({type(self.value).__name__})"

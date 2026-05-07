@@ -29,20 +29,24 @@ parameterDeclaration
     ;
 
 compoundStatement
-    : LBRACE declaration* statement* RBRACE
+: LBRACE (declaration | typedefDeclaration | statement)* RBRACE
+    ;
+
+initDeclaratorList
+    : initDeclarator (COMMA initDeclarator)*
+    ;
+
+initDeclarator
+    : CONST? MUL* CONST? IDENTIFIER (LBRACKET expression? RBRACKET)* (ASSIGN (expression | array_initializer))?
     ;
 
 declaration
-    : CONST? typeSpecifier CONST? MUL* CONST? IDENTIFIER (LBRACKET expression? RBRACKET)* (ASSIGN (expression | array_initializer))? SEMI
+    : CONST? typeSpecifier initDeclaratorList SEMI
     | typeSpecifier LPAREN MUL IDENTIFIER RPAREN LPAREN typeList? RPAREN (ASSIGN expression)? SEMI  // <-- NIEUW: Function Pointer
     ;
 
 typeList
     : typeSpecifier MUL* (COMMA typeSpecifier MUL*)*
-    ;
-    
-structDeclaration
-    : STRUCT IDENTIFIER LBRACE declaration* RBRACE SEMI
     ;
 
 typedefDeclaration
@@ -91,7 +95,16 @@ whileStatement
     ;
 
 forStatement
-    : FOR LPAREN expression? SEMI expression? SEMI expression? RPAREN compoundStatement
+    : FOR LPAREN forInit? SEMI expression? SEMI expression? RPAREN compoundStatement
+    ;
+
+forInit
+    : declarationFor
+    | expression
+    ;
+
+declarationFor
+    : CONST? typeSpecifier initDeclaratorList
     ;
 
 breakStatement

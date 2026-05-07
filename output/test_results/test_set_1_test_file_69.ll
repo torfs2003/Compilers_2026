@@ -1,5 +1,9 @@
 ; ModuleID = "cmm_module"
+<<<<<<< HEAD
 target triple = "x86_64-w64-windows-gnu"
+=======
+target triple = "x86_64-unknown-linux-gnu"
+>>>>>>> origin/main
 target datalayout = ""
 
 define i32 @"some_func"(i32 %".1", i32 %".2")

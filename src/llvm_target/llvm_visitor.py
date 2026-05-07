@@ -7,6 +7,7 @@ class LLVMVisitor:
         self.module = ir.Module(name="cmm_module")
         llvm.initialize_native_target()
         llvm.initialize_native_asmprinter()
+        llvm.initialize_native_asmparser()
         self.module.triple = llvm.get_default_triple()
         self.builder = None
         self.func = None
@@ -209,7 +210,11 @@ class LLVMVisitor:
                     self.builder = ir.IRBuilder(self.func.append_basic_block(name="entry"))
                     
                     # Alloceer alle parameters als lokale variabelen in het geheugen
+                    seen = set()
                     for i, (p_type, p_name) in enumerate(node.params):
+                        if p_name in seen:
+                            raise Exception(f"variabele '{p_name}' in functie '{node.name}' wordt meer keer gebruikt")
+                        seen.add(p_name)
                         typ = self._get_llvm_type(p_type)
                         ptr = self.builder.alloca(typ, name=p_name)
                         self.builder.store(self.func.args[i], ptr)
@@ -452,6 +457,20 @@ class LLVMVisitor:
                         left = self._apply_cast(left, ir.FloatType())
                     elif isinstance(right.type, ir.IntType) and isinstance(left.type, ir.FloatType):
                         right = self._apply_cast(right, ir.FloatType())
+                    elif isinstance(left.type, ir.IntType) and isinstance(right.type, ir.IntType):
+                        target_width = max(left.type.width, right.type.width)
+                        target_type = ir.IntType(target_width)
+                        if left.type.width != target_width:
+                            left = self._apply_cast(left, target_type)
+                        if right.type.width != target_width:
+                            right = self._apply_cast(right, target_type)
+            
+            # Array Indexering ([])
+            if node.op == '[]':
+                zero = ir.Constant(ir.IntType(32), 0)
+                
+                if not isinstance(left.type, ir.PointerType):
+                    raise Exception(f"Kan niet indexeren op non-pointer type: {left.type}")
 
             
             # 1. Array Indexering ([])
@@ -606,7 +625,10 @@ class LLVMVisitor:
             elif node.op in ['++', '--', 'POST++', 'POST--']:
                 # Haal het adres van de variabele op
                 addr = self._get_symbol(node.child.name) if isinstance(node.child, IdentifierNode) else self.results.get(f"addr_{id(node.child)}")
-                
+
+                if addr is None:
+                    raise Exception("++ of -- toegepast op een niet-adresseerbare expressie")
+
                 # Laad de huidige waarde
                 current_val = self.builder.load(addr)
                 

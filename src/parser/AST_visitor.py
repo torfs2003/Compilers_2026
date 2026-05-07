@@ -66,7 +66,11 @@ class ASTVisitor:
                     if ctx.children:
                         for child in ctx.children:
                             if id(child) in results and results[id(child)] is not None:
-                                nodes.append(results[id(child)])
+                                val = results[id(child)]
+                                if isinstance(val, list):
+                                    nodes.extend(val)
+                                else:
+                                    nodes.append(val)
                                 
                     res = self.get_loc(ProgramNode(nodes), ctx)
 
@@ -114,7 +118,11 @@ class ASTVisitor:
                     if ctx.children:
                         for child in ctx.children:
                             if id(child) in results and results[id(child)] is not None:
-                                items.append(results[id(child)])
+                                val = results[id(child)]
+                                if isinstance(val, list):
+                                    items.extend(val)
+                                else:
+                                    items.append(val)
                     res = self.get_loc(CompoundNode(items), ctx)
                 
                 elif class_name == "IncludeDirectiveContext":
@@ -165,58 +173,34 @@ class ASTVisitor:
                     res = self.get_loc(TypedefNode(original_type, new_name, is_array, array_size), ctx)
 
                 # 2. Declarations
-                elif class_name == "DeclarationContext":
-                    
-                    # Check of dit een Function Pointer declaratie is (heeft minstens 2 haakjes openen)
-                    if len(ctx.LPAREN()) >= 2:
-                        return_type = ctx.typeSpecifier().getText()
-                        name = ctx.IDENTIFIER().getText()
-                        
-                        param_types = []
-                        if ctx.typeList():
-                            # typeList bevat alle types gescheiden door komma's
-                            for i in range(len(ctx.typeList().typeSpecifier())):
-                                p_type = ctx.typeList().typeSpecifier(i).getText()
-                                # Voeg sterretjes toe als die er zijn
-                                if len(ctx.typeList().MUL()) > i: 
-                                     # Let op: dit is een simpele aanname voor pointers.
-                                     # Als je grammatica complexere sterretjes in typeList toelaat, 
-                                     # moet dit misschien netter.
-                                     pass 
-                                param_types.append(p_type)
-                                
-                        init_expr = None
-                        if ctx.ASSIGN():
-                            init_expr = results.get(id(ctx.expression(0)))
+                elif class_name in ["DeclarationContext", "DeclarationForContext"]:
+                    base_type = ctx.typeSpecifier().getText()
 
-                        node = FuncPtrDeclNode(return_type, name, param_types, init_expr)
-                        res = self.get_loc(node, ctx)
-                        
-                    else:
-                        # Normale declaratie (jouw originele code)
-                        base_type = ctx.typeSpecifier().getText()
-                        pointer_stars = "*" * len(ctx.MUL())
+                    nodes = []
+                    init_list = ctx.initDeclaratorList()
+                    for decl_ctx in init_list.initDeclarator():
+                        pointer_stars = "*" * len(decl_ctx.MUL())
                         full_type = base_type + pointer_stars
-                        
-                        all_exprs = ctx.expression()
+
+                        all_exprs = decl_ctx.expression()
                         sizes = []
                         init = None
-                        
-                        if ctx.ASSIGN():
-                            if ctx.array_initializer():
-                                init = results[id(ctx.array_initializer())]
+
+                        if decl_ctx.ASSIGN():
+                            if decl_ctx.array_initializer():
+                                init = results[id(decl_ctx.array_initializer())]
                                 dimension_exprs = all_exprs
                             else:
                                 init = results[id(all_exprs[-1])]
                                 dimension_exprs = all_exprs[:-1]
                         else:
                             dimension_exprs = all_exprs
-                            
+
                         for dim_ctx in dimension_exprs:
                             sizes.append(results[id(dim_ctx)])
-                            
-                        const_tokens = ctx.CONST()
-                        is_const = False     
+
+                        const_tokens = decl_ctx.CONST()
+                        is_const = False
                         is_const_ptr = False
 
                         if len(const_tokens) == 2:
@@ -224,21 +208,20 @@ class ASTVisitor:
                             is_const_ptr = True
                         elif len(const_tokens) == 1:
                             const_token_idx = const_tokens[0].getSymbol().tokenIndex
-                            type_token_idx = ctx.typeSpecifier().start.tokenIndex
-                            if const_token_idx < type_token_idx:
+                            ident_token_idx = decl_ctx.IDENTIFIER().getSymbol().tokenIndex
+                            if const_token_idx < ident_token_idx:
                                 is_const = True
                             else:
                                 is_const_ptr = True
+                        identifier = decl_ctx.IDENTIFIER().getText()
 
-                        identifier = ctx.IDENTIFIER().getText()
-                        
-                        if sizes or ctx.LBRACKET(): 
+                        if sizes or decl_ctx.LBRACKET():
                             node = ArrayDeclNode(is_const, full_type, identifier, sizes, init)
                         else:
                             node = DeclNode(is_const, full_type, identifier, init)
-                        
                         node.is_const_ptr = is_const_ptr
-                        res = self.get_loc(node, ctx)
+                        nodes.append(self.get_loc(node,decl_ctx))
+                    res = nodes[0] if len(nodes) == 1 else nodes
 
                 elif class_name == "StatementContext":
                     if ctx.expression():
@@ -412,11 +395,22 @@ class ASTVisitor:
                     scope = results[id(ctx.compoundStatement())]
                     res = self.get_loc(WhileNode(condition,scope),ctx)
 
+                elif class_name == "ForInitContext":
+                    if ctx.declarationFor():
+                        res = results.get(id(ctx.declarationFor()))
+                    else:
+                        res = results.get(id(ctx.expression()))
+
                 elif class_name == "ForStatementContext":
                     # Let op het gebruik van .get() omdat delen van de for-loop (zoals init) leeg kunnen zijn
-                    init = results.get(id(ctx.expression(0))) if ctx.expression(0) else None
-                    condition = results.get(id(ctx.expression(1))) if ctx.expression(1) else None
-                    update = results.get(id(ctx.expression(2))) if ctx.expression(2) else None
+                    init = results.get(id(ctx.forInit())) if ctx.forInit else None
+                    if ctx.forInit() and ctx.forInit().declarationFor():
+                        self.warnings.append(
+                            f"[Warning] line {ctx.forInit().start.line}:{ctx.forInit().start.column}: "
+                            f"Declaration in 'for' initializer is a C99 feature."
+                        )
+                    condition = results.get(id(ctx.expression(0))) if ctx.expression(0) else None
+                    update = results.get(id(ctx.expression(1))) if ctx.expression(1) else None
                     body = results[id(ctx.compoundStatement())]
 
                     # 1. Voeg de update toe aan het einde van de body
@@ -434,7 +428,10 @@ class ASTVisitor:
                     # 4. Stop alles in een Block (CompoundNode) met de init ervoor
                     wrapper_items = []
                     if init:
-                        wrapper_items.append(init)
+                        if isinstance(init, list):
+                            wrapper_items.extend(init)
+                        else:
+                            wrapper_items.append(init)
                     wrapper_items.append(while_node)
                     
                     res = self.get_loc(CompoundNode(wrapper_items), ctx)
@@ -486,8 +483,16 @@ class ASTVisitor:
 
                 if res:
                     if class_name in ["DeclarationContext", "Assignment_expressionContext", "Postfix_expressionContext", "StatementContext"]:
-                        res.original_c_code = self._get_source_text(ctx)
-                        res.user_comments = self._get_hidden_comments(ctx)
+                        src = self._get_source_text(ctx)
+                        comments = self._get_hidden_comments(ctx)
+
+                        if isinstance(res, list):
+                            for r in res:
+                                r.original_c_code = src
+                                r.user_comments = comments
+                        else:
+                            res.original_c_code = src
+                            res.user_comments = comments
                     
                     results[id(ctx)] = res
 

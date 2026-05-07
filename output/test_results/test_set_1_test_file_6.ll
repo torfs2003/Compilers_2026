@@ -1,5 +1,9 @@
 ; ModuleID = "cmm_module"
+<<<<<<< HEAD
 target triple = "x86_64-w64-windows-gnu"
+=======
+target triple = "x86_64-unknown-linux-gnu"
+>>>>>>> origin/main
 target datalayout = ""
 
 declare i32 @"printf"(i8* %".1", ...)
@@ -48,6 +52,7 @@ entry:
   %"ptr.1" = load i32*, i32** %"ptr"
   ;  Source: ptr++;
   %".19" = load i32*, i32** %"ptr"
+<<<<<<< HEAD
   %".20" = getelementptr i32, i32* %".19", i32 1
   store i32* %".20", i32** %"ptr"
   ;  Source: ptr
@@ -56,6 +61,16 @@ entry:
   %".24" = load i32*, i32** %"ptr"
   %".25" = getelementptr i32, i32* %".24", i32 -1
   store i32* %".25", i32** %"ptr"
+=======
+  %"ptr_incdec" = getelementptr i32, i32* %".19", i32 1
+  store i32* %"ptr_incdec", i32** %"ptr"
+  ;  Source: ptr
+  %"ptr.2" = load i32*, i32** %"ptr"
+  ;  Source: ptr--;
+  %".23" = load i32*, i32** %"ptr"
+  %"ptr_incdec.1" = getelementptr i32, i32* %".23", i32 -1
+  store i32* %"ptr_incdec.1", i32** %"ptr"
+>>>>>>> origin/main
   ;  Source: is_x
   %"is_x.1" = load i32, i32* %"is_x"
   ;  Source: ptr
@@ -63,12 +78,12 @@ entry:
   ;  Source: x
   %"x.2" = load i32, i32* %"x"
   ;  Source: (ptr==&x)
-  %".31" = ptrtoint i32* %"ptr.3" to i32
-  %".32" = ptrtoint i32* %"x" to i32
-  %".33" = icmp eq i32 %".31", %".32"
-  %".34" = zext i1 %".33" to i32
+  %".29" = ptrtoint i32* %"ptr.3" to i32
+  %".30" = ptrtoint i32* %"x" to i32
+  %".31" = icmp eq i32 %".29", %".30"
+  %".32" = zext i1 %".31" to i32
   ;  Source: is_x=(ptr==&x);
-  store i32 %".34", i32* %"is_x"
+  store i32 %".32", i32* %"is_x"
   ;  Source: is_y
   %"is_y.1" = load i32, i32* %"is_y"
   ;  Source: ptr
@@ -76,12 +91,12 @@ entry:
   ;  Source: y
   %"y.1" = load i32, i32* %"y"
   ;  Source: (ptr==&y)
-  %".41" = ptrtoint i32* %"ptr.4" to i32
-  %".42" = ptrtoint i32* %"y" to i32
-  %".43" = icmp eq i32 %".41", %".42"
-  %".44" = zext i1 %".43" to i32
+  %".39" = ptrtoint i32* %"ptr.4" to i32
+  %".40" = ptrtoint i32* %"y" to i32
+  %".41" = icmp eq i32 %".39", %".40"
+  %".42" = zext i1 %".41" to i32
   ;  Source: is_y=(ptr==&y);
-  store i32 %".44", i32* %"is_y"
+  store i32 %".42", i32* %"is_y"
   ;  Source: is_y
   %"is_y.2" = load i32, i32* %"is_y"
   ;  Source: x
@@ -89,55 +104,55 @@ entry:
   ;  Source: ptr
   %"ptr.5" = load i32*, i32** %"ptr"
   ;  Source: (&x!=ptr)
-  %".51" = ptrtoint i32* %"x" to i32
-  %".52" = ptrtoint i32* %"ptr.5" to i32
-  %".53" = icmp ne i32 %".51", %".52"
-  %".54" = zext i1 %".53" to i32
+  %".49" = ptrtoint i32* %"x" to i32
+  %".50" = ptrtoint i32* %"ptr.5" to i32
+  %".51" = icmp ne i32 %".49", %".50"
+  %".52" = zext i1 %".51" to i32
   ;  Source: is_y=(&x!=ptr);
-  store i32 %".54", i32* %"is_y"
+  store i32 %".52", i32* %"is_y"
   ;  Source: ptr2
   %"ptr2.1" = load float*, float** %"ptr2"
   ;  Source: ptr
   %"ptr.6" = load i32*, i32** %"ptr"
   ;  Source: ptr2>=ptr;
-  %".60" = ptrtoint float* %"ptr2.1" to i32
-  %".61" = ptrtoint i32* %"ptr.6" to i32
-  %".62" = icmp uge i32 %".60", %".61"
-  %".63" = zext i1 %".62" to i32
+  %".58" = ptrtoint float* %"ptr2.1" to i32
+  %".59" = ptrtoint i32* %"ptr.6" to i32
+  %".60" = icmp uge i32 %".58", %".59"
+  %".61" = zext i1 %".60" to i32
   ;  Source: ptr2
   %"ptr2.2" = load float*, float** %"ptr2"
   ;  Source: ptr
   %"ptr.7" = load i32*, i32** %"ptr"
   ;  Source: ptr2<=ptr;
-  %".67" = ptrtoint float* %"ptr2.2" to i32
-  %".68" = ptrtoint i32* %"ptr.7" to i32
-  %".69" = icmp ule i32 %".67", %".68"
-  %".70" = zext i1 %".69" to i32
+  %".65" = ptrtoint float* %"ptr2.2" to i32
+  %".66" = ptrtoint i32* %"ptr.7" to i32
+  %".67" = icmp ule i32 %".65", %".66"
+  %".68" = zext i1 %".67" to i32
   ;  Source: ptr
   %"ptr.8" = load i32*, i32** %"ptr"
   ;  Source: x
   %"x.4" = load i32, i32* %"x"
   ;  Source: ptr>&x;
-  %".74" = ptrtoint i32* %"ptr.8" to i32
-  %".75" = ptrtoint i32* %"x" to i32
-  %".76" = icmp ugt i32 %".74", %".75"
-  %".77" = zext i1 %".76" to i32
+  %".72" = ptrtoint i32* %"ptr.8" to i32
+  %".73" = ptrtoint i32* %"x" to i32
+  %".74" = icmp ugt i32 %".72", %".73"
+  %".75" = zext i1 %".74" to i32
   ;  Source: ptr
   %"ptr.9" = load i32*, i32** %"ptr"
   ;  Source: ptr<32;
-  %".80" = ptrtoint i32* %"ptr.9" to i32
-  %".81" = icmp ult i32 %".80", 32
-  %".82" = zext i1 %".81" to i32
+  %".78" = ptrtoint i32* %"ptr.9" to i32
+  %".79" = icmp ult i32 %".78", 32
+  %".80" = zext i1 %".79" to i32
   ;  Source: ptr
   %"ptr.10" = load i32*, i32** %"ptr"
   ;  Source: ptr
   %"ptr.11" = load i32*, i32** %"ptr"
   ;  Source: num_skip_elements
   %"num_skip_elements.1" = load i32, i32* %"num_skip_elements"
-  %".86" = mul i32 4, %"num_skip_elements.1"
+  %".84" = mul i32 4, %"num_skip_elements.1"
   ;  Source: ptr+4*num_skip_elements
-  %".88" = getelementptr i32, i32* %"ptr.11", i32 %".86"
+  %".86" = getelementptr i32, i32* %"ptr.11", i32 %".84"
   ;  Source: ptr=ptr+4*num_skip_elements;
-  store i32* %".88", i32** %"ptr"
+  store i32* %".86", i32** %"ptr"
   ret i32 0
 }

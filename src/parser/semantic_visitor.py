@@ -1,15 +1,19 @@
+from typing import Optional
+
 from src.parser.base_visitor import BaseVisitor
 from src.parser.symbol_table import SymbolTable
 from src.parser.AST import *
+import os
 
 class SemanticVisitor(BaseVisitor):
-    def __init__(self):
+    def __init__(self, include_paths=None):
         self.symbol_table = SymbolTable()
         self.errors = []
         self.warnings = []
         self.stdio_included = False
         self.type_richness = {'void': 0, 'char': 1, 'int': 2, 'float': 3}
         self.current_function_return_type = None
+        self.include_paths = include_paths or []
 
     def get_Error(self, node, error):
         self.errors.append(f"[ Error ] line {node.line}, position {node.column}: {error}")
@@ -31,16 +35,36 @@ class SemanticVisitor(BaseVisitor):
 
     def pre_visit_FunctionDeclNode(self, node):
         # Sla een forward declaration op in de symbol table
+        seen = set()
+        for p_type, p_name in node.params:
+            if p_name in seen:
+                self.get_Error(node, f"variabele '{p_name}' in functie '{node.name}' wordt meer keer gebruikt.")
+                break
+            seen.add(p_name)
+
         existing = self.symbol_table.get(node.name)
         if existing and existing.get('type') == 'function':
-            pass
-        else:
-            self.symbol_table.put(node.name, {
-                'type': 'function',
-                'return_type': node.return_type,
-                'params': node.params,
-                'defined': False
-            })
+            if existing.get('return_type') != node.return_type:
+                self.get_Error(node, f"functie '{node.name}' was gedefineerd als '{existing.get('return_type')}' en is hergedefineerd als '{node.return_type}'.")
+                return
+            old_params = existing.get('params', [])
+            new_params = node.params
+            if len(old_params) != len(new_params):
+                self.get_Error(node, f"functie '{node.name}' is origineel met '{len(old_params)}' parameters gedefineerd en is hergedefineerd met '{len(new_params)}' parameters.")
+                return
+            for i in range(len(old_params)):
+                old_type = old_params[i][0]
+                new_type = new_params[i][0]
+                if old_type != new_type:
+                    self.get_Error(node,f"Functie '{node.name}' is origineel gedeclareerd met parameter {i+1} van type '{old_type}' en is hergedeclareerd met parameter {i+1} van type '{new_type}'.")
+                    break
+
+        self.symbol_table.put(node.name, {
+            'type': 'function',
+            'return_type': node.return_type,
+            'params': node.params,
+            'defined': False
+        })
 
     def pre_visit_FunctionNode(self, node):
         func_sym = self.symbol_table.get(node.name)
@@ -79,11 +103,13 @@ class SemanticVisitor(BaseVisitor):
     def visit_CompoundNode(self, node):
         found_statement = False
         for item in node.items:
-            if isinstance(item, (DeclNode, ArrayDeclNode)):
-                if found_statement:
-                    self.errors.append(f"Line {item.line}: ANSI C89 forbids mixed declarations and code")
-            else:
-                found_statement = True
+            pass
+            #apparently we're adding a none c89 feature proof (test set 2 test 27)
+            #if isinstance(item, (DeclNode, ArrayDeclNode)):
+            #    if found_statement:
+            #        self.errors.append(f"Line {item.line}: ANSI C89 forbids mixed declarations and code")
+            #else:
+            #    found_statement = True
         
         self.symbol_table.exit_scope()
     
@@ -291,8 +317,23 @@ class SemanticVisitor(BaseVisitor):
             self.get_Error(node, "Missing 'main' function.")
 
     def visit_IncludeNode(self, node):
-        if hasattr(node, 'header') and node.header == "stdio.h":
+        header: Optional[str] = getattr(node, 'header', None)
+        if header is None:
+            return
+
+        found = False
+        if header == "stdio.h":
             self.stdio_included = True
+            return
+        if not found:
+            for base in self.include_paths:
+                to_search = os.path.join(base, header)
+                if os.path.isfile(to_search):
+                    found = True
+                    break
+        if not found:
+            self.get_Error(node, f"'{header}' niet gevonden")
+
     
     def visit_FunctionNode(self, node):
         self.symbol_table.exit_scope()
@@ -381,6 +422,15 @@ class SemanticVisitor(BaseVisitor):
                         # Voor andere conversies (bijv. float naar int) behouden we de warning
                         self.get_Warning(node, f"Informatieverlies bij initialisatie van {node.name}: {init_type} naar {node.eval_type}.")
     def visit_ArrayDeclNode(self, node):
+        if node.sizes:
+            for s in node.sizes:
+                s_type = getattr(s, "eval_type", None)
+                if s_type is None:
+                    continue
+                if s_type != "int":
+                    self.get_Error(node, f"size moet een int zijn! Kreeg '{s_type}'")
+                    break
+
         num_dimensions = len(node.sizes) if hasattr(node, 'sizes') and node.sizes else 1
         
         if hasattr(node, 'sizes') and node.sizes:
@@ -427,7 +477,29 @@ class SemanticVisitor(BaseVisitor):
         if not success:
             self.get_Error(node, f"Typedef naam '{node.new_name}' botst met een bestaande declaratie.")
 
-    
+    def is_nullptr_constant_expr(self, expr):
+        if expr is None:
+            return False
+
+        if isinstance(expr, IntNode):
+            return expr.value == 0
+
+        if isinstance(expr, IdentifierNode):
+            return expr.name == "NULL"
+
+        if isinstance(expr, UnaryOpNode) and expr.op in ['+']:
+            return self.is_nullptr_constant_expr(expr.child)
+
+        if isinstance(expr, CastNode):
+            return self.is_nullptr_constant_expr(expr.expr)
+
+        for attr in ("expr", "child", "inner", "value_node"):
+            inner = getattr(expr, attr, None)
+            if inner is not None and inner is not expr:
+                if self.is_nullptr_constant_expr(inner):
+                    return True
+
+        return False
 
     def visit_AssignNode(self, node):
         is_lvalue = False

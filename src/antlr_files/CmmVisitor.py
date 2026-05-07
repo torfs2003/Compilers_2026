@@ -44,6 +44,16 @@ class CmmVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by CmmParser#initDeclaratorList.
+    def visitInitDeclaratorList(self, ctx:CmmParser.InitDeclaratorListContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by CmmParser#initDeclarator.
+    def visitInitDeclarator(self, ctx:CmmParser.InitDeclaratorContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by CmmParser#declaration.
     def visitDeclaration(self, ctx:CmmParser.DeclarationContext):
         return self.visitChildren(ctx)
@@ -96,6 +106,16 @@ class CmmVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by CmmParser#forStatement.
     def visitForStatement(self, ctx:CmmParser.ForStatementContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by CmmParser#forInit.
+    def visitForInit(self, ctx:CmmParser.ForInitContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by CmmParser#declarationFor.
+    def visitDeclarationFor(self, ctx:CmmParser.DeclarationForContext):
         return self.visitChildren(ctx)
 
 
