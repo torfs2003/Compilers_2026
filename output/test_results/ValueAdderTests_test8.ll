@@ -122,6 +122,8 @@ entry:
   %".82" = sext i8 %"e.3" to i32
   %".83" = sdiv i32 %".80", %".82"
   ;  Source: h-g*b/e
+  %".85" = sub i32 %"h.1", %".83"
   ;  Source: constinti=h-g*b/e;
+  store i32 %".85", i32* %"i"
   ret i32 0
 }

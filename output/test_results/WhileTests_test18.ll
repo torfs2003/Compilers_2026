@@ -38,9 +38,9 @@ while.body:
   %"value.1" = load i32, i32* %"value"
   %"array_2.1" = load i32*, i32** %"array_2"
   %"i.2" = load i32, i32* %"i"
-  %"gep_idx" = getelementptr i32, i32* %"array_2.1", i32 %"i.2"
-  %"array_element" = load i32, i32* %"gep_idx"
-  store i32 %"value.1", i32* %"gep_idx"
+  %"gep_ptr" = getelementptr i32, i32* %"array_2.1", i32 %"i.2"
+  %"array_element" = load i32, i32* %"gep_ptr"
+  store i32 %"value.1", i32* %"gep_ptr"
   %"i.3" = load i32, i32* %"i"
   %".12" = load i32, i32* %"i"
   %".13" = add i32 %".12", 1
@@ -55,12 +55,12 @@ while.end:
 define i32 @"main"()
 {
 entry:
-  %"array_2" = alloca [5 x i32*]
+  %"array_2" = alloca [5 x i32]
   ;  Source: int*array_2[5];
   %"array" = alloca i32*
   ;  Source: array_2
   ;  Source: arrayCreator(array_2,5)
-  %".5" = bitcast [5 x i32*]* %"array_2" to i32*
+  %".5" = bitcast [5 x i32]* %"array_2" to i32*
   %".6" = call i32* @"arrayCreator"(i32* %".5", i32 5)
   ;  Source: int*array=arrayCreator(array_2,5);
   store i32* %".6", i32** %"array"
@@ -77,8 +77,8 @@ while.body:
   %".14" = bitcast [4 x i8]* @"str" to i8*
   %"array.1" = load i32*, i32** %"array"
   %"i.2" = load i32, i32* %"i"
-  %"gep_idx" = getelementptr i32, i32* %"array.1", i32 %"i.2"
-  %"array_element" = load i32, i32* %"gep_idx"
+  %"gep_ptr" = getelementptr i32, i32* %"array.1", i32 %"i.2"
+  %"array_element" = load i32, i32* %"gep_ptr"
   %".15" = call i32 (i8*, ...) @"printf"(i8* %".14", i32 %"array_element")
   %"i.3" = load i32, i32* %"i"
   %".16" = load i32, i32* %"i"

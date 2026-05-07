@@ -39,10 +39,13 @@ entry:
   %"p.3" = load i32, i32* %"p"
   ;  Source: q
   %"q.1" = load float*, float** %"q"
-  ;  Source: printf("%% %d %x %f  kappa kappa",p,p,q);
-  %".15" = call i32 (i8*, ...) @"printf"(i8* %".10", i32 %"p.2", i32 %"p.3", float* %"q.1")
+  %"deref_load" = load float, float* %"q.1"
+  ;  Source: (int)*q
+  %".15" = fptosi float %"deref_load" to i32
+  ;  Source: printf("%% %d %x %d  kappa kappa",p,p,(int)*q);
+  %".17" = call i32 (i8*, ...) @"printf"(i8* %".10", i32 %"p.2", i32 %"p.3", i32 %".15")
   ;  Source: return0;
   ret i32 0
 }
 
-@"str" = internal constant [25 x i8] c"%% %d %x %f  kappa kappa\00"
+@"str" = internal constant [25 x i8] c"%% %d %x %d  kappa kappa\00"

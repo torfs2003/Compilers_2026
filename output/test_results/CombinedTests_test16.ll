@@ -51,21 +51,23 @@ while.end:
   ;  Source: to
   %"to.1" = load i32, i32* %"to"
   ;  Source: to-1
+  %".20" = sub i32 %"to.1", 1
+  store i32 %".20", i32* %"i"
   br label %"while.cond.1"
 while.cond.1:
   %"i.4" = load i32, i32* %"i"
-  %".21" = icmp sge i32 %"i.4", 0
-  %".22" = zext i1 %".21" to i32
-  %"whilecond.1" = icmp ne i32 %".22", 0
+  %".23" = icmp sge i32 %"i.4", 0
+  %".24" = zext i1 %".23" to i32
+  %"whilecond.1" = icmp ne i32 %".24", 0
   br i1 %"whilecond.1", label %"while.body.1", label %"while.end.1"
 while.body.1:
-  %".24" = bitcast [4 x i8]* @"str.1" to i8*
+  %".26" = bitcast [4 x i8]* @"str.1" to i8*
   %"i.5" = load i32, i32* %"i"
-  %".25" = call i32 (i8*, ...) @"printf"(i8* %".24", i32 %"i.5")
+  %".27" = call i32 (i8*, ...) @"printf"(i8* %".26", i32 %"i.5")
   %"i.6" = load i32, i32* %"i"
-  %".26" = load i32, i32* %"i"
-  %".27" = sub i32 %".26", 1
-  store i32 %".27", i32* %"i"
+  %".28" = load i32, i32* %"i"
+  %".29" = sub i32 %".28", 1
+  store i32 %".29", i32* %"i"
   br label %"while.cond.1"
 while.end.1:
   ret void

@@ -35,16 +35,16 @@ entry:
   %"i.2" = load i32, i32* %"i"
   ;  Source: x[i]
   %"decay_left" = getelementptr [22 x i32], [22 x i32]* %"x", i32 0, i32 0
-  %"gep_idx" = getelementptr i32, i32* %"decay_left", i32 %"i.2"
-  %"array_element" = load i32, i32* %"gep_idx"
+  %"gep_ptr" = getelementptr i32, i32* %"decay_left", i32 %"i.2"
+  %"array_element" = load i32, i32* %"gep_ptr"
   ;  Source: x[i]=1;
-  store i32 1, i32* %"gep_idx"
+  store i32 1, i32* %"gep_ptr"
   %".13" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: x
   ;  Source: x[1]
   %"decay_left.1" = getelementptr [22 x i32], [22 x i32]* %"x", i32 0, i32 0
-  %"gep_idx.1" = getelementptr i32, i32* %"decay_left.1", i32 1
-  %"array_element.1" = load i32, i32* %"gep_idx.1"
+  %"gep_ptr.1" = getelementptr i32, i32* %"decay_left.1", i32 1
+  %"array_element.1" = load i32, i32* %"gep_ptr.1"
   ;  Source: printf("%d",x[1]);
   %".17" = call i32 (i8*, ...) @"printf"(i8* %".13", i32 %"array_element.1")
   ;  Source: return0;

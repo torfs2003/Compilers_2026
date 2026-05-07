@@ -37,13 +37,13 @@ entry:
   ;  Source: s
   ;  Source: s[2]
   %"decay_left" = getelementptr [2 x i32], [2 x i32]* %"s", i32 0, i32 0
-  %"gep_idx" = getelementptr i32, i32* %"decay_left", i32 2
-  %"array_element" = load i32, i32* %"gep_idx"
+  %"gep_ptr" = getelementptr i32, i32* %"decay_left", i32 2
+  %"array_element" = load i32, i32* %"gep_ptr"
   ;  Source: k
   ;  Source: k[2]
   %"decay_left.1" = getelementptr [2 x i32], [2 x i32]* %"k", i32 0, i32 0
-  %"gep_idx.1" = getelementptr i32, i32* %"decay_left.1", i32 2
-  %"array_element.1" = load i32, i32* %"gep_idx.1"
+  %"gep_ptr.1" = getelementptr i32, i32* %"decay_left.1", i32 2
+  %"array_element.1" = load i32, i32* %"gep_ptr.1"
   ;  Source: s[2]+k[2]
   %".17" = add i32 %"array_element", %"array_element.1"
   ;  Source: inta=s[2]+k[2];

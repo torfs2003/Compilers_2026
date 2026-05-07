@@ -27,8 +27,8 @@ entry:
   ;  Source: b
   %"b.1" = load i32**, i32*** %"b"
   ;  Source: b[0]
-  %"gep_idx" = getelementptr i32*, i32** %"b.1", i32 0
-  %"array_element" = load i32*, i32** %"gep_idx"
+  %"gep_ptr" = getelementptr i32*, i32** %"b.1", i32 0
+  %"array_element" = load i32*, i32** %"gep_ptr"
   ;  Source: printf("%d",b[0]);
   %".8" = call i32 (i8*, ...) @"printf"(i8* %".4", i32* %"array_element")
   ;  User Comment: /* This isn't always possible when an int* is given instead of int** */

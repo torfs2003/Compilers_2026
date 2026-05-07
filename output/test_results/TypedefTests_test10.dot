@@ -2,7 +2,7 @@ digraph AST {
   node [fontname="Arial"];
   node2 [label="Typedef\nfloat -> a", shape=box, style="filled", fillcolor="lightyellow", color="black", fontcolor="black"];
   node6 [label="4\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
-  node5 [label="Decl\na\nb\n(float)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
+  node5 [label="Decl\na\nb\n(char)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
   node5 -> node6 [style="solid", color="black", label=" init", fontcolor="blue"];
   node7 [label="Typedef\nchar -> a", shape=box, style="filled", fillcolor="lightyellow", color="black", fontcolor="black"];
   node9 [label="4\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];

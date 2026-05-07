@@ -29,8 +29,8 @@ entry:
   ;  Source: (*b)
   %"deref_load" = load i32*, i32** %"b.1"
   ;  Source: (*b)[0]
-  %"gep_idx" = getelementptr i32, i32* %"deref_load", i32 0
-  %"array_element" = load i32, i32* %"gep_idx"
+  %"gep_ptr" = getelementptr i32, i32* %"deref_load", i32 0
+  %"array_element" = load i32, i32* %"gep_ptr"
   ;  Source: printf("%d",(*b)[0]);
   %".9" = call i32 (i8*, ...) @"printf"(i8* %".4", i32 %"array_element")
   ;  Source: return0.0;

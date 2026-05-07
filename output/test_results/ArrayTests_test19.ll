@@ -57,8 +57,8 @@ entry:
   ;  Source: x
   ;  Source: x[0]
   %"decay_left" = getelementptr [2 x i8], [2 x i8]* %"x", i32 0, i32 0
-  %"gep_idx" = getelementptr i8, i8* %"decay_left", i32 0
-  %"array_element" = load i8, i8* %"gep_idx"
+  %"gep_ptr" = getelementptr i8, i8* %"decay_left", i32 0
+  %"array_element" = load i8, i8* %"gep_ptr"
   ;  Source: printf("%c",x[0]);
   %".28" = zext i8 %"array_element" to i32
   %".29" = call i32 (i8*, ...) @"printf"(i8* %".24", i32 %".28")

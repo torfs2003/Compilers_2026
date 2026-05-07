@@ -36,11 +36,11 @@ entry:
   ;  Source: arr
   ;  Source: arr[2]
   %"decay_left" = getelementptr [5 x float], [5 x float]* %"arr", i32 0, i32 0
-  %"gep_idx" = getelementptr float, float* %"decay_left", i32 2
-  %"array_element" = load float, float* %"gep_idx"
+  %"gep_ptr" = getelementptr float, float* %"decay_left", i32 2
+  %"array_element" = load float, float* %"gep_ptr"
   ;  Source: arr[2]=6;
   %".16" = sitofp i32 6 to float
-  store float %".16", float* %"gep_idx"
+  store float %".16", float* %"gep_ptr"
   ;  Source: return0;
   ret i32 0
 }

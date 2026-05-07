@@ -50,8 +50,8 @@ while.body:
   %".21" = bitcast [4 x i8]* @"str" to i8*
   %"i.3" = load i32, i32* %"i"
   %"decay_left" = getelementptr [5 x i32], [5 x i32]* %"array_2", i32 0, i32 0
-  %"gep_idx" = getelementptr i32, i32* %"decay_left", i32 %"i.3"
-  %"array_element" = load i32, i32* %"gep_idx"
+  %"gep_ptr" = getelementptr i32, i32* %"decay_left", i32 %"i.3"
+  %"array_element" = load i32, i32* %"gep_ptr"
   %".22" = call i32 (i8*, ...) @"printf"(i8* %".21", i32 %"array_element")
   %"i.4" = load i32, i32* %"i"
   %".23" = load i32, i32* %"i"

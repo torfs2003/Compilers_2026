@@ -41,17 +41,17 @@ entry:
   ;  Source: a
   ;  Source: a[0]
   %"decay_left" = getelementptr [2 x i32], [2 x i32]* %"a", i32 0, i32 0
-  %"gep_idx" = getelementptr i32, i32* %"decay_left", i32 0
-  %"array_element" = load i32, i32* %"gep_idx"
+  %"gep_ptr" = getelementptr i32, i32* %"decay_left", i32 0
+  %"array_element" = load i32, i32* %"gep_ptr"
   ;  Source: a[0]=15;
-  store i32 15, i32* %"gep_idx"
+  store i32 15, i32* %"gep_ptr"
   ;  Source: a
   ;  Source: a[1]
   %"decay_left.1" = getelementptr [2 x i32], [2 x i32]* %"a", i32 0, i32 0
-  %"gep_idx.1" = getelementptr i32, i32* %"decay_left.1", i32 1
-  %"array_element.1" = load i32, i32* %"gep_idx.1"
+  %"gep_ptr.1" = getelementptr i32, i32* %"decay_left.1", i32 1
+  %"array_element.1" = load i32, i32* %"gep_ptr.1"
   ;  Source: a[1]=12;
-  store i32 12, i32* %"gep_idx.1"
+  store i32 12, i32* %"gep_ptr.1"
   ;  Source: x
   %"x.2" = load i32, i32* %"x"
   ;  Source: x=12;
@@ -60,12 +60,12 @@ entry:
   ;  Source: a
   ;  Source: a[1]
   %"decay_left.2" = getelementptr [2 x i32], [2 x i32]* %"a", i32 0, i32 0
-  %"gep_idx.2" = getelementptr i32, i32* %"decay_left.2", i32 1
-  %"array_element.2" = load i32, i32* %"gep_idx.2"
+  %"gep_ptr.2" = getelementptr i32, i32* %"decay_left.2", i32 1
+  %"array_element.2" = load i32, i32* %"gep_ptr.2"
   ;  Source: --a[1]
-  %".31" = load i32, i32* %"gep_idx.2"
+  %".31" = load i32, i32* %"gep_ptr.2"
   %".32" = sub i32 %".31", 1
-  store i32 %".32", i32* %"gep_idx.2"
+  store i32 %".32", i32* %"gep_ptr.2"
   ;  Source: printf("%d; ",--a[1]);
   %".35" = call i32 (i8*, ...) @"printf"(i8* %".27", i32 %".32")
   ;  Source: return0;

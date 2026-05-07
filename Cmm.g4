@@ -5,12 +5,7 @@ grammar Cmm;
 // ==========================================
 
 compilationUnit
-<<<<<<< HEAD
-    : (includeDirective | enumDeclaration | structDeclaration | unionDeclaration | typedefDeclaration | declaration | functionDeclaration | functionDefinition)* EOF
-=======
-    : (includeDirective | enumDeclaration | structDeclaration | typedefDeclaration
-      | declaration | functionDeclaration | functionDefinition | SEMI)* EOF
->>>>>>> 88a73e8e0b9bdae62f18ddd33bbf348af3016d93
+    : (includeDirective | enumDeclaration | structDeclaration | unionDeclaration | typedefDeclaration | declaration | functionDeclaration | functionDefinition | SEMI)* EOF
     ;
 
 includeDirective

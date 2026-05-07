@@ -31,13 +31,13 @@ entry:
   ;  Source: a
   ;  Source: a[0]
   %"decay_left" = getelementptr [2 x i8], [2 x i8]* %"a", i32 0, i32 0
-  %"gep_idx" = getelementptr i8, i8* %"decay_left", i32 0
-  %"array_element" = load i8, i8* %"gep_idx"
+  %"gep_ptr" = getelementptr i8, i8* %"decay_left", i32 0
+  %"array_element" = load i8, i8* %"gep_ptr"
   ;  Source: a
   ;  Source: a[1]
   %"decay_left.1" = getelementptr [2 x i8], [2 x i8]* %"a", i32 0, i32 0
-  %"gep_idx.1" = getelementptr i8, i8* %"decay_left.1", i32 1
-  %"array_element.1" = load i8, i8* %"gep_idx.1"
+  %"gep_ptr.1" = getelementptr i8, i8* %"decay_left.1", i32 1
+  %"array_element.1" = load i8, i8* %"gep_ptr.1"
   ;  Source: printf("%c%c",a[0],a[1]);
   %".13" = zext i8 %"array_element" to i32
   %".14" = zext i8 %"array_element.1" to i32

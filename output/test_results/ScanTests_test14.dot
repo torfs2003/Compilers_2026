@@ -19,7 +19,7 @@ digraph AST {
   node12 [label="Decl\nint\nresult\n(int)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
   node12 -> node13 [style="solid", color="black", label=" init", fontcolor="blue"];
   node16 [label="ID: result\n(int)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
-  node18 [label="\"%d \"\n(char*)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node18 [label="\"%d\"\n(char*)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node19 [label="ID: result\n(int)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
   node17 [label="Call: printf()\n(int)", shape=ellipse, style="filled", fillcolor="lightpink", color="black", fontcolor="black"];
   node17 -> node18 [style="solid", color="black", label=" arg0", fontcolor="black"];
@@ -27,13 +27,13 @@ digraph AST {
   node15 [label="=", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node15 -> node16 [style="solid", color="black"];
   node15 -> node17 [style="solid", color="black"];
-  node21 [label="\"%d \"\n(char*)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node21 [label="\"%d\"\n(char*)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node22 [label="ID: result\n(int)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
   node20 [label="Call: printf()\n(int)", shape=ellipse, style="filled", fillcolor="lightpink", color="black", fontcolor="black"];
   node20 -> node21 [style="solid", color="black", label=" arg0", fontcolor="black"];
   node20 -> node22 [style="solid", color="black", label=" arg1", fontcolor="black"];
-  node24 [label="\"%d \"\n(char*)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
-  node27 [label="\"%d \"\n(char*)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node24 [label="\"%d\"\n(char*)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node27 [label="\"%d\"\n(char*)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node29 [label="ID: result\n(int)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
   node28 [label="&\n(int*)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node28 -> node29 [style="solid", color="black"];
@@ -45,7 +45,7 @@ digraph AST {
   node23 [label="Call: printf()\n(int)", shape=ellipse, style="filled", fillcolor="lightpink", color="black", fontcolor="black"];
   node23 -> node24 [style="solid", color="black", label=" arg0", fontcolor="black"];
   node23 -> node25 [style="solid", color="black", label=" arg1", fontcolor="black"];
-  node31 [label="\"%d \"\n(char*)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node31 [label="\"%d\"\n(char*)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node33 [label="ID: result\n(int)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
   node32 [label="Call: mul()\n(int)", shape=ellipse, style="filled", fillcolor="lightpink", color="black", fontcolor="black"];
   node32 -> node33 [style="solid", color="black", label=" arg0", fontcolor="black"];

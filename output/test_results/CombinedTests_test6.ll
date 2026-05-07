@@ -1,9 +1,5 @@
 ; ModuleID = "cmm_module"
-<<<<<<< HEAD
 target triple = "x86_64-w64-windows-gnu"
-=======
-target triple = "x86_64-unknown-linux-gnu"
->>>>>>> origin/main
 target datalayout = ""
 
 declare i32 @"printf"(i8* %".1", ...)
@@ -102,12 +98,12 @@ while.cond.1:
 while.body.1:
   %"arr.1" = load i32*, i32** %"arr"
   %"j.3" = load i32, i32* %"j"
-  %"gep_idx" = getelementptr i32, i32* %"arr.1", i32 %"j.3"
-  %"array_element" = load i32, i32* %"gep_idx"
+  %"gep_ptr" = getelementptr i32, i32* %"arr.1", i32 %"j.3"
+  %"array_element" = load i32, i32* %"gep_ptr"
   %"arr.2" = load i32*, i32** %"arr"
   %"min_idx.2" = load i32, i32* %"min_idx"
-  %"gep_idx.1" = getelementptr i32, i32* %"arr.2", i32 %"min_idx.2"
-  %"array_element.1" = load i32, i32* %"gep_idx.1"
+  %"gep_ptr.1" = getelementptr i32, i32* %"arr.2", i32 %"min_idx.2"
+  %"array_element.1" = load i32, i32* %"gep_ptr.1"
   %".24" = icmp slt i32 %"array_element", %"array_element.1"
   %".25" = zext i1 %".24" to i32
   %"ifcond" = icmp ne i32 %".25", 0
@@ -115,13 +111,13 @@ while.body.1:
 while.end.1:
   %"arr.3" = load i32*, i32** %"arr"
   %"min_idx.4" = load i32, i32* %"min_idx"
-  %"gep_idx.2" = getelementptr i32, i32* %"arr.3", i32 %"min_idx.4"
-  %"array_element.2" = load i32, i32* %"gep_idx.2"
+  %"gep_ptr.2" = getelementptr i32, i32* %"arr.3", i32 %"min_idx.4"
+  %"array_element.2" = load i32, i32* %"gep_ptr.2"
   %"arr.4" = load i32*, i32** %"arr"
   %"i.5" = load i32, i32* %"i"
-  %"gep_idx.3" = getelementptr i32, i32* %"arr.4", i32 %"i.5"
-  %"array_element.3" = load i32, i32* %"gep_idx.3"
-  call void @"swap"(i32* %"gep_idx.2", i32* %"gep_idx.3")
+  %"gep_ptr.3" = getelementptr i32, i32* %"arr.4", i32 %"i.5"
+  %"array_element.3" = load i32, i32* %"gep_ptr.3"
+  call void @"swap"(i32* %"gep_ptr.2", i32* %"gep_ptr.3")
   %"i.6" = load i32, i32* %"i"
   %".34" = load i32, i32* %"i"
   %".35" = add i32 %".34", 1
@@ -165,8 +161,8 @@ while.body:
   %".14" = bitcast [4 x i8]* @"str" to i8*
   %"arr.1" = load i32*, i32** %"arr"
   %"i.3" = load i32, i32* %"i"
-  %"gep_idx" = getelementptr i32, i32* %"arr.1", i32 %"i.3"
-  %"array_element" = load i32, i32* %"gep_idx"
+  %"gep_ptr" = getelementptr i32, i32* %"arr.1", i32 %"i.3"
+  %"array_element" = load i32, i32* %"gep_ptr"
   %".15" = call i32 (i8*, ...) @"printf"(i8* %".14", i32 %"array_element")
   %"i.4" = load i32, i32* %"i"
   %".16" = load i32, i32* %"i"

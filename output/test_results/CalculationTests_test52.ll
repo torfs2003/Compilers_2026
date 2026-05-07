@@ -33,11 +33,11 @@ entry:
   ;  Source: array
   ;  Source: array[0]
   %"decay_left" = getelementptr [3 x i32], [3 x i32]* %"array", i32 0, i32 0
-  %"gep_idx" = getelementptr i32, i32* %"decay_left", i32 0
-  %"array_element" = load i32, i32* %"gep_idx"
+  %"gep_ptr" = getelementptr i32, i32* %"decay_left", i32 0
+  %"array_element" = load i32, i32* %"gep_ptr"
   ;  Source: &array[0]
   ;  Source: int*array_ptr=&array[0];
-  store i32* %"gep_idx", i32** %"array_ptr"
+  store i32* %"gep_ptr", i32** %"array_ptr"
   %"a" = alloca i32
   ;  Source: array_ptr
   %"array_ptr.1" = load i32*, i32** %"array_ptr"

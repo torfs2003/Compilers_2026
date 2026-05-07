@@ -56,17 +56,19 @@ entry:
   ;  Source: a||b
   %"decay_left" = getelementptr [4 x i32], [4 x i32]* %"a", i32 0, i32 0
   %"decay_right" = getelementptr [2 x i32], [2 x i32]* %"b", i32 0, i32 0
-  %".29" = icmp ne i32* %"decay_left", null
-  %".30" = icmp ne i32* %"decay_right", null
-  %".31" = or i1 %".29", %".30"
-  %".32" = zext i1 %".31" to i32
+  %".29" = ptrtoint i32* %"decay_left" to i32
+  %".30" = ptrtoint i32* %"decay_right" to i32
+  %".31" = icmp ne i32 %".29", 0
+  %".32" = icmp ne i32 %".30", 0
+  %".33" = or i1 %".31", %".32"
+  %".34" = zext i1 %".33" to i32
   ;  Source: e=a||b;
-  store i32 %".32", i32* %"e"
-  %".35" = bitcast [3 x i8]* @"str" to i8*
+  store i32 %".34", i32* %"e"
+  %".37" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: e
   %"e.2" = load i32, i32* %"e"
   ;  Source: printf("%d",e);
-  %".38" = call i32 (i8*, ...) @"printf"(i8* %".35", i32 %"e.2")
+  %".40" = call i32 (i8*, ...) @"printf"(i8* %".37", i32 %"e.2")
   ;  Source: e
   %"e.3" = load i32, i32* %"e"
   ;  Source: sb
@@ -74,45 +76,47 @@ entry:
   ;  Source: sa
   %"sa.1" = load i32*, i32** %"sa"
   ;  Source: sb||sa
-  %".43" = icmp ne i32* %"sb.1", null
-  %".44" = icmp ne i32* %"sa.1", null
-  %".45" = or i1 %".43", %".44"
-  %".46" = zext i1 %".45" to i32
+  %".45" = ptrtoint i32* %"sb.1" to i32
+  %".46" = ptrtoint i32* %"sa.1" to i32
+  %".47" = icmp ne i32 %".45", 0
+  %".48" = icmp ne i32 %".46", 0
+  %".49" = or i1 %".47", %".48"
+  %".50" = zext i1 %".49" to i32
   ;  Source: e=sb||sa;
-  store i32 %".46", i32* %"e"
-  %".49" = bitcast [3 x i8]* @"str.1" to i8*
+  store i32 %".50", i32* %"e"
+  %".53" = bitcast [3 x i8]* @"str.1" to i8*
   ;  Source: e
   %"e.4" = load i32, i32* %"e"
   ;  Source: printf("%d",e);
-  %".52" = call i32 (i8*, ...) @"printf"(i8* %".49", i32 %"e.4")
+  %".56" = call i32 (i8*, ...) @"printf"(i8* %".53", i32 %"e.4")
   ;  Source: e
   %"e.5" = load i32, i32* %"e"
   ;  Source: a
   ;  Source: !a
   %"unary_decay" = getelementptr [4 x i32], [4 x i32]* %"a", i32 0, i32 0
-  %".56" = icmp eq i32* %"unary_decay", null
-  %".57" = zext i1 %".56" to i32
+  %".60" = icmp eq i32* %"unary_decay", null
+  %".61" = zext i1 %".60" to i32
   ;  Source: e=!a;
-  store i32 %".57", i32* %"e"
-  %".60" = bitcast [3 x i8]* @"str.2" to i8*
+  store i32 %".61", i32* %"e"
+  %".64" = bitcast [3 x i8]* @"str.2" to i8*
   ;  Source: e
   %"e.6" = load i32, i32* %"e"
   ;  Source: printf("%d",e);
-  %".63" = call i32 (i8*, ...) @"printf"(i8* %".60", i32 %"e.6")
+  %".67" = call i32 (i8*, ...) @"printf"(i8* %".64", i32 %"e.6")
   ;  Source: e
   %"e.7" = load i32, i32* %"e"
   ;  Source: sb
   %"sb.2" = load i32*, i32** %"sb"
   ;  Source: !sb
-  %".67" = icmp eq i32* %"sb.2", null
-  %".68" = zext i1 %".67" to i32
+  %".71" = icmp eq i32* %"sb.2", null
+  %".72" = zext i1 %".71" to i32
   ;  Source: e=!sb;
-  store i32 %".68", i32* %"e"
-  %".71" = bitcast [3 x i8]* @"str.3" to i8*
+  store i32 %".72", i32* %"e"
+  %".75" = bitcast [3 x i8]* @"str.3" to i8*
   ;  Source: e
   %"e.8" = load i32, i32* %"e"
   ;  Source: printf("%d",e);
-  %".74" = call i32 (i8*, ...) @"printf"(i8* %".71", i32 %"e.8")
+  %".78" = call i32 (i8*, ...) @"printf"(i8* %".75", i32 %"e.8")
   ;  Source: return0;
   ret i32 0
 }

@@ -40,18 +40,18 @@ entry:
   %"union_cast_b" = bitcast [20 x i32]* %"gep_b" to i32**
   %"load_b" = load i32*, i32** %"union_cast_b"
   ;  Source: c.b[2]
-  %"gep_idx" = getelementptr i32, i32* %"load_b", i32 2
-  %"array_element" = load i32, i32* %"gep_idx"
+  %"gep_ptr" = getelementptr i32, i32* %"load_b", i32 2
+  %"array_element" = load i32, i32* %"gep_ptr"
   ;  Source: c.b[2]=5;
-  store i32 5, i32* %"gep_idx"
+  store i32 5, i32* %"gep_ptr"
   %".14" = bitcast [3 x i8]* @"str.1" to i8*
   ;  Source: c.b
   %"gep_b.1" = getelementptr inbounds %"struct.a", %"struct.a"* %"c", i32 0, i32 0
   %"union_cast_b.1" = bitcast [20 x i32]* %"gep_b.1" to i32**
   %"load_b.1" = load i32*, i32** %"union_cast_b.1"
   ;  Source: c.b[2]
-  %"gep_idx.1" = getelementptr i32, i32* %"load_b.1", i32 2
-  %"array_element.1" = load i32, i32* %"gep_idx.1"
+  %"gep_ptr.1" = getelementptr i32, i32* %"load_b.1", i32 2
+  %"array_element.1" = load i32, i32* %"gep_ptr.1"
   ;  Source: printf("%d",c.b[2]);
   %".18" = call i32 (i8*, ...) @"printf"(i8* %".14", i32 %"array_element.1")
   ;  Source: return0;

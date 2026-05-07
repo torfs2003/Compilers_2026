@@ -33,11 +33,11 @@ entry:
   ;  Source: array
   ;  Source: array[0]
   %"decay_left" = getelementptr [3 x i32], [3 x i32]* %"array", i32 0, i32 0
-  %"gep_idx" = getelementptr i32, i32* %"decay_left", i32 0
-  %"array_element" = load i32, i32* %"gep_idx"
+  %"gep_ptr" = getelementptr i32, i32* %"decay_left", i32 0
+  %"array_element" = load i32, i32* %"gep_ptr"
   ;  Source: &array[0]
   ;  Source: int*ptr1=&array[0];
-  store i32* %"gep_idx", i32** %"ptr1"
+  store i32* %"gep_ptr", i32** %"ptr1"
   ;  Source: ptr1
   %"ptr1.1" = load i32*, i32** %"ptr1"
   ;  Source: ptr1++;
@@ -48,11 +48,11 @@ entry:
   ;  Source: array
   ;  Source: array[1]
   %"decay_left.1" = getelementptr [3 x i32], [3 x i32]* %"array", i32 0, i32 0
-  %"gep_idx.1" = getelementptr i32, i32* %"decay_left.1", i32 1
-  %"array_element.1" = load i32, i32* %"gep_idx.1"
+  %"gep_ptr.1" = getelementptr i32, i32* %"decay_left.1", i32 1
+  %"array_element.1" = load i32, i32* %"gep_ptr.1"
   ;  Source: &array[1]
   ;  Source: int*ptr2=&array[1];
-  store i32* %"gep_idx.1", i32** %"ptr2"
+  store i32* %"gep_ptr.1", i32** %"ptr2"
   %".24" = bitcast [4 x i8]* @"str" to i8*
   ;  Source: ptr1
   %"ptr1.2" = load i32*, i32** %"ptr1"

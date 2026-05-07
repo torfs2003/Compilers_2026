@@ -35,11 +35,11 @@ entry:
   ;  Source: k
   ;  Source: k[1]
   %"decay_left" = getelementptr [4 x i8], [4 x i8]* %"k", i32 0, i32 0
-  %"gep_idx" = getelementptr i8, i8* %"decay_left", i32 1
-  %"array_element" = load i8, i8* %"gep_idx"
+  %"gep_ptr" = getelementptr i8, i8* %"decay_left", i32 1
+  %"array_element" = load i8, i8* %"gep_ptr"
   ;  Source: &k[1]
   ;  Source: char*c=&k[1];
-  store i8* %"gep_idx", i8** %"c"
+  store i8* %"gep_ptr", i8** %"c"
   %".16" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: c
   %"c.1" = load i8*, i8** %"c"

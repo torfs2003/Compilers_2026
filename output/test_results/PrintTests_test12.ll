@@ -33,10 +33,10 @@ entry:
   %".8" = bitcast [7 x i8]* @"str" to i8*
   ;  Source: p
   %"p.2" = load float, float* %"p"
-  ;  Source: printf("%f %f ",3.14,p);
-  %".11" = fpext float 0x40091eb860000000 to double
-  %".12" = fpext float %"p.2" to double
-  %".13" = call i32 (i8*, ...) @"printf"(i8* %".8", double %".11", double %".12")
+  ;  Source: (int)p
+  %".11" = fptosi float %"p.2" to i32
+  ;  Source: printf("%d %d ",(int)3.14,(int)p);
+  %".13" = call i32 (i8*, ...) @"printf"(i8* %".8", i32 3, i32 %".11")
   %".14" = bitcast [7 x i8]* @"str.1" to i8*
   ;  Source: printf("True  ");
   %".16" = call i32 (i8*, ...) @"printf"(i8* %".14")
@@ -44,5 +44,5 @@ entry:
   ret i32 0
 }
 
-@"str" = internal constant [7 x i8] c"%f %f \00"
+@"str" = internal constant [7 x i8] c"%d %d \00"
 @"str.1" = internal constant [7 x i8] c"True  \00"
