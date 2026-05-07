@@ -5,7 +5,12 @@ grammar Cmm;
 // ==========================================
 
 compilationUnit
+<<<<<<< HEAD
     : (includeDirective | enumDeclaration | structDeclaration | unionDeclaration | typedefDeclaration | declaration | functionDeclaration | functionDefinition)* EOF
+=======
+    : (includeDirective | enumDeclaration | structDeclaration | typedefDeclaration
+      | declaration | functionDeclaration | functionDefinition | SEMI)* EOF
+>>>>>>> 88a73e8e0b9bdae62f18ddd33bbf348af3016d93
     ;
 
 includeDirective
@@ -50,7 +55,7 @@ typeList
     ;
 
 typedefDeclaration
-    : TYPEDEF typeSpecifier MUL* IDENTIFIER (LBRACKET INT_LITERAL RBRACKET)* SEMI
+    : TYPEDEF CONST? typeSpecifier CONST? MUL* CONST? IDENTIFIER (LBRACKET INT_LITERAL RBRACKET)* SEMI
     ;
 
 structDeclaration
@@ -60,7 +65,7 @@ structDeclaration
 unionDeclaration
     : UNION IDENTIFIER LBRACE declaration* RBRACE SEMI
     ;
-    
+
 statement
     : expression SEMI
     | compoundStatement
@@ -128,8 +133,8 @@ returnStatement
     ;
 
 caseBlock
-    : CASE INT_LITERAL COLON statement*
-    | DEFAULT COLON statement*
+    : CASE INT_LITERAL COLON (statement | declaration)*
+    | DEFAULT COLON (statement | declaration)*
     ;
 
 enumDeclaration
@@ -198,7 +203,7 @@ additive_expression
     ;
 
 cast_expression
-    : LPAREN typeSpecifier RPAREN cast_expression
+    : LPAREN CONST? typeSpecifier MUL* RPAREN cast_expression
     | unary_expression
     ;
 

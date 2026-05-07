@@ -449,26 +449,42 @@ class ASTVisitor:
                         values.append(ident.getText())
                     res = self.get_loc(EnumNode(name, values),ctx)
 
-                elif class_name == "SwitchStatementContext":
-                    switch_expr = results[id(ctx.expression())]
-                    default_case = None
-                    
-                    for case_ctx in ctx.caseBlock():
-                        if case_ctx.DEFAULT():
-                            default_case = results[id(case_ctx)]
 
-                    current_if_else = default_case
-                    
-                    for case_ctx in reversed(ctx.caseBlock()):
+
+
+                elif class_name == "SwitchStatementContext":
+
+                    switch_expr = results[id(ctx.expression())]
+
+                    cases = []
+
+                    default_body = None
+
+                    ordered_cases = []  # (val_or_None, body) in source volgorde
+
+                    for case_ctx in ctx.caseBlock():
+
+                        case_body = results[id(case_ctx)]
+
                         if case_ctx.CASE():
-                            val_node = IntNode(int(case_ctx.INT_LITERAL().getText()))
-                            case_body = results[id(case_ctx)]
-                            
-                            cond = BinOpNode(switch_expr, "==", val_node)
-                            
-                            current_if_else = self.get_loc(IfNode(cond, case_body, current_if_else), case_ctx)
-                    
-                    res = current_if_else if current_if_else else self.get_loc(CompoundNode([]), ctx)
+
+                            val = int(case_ctx.INT_LITERAL().getText())
+
+                            cases.append((val, case_body))
+
+                            ordered_cases.append((val, case_body))
+
+                        elif case_ctx.DEFAULT():
+
+                            default_body = case_body
+
+                            ordered_cases.append((None, case_body))  # None = default
+
+                    node = SwitchNode(switch_expr, cases, default_body)
+
+                    node.ordered_cases = ordered_cases  # bewaar source volgorde
+
+                    res = self.get_loc(node, ctx)
 
                 elif class_name == "ReturnStatementContext":
                     expr = results.get(id(ctx.expression())) if ctx.expression() else None
