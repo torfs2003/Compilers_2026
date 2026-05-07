@@ -852,3 +852,5 @@ class SemanticVisitor(BaseVisitor):
     def visit_FloatNode(self, node): node.eval_type = 'float'
     def visit_CharNode(self, node): node.eval_type = 'char'
     def visit_StringNode(self, node): node.eval_type = 'char*'
+    def visit_SizeofNode(self, node):
+        node.eval_type = 'int'

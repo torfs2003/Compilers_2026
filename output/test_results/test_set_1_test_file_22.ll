@@ -1,7 +1,8 @@
 ; ModuleID = "cmm_module"
-target triple = "x86_64-w64-windows-gnu"
+target triple = "x86_64-unknown-linux-gnu"
 target datalayout = ""
 
+<<<<<<< HEAD
 declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
@@ -22,6 +23,8 @@ declare i8* @"realloc"(i8* %".1", i32 %".2")
 
 declare void @"free"(i8* %".1")
 
+=======
+>>>>>>> origin/optionals
 define i32 @"main"()
 {
 entry:
@@ -52,9 +55,16 @@ entry:
   %".17" = add i32 %"integer.2", 5
   ;  Source: intz=integer+5;
   store i32 %".17", i32* %"z"
-  %"pointer" = alloca i32*
+  ;  Source: int_ptr
+  %"int_ptr.2" = load i32*, i32** %"int_ptr"
   ;  Source: z
   %"z.1" = load i32, i32* %"z"
+  ;  Source: &z
+  ;  Source: int_ptr=&z;
+  store i32* %"z", i32** %"int_ptr"
+  %"pointer" = alloca i32*
+  ;  Source: z
+  %"z.2" = load i32, i32* %"z"
   ;  Source: &z
   ;  Source: int*pointer=&z;
   store i32* %"z", i32** %"pointer"
@@ -67,16 +77,9 @@ entry:
   store i32 %"deref_load", i32* %"x"
   %"x_ptr" = alloca i32**
   ;  Source: int_ptr
-  %"int_ptr.2" = load i32*, i32** %"int_ptr"
+  %"int_ptr.3" = load i32*, i32** %"int_ptr"
   ;  Source: &int_ptr
   ;  Source: int**x_ptr=&int_ptr;
   store i32** %"int_ptr", i32*** %"x_ptr"
-  ;  Source: int_ptr
-  %"int_ptr.3" = load i32*, i32** %"int_ptr"
-  ;  Source: z
-  %"z.2" = load i32, i32* %"z"
-  ;  Source: &z
-  ;  Source: int_ptr=&z;
-  store i32* %"z", i32** %"int_ptr"
   ret i32 0
 }

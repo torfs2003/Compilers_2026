@@ -1,5 +1,5 @@
 ; ModuleID = "cmm_module"
-target triple = "x86_64-w64-windows-gnu"
+target triple = "x86_64-unknown-linux-gnu"
 target datalayout = ""
 
 %"struct.kaas" = type {i32, float}
@@ -78,12 +78,11 @@ entry:
   %".13" = load %"struct.kaas"*, %"struct.kaas"** %"ptr"
   %"gep_yoghurt" = getelementptr inbounds %"struct.kaas", %"struct.kaas"* %".13", i32 0, i32 1
   %"load_yoghurt" = load float, float* %"gep_yoghurt"
-  ;  Source: (int)ptr->yoghurt
-  %".15" = fptosi float %"load_yoghurt" to i32
-  ;  Source: printf("%d %d ",ptr->melk,(int)ptr->yoghurt);
-  %".17" = call i32 (i8*, ...) @"printf"(i8* %".9", i32 %"load_melk", i32 %".15")
+  ;  Source: printf("%d %f ",ptr->melk,ptr->yoghurt);
+  %".15" = fpext float %"load_yoghurt" to double
+  %".16" = call i32 (i8*, ...) @"printf"(i8* %".9", i32 %"load_melk", double %".15")
   ;  Source: return0;
   ret i32 0
 }
 
-@"str" = internal constant [7 x i8] c"%d %d \00"
+@"str" = internal constant [7 x i8] c"%d %f \00"

@@ -260,3 +260,9 @@ class ForInitNode(ASTNode):
         self.value = value
     def __repr__(self):
         return f"ForInitNode({type(self.value).__name__})"
+class SizeofNode(ASTNode):
+    def __init__(self, operand):
+        super().__init__()
+        self.operand = operand  # string (type) of ASTNode (expressie)
+    def __repr__(self):
+        return f"SizeofNode({self.operand})"

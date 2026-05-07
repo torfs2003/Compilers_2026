@@ -1,5 +1,5 @@
 ; ModuleID = "cmm_module"
-target triple = "x86_64-w64-windows-gnu"
+target triple = "x86_64-unknown-linux-gnu"
 target datalayout = ""
 
 %"struct.kaas" = type {i32}
@@ -40,7 +40,6 @@ entry:
   store %"struct.kaas"* %"gouda", %"struct.kaas"** %"ptr"
   %".12" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: ptr->melk
-  %"ptr.2" = load %"struct.kaas"*, %"struct.kaas"** %"ptr"
   %".14" = load %"struct.kaas"*, %"struct.kaas"** %"ptr"
   %"gep_melk.1" = getelementptr inbounds %"struct.kaas", %"struct.kaas"* %".14", i32 0, i32 0
   %"load_melk.1" = load i32, i32* %"gep_melk.1"
@@ -48,9 +47,9 @@ entry:
   %".16" = call i32 (i8*, ...) @"printf"(i8* %".12", i32 %"load_melk.1")
   %".17" = bitcast [3 x i8]* @"str.1" to i8*
   ;  Source: (*ptr).melk
-  %"ptr.3" = load %"struct.kaas"*, %"struct.kaas"** %"ptr"
-  %"deref_load" = load %"struct.kaas", %"struct.kaas"* %"ptr.3"
-  %"gep_melk.2" = getelementptr inbounds %"struct.kaas", %"struct.kaas"* %"ptr.3", i32 0, i32 0
+  %"ptr.2" = load %"struct.kaas"*, %"struct.kaas"** %"ptr"
+  %"deref_load" = load %"struct.kaas", %"struct.kaas"* %"ptr.2"
+  %"gep_melk.2" = getelementptr inbounds %"struct.kaas", %"struct.kaas"* %"ptr.2", i32 0, i32 0
   %"load_melk.2" = load i32, i32* %"gep_melk.2"
   ;  Source: printf("%d",(*ptr).melk);
   %".20" = call i32 (i8*, ...) @"printf"(i8* %".17", i32 %"load_melk.2")

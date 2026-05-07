@@ -1,7 +1,8 @@
 ; ModuleID = "cmm_module"
-target triple = "x86_64-w64-windows-gnu"
+target triple = "x86_64-unknown-linux-gnu"
 target datalayout = ""
 
+<<<<<<< HEAD
 declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
@@ -22,6 +23,8 @@ declare i8* @"realloc"(i8* %".1", i32 %".2")
 
 declare void @"free"(i8* %".1")
 
+=======
+>>>>>>> origin/optionals
 define i32 @"main"()
 {
 entry:
