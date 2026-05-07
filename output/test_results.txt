@@ -1,78 +1,83 @@
 
---- Start testen in: example_source_files/test_set_1 (71 bestanden) ---
+--- Start testen in: example_source_files/test_set_1 (70 bestanden) ---
 Testen van: test_set_1/test_file_43.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_1/test_file_18.c...PASSED
-Testen van: test_set_1/test_file_53.c...PASSED
-Testen van: test_set_1/test_file_64.c...PASSED
-Testen van: test_set_1/test_file_27.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_1/test_file_29.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_1/test_file_3.c...PASSED
-Testen van: test_set_1/test_file_32.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_1/test_file_63.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_1/test_file_11.c...PASSED
-Testen van: test_set_1/test_file_48.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_1/test_file_8.c...PASSED
-Testen van: test_set_1/test_file_26.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_1/test_file_24.c...FAILED (Clang gaf error, maar jouw compiler accepteerde de code!)
-Testen van: test_set_1/test_file_36.c...PASSED
-Testen van: test_set_1/test_file_40.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_1/test_file_67.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_1/test_file_54.c...PASSED
 Testen van: test_set_1/test_file_46.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_1/test_file_65.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_1/test_file_7.c...PASSED
-Testen van: test_set_1/test_file_1.c...PASSED
-Testen van: test_set_1/test_file_21.c...PASSED
-Testen van: test_set_1/test_file_69.c...PASSED
-Testen van: test_set_1/test_file_23.c...FAILED (Clang gaf error, maar jouw compiler accepteerde de code!)
-Testen van: test_set_1/test_file_44.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_1/test_file_39.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_1/test_file_57.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_1/test_file_22.c...PASSED
-Testen van: test_set_1/test_file_61.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_1/test_file_41.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_1/test_file_30.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_1/test_file_58.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_1/test_file_20.c...PASSED
-Testen van: test_set_1/test_file_66.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_1/test_file_2.c...PASSED
-Testen van: test_set_1/test_file_5.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_1/test_file_14.c...PASSED
-Testen van: test_set_1/test_file_4.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_1/test_file_70.c...PASSED
-Testen van: test_set_1/test_file_55.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_1/test_file_38.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_1/test_file_16.c...PASSED
-Testen van: test_set_1/test_file_49.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_1/test_file_45.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_1/test_file_59.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_1/test_file_50.c...PASSED
-Testen van: test_set_1/test_file_15.c...PASSED
-Testen van: test_set_1/test_file_25.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_1/test_file_28.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_1/test_file_62.c...PASSED
-Testen van: test_set_1/test_file_33.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_1/test_file_68.c...PASSED
-Testen van: test_set_1/test_file_35.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_1/test_file_9.c...PASSED
-Testen van: test_set_1/test_file_13.c...PASSED
-Testen van: test_set_1/test_file_17.c...PASSED
-Testen van: test_set_1/test_file_51.c...PASSED
-Testen van: test_set_1/test_file_12.c...PASSED
-Testen van: test_set_1/test_file_37.c...PASSED (Expected failure: compiler ving de error op)
 Testen van: test_set_1/test_file_60.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_1/test_file_52.c...PASSED
-Testen van: test_set_1/test_file_34.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_1/test_file_19.c...PASSED
-Testen van: test_set_1/test_file_47.c...PASSED
-Testen van: test_set_1/test_file_56.c...PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_13.c...PASSED
+Testen van: test_set_1/test_file_44.c...PASSED (Expected failure: compiler ving de error op)
 Testen van: test_set_1/test_file_31.c...PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_11.c...PASSED
+Testen van: test_set_1/test_file_61.c...PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_21.c...PASSED
+Testen van: test_set_1/test_file_33.c...PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_67.c...PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_57.c...PASSED (Expected failure: compiler ving de error op)
 Testen van: test_set_1/test_file_10.c...PASSED
-Testen van: test_set_1/test_file_0.c...PASSED
-Testen van: test_set_1/test_file_42.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_1/test_file_6.c...PASSED
+Testen van: test_set_1/test_file_30.c...PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_26.c...FAILED (Compiler Error on valid C)
+  --> Jouw compiler gaf een foutmelding:
+...
 
---- Resultaten voor example_source_files/test_set_1: 69 Passed, 2 Failed ---
+Testen van: test_set_1/test_file_28.c...PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_27.c...PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_53.c...PASSED
+Testen van: test_set_1/test_file_23.c...FAILED (Clang gaf error, maar jouw compiler accepteerde de code!)
+Testen van: test_set_1/test_file_7.c...PASSED
+Testen van: test_set_1/test_file_25.c...FAILED (Compiler Error on valid C)
+  --> Jouw compiler gaf een foutmelding:
+...
+
+Testen van: test_set_1/test_file_8.c...PASSED
+Testen van: test_set_1/test_file_45.c...PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_32.c...PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_4.c...PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_63.c...PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_0.c...PASSED
+Testen van: test_set_1/test_file_12.c...PASSED
+Testen van: test_set_1/test_file_15.c...PASSED
+Testen van: test_set_1/test_file_5.c...PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_56.c...PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_70.c...PASSED
+Testen van: test_set_1/test_file_51.c...PASSED
+Testen van: test_set_1/test_file_40.c...PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_18.c...PASSED
+Testen van: test_set_1/test_file_17.c...PASSED
+Testen van: test_set_1/test_file_1.c...PASSED
+Testen van: test_set_1/test_file_24.c...FAILED (Clang gaf error, maar jouw compiler accepteerde de code!)
+Testen van: test_set_1/test_file_64.c...PASSED
+Testen van: test_set_1/test_file_55.c...PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_50.c...PASSED
+Testen van: test_set_1/test_file_38.c...PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_29.c...PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_54.c...PASSED
+Testen van: test_set_1/test_file_65.c...PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_68.c...PASSED
+Testen van: test_set_1/test_file_14.c...PASSED
+Testen van: test_set_1/test_file_22.c...PASSED
+Testen van: test_set_1/test_file_42.c...PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_47.c...PASSED
+Testen van: test_set_1/test_file_62.c...PASSED
+Testen van: test_set_1/test_file_34.c...PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_66.c...PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_58.c...PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_9.c...PASSED
+Testen van: test_set_1/test_file_36.c...PASSED
+Testen van: test_set_1/test_file_16.c...PASSED
+Testen van: test_set_1/test_file_19.c...PASSED
+Testen van: test_set_1/test_file_39.c...PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_41.c...PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_69.c...PASSED
+Testen van: test_set_1/test_file_49.c...PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_20.c...PASSED
+Testen van: test_set_1/test_file_37.c...PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_2.c...PASSED
+Testen van: test_set_1/test_file_3.c...PASSED
+Testen van: test_set_1/test_file_48.c...PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_52.c...PASSED
+Testen van: test_set_1/test_file_35.c...PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_1/test_file_59.c...PASSED (Expected failure: compiler ving de error op)
+
+--- Resultaten voor example_source_files/test_set_1: 66 Passed, 4 Failed ---
 
 Gefaalde tests (zie apart bestand)
 
@@ -80,87 +85,23 @@ Gefaalde tests (zie apart bestand)
 
 --- Start testen in: example_source_files/test_set_2 (79 bestanden) ---
 Testen van: test_set_2/test_file_43.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_2/test_file_18.c...PASSED
-Testen van: test_set_2/test_file_53.c...PASSED
-Testen van: test_set_2/test_file_73.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_2/test_file_64.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_2/test_file_27.c...PASSED
-Testen van: test_set_2/test_file_29.c...PASSED
-Testen van: test_set_2/test_file_3.c...PASSED
-Testen van: test_set_2/test_file_75.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_2/test_file_32.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_2/test_file_63.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_2/test_file_11.c...PASSED
-Testen van: test_set_2/test_file_48.c...PASSED
-Testen van: test_set_2/test_file_74.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_2/test_file_8.c...PASSED
-Testen van: test_set_2/test_file_26.c...PASSED
-Testen van: test_set_2/test_file_24.c...PASSED
-Testen van: test_set_2/test_file_71.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_2/test_file_36.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_2/test_file_40.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_2/test_file_67.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_2/test_file_54.c...PASSED (Expected failure: compiler ving de error op)
 Testen van: test_set_2/test_file_46.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_2/test_file_65.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_2/test_file_7.c...PASSED
-Testen van: test_set_2/test_file_1.c...PASSED
-Testen van: test_set_2/test_file_21.c...PASSED
-Testen van: test_set_2/test_file_69.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_2/test_file_23.c...PASSED
-Testen van: test_set_2/test_file_44.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_2/test_file_39.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_2/test_file_57.c...PASSED
-Testen van: test_set_2/test_file_22.c...PASSED
-Testen van: test_set_2/test_file_61.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_2/test_file_41.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_2/test_file_30.c...PASSED
-Testen van: test_set_2/test_file_58.c...PASSED
-Testen van: test_set_2/test_file_20.c...PASSED
-Testen van: test_set_2/test_file_66.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_2/test_file_78.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_2/test_file_2.c...PASSED
-Testen van: test_set_2/test_file_5.c...PASSED
-Testen van: test_set_2/test_file_14.c...PASSED
-Testen van: test_set_2/test_file_4.c...PASSED
-Testen van: test_set_2/test_file_70.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_2/test_file_55.c...PASSED
-Testen van: test_set_2/test_file_38.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_2/test_file_16.c...PASSED
-Testen van: test_set_2/test_file_49.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_2/test_file_45.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_2/test_file_59.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_2/test_file_50.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_2/test_file_15.c...PASSED
-Testen van: test_set_2/test_file_25.c...PASSED
-Testen van: test_set_2/test_file_28.c...PASSED
-Testen van: test_set_2/test_file_62.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_2/test_file_33.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_2/test_file_68.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_2/test_file_35.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_2/test_file_76.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_2/test_file_9.c...PASSED
-Testen van: test_set_2/test_file_13.c...PASSED
-Testen van: test_set_2/test_file_17.c...PASSED
-Testen van: test_set_2/test_file_51.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_2/test_file_12.c...PASSED
-Testen van: test_set_2/test_file_37.c...PASSED (Expected failure: compiler ving de error op)
 Testen van: test_set_2/test_file_60.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_2/test_file_52.c...PASSED
-Testen van: test_set_2/test_file_34.c...PASSED
-Testen van: test_set_2/test_file_19.c...PASSED
-Testen van: test_set_2/test_file_72.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_2/test_file_47.c...PASSED
-Testen van: test_set_2/test_file_56.c...PASSED
+Testen van: test_set_2/test_file_13.c...PASSED
+Testen van: test_set_2/test_file_44.c...PASSED (Expected failure: compiler ving de error op)
 Testen van: test_set_2/test_file_31.c...PASSED
+Testen van: test_set_2/test_file_11.c...PASSED
+Testen van: test_set_2/test_file_61.c...PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_2/test_file_21.c...PASSED
+Testen van: test_set_2/test_file_33.c...PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_2/test_file_67.c...PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_2/test_file_57.c...PASSED
 Testen van: test_set_2/test_file_10.c...PASSED
-Testen van: test_set_2/test_file_0.c...PASSED
-Testen van: test_set_2/test_file_42.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_2/test_file_77.c...PASSED (Expected failure: compiler ving de error op)
-Testen van: test_set_2/test_file_6.c...PASSED
-
---- Resultaten voor example_source_files/test_set_2: 79 Passed, 0 Failed ---
-
-Geen gefaalde tests
-
-
+Testen van: test_set_2/test_file_30.c...PASSED
+Testen van: test_set_2/test_file_26.c...PASSED
+Testen van: test_set_2/test_file_28.c...PASSED
+Testen van: test_set_2/test_file_27.c...PASSED
+Testen van: test_set_2/test_file_53.c...PASSED
+Testen van: test_set_2/test_file_23.c...PASSED
+Testen van: test_set_2/test_file_78.c...PASSED (Expected failure: compiler ving de error op)
+Testen van: test_set_2/test_file_7.c...
