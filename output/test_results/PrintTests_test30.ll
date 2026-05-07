@@ -35,14 +35,15 @@ entry:
   %"x.1" = load i32, i32* %"x"
   ;  Source: y
   %"y.1" = load float, float* %"y"
+  ;  Source: (int)y
+  %".12" = fptosi float %"y.1" to i32
   ;  Source: c
   %"c.1" = load i8, i8* %"c"
-  ;  Source: printf("%d; %f; %c",x,y,c);
-  %".13" = fpext float %"y.1" to double
-  %".14" = zext i8 %"c.1" to i32
-  %".15" = call i32 (i8*, ...) @"printf"(i8* %".8", i32 %"x.1", double %".13", i32 %".14")
+  ;  Source: printf("%d; %d; %c",x,(int)y,c);
+  %".15" = zext i8 %"c.1" to i32
+  %".16" = call i32 (i8*, ...) @"printf"(i8* %".8", i32 %"x.1", i32 %".12", i32 %".15")
   ;  Source: return0;
   ret i32 0
 }
 
-@"str" = internal constant [11 x i8] c"%d; %f; %c\00"
+@"str" = internal constant [11 x i8] c"%d; %d; %c\00"

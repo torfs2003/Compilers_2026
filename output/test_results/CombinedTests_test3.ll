@@ -23,7 +23,7 @@ define void @"printPositive"(float %".1")
 entry:
   %"a" = alloca float
   store float %".1", float* %"a"
-  ;  Source: if(a>0.0){printf("f%",a);}
+  ;  Source: if(a>0.0){printf("%d",(int)a);}
   %"a.1" = load float, float* %"a"
   %".5" = fcmp ogt float %"a.1",              0x0
   %".6" = zext i1 %".5" to i32
@@ -32,14 +32,14 @@ entry:
 if.then:
   %".8" = bitcast [3 x i8]* @"str" to i8*
   %"a.2" = load float, float* %"a"
-  %".9" = fpext float %"a.2" to double
-  %".10" = call i32 (i8*, ...) @"printf"(i8* %".8", double %".9")
+  %".9" = fptosi float %"a.2" to i32
+  %".10" = call i32 (i8*, ...) @"printf"(i8* %".8", i32 %".9")
   br label %"if.end"
 if.end:
   ret void
 }
 
-@"str" = internal constant [3 x i8] c"f%\00"
+@"str" = internal constant [3 x i8] c"%d\00"
 define i32 @"main"()
 {
 entry:

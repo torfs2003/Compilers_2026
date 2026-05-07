@@ -54,11 +54,12 @@ entry:
   %".7" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: biggest
   %"biggest.1" = load float, float* %"biggest"
-  ;  Source: printf("%f",biggest);
-  %".10" = fpext float %"biggest.1" to double
-  %".11" = call i32 (i8*, ...) @"printf"(i8* %".7", double %".10")
+  ;  Source: (int)biggest
+  %".10" = fptosi float %"biggest.1" to i32
+  ;  Source: printf("%d",(int)biggest);
+  %".12" = call i32 (i8*, ...) @"printf"(i8* %".7", i32 %".10")
   ;  Source: return0;
   ret i32 0
 }
 
-@"str" = internal constant [3 x i8] c"%f\00"
+@"str" = internal constant [3 x i8] c"%d\00"

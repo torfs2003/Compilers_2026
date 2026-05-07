@@ -50,21 +50,24 @@ if.end.1:
   %"x.3" = load i32, i32* %"x"
   %".19" = icmp eq i32 %"x.3", 5
   %".20" = zext i1 %".19" to i32
-  %".21" = and i32 %".20", 1
-  %"ifcond.2" = icmp ne i32 %".21", 0
+  %".21" = icmp ne i32 %".20", 0
+  %".22" = icmp ne i32 1, 0
+  %".23" = and i1 %".21", %".22"
+  %".24" = zext i1 %".23" to i32
+  %"ifcond.2" = icmp ne i32 %".24", 0
   br i1 %"ifcond.2", label %"if.then.2", label %"if.end.2"
 if.then.2:
   %"x.4" = load i32, i32* %"x"
-  %".23" = icmp ne i32 %"x.4", 4
-  %".24" = zext i1 %".23" to i32
-  %"ifcond.3" = icmp ne i32 %".24", 0
+  %".26" = icmp ne i32 %"x.4", 4
+  %".27" = zext i1 %".26" to i32
+  %"ifcond.3" = icmp ne i32 %".27", 0
   br i1 %"ifcond.3", label %"if.then.3", label %"if.end.3"
 if.end.2:
   ;  Source: return0;
   ret i32 0
 if.then.3:
-  %".26" = bitcast [3 x i8]* @"str.2" to i8*
-  %".27" = call i32 (i8*, ...) @"printf"(i8* %".26", i32 3)
+  %".29" = bitcast [3 x i8]* @"str.2" to i8*
+  %".30" = call i32 (i8*, ...) @"printf"(i8* %".29", i32 3)
   br label %"if.end.3"
 if.end.3:
   br label %"if.end.2"

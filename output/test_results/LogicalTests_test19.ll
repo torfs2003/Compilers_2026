@@ -32,7 +32,10 @@ entry:
   ;  Source: b
   %"b.1" = load i32, i32* %"b"
   ;  Source: a||b;
-  %".9" = or i32 %"a.1", %"b.1"
+  %".9" = icmp ne i32 %"a.1", 0
+  %".10" = icmp ne i32 %"b.1", 0
+  %".11" = or i1 %".9", %".10"
+  %".12" = zext i1 %".11" to i32
   ;  Source: return0;
   ret i32 0
 }

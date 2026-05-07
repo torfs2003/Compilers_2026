@@ -1,0 +1,26 @@
+digraph AST {
+  node [fontname="Arial"];
+  node2 [label="Include\n<stdio.h>", shape=note, style="filled", fillcolor="lightyellow", color="black", fontcolor="black"];
+  node4 [label="Decl\nstruct grammar_rule*\nproductions\n(struct grammar_rule*)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
+  node5 [label="Decl\nint\nproduction_size\n(int)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
+  node6 [label="Decl\nint\nis_terminal\n(int)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
+  node3 [label="StructDef\ngrammar_rule", shape=box, style="filled", fillcolor="lightpink", color="black", fontcolor="black"];
+  node3 -> node4 [style="solid", color="black"];
+  node3 -> node5 [style="solid", color="black"];
+  node3 -> node6 [style="solid", color="black"];
+  node7 [label="StructDef\ngrammar", shape=box, style="filled", fillcolor="lightpink", color="black", fontcolor="black"];
+  node10 [label="Decl\nuniongrammar_rule_production\nv\n(uniongrammar_rule_production)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
+  node12 [label="0\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node11 [label="Return", shape=ellipse, style="filled", fillcolor="lightpink", color="black", fontcolor="black"];
+  node11 -> node12 [style="solid", color="black"];
+  node9 [label="Block", shape=diamond, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node9 -> node10 [style="solid", color="black"];
+  node9 -> node11 [style="solid", color="black"];
+  node8 [label="Func\nint main()", shape=invhouse, style="filled", fillcolor="lightgreen", color="black", fontcolor="black"];
+  node8 -> node9 [style="solid", color="black"];
+  node1 [label="Program", shape=box, style="filled", fillcolor="lightblue", color="black", fontcolor="black"];
+  node1 -> node2 [style="solid", color="black"];
+  node1 -> node3 [style="solid", color="black"];
+  node1 -> node7 [style="solid", color="black"];
+  node1 -> node8 [style="solid", color="black"];
+}

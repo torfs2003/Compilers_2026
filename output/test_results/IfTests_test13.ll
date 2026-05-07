@@ -50,8 +50,11 @@ if.end.1:
   %"x.3" = load i32, i32* %"x"
   %".22" = icmp eq i32 %"x.3", 5
   %".23" = zext i1 %".22" to i32
-  %".24" = and i32 %".23", 1
-  %"ifcond.2" = icmp ne i32 %".24", 0
+  %".24" = icmp ne i32 %".23", 0
+  %".25" = icmp ne i32 1, 0
+  %".26" = and i1 %".24", %".25"
+  %".27" = zext i1 %".26" to i32
+  %"ifcond.2" = icmp ne i32 %".27", 0
   br i1 %"ifcond.2", label %"if.then.2", label %"if.end.2"
 if.else:
   %".18" = bitcast [3 x i8]* @"str.2" to i8*
@@ -59,26 +62,26 @@ if.else:
   br label %"if.end.1"
 if.then.2:
   %"x.4" = load i32, i32* %"x"
-  %".26" = icmp ne i32 %"x.4", 4
-  %".27" = zext i1 %".26" to i32
-  %"ifcond.3" = icmp ne i32 %".27", 0
+  %".29" = icmp ne i32 %"x.4", 4
+  %".30" = zext i1 %".29" to i32
+  %"ifcond.3" = icmp ne i32 %".30", 0
   br i1 %"ifcond.3", label %"if.then.3", label %"if.else.1"
 if.end.2:
   ;  Source: if(x<5){}else{}
   %"x.5" = load i32, i32* %"x"
-  %".37" = icmp slt i32 %"x.5", 5
-  %".38" = zext i1 %".37" to i32
-  %"ifcond.4" = icmp ne i32 %".38", 0
+  %".40" = icmp slt i32 %"x.5", 5
+  %".41" = zext i1 %".40" to i32
+  %"ifcond.4" = icmp ne i32 %".41", 0
   br i1 %"ifcond.4", label %"if.then.4", label %"if.else.2"
 if.then.3:
-  %".29" = bitcast [3 x i8]* @"str.3" to i8*
-  %".30" = call i32 (i8*, ...) @"printf"(i8* %".29", i32 4)
+  %".32" = bitcast [3 x i8]* @"str.3" to i8*
+  %".33" = call i32 (i8*, ...) @"printf"(i8* %".32", i32 4)
   br label %"if.end.3"
 if.end.3:
   br label %"if.end.2"
 if.else.1:
-  %".32" = bitcast [3 x i8]* @"str.4" to i8*
-  %".33" = call i32 (i8*, ...) @"printf"(i8* %".32", i32 5)
+  %".35" = bitcast [3 x i8]* @"str.4" to i8*
+  %".36" = call i32 (i8*, ...) @"printf"(i8* %".35", i32 5)
   br label %"if.end.3"
 if.then.4:
   br label %"if.end.4"

@@ -31,38 +31,65 @@ entry:
   %"a.1" = load i32, i32* %"a"
   ;  Source: b
   %"b.1" = load i32, i32* %"b"
-  %".8" = and i32 %"a.1", %"b.1"
-  %".9" = and i32 %".8", 0
+  %".8" = icmp ne i32 %"a.1", 0
+  %".9" = icmp ne i32 %"b.1", 0
+  %".10" = and i1 %".8", %".9"
+  %".11" = zext i1 %".10" to i32
+  %".12" = icmp ne i32 %".11", 0
+  %".13" = icmp ne i32 0, 0
+  %".14" = and i1 %".12", %".13"
+  %".15" = zext i1 %".14" to i32
   ;  Source: a&&b&&0&&1;
-  %".11" = and i32 %".9", 1
+  %".17" = icmp ne i32 %".15", 0
+  %".18" = icmp ne i32 1, 0
+  %".19" = and i1 %".17", %".18"
+  %".20" = zext i1 %".19" to i32
   ;  Source: a
   %"a.2" = load i32, i32* %"a"
   ;  Source: a
   %"a.3" = load i32, i32* %"a"
   ;  Source: b
   %"b.2" = load i32, i32* %"b"
-  %".15" = and i32 %"a.3", %"b.2"
-  %".16" = and i32 %".15", 0
+  %".24" = icmp ne i32 %"a.3", 0
+  %".25" = icmp ne i32 %"b.2", 0
+  %".26" = and i1 %".24", %".25"
+  %".27" = zext i1 %".26" to i32
+  %".28" = icmp ne i32 %".27", 0
+  %".29" = icmp ne i32 0, 0
+  %".30" = and i1 %".28", %".29"
+  %".31" = zext i1 %".30" to i32
   ;  Source: a&&b&&0&&1
-  %".18" = and i32 %".16", 1
+  %".33" = icmp ne i32 %".31", 0
+  %".34" = icmp ne i32 1, 0
+  %".35" = and i1 %".33", %".34"
+  %".36" = zext i1 %".35" to i32
   ;  Source: a=a&&b&&0&&1;
-  store i32 %".18", i32* %"a"
-  %".21" = bitcast [3 x i8]* @"str" to i8*
+  store i32 %".36", i32* %"a"
+  %".39" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: a
   %"a.4" = load i32, i32* %"a"
   ;  Source: printf("%d",a);
-  %".24" = call i32 (i8*, ...) @"printf"(i8* %".21", i32 %"a.4")
-  %".25" = bitcast [19 x i8]* @"str.1" to i8*
+  %".42" = call i32 (i8*, ...) @"printf"(i8* %".39", i32 %"a.4")
+  %".43" = bitcast [19 x i8]* @"str.1" to i8*
   ;  Source: a
   %"a.5" = load i32, i32* %"a"
   ;  Source: b
   %"b.3" = load i32, i32* %"b"
-  %".28" = and i32 %"a.5", %"b.3"
-  %".29" = and i32 %".28", 0
+  %".46" = icmp ne i32 %"a.5", 0
+  %".47" = icmp ne i32 %"b.3", 0
+  %".48" = and i1 %".46", %".47"
+  %".49" = zext i1 %".48" to i32
+  %".50" = icmp ne i32 %".49", 0
+  %".51" = icmp ne i32 0, 0
+  %".52" = and i1 %".50", %".51"
+  %".53" = zext i1 %".52" to i32
   ;  Source: a&&b&&0&&1
-  %".31" = and i32 %".29", 1
+  %".55" = icmp ne i32 %".53", 0
+  %".56" = icmp ne i32 1, 0
+  %".57" = and i1 %".55", %".56"
+  %".58" = zext i1 %".57" to i32
   ;  Source: printf("........... %% %d ",a&&b&&0&&1);
-  %".33" = call i32 (i8*, ...) @"printf"(i8* %".25", i32 %".31")
+  %".60" = call i32 (i8*, ...) @"printf"(i8* %".43", i32 %".58")
   ;  Source: return0;
   ret i32 0
 }

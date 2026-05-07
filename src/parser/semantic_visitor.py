@@ -493,26 +493,24 @@ class SemanticVisitor(BaseVisitor):
                     self.get_Warning(node, f"Informatieverlies bij toewijzing van {r_type} aan {l_type}.")
     
     def visit_BinOpNode(self, node):
-        # 1. Haal de types op met een veiligheidsmarge (voorkom NoneType errors)
         l_type = getattr(node.left, 'eval_type', 'void') or 'void'
         r_type = getattr(node.right, 'eval_type', 'void') or 'void'
 
-        # --- NIEUW: FIX VOOR BITWISE OPERATOREN OP POINTERS ---
+        if node.op in ['<<', '>>']:
+            if hasattr(node.right, 'value') and node.right.value < 0:
+                self.get_Error(node, "Semantic Error: Bitwise shift by a negative amount is invalid C89!")
+                import sys
+                sys.exit(1)
+
         bitwise_ops = ['&', '|', '^', '<<', '>>', '%']
         if node.op in bitwise_ops:
             if '*' in l_type or '*' in r_type:
                 self.get_Error(node, f"Operator '{node.op}' is niet toegestaan op pointer types.")
                 import sys
                 sys.exit(1)
-        # ------------------------------------------------------
 
-        # 2. Definieer groepen operatoren
-        # Belangrijk: && en || horen hierbij, want ptr || ptr is ALTIJD een int (0 of 1)
         comparison_and_logical_ops = ['==', '!=', '<', '>', '<=', '>=', '&&', '||']
 
-        # 3. PRIORITEIT 1: Vergelijkingen en Logica
-        # Dit moet bovenaan. Zelfs als l_type en r_type pointers zijn, 
-        # is de uitkomst van 'ptr == ptr' of 'ptr || ptr' altijd een 'int'.
         if node.op in comparison_and_logical_ops:
             node.eval_type = 'int'
             return

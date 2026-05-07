@@ -477,24 +477,26 @@ class LLVMVisitor:
                 else:
                     self.results[id(node)] = self.builder.add(left, right)
 
-            # 3. Aftrekken (-)
+           # 3. Aftrekken (-)
             elif node.op == '-':
                 if isinstance(left.type, ir.PointerType) and isinstance(right.type, ir.PointerType):
-                    # Pointer - Pointer (verschil berekenen)
+                    # Pointer - Pointer (verschil in bytes berekenen)
                     l_int = self.builder.ptrtoint(left, ir.IntType(32))
                     r_int = self.builder.ptrtoint(right, ir.IntType(32))
                     diff = self.builder.sub(l_int, r_int)
-                    # Optioneel: delen door de grootte van het type (sizeof), hier simpelweg 1.
-                    self.results[id(node)] = self.builder.sdiv(diff, ir.Constant(ir.IntType(32), 1))
-                elif isinstance(left.type, ir.PointerType):
-                    # Pointer - Int
-                    neg_right = self.builder.neg(right)
-                    self.results[id(node)] = self.builder.gep(left, [neg_right])
-                elif isinstance(left.type, ir.FloatType):
-                    self.results[id(node)] = self.builder.fsub(left, right)
-                else:
-                    self.results[id(node)] = self.builder.sub(left, right)
-
+                    
+                    pointee = left.type.pointee
+                    if isinstance(pointee, ir.IntType):
+                        type_size = pointee.width // 8
+                    elif isinstance(pointee, ir.FloatType):
+                        type_size = 4                  
+                    elif isinstance(pointee, ir.PointerType):
+                        type_size = 8                   
+                    else:
+                        type_size = 1                  
+                    
+                    size_const = ir.Constant(ir.IntType(32), max(1, type_size))
+                    self.results[id(node)] = self.builder.sdiv(diff, size_const)
             # Vermenigvuldigen (*)
             elif node.op == '*':
                 if isinstance(left.type, ir.FloatType) or isinstance(right.type, ir.FloatType):

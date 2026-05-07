@@ -43,7 +43,7 @@ entry:
   %".14" = ptrtoint i32* %"sa.1" to i32
   %".15" = ptrtoint i32* %"sb.1" to i32
   %".16" = sub i32 %".14", %".15"
-  %".17" = sdiv i32 %".16", 1
+  %".17" = sdiv i32 %".16", 4
   ;  Source: return0;
   ret i32 0
 }

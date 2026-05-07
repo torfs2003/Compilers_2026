@@ -1,0 +1,32 @@
+digraph AST {
+  node [fontname="Arial"];
+  node4 [label="1\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node5 [label="1.1\n(float)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node6 [label="0.1\n(float)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node7 [label="1.0\n(float)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node8 [label="0.01\n(float)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node9 [label="1.0\n(float)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node10 [label="0.1\n(float)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node11 [label="0.1\n(float)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node12 [label="10.0\n(float)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node13 [label="0.001\n(float)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node15 [label="0\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node14 [label="Return", shape=ellipse, style="filled", fillcolor="lightpink", color="black", fontcolor="black"];
+  node14 -> node15 [style="solid", color="black"];
+  node3 [label="Block", shape=diamond, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node3 -> node4 [style="solid", color="black"];
+  node3 -> node5 [style="solid", color="black"];
+  node3 -> node6 [style="solid", color="black"];
+  node3 -> node7 [style="solid", color="black"];
+  node3 -> node8 [style="solid", color="black"];
+  node3 -> node9 [style="solid", color="black"];
+  node3 -> node10 [style="solid", color="black"];
+  node3 -> node11 [style="solid", color="black"];
+  node3 -> node12 [style="solid", color="black"];
+  node3 -> node13 [style="solid", color="black"];
+  node3 -> node14 [style="solid", color="black"];
+  node2 [label="Func\nint main()", shape=invhouse, style="filled", fillcolor="lightgreen", color="black", fontcolor="black"];
+  node2 -> node3 [style="solid", color="black"];
+  node1 [label="Program", shape=box, style="filled", fillcolor="lightblue", color="black", fontcolor="black"];
+  node1 -> node2 [style="solid", color="black"];
+}

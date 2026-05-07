@@ -47,9 +47,12 @@ entry:
   ;  Source: val
   %"val.1" = load i32, i32* %"val"
   ;  Source: some_value&&val
-  %".9" = and i32 %"some_value.1", %"val.1"
+  %".9" = icmp ne i32 %"some_value.1", 0
+  %".10" = icmp ne i32 %"val.1", 0
+  %".11" = and i1 %".9", %".10"
+  %".12" = zext i1 %".11" to i32
   ;  Source: intanother_value=some_value&&val;
-  store i32 %".9", i32* %"another_value"
+  store i32 %".12", i32* %"another_value"
   %"x" = alloca i32
   ;  Source: intx=1;
   store i32 1, i32* %"x"
@@ -57,19 +60,19 @@ entry:
   br label %"while.cond"
 while.cond:
   %"x.1" = load i32, i32* %"x"
-  %".16" = icmp slt i32 %"x.1", 10
-  %".17" = zext i1 %".16" to i32
-  %"whilecond" = icmp ne i32 %".17", 0
+  %".19" = icmp slt i32 %"x.1", 10
+  %".20" = zext i1 %".19" to i32
+  %"whilecond" = icmp ne i32 %".20", 0
   br i1 %"whilecond", label %"while.body", label %"while.end"
 while.body:
   %"result" = alloca i32
   %"x.2" = load i32, i32* %"x"
-  %".19" = call i32 @"mul"(i32 %"x.2", i32 2)
-  store i32 %".19", i32* %"result"
+  %".22" = call i32 @"mul"(i32 %"x.2", i32 2)
+  store i32 %".22", i32* %"result"
   %"x.3" = load i32, i32* %"x"
-  %".21" = icmp sgt i32 %"x.3", 5
-  %".22" = zext i1 %".21" to i32
-  %"ifcond" = icmp ne i32 %".22", 0
+  %".24" = icmp sgt i32 %"x.3", 5
+  %".25" = zext i1 %".24" to i32
+  %"ifcond" = icmp ne i32 %".25", 0
   br i1 %"ifcond", label %"if.then", label %"if.end"
 while.end:
   ;  Source: return0;
@@ -77,18 +80,18 @@ while.end:
 if.then:
   %"result.1" = load i32, i32* %"result"
   %"x.4" = load i32, i32* %"x"
-  %".24" = call i32 @"mul"(i32 %"result.1", i32 %"x.4")
+  %".27" = call i32 @"mul"(i32 %"result.1", i32 %"x.4")
   %"result.2" = load i32, i32* %"result"
-  store i32 %".24", i32* %"result"
+  store i32 %".27", i32* %"result"
   br label %"if.end"
 if.end:
-  %".27" = bitcast [3 x i8]* @"str" to i8*
+  %".30" = bitcast [3 x i8]* @"str" to i8*
   %"result.3" = load i32, i32* %"result"
-  %".28" = call i32 (i8*, ...) @"printf"(i8* %".27", i32 %"result.3")
+  %".31" = call i32 (i8*, ...) @"printf"(i8* %".30", i32 %"result.3")
   %"x.5" = load i32, i32* %"x"
-  %".29" = add i32 %"x.5", 1
+  %".32" = add i32 %"x.5", 1
   %"x.6" = load i32, i32* %"x"
-  store i32 %".29", i32* %"x"
+  store i32 %".32", i32* %"x"
   br label %"while.cond"
 }
 

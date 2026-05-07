@@ -68,27 +68,42 @@ entry:
   ;  Source: c
   %"c.2" = load i32, i32* %"c"
   ;  Source: (b||c)
-  %".34" = or i32 %"b.2", %"c.2"
+  %".34" = icmp ne i32 %"b.2", 0
+  %".35" = icmp ne i32 %"c.2", 0
+  %".36" = or i1 %".34", %".35"
+  %".37" = zext i1 %".36" to i32
   ;  Source: (a&&(b||c))
-  %".36" = and i32 %"a.2", %".34"
+  %".39" = icmp ne i32 %"a.2", 0
+  %".40" = icmp ne i32 %".37", 0
+  %".41" = and i1 %".39", %".40"
+  %".42" = zext i1 %".41" to i32
   ;  Source: d
   %"d.2" = load i32, i32* %"d"
   ;  Source: c
   %"c.3" = load i32, i32* %"c"
   ;  Source: (d&&c)
-  %".40" = and i32 %"d.2", %"c.3"
+  %".46" = icmp ne i32 %"d.2", 0
+  %".47" = icmp ne i32 %"c.3", 0
+  %".48" = and i1 %".46", %".47"
+  %".49" = zext i1 %".48" to i32
   ;  Source: e
   %"e.2" = load i32, i32* %"e"
-  %".42" = and i32 %".40", %"e.2"
+  %".51" = icmp ne i32 %".49", 0
+  %".52" = icmp ne i32 %"e.2", 0
+  %".53" = and i1 %".51", %".52"
+  %".54" = zext i1 %".53" to i32
   ;  Source: (a&&(b||c))||(d&&c)&&e
-  %".44" = or i32 %".36", %".42"
+  %".56" = icmp ne i32 %".42", 0
+  %".57" = icmp ne i32 %".54", 0
+  %".58" = or i1 %".56", %".57"
+  %".59" = zext i1 %".58" to i32
   ;  Source: f=(a&&(b||c))||(d&&c)&&e;
-  store i32 %".44", i32* %"f"
-  %".47" = bitcast [3 x i8]* @"str" to i8*
+  store i32 %".59", i32* %"f"
+  %".62" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: f
   %"f.2" = load i32, i32* %"f"
   ;  Source: printf("%d",f);
-  %".50" = call i32 (i8*, ...) @"printf"(i8* %".47", i32 %"f.2")
+  %".65" = call i32 (i8*, ...) @"printf"(i8* %".62", i32 %"f.2")
   ;  Source: a
   %"a.3" = load i32, i32* %"a"
   ;  Source: a=1;
@@ -102,27 +117,42 @@ entry:
   ;  Source: c
   %"c.4" = load i32, i32* %"c"
   ;  Source: (b||c)
-  %".59" = or i32 %"b.3", %"c.4"
+  %".74" = icmp ne i32 %"b.3", 0
+  %".75" = icmp ne i32 %"c.4", 0
+  %".76" = or i1 %".74", %".75"
+  %".77" = zext i1 %".76" to i32
   ;  Source: (a&&(b||c))
-  %".61" = and i32 %"a.4", %".59"
+  %".79" = icmp ne i32 %"a.4", 0
+  %".80" = icmp ne i32 %".77", 0
+  %".81" = and i1 %".79", %".80"
+  %".82" = zext i1 %".81" to i32
   ;  Source: d
   %"d.3" = load i32, i32* %"d"
   ;  Source: c
   %"c.5" = load i32, i32* %"c"
   ;  Source: (d&&c)
-  %".65" = and i32 %"d.3", %"c.5"
+  %".86" = icmp ne i32 %"d.3", 0
+  %".87" = icmp ne i32 %"c.5", 0
+  %".88" = and i1 %".86", %".87"
+  %".89" = zext i1 %".88" to i32
   ;  Source: e
   %"e.3" = load i32, i32* %"e"
-  %".67" = and i32 %".65", %"e.3"
+  %".91" = icmp ne i32 %".89", 0
+  %".92" = icmp ne i32 %"e.3", 0
+  %".93" = and i1 %".91", %".92"
+  %".94" = zext i1 %".93" to i32
   ;  Source: (a&&(b||c))||(d&&c)&&e
-  %".69" = or i32 %".61", %".67"
+  %".96" = icmp ne i32 %".82", 0
+  %".97" = icmp ne i32 %".94", 0
+  %".98" = or i1 %".96", %".97"
+  %".99" = zext i1 %".98" to i32
   ;  Source: f=(a&&(b||c))||(d&&c)&&e;
-  store i32 %".69", i32* %"f"
-  %".72" = bitcast [3 x i8]* @"str.1" to i8*
+  store i32 %".99", i32* %"f"
+  %".102" = bitcast [3 x i8]* @"str.1" to i8*
   ;  Source: f
   %"f.4" = load i32, i32* %"f"
   ;  Source: printf("%d",f);
-  %".75" = call i32 (i8*, ...) @"printf"(i8* %".72", i32 %"f.4")
+  %".105" = call i32 (i8*, ...) @"printf"(i8* %".102", i32 %"f.4")
   ;  Source: b
   %"b.4" = load i32, i32* %"b"
   ;  Source: b=1;
@@ -136,27 +166,42 @@ entry:
   ;  Source: c
   %"c.6" = load i32, i32* %"c"
   ;  Source: (b||c)
-  %".84" = or i32 %"b.5", %"c.6"
+  %".114" = icmp ne i32 %"b.5", 0
+  %".115" = icmp ne i32 %"c.6", 0
+  %".116" = or i1 %".114", %".115"
+  %".117" = zext i1 %".116" to i32
   ;  Source: (a&&(b||c))
-  %".86" = and i32 %"a.5", %".84"
+  %".119" = icmp ne i32 %"a.5", 0
+  %".120" = icmp ne i32 %".117", 0
+  %".121" = and i1 %".119", %".120"
+  %".122" = zext i1 %".121" to i32
   ;  Source: d
   %"d.4" = load i32, i32* %"d"
   ;  Source: c
   %"c.7" = load i32, i32* %"c"
   ;  Source: (d&&c)
-  %".90" = and i32 %"d.4", %"c.7"
+  %".126" = icmp ne i32 %"d.4", 0
+  %".127" = icmp ne i32 %"c.7", 0
+  %".128" = and i1 %".126", %".127"
+  %".129" = zext i1 %".128" to i32
   ;  Source: e
   %"e.4" = load i32, i32* %"e"
-  %".92" = and i32 %".90", %"e.4"
+  %".131" = icmp ne i32 %".129", 0
+  %".132" = icmp ne i32 %"e.4", 0
+  %".133" = and i1 %".131", %".132"
+  %".134" = zext i1 %".133" to i32
   ;  Source: (a&&(b||c))||(d&&c)&&e
-  %".94" = or i32 %".86", %".92"
+  %".136" = icmp ne i32 %".122", 0
+  %".137" = icmp ne i32 %".134", 0
+  %".138" = or i1 %".136", %".137"
+  %".139" = zext i1 %".138" to i32
   ;  Source: f=(a&&(b||c))||(d&&c)&&e;
-  store i32 %".94", i32* %"f"
-  %".97" = bitcast [3 x i8]* @"str.2" to i8*
+  store i32 %".139", i32* %"f"
+  %".142" = bitcast [3 x i8]* @"str.2" to i8*
   ;  Source: f
   %"f.6" = load i32, i32* %"f"
   ;  Source: printf("%d",f);
-  %".100" = call i32 (i8*, ...) @"printf"(i8* %".97", i32 %"f.6")
+  %".145" = call i32 (i8*, ...) @"printf"(i8* %".142", i32 %"f.6")
   ;  Source: c
   %"c.8" = load i32, i32* %"c"
   ;  Source: c=1;
@@ -170,27 +215,42 @@ entry:
   ;  Source: c
   %"c.9" = load i32, i32* %"c"
   ;  Source: (b||c)
-  %".109" = or i32 %"b.6", %"c.9"
+  %".154" = icmp ne i32 %"b.6", 0
+  %".155" = icmp ne i32 %"c.9", 0
+  %".156" = or i1 %".154", %".155"
+  %".157" = zext i1 %".156" to i32
   ;  Source: (a&&(b||c))
-  %".111" = and i32 %"a.6", %".109"
+  %".159" = icmp ne i32 %"a.6", 0
+  %".160" = icmp ne i32 %".157", 0
+  %".161" = and i1 %".159", %".160"
+  %".162" = zext i1 %".161" to i32
   ;  Source: d
   %"d.5" = load i32, i32* %"d"
   ;  Source: c
   %"c.10" = load i32, i32* %"c"
   ;  Source: (d&&c)
-  %".115" = and i32 %"d.5", %"c.10"
+  %".166" = icmp ne i32 %"d.5", 0
+  %".167" = icmp ne i32 %"c.10", 0
+  %".168" = and i1 %".166", %".167"
+  %".169" = zext i1 %".168" to i32
   ;  Source: e
   %"e.5" = load i32, i32* %"e"
-  %".117" = and i32 %".115", %"e.5"
+  %".171" = icmp ne i32 %".169", 0
+  %".172" = icmp ne i32 %"e.5", 0
+  %".173" = and i1 %".171", %".172"
+  %".174" = zext i1 %".173" to i32
   ;  Source: (a&&(b||c))||(d&&c)&&e
-  %".119" = or i32 %".111", %".117"
+  %".176" = icmp ne i32 %".162", 0
+  %".177" = icmp ne i32 %".174", 0
+  %".178" = or i1 %".176", %".177"
+  %".179" = zext i1 %".178" to i32
   ;  Source: f=(a&&(b||c))||(d&&c)&&e;
-  store i32 %".119", i32* %"f"
-  %".122" = bitcast [3 x i8]* @"str.3" to i8*
+  store i32 %".179", i32* %"f"
+  %".182" = bitcast [3 x i8]* @"str.3" to i8*
   ;  Source: f
   %"f.8" = load i32, i32* %"f"
   ;  Source: printf("%d",f);
-  %".125" = call i32 (i8*, ...) @"printf"(i8* %".122", i32 %"f.8")
+  %".185" = call i32 (i8*, ...) @"printf"(i8* %".182", i32 %"f.8")
   ;  Source: d
   %"d.6" = load i32, i32* %"d"
   ;  Source: d=1;
@@ -204,27 +264,42 @@ entry:
   ;  Source: c
   %"c.11" = load i32, i32* %"c"
   ;  Source: (b||c)
-  %".134" = or i32 %"b.7", %"c.11"
+  %".194" = icmp ne i32 %"b.7", 0
+  %".195" = icmp ne i32 %"c.11", 0
+  %".196" = or i1 %".194", %".195"
+  %".197" = zext i1 %".196" to i32
   ;  Source: (a&&(b||c))
-  %".136" = and i32 %"a.7", %".134"
+  %".199" = icmp ne i32 %"a.7", 0
+  %".200" = icmp ne i32 %".197", 0
+  %".201" = and i1 %".199", %".200"
+  %".202" = zext i1 %".201" to i32
   ;  Source: d
   %"d.7" = load i32, i32* %"d"
   ;  Source: c
   %"c.12" = load i32, i32* %"c"
   ;  Source: (d&&c)
-  %".140" = and i32 %"d.7", %"c.12"
+  %".206" = icmp ne i32 %"d.7", 0
+  %".207" = icmp ne i32 %"c.12", 0
+  %".208" = and i1 %".206", %".207"
+  %".209" = zext i1 %".208" to i32
   ;  Source: e
   %"e.6" = load i32, i32* %"e"
-  %".142" = and i32 %".140", %"e.6"
+  %".211" = icmp ne i32 %".209", 0
+  %".212" = icmp ne i32 %"e.6", 0
+  %".213" = and i1 %".211", %".212"
+  %".214" = zext i1 %".213" to i32
   ;  Source: (a&&(b||c))||(d&&c)&&e
-  %".144" = or i32 %".136", %".142"
+  %".216" = icmp ne i32 %".202", 0
+  %".217" = icmp ne i32 %".214", 0
+  %".218" = or i1 %".216", %".217"
+  %".219" = zext i1 %".218" to i32
   ;  Source: f=(a&&(b||c))||(d&&c)&&e;
-  store i32 %".144", i32* %"f"
-  %".147" = bitcast [3 x i8]* @"str.4" to i8*
+  store i32 %".219", i32* %"f"
+  %".222" = bitcast [3 x i8]* @"str.4" to i8*
   ;  Source: f
   %"f.10" = load i32, i32* %"f"
   ;  Source: printf("%d",f);
-  %".150" = call i32 (i8*, ...) @"printf"(i8* %".147", i32 %"f.10")
+  %".225" = call i32 (i8*, ...) @"printf"(i8* %".222", i32 %"f.10")
   ;  Source: e
   %"e.7" = load i32, i32* %"e"
   ;  Source: e=1;
@@ -238,27 +313,42 @@ entry:
   ;  Source: c
   %"c.13" = load i32, i32* %"c"
   ;  Source: (b||c)
-  %".159" = or i32 %"b.8", %"c.13"
+  %".234" = icmp ne i32 %"b.8", 0
+  %".235" = icmp ne i32 %"c.13", 0
+  %".236" = or i1 %".234", %".235"
+  %".237" = zext i1 %".236" to i32
   ;  Source: (a&&(b||c))
-  %".161" = and i32 %"a.8", %".159"
+  %".239" = icmp ne i32 %"a.8", 0
+  %".240" = icmp ne i32 %".237", 0
+  %".241" = and i1 %".239", %".240"
+  %".242" = zext i1 %".241" to i32
   ;  Source: d
   %"d.8" = load i32, i32* %"d"
   ;  Source: c
   %"c.14" = load i32, i32* %"c"
   ;  Source: (d&&c)
-  %".165" = and i32 %"d.8", %"c.14"
+  %".246" = icmp ne i32 %"d.8", 0
+  %".247" = icmp ne i32 %"c.14", 0
+  %".248" = and i1 %".246", %".247"
+  %".249" = zext i1 %".248" to i32
   ;  Source: e
   %"e.8" = load i32, i32* %"e"
-  %".167" = and i32 %".165", %"e.8"
+  %".251" = icmp ne i32 %".249", 0
+  %".252" = icmp ne i32 %"e.8", 0
+  %".253" = and i1 %".251", %".252"
+  %".254" = zext i1 %".253" to i32
   ;  Source: (a&&(b||c))||(d&&c)&&e
-  %".169" = or i32 %".161", %".167"
+  %".256" = icmp ne i32 %".242", 0
+  %".257" = icmp ne i32 %".254", 0
+  %".258" = or i1 %".256", %".257"
+  %".259" = zext i1 %".258" to i32
   ;  Source: f=(a&&(b||c))||(d&&c)&&e;
-  store i32 %".169", i32* %"f"
-  %".172" = bitcast [3 x i8]* @"str.5" to i8*
+  store i32 %".259", i32* %"f"
+  %".262" = bitcast [3 x i8]* @"str.5" to i8*
   ;  Source: f
   %"f.12" = load i32, i32* %"f"
   ;  Source: printf("%d",f);
-  %".175" = call i32 (i8*, ...) @"printf"(i8* %".172", i32 %"f.12")
+  %".265" = call i32 (i8*, ...) @"printf"(i8* %".262", i32 %"f.12")
   ;  Source: return0;
   ret i32 0
 }

@@ -64,25 +64,24 @@ entry:
   ;  Source: ia
   %"ia.6" = load i32, i32* %"ia"
   ;  Source: ia-ia;
-  %".33" = sub i32 %"ia.5", %"ia.6"
   ;  Source: ia
   %"ia.7" = load i32, i32* %"ia"
   ;  Source: ia
   %"ia.8" = load i32, i32* %"ia"
   ;  Source: ia*ia;
-  %".37" = mul i32 %"ia.7", %"ia.8"
+  %".36" = mul i32 %"ia.7", %"ia.8"
   ;  Source: ia
   %"ia.9" = load i32, i32* %"ia"
   ;  Source: ia
   %"ia.10" = load i32, i32* %"ia"
   ;  Source: ia/ia;
-  %".41" = sdiv i32 %"ia.9", %"ia.10"
+  %".40" = sdiv i32 %"ia.9", %"ia.10"
   ;  Source: ia
   %"ia.11" = load i32, i32* %"ia"
   ;  Source: ia
   %"ia.12" = load i32, i32* %"ia"
   ;  Source: ia%ia;
-  %".45" = srem i32 %"ia.11", %"ia.12"
+  %".44" = srem i32 %"ia.11", %"ia.12"
   ;  Source: return0;
   ret i32 0
 }

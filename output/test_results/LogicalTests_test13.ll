@@ -76,18 +76,24 @@ entry:
   ;  Source: c
   %"c.2" = load i32, i32* %"c"
   ;  Source: (b||c)
-  %".40" = or i32 %"b.3", %"c.2"
-  %".41" = icmp eq i32 %".40", 0
-  %".42" = zext i1 %".41" to i32
+  %".40" = icmp ne i32 %"b.3", 0
+  %".41" = icmp ne i32 %"c.2", 0
+  %".42" = or i1 %".40", %".41"
+  %".43" = zext i1 %".42" to i32
+  %".44" = icmp eq i32 %".43", 0
+  %".45" = zext i1 %".44" to i32
   ;  Source: (a&&!(b||c))
-  %".44" = and i32 %"a.3", %".42"
+  %".47" = icmp ne i32 %"a.3", 0
+  %".48" = icmp ne i32 %".45", 0
+  %".49" = and i1 %".47", %".48"
+  %".50" = zext i1 %".49" to i32
   ;  Source: f=(a&&!(b||c));
-  store i32 %".44", i32* %"f"
-  %".47" = bitcast [3 x i8]* @"str" to i8*
+  store i32 %".50", i32* %"f"
+  %".53" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: f
   %"f.2" = load i32, i32* %"f"
   ;  Source: printf("%d",f);
-  %".50" = call i32 (i8*, ...) @"printf"(i8* %".47", i32 %"f.2")
+  %".56" = call i32 (i8*, ...) @"printf"(i8* %".53", i32 %"f.2")
   ;  Source: return0;
   ret i32 0
 }
