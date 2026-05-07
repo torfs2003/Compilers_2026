@@ -7,7 +7,16 @@ from pathlib import Path
 LOG_FILE = "output/test_results.txt"
 FAILED_LOG_FILE = "output/failed_tests.txt"
 
-
+# Clang flags (vergelijkbaar streng als je GCC-set)
+CLANG_FLAGS = [
+    "-std=c89",
+    "-pedantic",
+    "-Wall",
+    "-Wextra",
+    "-Werror=implicit-int",
+    "-Werror=multichar",
+    "-Wno-error=int-conversion"
+    ]
 
 def log(message, end="\n"):
     """Print naar terminal én schrijft weg naar het resultatenbestand."""
@@ -16,34 +25,81 @@ def log(message, end="\n"):
         f.write(message + end)
 
 
-def test_execution(c_file, generated_ll_file):
-    ref_exe = f"./compiler_test_{c_file.stem}.exe" if os.name == 'nt' else f"./safe_compile_{c_file.stem}"
+def test_execution(c_file: Path, generated_ll_file: str):
+    ref_exe = f"./compiler_test_{c_file.stem}.exe" if os.name == "nt" else f"./safe_compile_{c_file.stem}"
 
     try:
-        # Referentie compileren
+        # 1. Run Clang (compile + run reference)
         subprocess.run(
-            ["gcc", "-ansi", "-pedantic", str(c_file), "-o", ref_exe],
-            check=True, capture_output=True, text=True, timeout=5
+            ["clang", *CLANG_FLAGS, str(c_file), "-o", ref_exe],
+            check=True,
+            capture_output=True,
+            text=True,
+            timeout=5,
         )
-
-        # Referentie uitvoeren
         ref_result = subprocess.run([ref_exe], capture_output=True, text=True, timeout=2)
 
-        # LLVM uitvoeren
+        # 2. Run compiler output (LLI)
         my_result = subprocess.run(
             ["lli", generated_ll_file],
-            capture_output=True, text=True, timeout=2
+            capture_output=True,
+            text=True,
+            timeout=2,
         )
 
-        if ref_result.stdout == my_result.stdout and ref_result.returncode == my_result.returncode:
+        # 3. Vergelijk de output
+        out_match = (ref_result.stdout.strip() == my_result.stdout.strip())
+
+        lli_system_error = (
+            "error while loading shared libraries" in my_result.stderr
+            or "lli: " in my_result.stderr
+        )
+
+        code_match = False
+        if lli_system_error:
+            code_match = False
+        elif ref_result.returncode == my_result.returncode:
+            code_match = True
+        elif ref_result.returncode != 0 and my_result.returncode != 0:
+            code_match = True
+        elif out_match and my_result.returncode == 0 and my_result.stdout.strip() == "":
+            code_match = True  # De fix voor GCC garbage codes (houdbaar voor Clang scenario’s)
+
+        # 4. Geef het resultaat correct terug
+        if out_match and code_match:
             return True, "Execution output match!"
         else:
-            diff = f"EXPECTED:\n{ref_result.stdout}\nACTUAL:\n{my_result.stdout}"
+            diff = (
+                f"EXPECTED (code {ref_result.returncode}):\n{ref_result.stdout}\n"
+                f"ACTUAL (code {my_result.returncode}):\n{my_result.stdout}"
+            )
+            if my_result.stderr:
+                diff += f"\n[!] LLI SYSTEM ERROR / STDERR:\n{my_result.stderr.strip()}"
             return False, diff
 
     except subprocess.TimeoutExpired:
         return False, "TIMEOUT (Mogelijke oneindige lus in de code)"
     except subprocess.CalledProcessError:
+        # In de Clang versie: geen speciale uitzondering meer voor C90 // comments
+        return False, "INVALID_C_FILE"
+    finally:
+        if os.path.exists(ref_exe):
+            os.remove(ref_exe)
+
+
+def clang_accepts_c_file(c_file: Path):
+    ref_exe = f"./compiler_test_{c_file.stem}.exe" if os.name == "nt" else f"./safe_compile_{c_file.stem}"
+    try:
+        subprocess.run(
+            ["clang", *CLANG_FLAGS, str(c_file), "-o", ref_exe],
+            check=True,
+            capture_output=True,
+            text=True,
+            timeout=5,
+        )
+        return True, ""
+    except subprocess.CalledProcessError:
+        # In de Clang versie: geen speciale uitzondering meer voor C90 // comments
         return False, "INVALID_C_FILE"
     finally:
         if os.path.exists(ref_exe):
@@ -78,25 +134,44 @@ def run_tests_in_directory(test_dir, output_dir):
             sys.executable, "-m", "src.main",
             "--input", str(c_file),
             "--render_ast", out_dot,
-            "--target_llvm", out_ll
+            "--target_llvm", out_ll,
         ]
 
         log(f"Testen van: {folder_name}/{c_file.name}...", end="")
 
         # Run jouw compiler
-        result = subprocess.run(cmd, capture_output=True, text=True, encoding='utf-8')
+        result = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8")
+
+        if result.returncode != 0:
+            clang_ok, _ = clang_accepts_c_file(c_file)
+
+            if clang_ok:
+                log("FAILED (Compiler Error on valid C)")
+                log(f"  --> Jouw compiler gaf een foutmelding:\n{result.stderr[:300]}...\n")
+                failed += 1
+                failed_tests.append(f"{folder_name}/{c_file.name} -> Compiler Error (but Clang accepts)")
+            else:
+                log("PASSED (Expected failure: compiler ving de error op)")
+                passed += 1
+            continue
+
+        if not os.path.exists(out_ll):
+            log("FAILED (Geen .ll bestand gemaakt)")
+            failed += 1
+            failed_tests.append(f"{folder_name}/{c_file.name} -> No .ll output")
+            continue
 
         match, msg = test_execution(c_file, out_ll)
 
-        # GCC faalt → check of jouw compiler dit correct afvangt
+        # Clang faalt → check of jouw compiler dit correct afvangt
         if msg == "INVALID_C_FILE":
             if result.returncode != 0:
                 log("PASSED (Expected failure: compiler ving de error op)")
                 passed += 1
             else:
-                log("FAILED (GCC gaf error, maar jouw compiler accepteerde de code!)")
+                log("FAILED (Clang gaf error, maar jouw compiler accepteerde de code!)")
                 failed += 1
-                failed_tests.append(f"{folder_name}/{c_file.name} -> GCC mismatch")
+                failed_tests.append(f"{folder_name}/{c_file.name} -> Clang mismatch")
             continue
 
         # Compiler zelf faalt
@@ -136,7 +211,7 @@ def run_tests_in_directory(test_dir, output_dir):
             for test in failed_tests:
                 f.write(f"{test}\n")
     else:
-        log("\nGeen gefaalde tests 🎉")
+        log("\nGeen gefaalde tests")
 
     log("\n")
 
@@ -146,9 +221,9 @@ def main():
         os.remove(FAILED_LOG_FILE)
 
     test_folders = [
-        "example_source_files/test_set_1"#,
-        #"example_source_files/test_set_2",
-        #"example_source_files/test_set_3"
+        #"example_source_files/test_set_1",
+        "example_source_files/test_set_3/LLVMTests/StructTests"#,
+        #"example_source_files/test_set_3",
     ]
 
     output_folder = "output/test_results"

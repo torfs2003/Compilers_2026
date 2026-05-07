@@ -5,7 +5,8 @@ grammar Cmm;
 // ==========================================
 
 compilationUnit
-    : (includeDirective | enumDeclaration | structDeclaration | typedefDeclaration | declaration | functionDeclaration | functionDefinition)* EOF
+    : (includeDirective | enumDeclaration | structDeclaration | typedefDeclaration
+      | declaration | functionDeclaration | functionDefinition | SEMI)* EOF
     ;
 
 includeDirective
@@ -29,7 +30,7 @@ parameterDeclaration
     ;
 
 compoundStatement
-    : LBRACE declaration* statement* RBRACE  // C89 Strikte volgorde overgenomen uit Versie 2
+    : LBRACE (declaration | typedefDeclaration | statement)* RBRACE
     ;
 
 declaration
@@ -42,9 +43,9 @@ structDeclaration
     ;
 
 typedefDeclaration
-    : TYPEDEF typeSpecifier MUL* IDENTIFIER (LBRACKET INT_LITERAL RBRACKET)* SEMI
+    : TYPEDEF CONST? typeSpecifier CONST? MUL* CONST? IDENTIFIER (LBRACKET INT_LITERAL RBRACKET)* SEMI
     ;
-    
+
 statement
     : expression SEMI
     | compoundStatement
@@ -102,8 +103,8 @@ returnStatement
     ;
 
 caseBlock
-    : CASE INT_LITERAL COLON statement*
-    | DEFAULT COLON statement*
+    : CASE INT_LITERAL COLON (statement | declaration)*
+    | DEFAULT COLON (statement | declaration)*
     ;
 
 enumDeclaration
@@ -172,7 +173,7 @@ additive_expression
     ;
 
 cast_expression
-    : LPAREN typeSpecifier RPAREN cast_expression
+    : LPAREN CONST? typeSpecifier MUL* RPAREN cast_expression
     | unary_expression
     ;
 

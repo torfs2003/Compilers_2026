@@ -77,13 +77,28 @@ class SemanticVisitor(BaseVisitor):
             self.symbol_table.put(p_name, {'type': p_type, 'is_const': False})
 
     def visit_CompoundNode(self, node):
-        found_statement = False
+        self.symbol_table.enter_scope()
+
+        seen_statement = False
+
         for item in node.items:
+
+            # DECLARATION
             if isinstance(item, (DeclNode, ArrayDeclNode)):
-                if found_statement:
-                    self.errors.append(f"Line {item.line}: ANSI C89 forbids mixed declarations and code")
+                if seen_statement:
+                    self.get_Warning(
+                        item,
+                        "ISO C90 forbids mixed declarations and code"
+                    )
+
+            # STATEMENT
             else:
-                found_statement = True
+                seen_statement = True
+
+            # bezoek kind normaal verder
+            self.visit(item)
+
+        self.symbol_table.exit_scope()
         
         self.symbol_table.exit_scope()
     
@@ -114,6 +129,13 @@ class SemanticVisitor(BaseVisitor):
                         })               
 
     def pre_visit_DeclNode(self, node):
+        base_type = node.type_spec.replace('*', '').replace('const', '').strip()
+        primitives = {'int', 'float', 'char', 'void'}
+        if base_type not in primitives and not base_type.startswith('struct'):
+            sym = self.symbol_table.get(base_type)
+            if not sym or sym.get('type') != 'typedef':
+                self.get_Error(node, f"Onbekend type '{base_type}'.")
+
         if node.type_spec.startswith("struct") and " " not in node.type_spec:
             node.type_spec = node.type_spec.replace("struct", "struct ", 1)
 
@@ -164,7 +186,7 @@ class SemanticVisitor(BaseVisitor):
         })
         if not success:
             self.get_Error(node, f"Array '{node.name}' is al gedeclareerd in deze scope.")
-    
+
     def pre_visit_StructDeclNode(self, node):
         member_dict = {}
         for index, member in enumerate(node.members):
@@ -263,7 +285,7 @@ class SemanticVisitor(BaseVisitor):
             
             if ('*' in node.eval_type or '*' in init_type) and not is_null_ptr:
                 if node.eval_type != init_type and not isinstance(node.init_expr, CastNode):
-                    self.get_Error(node, f"Incompatibele types bij initialisatie: '{init_type}' aan '{node.eval_type}'.")
+                    self.get_Warning(node, f"Incompatibele types bij initialisatie: '{init_type}' aan '{node.eval_type}'.")
             
             elif self.get_richness(init_type) > self.get_richness(node.eval_type) and not (node.eval_type == 'char*' and init_type == 'char*'):
                 self.get_Warning(node, f"Informatieverlies bij initialisatie van {node.name}: {init_type} naar {node.eval_type}.")
@@ -285,25 +307,33 @@ class SemanticVisitor(BaseVisitor):
                 actual_size = len(node.init_expr.values)
                 if declared_size > 0 and actual_size > declared_size:
                     self.get_Error(node, f"Te veel initializers voor array '{node.name}'.")
-    
+
     def visit_TypedefNode(self, node):
         resolved_type = self.symbol_table.resolve_type(node.original_type)
-        
-        # Sla op in de symbol table als een speciaal 'typedef' symbool
-        success = self.symbol_table.put(node.new_name, {
+
+        # Alleen huidige scope checken, niet outer scopes!
+        current_scope = self.symbol_table.scopes[-1]
+        existing = current_scope.get(node.new_name)
+
+        if existing and existing.get('type') == 'typedef':
+            existing_type = existing.get('original_type')
+            if existing_type != resolved_type:
+                self.get_Error(node,
+                               f"Conflicting types for typedef '{node.new_name}': '{existing_type}' vs '{resolved_type}'.")
+            else:
+                self.get_Warning(node, f"Redefinition of typedef '{node.new_name}'.")
+            return
+
+        self.symbol_table.put(node.new_name, {
             'type': 'typedef',
             'original_type': resolved_type,
             'is_array': node.is_array,
             'array_size': node.array_size
         })
-        if not success:
-            self.get_Error(node, f"Typedef naam '{node.new_name}' botst met een bestaande declaratie.")
-
-    
 
     def visit_AssignNode(self, node):
         is_lvalue = False
-        
+
         if isinstance(node.left, IdentifierNode):
             is_lvalue = True
         elif isinstance(node.left, UnaryOpNode) and node.left.op == '*':
@@ -317,23 +347,25 @@ class SemanticVisitor(BaseVisitor):
             self.get_Error(node, "Toewijzing aan een rvalue is niet toegestaan.")
         else:
             if isinstance(node.left, UnaryOpNode) and node.left.op == '*':
-                target = node.left.child
-                if isinstance(target, IdentifierNode) and getattr(target, 'points_to_const', False):
-                    self.get_Error(node, f"Toewijzing aan de waarde waar '{target.name}' naar wijst is niet toegestaan (const).")
+                # FIX: gebruik is_const (gezet door visit_UnaryOpNode) i.p.v. enkel IdentifierNode te checken
+                if getattr(node.left, 'is_const', False):
+                    child = node.left.child
+                    name = child.name if isinstance(child, IdentifierNode) else "expressie"
+                    self.get_Error(node,
+                                   f"Toewijzing aan de waarde waar '{name}' naar wijst is niet toegestaan (const).")
             elif isinstance(node.left, IdentifierNode) and getattr(node.left, 'is_const', False):
                 self.get_Error(node, f"Toewijzing aan const variabele '{node.left.name}' is niet toegestaan.")
 
         l_type = getattr(node.left, 'eval_type', 'void')
         r_type = getattr(node.right, 'eval_type', 'void')
-        
+
         if l_type and r_type:
             if '*' in l_type or '*' in r_type:
                 if l_type != r_type and not isinstance(node.right, CastNode):
-                    self.get_Error(node, f"Incompatibele types bij toewijzing: '{r_type}' aan '{l_type}'.")
-            
+                    self.get_Warning(node, f"Incompatibele types bij toewijzing: '{r_type}' aan '{l_type}'.")
+
             elif self.get_richness(r_type) > self.get_richness(l_type):
                 self.get_Warning(node, f"Informatieverlies bij toewijzing van {r_type} aan {l_type}.")
-
 
     def visit_BinOpNode(self, node):
         l_type = getattr(node.left, 'eval_type', 'void')
@@ -349,28 +381,31 @@ class SemanticVisitor(BaseVisitor):
                 node.eval_type = 'int'
                 return
             elif node.op == '-':
-                node.eval_type = 'int' 
+                node.eval_type = 'int'
                 return
-            
+
         if node.op == '[]':
             if r_type != 'int':
                 self.get_Error(node, f"Array index moet een 'int' zijn, kreeg '{r_type}'.")
             if '*' in l_type:
                 node.eval_type = l_type.replace('*', '', 1)
+                node.points_to_const = getattr(node.left, 'points_to_const', False)
             else:
                 self.get_Error(node, f"Type '{l_type}' kan niet worden geïndexeerd.")
                 node.eval_type = 'void'
         elif '*' in l_type and r_type == 'int':
             node.eval_type = l_type
+            node.points_to_const = getattr(node.left, 'points_to_const', False)  # <-- FIX
         elif l_type == 'int' and '*' in r_type:
             node.eval_type = r_type
+            node.points_to_const = getattr(node.right, 'points_to_const', False)  # <-- FIX
         elif '*' in l_type and '*' in r_type and node.op == '-':
             node.eval_type = 'int'
         else:
             node.eval_type = l_type if self.get_richness(l_type) >= self.get_richness(r_type) else r_type
-        
+
         comparison_ops = ['==', '!=', '<', '>', '<=', '>=', '&&', '||']
-        
+
         if node.op in comparison_ops:
             node.eval_type = 'int'
         else:
