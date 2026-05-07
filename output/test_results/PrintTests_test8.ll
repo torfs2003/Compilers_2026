@@ -1,5 +1,5 @@
 ; ModuleID = "cmm_module"
-target triple = "x86_64-w64-windows-gnu"
+target triple = "x86_64-unknown-linux-gnu"
 target datalayout = ""
 
 declare i32 @"printf"(i8* %".1", ...)
@@ -37,13 +37,20 @@ entry:
   %".11" = zext i8 %"c.1" to i32
   %".12" = call i32 (i8*, ...) @"printf"(i8* %".8", i32 %".11")
   %".13" = bitcast [3 x i8]* @"str.1" to i8*
+  ;  Source: b
+  %"b.1" = load float, float* %"b"
+  ;  Source: printf("%f",b);
+  %".16" = fpext float %"b.1" to double
+  %".17" = call i32 (i8*, ...) @"printf"(i8* %".13", double %".16")
+  %".18" = bitcast [3 x i8]* @"str.2" to i8*
   ;  Source: a
   %"a.1" = load i32, i32* %"a"
   ;  Source: printf("%d",a);
-  %".16" = call i32 (i8*, ...) @"printf"(i8* %".13", i32 %"a.1")
+  %".21" = call i32 (i8*, ...) @"printf"(i8* %".18", i32 %"a.1")
   ;  Source: return0;
   ret i32 0
 }
 
 @"str" = internal constant [3 x i8] c"%c\00"
-@"str.1" = internal constant [3 x i8] c"%d\00"
+@"str.1" = internal constant [3 x i8] c"%f\00"
+@"str.2" = internal constant [3 x i8] c"%d\00"

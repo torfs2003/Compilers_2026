@@ -1,14 +1,12 @@
 digraph AST {
   node [fontname="Arial"];
-  node2 [label="Include\n<stdio.h>", shape=note, style="filled", fillcolor="lightyellow", color="black", fontcolor="black"];
-  node6 [label="6532\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
-  node5 [label="Decl\nconst int\ny\n(int)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
-  node5 -> node6 [style="solid", color="black", label=" init", fontcolor="blue"];
-  node4 [label="Block", shape=diamond, style="filled", fillcolor="none", color="black", fontcolor="black"];
-  node4 -> node5 [style="solid", color="black"];
-  node3 [label="Func\nint main()", shape=invhouse, style="filled", fillcolor="lightgreen", color="black", fontcolor="black"];
+  node5 [label="6532\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node4 [label="Decl\nconst int\ny\n(int)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
+  node4 -> node5 [style="solid", color="black", label=" init", fontcolor="blue"];
+  node3 [label="Block", shape=diamond, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node3 -> node4 [style="solid", color="black"];
+  node2 [label="Func\nint main()", shape=invhouse, style="filled", fillcolor="lightgreen", color="black", fontcolor="black"];
+  node2 -> node3 [style="solid", color="black"];
   node1 [label="Program", shape=box, style="filled", fillcolor="lightblue", color="black", fontcolor="black"];
   node1 -> node2 [style="solid", color="black"];
-  node1 -> node3 [style="solid", color="black"];
 }

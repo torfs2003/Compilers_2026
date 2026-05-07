@@ -1,5 +1,5 @@
 ; ModuleID = "cmm_module"
-target triple = "x86_64-w64-windows-gnu"
+target triple = "x86_64-unknown-linux-gnu"
 target datalayout = ""
 
 %"struct.kaas" = type {i32}
@@ -55,7 +55,6 @@ entry:
   store %"struct.pointer"* %"ptr", %"struct.pointer"** %"ptr2"
   %".21" = bitcast [3 x i8]* @"str.1" to i8*
   ;  Source: ptr2->kaas_ptr->melk
-  %"ptr2.1" = load %"struct.pointer"*, %"struct.pointer"** %"ptr2"
   %".23" = load %"struct.pointer"*, %"struct.pointer"** %"ptr2"
   %"gep_kaas_ptr.2" = getelementptr inbounds %"struct.pointer", %"struct.pointer"* %".23", i32 0, i32 0
   %"load_kaas_ptr.2" = load %"struct.kaas"*, %"struct.kaas"** %"gep_kaas_ptr.2"

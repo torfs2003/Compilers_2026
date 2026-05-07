@@ -285,12 +285,20 @@ class ASTVisitor:
                 elif class_name == "Unary_expressionContext":
                     if ctx.getChildCount() == 1:
                         res = results[id(ctx.postfix_expression())]
+                    elif ctx.SIZEOF():
+                        if ctx.typeSpecifier():
+                            stars = len(ctx.MUL()) if ctx.MUL() else 0
+                            type_str = ctx.typeSpecifier().getText() + ('*' * stars)
+                            res = self.get_loc(SizeofNode(type_str), ctx)
+                        else:
+                            inner = results[id(ctx.unary_expression())]
+                            res = self.get_loc(SizeofNode(inner), ctx)
                     else:
                         if ctx.MUL() or ctx.BITAND():
                             op = ctx.getChild(0).getText()
                             inner_node = results[id(ctx.cast_expression())]
                             res = self.get_loc(UnaryOpNode(op, inner_node), ctx)
-                        else:                           
+                        else:
                             op = ctx.getChild(0).getText()
                             inner_node = results[id(ctx.unary_expression())]
                             res = self.get_loc(UnaryOpNode(op, inner_node), ctx)

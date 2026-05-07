@@ -44,6 +44,9 @@ class BaseVisitor:
             
         if isinstance(node, MemberAccessNode):
             return [node.expr]
+
+        if isinstance(node, SizeofNode):
+            return [node.operand] if isinstance(node.operand, ASTNode) else []
             
         if isinstance(node, (FunctionDeclNode, TypedefNode)):
             return []

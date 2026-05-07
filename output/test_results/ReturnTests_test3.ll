@@ -1,5 +1,5 @@
 ; ModuleID = "cmm_module"
-target triple = "x86_64-w64-windows-gnu"
+target triple = "x86_64-unknown-linux-gnu"
 target datalayout = ""
 
 declare i32 @"printf"(i8* %".1", ...)
@@ -40,12 +40,11 @@ entry:
   %".9" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: a
   %"a.2" = load float, float* %"a"
-  ;  Source: (int)a
-  %".12" = fptosi float %"a.2" to i32
-  ;  Source: printf("%d",(int)a);
-  %".14" = call i32 (i8*, ...) @"printf"(i8* %".9", i32 %".12")
+  ;  Source: printf("%f",a);
+  %".12" = fpext float %"a.2" to double
+  %".13" = call i32 (i8*, ...) @"printf"(i8* %".9", double %".12")
   ;  Source: return0;
   ret i32 0
 }
 
-@"str" = internal constant [3 x i8] c"%d\00"
+@"str" = internal constant [3 x i8] c"%f\00"

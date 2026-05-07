@@ -1,5 +1,5 @@
 ; ModuleID = "cmm_module"
-target triple = "x86_64-w64-windows-gnu"
+target triple = "x86_64-unknown-linux-gnu"
 target datalayout = ""
 
 %"struct.kaas" = type {i32, float, i8}
@@ -46,19 +46,15 @@ entry:
   ;  Source: ementaler.fermtented
   %"gep_fermtented.1" = getelementptr inbounds %"struct.kaas", %"struct.kaas"* %"ementaler", i32 0, i32 1
   %"load_fermtented.1" = load float, float* %"gep_fermtented.1"
-  ;  Source: (ementaler.fermtented*10000)
-  %".16" = sitofp i32 10000 to float
-  %".17" = fmul float %"load_fermtented.1", %".16"
-  ;  Source: (int)(ementaler.fermtented*10000)
-  %".19" = fptosi float %".17" to i32
   ;  Source: ementaler.lol
   %"gep_lol.1" = getelementptr inbounds %"struct.kaas", %"struct.kaas"* %"ementaler", i32 0, i32 2
   %"load_lol.1" = load i8, i8* %"gep_lol.1"
-  ;  Source: printf("%d %d %c",ementaler.melk,(int)(ementaler.fermtented*10000),ementaler.lol);
-  %".22" = zext i8 %"load_lol.1" to i32
-  %".23" = call i32 (i8*, ...) @"printf"(i8* %".12", i32 %"load_melk.1", i32 %".19", i32 %".22")
+  ;  Source: printf("%d %f %c",ementaler.melk,ementaler.fermtented,ementaler.lol);
+  %".17" = fpext float %"load_fermtented.1" to double
+  %".18" = zext i8 %"load_lol.1" to i32
+  %".19" = call i32 (i8*, ...) @"printf"(i8* %".12", i32 %"load_melk.1", double %".17", i32 %".18")
   ;  Source: return0;
   ret i32 0
 }
 
-@"str" = internal constant [9 x i8] c"%d %d %c\00"
+@"str" = internal constant [9 x i8] c"%d %f %c\00"

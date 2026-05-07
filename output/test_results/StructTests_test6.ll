@@ -1,5 +1,5 @@
 ; ModuleID = "cmm_module"
-target triple = "x86_64-w64-windows-gnu"
+target triple = "x86_64-unknown-linux-gnu"
 target datalayout = ""
 
 %"struct.kaas" = type {i32, i32}
@@ -105,8 +105,8 @@ entry:
   %".50" = fmul float %".49", 0x400b9999a0000000
   ;  Source: (int)(*gouda_ptr).melk*3.45||36
   %".52" = sitofp i32 36 to float
-  %".53" = icmp ne float %".50", 0.0
-  %".54" = icmp ne float %".52", 0.0
+  %".53" = icmp ne float %".50",              0x0
+  %".54" = icmp ne float %".52",              0x0
   %".55" = or i1 %".53", %".54"
   %".56" = zext i1 %".55" to i32
   ;  Source: inta=(int)(*gouda_ptr).melk*3.45||36;

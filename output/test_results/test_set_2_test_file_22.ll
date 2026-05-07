@@ -1,5 +1,5 @@
 ; ModuleID = "cmm_module"
-target triple = "x86_64-w64-windows-gnu"
+target triple = "x86_64-unknown-linux-gnu"
 target datalayout = ""
 
 declare i32 @"printf"(i8* %".1", ...)
@@ -41,17 +41,17 @@ entry:
   ;  Source: a
   ;  Source: a[0]
   %"decay_left" = getelementptr [2 x i32], [2 x i32]* %"a", i32 0, i32 0
-  %"gep_idx" = getelementptr i32, i32* %"decay_left", i32 0
-  %"array_element" = load i32, i32* %"gep_idx"
+  %"gep_ptr" = getelementptr i32, i32* %"decay_left", i32 0
+  %"array_element" = load i32, i32* %"gep_ptr"
   ;  Source: a[0]=15;
-  store i32 15, i32* %"gep_idx"
+  store i32 15, i32* %"gep_ptr"
   ;  Source: a
   ;  Source: a[1]
   %"decay_left.1" = getelementptr [2 x i32], [2 x i32]* %"a", i32 0, i32 0
-  %"gep_idx.1" = getelementptr i32, i32* %"decay_left.1", i32 1
-  %"array_element.1" = load i32, i32* %"gep_idx.1"
+  %"gep_ptr.1" = getelementptr i32, i32* %"decay_left.1", i32 1
+  %"array_element.1" = load i32, i32* %"gep_ptr.1"
   ;  Source: a[1]=12;
-  store i32 12, i32* %"gep_idx.1"
+  store i32 12, i32* %"gep_ptr.1"
   ;  Source: x
   %"x.2" = load i32, i32* %"x"
   ;  Source: x=12;
@@ -60,12 +60,12 @@ entry:
   ;  Source: a
   ;  Source: a[1]
   %"decay_left.2" = getelementptr [2 x i32], [2 x i32]* %"a", i32 0, i32 0
-  %"gep_idx.2" = getelementptr i32, i32* %"decay_left.2", i32 1
-  %"array_element.2" = load i32, i32* %"gep_idx.2"
+  %"gep_ptr.2" = getelementptr i32, i32* %"decay_left.2", i32 1
+  %"array_element.2" = load i32, i32* %"gep_ptr.2"
   ;  Source: --a[1]
-  %".31" = load i32, i32* %"gep_idx.2"
+  %".31" = load i32, i32* %"gep_ptr.2"
   %".32" = sub i32 %".31", 1
-  store i32 %".32", i32* %"gep_idx.2"
+  store i32 %".32", i32* %"gep_ptr.2"
   ;  Source: printf("%d; ",--a[1]);
   %".35" = call i32 (i8*, ...) @"printf"(i8* %".27", i32 %".32")
   %".36" = bitcast [5 x i8]* @"str.3" to i8*
@@ -85,18 +85,18 @@ entry:
   ;  Source: a
   ;  Source: a[0]
   %"decay_left.3" = getelementptr [2 x i32], [2 x i32]* %"a", i32 0, i32 0
-  %"gep_idx.3" = getelementptr i32, i32* %"decay_left.3", i32 0
-  %"array_element.3" = load i32, i32* %"gep_idx.3"
+  %"gep_ptr.3" = getelementptr i32, i32* %"decay_left.3", i32 0
+  %"array_element.3" = load i32, i32* %"gep_ptr.3"
   ;  Source: a[0]--;
-  %".51" = load i32, i32* %"gep_idx.3"
+  %".51" = load i32, i32* %"gep_ptr.3"
   %".52" = sub i32 %".51", 1
-  store i32 %".52", i32* %"gep_idx.3"
+  store i32 %".52", i32* %"gep_ptr.3"
   %".54" = bitcast [5 x i8]* @"str.5" to i8*
   ;  Source: a
   ;  Source: a[0]
   %"decay_left.4" = getelementptr [2 x i32], [2 x i32]* %"a", i32 0, i32 0
-  %"gep_idx.4" = getelementptr i32, i32* %"decay_left.4", i32 0
-  %"array_element.4" = load i32, i32* %"gep_idx.4"
+  %"gep_ptr.4" = getelementptr i32, i32* %"decay_left.4", i32 0
+  %"array_element.4" = load i32, i32* %"gep_ptr.4"
   ;  Source: printf("%d; ",a[0]);
   %".58" = call i32 (i8*, ...) @"printf"(i8* %".54", i32 %"array_element.4")
   ;  Source: return0;

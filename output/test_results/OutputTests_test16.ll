@@ -1,5 +1,5 @@
 ; ModuleID = "cmm_module"
-target triple = "x86_64-w64-windows-gnu"
+target triple = "x86_64-unknown-linux-gnu"
 target datalayout = ""
 
 declare i32 @"printf"(i8* %".1", ...)
@@ -80,17 +80,15 @@ entry:
   %".43" = bitcast [3 x i8]* @"str.3" to i8*
   ;  Source: f
   %"f.2" = load float, float* %"f"
-  ;  Source: (int)f
-  %".46" = fptosi float %"f.2" to i32
-  ;  Source: printf("%d",(int)f);
-  %".48" = call i32 (i8*, ...) @"printf"(i8* %".43", i32 %".46")
-  %".49" = bitcast [3 x i8]* @"str.4" to i8*
+  ;  Source: printf("%f",f);
+  %".46" = fpext float %"f.2" to double
+  %".47" = call i32 (i8*, ...) @"printf"(i8* %".43", double %".46")
+  %".48" = bitcast [3 x i8]* @"str.4" to i8*
   ;  Source: f2
   %"f2.1" = load float, float* %"f2"
-  ;  Source: (int)f2
-  %".52" = fptosi float %"f2.1" to i32
-  ;  Source: printf("%d",(int)f2);
-  %".54" = call i32 (i8*, ...) @"printf"(i8* %".49", i32 %".52")
+  ;  Source: printf("%f",f2);
+  %".51" = fpext float %"f2.1" to double
+  %".52" = call i32 (i8*, ...) @"printf"(i8* %".48", double %".51")
   ;  Source: f2
   %"f2.2" = load float, float* %"f2"
   ;  Source: f2
@@ -98,35 +96,34 @@ entry:
   ;  Source: f
   %"f.3" = load float, float* %"f"
   ;  Source: f2+f
-  %".59" = fadd float %"f2.3", %"f.3"
+  %".57" = fadd float %"f2.3", %"f.3"
   ;  Source: f2=f2+f;
-  store float %".59", float* %"f2"
-  %".62" = bitcast [3 x i8]* @"str.5" to i8*
+  store float %".57", float* %"f2"
+  %".60" = bitcast [3 x i8]* @"str.5" to i8*
   ;  Source: f2
   %"f2.4" = load float, float* %"f2"
-  ;  Source: (int)f2
-  %".65" = fptosi float %"f2.4" to i32
-  ;  Source: printf("%d",(int)f2);
-  %".67" = call i32 (i8*, ...) @"printf"(i8* %".62", i32 %".65")
+  ;  Source: printf("%f",f2);
+  %".63" = fpext float %"f2.4" to double
+  %".64" = call i32 (i8*, ...) @"printf"(i8* %".60", double %".63")
   %"c" = alloca i8
   ;  Source: charc='a';
   store i8 97, i8* %"c"
-  %".70" = bitcast [3 x i8]* @"str.6" to i8*
+  %".67" = bitcast [3 x i8]* @"str.6" to i8*
   ;  Source: c
   %"c.1" = load i8, i8* %"c"
   ;  Source: printf("%c",c);
-  %".73" = zext i8 %"c.1" to i32
-  %".74" = call i32 (i8*, ...) @"printf"(i8* %".70", i32 %".73")
+  %".70" = zext i8 %"c.1" to i32
+  %".71" = call i32 (i8*, ...) @"printf"(i8* %".67", i32 %".70")
   ;  Source: c
   %"c.2" = load i8, i8* %"c"
   ;  Source: c='b';
   store i8 98, i8* %"c"
-  %".78" = bitcast [3 x i8]* @"str.7" to i8*
+  %".75" = bitcast [3 x i8]* @"str.7" to i8*
   ;  Source: c
   %"c.3" = load i8, i8* %"c"
   ;  Source: printf("%c",c);
-  %".81" = zext i8 %"c.3" to i32
-  %".82" = call i32 (i8*, ...) @"printf"(i8* %".78", i32 %".81")
+  %".78" = zext i8 %"c.3" to i32
+  %".79" = call i32 (i8*, ...) @"printf"(i8* %".75", i32 %".78")
   ;  Source: return0;
   ret i32 0
 }
@@ -134,8 +131,8 @@ entry:
 @"str" = internal constant [3 x i8] c"%d\00"
 @"str.1" = internal constant [3 x i8] c"%d\00"
 @"str.2" = internal constant [3 x i8] c"%d\00"
-@"str.3" = internal constant [3 x i8] c"%d\00"
-@"str.4" = internal constant [3 x i8] c"%d\00"
-@"str.5" = internal constant [3 x i8] c"%d\00"
+@"str.3" = internal constant [3 x i8] c"%f\00"
+@"str.4" = internal constant [3 x i8] c"%f\00"
+@"str.5" = internal constant [3 x i8] c"%f\00"
 @"str.6" = internal constant [3 x i8] c"%c\00"
 @"str.7" = internal constant [3 x i8] c"%c\00"

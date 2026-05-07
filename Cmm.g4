@@ -29,7 +29,7 @@ parameterDeclaration
     ;
 
 compoundStatement
-: LBRACE (declaration | typedefDeclaration | statement)* RBRACE
+    : LBRACE (structDeclaration | unionDeclaration | enumDeclaration | declaration | typedefDeclaration | statement)* RBRACE
     ;
 
 initDeclaratorList
@@ -211,6 +211,8 @@ multiplicative_expression
 
 unary_expression
     : postfix_expression
+    | SIZEOF LPAREN typeSpecifier MUL* RPAREN
+    | SIZEOF LPAREN unary_expression RPAREN
     | PLUS unary_expression
     | MINUS unary_expression
     | NOT unary_expression
@@ -286,6 +288,7 @@ RETURN    : 'return';
 DEFAULT   : 'default';
 STRUCT    : 'struct';
 TYPEDEF   : 'typedef';
+SIZEOF    : 'sizeof';
 
 // Operators
 LPAREN    : '(' ;

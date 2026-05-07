@@ -1,5 +1,5 @@
 ; ModuleID = "cmm_module"
-target triple = "x86_64-w64-windows-gnu"
+target triple = "x86_64-unknown-linux-gnu"
 target datalayout = ""
 
 declare i32 @"printf"(i8* %".1", ...)
@@ -25,16 +25,14 @@ entry:
   store float %".1", float* %"foo"
   %".4" = bitcast [4 x i8]* @"str" to i8*
   ;  Source: foo
-  ;  Source: (int)foo
-  %".7" = ptrtoint i32 (float)* @"foo" to i32
-  ;  Source: printf("%d\n",(int)foo);
-  %".9" = call i32 (i8*, ...) @"printf"(i8* %".4", i32 %".7")
+  ;  Source: printf("%f\n",foo);
+  %".7" = call i32 (i8*, ...) @"printf"(i8* %".4", i32 (float)* @"foo")
   ;  Source: returnfoo;
-  %".11" = ptrtoint i32 (float)* @"foo" to i32
-  ret i32 %".11"
+  %".9" = ptrtoint i32 (float)* @"foo" to i32
+  ret i32 %".9"
 }
 
-@"str" = internal constant [4 x i8] c"%d\0a\00"
+@"str" = internal constant [4 x i8] c"%f\0a\00"
 define i32 @"main"()
 {
 entry:

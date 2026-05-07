@@ -921,7 +921,7 @@ class LLVMVisitor:
             if isinstance(node.expr, IdentifierNode):
                 struct_ptr = self._get_symbol(node.expr.name)
             else:
-                self.visit(node.expr)
+                self._ensure_result(node.expr)
                 struct_ptr = self.results.get(f"addr_{id(node.expr)}") or self.results.get(id(node.expr))
 
             if struct_ptr is None:
@@ -956,6 +956,15 @@ class LLVMVisitor:
         # 16. Typedefs (Puur tekstueel in C, dus LLVM negeert dit)
         elif isinstance(node, TypedefNode):
             pass
+        # 17. SizeOf
+        elif isinstance(node, SizeofNode):
+            if isinstance(node.operand, str):
+                llvm_type = self._get_llvm_type(node.operand)
+            else:
+                operand_type = getattr(node.operand, 'eval_type', 'int') or 'int'
+                llvm_type = self._get_llvm_type(operand_type)
+            size = self._get_type_size(llvm_type)
+            self.results[id(node)] = ir.Constant(ir.IntType(32), size)
 
     def _apply_cast(self, val, target_typ):
         if val.type == target_typ: return val
