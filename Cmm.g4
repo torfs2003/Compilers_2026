@@ -75,10 +75,10 @@ statement
     ;
 
 typeSpecifier
-    : INT 
-    | FLOAT 
-    | CHAR 
-    | VOID 
+    : INT
+    | FLOAT
+    | CHAR
+    | VOID
     | ENUM IDENTIFIER
     | STRUCT IDENTIFIER
     | UNION IDENTIFIER
@@ -377,7 +377,7 @@ IDENTIFIER
 MULTI_LINE_COMMENT
     : '/*' .*? '*/' -> channel(HIDDEN)
     ;
-    
+
 SINGLE_LINE_COMMENT
     : '//' ~[\r\n]* -> channel(HIDDEN)
     ;
