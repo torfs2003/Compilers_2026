@@ -276,11 +276,14 @@ class ASTVisitor:
                 elif class_name == "Cast_expressionContext":
                     if ctx.LPAREN():
                         target = ctx.typeSpecifier().getText()
+                        
+                        if ctx.MUL():
+                            target += "*" * len(ctx.MUL())
+                        
                         inner = results[id(ctx.cast_expression())]
                         res = self.get_loc(CastNode(target, inner), ctx)
                     else:
                         res = results[id(ctx.unary_expression())]
-
                 # 6. Unary Operations
                 elif class_name == "Unary_expressionContext":
                     if ctx.getChildCount() == 1:
@@ -345,9 +348,14 @@ class ASTVisitor:
                                 val = int(text_val, 0) # Base 0 is prima voor decimaal en hexadecimaal (0x...)
                             
                             if val > 2147483647 or val < -2147483648:
-                                print(f"[ Error ] line {ctx.start.line}, position {ctx.start.column}: Integer overflow. '{val}' exceeds 32-bit boundaries.")
-                                import sys
-                                sys.exit(1)
+                                warning_msg = f"[Warning] line {ctx.start.line}:{ctx.start.column}: Integer overflow. '{val}' exceeds 32-bit boundaries."
+                                if warning_msg not in self.warnings:
+                                    self.warnings.append(warning_msg)
+                                
+                                val = val & 0xFFFFFFFF
+                                if val > 2147483647:
+                                    val -= 4294967296
+                                    
                             res = self.get_loc(IntNode(val), ctx)
                         except ValueError:
                             print(f"[Error] line {ctx.start.line}, position {ctx.start.column}: Invalid integer literal '{text_val}'")

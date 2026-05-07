@@ -10,12 +10,12 @@ digraph AST {
   node7 [label="Decl\nint*\na\n(int*)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
   node7 -> node8 [style="solid", color="black", label=" init", fontcolor="blue"];
   node12 [label="ID: a\n(int*)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
-  node11 [label="Cast\n(int)", shape=ellipse, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node11 [label="Cast\n(int*)", shape=ellipse, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node11 -> node12 [style="solid", color="black"];
   node10 [label="Decl\nint*\nb\n(int*)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
   node10 -> node11 [style="solid", color="black", label=" init", fontcolor="blue"];
   node15 [label="ID: b\n(int*)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
-  node14 [label="Cast\n(int)", shape=ellipse, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node14 [label="Cast\n(int*)", shape=ellipse, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node14 -> node15 [style="solid", color="black"];
   node13 [label="Decl\nint*\nc\n(int*)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
   node13 -> node14 [style="solid", color="black", label=" init", fontcolor="blue"];

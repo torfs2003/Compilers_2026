@@ -1,6 +1,7 @@
 from llvmlite import ir
 from src.parser.AST import *
 import llvmlite.binding as llvm
+from src.parser.symbol_table import SymbolTable
 
 class LLVMVisitor:
     def __init__(self):
@@ -12,7 +13,7 @@ class LLVMVisitor:
         self.builder = None
         self.func = None
         self.global_vars = {}
-        self.local_vars = {}
+        self.var_table = SymbolTable()
         self.results = {}
         self.stdio_declared = False
         self.loop_stack = []
@@ -59,8 +60,10 @@ class LLVMVisitor:
         return t
 
     def _get_symbol(self, name):
-        """Zoekt eerst in lokale variabelen, dan in globale."""
-        return self.local_vars.get(name) or self.global_vars.get(name)
+        result = self.var_table.get(name)
+        if result is not None:
+            return result
+        return self.global_vars.get(name)
 
     def _init_array(self, base_ptr, array_node, current_indices):
         if self.builder is None: return
@@ -124,9 +127,14 @@ class LLVMVisitor:
         fputs_ty = ir.FunctionType(ir.IntType(32), [voidptr_ty, voidptr_ty])
         self.stdlib_fputs = ir.Function(self.module, fputs_ty, name="fputs")
         
-        # 3. Memory Allocation (malloc, free)
         malloc_ty = ir.FunctionType(voidptr_ty, [ir.IntType(32)])
         self.malloc = ir.Function(self.module, malloc_ty, name="malloc")
+        
+        calloc_ty = ir.FunctionType(voidptr_ty, [ir.IntType(32), ir.IntType(32)])
+        self.calloc = ir.Function(self.module, calloc_ty, name="calloc")
+
+        realloc_ty = ir.FunctionType(voidptr_ty, [voidptr_ty, ir.IntType(32)])
+        self.realloc = ir.Function(self.module, realloc_ty, name="realloc")
         
         free_ty = ir.FunctionType(ir.VoidType(), [voidptr_ty])
         self.free = ir.Function(self.module, free_ty, name="free")
@@ -151,19 +159,19 @@ class LLVMVisitor:
         return self.results.get(node_id, None)
 
     def _allocate_variable(self, node):
-        """Maakt de geheugenplek aan VOORDAT we de rest van de expressie evalueren."""
-        if self._get_symbol(node.name) and self.builder is not None: return
-        
+        # Check alleen huidige scope (niet outer scopes)
+        current_scope = self.var_table.scopes[-1]
+        if node.name in current_scope and self.builder is not None:
+            return current_scope[node.name]
+
         base_typ = self._get_llvm_type(node.type_spec)
         typ = base_typ
 
         if isinstance(node, ArrayDeclNode):
             base_str = node.type_spec.replace('*', '')
             typ = self._get_llvm_type(base_str)
-            
             if hasattr(node, 'sizes') and node.sizes:
                 for size_node in reversed(node.sizes):
-                    # Behoud jouw veilige check voor de waarde van de grootte
                     size = size_node.value if hasattr(size_node, 'value') else size_node
                     typ = ir.ArrayType(typ, size)
 
@@ -175,9 +183,9 @@ class LLVMVisitor:
             return addr
 
         addr = self.builder.alloca(typ, name=node.name)
-        self.local_vars[node.name] = addr
+        self.var_table.put(node.name, addr)  # Zet in huidige scope
         return addr
-
+    
     def generate(self, root_node):
         stack = [(root_node, False)]
         while stack:
@@ -201,7 +209,8 @@ class LLVMVisitor:
 
                 # 2. Functie Definities
                 elif isinstance(node, FunctionNode):
-                    self.local_vars = {}  # Reset lokale variabelen voor de nieuwe functie!
+                    self.var_table = SymbolTable()  # Reset voor nieuwe functie
+                    self.var_table.enter_scope()    # Open functie-scope
 
                     ret_type = self._get_llvm_type(node.return_type)
                     param_types = [self._get_llvm_type(p[0]) for p in node.params]
@@ -214,7 +223,6 @@ class LLVMVisitor:
 
                     self.builder = ir.IRBuilder(self.func.append_basic_block(name="entry"))
 
-                    # Alloceer alle parameters als lokale variabelen in het geheugen
                     seen = set()
                     for i, (p_type, p_name) in enumerate(node.params):
                         if p_name in seen:
@@ -223,7 +231,7 @@ class LLVMVisitor:
                         typ = self._get_llvm_type(p_type)
                         ptr = self.builder.alloca(typ, name=p_name)
                         self.builder.store(self.func.args[i], ptr)
-                        self.local_vars[p_name] = ptr
+                        self.var_table.put(p_name, ptr)  # ← var_table, niet local_vars
 
                 if isinstance(node, (DeclNode, ArrayDeclNode)):
                     self._allocate_variable(node)
@@ -280,8 +288,10 @@ class LLVMVisitor:
 
         # 0. CompoundNode
         if isinstance(node, CompoundNode):
+            self.var_table.enter_scope()       # ← NIEUW
             for item in node.items:
                 self._ensure_result(item)
+            self.var_table.exit_scope()        # ← NIEUW
             return
 
         # 1. Literals
@@ -371,18 +381,44 @@ class LLVMVisitor:
                 self.builder.call(self.fclose, [file_ptr])
                 self.results[id(node)] = res
                 
-            elif node.name in ['malloc', 'free']:
+            elif node.name in ['malloc', 'calloc', 'free']:
                 self._declare_stdlib()
-                func = self.malloc if node.name == 'malloc' else self.free
-                arg_val = self._ensure_result(node.args[0])
                 
-                if node.name == 'malloc' and arg_val.type != ir.IntType(32):
-                    arg_val = self._apply_cast(arg_val, ir.IntType(32))
-                elif node.name == 'free' and arg_val.type != ir.IntType(8).as_pointer():
-                    arg_val = self._apply_cast(arg_val, ir.IntType(8).as_pointer())
-                
-                self.results[id(node)] = self.builder.call(func, [arg_val])
+                if node.name == 'malloc':
+                    arg_val = self._ensure_result(node.args[0])
+                    if arg_val.type != ir.IntType(32):
+                        arg_val = self._apply_cast(arg_val, ir.IntType(32))
+                    self.results[id(node)] = self.builder.call(self.malloc, [arg_val])
+                    
+                elif node.name == 'calloc':
+                    arg_val1 = self._ensure_result(node.args[0])
+                    arg_val2 = self._ensure_result(node.args[1])
+                    
+                    if arg_val1.type != ir.IntType(32):
+                        arg_val1 = self._apply_cast(arg_val1, ir.IntType(32))
+                    if arg_val2.type != ir.IntType(32):
+                        arg_val2 = self._apply_cast(arg_val2, ir.IntType(32))
+                        
+                    self.results[id(node)] = self.builder.call(self.calloc, [arg_val1, arg_val2])
+                    
+                elif node.name == 'realloc':
+                    # Realloc heeft een pointer (void*) en een getal (int) nodig
+                    arg_val1 = self._ensure_result(node.args[0])
+                    arg_val2 = self._ensure_result(node.args[1])
+                    
+                    if arg_val1.type != ir.IntType(8).as_pointer():
+                        arg_val1 = self._apply_cast(arg_val1, ir.IntType(8).as_pointer())
+                    if arg_val2.type != ir.IntType(32):
+                        arg_val2 = self._apply_cast(arg_val2, ir.IntType(32))
+                        
+                    self.results[id(node)] = self.builder.call(self.realloc, [arg_val1, arg_val2])
 
+                elif node.name == 'free':
+                    arg_val = self._ensure_result(node.args[0])
+                    if arg_val.type != ir.IntType(8).as_pointer():
+                        arg_val = self._apply_cast(arg_val, ir.IntType(8).as_pointer())
+                    self.results[id(node)] = self.builder.call(self.free, [arg_val])
+            
             else:
                 # Custom User Functions
                 for i, arg_node in enumerate(node.args):

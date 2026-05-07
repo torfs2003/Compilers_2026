@@ -16,6 +16,10 @@ declare i32 @"fputs"(i8* %".1", i8* %".2")
 
 declare i8* @"malloc"(i32 %".1")
 
+declare i8* @"calloc"(i32 %".1", i32 %".2")
+
+declare i8* @"realloc"(i8* %".1", i32 %".2")
+
 declare void @"free"(i8* %".1")
 
 define i32 @"main"()
@@ -90,22 +94,21 @@ entry:
   ;  Source: sptr
   %"sptr.2" = load i8*, i8** %"sptr"
   ;  Source: (int*)sptr
-  %".50" = ptrtoint i8* %"sptr.2" to i32
+  %".50" = bitcast i8* %"sptr.2" to i32*
   ;  Source: kptr=(int*)sptr;
-  %".52" = inttoptr i32 %".50" to i32*
-  store i32* %".52", i32** %"kptr"
+  store i32* %".50", i32** %"kptr"
   %"kptrptr" = alloca i32**
   ;  Source: kptr
   %"kptr.3" = load i32*, i32** %"kptr"
   ;  Source: int**kptrptr=kptr;
-  %".56" = bitcast i32* %"kptr.3" to i32**
-  store i32** %".56", i32*** %"kptrptr"
+  %".55" = bitcast i32* %"kptr.3" to i32**
+  store i32** %".55", i32*** %"kptrptr"
   %"sptrptrptr" = alloca i8***
   ;  Source: kptr
   %"kptr.4" = load i32*, i32** %"kptr"
   ;  Source: char***sptrptrptr=kptr;
-  %".60" = bitcast i32* %"kptr.4" to i8***
-  store i8*** %".60", i8**** %"sptrptrptr"
+  %".59" = bitcast i32* %"kptr.4" to i8***
+  store i8*** %".59", i8**** %"sptrptrptr"
   %"p" = alloca float
   ;  Source: floatp=3.14;
   store float 0x40091eb860000000, float* %"p"
@@ -119,23 +122,23 @@ entry:
   ;  Source: pptr
   %"pptr.1" = load float*, float** %"pptr"
   ;  Source: float**ptrptr=pptr;
-  %".70" = bitcast float* %"pptr.1" to float**
-  store float** %".70", float*** %"ptrptr"
+  %".69" = bitcast float* %"pptr.1" to float**
+  store float** %".69", float*** %"ptrptr"
   %"pieter" = alloca float**
   ;  Source: pptr
   %"pptr.2" = load float*, float** %"pptr"
   ;  Source: &pptr
   ;  Source: float**pieter=&pptr;
   store float** %"pptr", float*** %"pieter"
-  %".76" = bitcast [3 x i8]* @"str" to i8*
+  %".75" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: pieter
   %"pieter.1" = load float**, float*** %"pieter"
   %"deref_load" = load float*, float** %"pieter.1"
   ;  Source: **pieter
   %"deref_load.1" = load float, float* %"deref_load"
   ;  Source: printf("%f",**pieter);
-  %".80" = fpext float %"deref_load.1" to double
-  %".81" = call i32 (i8*, ...) @"printf"(i8* %".76", double %".80")
+  %".79" = fpext float %"deref_load.1" to double
+  %".80" = call i32 (i8*, ...) @"printf"(i8* %".75", double %".79")
   ;  Source: return0;
   ret i32 0
 }

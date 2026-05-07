@@ -16,6 +16,10 @@ declare i32 @"fputs"(i8* %".1", i8* %".2")
 
 declare i8* @"malloc"(i32 %".1")
 
+declare i8* @"calloc"(i32 %".1", i32 %".2")
+
+declare i8* @"realloc"(i8* %".1", i32 %".2")
+
 declare void @"free"(i8* %".1")
 
 define i32 @"func"(i32 %".1", i32 %".2")

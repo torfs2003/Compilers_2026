@@ -51,7 +51,7 @@ digraph AST {
   node31 -> node33 [style="solid", color="black"];
   node35 [label="ID: kptr\n(int*)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
   node37 [label="ID: sptr\n(char*)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
-  node36 [label="Cast\n(int)", shape=ellipse, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node36 [label="Cast\n(int*)", shape=ellipse, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node36 -> node37 [style="solid", color="black"];
   node34 [label="=", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node34 -> node35 [style="solid", color="black"];

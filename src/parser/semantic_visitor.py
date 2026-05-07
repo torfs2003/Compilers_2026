@@ -345,6 +345,33 @@ class SemanticVisitor(BaseVisitor):
         if header == "stdio.h":
             self.stdio_included = True
             return
+        elif header == "stdlib.h":
+            self.symbol_table.put("malloc", {
+                'type': 'function',
+                'return_type': 'void*',
+                'params': [('int', 'size')],
+                'defined': True
+            })
+            self.symbol_table.put("calloc", {
+                'type': 'function',
+                'return_type': 'void*',
+                'params': [('int', 'num'), ('int', 'size')],
+                'defined': True
+            })
+            self.symbol_table.put("realloc", {
+                'type': 'function',
+                'return_type': 'void*',
+                'params': [('void*', 'ptr'), ('int', 'size')],
+                'defined': True
+            })
+            self.symbol_table.put("free", {
+                'type': 'function',
+                'return_type': 'void',
+                'params': [('void*', 'ptr')],
+                'defined': True
+            })
+            return
+
         if not found:
             for base in self.include_paths:
                 to_search = os.path.join(base, header)
@@ -425,8 +452,9 @@ class SemanticVisitor(BaseVisitor):
                 # 1. Check Pointers
                 if '*' in node.eval_type or '*' in init_type:
                     is_null_ptr = isinstance(node.init_expr, IntNode) and node.init_expr.value == 0
-                    if not is_null_ptr:
-                        # Maak er een Warning van voor Folder 3, of een Error zonder sys.exit
+                    # Check of een van de pointers 'void*' is. Zo ja, niet waarschuwen!
+                    is_void_ptr = init_type == 'void*' or node.eval_type == 'void*'
+                    if not is_null_ptr and not is_void_ptr:
                         self.get_Warning(node, f"Incompatibele types bij initialisatie: '{init_type}' aan '{node.eval_type}'.")
                 
                 # 2. Check Informatieverlies (Richness)
@@ -733,11 +761,11 @@ class SemanticVisitor(BaseVisitor):
             node.eval_type = child_type
 
     def visit_FuncCallNode(self, node):
-        if node.name in ['printf', 'scanf', 'malloc', 'free', 'fgets', 'fputs']:
+        if node.name in ['printf', 'scanf', 'malloc', 'calloc', 'realloc', 'free', 'fgets', 'fputs']:
             if node.name in ['printf', 'scanf', 'fgets', 'fputs'] and not self.stdio_included:
                 self.get_Error(node, f"Gebruik van '{node.name}' vereist #include <stdio.h>.")
             
-            if node.name == 'malloc': node.eval_type = 'void*'
+            if node.name in ['malloc', 'calloc', 'realloc']: node.eval_type = 'void*'
             elif node.name == 'free': node.eval_type = 'void'
             elif node.name == 'fgets': node.eval_type = 'char*'
             elif node.name == 'fputs': node.eval_type = 'void'

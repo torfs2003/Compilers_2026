@@ -17,6 +17,10 @@ declare i32 @"fputs"(i8* %".1", i8* %".2")
 
 declare i8* @"malloc"(i32 %".1")
 
+declare i8* @"calloc"(i32 %".1", i32 %".2")
+
+declare i8* @"realloc"(i8* %".1", i32 %".2")
+
 declare void @"free"(i8* %".1")
 
 define i32 @"main"()
@@ -37,9 +41,9 @@ entry:
   ;  Source: c
   %"c.1" = load i8*, i8** %"c"
   ;  Source: (structcheese*)c
-  %".11" = ptrtoint i8* %"c.1" to i32
+  %".11" = bitcast i8* %"c.1" to i32*
   ;  Source: structcheese*gouda_ptr=(structcheese*)c;
-  %".13" = inttoptr i32 %".11" to %"struct.cheese"*
+  %".13" = bitcast i32* %".11" to %"struct.cheese"*
   store %"struct.cheese"* %".13", %"struct.cheese"** %"gouda_ptr"
   ;  Source: return0;
   ret i32 0

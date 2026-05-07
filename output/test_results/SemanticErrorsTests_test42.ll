@@ -16,6 +16,10 @@ declare i32 @"fputs"(i8* %".1", i8* %".2")
 
 declare i8* @"malloc"(i32 %".1")
 
+declare i8* @"calloc"(i32 %".1", i32 %".2")
+
+declare i8* @"realloc"(i8* %".1", i32 %".2")
+
 declare void @"free"(i8* %".1")
 
 define i32 @"main"()
@@ -90,22 +94,21 @@ entry:
   ;  Source: sptr
   %"sptr.2" = load i8*, i8** %"sptr"
   ;  Source: (int*)sptr
-  %".50" = ptrtoint i8* %"sptr.2" to i32
+  %".50" = bitcast i8* %"sptr.2" to i32*
   ;  Source: kptr=(int*)sptr;
-  %".52" = inttoptr i32 %".50" to i32*
-  store i32* %".52", i32** %"kptr"
+  store i32* %".50", i32** %"kptr"
   %"kptrptr" = alloca i32**
   ;  Source: kptr
   %"kptr.3" = load i32*, i32** %"kptr"
   ;  Source: int**kptrptr=kptr;
-  %".56" = bitcast i32* %"kptr.3" to i32**
-  store i32** %".56", i32*** %"kptrptr"
+  %".55" = bitcast i32* %"kptr.3" to i32**
+  store i32** %".55", i32*** %"kptrptr"
   %"sptrptrptr" = alloca i8***
   ;  Source: kptr
   %"kptr.4" = load i32*, i32** %"kptr"
   ;  Source: char***sptrptrptr=kptr;
-  %".60" = bitcast i32* %"kptr.4" to i8***
-  store i8*** %".60", i8**** %"sptrptrptr"
+  %".59" = bitcast i32* %"kptr.4" to i8***
+  store i8*** %".59", i8**** %"sptrptrptr"
   %"p" = alloca float
   ;  Source: floatp=3.14;
   store float 0x40091eb860000000, float* %"p"
@@ -119,8 +122,8 @@ entry:
   ;  Source: pptr
   %"pptr.1" = load float*, float** %"pptr"
   ;  Source: float**ptrptr=pptr;
-  %".70" = bitcast float* %"pptr.1" to float**
-  store float** %".70", float*** %"ptrptr"
+  %".69" = bitcast float* %"pptr.1" to float**
+  store float** %".69", float*** %"ptrptr"
   %"pieter" = alloca float**
   ;  Source: pptr
   %"pptr.2" = load float*, float** %"pptr"
@@ -133,12 +136,12 @@ entry:
   ;  Source: pieter
   %"pieter.1" = load float**, float*** %"pieter"
   ;  Source: pptr-pieter
-  %".79" = ptrtoint float* %"pptr.3" to i32
-  %".80" = ptrtoint float** %"pieter.1" to i32
-  %".81" = sub i32 %".79", %".80"
-  %".82" = sdiv i32 %".81", 4
+  %".78" = ptrtoint float* %"pptr.3" to i32
+  %".79" = ptrtoint float** %"pieter.1" to i32
+  %".80" = sub i32 %".78", %".79"
+  %".81" = sdiv i32 %".80", 4
   ;  Source: inta=pptr-pieter;
-  store i32 %".82", i32* %"a"
+  store i32 %".81", i32* %"a"
   ;  Source: return0;
   ret i32 0
 }

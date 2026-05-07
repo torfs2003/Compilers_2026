@@ -16,6 +16,10 @@ declare i32 @"fputs"(i8* %".1", i8* %".2")
 
 declare i8* @"malloc"(i32 %".1")
 
+declare i8* @"calloc"(i32 %".1", i32 %".2")
+
+declare i8* @"realloc"(i8* %".1", i32 %".2")
+
 declare void @"free"(i8* %".1")
 
 define i32 @"main"()
@@ -34,20 +38,18 @@ entry:
   ;  Source: ptr
   %"ptr.1" = load i32*, i32** %"ptr"
   ;  Source: (int*)ptr
-  %".10" = ptrtoint i32* %"ptr.1" to i32
   ;  Source: int*nonConstPtr=(int*)ptr;
-  %".12" = inttoptr i32 %".10" to i32*
-  store i32* %".12", i32** %"nonConstPtr"
+  store i32* %"ptr.1", i32** %"nonConstPtr"
   ;  Source: nonConstPtr
   %"nonConstPtr.1" = load i32*, i32** %"nonConstPtr"
   %"deref_load" = load i32, i32* %"nonConstPtr.1"
   ;  Source: *nonConstPtr=20;
   store i32 20, i32* %"nonConstPtr.1"
-  %".17" = bitcast [4 x i8]* @"str" to i8*
+  %".15" = bitcast [4 x i8]* @"str" to i8*
   ;  Source: num
   %"num.2" = load i32, i32* %"num"
   ;  Source: printf("%d\n",num);
-  %".20" = call i32 (i8*, ...) @"printf"(i8* %".17", i32 %"num.2")
+  %".18" = call i32 (i8*, ...) @"printf"(i8* %".15", i32 %"num.2")
   ;  Source: return0;
   ret i32 0
 }

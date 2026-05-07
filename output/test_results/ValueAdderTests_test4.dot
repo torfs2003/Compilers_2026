@@ -14,7 +14,7 @@ digraph AST {
   node9 [label="Decl\nfloat**\nppf\n(float**)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
   node9 -> node10 [style="solid", color="black", label=" init", fontcolor="blue"];
   node14 [label="ID: ppf\n(float**)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
-  node13 [label="Cast\n(int)", shape=ellipse, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node13 [label="Cast\n(int*)", shape=ellipse, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node13 -> node14 [style="solid", color="black"];
   node12 [label="Decl\nint*\npi\n(int*)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
   node12 -> node13 [style="solid", color="black", label=" init", fontcolor="blue"];

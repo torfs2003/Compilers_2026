@@ -24,17 +24,16 @@ entry:
   ;  Source: ppf
   %"ppf.1" = load float**, float*** %"ppf"
   ;  Source: (int*)ppf
-  %".14" = ptrtoint float** %"ppf.1" to i32
+  %".14" = bitcast float** %"ppf.1" to i32*
   ;  Source: int*pi=(int*)ppf;
-  %".16" = inttoptr i32 %".14" to i32*
-  store i32* %".16", i32** %"pi"
+  store i32* %".14", i32** %"pi"
   %"result" = alloca i32
   ;  Source: pi
   %"pi.1" = load i32*, i32** %"pi"
   %"deref_load" = load i32, i32* %"pi.1"
   ;  Source: *pi+1
-  %".20" = add i32 %"deref_load", 1
+  %".19" = add i32 %"deref_load", 1
   ;  Source: intresult=*pi+1;
-  store i32 %".20", i32* %"result"
+  store i32 %".19", i32* %"result"
   ret i32 0
 }

@@ -16,6 +16,10 @@ declare i32 @"fputs"(i8* %".1", i8* %".2")
 
 declare i8* @"malloc"(i32 %".1")
 
+declare i8* @"calloc"(i32 %".1", i32 %".2")
+
+declare i8* @"realloc"(i8* %".1", i32 %".2")
+
 declare void @"free"(i8* %".1")
 
 define i32 @"main"()
@@ -34,18 +38,14 @@ entry:
   ;  Source: a
   %"a.1" = load i32*, i32** %"a"
   ;  Source: (int*)a
-  %".10" = ptrtoint i32* %"a.1" to i32
   ;  Source: int*b=(int*)a;
-  %".12" = inttoptr i32 %".10" to i32*
-  store i32* %".12", i32** %"b"
+  store i32* %"a.1", i32** %"b"
   %"c" = alloca i32*
   ;  Source: b
   %"b.1" = load i32*, i32** %"b"
   ;  Source: (constint*)b
-  %".16" = ptrtoint i32* %"b.1" to i32
   ;  Source: constint*c=(constint*)b;
-  %".18" = inttoptr i32 %".16" to i32*
-  store i32* %".18", i32** %"c"
+  store i32* %"b.1", i32** %"c"
   ;  Source: c
   %"c.1" = load i32*, i32** %"c"
   %"deref_load" = load i32, i32* %"c.1"

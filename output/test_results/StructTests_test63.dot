@@ -8,7 +8,7 @@ digraph AST {
   node3 -> node5 [style="solid", color="black"];
   node8 [label="Decl\nstruct MyStruct\naStruct\n(struct MyStruct)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
   node10 [label="ID: aStruct\n(struct MyStruct)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
-  node9 [label="Cast\n(char)", shape=ellipse, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node9 [label="Cast\n(char*)", shape=ellipse, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node9 -> node10 [style="solid", color="black"];
   node12 [label="0\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node11 [label="Return", shape=ellipse, style="filled", fillcolor="lightpink", color="black", fontcolor="black"];
