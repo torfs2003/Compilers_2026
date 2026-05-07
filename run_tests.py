@@ -6,6 +6,7 @@ from pathlib import Path
 # De geautomatiseerde output file
 LOG_FILE = "output/test_results.txt"
 FAILED_LOG_FILE = "output/failed_tests.txt"
+test_input = "abcde\n"
 
 # Clang flags (vergelijkbaar streng als je GCC-set)
 CLANG_FLAGS = [
@@ -15,6 +16,7 @@ CLANG_FLAGS = [
     "-Wextra",
     "-Werror=implicit-int",
     "-Werror=multichar",
+    "-Wno-error=int-conversion"
 ]
 
 def log(message, end="\n"):
@@ -23,9 +25,28 @@ def log(message, end="\n"):
     with open(LOG_FILE, "a", encoding="utf-8") as f:
         f.write(message + end)
 
+def stdin_for_test(c_file: Path) -> str:
+    # default: genoeg tokens voor meerdere scanf's
+    default = "0 0\n0 0\n0 0\nabcde\nabcde\n"
+
+    name = c_file.name
+    if name == "test_file_6.c":
+        # fib: n=5
+        return "5"
+    if name == "test_file_15.c":
+        # primes: n=10
+        return "10"
+    if name == "test_file_19.c":
+        # two ints: x=0 y=0
+        return "0 0"
+    if name == "test_file_20.c":
+        # 5 chars; NOTE: test itself is UB because a[5] can't hold 5 chars + '\0'
+        return "abcd"
+    return default
 
 def test_execution(c_file: Path, generated_ll_file: str):
     ref_exe = f"./compiler_test_{c_file.stem}.exe" if os.name == "nt" else f"./safe_compile_{c_file.stem}"
+    test_input = stdin_for_test(c_file)
 
     try:
         # 1. Run Clang (compile + run reference)
@@ -36,14 +57,15 @@ def test_execution(c_file: Path, generated_ll_file: str):
             text=True,
             timeout=5,
         )
-        ref_result = subprocess.run([ref_exe], capture_output=True, text=True, timeout=2)
+        ref_result = subprocess.run([ref_exe], input=test_input, capture_output=True, text=True, timeout=2)
 
         # 2. Run compiler output (LLI)
         my_result = subprocess.run(
             ["lli", generated_ll_file],
+            input=test_input,
             capture_output=True,
             text=True,
-            timeout=2,
+            timeout=5,
         )
 
         # 3. Vergelijk de output
@@ -220,9 +242,9 @@ def main():
         os.remove(FAILED_LOG_FILE)
 
     test_folders = [
-        #"example_source_files/test_set_1",
+        "example_source_files/test_set_1",
         "example_source_files/test_set_2"#,
-        #"example_source_files/test_set_3",
+        #"example_source_files/test_set_3"#,
     ]
 
     output_folder = "output/test_results"

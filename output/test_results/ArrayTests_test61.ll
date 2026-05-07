@@ -1,5 +1,5 @@
 ; ModuleID = "cmm_module"
-target triple = "unknown-unknown-unknown"
+target triple = "x86_64-unknown-linux-gnu"
 target datalayout = ""
 
 declare i32 @"printf"(i8* %".1", ...)
@@ -60,15 +60,15 @@ entry:
   %"passed.1" = load i32*, i32** %"passed"
   ;  Source: passed++;
   %".49" = load i32*, i32** %"passed"
-  %".50" = add i32* %".49", 1
-  store i32* %".50", i32** %"passed"
-  %".52" = bitcast [3 x i8]* @"str" to i8*
+  %"ptr_incdec" = getelementptr i32, i32* %".49", i32 1
+  store i32* %"ptr_incdec", i32** %"passed"
+  %".51" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: passed
   %"passed.2" = load i32*, i32** %"passed"
   ;  Source: *passed
   %"deref_load" = load i32, i32* %"passed.2"
   ;  Source: printf("%d",*passed);
-  %".56" = call i32 (i8*, ...) @"printf"(i8* %".52", i32 %"deref_load")
+  %".55" = call i32 (i8*, ...) @"printf"(i8* %".51", i32 %"deref_load")
   ;  Source: return0;
   ret i32 0
 }

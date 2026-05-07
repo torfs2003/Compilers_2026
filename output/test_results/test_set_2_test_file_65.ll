@@ -1,5 +1,5 @@
 ; ModuleID = "cmm_module"
-target triple = "unknown-unknown-unknown"
+target triple = "x86_64-unknown-linux-gnu"
 target datalayout = ""
 
 define i32 @"f"(i32 %".1", float %".2", i8 %".3", i32 %".4", i32 %".5")

@@ -71,6 +71,24 @@ class CmmListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by CmmParser#initDeclaratorList.
+    def enterInitDeclaratorList(self, ctx:CmmParser.InitDeclaratorListContext):
+        pass
+
+    # Exit a parse tree produced by CmmParser#initDeclaratorList.
+    def exitInitDeclaratorList(self, ctx:CmmParser.InitDeclaratorListContext):
+        pass
+
+
+    # Enter a parse tree produced by CmmParser#initDeclarator.
+    def enterInitDeclarator(self, ctx:CmmParser.InitDeclaratorContext):
+        pass
+
+    # Exit a parse tree produced by CmmParser#initDeclarator.
+    def exitInitDeclarator(self, ctx:CmmParser.InitDeclaratorContext):
+        pass
+
+
     # Enter a parse tree produced by CmmParser#declaration.
     def enterDeclaration(self, ctx:CmmParser.DeclarationContext):
         pass
@@ -149,6 +167,24 @@ class CmmListener(ParseTreeListener):
 
     # Exit a parse tree produced by CmmParser#forStatement.
     def exitForStatement(self, ctx:CmmParser.ForStatementContext):
+        pass
+
+
+    # Enter a parse tree produced by CmmParser#forInit.
+    def enterForInit(self, ctx:CmmParser.ForInitContext):
+        pass
+
+    # Exit a parse tree produced by CmmParser#forInit.
+    def exitForInit(self, ctx:CmmParser.ForInitContext):
+        pass
+
+
+    # Enter a parse tree produced by CmmParser#declarationFor.
+    def enterDeclarationFor(self, ctx:CmmParser.DeclarationForContext):
+        pass
+
+    # Exit a parse tree produced by CmmParser#declarationFor.
+    def exitDeclarationFor(self, ctx:CmmParser.DeclarationForContext):
         pass
 
 

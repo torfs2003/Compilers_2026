@@ -132,7 +132,11 @@ class LLVMVisitor:
                     self.builder = ir.IRBuilder(self.func.append_basic_block(name="entry"))
                     
                     # Alloceer alle parameters als lokale variabelen in het geheugen
+                    seen = set()
                     for i, (p_type, p_name) in enumerate(node.params):
+                        if p_name in seen:
+                            raise Exception(f"variabele '{p_name}' in functie '{node.name}' wordt meer keer gebruikt")
+                        seen.add(p_name)
                         typ = self._get_llvm_type(p_type)
                         ptr = self.builder.alloca(typ, name=p_name)
                         self.builder.store(self.func.args[i], ptr)
@@ -231,17 +235,24 @@ class LLVMVisitor:
         elif isinstance(node, FuncCallNode):
             args = []
             func = self.module.globals.get(node.name)
-            
+
             if node.name in ['printf', 'scanf']:
                 func = self.printf if node.name == 'printf' else self.scanf
                 for arg_node in node.args:
                     if node.name == 'scanf' and isinstance(arg_node, IdentifierNode):
-                        args.append(self._get_symbol(arg_node.name))
+                        arg_val = self._get_symbol(arg_node.name)
                     else:
                         arg_val = self._ensure_result(arg_node)
-                        if node.name == 'printf' and isinstance(arg_val.type, ir.FloatType):
-                            arg_val = self.builder.fpext(arg_val, ir.DoubleType())
-                        args.append(arg_val)
+
+                    zero = ir.Constant(ir.IntType(32), 0)
+                    if (isinstance(arg_val.type, ir.PointerType)
+                            and isinstance(arg_val.type.pointee, ir.ArrayType)):
+                        arg_val = self.builder.gep(arg_val, [zero, zero], inbounds=True)
+
+                    if node.name == 'printf' and isinstance(arg_val.type, ir.FloatType):
+                        arg_val = self.builder.fpext(arg_val, ir.DoubleType())
+
+                    args.append(arg_val)
             else:
                 # Custom User Functions
                 for i, arg_node in enumerate(node.args):
@@ -250,7 +261,7 @@ class LLVMVisitor:
                     if arg_val.type != expected_type:
                         arg_val = self._apply_cast(arg_val, expected_type)
                     args.append(arg_val)
-            
+
             self.results[id(node)] = self.builder.call(func, args)
 
         # 3.5 Return Statements
@@ -309,6 +320,13 @@ class LLVMVisitor:
                         left = self._apply_cast(left, ir.FloatType())
                     elif isinstance(right.type, ir.IntType) and isinstance(left.type, ir.FloatType):
                         right = self._apply_cast(right, ir.FloatType())
+                    elif isinstance(left.type, ir.IntType) and isinstance(right.type, ir.IntType):
+                        target_width = max(left.type.width, right.type.width)
+                        target_type = ir.IntType(target_width)
+                        if left.type.width != target_width:
+                            left = self._apply_cast(left, target_type)
+                        if right.type.width != target_width:
+                            right = self._apply_cast(right, target_type)
             
             # Array Indexering ([])
             if node.op == '[]':

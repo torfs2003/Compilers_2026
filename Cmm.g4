@@ -29,13 +29,20 @@ parameterDeclaration
     ;
 
 compoundStatement
-    : LBRACE declaration* statement* RBRACE  // C89 Strikte volgorde overgenomen uit Versie 2
+    : LBRACE (declaration | typedefDeclaration | statement)* RBRACE
+    ;
+
+initDeclaratorList
+    : initDeclarator (COMMA initDeclarator)*
+    ;
+
+initDeclarator
+    : CONST? MUL* CONST? IDENTIFIER (LBRACKET expression? RBRACKET)* (ASSIGN (expression | array_initializer))?
     ;
 
 declaration
-    : CONST? typeSpecifier CONST? MUL* CONST? IDENTIFIER (LBRACKET expression? RBRACKET)* (ASSIGN (expression | array_initializer))? SEMI
+    : CONST? typeSpecifier initDeclaratorList SEMI
     ;
-
 
 structDeclaration
     : STRUCT IDENTIFIER LBRACE declaration* RBRACE SEMI
@@ -82,7 +89,16 @@ whileStatement
     ;
 
 forStatement
-    : FOR LPAREN expression? SEMI expression? SEMI expression? RPAREN compoundStatement
+    : FOR LPAREN forInit? SEMI expression? SEMI expression? RPAREN compoundStatement
+    ;
+
+forInit
+    : declarationFor
+    | expression
+    ;
+
+declarationFor
+    : CONST? typeSpecifier initDeclaratorList
     ;
 
 breakStatement

@@ -1,39 +1,32 @@
 ; ModuleID = "cmm_module"
-target triple = "unknown-unknown-unknown"
+target triple = "x86_64-unknown-linux-gnu"
 target datalayout = ""
+
+declare i32 @"printf"(i8* %".1", ...)
+
+declare i32 @"scanf"(i8* %".1", ...)
 
 define i32 @"main"()
 {
 entry:
-  %"sum" = alloca i32
-  ;  Source: intsum=0;
-  store i32 0, i32* %"sum"
-  %"i" = alloca i32
-  ;  Source: inti;
-  ;  Source: i
-  %"i.1" = load i32, i32* %"i"
-  ;  Source: i=0
-  store i32 0, i32* %"i"
-  br label %"while.cond"
-while.cond:
-  %"i.2" = load i32, i32* %"i"
-  %".9" = icmp slt i32 %"i.2", 5
-  %".10" = zext i1 %".9" to i32
-  %"whilecond" = icmp ne i32 %".10", 0
-  br i1 %"whilecond", label %"while.body", label %"while.end"
-while.body:
-  %"sum.1" = load i32, i32* %"sum"
-  %"i.3" = load i32, i32* %"i"
-  %".12" = add i32 %"sum.1", %"i.3"
-  %"sum.2" = load i32, i32* %"sum"
-  store i32 %".12", i32* %"sum"
-  %"i.4" = load i32, i32* %"i"
-  %".14" = add i32 %"i.4", 1
-  %"i.5" = load i32, i32* %"i"
-  store i32 %".14", i32* %"i"
-  br label %"while.cond"
-while.end:
-  ;  Source: returnsum;
-  %"sum.3" = load i32, i32* %"sum"
-  ret i32 %"sum.3"
+  %"x" = alloca i32
+  ;  Source: intx=4;
+  store i32 4, i32* %"x"
+  %"b" = alloca i32
+  ;  Source: intb=9632;
+  store i32 9632, i32* %"b"
+  %"x_ptr" = alloca i32*
+  ;  Source: b
+  %"b.1" = load i32, i32* %"b"
+  ;  Source: &b
+  ;  Source: constint*x_ptr=&b;
+  store i32* %"b", i32** %"x_ptr"
+  ;  Source: x_ptr
+  %"x_ptr.1" = load i32*, i32** %"x_ptr"
+  %"deref_load" = load i32, i32* %"x_ptr.1"
+  ;  Source: x
+  %"x.1" = load i32, i32* %"x"
+  ;  Source: *x_ptr=x;
+  store i32 %"x.1", i32* %"x_ptr.1"
+  ret i32 0
 }
