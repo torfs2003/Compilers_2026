@@ -135,6 +135,21 @@ class ASTVisitor:
                                     members.append(decl_node)
                                     
                     res = self.get_loc(StructDeclNode(name, members), ctx)
+                
+                elif class_name == "UnionDeclarationContext":
+                    name = ctx.IDENTIFIER().getText()
+                    members = []
+                    
+                    if hasattr(ctx, 'declaration'):
+                        for decl_ctx in ctx.declaration():
+                            decl_node = results.get(id(decl_ctx))
+                            if decl_node:
+                                if isinstance(decl_node, list):
+                                    members.extend(decl_node)
+                                else:
+                                    members.append(decl_node)
+                                    
+                    res = self.get_loc(UnionDeclNode(name, members), ctx)
 
                 elif class_name == "TypedefDeclarationContext":
                     original_type = ctx.typeSpecifier().getText()
@@ -151,52 +166,79 @@ class ASTVisitor:
 
                 # 2. Declarations
                 elif class_name == "DeclarationContext":
-                    base_type = ctx.typeSpecifier().getText()
-                    pointer_stars = "*" * len(ctx.MUL())
-                    full_type = base_type + pointer_stars
                     
-                    all_exprs = ctx.expression()
-                    sizes = []
-                    init = None
-                    
-                    if ctx.ASSIGN():
-                        if ctx.array_initializer():
-                            init = results[id(ctx.array_initializer())]
+                    # Check of dit een Function Pointer declaratie is (heeft minstens 2 haakjes openen)
+                    if len(ctx.LPAREN()) >= 2:
+                        return_type = ctx.typeSpecifier().getText()
+                        name = ctx.IDENTIFIER().getText()
+                        
+                        param_types = []
+                        if ctx.typeList():
+                            # typeList bevat alle types gescheiden door komma's
+                            for i in range(len(ctx.typeList().typeSpecifier())):
+                                p_type = ctx.typeList().typeSpecifier(i).getText()
+                                # Voeg sterretjes toe als die er zijn
+                                if len(ctx.typeList().MUL()) > i: 
+                                     # Let op: dit is een simpele aanname voor pointers.
+                                     # Als je grammatica complexere sterretjes in typeList toelaat, 
+                                     # moet dit misschien netter.
+                                     pass 
+                                param_types.append(p_type)
+                                
+                        init_expr = None
+                        if ctx.ASSIGN():
+                            init_expr = results.get(id(ctx.expression(0)))
+
+                        node = FuncPtrDeclNode(return_type, name, param_types, init_expr)
+                        res = self.get_loc(node, ctx)
+                        
+                    else:
+                        # Normale declaratie (jouw originele code)
+                        base_type = ctx.typeSpecifier().getText()
+                        pointer_stars = "*" * len(ctx.MUL())
+                        full_type = base_type + pointer_stars
+                        
+                        all_exprs = ctx.expression()
+                        sizes = []
+                        init = None
+                        
+                        if ctx.ASSIGN():
+                            if ctx.array_initializer():
+                                init = results[id(ctx.array_initializer())]
+                                dimension_exprs = all_exprs
+                            else:
+                                init = results[id(all_exprs[-1])]
+                                dimension_exprs = all_exprs[:-1]
+                        else:
                             dimension_exprs = all_exprs
-                        else:
-                            init = results[id(all_exprs[-1])]
-                            dimension_exprs = all_exprs[:-1]
-                    else:
-                        dimension_exprs = all_exprs
-                        
-                    for dim_ctx in dimension_exprs:
-                        sizes.append(results[id(dim_ctx)])
-                        
-                    const_tokens = ctx.CONST()
-                    is_const = False     
-                    is_const_ptr = False
+                            
+                        for dim_ctx in dimension_exprs:
+                            sizes.append(results[id(dim_ctx)])
+                            
+                        const_tokens = ctx.CONST()
+                        is_const = False     
+                        is_const_ptr = False
 
-                    if len(const_tokens) == 2:
-                        is_const = True
-                        is_const_ptr = True
-                    elif len(const_tokens) == 1:
-                        const_token_idx = const_tokens[0].getSymbol().tokenIndex
-                        type_token_idx = ctx.typeSpecifier().start.tokenIndex
-                        if const_token_idx < type_token_idx:
+                        if len(const_tokens) == 2:
                             is_const = True
-                        else:
                             is_const_ptr = True
+                        elif len(const_tokens) == 1:
+                            const_token_idx = const_tokens[0].getSymbol().tokenIndex
+                            type_token_idx = ctx.typeSpecifier().start.tokenIndex
+                            if const_token_idx < type_token_idx:
+                                is_const = True
+                            else:
+                                is_const_ptr = True
 
-                    identifier = ctx.IDENTIFIER().getText()
-                    
-                    if sizes or ctx.LBRACKET(): 
-                        node = ArrayDeclNode(is_const, full_type, identifier, sizes, init)
-                    else:
-                        node = DeclNode(is_const, full_type, identifier, init)
-                    
-                    node.is_const_ptr = is_const_ptr
-                    
-                    res = self.get_loc(node, ctx)
+                        identifier = ctx.IDENTIFIER().getText()
+                        
+                        if sizes or ctx.LBRACKET(): 
+                            node = ArrayDeclNode(is_const, full_type, identifier, sizes, init)
+                        else:
+                            node = DeclNode(is_const, full_type, identifier, init)
+                        
+                        node.is_const_ptr = is_const_ptr
+                        res = self.get_loc(node, ctx)
 
                 elif class_name == "StatementContext":
                     if ctx.expression():
@@ -318,6 +360,11 @@ class ASTVisitor:
                                 val = int(text_val, 8) # Forceer octaal (base 8)
                             else:
                                 val = int(text_val, 0) # Base 0 is prima voor decimaal en hexadecimaal (0x...)
+                            
+                            if val > 2147483647 or val < -2147483648:
+                                print(f"[ Error ] line {ctx.start.line}, position {ctx.start.column}: Integer overflow. '{val}' exceeds 32-bit boundaries.")
+                                import sys
+                                sys.exit(1)
                             res = self.get_loc(IntNode(val), ctx)
                         except ValueError:
                             print(f"[Error] line {ctx.start.line}, position {ctx.start.column}: Invalid integer literal '{text_val}'")
@@ -330,12 +377,24 @@ class ASTVisitor:
                     elif ctx.STRING_LITERAL():
                         res = self.get_loc(StringNode(ctx.STRING_LITERAL().getText()[1:-1]), ctx)
 
+                elif class_name == "Initializer_elementContext":
+                    if ctx.expression():
+                        res = results.get(id(ctx.expression()))
+                    elif ctx.array_initializer():
+                        res = results.get(id(ctx.array_initializer()))
+
                 elif class_name == "Array_initializerContext":
-                    values = []
-                    for child in ctx.children:
-                        if id(child) in results:
-                            values.append(results[id(child)])
-                    res = self.get_loc(ArrayInitNode(values), ctx)
+                    elements = []
+                    # De nieuwe grammatica gebruikt een initializer_list
+                    if ctx.initializer_list():
+                        # Loop door de elementen in de lijst
+                        for el_ctx in ctx.initializer_list().initializer_element():
+                            el_node = results.get(id(el_ctx))
+                            if el_node:
+                                elements.append(el_node)
+                    
+                    # Maak de ArrayInitNode aan met de verzamelde kinderen
+                    res = self.get_loc(ArrayInitNode(elements), ctx)
 
                 elif class_name == "IfStatementContext":
                     condition = results[id(ctx.expression())]

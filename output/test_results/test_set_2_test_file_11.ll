@@ -1,10 +1,22 @@
 ; ModuleID = "cmm_module"
-target triple = "unknown-unknown-unknown"
+target triple = "x86_64-w64-windows-gnu"
 target datalayout = ""
 
 declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
+
+declare i8* @"fopen"(i8* %".1", i8* %".2")
+
+declare i32 @"fclose"(i8* %".1")
+
+declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
+
+declare i32 @"fputs"(i8* %".1", i8* %".2")
+
+declare i8* @"malloc"(i32 %".1")
+
+declare void @"free"(i8* %".1")
 
 define i32 @"main"()
 {
@@ -27,8 +39,11 @@ if.end:
   %"x.2" = load i32, i32* %"x"
   %".15" = icmp eq i32 %"x.2", 5
   %".16" = zext i1 %".15" to i32
-  %".17" = and i32 %".16", 1
-  %"ifcond.1" = icmp ne i32 %".17", 0
+  %".17" = icmp ne i32 %".16", 0
+  %".18" = icmp ne i32 1, 0
+  %".19" = and i1 %".17", %".18"
+  %".20" = zext i1 %".19" to i32
+  %"ifcond.1" = icmp ne i32 %".20", 0
   br i1 %"ifcond.1", label %"if.then.1", label %"if.end.1"
 if.else:
   %".11" = bitcast [14 x i8]* @"str.1" to i8*
@@ -36,22 +51,22 @@ if.else:
   br label %"if.end"
 if.then.1:
   %"x.3" = load i32, i32* %"x"
-  %".19" = icmp eq i32 %"x.3", 5
-  %".20" = zext i1 %".19" to i32
-  %"ifcond.2" = icmp ne i32 %".20", 0
+  %".22" = icmp eq i32 %"x.3", 5
+  %".23" = zext i1 %".22" to i32
+  %"ifcond.2" = icmp ne i32 %".23", 0
   br i1 %"ifcond.2", label %"if.then.2", label %"if.else.1"
 if.end.1:
   ;  Source: return0;
   ret i32 0
 if.then.2:
-  %".22" = bitcast [14 x i8]* @"str.2" to i8*
-  %".23" = call i32 (i8*, ...) @"printf"(i8* %".22")
+  %".25" = bitcast [14 x i8]* @"str.2" to i8*
+  %".26" = call i32 (i8*, ...) @"printf"(i8* %".25")
   br label %"if.end.2"
 if.end.2:
   br label %"if.end.1"
 if.else.1:
-  %".25" = bitcast [21 x i8]* @"str.3" to i8*
-  %".26" = call i32 (i8*, ...) @"printf"(i8* %".25")
+  %".28" = bitcast [21 x i8]* @"str.3" to i8*
+  %".29" = call i32 (i8*, ...) @"printf"(i8* %".28")
   br label %"if.end.2"
 }
 

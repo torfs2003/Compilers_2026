@@ -30,7 +30,7 @@ digraph AST {
   node24 [label="\"%d \"\n(char*)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node26 [label="ID: array_2\n(int*)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
   node27 [label="ID: i\n(int)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
-  node25 [label="[]\n(int*)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node25 [label="[]\n(int)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node25 -> node26 [style="solid", color="black"];
   node25 -> node27 [style="solid", color="black"];
   node23 [label="Call: printf()\n(int)", shape=ellipse, style="filled", fillcolor="lightpink", color="black", fontcolor="black"];

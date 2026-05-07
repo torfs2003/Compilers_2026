@@ -6,7 +6,7 @@ digraph AST {
   node8 [label="*\n(int*)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node8 -> node9 [style="solid", color="black"];
   node10 [label="0\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
-  node7 [label="[]\n(int*)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node7 [label="[]\n(int)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node7 -> node8 [style="solid", color="black"];
   node7 -> node10 [style="solid", color="black"];
   node5 [label="Call: printf()\n(int)", shape=ellipse, style="filled", fillcolor="lightpink", color="black", fontcolor="black"];
@@ -55,7 +55,7 @@ digraph AST {
   node35 [label="*\n(int*)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node35 -> node36 [style="solid", color="black"];
   node37 [label="0\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
-  node34 [label="[]\n(int*)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node34 [label="[]\n(int)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node34 -> node35 [style="solid", color="black"];
   node34 -> node37 [style="solid", color="black"];
   node32 [label="Call: printf()\n(int)", shape=ellipse, style="filled", fillcolor="lightpink", color="black", fontcolor="black"];

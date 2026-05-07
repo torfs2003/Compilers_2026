@@ -39,7 +39,7 @@ digraph AST {
   node26 [label="\"%c\"\n(char*)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node28 [label="ID: x\n(char*)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
   node29 [label="0\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
-  node27 [label="[]\n(char*)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node27 [label="[]\n(char)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node27 -> node28 [style="solid", color="black"];
   node27 -> node29 [style="solid", color="black"];
   node25 [label="Call: printf()\n(int)", shape=ellipse, style="filled", fillcolor="lightpink", color="black", fontcolor="black"];

@@ -1,10 +1,22 @@
 ; ModuleID = "cmm_module"
-target triple = "unknown-unknown-unknown"
+target triple = "x86_64-w64-windows-gnu"
 target datalayout = ""
 
 declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
+
+declare i8* @"fopen"(i8* %".1", i8* %".2")
+
+declare i32 @"fclose"(i8* %".1")
+
+declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
+
+declare i32 @"fputs"(i8* %".1", i8* %".2")
+
+declare i8* @"malloc"(i32 %".1")
+
+declare void @"free"(i8* %".1")
 
 define i32 @"main"()
 {
@@ -60,7 +72,7 @@ entry:
   %"passed.1" = load i32*, i32** %"passed"
   ;  Source: passed++;
   %".49" = load i32*, i32** %"passed"
-  %".50" = add i32* %".49", 1
+  %".50" = getelementptr i32, i32* %".49", i32 1
   store i32* %".50", i32** %"passed"
   %".52" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: passed

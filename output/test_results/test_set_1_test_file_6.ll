@@ -1,10 +1,22 @@
 ; ModuleID = "cmm_module"
-target triple = "unknown-unknown-unknown"
+target triple = "x86_64-w64-windows-gnu"
 target datalayout = ""
 
 declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
+
+declare i8* @"fopen"(i8* %".1", i8* %".2")
+
+declare i32 @"fclose"(i8* %".1")
+
+declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
+
+declare i32 @"fputs"(i8* %".1", i8* %".2")
+
+declare i8* @"malloc"(i32 %".1")
+
+declare void @"free"(i8* %".1")
 
 define i32 @"main"()
 {
@@ -36,13 +48,13 @@ entry:
   %"ptr.1" = load i32*, i32** %"ptr"
   ;  Source: ptr++;
   %".19" = load i32*, i32** %"ptr"
-  %".20" = add i32* %".19", 1
+  %".20" = getelementptr i32, i32* %".19", i32 1
   store i32* %".20", i32** %"ptr"
   ;  Source: ptr
   %"ptr.2" = load i32*, i32** %"ptr"
   ;  Source: ptr--;
   %".24" = load i32*, i32** %"ptr"
-  %".25" = sub i32* %".24", 1
+  %".25" = getelementptr i32, i32* %".24", i32 -1
   store i32* %".25", i32** %"ptr"
   ;  Source: is_x
   %"is_x.1" = load i32, i32* %"is_x"

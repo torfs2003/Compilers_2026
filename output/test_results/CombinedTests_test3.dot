@@ -45,7 +45,7 @@ digraph AST {
   node26 -> node28 [style="solid", color="black"];
   node32 [label="ID: arr\n(float*)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
   node33 [label="ID: i\n(int)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
-  node31 [label="[]\n(float*)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node31 [label="[]\n(float)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node31 -> node32 [style="solid", color="black"];
   node31 -> node33 [style="solid", color="black"];
   node30 [label="Call: printPositive()\n(void)", shape=ellipse, style="filled", fillcolor="lightpink", color="black", fontcolor="black"];

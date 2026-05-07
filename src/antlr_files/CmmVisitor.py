@@ -49,6 +49,11 @@ class CmmVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by CmmParser#typeList.
+    def visitTypeList(self, ctx:CmmParser.TypeListContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by CmmParser#structDeclaration.
     def visitStructDeclaration(self, ctx:CmmParser.StructDeclarationContext):
         return self.visitChildren(ctx)
@@ -56,6 +61,11 @@ class CmmVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by CmmParser#typedefDeclaration.
     def visitTypedefDeclaration(self, ctx:CmmParser.TypedefDeclarationContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by CmmParser#unionDeclaration.
+    def visitUnionDeclaration(self, ctx:CmmParser.UnionDeclarationContext):
         return self.visitChildren(ctx)
 
 
@@ -206,6 +216,16 @@ class CmmVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by CmmParser#array_initializer.
     def visitArray_initializer(self, ctx:CmmParser.Array_initializerContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by CmmParser#initializer_list.
+    def visitInitializer_list(self, ctx:CmmParser.Initializer_listContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by CmmParser#initializer_element.
+    def visitInitializer_element(self, ctx:CmmParser.Initializer_elementContext):
         return self.visitChildren(ctx)
 
 

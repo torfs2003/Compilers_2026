@@ -1,10 +1,22 @@
 ; ModuleID = "cmm_module"
-target triple = "unknown-unknown-unknown"
+target triple = "x86_64-w64-windows-gnu"
 target datalayout = ""
 
 declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
+
+declare i8* @"fopen"(i8* %".1", i8* %".2")
+
+declare i32 @"fclose"(i8* %".1")
+
+declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
+
+declare i32 @"fputs"(i8* %".1", i8* %".2")
+
+declare i8* @"malloc"(i32 %".1")
+
+declare void @"free"(i8* %".1")
 
 define i32 @"main"()
 {
@@ -23,19 +35,19 @@ entry:
   %"appel.1" = load i32*, i32** %"appel"
   ;  Source: --appel;
   %".11" = load i32*, i32** %"appel"
-  %".12" = sub i32* %".11", 1
+  %".12" = getelementptr i32, i32* %".11", i32 -1
   store i32* %".12", i32** %"appel"
   ;  Source: appel
   %"appel.2" = load i32*, i32** %"appel"
   ;  Source: appel++;
   %".16" = load i32*, i32** %"appel"
-  %".17" = add i32* %".16", 1
+  %".17" = getelementptr i32, i32* %".16", i32 1
   store i32* %".17", i32** %"appel"
   ;  Source: appel
   %"appel.3" = load i32*, i32** %"appel"
   ;  Source: ++appel;
   %".21" = load i32*, i32** %"appel"
-  %".22" = add i32* %".21", 1
+  %".22" = getelementptr i32, i32* %".21", i32 1
   store i32* %".22", i32** %"appel"
   %".24" = bitcast [4 x i8]* @"str" to i8*
   ;  Source: peer
@@ -85,7 +97,7 @@ entry:
   %"appel.7" = load i32*, i32** %"appel"
   ;  Source: --appel;
   %".60" = load i32*, i32** %"appel"
-  %".61" = sub i32* %".60", 1
+  %".61" = getelementptr i32, i32* %".60", i32 -1
   store i32* %".61", i32** %"appel"
   ;  User Comment: /* --(peer+peer); This is not allowed /
   ;  User Comment: --(peer);

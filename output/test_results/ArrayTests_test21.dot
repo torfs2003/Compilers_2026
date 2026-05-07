@@ -24,7 +24,7 @@ digraph AST {
   node18 [label="\"%d\"\n(char*)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node20 [label="ID: b\n(int*)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
   node21 [label="0\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
-  node19 [label="[]\n(int*)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node19 [label="[]\n(int)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node19 -> node20 [style="solid", color="black"];
   node19 -> node21 [style="solid", color="black"];
   node17 [label="Call: printf()\n(int)", shape=ellipse, style="filled", fillcolor="lightpink", color="black", fontcolor="black"];

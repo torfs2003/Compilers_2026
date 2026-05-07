@@ -1,5 +1,5 @@
 ; ModuleID = "cmm_module"
-target triple = "unknown-unknown-unknown"
+target triple = "x86_64-w64-windows-gnu"
 target datalayout = ""
 
 define i32 @"main"()
@@ -19,13 +19,19 @@ entry:
   %"b.1" = load i32, i32* %"b"
   ;  Source: c
   %"c.1" = load i32, i32* %"c"
-  %".10" = and i32 %"b.1", %"c.1"
+  %".10" = icmp ne i32 %"b.1", 0
+  %".11" = icmp ne i32 %"c.1", 0
+  %".12" = and i1 %".10", %".11"
+  %".13" = zext i1 %".12" to i32
   ;  Source: d
   %"d.1" = load i32, i32* %"d"
   ;  Source: (b&&c||d)
-  %".13" = or i32 %".10", %"d.1"
+  %".16" = icmp ne i32 %".13", 0
+  %".17" = icmp ne i32 %"d.1", 0
+  %".18" = or i1 %".16", %".17"
+  %".19" = zext i1 %".18" to i32
   ;  Source: inta=(b&&c||d);
-  store i32 %".13", i32* %"a"
+  store i32 %".19", i32* %"a"
   ;  Source: return0;
   ret i32 0
 }

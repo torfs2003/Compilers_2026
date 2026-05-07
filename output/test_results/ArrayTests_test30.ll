@@ -1,10 +1,22 @@
 ; ModuleID = "cmm_module"
-target triple = "unknown-unknown-unknown"
+target triple = "x86_64-w64-windows-gnu"
 target datalayout = ""
 
 declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
+
+declare i8* @"fopen"(i8* %".1", i8* %".2")
+
+declare i32 @"fclose"(i8* %".1")
+
+declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
+
+declare i32 @"fputs"(i8* %".1", i8* %".2")
+
+declare i8* @"malloc"(i32 %".1")
+
+declare void @"free"(i8* %".1")
 
 define i32** @"mul"(i32** %".1")
 {
@@ -17,8 +29,8 @@ entry:
   ;  Source: (*b)
   %"deref_load" = load i32*, i32** %"b.1"
   ;  Source: (*b)[0]
-  %"gep_ptr" = getelementptr i32, i32* %"deref_load", i32 0
-  %"array_element" = load i32, i32* %"gep_ptr"
+  %"gep_idx" = getelementptr i32, i32* %"deref_load", i32 0
+  %"array_element" = load i32, i32* %"gep_idx"
   ;  Source: printf("%d",(*b)[0]);
   %".9" = call i32 (i8*, ...) @"printf"(i8* %".4", i32 %"array_element")
   ;  Source: returnb;
@@ -67,8 +79,8 @@ entry:
   ;  Source: (*b)
   %"deref_load" = load i32*, i32** %"b.3"
   ;  Source: (*b)[0]
-  %"gep_ptr" = getelementptr i32, i32* %"deref_load", i32 0
-  %"array_element" = load i32, i32* %"gep_ptr"
+  %"gep_idx" = getelementptr i32, i32* %"deref_load", i32 0
+  %"array_element" = load i32, i32* %"gep_idx"
   ;  Source: printf("%d",(*b)[0]);
   %".32" = call i32 (i8*, ...) @"printf"(i8* %".27", i32 %"array_element")
   ;  Source: return0;

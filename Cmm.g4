@@ -5,7 +5,7 @@ grammar Cmm;
 // ==========================================
 
 compilationUnit
-    : (includeDirective | enumDeclaration | structDeclaration | typedefDeclaration | declaration | functionDeclaration | functionDefinition)* EOF
+    : (includeDirective | enumDeclaration | structDeclaration | unionDeclaration | typedefDeclaration | declaration | functionDeclaration | functionDefinition)* EOF
     ;
 
 includeDirective
@@ -29,20 +29,28 @@ parameterDeclaration
     ;
 
 compoundStatement
-    : LBRACE declaration* statement* RBRACE  // C89 Strikte volgorde overgenomen uit Versie 2
+    : LBRACE declaration* statement* RBRACE
     ;
 
 declaration
     : CONST? typeSpecifier CONST? MUL* CONST? IDENTIFIER (LBRACKET expression? RBRACKET)* (ASSIGN (expression | array_initializer))? SEMI
+    | typeSpecifier LPAREN MUL IDENTIFIER RPAREN LPAREN typeList? RPAREN (ASSIGN expression)? SEMI  // <-- NIEUW: Function Pointer
     ;
 
-
+typeList
+    : typeSpecifier MUL* (COMMA typeSpecifier MUL*)*
+    ;
+    
 structDeclaration
     : STRUCT IDENTIFIER LBRACE declaration* RBRACE SEMI
     ;
 
 typedefDeclaration
     : TYPEDEF typeSpecifier MUL* IDENTIFIER (LBRACKET INT_LITERAL RBRACKET)* SEMI
+    ;
+
+unionDeclaration
+    : UNION IDENTIFIER LBRACE declaration* RBRACE SEMI
     ;
     
 statement
@@ -65,6 +73,7 @@ typeSpecifier
     | VOID 
     | ENUM IDENTIFIER
     | STRUCT IDENTIFIER
+    | UNION IDENTIFIER
     | IDENTIFIER
     ;
 
@@ -219,8 +228,16 @@ primary_expression
     ;
 
 array_initializer
-    : LBRACE (expression (COMMA expression)*)? RBRACE
-    | LBRACE (array_initializer (COMMA array_initializer)*)? RBRACE
+    : LBRACE (initializer_list)? RBRACE
+    ;
+
+initializer_list
+    : initializer_element (COMMA initializer_element)* COMMA?
+    ;
+
+initializer_element
+    : expression
+    | array_initializer
     ;
 
 // ==========================================
@@ -236,6 +253,7 @@ IF        : 'if';
 ELSE      : 'else';
 WHILE     : 'while';
 FOR       : 'for';
+UNION     : 'union';
 BREAK     : 'break';
 CONTINUE  : 'continue';
 ENUM      : 'enum';
