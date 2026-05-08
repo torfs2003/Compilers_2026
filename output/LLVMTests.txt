@@ -135,7 +135,7 @@
     --> EXPECTED (code 0):
     1230
     ACTUAL (code 0):
-    12330
+    12390
   ArrayTests\test8.c... FAILED (Compiler Error)
     --> Traceback (most recent call last):
     -->   File "<frozen runpy>", line 198, in _run_module_as_main
@@ -204,7 +204,7 @@
     --> EXPECTED (code 0):
     200
     ACTUAL (code 0):
-    555555
+    686868
   CalculationTests\test53.c... PASSED
   CalculationTests\test54.c... PASSED
   CalculationTests\test55.c... PASSED
@@ -581,7 +581,7 @@
     --> EXPECTED (code 0):
     20
     ACTUAL (code 0):
-    117117
+    245245
   OutputTests\test38.c... PASSED
   OutputTests\test39.c... PASSED
   OutputTests\test4.c... PASSED
@@ -644,10 +644,10 @@
   PrintTests\test1.c... PASSED
   PrintTests\test10.c... FAILED
     --> EXPECTED (code 0):
-    3.140000 60000000 7 True 1198194688 
+    3.140000 60000000 7 True 47054848 
      
     ACTUAL (code 0):
-    3.140000 60000000 7 True 1417674752 
+    3.140000 60000000 7 True -267255808 
      
   PrintTests\test11.c... PASSED
   PrintTests\test12.c... PASSED
