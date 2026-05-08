@@ -1,6 +1,6 @@
 
 ============================================================
-  TEST MAP : example_source_files/test_set_3/LLVMTests/DynamicArrayTests/
+  TEST MAP : example_source_files/test_set_3/LLVMTests/DynamicArrayTests
   Log file : output\DynamicArrayTests.txt
 ============================================================
   test1.c... PASSED

@@ -22,11 +22,11 @@ entry:
   %"b" = alloca i32
   store i32 0, i32* %"b"
   ;  Source: a
-  %"a.1" = load i32, i32* %"a"
+  %"a_load" = load i32, i32* %"a"
   ;  Source: a=6;
   store i32 6, i32* %"a"
-  %"a.2" = load i32, i32* %"a"
-  switch i32 %"a.2", label %"switch.default" [i32 1, label %"switch.case1" i32 6, label %"switch.case6" i32 2, label %"switch.case2"]
+  %"a_load.1" = load i32, i32* %"a"
+  switch i32 %"a_load.1", label %"switch.default" [i32 1, label %"switch.case1" i32 6, label %"switch.case6" i32 2, label %"switch.case2"]
 switch.merge:
   %".76" = bitcast [3 x i8]* @"str.20" to i8*
   ;  Source: printf("%d",4);
@@ -34,25 +34,25 @@ switch.merge:
   ;  Source: return0;
   ret i32 0
 switch.case1:
-  %"b.1" = load i32, i32* %"b"
+  %"b_load" = load i32, i32* %"b"
   store i32 1, i32* %"b"
-  %"b.2" = load i32, i32* %"b"
-  switch i32 %"b.2", label %"switch.default.1" [i32 1, label %"switch.case1.1" i32 6, label %"switch.case6.1" i32 2, label %"switch.case2.1"]
+  %"b_load.1" = load i32, i32* %"b"
+  switch i32 %"b_load.1", label %"switch.default.1" [i32 1, label %"switch.case1.1" i32 6, label %"switch.case6.1" i32 2, label %"switch.case2.1"]
 switch.case6:
-  %"b.3" = load i32, i32* %"b"
+  %"b_load.2" = load i32, i32* %"b"
   store i32 6, i32* %"b"
-  %"b.4" = load i32, i32* %"b"
-  switch i32 %"b.4", label %"switch.default.2" [i32 1, label %"switch.case1.2" i32 6, label %"switch.case6.2" i32 2, label %"switch.case2.2"]
+  %"b_load.3" = load i32, i32* %"b"
+  switch i32 %"b_load.3", label %"switch.default.2" [i32 1, label %"switch.case1.2" i32 6, label %"switch.case6.2" i32 2, label %"switch.case2.2"]
 switch.case2:
-  %"b.5" = load i32, i32* %"b"
+  %"b_load.4" = load i32, i32* %"b"
   store i32 2, i32* %"b"
-  %"b.6" = load i32, i32* %"b"
-  switch i32 %"b.6", label %"switch.default.3" [i32 1, label %"switch.case1.3" i32 6, label %"switch.case6.3" i32 2, label %"switch.case2.3"]
+  %"b_load.5" = load i32, i32* %"b"
+  switch i32 %"b_load.5", label %"switch.default.3" [i32 1, label %"switch.case1.3" i32 6, label %"switch.case6.3" i32 2, label %"switch.case2.3"]
 switch.default:
-  %"b.7" = load i32, i32* %"b"
+  %"b_load.6" = load i32, i32* %"b"
   store i32 3, i32* %"b"
-  %"b.8" = load i32, i32* %"b"
-  switch i32 %"b.8", label %"switch.default.4" [i32 1, label %"switch.case1.4" i32 6, label %"switch.case6.4" i32 2, label %"switch.case2.4"]
+  %"b_load.7" = load i32, i32* %"b"
+  switch i32 %"b_load.7", label %"switch.default.4" [i32 1, label %"switch.case1.4" i32 6, label %"switch.case6.4" i32 2, label %"switch.case2.4"]
 switch.merge.1:
   %".22" = bitcast [3 x i8]* @"str.4" to i8*
   %".23" = call i32 (i8*, ...) @"printf"(i8* %".22", i32 1)

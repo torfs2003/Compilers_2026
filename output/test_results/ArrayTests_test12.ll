@@ -26,24 +26,26 @@ entry:
   %".6" = bitcast [2 x i8]* %"x" to i8*
   store i8* %".6", i8** %"c"
   ;  Source: c
-  %"c.1" = load i8*, i8** %"c"
-  %"deref_load" = load i8, i8* %"c.1"
+  %"c_load" = load i8*, i8** %"c"
+  %"deref_load" = load i8, i8* %"c_load"
   ;  Source: *c='c';
-  store i8 99, i8* %"c.1"
+  store i8 99, i8* %"c_load"
   %".11" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: c
-  %"c.2" = load i8*, i8** %"c"
+  %"c_load.1" = load i8*, i8** %"c"
   ;  Source: *c
-  %"deref_load.1" = load i8, i8* %"c.2"
+  %"deref_load.1" = load i8, i8* %"c_load.1"
   ;  Source: printf("%c",*c);
-  %".15" = call i32 (i8*, ...) @"printf"(i8* %".11", i8 %"deref_load.1")
-  %".16" = bitcast [3 x i8]* @"str.1" to i8*
+  %".15" = sext i8 %"deref_load.1" to i32
+  %".16" = call i32 (i8*, ...) @"printf"(i8* %".11", i32 %".15")
+  %".17" = bitcast [3 x i8]* @"str.1" to i8*
   ;  Source: x
   ;  Source: x[0]
   %"gep_array" = getelementptr [2 x i8], [2 x i8]* %"x", i32 0, i32 0
   %"array_element" = load i8, i8* %"gep_array"
   ;  Source: printf("%c",x[0]);
-  %".20" = call i32 (i8*, ...) @"printf"(i8* %".16", i8 %"array_element")
+  %".21" = sext i8 %"array_element" to i32
+  %".22" = call i32 (i8*, ...) @"printf"(i8* %".17", i32 %".21")
   ;  Source: return0;
   ret i32 0
 }

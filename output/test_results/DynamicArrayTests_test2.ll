@@ -29,21 +29,22 @@ entry:
   %".2" = call i8* @"malloc"(i32 5)
   store i8* %".2", i8** %"ptr"
   ;  Source: ptr
-  %"ptr.1" = load i8*, i8** %"ptr"
+  %"ptr_load" = load i8*, i8** %"ptr"
   ;  Source: (ptr+4)
-  %".6" = getelementptr i8, i8* %"ptr.1", i32 4
+  %".6" = getelementptr i8, i8* %"ptr_load", i32 4
   %"deref_load" = load i8, i8* %".6"
   ;  Source: *(ptr+4)='a';
   store i8 97, i8* %".6"
   %".9" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: ptr
-  %"ptr.2" = load i8*, i8** %"ptr"
+  %"ptr_load.1" = load i8*, i8** %"ptr"
   ;  Source: (ptr+4)
-  %".12" = getelementptr i8, i8* %"ptr.2", i32 4
+  %".12" = getelementptr i8, i8* %"ptr_load.1", i32 4
   ;  Source: *(ptr+4)
   %"deref_load.1" = load i8, i8* %".12"
   ;  Source: printf("%c",*(ptr+4));
-  %".15" = call i32 (i8*, ...) @"printf"(i8* %".9", i8 %"deref_load.1")
+  %".15" = sext i8 %"deref_load.1" to i32
+  %".16" = call i32 (i8*, ...) @"printf"(i8* %".9", i32 %".15")
   ;  Source: return0;
   ret i32 0
 }

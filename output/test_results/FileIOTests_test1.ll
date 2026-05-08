@@ -25,10 +25,10 @@ entry:
   store i8* %".4", i8** %"fp"
   ;  Source: buffer
   ;  Source: fp
-  %"fp.1" = load i8*, i8** %"fp"
+  %"fp_load" = load i8*, i8** %"fp"
   ;  Source: fgets(buffer,50,fp);
   %".9" = getelementptr inbounds [50 x i8], [50 x i8]* %"buffer", i32 0, i32 0
-  %".10" = call i8* @"fgets"(i8* %".9", i32 50, i8* %"fp.1")
+  %".10" = call i8* @"fgets"(i8* %".9", i32 50, i8* %"fp_load")
   %".11" = bitcast [3 x i8]* @"str.2" to i8*
   ;  Source: buffer
   ;  Source: printf("%s",buffer);

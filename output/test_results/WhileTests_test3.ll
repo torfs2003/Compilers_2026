@@ -22,14 +22,14 @@ entry:
   ;  Source: while(a<30){if((a%2)==0){printf("%d",1);}else{printf("%d",2);}a++;}
   br label %"while.cond"
 while.cond:
-  %"a.1" = load i32, i32* %"a"
-  %".5" = icmp slt i32 %"a.1", 30
+  %"a_load" = load i32, i32* %"a"
+  %".5" = icmp slt i32 %"a_load", 30
   %".6" = zext i1 %".5" to i32
   %"whilecond" = icmp ne i32 %".6", 0
   br i1 %"whilecond", label %"while.body", label %"while.end"
 while.body:
-  %"a.2" = load i32, i32* %"a"
-  %".8" = srem i32 %"a.2", 2
+  %"a_load.1" = load i32, i32* %"a"
+  %".8" = srem i32 %"a_load.1", 2
   %".9" = icmp eq i32 %".8", 0
   %".10" = zext i1 %".9" to i32
   %"ifcond" = icmp ne i32 %".10", 0
@@ -42,7 +42,7 @@ if.then:
   %".13" = call i32 (i8*, ...) @"printf"(i8* %".12", i32 1)
   br label %"if.end"
 if.end:
-  %"a.3" = load i32, i32* %"a"
+  %"a_load.2" = load i32, i32* %"a"
   %".18" = load i32, i32* %"a"
   %".19" = add i32 %".18", 1
   store i32 %".19", i32* %"a"

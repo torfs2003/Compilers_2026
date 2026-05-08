@@ -14,7 +14,7 @@ digraph AST {
   node13 [label="ID: c\n(int)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
   node12 [label="Cast\n(char)", shape=ellipse, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node12 -> node13 [style="solid", color="black"];
-  node11 [label="Decl\nchar\nd\n(char)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
+  node11 [label="Decl\nconst char\nd\n(char)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
   node11 -> node12 [style="solid", color="black", label=" init", fontcolor="blue"];
   node16 [label="ID: b\n(int)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
   node17 [label="3.5\n(float)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];

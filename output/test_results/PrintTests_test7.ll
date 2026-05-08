@@ -23,13 +23,15 @@ entry:
   %".5" = call i32 (i8*, ...) @"printf"(i8* %".2", double %".4")
   %".6" = bitcast [3 x i8]* @"str.1" to i8*
   ;  Source: printf("%x",'a');
-  %".8" = call i32 (i8*, ...) @"printf"(i8* %".6", i8 97)
-  %".9" = bitcast [3 x i8]* @"str.2" to i8*
+  %".8" = sext i8 97 to i32
+  %".9" = call i32 (i8*, ...) @"printf"(i8* %".6", i32 %".8")
+  %".10" = bitcast [3 x i8]* @"str.2" to i8*
   ;  Source: printf("%c",'a');
-  %".11" = call i32 (i8*, ...) @"printf"(i8* %".9", i8 97)
-  %".12" = bitcast [3 x i8]* @"str.3" to i8*
+  %".12" = sext i8 97 to i32
+  %".13" = call i32 (i8*, ...) @"printf"(i8* %".10", i32 %".12")
+  %".14" = bitcast [3 x i8]* @"str.3" to i8*
   ;  Source: printf("%d",6);
-  %".14" = call i32 (i8*, ...) @"printf"(i8* %".12", i32 6)
+  %".16" = call i32 (i8*, ...) @"printf"(i8* %".14", i32 6)
   ;  Source: return0;
   ret i32 0
 }

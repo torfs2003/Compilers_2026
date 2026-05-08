@@ -10,9 +10,9 @@ entry:
   %"y" = alloca i32
   store i32 %".2", i32* %"y"
   ;  Source: returnx*y;
-  %"x.1" = load i32, i32* %"x"
-  %"y.1" = load i32, i32* %"y"
-  %".7" = mul i32 %"x.1", %"y.1"
+  %"x_load" = load i32, i32* %"x"
+  %"y_load" = load i32, i32* %"y"
+  %".7" = mul i32 %"x_load", %"y_load"
   ret i32 %".7"
 }
 

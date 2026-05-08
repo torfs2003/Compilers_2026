@@ -28,8 +28,8 @@ entry:
   store i32** %".6", i32*** %"t"
   %".8" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: t
-  %"t.1" = load i32**, i32*** %"t"
-  %"deref_load" = load i32*, i32** %"t.1"
+  %"t_load" = load i32**, i32*** %"t"
+  %"deref_load" = load i32*, i32** %"t_load"
   ;  Source: **t
   %"deref_load.1" = load i32, i32* %"deref_load"
   ;  Source: printf("%d",**t);

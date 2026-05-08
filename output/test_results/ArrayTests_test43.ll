@@ -25,7 +25,7 @@ entry:
   %".5" = call i32 (i8*, ...) @"printf"(i8* %".3", i32 9)
   %".6" = bitcast [5 x i8]* @"str.1" to i8*
   ;  Source: x
-  %"x.1" = load i32, i32* %"x"
+  %"x_load" = load i32, i32* %"x"
   ;  Source: ++x
   %".9" = load i32, i32* %"x"
   %".10" = add i32 %".9", 1
@@ -45,7 +45,7 @@ entry:
   ;  Source: a[1]=12;
   store i32 12, i32* %"gep_array.1"
   ;  Source: x
-  %"x.2" = load i32, i32* %"x"
+  %"x_load.1" = load i32, i32* %"x"
   ;  Source: x=12;
   store i32 12, i32* %"x"
   %".25" = bitcast [5 x i8]* @"str.2" to i8*

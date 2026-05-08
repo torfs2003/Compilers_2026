@@ -30,25 +30,25 @@ entry:
   %".3" = bitcast i8* %".2" to i32*
   store i32* %".3", i32** %"f"
   ;  Source: f
-  %"f.1" = load i32*, i32** %"f"
+  %"f_load" = load i32*, i32** %"f"
   ;  Source: (f+9)
-  %".7" = getelementptr i32, i32* %"f.1", i32 9
+  %".7" = getelementptr i32, i32* %"f_load", i32 9
   %"deref_load" = load i32, i32* %".7"
   ;  Source: *(f+9)=5;
   store i32 5, i32* %".7"
   %".10" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: f
-  %"f.2" = load i32*, i32** %"f"
+  %"f_load.1" = load i32*, i32** %"f"
   ;  Source: (f+9)
-  %".13" = getelementptr i32, i32* %"f.2", i32 9
+  %".13" = getelementptr i32, i32* %"f_load.1", i32 9
   ;  Source: *(f+9)
   %"deref_load.1" = load i32, i32* %".13"
   ;  Source: printf("%d",*(f+9));
   %".16" = call i32 (i8*, ...) @"printf"(i8* %".10", i32 %"deref_load.1")
   ;  Source: f
-  %"f.3" = load i32*, i32** %"f"
+  %"f_load.2" = load i32*, i32** %"f"
   ;  Source: free(f);
-  %".19" = bitcast i32* %"f.3" to i8*
+  %".19" = bitcast i32* %"f_load.2" to i8*
   call void @"free"(i8* %".19")
   ;  Source: return0;
   ret i32 0

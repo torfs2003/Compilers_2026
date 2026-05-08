@@ -29,11 +29,11 @@ entry:
   %"b" = alloca i32
   store i32 6, i32* %"b"
   ;  Source: a
-  %"a.1" = load i32, i32* %"a"
+  %"a_load" = load i32, i32* %"a"
   ;  Source: a=5;
   store i32 5, i32* %"a"
   ;  Source: b
-  %"b.1" = load i32, i32* %"b"
+  %"b_load" = load i32, i32* %"b"
   ;  Source: b=8792432;
   store i32 8792432, i32* %"b"
   %".13" = bitcast [3 x i8]* @"str" to i8*
@@ -60,7 +60,8 @@ entry:
   %"gep_ptr.1" = getelementptr i8, i8* %"load_as_str.1", i32 0
   %"array_element.1" = load i8, i8* %"gep_ptr.1"
   ;  Source: printf("%c",gouda.as_str[0]);
-  %".25" = call i32 (i8*, ...) @"printf"(i8* %".21", i8 %"array_element.1")
+  %".25" = sext i8 %"array_element.1" to i32
+  %".26" = call i32 (i8*, ...) @"printf"(i8* %".21", i32 %".25")
   ;  Source: return0;
   ret i32 0
 }

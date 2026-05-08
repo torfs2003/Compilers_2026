@@ -28,8 +28,8 @@ entry:
   %".5" = bitcast [7 x i8]* @"str" to i8*
   store i8* %".5", i8** %"c"
   %"gouda_ptr" = alloca %"struct.cheese"*
-  %"c.1" = load i8*, i8** %"c"
-  %".7" = bitcast i8* %"c.1" to %"struct.cheese"*
+  %"c_load" = load i8*, i8** %"c"
+  %".7" = bitcast i8* %"c_load" to %"struct.cheese"*
   store %"struct.cheese"* %".7", %"struct.cheese"** %"gouda_ptr"
   ;  Source: return0;
   ret i32 0

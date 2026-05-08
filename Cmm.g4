@@ -51,6 +51,7 @@ typeList
 
 typedefDeclaration
     : TYPEDEF CONST? typeSpecifier CONST? MUL* CONST? IDENTIFIER (LBRACKET INT_LITERAL RBRACKET)* SEMI
+    | TYPEDEF SEMI
     ;
 
 structDeclaration

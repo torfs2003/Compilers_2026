@@ -24,13 +24,13 @@ entry:
   store i32 %".3", i32* %"result"
   %".5" = bitcast [3 x i8]* @"str.1" to i8*
   ;  Source: result
-  %"result.1" = load i32, i32* %"result"
+  %"result_load" = load i32, i32* %"result"
   ;  Source: printf("%d",result);
-  %".8" = call i32 (i8*, ...) @"printf"(i8* %".5", i32 %"result.1")
+  %".8" = call i32 (i8*, ...) @"printf"(i8* %".5", i32 %"result_load")
   %".9" = bitcast [3 x i8]* @"str.2" to i8*
   %".10" = bitcast [3 x i8]* @"str.3" to i8*
   ;  Source: k
-  %"k.1" = load i32, i32* %"k"
+  %"k_load" = load i32, i32* %"k"
   ;  Source: &k
   ;  Source: scanf("%d",&k)
   %".14" = call i32 (i8*, ...) @"scanf"(i8* %".10", i32* %"k")
@@ -38,9 +38,9 @@ entry:
   %".16" = call i32 (i8*, ...) @"printf"(i8* %".9", i32 %".14")
   %".17" = bitcast [3 x i8]* @"str.4" to i8*
   ;  Source: k
-  %"k.2" = load i32, i32* %"k"
+  %"k_load.1" = load i32, i32* %"k"
   ;  Source: printf("%d",k);
-  %".20" = call i32 (i8*, ...) @"printf"(i8* %".17", i32 %"k.2")
+  %".20" = call i32 (i8*, ...) @"printf"(i8* %".17", i32 %"k_load.1")
   ;  Source: return0;
   ret i32 0
 }

@@ -21,14 +21,14 @@ entry:
   %"z" = alloca i32
   store i32 1, i32* %"z"
   ;  Source: day
-  %"day.1" = load i32, i32* %"day"
+  %"day_load" = load i32, i32* %"day"
   ;  Source: day=Wed;
   store i32 2, i32* %"day"
   %".6" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: day
-  %"day.2" = load i32, i32* %"day"
+  %"day_load.1" = load i32, i32* %"day"
   ;  Source: printf("%d",day);
-  %".9" = call i32 (i8*, ...) @"printf"(i8* %".6", i32 %"day.2")
+  %".9" = call i32 (i8*, ...) @"printf"(i8* %".6", i32 %"day_load.1")
   %".10" = bitcast [3 x i8]* @"str.1" to i8*
   ;  Source: printf("%d",Mon);
   %".12" = call i32 (i8*, ...) @"printf"(i8* %".10", i32 0)
@@ -48,21 +48,21 @@ entry:
   %".25" = call i32 (i8*, ...) @"printf"(i8* %".23", i32 5)
   %".26" = bitcast [3 x i8]* @"str.6" to i8*
   ;  Source: q
-  %"q.1" = load i32, i32* %"q"
+  %"q_load" = load i32, i32* %"q"
   ;  Source: printf("%d",q);
-  %".29" = call i32 (i8*, ...) @"printf"(i8* %".26", i32 %"q.1")
+  %".29" = call i32 (i8*, ...) @"printf"(i8* %".26", i32 %"q_load")
   %".30" = bitcast [3 x i8]* @"str.7" to i8*
   ;  Source: printf("%d",Sun);
   %".32" = call i32 (i8*, ...) @"printf"(i8* %".30", i32 6)
   ;  Source: q
-  %"q.2" = load i32, i32* %"q"
+  %"q_load.1" = load i32, i32* %"q"
   ;  Source: q=Sun;
   store i32 6, i32* %"q"
   %".36" = bitcast [3 x i8]* @"str.8" to i8*
   ;  Source: q
-  %"q.3" = load i32, i32* %"q"
+  %"q_load.2" = load i32, i32* %"q"
   ;  Source: printf("%d",q);
-  %".39" = call i32 (i8*, ...) @"printf"(i8* %".36", i32 %"q.3")
+  %".39" = call i32 (i8*, ...) @"printf"(i8* %".36", i32 %"q_load.2")
   ;  Source: return0;
   ret i32 0
 }

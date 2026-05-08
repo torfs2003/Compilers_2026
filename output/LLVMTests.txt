@@ -13,7 +13,7 @@
     --> Traceback (most recent call last):
     -->   File "<frozen runpy>", line 198, in _run_module_as_main
     -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 125, in <module>
     -->     main()
   ArrayTests\test12.c... PASSED
   ArrayTests\test13.c... PASSED (Expected failure)
@@ -23,19 +23,24 @@
     --> Traceback (most recent call last):
     -->   File "<frozen runpy>", line 198, in _run_module_as_main
     -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 125, in <module>
     -->     main()
   ArrayTests\test17.c... PASSED (Expected failure)
   ArrayTests\test18.c... PASSED (Expected failure)
   ArrayTests\test19.c... PASSED
   ArrayTests\test2.c... PASSED
   ArrayTests\test20.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 125, in <module>
+    -->     main()
   ArrayTests\test21.c... PASSED
   ArrayTests\test22.c... FAILED (Compiler Error)
     --> Traceback (most recent call last):
     -->   File "<frozen runpy>", line 198, in _run_module_as_main
     -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 125, in <module>
     -->     main()
   ArrayTests\test23.c... FAILED
     --> EXPECTED (code 0):
@@ -67,19 +72,19 @@
     --> Traceback (most recent call last):
     -->   File "<frozen runpy>", line 198, in _run_module_as_main
     -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 125, in <module>
     -->     main()
   ArrayTests\test37.c... FAILED (Compiler Error)
     --> Traceback (most recent call last):
     -->   File "<frozen runpy>", line 198, in _run_module_as_main
     -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 125, in <module>
     -->     main()
   ArrayTests\test38.c... FAILED (Compiler Error)
     --> Traceback (most recent call last):
     -->   File "<frozen runpy>", line 198, in _run_module_as_main
     -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 125, in <module>
     -->     main()
   ArrayTests\test39.c... PASSED
   ArrayTests\test4.c... PASSED
@@ -87,7 +92,7 @@
     --> Traceback (most recent call last):
     -->   File "<frozen runpy>", line 198, in _run_module_as_main
     -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 125, in <module>
     -->     main()
   ArrayTests\test41.c... PASSED
   ArrayTests\test42.c... PASSED
@@ -106,7 +111,7 @@
     lli.exe: lli: output/test_results\ArrayTests_test49.ll:46:37: error: integer constant must have integer type
   ArrayTests\test5.c... PASSED
   ArrayTests\test50.c... PASSED
-  ArrayTests\test51.c... FAILED (Compiler accepteerde ongeldige C!)
+  ArrayTests\test51.c... PASSED (Expected failure)
   ArrayTests\test52.c... PASSED
   ArrayTests\test53.c... PASSED
   ArrayTests\test54.c... PASSED (Expected failure)
@@ -114,50 +119,39 @@
   ArrayTests\test56.c... PASSED (Expected failure)
   ArrayTests\test57.c... PASSED
   ArrayTests\test58.c... PASSED
-  ArrayTests\test59.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
+  ArrayTests\test59.c... FAILED
+    --> EXPECTED (code 3221225725):
+    
+    ACTUAL (code 1):
+    
+    [!] LLI STDERR:
+    lli.exe: lli: output/test_results\ArrayTests_test59.ll:22:18: error: expected number in address space
   ArrayTests\test6.c... PASSED
   ArrayTests\test60.c... PASSED
   ArrayTests\test61.c... PASSED
-  ArrayTests\test62.c... FAILED
-    --> EXPECTED (code 0):
-    971
-    ACTUAL (code 0):
-    321972171
+  ArrayTests\test62.c... PASSED
   ArrayTests\test63.c... PASSED
   ArrayTests\test7.c... FAILED
     --> EXPECTED (code 0):
     1230
     ACTUAL (code 0):
-    123156
+    12330
   ArrayTests\test8.c... FAILED (Compiler Error)
     --> Traceback (most recent call last):
     -->   File "<frozen runpy>", line 198, in _run_module_as_main
     -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 125, in <module>
     -->     main()
   ArrayTests\test9.c... PASSED (Expected failure)
 
-  |== ArrayTests TOTAAL: 47 passed, 16 failed  [16 GEFAALD] ==|
+  |== ArrayTests TOTAAL: 49 passed, 14 failed  [14 GEFAALD] ==|
 
 ──────────────────────────────────────────────────
   [CalculationTests]
 ──────────────────────────────────────────────────
-  CalculationTests\test1.c... FAILED
-    --> EXPECTED (code 0):
-    110127075010001666756121210111100993163842563736044677810180
-    ACTUAL (code 0):
-    11012707501000166675612121011110099316384256244449280736044677810180
+  CalculationTests\test1.c... PASSED
   CalculationTests\test10.c... PASSED
-  CalculationTests\test11.c... FAILED
-    --> EXPECTED (code 0):
-    9798
-    ACTUAL (code 0):
-    -1034930591-1039990686
+  CalculationTests\test11.c... PASSED
   CalculationTests\test12.c... PASSED
   CalculationTests\test13.c... PASSED
   CalculationTests\test14.c... PASSED
@@ -167,13 +161,9 @@
     --> EXPECTED (code 0):
     a9797.000000291709.00000014182fffffbc7
     ACTUAL (code 0):
-    a9797.000000291F652.00000013048fffff8fa
+    a970.00000035F396.0000007920fffffbb7
   CalculationTests\test18.c... PASSED
-  CalculationTests\test19.c... FAILED
-    --> EXPECTED (code 0):
-    3.1492000.789000
-    ACTUAL (code 0):
-    3.1492003.149200
+  CalculationTests\test19.c... PASSED
   CalculationTests\test2.c... PASSED
   CalculationTests\test20.c... PASSED
   CalculationTests\test21.c... PASSED
@@ -181,29 +171,25 @@
   CalculationTests\test23.c... PASSED
   CalculationTests\test24.c... PASSED
   CalculationTests\test25.c... PASSED
-  CalculationTests\test26.c... PASSED
+  CalculationTests\test26.c... FAILED (Compiler Error)
   CalculationTests\test27.c... PASSED (Expected failure)
-  CalculationTests\test28.c... FAILED (Compiler accepteerde ongeldige C!)
+  CalculationTests\test28.c... PASSED (Expected failure)
   CalculationTests\test29.c... PASSED (Expected failure)
-  CalculationTests\test3.c... FAILED
-    --> EXPECTED (code 0):
-    1101270752-69853150100487897-5110510445-165-3001155720319940-314
-    ACTUAL (code 0):
-    1101270752-69853150100487897-5110510445-165-3001155720-64408780819940-314
+  CalculationTests\test3.c... PASSED
   CalculationTests\test30.c... PASSED (Expected failure)
   CalculationTests\test31.c... PASSED
   CalculationTests\test32.c... PASSED
   CalculationTests\test33.c... PASSED
   CalculationTests\test34.c... PASSED
-  CalculationTests\test35.c... FAILED (Compiler Error)
-  CalculationTests\test36.c... FAILED (Compiler Error)
+  CalculationTests\test35.c... PASSED
+  CalculationTests\test36.c... PASSED
   CalculationTests\test37.c... PASSED
   CalculationTests\test38.c... PASSED (Expected failure)
   CalculationTests\test39.c... PASSED (Expected failure)
   CalculationTests\test4.c... PASSED
-  CalculationTests\test40.c... FAILED (Compiler Error)
+  CalculationTests\test40.c... PASSED
   CalculationTests\test41.c... PASSED (Expected failure)
-  CalculationTests\test42.c... FAILED (Compiler Error)
+  CalculationTests\test42.c... PASSED
   CalculationTests\test43.c... PASSED (Expected failure)
   CalculationTests\test44.c... PASSED (Expected failure)
   CalculationTests\test45.c... PASSED (Expected failure)
@@ -214,7 +200,11 @@
   CalculationTests\test5.c... PASSED
   CalculationTests\test50.c... PASSED
   CalculationTests\test51.c... PASSED
-  CalculationTests\test52.c... FAILED (Compiler Error)
+  CalculationTests\test52.c... FAILED
+    --> EXPECTED (code 0):
+    200
+    ACTUAL (code 0):
+    555555
   CalculationTests\test53.c... PASSED
   CalculationTests\test54.c... PASSED
   CalculationTests\test55.c... PASSED
@@ -239,7 +229,7 @@
   CalculationTests\test8.c... PASSED
   CalculationTests\test9.c... PASSED
 
-  |== CalculationTests TOTAAL: 60 passed, 11 failed  [11 GEFAALD] ==|
+  |== CalculationTests TOTAAL: 68 passed, 3 failed  [3 GEFAALD] ==|
 
 ──────────────────────────────────────────────────
   [CombinedTests]
@@ -333,13 +323,13 @@
     --> Traceback (most recent call last):
     -->   File "<frozen runpy>", line 198, in _run_module_as_main
     -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 125, in <module>
     -->     main()
   DynamicStructTests\test7.c... FAILED (Compiler Error)
     --> Traceback (most recent call last):
     -->   File "<frozen runpy>", line 198, in _run_module_as_main
     -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 125, in <module>
     -->     main()
   DynamicStructTests\test8.c... PASSED
   DynamicStructTests\test9.c... PASSED
@@ -350,7 +340,7 @@
   [EnumTests]
 ──────────────────────────────────────────────────
   EnumTests\test1.c... PASSED
-  EnumTests\test10.c... FAILED (Compiler Error)
+  EnumTests\test10.c... PASSED
   EnumTests\test11.c... FAILED (Compiler Error)
   EnumTests\test12.c... PASSED
   EnumTests\test2.c... PASSED
@@ -362,7 +352,7 @@
   EnumTests\test8.c... PASSED
   EnumTests\test9.c... PASSED
 
-  |== EnumTests TOTAAL: 10 passed, 2 failed  [2 GEFAALD] ==|
+  |== EnumTests TOTAAL: 11 passed, 1 failed  [1 GEFAALD] ==|
 
 ──────────────────────────────────────────────────
   [FileIOTests]
@@ -377,95 +367,6 @@
   FileIOTests\test8.c... PASSED
 
   |== FileIOTests TOTAAL: 8 passed, 0 failed  [ALLES GESLAAGD] ==|
-
-──────────────────────────────────────────────────
-  [FunctionPtrTests]
-──────────────────────────────────────────────────
-  FunctionPtrTests\test1.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
-  FunctionPtrTests\test10.c... FAILED (Compiler Error)
-    --> line 10:7 extraneous input '(' expecting ')'
-    --> line 10:9 extraneous input ')' expecting '('
-    --> line 10:16 mismatched input '{' expecting {';', '='}
-    --> line 12:4 extraneous input 'return' expecting {<EOF>, '#include', 'union', 'enum', 'const', 'int', 'float', 'char', 'void', 'struct', 'typedef', ';', IDENTIFIER}
-  FunctionPtrTests\test11.c... FAILED (Compiler Error)
-    --> line 10:7 extraneous input '(' expecting ')'
-    --> line 10:9 extraneous input ')' expecting '('
-    --> line 10:16 mismatched input '{' expecting {';', '='}
-    --> line 12:4 extraneous input 'return' expecting {<EOF>, '#include', 'union', 'enum', 'const', 'int', 'float', 'char', 'void', 'struct', 'typedef', ';', IDENTIFIER}
-  FunctionPtrTests\test12.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
-  FunctionPtrTests\test13.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
-  FunctionPtrTests\test14.c... PASSED (Expected failure)
-  FunctionPtrTests\test15.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
-  FunctionPtrTests\test16.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
-  FunctionPtrTests\test17.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
-  FunctionPtrTests\test2.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
-  FunctionPtrTests\test3.c... FAILED (Compiler Error)
-    --> line 3:10 no viable alternative at input 'intf(int('
-  FunctionPtrTests\test4.c... FAILED (Compiler Error)
-    --> line 8:7 extraneous input '(' expecting ')'
-    --> line 8:9 extraneous input ')' expecting '('
-    --> line 8:16 mismatched input '{' expecting {';', '='}
-    --> line 10:4 extraneous input 'return' expecting {<EOF>, '#include', 'union', 'enum', 'const', 'int', 'float', 'char', 'void', 'struct', 'typedef', ';', IDENTIFIER}
-  FunctionPtrTests\test5.c... FAILED (Compiler Error)
-    --> line 10:7 extraneous input '(' expecting ')'
-    --> line 10:9 extraneous input ')' expecting '('
-    --> line 10:16 mismatched input '{' expecting {';', '='}
-    --> line 12:4 extraneous input 'return' expecting {<EOF>, '#include', 'union', 'enum', 'const', 'int', 'float', 'char', 'void', 'struct', 'typedef', ';', IDENTIFIER}
-  FunctionPtrTests\test6.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
-  FunctionPtrTests\test7.c... FAILED (Compiler Error)
-    --> line 10:7 extraneous input '(' expecting ')'
-    --> line 10:9 extraneous input ')' expecting '('
-    --> line 10:16 mismatched input '{' expecting {';', '='}
-    --> line 12:4 extraneous input 'return' expecting {<EOF>, '#include', 'union', 'enum', 'const', 'int', 'float', 'char', 'void', 'struct', 'typedef', ';', IDENTIFIER}
-  FunctionPtrTests\test8.c... FAILED (Compiler Error)
-    --> line 10:7 extraneous input '(' expecting ')'
-    --> line 10:9 extraneous input ')' expecting '('
-    --> line 10:16 mismatched input '{' expecting {';', '='}
-    --> line 12:4 extraneous input 'return' expecting {<EOF>, '#include', 'union', 'enum', 'const', 'int', 'float', 'char', 'void', 'struct', 'typedef', ';', IDENTIFIER}
-  FunctionPtrTests\test9.c... FAILED (Compiler Error)
-    --> line 3:10 no viable alternative at input 'intf(int('
-
-  |== FunctionPtrTests TOTAAL: 1 passed, 16 failed  [16 GEFAALD] ==|
 
 ──────────────────────────────────────────────────
   [FunctionTests]
@@ -640,7 +541,7 @@
 ──────────────────────────────────────────────────
   [OutputTests]
 ──────────────────────────────────────────────────
-  OutputTests\test1.c... FAILED (Compiler Error)
+  OutputTests\test1.c... PASSED
   OutputTests\test10.c... PASSED
   OutputTests\test11.c... PASSED
   OutputTests\test12.c... PASSED
@@ -649,17 +550,9 @@
   OutputTests\test15.c... PASSED
   OutputTests\test16.c... PASSED
   OutputTests\test17.c... PASSED
-  OutputTests\test18.c... FAILED
-    --> EXPECTED (code 0):
-    aaaac
-    ACTUAL (code 0):
-    aaacc
-  OutputTests\test19.c... FAILED
-    --> EXPECTED (code 0):
-    0.7890000.7890000.7890003.1492000.789000
-    ACTUAL (code 0):
-    0.7890000.7890000.7890003.1492003.149200
-  OutputTests\test2.c... FAILED (Compiler Error)
+  OutputTests\test18.c... PASSED
+  OutputTests\test19.c... PASSED
+  OutputTests\test2.c... PASSED
   OutputTests\test20.c... PASSED
   OutputTests\test21.c... PASSED
   OutputTests\test22.c... PASSED
@@ -684,16 +577,16 @@
   OutputTests\test34.c... PASSED (Expected failure)
   OutputTests\test35.c... PASSED (Expected failure)
   OutputTests\test36.c... PASSED (Expected failure)
-  OutputTests\test37.c... FAILED (Compiler Error)
+  OutputTests\test37.c... FAILED
+    --> EXPECTED (code 0):
+    20
+    ACTUAL (code 0):
+    117117
   OutputTests\test38.c... PASSED
   OutputTests\test39.c... PASSED
   OutputTests\test4.c... PASSED
-  OutputTests\test40.c... FAILED
-    --> EXPECTED (code 0):
-    3
-    ACTUAL (code 0):
-    2
-  OutputTests\test41.c... FAILED (Compiler Error)
+  OutputTests\test40.c... PASSED
+  OutputTests\test41.c... PASSED
   OutputTests\test42.c... FAILED
     --> EXPECTED (code 0):
     0
@@ -703,18 +596,13 @@
     
   OutputTests\test43.c... PASSED
   OutputTests\test44.c... PASSED
-  OutputTests\test45.c... PASSED
+  OutputTests\test45.c... FAILED (Compiler Error)
   OutputTests\test46.c... PASSED
   OutputTests\test47.c... PASSED
   OutputTests\test48.c... PASSED
   OutputTests\test49.c... PASSED
   OutputTests\test5.c... PASSED
-  OutputTests\test50.c... FAILED
-    --> EXPECTED (code 0):
-    10
-    
-    ACTUAL (code 0):
-    20
+  OutputTests\test50.c... PASSED
   OutputTests\test51.c... PASSED
   OutputTests\test52.c... FAILED (Compiler Error)
     --> line 3:18 mismatched input '(' expecting ';'
@@ -723,13 +611,13 @@
     --> Traceback (most recent call last):
     -->   File "<frozen runpy>", line 198, in _run_module_as_main
     -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 125, in <module>
     -->     main()
   OutputTests\test54.c... FAILED (Compiler Error)
     --> Traceback (most recent call last):
     -->   File "<frozen runpy>", line 198, in _run_module_as_main
     -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 125, in <module>
     -->     main()
   OutputTests\test55.c... PASSED
   OutputTests\test56.c... PASSED
@@ -743,18 +631,24 @@
     
     ACTUAL (code 0):
   OutputTests\test6.c... PASSED
-  OutputTests\test60.c... FAILED (Compiler accepteerde ongeldige C!)
+  OutputTests\test60.c... PASSED (Expected failure)
   OutputTests\test7.c... PASSED
   OutputTests\test8.c... PASSED
   OutputTests\test9.c... PASSED
 
-  |== OutputTests TOTAAL: 45 passed, 15 failed  [15 GEFAALD] ==|
+  |== OutputTests TOTAAL: 52 passed, 8 failed  [8 GEFAALD] ==|
 
 ──────────────────────────────────────────────────
   [PrintTests]
 ──────────────────────────────────────────────────
   PrintTests\test1.c... PASSED
-  PrintTests\test10.c... FAILED (Compiler Error)
+  PrintTests\test10.c... FAILED
+    --> EXPECTED (code 0):
+    3.140000 60000000 7 True 1198194688 
+     
+    ACTUAL (code 0):
+    3.140000 60000000 7 True 1417674752 
+     
   PrintTests\test11.c... PASSED
   PrintTests\test12.c... PASSED
   PrintTests\test13.c... PASSED
@@ -792,18 +686,8 @@
   PrintTests\test42.c... PASSED
   PrintTests\test43.c... PASSED
   PrintTests\test44.c... PASSED
-  PrintTests\test45.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
-  PrintTests\test46.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
+  PrintTests\test45.c... PASSED
+  PrintTests\test46.c... PASSED
   PrintTests\test47.c... FAILED
     --> EXPECTED (code 0):
     10
@@ -818,24 +702,16 @@
     
     ACTUAL (code 0):
   PrintTests\test49.c... PASSED
-  PrintTests\test5.c... FAILED
-    --> EXPECTED (code 0):
-    79
-    ACTUAL (code 0):
-    6cb1779
+  PrintTests\test5.c... PASSED
   PrintTests\test50.c... PASSED
   PrintTests\test51.c... PASSED
   PrintTests\test52.c... PASSED
   PrintTests\test6.c... PASSED
-  PrintTests\test7.c... FAILED
-    --> EXPECTED (code 0):
-    5.20000061a6
-    ACTUAL (code 0):
-    5.200000a9c00061a6
+  PrintTests\test7.c... PASSED
   PrintTests\test8.c... PASSED
   PrintTests\test9.c... PASSED
 
-  |== PrintTests TOTAAL: 45 passed, 7 failed  [7 GEFAALD] ==|
+  |== PrintTests TOTAAL: 49 passed, 3 failed  [3 GEFAALD] ==|
 
 ──────────────────────────────────────────────────
   [ReturnTests]
@@ -866,28 +742,15 @@
 ──────────────────────────────────────────────────
   [ScanTests]
 ──────────────────────────────────────────────────
-  ScanTests\test1.c... FAILED (Compiler Error)
+  ScanTests\test1.c... PASSED
   ScanTests\test10.c... PASSED
   ScanTests\test11.c... PASSED
   ScanTests\test12.c... PASSED
-  ScanTests\test13.c... FAILED
-    --> EXPECTED (code 0):
-    b 
-    ACTUAL (code 0):
-    ÎÎ
+  ScanTests\test13.c... PASSED
   ScanTests\test14.c... PASSED
   ScanTests\test15.c... PASSED
-  ScanTests\test16.c... FAILED (Compiler Error)
-    --> Traceback (most recent call last):
-    -->   File "<frozen runpy>", line 198, in _run_module_as_main
-    -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
-    -->     main()
-  ScanTests\test2.c... FAILED
-    --> EXPECTED (code 0):
-    0.0000003.1400000.0000003.1400003.140000
-    ACTUAL (code 0):
-    0.0000003.1400000.0000003.1400000.000000
+  ScanTests\test16.c... PASSED
+  ScanTests\test2.c... PASSED
   ScanTests\test3.c... PASSED
   ScanTests\test4.c... PASSED
   ScanTests\test5.c... PASSED
@@ -896,7 +759,7 @@
   ScanTests\test8.c... PASSED
   ScanTests\test9.c... PASSED
 
-  |== ScanTests TOTAAL: 12 passed, 4 failed  [4 GEFAALD] ==|
+  |== ScanTests TOTAAL: 16 passed, 0 failed  [ALLES GESLAAGD] ==|
 
 ──────────────────────────────────────────────────
   [StringTests]
@@ -906,15 +769,15 @@
     --> Traceback (most recent call last):
     -->   File "<frozen runpy>", line 198, in _run_module_as_main
     -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 125, in <module>
     -->     main()
   StringTests\test11.c... FAILED (Compiler Error)
     --> Traceback (most recent call last):
     -->   File "<frozen runpy>", line 198, in _run_module_as_main
     -->   File "<frozen runpy>", line 88, in _run_code
-    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 125, in <module>
     -->     main()
-  StringTests\test12.c... FAILED (Compiler Error)
+  StringTests\test12.c... PASSED
   StringTests\test13.c... FAILED (Compiler Error)
   StringTests\test14.c... FAILED (Compiler Error)
   StringTests\test15.c... PASSED
@@ -929,9 +792,9 @@
     --> EXPECTED (code 0):
     1
     ACTUAL (code 0):
-    -509607936
+    0
 
-  |== StringTests TOTAAL: 9 passed, 6 failed  [6 GEFAALD] ==|
+  |== StringTests TOTAAL: 10 passed, 5 failed  [5 GEFAALD] ==|
 
 ──────────────────────────────────────────────────
   [StructTests]
@@ -940,7 +803,7 @@
   StructTests\test10.c... PASSED
   StructTests\test11.c... PASSED
   StructTests\test12.c... PASSED
-  StructTests\test13.c... PASSED
+  StructTests\test13.c... FAILED (Compiler Error)
   StructTests\test14.c... PASSED
   StructTests\test15.c... PASSED
   StructTests\test16.c... PASSED
@@ -950,7 +813,7 @@
   StructTests\test2.c... PASSED
   StructTests\test20.c... PASSED
   StructTests\test21.c... PASSED
-  StructTests\test22.c... PASSED
+  StructTests\test22.c... FAILED (Compiler Error)
   StructTests\test23.c... PASSED (Expected failure)
   StructTests\test24.c... PASSED (Expected failure)
   StructTests\test25.c... PASSED
@@ -1025,7 +888,7 @@
   StructTests\test8.c... PASSED
   StructTests\test9.c... PASSED
 
-  |== StructTests TOTAAL: 61 passed, 9 failed  [9 GEFAALD] ==|
+  |== StructTests TOTAAL: 59 passed, 11 failed  [11 GEFAALD] ==|
 
 ──────────────────────────────────────────────────
   [SwitchTests]
@@ -1067,10 +930,7 @@
   SyntaxErrorTests\test17.c... PASSED (Expected failure)
   SyntaxErrorTests\test18.c... PASSED (Expected failure)
   SyntaxErrorTests\test19.c... PASSED (Expected failure)
-  SyntaxErrorTests\test2.c... FAILED (Compiler Error)
-    --> line 1:7 extraneous input ';' expecting {'union', 'enum', 'const', 'int', 'float', 'char', 'void', 'struct', IDENTIFIER}
-    --> line 3:4 mismatched input 'main' expecting {'const', '*', IDENTIFIER}
-    --> line 5:0 extraneous input '}' expecting {<EOF>, '#include', 'union', 'enum', 'const', 'int', 'float', 'char', 'void', 'struct', 'typedef', ';', IDENTIFIER}
+  SyntaxErrorTests\test2.c... PASSED
   SyntaxErrorTests\test20.c... PASSED (Expected failure)
   SyntaxErrorTests\test21.c... PASSED (Expected failure)
   SyntaxErrorTests\test22.c... PASSED (Expected failure)
@@ -1108,20 +968,17 @@
   SyntaxErrorTests\test51.c... PASSED
   SyntaxErrorTests\test52.c... PASSED
   SyntaxErrorTests\test53.c... PASSED (Expected failure)
-  SyntaxErrorTests\test54.c... FAILED (Compiler accepteerde ongeldige C!)
+  SyntaxErrorTests\test54.c... PASSED (Expected failure)
   SyntaxErrorTests\test55.c... PASSED (Expected failure)
   SyntaxErrorTests\test56.c... PASSED (Expected failure)
   SyntaxErrorTests\test57.c... PASSED (Expected failure)
   SyntaxErrorTests\test6.c... FAILED (Compiler Error)
     --> line 7:12 mismatched input 'typedef' expecting {'const', '*', IDENTIFIER}
-    --> line 7:19 extraneous input ';' expecting {'union', 'enum', 'const', 'int', 'float', 'char', 'void', 'struct', IDENTIFIER}
-    --> line 9:4 mismatched input 'main' expecting {'const', '*', IDENTIFIER}
-    --> line 11:0 extraneous input '}' expecting {<EOF>, '#include', 'union', 'enum', 'const', 'int', 'float', 'char', 'void', 'struct', 'typedef', ';', IDENTIFIER}
   SyntaxErrorTests\test7.c... PASSED
   SyntaxErrorTests\test8.c... PASSED (Expected failure)
   SyntaxErrorTests\test9.c... PASSED (Expected failure)
 
-  |== SyntaxErrorTests TOTAAL: 55 passed, 3 failed  [3 GEFAALD] ==|
+  |== SyntaxErrorTests TOTAAL: 57 passed, 1 failed  [1 GEFAALD] ==|
 
 ──────────────────────────────────────────────────
   [WhileTests]
@@ -1154,6 +1011,6 @@
   |== WhileTests TOTAAL: 24 passed, 0 failed  [ALLES GESLAAGD] ==|
 
 ============================================================
-  EINDTOTAAL: 586 passed, 107 failed
+  EINDTOTAAL: 612 passed, 64 failed
 ============================================================
 

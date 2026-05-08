@@ -24,16 +24,16 @@ entry:
   ;  Source: while(b<5){printf("%d",1);if(a>5){printf("%d",2);break;}printf("%d",3);a++;}
   br label %"while.cond"
 while.cond:
-  %"b.1" = load i32, i32* %"b"
-  %".6" = icmp slt i32 %"b.1", 5
+  %"b_load" = load i32, i32* %"b"
+  %".6" = icmp slt i32 %"b_load", 5
   %".7" = zext i1 %".6" to i32
   %"whilecond" = icmp ne i32 %".7", 0
   br i1 %"whilecond", label %"while.body", label %"while.end"
 while.body:
   %".9" = bitcast [3 x i8]* @"str" to i8*
   %".10" = call i32 (i8*, ...) @"printf"(i8* %".9", i32 1)
-  %"a.1" = load i32, i32* %"a"
-  %".11" = icmp sgt i32 %"a.1", 5
+  %"a_load" = load i32, i32* %"a"
+  %".11" = icmp sgt i32 %"a_load", 5
   %".12" = zext i1 %".11" to i32
   %"ifcond" = icmp ne i32 %".12", 0
   br i1 %"ifcond", label %"if.then", label %"if.end"
@@ -50,7 +50,7 @@ if.then:
 if.end:
   %".17" = bitcast [3 x i8]* @"str.2" to i8*
   %".18" = call i32 (i8*, ...) @"printf"(i8* %".17", i32 3)
-  %"a.2" = load i32, i32* %"a"
+  %"a_load.1" = load i32, i32* %"a"
   %".19" = load i32, i32* %"a"
   %".20" = add i32 %".19", 1
   store i32 %".20", i32* %"a"

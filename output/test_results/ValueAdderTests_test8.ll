@@ -8,82 +8,58 @@ entry:
   %"a" = alloca i8
   store i8 97, i8* %"a"
   %"b" = alloca i32
-  %"a.1" = load i8, i8* %"a"
-  %".3" = sext i8 %"a.1" to i32
+  %".3" = sext i8 97 to i32
   store i32 %".3", i32* %"b"
   %"c" = alloca float
-  %"b.1" = load i32, i32* %"b"
-  %".5" = sitofp i32 %"b.1" to float
+  %".5" = sitofp i8 97 to float
   store float %".5", float* %"c"
   %"d" = alloca i32
-  %"c.1" = load float, float* %"c"
-  %"b.2" = load i32, i32* %"b"
-  %".7" = sitofp i32 %"b.2" to float
-  %".8" = fadd float %"c.1", %".7"
-  %"a.2" = load i8, i8* %"a"
-  %".9" = sitofp i8 %"a.2" to float
-  %".10" = fadd float %".8", %".9"
-  %".11" = fptosi float %".10" to i32
-  store i32 %".11", i32* %"d"
+  %".7" = add i8 97, 97
+  %".8" = add i8 %".7", 97
+  %".9" = sext i8 %".8" to i32
+  store i32 %".9", i32* %"d"
   %"e" = alloca i8
-  %"d.1" = load i32, i32* %"d"
-  %"c.2" = load float, float* %"c"
-  %".13" = sitofp i32 %"d.1" to float
-  %".14" = fadd float %".13", %"c.2"
-  %"b.3" = load i32, i32* %"b"
-  %".15" = sitofp i32 %"b.3" to float
-  %".16" = fadd float %".14", %".15"
-  %"a.3" = load i8, i8* %"a"
-  %".17" = sitofp i8 %"a.3" to float
-  %".18" = fadd float %".16", %".17"
-  %".19" = fptosi float %".18" to i8
-  store i8 %".19", i8* %"e"
+  %".11" = sext i8 97 to i32
+  %".12" = add i32 %".9", %".11"
+  %".13" = sext i8 97 to i32
+  %".14" = add i32 %".12", %".13"
+  %".15" = sext i8 97 to i32
+  %".16" = add i32 %".14", %".15"
+  %".17" = trunc i32 %".16" to i8
+  store i8 %".17", i8* %"e"
   %"f" = alloca float
-  %"e.1" = load i8, i8* %"e"
-  %"d.2" = load i32, i32* %"d"
-  %".21" = sext i8 %"e.1" to i32
-  %".22" = add i32 %".21", %"d.2"
-  %"c.3" = load float, float* %"c"
-  %".23" = sitofp i32 %".22" to float
-  %".24" = fadd float %".23", %"c.3"
-  %"b.4" = load i32, i32* %"b"
-  %".25" = sitofp i32 %"b.4" to float
-  %".26" = fadd float %".24", %".25"
-  %"a.4" = load i8, i8* %"a"
-  %".27" = sitofp i8 %"a.4" to float
-  %".28" = fadd float %".26", %".27"
-  store float %".28", float* %"f"
+  %".19" = sext i8 %".17" to i32
+  %".20" = add i32 %".19", %".9"
+  %".21" = sext i8 97 to i32
+  %".22" = add i32 %".20", %".21"
+  %".23" = sext i8 97 to i32
+  %".24" = add i32 %".22", %".23"
+  %".25" = sext i8 97 to i32
+  %".26" = add i32 %".24", %".25"
+  %".27" = sitofp i32 %".26" to float
+  store float %".27", float* %"f"
   %"g" = alloca i32
-  %"e.2" = load i8, i8* %"e"
-  %"d.3" = load i32, i32* %"d"
-  %".30" = sext i8 %"e.2" to i32
-  %".31" = add i32 %".30", %"d.3"
-  %"c.4" = load float, float* %"c"
-  %".32" = sitofp i32 %".31" to float
-  %".33" = fadd float %".32", %"c.4"
-  %"b.5" = load i32, i32* %"b"
-  %".34" = sitofp i32 %"b.5" to float
-  %".35" = fadd float %".33", %".34"
-  %"a.5" = load i8, i8* %"a"
-  %".36" = sitofp i8 %"a.5" to float
-  %".37" = fadd float %".35", %".36"
-  %"f.1" = load float, float* %"f"
-  %".38" = fadd float %".37", %"f.1"
+  %".29" = sext i8 %".17" to i32
+  %".30" = add i32 %".29", %".9"
+  %".31" = sext i8 97 to i32
+  %".32" = add i32 %".30", %".31"
+  %".33" = sext i8 97 to i32
+  %".34" = add i32 %".32", %".33"
+  %".35" = sext i8 97 to i32
+  %".36" = add i32 %".34", %".35"
+  %".37" = sitofp i32 %".36" to float
+  %".38" = fadd float %".37", %".27"
   %".39" = fptosi float %".38" to i32
   store i32 %".39", i32* %"g"
   %"h" = alloca i32
-  %"g.1" = load i32, i32* %"g"
-  %".41" = srem i32 %"g.1", 12
+  %".41" = srem i32 %".39", 12
   store i32 %".41", i32* %"h"
   %"i" = alloca i32
-  %"h.1" = load i32, i32* %"h"
-  %"g.2" = load i32, i32* %"g"
-  %"b.6" = load i32, i32* %"b"
-  %".43" = mul i32 %"g.2", %"b.6"
-  %"e.3" = load i8, i8* %"e"
-  %".44" = sext i8 %"e.3" to i32
-  %".45" = sdiv i32 %".43", %".44"
-  %".46" = sub i32 %"h.1", %".45"
-  store i32 %".46", i32* %"i"
+  %".43" = sext i8 97 to i32
+  %".44" = mul i32 %".39", %".43"
+  %".45" = sext i8 %".17" to i32
+  %".46" = sdiv i32 %".44", %".45"
+  %".47" = sub i32 %".41", %".46"
+  store i32 %".47", i32* %"i"
   ret i32 0
 }

@@ -14,9 +14,9 @@ entry:
   %"x_ptr" = alloca i32**
   store i32** %"b_ptr", i32*** %"x_ptr"
   ;  Source: x_ptr
-  %"x_ptr.1" = load i32**, i32*** %"x_ptr"
+  %"x_ptr_load" = load i32**, i32*** %"x_ptr"
   ;  Source: b
-  %"b.1" = load i32, i32* %"b"
+  %"b_load" = load i32, i32* %"b"
   ;  Source: &b
   ;  Source: x_ptr=&b;
   %".10" = bitcast i32* %"b" to i32**

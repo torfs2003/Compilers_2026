@@ -24,9 +24,9 @@ entry:
   %".5" = call i32 (i8*, ...) @"printf"(i8* %".3", i32 2048)
   %".6" = bitcast [3 x i8]* @"str.1" to i8*
   ;  Source: x
-  %"x.1" = load float, float* %"x"
+  %"x_load" = load float, float* %"x"
   ;  Source: printf("%f",x);
-  %".9" = fpext float %"x.1" to double
+  %".9" = fpext float %"x_load" to double
   %".10" = call i32 (i8*, ...) @"printf"(i8* %".6", double %".9")
   ;  Source: return0;
   ret i32 0

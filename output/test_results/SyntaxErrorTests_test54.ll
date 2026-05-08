@@ -20,7 +20,7 @@ entry:
   %"x" = alloca i32
   store i32 2, i32* %"x"
   ;  Source: x
-  %"x.1" = load i32, i32* %"x"
+  %"x_load" = load i32, i32* %"x"
   ;  Source: x--;
   %".5" = load i32, i32* %"x"
   %".6" = sub i32 %".5", 1

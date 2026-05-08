@@ -2,7 +2,7 @@ digraph AST {
   node [fontname="Arial"];
   node2 [label="Include\n<stdio.h>", shape=note, style="filled", fillcolor="lightyellow", color="black", fontcolor="black"];
   node6 [label="3.14\n(float)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
-  node5 [label="Decl\nfloat\np\n(float)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
+  node5 [label="Decl\nconst float\np\n(float)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
   node5 -> node6 [style="solid", color="black", label=" init", fontcolor="blue"];
   node9 [label="ID: p\n(float)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
   node8 [label="&\n(float*)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
@@ -10,7 +10,7 @@ digraph AST {
   node7 [label="Decl\nfloat*\nq\n(float*)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
   node7 -> node8 [style="solid", color="black", label=" init", fontcolor="blue"];
   node11 [label="ID: q\n(float*)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
-  node10 [label="Decl\nfloat*\ns\n(float*)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
+  node10 [label="Decl\nconst float*\ns\n(float*)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
   node10 -> node11 [style="solid", color="black", label=" init", fontcolor="blue"];
   node13 [label="\"%f\"\n(char*)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node14 [label="ID: s\n(float*)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];

@@ -1,0 +1,85 @@
+
+============================================================
+  TEST MAP : example_source_files/test_set_3/LLVMTests/CalculationTests
+  Log file : output\CalculationTests.txt
+============================================================
+  test1.c... PASSED
+  test10.c... PASSED
+  test11.c... PASSED
+  test12.c... PASSED
+  test13.c... PASSED
+  test14.c... PASSED
+  test15.c... PASSED
+  test16.c... PASSED
+  test17.c... PASSED
+  test18.c... PASSED
+  test19.c... PASSED
+  test2.c... PASSED
+  test20.c... PASSED
+  test21.c... PASSED
+  test22.c... PASSED (Expected failure)
+  test23.c... PASSED
+  test24.c... PASSED
+  test25.c... PASSED
+  test26.c... FAILED (Compiler Error)
+  test27.c... PASSED (Expected failure)
+  test28.c... PASSED (Expected failure)
+  test29.c... PASSED (Expected failure)
+  test3.c... PASSED
+  test30.c... PASSED (Expected failure)
+  test31.c... PASSED
+  test32.c... PASSED
+  test33.c... PASSED
+  test34.c... PASSED
+  test35.c... PASSED
+  test36.c... PASSED
+  test37.c... PASSED
+  test38.c... PASSED (Expected failure)
+  test39.c... PASSED (Expected failure)
+  test4.c... PASSED
+  test40.c... PASSED
+  test41.c... PASSED (Expected failure)
+  test42.c... PASSED
+  test43.c... PASSED (Expected failure)
+  test44.c... PASSED (Expected failure)
+  test45.c... PASSED (Expected failure)
+  test46.c... PASSED (Expected failure)
+  test47.c... PASSED (Expected failure)
+  test48.c... PASSED (Expected failure)
+  test49.c... PASSED (Expected failure)
+  test5.c... PASSED
+  test50.c... PASSED
+  test51.c... PASSED
+  test52.c... FAILED
+    --> EXPECTED (code 0):
+    200
+    ACTUAL (code 0):
+    136136136
+  test53.c... PASSED
+  test54.c... PASSED
+  test55.c... PASSED
+  test56.c... PASSED
+  test57.c... PASSED
+  test58.c... PASSED
+  test59.c... PASSED
+  test6.c... PASSED
+  test60.c... PASSED
+  test61.c... PASSED (Expected failure)
+  test62.c... PASSED
+  test63.c... PASSED
+  test64.c... PASSED
+  test65.c... PASSED
+  test66.c... PASSED
+  test67.c... PASSED
+  test68.c... PASSED
+  test69.c... PASSED
+  test7.c... PASSED
+  test70.c... PASSED
+  test71.c... PASSED
+  test8.c... PASSED
+  test9.c... PASSED
+
+============================================================
+  EINDTOTAAL: 69 passed, 2 failed
+============================================================
+

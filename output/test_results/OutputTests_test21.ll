@@ -25,21 +25,22 @@ entry:
   store float 0x4040ffdda0000000, float* %"final_line"
   %".5" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: final_line
-  %"final_line.1" = load float, float* %"final_line"
+  %"final_line_load" = load float, float* %"final_line"
   ;  Source: printf("%f",final_line);
-  %".8" = fpext float %"final_line.1" to double
+  %".8" = fpext float %"final_line_load" to double
   %".9" = call i32 (i8*, ...) @"printf"(i8* %".5", double %".8")
   %".10" = bitcast [3 x i8]* @"str.1" to i8*
   ;  Source: f
-  %"f.1" = load float, float* %"f"
+  %"f_load" = load float, float* %"f"
   ;  Source: printf("%f",f);
-  %".13" = fpext float %"f.1" to double
+  %".13" = fpext float %"f_load" to double
   %".14" = call i32 (i8*, ...) @"printf"(i8* %".10", double %".13")
   %".15" = bitcast [3 x i8]* @"str.2" to i8*
   ;  Source: c
-  %"c.1" = load i8, i8* %"c"
+  %"c_load" = load i8, i8* %"c"
   ;  Source: printf("%c",c);
-  %".18" = call i32 (i8*, ...) @"printf"(i8* %".15", i8 %"c.1")
+  %".18" = sext i8 %"c_load" to i32
+  %".19" = call i32 (i8*, ...) @"printf"(i8* %".15", i32 %".18")
   ;  Source: return0;
   ret i32 0
 }

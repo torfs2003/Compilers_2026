@@ -13,7 +13,7 @@ digraph AST {
   node7 -> node10 [style="solid", color="black"];
   node7 -> node11 [style="solid", color="black"];
   node7 -> node12 [style="solid", color="black"];
-  node5 [label="ArrayDecl\nfloat[]\narr\n(float*)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
+  node5 [label="ArrayDecl\nconst float[]\narr\n(float*)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
   node5 -> node6 [style="solid", color="black", label=" dim0", fontcolor="black"];
   node5 -> node7 [style="solid", color="black", label=" init", fontcolor="blue"];
   node14 [label="0\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];

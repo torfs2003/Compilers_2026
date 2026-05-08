@@ -21,14 +21,14 @@ entry:
   %"z" = alloca i32
   store i32 1, i32* %"z"
   ;  Source: day
-  %"day.1" = load i32, i32* %"day"
+  %"day_load" = load i32, i32* %"day"
   ;  Source: day=Wed;
   store i32 2, i32* %"day"
   %".6" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: day
-  %"day.2" = load i32, i32* %"day"
+  %"day_load.1" = load i32, i32* %"day"
   ;  Source: printf("%d",day);
-  %".9" = call i32 (i8*, ...) @"printf"(i8* %".6", i32 %"day.2")
+  %".9" = call i32 (i8*, ...) @"printf"(i8* %".6", i32 %"day_load.1")
   ;  Source: return0;
   ret i32 0
 }

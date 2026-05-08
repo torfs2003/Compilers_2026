@@ -20,7 +20,7 @@ digraph AST {
   node16 [label="Access\n.kaas_ptr\n(struct kaas*)", shape=ellipse, style="filled", fillcolor="lightblue", color="black", fontcolor="black"];
   node16 -> node17 [style="solid", color="black"];
   node19 [label="ID: gouda\n(struct kaas)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
-  node18 [label="&\n(struct kaas*)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node18 [label="&\n(structkaas*)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node18 -> node19 [style="solid", color="black"];
   node15 [label="=", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node15 -> node16 [style="solid", color="black"];
@@ -35,7 +35,7 @@ digraph AST {
   node20 -> node21 [style="solid", color="black", label=" arg0", fontcolor="black"];
   node20 -> node22 [style="solid", color="black", label=" arg1", fontcolor="black"];
   node27 [label="ID: ptr\n(struct pointer)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
-  node26 [label="&\n(struct pointer*)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node26 [label="&\n(structpointer*)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node26 -> node27 [style="solid", color="black"];
   node25 [label="Decl\nstruct pointer*\nptr2\n(struct pointer*)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
   node25 -> node26 [style="solid", color="black", label=" init", fontcolor="blue"];

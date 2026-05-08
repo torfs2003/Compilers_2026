@@ -22,25 +22,25 @@ entry:
   %"yp" = alloca i32*
   store i32* %".2", i32** %"yp"
   %"temp" = alloca i32
-  %"xp.1" = load i32*, i32** %"xp"
-  %"deref_load" = load i32, i32* %"xp.1"
+  %"xp_load" = load i32*, i32** %"xp"
+  %"deref_load" = load i32, i32* %"xp_load"
   store i32 %"deref_load", i32* %"temp"
   ;  Source: xp
-  %"xp.2" = load i32*, i32** %"xp"
-  %"deref_load.1" = load i32, i32* %"xp.2"
+  %"xp_load.1" = load i32*, i32** %"xp"
+  %"deref_load.1" = load i32, i32* %"xp_load.1"
   ;  Source: yp
-  %"yp.1" = load i32*, i32** %"yp"
+  %"yp_load" = load i32*, i32** %"yp"
   ;  Source: *yp
-  %"deref_load.2" = load i32, i32* %"yp.1"
+  %"deref_load.2" = load i32, i32* %"yp_load"
   ;  Source: *xp=*yp;
-  store i32 %"deref_load.2", i32* %"xp.2"
+  store i32 %"deref_load.2", i32* %"xp_load.1"
   ;  Source: yp
-  %"yp.2" = load i32*, i32** %"yp"
-  %"deref_load.3" = load i32, i32* %"yp.2"
+  %"yp_load.1" = load i32*, i32** %"yp"
+  %"deref_load.3" = load i32, i32* %"yp_load.1"
   ;  Source: temp
-  %"temp.1" = load i32, i32* %"temp"
+  %"temp_load" = load i32, i32* %"temp"
   ;  Source: *yp=temp;
-  store i32 %"temp.1", i32* %"yp.2"
+  store i32 %"temp_load", i32* %"yp_load.1"
   ret void
 }
 
@@ -55,71 +55,71 @@ entry:
   %"j" = alloca i32
   %"min_idx" = alloca i32
   ;  Source: i
-  %"i.1" = load i32, i32* %"i"
+  %"i_load" = load i32, i32* %"i"
   ;  Source: i=0
   store i32 0, i32* %"i"
   br label %"while.cond"
 while.cond:
-  %"i.2" = load i32, i32* %"i"
-  %"n.1" = load i32, i32* %"n"
-  %".10" = sub i32 %"n.1", 1
-  %".11" = icmp slt i32 %"i.2", %".10"
+  %"i_load.1" = load i32, i32* %"i"
+  %"n_load" = load i32, i32* %"n"
+  %".10" = sub i32 %"n_load", 1
+  %".11" = icmp slt i32 %"i_load.1", %".10"
   %".12" = zext i1 %".11" to i32
   %"whilecond" = icmp ne i32 %".12", 0
   br i1 %"whilecond", label %"while.body", label %"while.end"
 while.body:
-  %"i.3" = load i32, i32* %"i"
-  %"min_idx.1" = load i32, i32* %"min_idx"
-  store i32 %"i.3", i32* %"min_idx"
-  %"i.4" = load i32, i32* %"i"
-  %".15" = add i32 %"i.4", 1
-  %"j.1" = load i32, i32* %"j"
+  %"i_load.2" = load i32, i32* %"i"
+  %"min_idx_load" = load i32, i32* %"min_idx"
+  store i32 %"i_load.2", i32* %"min_idx"
+  %"i_load.3" = load i32, i32* %"i"
+  %".15" = add i32 %"i_load.3", 1
+  %"j_load" = load i32, i32* %"j"
   store i32 %".15", i32* %"j"
   br label %"while.cond.1"
 while.end:
   ret void
 while.cond.1:
-  %"j.2" = load i32, i32* %"j"
-  %"n.2" = load i32, i32* %"n"
-  %".18" = icmp slt i32 %"j.2", %"n.2"
+  %"j_load.1" = load i32, i32* %"j"
+  %"n_load.1" = load i32, i32* %"n"
+  %".18" = icmp slt i32 %"j_load.1", %"n_load.1"
   %".19" = zext i1 %".18" to i32
   %"whilecond.1" = icmp ne i32 %".19", 0
   br i1 %"whilecond.1", label %"while.body.1", label %"while.end.1"
 while.body.1:
-  %"arr.1" = load i32*, i32** %"arr"
-  %"j.3" = load i32, i32* %"j"
-  %"gep_ptr" = getelementptr i32, i32* %"arr.1", i32 %"j.3"
+  %"arr_load" = load i32*, i32** %"arr"
+  %"j_load.2" = load i32, i32* %"j"
+  %"gep_ptr" = getelementptr i32, i32* %"arr_load", i32 %"j_load.2"
   %"array_element" = load i32, i32* %"gep_ptr"
-  %"arr.2" = load i32*, i32** %"arr"
-  %"min_idx.2" = load i32, i32* %"min_idx"
-  %"gep_ptr.1" = getelementptr i32, i32* %"arr.2", i32 %"min_idx.2"
+  %"arr_load.1" = load i32*, i32** %"arr"
+  %"min_idx_load.1" = load i32, i32* %"min_idx"
+  %"gep_ptr.1" = getelementptr i32, i32* %"arr_load.1", i32 %"min_idx_load.1"
   %"array_element.1" = load i32, i32* %"gep_ptr.1"
   %".21" = icmp slt i32 %"array_element", %"array_element.1"
   %".22" = zext i1 %".21" to i32
   %"ifcond" = icmp ne i32 %".22", 0
   br i1 %"ifcond", label %"if.then", label %"if.end"
 while.end.1:
-  %"arr.3" = load i32*, i32** %"arr"
-  %"min_idx.4" = load i32, i32* %"min_idx"
-  %"gep_ptr.2" = getelementptr i32, i32* %"arr.3", i32 %"min_idx.4"
+  %"arr_load.2" = load i32*, i32** %"arr"
+  %"min_idx_load.3" = load i32, i32* %"min_idx"
+  %"gep_ptr.2" = getelementptr i32, i32* %"arr_load.2", i32 %"min_idx_load.3"
   %"array_element.2" = load i32, i32* %"gep_ptr.2"
-  %"arr.4" = load i32*, i32** %"arr"
-  %"i.5" = load i32, i32* %"i"
-  %"gep_ptr.3" = getelementptr i32, i32* %"arr.4", i32 %"i.5"
+  %"arr_load.3" = load i32*, i32** %"arr"
+  %"i_load.4" = load i32, i32* %"i"
+  %"gep_ptr.3" = getelementptr i32, i32* %"arr_load.3", i32 %"i_load.4"
   %"array_element.3" = load i32, i32* %"gep_ptr.3"
   call void @"swap"(i32* %"gep_ptr.2", i32* %"gep_ptr.3")
-  %"i.6" = load i32, i32* %"i"
+  %"i_load.5" = load i32, i32* %"i"
   %".31" = load i32, i32* %"i"
   %".32" = add i32 %".31", 1
   store i32 %".32", i32* %"i"
   br label %"while.cond"
 if.then:
-  %"j.4" = load i32, i32* %"j"
-  %"min_idx.3" = load i32, i32* %"min_idx"
-  store i32 %"j.4", i32* %"min_idx"
+  %"j_load.3" = load i32, i32* %"j"
+  %"min_idx_load.2" = load i32, i32* %"min_idx"
+  store i32 %"j_load.3", i32* %"min_idx"
   br label %"if.end"
 if.end:
-  %"j.5" = load i32, i32* %"j"
+  %"j_load.4" = load i32, i32* %"j"
   %".26" = load i32, i32* %"j"
   %".27" = add i32 %".26", 1
   store i32 %".27", i32* %"j"
@@ -135,25 +135,25 @@ entry:
   store i32 %".2", i32* %"size"
   %"i" = alloca i32
   ;  Source: i
-  %"i.1" = load i32, i32* %"i"
+  %"i_load" = load i32, i32* %"i"
   ;  Source: i=0
   store i32 0, i32* %"i"
   br label %"while.cond"
 while.cond:
-  %"i.2" = load i32, i32* %"i"
-  %"size.1" = load i32, i32* %"size"
-  %".10" = icmp slt i32 %"i.2", %"size.1"
+  %"i_load.1" = load i32, i32* %"i"
+  %"size_load" = load i32, i32* %"size"
+  %".10" = icmp slt i32 %"i_load.1", %"size_load"
   %".11" = zext i1 %".10" to i32
   %"whilecond" = icmp ne i32 %".11", 0
   br i1 %"whilecond", label %"while.body", label %"while.end"
 while.body:
   %".13" = bitcast [4 x i8]* @"str" to i8*
-  %"arr.1" = load i32*, i32** %"arr"
-  %"i.3" = load i32, i32* %"i"
-  %"gep_ptr" = getelementptr i32, i32* %"arr.1", i32 %"i.3"
+  %"arr_load" = load i32*, i32** %"arr"
+  %"i_load.2" = load i32, i32* %"i"
+  %"gep_ptr" = getelementptr i32, i32* %"arr_load", i32 %"i_load.2"
   %"array_element" = load i32, i32* %"gep_ptr"
   %".14" = call i32 (i8*, ...) @"printf"(i8* %".13", i32 %"array_element")
-  %"i.4" = load i32, i32* %"i"
+  %"i_load.3" = load i32, i32* %"i"
   %".15" = load i32, i32* %"i"
   %".16" = add i32 %".15", 1
   store i32 %".16", i32* %"i"
@@ -183,22 +183,22 @@ entry:
   store i32 5, i32* %"n"
   ;  Source: arr
   ;  Source: n
-  %"n.1" = load i32, i32* %"n"
+  %"n_load" = load i32, i32* %"n"
   ;  Source: printArray(arr,n);
   %".16" = bitcast [5 x i32]* %"arr" to i32*
-  call void @"printArray"(i32* %".16", i32 %"n.1")
+  call void @"printArray"(i32* %".16", i32 %"n_load")
   ;  Source: arr
   ;  Source: n
-  %"n.2" = load i32, i32* %"n"
+  %"n_load.1" = load i32, i32* %"n"
   ;  Source: selectionSort(arr,n);
   %".21" = bitcast [5 x i32]* %"arr" to i32*
-  call void @"selectionSort"(i32* %".21", i32 %"n.2")
+  call void @"selectionSort"(i32* %".21", i32 %"n_load.1")
   ;  Source: arr
   ;  Source: n
-  %"n.3" = load i32, i32* %"n"
+  %"n_load.2" = load i32, i32* %"n"
   ;  Source: printArray(arr,n);
   %".26" = bitcast [5 x i32]* %"arr" to i32*
-  call void @"printArray"(i32* %".26", i32 %"n.3")
+  call void @"printArray"(i32* %".26", i32 %"n_load.2")
   ;  Source: return0;
   ret i32 0
 }

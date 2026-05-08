@@ -21,14 +21,14 @@ entry:
   %".2" = fptosi float 0x3ff2147ae0000000 to i32
   store i32 %".2", i32* %"x"
   ;  Source: x
-  %"x.1" = load i32, i32* %"x"
+  %"x_load" = load i32, i32* %"x"
   ;  Source: x=2048;
   store i32 2048, i32* %"x"
   %".7" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: x
-  %"x.2" = load i32, i32* %"x"
+  %"x_load.1" = load i32, i32* %"x"
   ;  Source: printf("%d",x);
-  %".10" = call i32 (i8*, ...) @"printf"(i8* %".7", i32 %"x.2")
+  %".10" = call i32 (i8*, ...) @"printf"(i8* %".7", i32 %"x_load.1")
   ;  Source: return0;
   ret i32 0
 }

@@ -20,12 +20,12 @@ entry:
   %"a" = alloca i32
   store i32 1, i32* %"a"
   ;  Source: a
-  %"a.1" = load i32, i32* %"a"
+  %"a_load" = load i32, i32* %"a"
   ;  Source: a=3;
   store i32 3, i32* %"a"
   ;  Source: if(a){printf("%d",1);}else{printf("%d",2);}
-  %"a.2" = load i32, i32* %"a"
-  %"ifcond" = icmp ne i32 %"a.2", 0
+  %"a_load.1" = load i32, i32* %"a"
+  %"ifcond" = icmp ne i32 %"a_load.1", 0
   br i1 %"ifcond", label %"if.then", label %"if.else"
 if.then:
   %".8" = bitcast [3 x i8]* @"str" to i8*
@@ -33,12 +33,12 @@ if.then:
   br label %"if.end"
 if.end:
   ;  Source: a
-  %"a.3" = load i32, i32* %"a"
+  %"a_load.2" = load i32, i32* %"a"
   ;  Source: a=0;
   store i32 0, i32* %"a"
   ;  Source: if(a){printf("%d",1);}else{printf("%d",2);}
-  %"a.4" = load i32, i32* %"a"
-  %"ifcond.1" = icmp ne i32 %"a.4", 0
+  %"a_load.3" = load i32, i32* %"a"
+  %"ifcond.1" = icmp ne i32 %"a_load.3", 0
   br i1 %"ifcond.1", label %"if.then.1", label %"if.else.1"
 if.else:
   %".11" = bitcast [3 x i8]* @"str.1" to i8*

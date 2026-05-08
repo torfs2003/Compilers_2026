@@ -9,29 +9,29 @@ entry:
   store i32 0, i32* %"sum"
   %"i" = alloca i32
   ;  Source: i
-  %"i.1" = load i32, i32* %"i"
+  %"i_load" = load i32, i32* %"i"
   ;  Source: i=0
   store i32 0, i32* %"i"
   br label %"while.cond"
 while.cond:
-  %"i.2" = load i32, i32* %"i"
-  %".7" = icmp slt i32 %"i.2", 5
+  %"i_load.1" = load i32, i32* %"i"
+  %".7" = icmp slt i32 %"i_load.1", 5
   %".8" = zext i1 %".7" to i32
   %"whilecond" = icmp ne i32 %".8", 0
   br i1 %"whilecond", label %"while.body", label %"while.end"
 while.body:
-  %"sum.1" = load i32, i32* %"sum"
-  %"i.3" = load i32, i32* %"i"
-  %".10" = add i32 %"sum.1", %"i.3"
-  %"sum.2" = load i32, i32* %"sum"
+  %"sum_load" = load i32, i32* %"sum"
+  %"i_load.2" = load i32, i32* %"i"
+  %".10" = add i32 %"sum_load", %"i_load.2"
+  %"sum_load.1" = load i32, i32* %"sum"
   store i32 %".10", i32* %"sum"
-  %"i.4" = load i32, i32* %"i"
-  %".12" = add i32 %"i.4", 1
-  %"i.5" = load i32, i32* %"i"
+  %"i_load.3" = load i32, i32* %"i"
+  %".12" = add i32 %"i_load.3", 1
+  %"i_load.4" = load i32, i32* %"i"
   store i32 %".12", i32* %"i"
   br label %"while.cond"
 while.end:
   ;  Source: returnsum;
-  %"sum.3" = load i32, i32* %"sum"
-  ret i32 %"sum.3"
+  %"sum_load.2" = load i32, i32* %"sum"
+  ret i32 %"sum_load.2"
 }

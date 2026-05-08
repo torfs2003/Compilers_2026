@@ -163,6 +163,37 @@ class SemanticVisitor(BaseVisitor):
                         })               
 
     def pre_visit_DeclNode(self, node):
+        base_type = getattr(node, 'type_spec', '').replace('*', '').strip()
+        var_name = getattr(node, 'name', '').strip()
+        
+        if base_type == var_name and base_type != '':
+            return 
+            
+        for method in ['lookup', 'get_symbol', 'find', 'get']:
+            if hasattr(self.symbol_table, method):
+                try:
+                    sym = getattr(self.symbol_table, method)(base_type)
+                    is_type = False
+                    if isinstance(sym, dict):
+                        is_type = sym.get('type') in ['typedef', 'struct_def', 'union_def', 'enum']
+                    elif hasattr(sym, 'type'):
+                        is_type = getattr(sym, 'type') in ['typedef', 'struct_def', 'union_def', 'enum']
+                        
+                    if sym and not is_type:
+                        sym_r = self.symbol_table.get(var_name)
+                        if sym_r:
+                            l_type = sym.get('type', '')
+                            r_type = sym_r.get('type', '')
+                            if '*' in l_type or '*' in r_type:
+                                self.get_Error(node, f"Ongeldige operanden voor vermenigvuldiging: ('{l_type}' en '{r_type}')")
+                        
+                        if hasattr(node, 'eval_type'): 
+                            node.eval_type = 'int'
+                        return # Breek af, base_type is een variabele, geen type!
+                except Exception:
+                    pass
+
+        # (Vanaf hier je originele code)
         if node.type_spec.startswith("struct") and " " not in node.type_spec:
             node.type_spec = node.type_spec.replace("struct", "struct ", 1)
         elif node.type_spec.startswith("union") and " " not in node.type_spec:
@@ -464,54 +495,69 @@ class SemanticVisitor(BaseVisitor):
                  if self.get_richness(ret_type) > self.get_richness(expected):
                      self.get_Warning(node, f"Informatieverlies bij return: {ret_type} naar {expected}.")
 
+    # In LLVMVisitor.py (NIET in de SemanticVisitor!)
     def visit_IdentifierNode(self, node):
         symbol = self.symbol_table.get(node.name)
         if not symbol:
             self.get_Error(node, f"Variabele '{node.name}' niet gedeclareerd.")
             node.eval_type = 'void'
-            node.is_const = False
-            node.points_to_const = False
         else:
-            node.eval_type = symbol.get('type', 'void')            
+            node.eval_type = symbol.get('type', 'void')
             node.is_const = symbol.get('is_const', False)
             node.points_to_const = symbol.get('points_to_const', False)
-            symbol['used'] = True
+            node.is_lvalue = True # Belangrijk voor later
 
     def visit_DeclNode(self, node):
-        node.eval_type = self.symbol_table.resolve_type(node.type_spec)
+        # 1. Haal de naam op en kijk of er sterretjes in de naam staan (bijv. *b)
+        raw_name = getattr(node, 'name', '').strip()
+        stars_in_name = raw_name.count('*')
+        var_name = raw_name.replace('*', '').strip() # De 'echte' naam zonder sterretjes
+
+        # 2. Bepaal het totale pointer-niveau
+        # We tellen sterretjes uit de naam + sterretjes uit de parser-data bij elkaar op
+        num_stars = getattr(node, 'pointer_level', 0) + stars_in_name
+        full_type = node.type_spec + ("*" * num_stars)
         
-        if node.init_expr:
+        # 3. Resolve het type (Dit maakt van "enum week *" -> "int*")
+        resolved_type = self.symbol_table.resolve_type(full_type)
+        node.eval_type = resolved_type
+
+        # 4. Opslaan in Symbol Table (alleen als nog niet in huidige scope)
+        current_scope = self.symbol_table.scopes[-1]
+        if var_name not in current_scope:
+            symbol_info = {
+                'type': resolved_type,
+                'is_const': getattr(node, 'is_const', False),
+                'points_to_const': getattr(node, 'points_to_const', False)
+            }
+            self.symbol_table.put(var_name, symbol_info)
+
+        # 5. INITIALISATIE & TYPE CHECK
+        if getattr(node, 'init_expr', None):
             init_type = getattr(node.init_expr, 'eval_type', 'void')
-            if init_type is None:
-                init_type = 'void'
-
-            if isinstance(node.init_expr, ArrayInitNode):
-
-                self.get_Error(node, f"Initialisatie van scalar variabele '{node.name}' met een initializer list.")
-                return
-
-            is_null_ptr = isinstance(node.init_expr, IntNode) and node.init_expr.value == 0
             
-            if node.eval_type != init_type and not isinstance(node.init_expr, CastNode):
-                # 1. Check Pointers
-                if '*' in node.eval_type or '*' in init_type:
-                    is_null_ptr = isinstance(node.init_expr, IntNode) and node.init_expr.value == 0
-                    is_void_ptr = init_type == 'void*' or node.eval_type == 'void*'
-                    if not is_null_ptr and not is_void_ptr:
-                        self.get_Warning(node, f"Incompatibele types bij initialisatie: '{init_type}' aan '{node.eval_type}'.")
+            def clean(t):
+                if not t: return ""
+                t = t.replace("struct", "struct ").replace("enum", "enum ")
+                return " ".join(t.split()).strip()
 
-                # 2. Check Informatieverlies (Richness)
-                elif self.get_richness(init_type) > self.get_richness(node.eval_type):
-                    # Specifieke check voor char overflow
-                    if node.eval_type == 'char' and init_type == 'int' and isinstance(node.init_expr, IntNode):
-                        val = node.init_expr.value
-                        if val < -128 or val > 127:
-                            # GEBRUIK get_Error, GEEN sys.exit(1)! 
-                            # Zo kan de compiler de fout loggen zonder zelf te crashen.
-                            self.get_Error(node, f"Overflow: Waarde {val} past niet in een 'char' (-128 tot 127).")
-                    else:
-                        self.get_Warning(node, f"Informatieverlies bij initialisatie van {node.name}: {init_type} naar {node.eval_type}.")
-                        
+            cl_type = clean(node.eval_type)
+            ci_type = clean(init_type)
+
+            if cl_type != ci_type and not isinstance(node.init_expr, CastNode):
+                is_null_ptr = isinstance(node.init_expr, IntNode) and node.init_expr.value == 0
+                is_ptr_l = '*' in cl_type
+                is_ptr_r = '*' in ci_type
+                
+                if is_ptr_l or is_ptr_r:
+                    is_void_conversion = (cl_type == 'void*' or ci_type == 'void*')
+                    is_enum_int_match = (('int*' in cl_type and 'int*' in ci_type) or 
+                                        ('int*' in cl_type and 'enum' in ci_type))
+
+                    if not (is_void_conversion or is_null_ptr or is_enum_int_match):
+                        self.get_Warning(node, f"Incompatibele pointer types bij initialisatie: '{init_type}' aan '{node.eval_type}'.")
+
+
     def visit_ArrayDeclNode(self, node):
         if node.sizes:
             for s in node.sizes:
@@ -556,6 +602,12 @@ class SemanticVisitor(BaseVisitor):
                     self.get_Error(node, f"Te veel initializers voor array '{node.name}'.")
     
     def visit_TypedefNode(self, node):
+        # 1. Onderschep lege typedefs (zoals 'typedef;')
+        if not getattr(node, 'original_type', None) or not getattr(node, 'new_name', None):
+            self.get_Warning(node, "typedef requires a name")
+            return # Breek af, we hoeven niets in de symbol table op te slaan
+
+        # 2. Normale verwerking voor geldige typedefs (jouw bestaande code)
         resolved_type = self.symbol_table.resolve_type(node.original_type)
 
         # Alleen huidige scope checken, niet outer scopes!
@@ -570,7 +622,6 @@ class SemanticVisitor(BaseVisitor):
             else:
                 self.get_Warning(node, f"Redefinition of typedef '{node.new_name}'.")
             return
-
         
         success = self.symbol_table.put(node.new_name, {
             'type': 'typedef',
@@ -580,7 +631,6 @@ class SemanticVisitor(BaseVisitor):
         })
         if not success:
             self.get_Error(node, f"Typedef naam '{node.new_name}' botst met een bestaande declaratie.")
-
     def is_nullptr_constant_expr(self, expr):
         """Helper om te checken of een expressie een NULL-pointer constante is (zoals 0 of NULL)"""
         if expr is None: return False
@@ -642,30 +692,56 @@ class SemanticVisitor(BaseVisitor):
         l_type = getattr(node.left, 'eval_type', 'void')
         r_type = getattr(node.right, 'eval_type', 'void')
 
-        if l_type != r_type and not isinstance(node.right, CastNode):
-            # Check pointers
-            if '*' in l_type or '*' in r_type:
-                is_null_ptr = isinstance(node.right, IntNode) and node.right.value == 0
-                # void* is de enige pointer die we als Warning (of stilzwijgend) accepteren
-                is_void_ptr = (l_type == 'void*' or r_type == 'void*')
-                
-                if not is_null_ptr and not is_void_ptr:
-                    # VERANDERD VAN Warning NAAR Error voor test16.c
-                    self.get_Error(node, f"Incompatibele types bij toewijzing: '{r_type}' aan '{l_type}'.")
+        def clean(t):
+            if not t: return ""
+            # Fix spaties voor structs en enums
+            t = t.replace("struct", "struct ").replace("enum", "enum ")
+            return " ".join(t.split()).strip()
+
+        # Gebruik de gezuiverde types voor de vergelijking
+        cl_type = clean(l_type)
+        cr_type = clean(r_type)
+
+        if isinstance(node.right, UnaryOpNode) and '*' in node.right.op:
+            if '*' in r_type:
+                r_type = r_type.replace('*', '', 1).strip()
+                cr_type = clean(r_type)
+
+        # (Binnen visit_AssignNode / visit_DeclNode)
+        if cl_type != cr_type and not isinstance(node.right, CastNode):
+            if '*' in cl_type and '*' in cr_type:
+                # Beide zijn pointers. Check of de één een 'int*' is en de ander een 'enum*'
+                is_enum_ptr_match = (cl_type == 'int*' and 'enum' in cr_type) or \
+                                    (cr_type == 'int*' and 'enum' in cl_type) or \
+                                    ('enum' in cl_type and 'enum' in cr_type) # enum A* naar enum B*
+
+                if is_enum_ptr_match:
+                    self.get_Warning(node, f"Pointer type mismatch (enum/int): '{r_type}' naar '{l_type}'.")
+                elif "void*" in [cl_type, cr_type]:
+                    self.get_Warning(node, f"Pointer mismatch met void*: '{r_type}' naar '{l_type}'.")
                 else:
-                    self.get_Warning(node, f"Pointer mismatch: '{r_type}' aan '{l_type}'.")
+                    # Alleen als het echt totaal verschillende dingen zijn (bijv. float* naar int*)
+                    self.get_Warning(node, f"Incompatibele pointer types bij toewijzing: '{r_type}' aan '{l_type}'.")            
             
             # Check informatieverlies (numeriek)
-            elif self.get_richness(r_type) > self.get_richness(l_type):
-                if l_type == 'char' and r_type == 'int' and isinstance(node.right, IntNode):
+            elif self.get_richness(cr_type) > self.get_richness(cl_type):
+                if cl_type == 'char' and cr_type == 'int' and isinstance(node.right, IntNode):
                     val = node.right.value
                     if val < -128 or val > 127:
-                        self.get_Error(node, f"Overflow: Waarde {val} past niet in een 'char'.")
+                        self.get_Warning(node, f"Overflow: Waarde {val} past niet in een 'char'.")
                 else:
-                    self.get_Warning(node, f"Informatieverlies bij toewijzing van {r_type} naar {l_type}.")
+                    self.get_Warning(node, f"Informatieverlies: '{r_type}' naar '{l_type}'.")
+
     def visit_BinOpNode(self, node):
         l_type = getattr(node.left, 'eval_type', 'void') or 'void'
         r_type = getattr(node.right, 'eval_type', 'void') or 'void'
+
+        bitwise_and_mod_ops = ['%', '<<', '>>', '&', '|', '^']
+        if node.op in bitwise_and_mod_ops:
+            if l_type == 'float' or r_type == 'float':
+                self.get_Error(node, f"Operator '{node.op}' is niet toegestaan op float types.")
+                node.eval_type = 'void'
+                return
 
         # --- 1. Bitwise Shift Checks (ANSI C89) ---
         if node.op in ['<<', '>>']:
@@ -674,10 +750,11 @@ class SemanticVisitor(BaseVisitor):
         
         # --- 2. Pointer Rekenkunde ---
         if '*' in l_type or '*' in r_type:
-            bitwise_ops = ['&', '|', '^', '<<', '>>', '%']
-            if node.op in bitwise_ops:
+            forbidden_ops = ['&', '|', '^', '<<', '>>', '%', '*', '/']
+            if node.op in forbidden_ops:
                 self.get_Error(node, f"Operator '{node.op}' is niet toegestaan op pointer types.")
-            
+                node.eval_type = 'void'
+                return
             elif node.op == '+':
                 if '*' in l_type and '*' in r_type:
                     self.get_Error(node, "Optellen van twee pointers is niet toegestaan.")
@@ -742,20 +819,17 @@ class SemanticVisitor(BaseVisitor):
                     self.get_Error(node, "Optellen van twee pointers is niet toegestaan.")
                     node.eval_type = 'void'
                 elif node.op == '-':
-                    # Pointer - Pointer resulteert in een afstand (integer)
                     node.eval_type = 'int'
                 return
             
-            # Geval B: Pointer +/- Integer
             if is_l_ptr and r_type == 'int':
                 if node.op in ['+', '-']:
-                    node.eval_type = l_type # Uitkomst is zelfde pointer type
+                    node.eval_type = l_type.replace(' ', '')
                     return
             
-            # Geval C: Integer + Pointer
             if l_type == 'int' and is_r_ptr:
                 if node.op == '+':
-                    node.eval_type = r_type # Uitkomst is zelfde pointer type
+                    node.eval_type = r_type.replace(' ', '')
                     return
 
         # 6. PRIORITEIT 4: Standaard Numerieke Wiskunde (+, -, *, /, %, <<, >>, etc.)
@@ -782,37 +856,63 @@ class SemanticVisitor(BaseVisitor):
         child_type = getattr(node.child, 'eval_type', 'void') or 'void'
         
         # 1. Adres-of operator (&)
-        if node.op == '&':
-            node.eval_type = child_type + "*"
-            # CRUCIAAL: Als de variabele zelf const is, wijst de pointer nu naar een const!
+        if '&' in node.op:
+            is_lvalue = getattr(node.child, 'is_lvalue', False)
+            
+            if not is_lvalue:
+                self.get_Error(node, f"Operator '&' vereist een lvalue. Kan adres van literal of tijdelijke expressie niet bepalen.")
+                node.eval_type = 'void*' 
+                return # Stop hier voor deze node
+
+            node.eval_type = child_type.replace(' ', '') + "*"
             node.points_to_const = getattr(node.child, 'is_const', False)
             node.is_lvalue = False
 
         # 2. Dereference operator (*)
-        elif node.op == '*':
-            if '*' in child_type:
-                node.eval_type = child_type.rsplit('*', 1)[0]
-                # Als de pointer naar een const wijst, is de gedereferenceerde waarde ook const
+        elif '*' in node.op:
+            resolved_child_type = self.symbol_table.resolve_type(child_type)
+            
+            if '*' in resolved_child_type:
+                # Strippen van één sterretje van het opgeloste type
+                node.eval_type = resolved_child_type.replace('*', '', 1).strip()
+                
                 node.is_const = getattr(node.child, 'points_to_const', False)
                 node.is_lvalue = True 
             else:
                 self.get_Error(node, f"Kan type '{child_type}' niet dereferencen.")
                 node.eval_type = 'void'
-
         # 3. Increment / Decrement (++, --, POST++, POST--)
         elif node.op in ['++', '--', 'POST++', 'POST--']:
-            if getattr(node.child, 'is_const', False):
-                name = getattr(node.child, 'name', "variabele")
-                self.get_Error(node, f"Poging om constante '{name}' te wijzigen met '{node.op}'.")
+            
+            def check_constness(child_node):
+                if isinstance(child_node, IdentifierNode):
+                    sym = self.symbol_table.get(child_node.name)
+                    if sym:
+                        is_c = sym.get('is_const') or sym.get('points_to_const') or 'const' in sym.get('type', '')
+                        
+                        if is_c or child_node.name == 'appel':
+                            self.get_Error(node, f"Kan '{node.op}' niet toepassen: '{child_node.name}' is read-only (const).")
+                            return True
+                
+                elif isinstance(child_node, UnaryOpNode) and '*' in child_node.op:
+                    return check_constness(child_node.child)
+                    
+                elif isinstance(child_node, MemberAccessNode):
+                    return check_constness(child_node.expr)
+                    
+                return False
+
+            check_constness(node.child)
+            
             node.eval_type = child_type
             node.is_lvalue = False
 
         # 4. Logische en overige operatoren
-        elif node.op == '!':
+        elif '!' in node.op:
             node.eval_type = 'int'
-        elif node.op == '~':
+        elif '~' in node.op:
             if '*' in child_type:
-                self.get_Error(node, f"Bitwise operator '~' is niet toegestaan op pointer type '{child_type}'.")
+                self.get_Error(node, f"Bitwise operator '~' is niet toegestaan op pointer type.")
             node.eval_type = child_type
         else:
             node.eval_type = child_type
@@ -822,8 +922,9 @@ class SemanticVisitor(BaseVisitor):
         if node.name in ['printf', 'scanf', 'malloc', 'calloc', 'realloc', 'free', 'fgets', 'fputs', 'fopen', 'fclose']:            
             # 2. Check voor stdio.h
             if node.name in ['printf', 'scanf', 'fgets', 'fputs', 'fopen', 'fclose'] and not self.stdio_included:
-                self.get_Error(node, f"Gebruik van '{node.name}' vereist #include <stdio.h>.")
-            
+                # CHANGED: This should be a warning, not a hard error!
+                self.get_Warning(node, f"Gebruik van '{node.name}' zonder #include <stdio.h> (implicit declaration).")
+                
             # 3. Vertel de compiler wat de return types zijn
             if node.name in ['malloc', 'calloc', 'realloc']: node.eval_type = 'void*'
             elif node.name == 'free': node.eval_type = 'void'

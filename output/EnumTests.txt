@@ -1,0 +1,22 @@
+
+============================================================
+  TEST MAP : example_source_files/test_set_3/LLVMTests/EnumTests
+  Log file : output\EnumTests.txt
+============================================================
+  test1.c... PASSED
+  test10.c... PASSED
+  test11.c... FAILED (Compiler Error)
+  test12.c... PASSED
+  test2.c... PASSED
+  test3.c... PASSED
+  test4.c... PASSED
+  test5.c... PASSED
+  test6.c... PASSED (Expected failure)
+  test7.c... PASSED (Expected failure)
+  test8.c... PASSED
+  test9.c... PASSED
+
+============================================================
+  EINDTOTAAL: 11 passed, 1 failed
+============================================================
+

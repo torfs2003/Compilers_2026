@@ -20,15 +20,15 @@ entry:
   %"k" = alloca i32
   store i32 3, i32* %"k"
   %"z" = alloca i32
-  %"k.1" = load i32, i32* %"k"
-  store i32 %"k.1", i32* %"z"
+  %"k_load" = load i32, i32* %"k"
+  store i32 %"k_load", i32* %"z"
   %".4" = bitcast [6 x i8]* @"str" to i8*
   ;  Source: k
-  %"k.2" = load i32, i32* %"k"
+  %"k_load.1" = load i32, i32* %"k"
   ;  Source: z
-  %"z.1" = load i32, i32* %"z"
+  %"z_load" = load i32, i32* %"z"
   ;  Source: printf("%d %d",k,z);
-  %".8" = call i32 (i8*, ...) @"printf"(i8* %".4", i32 %"k.2", i32 %"z.1")
+  %".8" = call i32 (i8*, ...) @"printf"(i8* %".4", i32 %"k_load.1", i32 %"z_load")
   ;  Source: return0;
   ret i32 0
 }

@@ -20,8 +20,8 @@ entry:
   %"x" = alloca i32
   store i32 5, i32* %"x"
   ;  Source: if(x<5){printf("Something went wrong");/* Should not print */}
-  %"x.1" = load i32, i32* %"x"
-  %".4" = icmp slt i32 %"x.1", 5
+  %"x_load" = load i32, i32* %"x"
+  %".4" = icmp slt i32 %"x_load", 5
   %".5" = zext i1 %".4" to i32
   %"ifcond" = icmp ne i32 %".5", 0
   br i1 %"ifcond", label %"if.then", label %"if.end"
@@ -31,8 +31,8 @@ if.then:
   br label %"if.end"
 if.end:
   ;  Source: if(x>=5){printf("Hello world!\n");/* Should print */}
-  %"x.2" = load i32, i32* %"x"
-  %".11" = icmp sge i32 %"x.2", 5
+  %"x_load.1" = load i32, i32* %"x"
+  %".11" = icmp sge i32 %"x_load.1", 5
   %".12" = zext i1 %".11" to i32
   %"ifcond.1" = icmp ne i32 %".12", 0
   br i1 %"ifcond.1", label %"if.then.1", label %"if.end.1"
@@ -42,8 +42,8 @@ if.then.1:
   br label %"if.end.1"
 if.end.1:
   ;  Source: if(x==5&&1){if(x!=4){printf("Hello world!\n");/* Should print */}}
-  %"x.3" = load i32, i32* %"x"
-  %".18" = icmp eq i32 %"x.3", 5
+  %"x_load.2" = load i32, i32* %"x"
+  %".18" = icmp eq i32 %"x_load.2", 5
   %".19" = zext i1 %".18" to i32
   %".20" = icmp ne i32 %".19", 0
   %".21" = icmp ne i32 1, 0
@@ -52,8 +52,8 @@ if.end.1:
   %"ifcond.2" = icmp ne i32 %".23", 0
   br i1 %"ifcond.2", label %"if.then.2", label %"if.end.2"
 if.then.2:
-  %"x.4" = load i32, i32* %"x"
-  %".25" = icmp ne i32 %"x.4", 4
+  %"x_load.3" = load i32, i32* %"x"
+  %".25" = icmp ne i32 %"x_load.3", 4
   %".26" = zext i1 %".25" to i32
   %"ifcond.3" = icmp ne i32 %".26", 0
   br i1 %"ifcond.3", label %"if.then.3", label %"if.end.3"

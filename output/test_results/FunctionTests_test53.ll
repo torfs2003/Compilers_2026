@@ -20,11 +20,11 @@ entry:
   %"bar" = alloca i32
   store i32 %".1", i32* %"bar"
   ;  Source: if(global){global=1;foo(1);}else{printf("%d",bar);}
-  %"global" = load i32, i32* @"global"
-  %"ifcond" = icmp ne i32 %"global", 0
+  %"global_load" = load i32, i32* @"global"
+  %"ifcond" = icmp ne i32 %"global_load", 0
   br i1 %"ifcond", label %"if.then", label %"if.else"
 if.then:
-  %"global.1" = load i32, i32* @"global"
+  %"global_load.1" = load i32, i32* @"global"
   store i32 1, i32* @"global"
   %".7" = call float @"foo"(i32 1)
   br label %"if.end"
@@ -33,8 +33,8 @@ if.end:
   ret float              0x0
 if.else:
   %".9" = bitcast [3 x i8]* @"str" to i8*
-  %"bar.1" = load i32, i32* %"bar"
-  %".10" = call i32 (i8*, ...) @"printf"(i8* %".9", i32 %"bar.1")
+  %"bar_load" = load i32, i32* %"bar"
+  %".10" = call i32 (i8*, ...) @"printf"(i8* %".9", i32 %"bar_load")
   br label %"if.end"
 }
 

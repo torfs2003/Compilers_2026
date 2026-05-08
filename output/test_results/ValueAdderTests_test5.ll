@@ -8,8 +8,8 @@ entry:
   %"v" = alloca float
   store float 0x4016000000000000, float* %"v"
   %"a" = alloca i32
-  %"v.1" = load float, float* %"v"
-  %".3" = fptosi float %"v.1" to i32
+  %"v_load" = load float, float* %"v"
+  %".3" = fptosi float %"v_load" to i32
   store i32 %".3", i32* %"a"
   ;  Source: return0;
   ret i32 0

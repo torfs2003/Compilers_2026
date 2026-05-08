@@ -24,26 +24,26 @@ entry:
   %"i" = alloca i32
   store i32 0, i32* %"i"
   ;  Source: i
-  %"i.1" = load i32, i32* %"i"
+  %"i_load" = load i32, i32* %"i"
   ;  Source: i=0
   store i32 0, i32* %"i"
   br label %"while.cond"
 while.cond:
-  %"i.2" = load i32, i32* %"i"
-  %"length.1" = load i32, i32* %"length"
-  %".11" = icmp slt i32 %"i.2", %"length.1"
+  %"i_load.1" = load i32, i32* %"i"
+  %"length_load" = load i32, i32* %"length"
+  %".11" = icmp slt i32 %"i_load.1", %"length_load"
   %".12" = zext i1 %".11" to i32
   %"whilecond" = icmp ne i32 %".12", 0
   br i1 %"whilecond", label %"while.body", label %"while.end"
 while.body:
   %".14" = bitcast [3 x i8]* @"str" to i8*
-  %"arr.1" = load i32*, i32** %"arr"
+  %"arr_load" = load i32*, i32** %"arr"
   %".15" = load i32*, i32** %"arr"
   %"ptr_incdec" = getelementptr i32, i32* %".15", i32 1
   store i32* %"ptr_incdec", i32** %"arr"
   %"deref_load" = load i32, i32* %".15"
   %".17" = call i32 (i8*, ...) @"printf"(i8* %".14", i32 %"deref_load")
-  %"i.3" = load i32, i32* %"i"
+  %"i_load.2" = load i32, i32* %"i"
   %".18" = load i32, i32* %"i"
   %".19" = add i32 %".18", 1
   store i32 %".19", i32* %"i"

@@ -22,15 +22,15 @@ entry:
   %"b" = alloca i32
   store i32 0, i32* %"b"
   ;  Source: b
-  %"b.1" = load i32, i32* %"b"
+  %"b_load" = load i32, i32* %"b"
   ;  Source: b=0;
   store i32 0, i32* %"b"
   ;  Source: a
-  %"a.1" = load i32, i32* %"a"
+  %"a_load" = load i32, i32* %"a"
   ;  Source: b
-  %"b.2" = load i32, i32* %"b"
+  %"b_load.1" = load i32, i32* %"b"
   ;  Source: (char)b
-  %".10" = trunc i32 %"b.2" to i8
+  %".10" = trunc i32 %"b_load.1" to i8
   ;  Source: a=(char)b;
   %".12" = sext i8 %".10" to i32
   store i32 %".12", i32* %"a"

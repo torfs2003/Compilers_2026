@@ -21,23 +21,26 @@ entry:
   store i8 10, i8* %"nl"
   %".3" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: nl
-  %"nl.1" = load i8, i8* %"nl"
+  %"nl_load" = load i8, i8* %"nl"
   ;  Source: printf("%c",nl);
-  %".6" = call i32 (i8*, ...) @"printf"(i8* %".3", i8 %"nl.1")
+  %".6" = sext i8 %"nl_load" to i32
+  %".7" = call i32 (i8*, ...) @"printf"(i8* %".3", i32 %".6")
   %"tab" = alloca i8
   store i8 9, i8* %"tab"
-  %".8" = bitcast [3 x i8]* @"str.1" to i8*
+  %".9" = bitcast [3 x i8]* @"str.1" to i8*
   ;  Source: tab
-  %"tab.1" = load i8, i8* %"tab"
+  %"tab_load" = load i8, i8* %"tab"
   ;  Source: printf("%c",tab);
-  %".11" = call i32 (i8*, ...) @"printf"(i8* %".8", i8 %"tab.1")
+  %".12" = sext i8 %"tab_load" to i32
+  %".13" = call i32 (i8*, ...) @"printf"(i8* %".9", i32 %".12")
   %"character_null" = alloca i8
   store i8 0, i8* %"character_null"
-  %".13" = bitcast [3 x i8]* @"str.2" to i8*
+  %".15" = bitcast [3 x i8]* @"str.2" to i8*
   ;  Source: character_null
-  %"character_null.1" = load i8, i8* %"character_null"
+  %"character_null_load" = load i8, i8* %"character_null"
   ;  Source: printf("%c",character_null);
-  %".16" = call i32 (i8*, ...) @"printf"(i8* %".13", i8 %"character_null.1")
+  %".18" = sext i8 %"character_null_load" to i32
+  %".19" = call i32 (i8*, ...) @"printf"(i8* %".15", i32 %".18")
   ;  Source: return0;
   ret i32 0
 }

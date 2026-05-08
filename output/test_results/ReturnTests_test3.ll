@@ -27,16 +27,16 @@ entry:
   %"a" = alloca float
   store float 0x3fe0000000000000, float* %"a"
   ;  Source: a
-  %"a.1" = load float, float* %"a"
+  %"a_load" = load float, float* %"a"
   ;  Source: d()
   %".5" = call float @"d"()
   ;  Source: a=d();
   store float %".5", float* %"a"
   %".8" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: a
-  %"a.2" = load float, float* %"a"
+  %"a_load.1" = load float, float* %"a"
   ;  Source: printf("%f",a);
-  %".11" = fpext float %"a.2" to double
+  %".11" = fpext float %"a_load.1" to double
   %".12" = call i32 (i8*, ...) @"printf"(i8* %".8", double %".11")
   ;  Source: return0;
   ret i32 0

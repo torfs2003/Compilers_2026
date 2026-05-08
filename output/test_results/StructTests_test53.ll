@@ -39,8 +39,8 @@ entry:
   ;  Source: n->a=5;
   store i32 5, i32* %"gep_a"
   ;  Source: returnn;
-  %"n.1" = load %"struct.v"*, %"struct.v"** %"n"
-  ret %"struct.v"* %"n.1"
+  %"n_load" = load %"struct.v"*, %"struct.v"** %"n"
+  ret %"struct.v"* %"n_load"
 }
 
 define i32 @"main"()

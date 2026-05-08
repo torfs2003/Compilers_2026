@@ -28,22 +28,20 @@ entry:
   %"success" = alloca i32
   store i32 -20, i32* %"success"
   ;  Source: area
-  %"area.1" = load i32, i32* %"area"
+  %"area_load" = load i32, i32* %"area"
   ;  Source: area=3.14;
   %".10" = fptosi float 0x40091eb860000000 to i32
   store i32 %".10", i32* %"area"
   %".12" = bitcast [3 x i8]* @"str.1" to i8*
-  ;  Source: success
-  %"success.1" = load i32, i32* %"success"
   ;  Source: printf("%d",success);
-  %".15" = call i32 (i8*, ...) @"printf"(i8* %".12", i32 %"success.1")
+  %".14" = call i32 (i8*, ...) @"printf"(i8* %".12", i32 -20)
   ;  Source: side
-  %"side.1" = load i32, i32* %"side"
+  %"side_load" = load i32, i32* %"side"
   ;  Source: side=7;
   store i32 7, i32* %"side"
-  %".19" = bitcast [3 x i8]* @"str.2" to i8*
+  %".18" = bitcast [3 x i8]* @"str.2" to i8*
   ;  Source: printf("%d",-20);
-  %".21" = call i32 (i8*, ...) @"printf"(i8* %".19", i32 -20)
+  %".20" = call i32 (i8*, ...) @"printf"(i8* %".18", i32 -20)
   ;  Source: return0;
   ret i32 0
 }

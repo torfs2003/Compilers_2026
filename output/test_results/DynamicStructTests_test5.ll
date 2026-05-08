@@ -52,8 +52,8 @@ entry:
   ;  Source: m->size=0;
   store i32 0, i32* %"gep_size"
   ;  Source: returnm;
-  %"m.1" = load %"struct.map"*, %"struct.map"** %"m"
-  ret %"struct.map"* %"m.1"
+  %"m_load" = load %"struct.map"*, %"struct.map"** %"m"
+  ret %"struct.map"* %"m_load"
 }
 
 define i32 @"main"()
@@ -70,9 +70,9 @@ entry:
   ;  Source: printf("%d",m->size);
   %".8" = call i32 (i8*, ...) @"printf"(i8* %".4", i32 %"load_size")
   ;  Source: m
-  %"m.1" = load %"struct.map"*, %"struct.map"** %"m"
+  %"m_load" = load %"struct.map"*, %"struct.map"** %"m"
   ;  Source: free(m);
-  %".11" = bitcast %"struct.map"* %"m.1" to i8*
+  %".11" = bitcast %"struct.map"* %"m_load" to i8*
   call void @"free"(i8* %".11")
   ;  Source: return0;
   ret i32 0

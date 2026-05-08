@@ -20,95 +20,97 @@ entry:
   %"x" = alloca i32
   store i32 5, i32* %"x"
   %"z" = alloca i32
-  %"x.1" = load i32, i32* %"x"
-  %".3" = add i32 %"x.1", 3
+  %"x_load" = load i32, i32* %"x"
+  %".3" = add i32 %"x_load", 3
   store i32 %".3", i32* %"z"
   %".5" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: z
-  %"z.1" = load i32, i32* %"z"
+  %"z_load" = load i32, i32* %"z"
   ;  Source: printf("%d",z);
-  %".8" = call i32 (i8*, ...) @"printf"(i8* %".5", i32 %"z.1")
+  %".8" = call i32 (i8*, ...) @"printf"(i8* %".5", i32 %"z_load")
   ;  Source: x
-  %"x.2" = load i32, i32* %"x"
+  %"x_load.1" = load i32, i32* %"x"
   ;  Source: z
-  %"z.2" = load i32, i32* %"z"
+  %"z_load.1" = load i32, i32* %"z"
   ;  Source: z
-  %"z.3" = load i32, i32* %"z"
-  %".12" = mul i32 %"z.2", %"z.3"
+  %"z_load.2" = load i32, i32* %"z"
+  %".12" = mul i32 %"z_load.1", %"z_load.2"
   ;  Source: z
-  %"z.4" = load i32, i32* %"z"
-  %".14" = mul i32 %".12", %"z.4"
+  %"z_load.3" = load i32, i32* %"z"
+  %".14" = mul i32 %".12", %"z_load.3"
   ;  Source: x
-  %"x.3" = load i32, i32* %"x"
+  %"x_load.2" = load i32, i32* %"x"
   ;  Source: x
-  %"x.4" = load i32, i32* %"x"
+  %"x_load.3" = load i32, i32* %"x"
   ;  Source: (x+x)
-  %".18" = add i32 %"x.3", %"x.4"
+  %".18" = add i32 %"x_load.2", %"x_load.3"
   ;  Source: z*z*z*(x+x)
   %".20" = mul i32 %".14", %".18"
   ;  Source: x=z*z*z*(x+x);
   store i32 %".20", i32* %"x"
   %".23" = bitcast [3 x i8]* @"str.1" to i8*
   ;  Source: z
-  %"z.5" = load i32, i32* %"z"
+  %"z_load.4" = load i32, i32* %"z"
   ;  Source: printf("%d",z);
-  %".26" = call i32 (i8*, ...) @"printf"(i8* %".23", i32 %"z.5")
+  %".26" = call i32 (i8*, ...) @"printf"(i8* %".23", i32 %"z_load.4")
   %".27" = bitcast [3 x i8]* @"str.2" to i8*
   ;  Source: x
-  %"x.5" = load i32, i32* %"x"
+  %"x_load.4" = load i32, i32* %"x"
   ;  Source: printf("%d",x);
-  %".30" = call i32 (i8*, ...) @"printf"(i8* %".27", i32 %"x.5")
+  %".30" = call i32 (i8*, ...) @"printf"(i8* %".27", i32 %"x_load.4")
   %"f" = alloca float
   store float 0x3fef8fde20000000, float* %"f"
   %"f2" = alloca float
-  %"f.1" = load float, float* %"f"
-  %".32" = fmul float %"f.1", 0x4040800000000000
+  %"f_load" = load float, float* %"f"
+  %".32" = fmul float %"f_load", 0x4040800000000000
   %".33" = fadd float %".32", 0x4000000000000000
   store float %".33", float* %"f2"
   %".35" = bitcast [3 x i8]* @"str.3" to i8*
   ;  Source: f
-  %"f.2" = load float, float* %"f"
+  %"f_load.1" = load float, float* %"f"
   ;  Source: printf("%f",f);
-  %".38" = fpext float %"f.2" to double
+  %".38" = fpext float %"f_load.1" to double
   %".39" = call i32 (i8*, ...) @"printf"(i8* %".35", double %".38")
   %".40" = bitcast [3 x i8]* @"str.4" to i8*
   ;  Source: f2
-  %"f2.1" = load float, float* %"f2"
+  %"f2_load" = load float, float* %"f2"
   ;  Source: printf("%f",f2);
-  %".43" = fpext float %"f2.1" to double
+  %".43" = fpext float %"f2_load" to double
   %".44" = call i32 (i8*, ...) @"printf"(i8* %".40", double %".43")
   ;  Source: f2
-  %"f2.2" = load float, float* %"f2"
+  %"f2_load.1" = load float, float* %"f2"
   ;  Source: f2
-  %"f2.3" = load float, float* %"f2"
+  %"f2_load.2" = load float, float* %"f2"
   ;  Source: f
-  %"f.3" = load float, float* %"f"
+  %"f_load.2" = load float, float* %"f"
   ;  Source: f2+f
-  %".49" = fadd float %"f2.3", %"f.3"
+  %".49" = fadd float %"f2_load.2", %"f_load.2"
   ;  Source: f2=f2+f;
   store float %".49", float* %"f2"
   %".52" = bitcast [3 x i8]* @"str.5" to i8*
   ;  Source: f2
-  %"f2.4" = load float, float* %"f2"
+  %"f2_load.3" = load float, float* %"f2"
   ;  Source: printf("%f",f2);
-  %".55" = fpext float %"f2.4" to double
+  %".55" = fpext float %"f2_load.3" to double
   %".56" = call i32 (i8*, ...) @"printf"(i8* %".52", double %".55")
   %"c" = alloca i8
   store i8 97, i8* %"c"
   %".58" = bitcast [3 x i8]* @"str.6" to i8*
   ;  Source: c
-  %"c.1" = load i8, i8* %"c"
+  %"c_load" = load i8, i8* %"c"
   ;  Source: printf("%c",c);
-  %".61" = call i32 (i8*, ...) @"printf"(i8* %".58", i8 %"c.1")
+  %".61" = sext i8 %"c_load" to i32
+  %".62" = call i32 (i8*, ...) @"printf"(i8* %".58", i32 %".61")
   ;  Source: c
-  %"c.2" = load i8, i8* %"c"
+  %"c_load.1" = load i8, i8* %"c"
   ;  Source: c='b';
   store i8 98, i8* %"c"
-  %".65" = bitcast [3 x i8]* @"str.7" to i8*
+  %".66" = bitcast [3 x i8]* @"str.7" to i8*
   ;  Source: c
-  %"c.3" = load i8, i8* %"c"
+  %"c_load.2" = load i8, i8* %"c"
   ;  Source: printf("%c",c);
-  %".68" = call i32 (i8*, ...) @"printf"(i8* %".65", i8 %"c.3")
+  %".69" = sext i8 %"c_load.2" to i32
+  %".70" = call i32 (i8*, ...) @"printf"(i8* %".66", i32 %".69")
   ;  Source: return0;
   ret i32 0
 }

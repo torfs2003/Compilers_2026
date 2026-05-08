@@ -20,8 +20,8 @@ entry:
   %"n" = alloca i32
   store i32 %".1", i32* %"n"
   ;  Source: if(n==0){return1;}else{returnn*factorial(n-1);}
-  %"n.1" = load i32, i32* %"n"
-  %".5" = icmp eq i32 %"n.1", 0
+  %"n_load" = load i32, i32* %"n"
+  %".5" = icmp eq i32 %"n_load", 0
   %".6" = zext i1 %".5" to i32
   %"ifcond" = icmp ne i32 %".6", 0
   br i1 %"ifcond", label %"if.then", label %"if.else"
@@ -30,11 +30,11 @@ if.then:
 if.end:
   ret i32 0
 if.else:
-  %"n.2" = load i32, i32* %"n"
-  %"n.3" = load i32, i32* %"n"
-  %".9" = sub i32 %"n.3", 1
+  %"n_load.1" = load i32, i32* %"n"
+  %"n_load.2" = load i32, i32* %"n"
+  %".9" = sub i32 %"n_load.2", 1
   %".10" = call i32 @"factorial"(i32 %".9")
-  %".11" = mul i32 %"n.2", %".10"
+  %".11" = mul i32 %"n_load.1", %".10"
   ret i32 %".11"
 }
 
@@ -45,9 +45,9 @@ entry:
   store i32 5, i32* %"n"
   %".3" = bitcast [4 x i8]* @"str" to i8*
   ;  Source: n
-  %"n.1" = load i32, i32* %"n"
+  %"n_load" = load i32, i32* %"n"
   ;  Source: factorial(n)
-  %".6" = call i32 @"factorial"(i32 %"n.1")
+  %".6" = call i32 @"factorial"(i32 %"n_load")
   ;  Source: printf("%d\n",factorial(n));
   %".8" = call i32 (i8*, ...) @"printf"(i8* %".3", i32 %".6")
   ;  Source: return0;

@@ -49,9 +49,9 @@ entry:
   %"gep_b" = getelementptr inbounds %"struct.a", %"struct.a"* %".17", i32 0, i32 0
   %"load_b" = load %"struct.a"*, %"struct.a"** %"gep_b"
   ;  Source: w
-  %"w.1" = load %"struct.a"*, %"struct.a"** %"w"
+  %"w_load" = load %"struct.a"*, %"struct.a"** %"w"
   ;  Source: v->b=w;
-  store %"struct.a"* %"w.1", %"struct.a"** %"gep_b"
+  store %"struct.a"* %"w_load", %"struct.a"** %"gep_b"
   %".21" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: w->v
   %".23" = load %"struct.a"*, %"struct.a"** %"w"
@@ -70,15 +70,15 @@ entry:
   ;  Source: printf("%d",v->b->v);
   %".31" = call i32 (i8*, ...) @"printf"(i8* %".26", i32 %"load_v.2")
   ;  Source: v
-  %"v.1" = load %"struct.a"*, %"struct.a"** %"v"
+  %"v_load" = load %"struct.a"*, %"struct.a"** %"v"
   ;  Source: (char*)v
-  %".34" = bitcast %"struct.a"* %"v.1" to i8*
+  %".34" = bitcast %"struct.a"* %"v_load" to i8*
   ;  Source: free((char*)v);
   call void @"free"(i8* %".34")
   ;  Source: w
-  %"w.2" = load %"struct.a"*, %"struct.a"** %"w"
+  %"w_load.1" = load %"struct.a"*, %"struct.a"** %"w"
   ;  Source: (char*)w
-  %".39" = bitcast %"struct.a"* %"w.2" to i8*
+  %".39" = bitcast %"struct.a"* %"w_load.1" to i8*
   ;  Source: free((char*)w);
   call void @"free"(i8* %".39")
   ;  Source: return0;

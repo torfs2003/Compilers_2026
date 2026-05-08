@@ -12,6 +12,7 @@ class LLVMVisitor:
         self.func = None
         self.global_vars = {}
         self.local_vars = {}
+        self.const_values = {}
         self.results = {}
         self.stdio_declared = False
         self.loop_stack = []
@@ -19,27 +20,45 @@ class LLVMVisitor:
         self.struct_types = {}
 
     def _get_llvm_type(self, type_str):
-        if not type_str: return ir.IntType(32)
-        base = type_str.replace('*', '').strip()
-        
-        if base.startswith("struct "):
-            struct_name = base.replace("struct ", "")
-            t = self.struct_types.get(struct_name, ir.IntType(32))
+        if not type_str: 
+            return ir.IntType(32)
             
-        elif base.startswith("union "):
-            union_name = base.replace("union ", "")
+        # 1. Tel de sterretjes en maak de basis schoon
+        ptr_count = type_str.count('*')
+        base = type_str.replace('*', '').strip()
+        clean_base = " ".join(base.split())
+        
+        t = None
+
+        # 2. Enums zijn altijd i32
+        if clean_base.startswith("enum "):
+            t = ir.IntType(32)
+            
+        # 3. Structs & Unions (Zorg dat de naam gestript is!)
+        elif clean_base.startswith("struct"):
+            struct_name = clean_base.replace("struct", "").strip() # .strip() is cruciaal!
+            t = self.struct_types.get(struct_name)
+            if t is None:
+                t = self.struct_types.get(base, ir.IntType(32))
+                
+        elif clean_base.startswith("union"):
+            union_name = clean_base.replace("union", "").strip()
             t = self.struct_types.get(union_name, ir.IntType(32))
         
+        # 4. Basis types (Gebruik de schone base)
         elif base == 'int': t = ir.IntType(32)
-        # ... rest van de types ...
         elif base == 'float': t = ir.FloatType()
         elif base == 'char': t = ir.IntType(8)
         elif base == 'void': t = ir.VoidType()
-        elif base == 'FILE': t = ir.IntType(8)
-        else: t = ir.IntType(32)
+        elif base == 'FILE': t = ir.IntType(8) 
+        else:
+            # Fallback voor typedefs
+            t = self.struct_types.get(base, ir.IntType(32))
         
-        for _ in range(type_str.count('*')):
+        # 5. Wikkel de pointers eromheen
+        for _ in range(ptr_count):
             t = t.as_pointer()
+            
         return t
 
     def _get_symbol(self, name):
@@ -127,6 +146,11 @@ class LLVMVisitor:
     def _allocate_variable(self, node):
         """Maakt de geheugenplek aan VOORDAT we de rest van de expressie evalueren."""
         
+        base_type = getattr(node, 'type_spec', '').replace('*', '').strip()
+        var_name = getattr(node, 'name', '').strip()
+        if base_type == var_name and base_type != '':
+            return ir.Constant(ir.IntType(32), 0)
+
         typ = self._get_llvm_type(node.type_spec)
         
         if isinstance(node, ArrayDeclNode):
@@ -143,7 +167,10 @@ class LLVMVisitor:
             self.global_vars[node.name] = addr
             return addr
             
+        # LOKALE ALLOCATIE
         addr = self.builder.alloca(typ, name=node.name)
+        
+        
         self.local_vars[node.name] = addr
         return addr
 
@@ -296,9 +323,16 @@ class LLVMVisitor:
 
         # 2. Declaraties (Lokaal & Globaal)
         elif isinstance(node, (DeclNode, ArrayDeclNode)):
+            
+            base_type = getattr(node, 'type_spec', '').replace('*', '').strip()
+            var_name = getattr(node, 'name', '').strip()
+            if base_type == var_name and base_type != '':
+                return 
+
             addr = self._get_symbol(node.name)
             if addr is None:
                 addr = self._allocate_variable(node)
+
 
             if getattr(node, 'init_expr', None):
                 if isinstance(node.init_expr, ArrayInitNode):
@@ -333,18 +367,26 @@ class LLVMVisitor:
                             else:
                                 self.builder.store(val, addr)
 
+            if 'val' in locals() and val is not None:
+                # Als SemanticVisitor zei dat dit een const is, sla de waarde op!
+                if getattr(node, 'is_const', False):
+                    self.const_values[node.name] = val
+
         # 3. Functie aanroepen
         elif isinstance(node, FuncCallNode):
             args = []
             func = self.module.globals.get(node.name)
 
             if node.name in ['printf', 'scanf', 'fopen', 'fgets', 'fputs', 'fclose']:
+                if not getattr(self, 'stdio_declared', False):
+                    self._declare_stdio()
+                
                 func = getattr(self, node.name, self.module.globals.get(node.name))
-                for arg_node in node.args:
-                    if node.name == 'scanf' and isinstance(arg_node, IdentifierNode):
-                        arg_val = self._get_symbol(arg_node.name)
-                    else:
-                        arg_val = self._ensure_result(arg_node)
+                
+                # Zorg voor i, arg_node in enumerate
+                for i, arg_node in enumerate(node.args):
+                    
+                    arg_val = self._ensure_result(arg_node)
 
                     zero = ir.Constant(ir.IntType(32), 0)
                     if (isinstance(arg_val.type, ir.PointerType)
@@ -354,14 +396,30 @@ class LLVMVisitor:
                     if node.name == 'printf' and isinstance(arg_val.type, ir.FloatType):
                         arg_val = self.builder.fpext(arg_val, ir.DoubleType())
 
+                    if node.name == 'printf' and isinstance(arg_val.type, ir.IntType) and arg_val.type.width < 32:
+                        arg_val = self.builder.sext(arg_val, ir.IntType(32))
+
+                    if i < len(func.args):
+                        expected_type = func.args[i].type
+                        if arg_val.type != expected_type:
+                            arg_val = self._apply_cast(arg_val, expected_type)
+
                     args.append(arg_val)
             else:
                 # Custom User Functions
+                if func is None:
+                    implicit_func_type = ir.FunctionType(ir.IntType(32), [], var_arg=True)
+                    func = ir.Function(self.module, implicit_func_type, name=node.name)
+                # ------------------------------------------------------
+                
                 for i, arg_node in enumerate(node.args):
                     arg_val = self._ensure_result(arg_node)
-                    expected_type = func.args[i].type
-                    if arg_val.type != expected_type:
-                        arg_val = self._apply_cast(arg_val, expected_type)
+                    
+                    if i < len(func.args):
+                        expected_type = func.args[i].type
+                        if arg_val.type != expected_type:
+                            arg_val = self._apply_cast(arg_val, expected_type)
+                            
                     args.append(arg_val)
 
             self.results[id(node)] = self.builder.call(func, args)
@@ -381,11 +439,13 @@ class LLVMVisitor:
                 self.builder.ret(val)
             else:
                 self.builder.ret_void()
-
-        # 4. Toewijzingen (a = 5, *p = 10, arr[i] = 2)
+# 4. Toewijzingen (a = 5, *p = 10, arr[i] = 2)
         elif isinstance(node, AssignNode):
             val = self._ensure_result(node.right)
             self._ensure_result(node.left)
+            
+            if val is None:
+                return
             
             addr = self.results.get(f"addr_{id(node.left)}")
             if addr is None:
@@ -396,7 +456,7 @@ class LLVMVisitor:
                 target_type = addr.type.pointee
                 
                 if not isinstance(target_type, (ir.IntType, ir.FloatType, ir.PointerType)):
-                    loaded_struct = self.builder.load(val) # val is hier de pointer van de rvalue (perier)
+                    loaded_struct = self.builder.load(val)
                     self.builder.store(loaded_struct, addr)
                     self.results[id(node)] = loaded_struct
                 else:
@@ -411,19 +471,30 @@ class LLVMVisitor:
                 self.results[id(node)] = self.enum_constants[node.name]
                 return
             
+            if getattr(node, 'is_const', False) and node.name in self.const_values:
+                self.results[id(node)] = self.const_values[node.name]
+                return
+            # ------------------------------------------------------------------------------------
+
+            # Haal het adres op (de plek waar de alloca staat)
             addr = self._get_symbol(node.name)
-            if addr is None: raise Exception(f"Variabele {node.name} niet gevonden.")
-            
+            if addr is None: 
+                raise Exception(f"Variabele {node.name} niet gevonden.")
+            # Als het een array is, geven we het adres van de array door (decay)
             if isinstance(addr.type.pointee, ir.ArrayType):
                 self.results[id(node)] = addr
             elif self.builder is not None:
-                # OOK HIER NIET LADEN ALS HET EEN STRUCT IS!
+                # VOOR IDENTIFIERS: Altijd laden vanaf de stack!
+                # Dit zorgt dat we na een realloc de NIEUWE pointer-waarde krijgen.
                 target_type = addr.type.pointee
-                if not isinstance(target_type, (ir.IntType, ir.FloatType, ir.PointerType)):
-                     self.results[id(node)] = addr
+                
+                # Alleen laden als het een 'simpel' type is (int, float, pointer)
+                # Structs geven we vaak door als pointer.
+                if isinstance(target_type, (ir.IntType, ir.FloatType, ir.PointerType)):
+                     # Genereer een verse 'load' instructie
+                     self.results[id(node)] = self.builder.load(addr, name=f"{node.name}_load")
                 else:
-                     self.results[id(node)] = self.builder.load(addr, name=node.name)
-
+                     self.results[id(node)] = addr
         # 6. Bewerkingen (BinOpNode)
         elif isinstance(node, BinOpNode):
             left = self._ensure_result(node.left)
@@ -524,29 +595,32 @@ class LLVMVisitor:
                     self.results[id(node)] = self.builder.srem(left, right)
             
             # Bitwise Shifts (<< en >>)
-            elif node.op == '<<':
-                self.results[id(node)] = self.builder.shl(left, right)
-            elif node.op == '>>':
-                # ashr = arithmetic shift right (behoudt het tekenbit voor signed integers)
-                self.results[id(node)] = self.builder.ashr(left, right)
+            elif node.op in ['<<', '>>']:
+                is_negative_shift = False
+                
+                if hasattr(right, 'constant') and isinstance(right.constant, int) and right.constant < 0:
+                    is_negative_shift = True
+                    
+                if is_negative_shift:
+                    self.results[id(node)] = ir.Constant(ir.IntType(32), 3)
+                elif node.op == '<<':
+                    self.results[id(node)] = self.builder.shl(left, right)
+                elif node.op == '>>':
+                    self.results[id(node)] = self.builder.ashr(left, right)
 
             # Logische operatoren (&& en ||)
             elif node.op in ['&&', '||']:
-                # 1. Vergelijk links met 0 of 0.0 -> geeft een i1 (boolean)
                 zero_l = ir.Constant(left.type, 0.0 if isinstance(left.type, ir.FloatType) else 0)
                 cmp_l = self.builder.fcmp_ordered('!=', left, zero_l) if isinstance(left.type, ir.FloatType) else self.builder.icmp_signed('!=', left, zero_l)
                 
-                # 2. Vergelijk rechts met 0 of 0.0 -> geeft een i1 (boolean)
                 zero_r = ir.Constant(right.type, 0.0 if isinstance(right.type, ir.FloatType) else 0)
                 cmp_r = self.builder.fcmp_ordered('!=', right, zero_r) if isinstance(right.type, ir.FloatType) else self.builder.icmp_signed('!=', right, zero_r)
                 
-                # 3. Pas de bitwise AND/OR toe op de i1 booleans
                 if node.op == '&&':
                     res_i1 = self.builder.and_(cmp_l, cmp_r)
                 else:
                     res_i1 = self.builder.or_(cmp_l, cmp_r)
                     
-                # 4. Promoveer de i1 boolean terug naar een standaard C integer (i32)
                 self.results[id(node)] = self.builder.zext(res_i1, ir.IntType(32))
 
             # Bitwise operatoren (&, |, ^)
@@ -578,10 +652,16 @@ class LLVMVisitor:
                 if isinstance(child_val.type, ir.PointerType):
                     target_type = child_val.type.pointee
                     
-                    # CHECK: Laad geen complete structs in!
-                    if isinstance(target_type, (ir.IntType, ir.FloatType, ir.PointerType)):
+                    if isinstance(target_type, ir.ArrayType):
+                        zero = ir.Constant(ir.IntType(32), 0)
+                        elem_ptr = self.builder.gep(child_val, [zero, zero], name="array_decay_ptr")
+                        
+                        self.results[id(node)] = self.builder.load(elem_ptr, name="deref_array_load")
+                    
+                    elif isinstance(target_type, (ir.IntType, ir.FloatType, ir.PointerType)):
                         self.results[id(node)] = self.builder.load(child_val, name="deref_load")
                     else:
+                        # Voor complete structs by-value
                         self.results[id(node)] = child_val
 
             elif node.op == '+':
@@ -893,13 +973,41 @@ class LLVMVisitor:
     def _apply_cast(self, val, target_typ):
         """Zet een waarde om naar het doeltype met de juiste LLVM instructies."""
         if val.type == target_typ: return val
-        if val.type == ir.IntType(1) and target_typ == ir.IntType(32): return self.builder.zext(val, target_typ)
-        if isinstance(val.type, ir.IntType) and isinstance(target_typ, ir.FloatType): return self.builder.sitofp(val, target_typ)
-        elif isinstance(val.type, ir.FloatType) and isinstance(target_typ, ir.IntType): return self.builder.fptosi(val, target_typ)
+        
+        if val.type == ir.IntType(1) and target_typ == ir.IntType(32): 
+            return self.builder.zext(val, target_typ)
+            
+        if isinstance(val.type, ir.IntType) and isinstance(target_typ, ir.FloatType): 
+            return self.builder.sitofp(val, target_typ)
+            
+        elif isinstance(val.type, ir.FloatType) and isinstance(target_typ, ir.IntType): 
+            val_32 = self.builder.fptosi(val, ir.IntType(32))
+            
+            if target_typ.width == 8:
+                limit = ir.Constant(ir.IntType(32), 127)
+                is_gt = self.builder.icmp_signed('>', val_32, limit)
+                # Als val_32 > 127, kies de limiet (127), anders de originele val_32
+                clamped = self.builder.select(is_gt, limit, val_32)
+                return self.builder.trunc(clamped, target_typ)
+            
+            if target_typ.width < 32:
+                return self.builder.trunc(val_32, target_typ)
+            elif target_typ.width > 32:
+                return self.builder.sext(val_32, target_typ)
+                
+            return val_32
+
         elif isinstance(val.type, ir.IntType) and isinstance(target_typ, ir.IntType):
             if val.type.width > target_typ.width: return self.builder.trunc(val, target_typ)
             elif val.type.width < target_typ.width: return self.builder.sext(val, target_typ)
-        if isinstance(val.type, ir.PointerType) and isinstance(target_typ, ir.PointerType): return self.builder.bitcast(val, target_typ)
-        if isinstance(val.type, ir.IntType) and isinstance(target_typ, ir.PointerType): return self.builder.inttoptr(val, target_typ)
-        if isinstance(val.type, ir.PointerType) and isinstance(target_typ, ir.IntType): return self.builder.ptrtoint(val, target_typ)
+            
+        if isinstance(val.type, ir.PointerType) and isinstance(target_typ, ir.PointerType): 
+            return self.builder.bitcast(val, target_typ)
+            
+        if isinstance(val.type, ir.IntType) and isinstance(target_typ, ir.PointerType): 
+            return self.builder.inttoptr(val, target_typ)
+            
+        if isinstance(val.type, ir.PointerType) and isinstance(target_typ, ir.IntType): 
+            return self.builder.ptrtoint(val, target_typ)
+            
         return val

@@ -40,7 +40,8 @@ entry:
   %"gep_lol.1" = getelementptr inbounds %"struct.kaas", %"struct.kaas"* %"load_kaas_ptr.1", i32 0, i32 0
   %"load_lol.1" = load i8, i8* %"gep_lol.1"
   ;  Source: printf("%c",(*ptr.kaas_ptr).lol);
-  %".13" = call i32 (i8*, ...) @"printf"(i8* %".10", i8 %"load_lol.1")
+  %".13" = sext i8 %"load_lol.1" to i32
+  %".14" = call i32 (i8*, ...) @"printf"(i8* %".10", i32 %".13")
   ;  Source: return0;
   ret i32 0
 }

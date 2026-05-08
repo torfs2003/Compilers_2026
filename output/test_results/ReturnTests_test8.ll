@@ -20,8 +20,8 @@ entry:
   %"a" = alloca i32
   store i32 %".1", i32* %"a"
   ;  Source: returna;
-  %"a.1" = load i32, i32* %"a"
-  ret i32 %"a.1"
+  %"a_load" = load i32, i32* %"a"
+  ret i32 %"a_load"
 }
 
 define float @"e"()
@@ -39,11 +39,11 @@ entry:
   store i32 %".2", i32* %"a"
   %".4" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: a
-  %"a.1" = load i32, i32* %"a"
+  %"a_load" = load i32, i32* %"a"
   ;  Source: printf("%d",a);
-  %".7" = call i32 (i8*, ...) @"printf"(i8* %".4", i32 %"a.1")
+  %".7" = call i32 (i8*, ...) @"printf"(i8* %".4", i32 %"a_load")
   ;  Source: a
-  %"a.2" = load i32, i32* %"a"
+  %"a_load.1" = load i32, i32* %"a"
   ;  Source: e()
   %".10" = call float @"e"()
   ;  Source: a=e();
@@ -51,9 +51,9 @@ entry:
   store i32 %".12", i32* %"a"
   %".14" = bitcast [3 x i8]* @"str.1" to i8*
   ;  Source: a
-  %"a.3" = load i32, i32* %"a"
+  %"a_load.2" = load i32, i32* %"a"
   ;  Source: printf("%d",a);
-  %".17" = call i32 (i8*, ...) @"printf"(i8* %".14", i32 %"a.3")
+  %".17" = call i32 (i8*, ...) @"printf"(i8* %".14", i32 %"a_load.2")
   ;  Source: return0;
   ret i32 0
 }

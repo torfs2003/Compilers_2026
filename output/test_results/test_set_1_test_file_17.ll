@@ -6,6 +6,14 @@ declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
 
+declare i8* @"fopen"(i8* %".1", i8* %".2")
+
+declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
+
+declare i32 @"fputs"(i8* %".1", i8* %".2")
+
+declare i32 @"fclose"(i8* %".1")
+
 define i32 @"main"()
 {
 entry:
@@ -15,16 +23,16 @@ entry:
   store i8* %"x", i8** %"chr_ptr"
   %"another_char" = alloca i8
   ;  Source: chr_ptr
-  %"chr_ptr.1" = load i8*, i8** %"chr_ptr"
-  %"deref_load" = load i8, i8* %"chr_ptr.1"
+  %"chr_ptr_load" = load i8*, i8** %"chr_ptr"
+  %"deref_load" = load i8, i8* %"chr_ptr_load"
   ;  Source: *chr_ptr='b';
-  store i8 98, i8* %"chr_ptr.1"
+  store i8 98, i8* %"chr_ptr_load"
   ;  Source: another_char
-  %"another_char.1" = load i8, i8* %"another_char"
+  %"another_char_load" = load i8, i8* %"another_char"
   ;  Source: chr_ptr
-  %"chr_ptr.2" = load i8*, i8** %"chr_ptr"
+  %"chr_ptr_load.1" = load i8*, i8** %"chr_ptr"
   ;  Source: *chr_ptr
-  %"deref_load.1" = load i8, i8* %"chr_ptr.2"
+  %"deref_load.1" = load i8, i8* %"chr_ptr_load.1"
   ;  Source: another_char=*chr_ptr;
   store i8 %"deref_load.1", i8* %"another_char"
   ret i32 0

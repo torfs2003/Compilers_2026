@@ -161,21 +161,32 @@ class ASTVisitor:
                     res = self.get_loc(UnionDeclNode(name, members), ctx)
 
                 elif class_name == "TypedefDeclarationContext":
-                    original_type = ctx.typeSpecifier().getText()
+                    # 1. Vang lege 'typedef;' op!
+                    if ctx.typeSpecifier() is None:
+                        # Geef None mee, dit wordt afgevangen in SemanticVisitor
+                        res = self.get_loc(TypedefNode(None, None, False, 0), ctx)
                     
-                    if ctx.MUL():
-                        original_type += "*" * len(ctx.MUL())
+                    # 2. Normale geldige typedef
+                    else:
+                        original_type = ctx.typeSpecifier().getText()
                         
-                    new_name = ctx.IDENTIFIER().getText()
-                    
-                    is_array = ctx.LBRACKET() is not None and len(ctx.LBRACKET()) > 0
-                    array_size = int(ctx.INT_LITERAL(0).getText()) if is_array else 0
-                    
-                    res = self.get_loc(TypedefNode(original_type, new_name, is_array, array_size), ctx)
+                        if ctx.MUL():
+                            original_type += "*" * len(ctx.MUL())
+                            
+                        new_name = ctx.IDENTIFIER().getText()
+                        
+                        is_array = ctx.LBRACKET() is not None and len(ctx.LBRACKET()) > 0
+                        array_size = int(ctx.INT_LITERAL(0).getText()) if is_array else 0
+                        
+                        res = self.get_loc(TypedefNode(original_type, new_name, is_array, array_size), ctx)
 
                 # 2. Declarations
                 elif class_name in ["DeclarationContext", "DeclarationForContext"]:
-                    base_type = ctx.typeSpecifier().getText()
+                    # Kijk of de HELE regel het woord 'const' bevat (zoals 'const int x = 2;')
+                    base_has_const = ctx.CONST() is not None
+
+                    # Strip 'const' uit het basistype voor schonere AST, we slaan de status op in is_const
+                    base_type = ctx.typeSpecifier().getText().replace('const', '').strip()
 
                     nodes = []
                     init_list = ctx.initDeclaratorList()
@@ -183,25 +194,13 @@ class ASTVisitor:
                         pointer_stars = "*" * len(decl_ctx.MUL())
                         full_type = base_type + pointer_stars
 
-                        # --- NIEUWE LOGICA VOOR DIMENSIES ---
-                        # We zoeken alle expressies die tussen [ ] staan in de hele declarator
+                        # --- NIEUWE DIMENSIE LOGICA ---
                         sizes = []
-                        # Zoek in alle kinderen van de declarator naar expressies
-                        # (Dit werkt beter bij multi-dimensionele arrays zoals [30][2])
-                        all_children = []
-                        def collect_exprs(curr_ctx):
-                            if hasattr(curr_ctx, 'expression') and callable(curr_ctx.expression):
-                                # Alleen expressies die NIET na een '=' komen zijn dimensies
-                                # We checken of er een ASSIGN in de buurt is
-                                pass 
-                        
-                        # Simpeler alternatief: gebruik de bestaande results map
                         all_expr_ids = [id(e) for e in decl_ctx.expression()]
                         init = None
                         dimension_exprs = []
 
                         if decl_ctx.ASSIGN():
-                            # De laatste expressie is de initialisatie (bv. = 'a')
                             if decl_ctx.array_initializer():
                                 init = results[id(decl_ctx.array_initializer())]
                                 dimension_exprs = decl_ctx.expression()
@@ -217,14 +216,17 @@ class ASTVisitor:
                         # ------------------------------------
 
                         identifier = decl_ctx.IDENTIFIER().getText()
-                        
-                        # Check of het een array is (heeft het brackets in de broncode?)
                         is_array = "[" in decl_ctx.getText()
 
+                        # --- FIX: Const check ---
+                        # Combineer check van basistype ('const int x') met check op specifieke declarator ('int * const x')
+                        decl_has_const = decl_ctx.CONST() is not None and len(decl_ctx.CONST()) > 0
+                        is_const = base_has_const or decl_has_const
+
                         if is_array:
-                            node = self.get_loc(ArrayDeclNode(False, full_type, identifier, sizes, init), decl_ctx)
+                            node = self.get_loc(ArrayDeclNode(is_const, full_type, identifier, sizes, init), decl_ctx)
                         else:
-                            node = self.get_loc(DeclNode(False, full_type, identifier, init), decl_ctx)
+                            node = self.get_loc(DeclNode(is_const, full_type, identifier, init), decl_ctx)
                         
                         nodes.append(node)
                     res = nodes[0] if len(nodes) == 1 else nodes

@@ -20,8 +20,8 @@ entry:
   %"n" = alloca i32
   store i32 %".1", i32* %"n"
   ;  Source: if(n==0){return1;}
-  %"n.1" = load i32, i32* %"n"
-  %".5" = icmp eq i32 %"n.1", 0
+  %"n_load" = load i32, i32* %"n"
+  %".5" = icmp eq i32 %"n_load", 0
   %".6" = zext i1 %".5" to i32
   %"ifcond" = icmp ne i32 %".6", 0
   br i1 %"ifcond", label %"if.then", label %"if.end"
@@ -29,11 +29,11 @@ if.then:
   ret i32 1
 if.end:
   ;  Source: returnn*factorial(n-1);
-  %"n.2" = load i32, i32* %"n"
-  %"n.3" = load i32, i32* %"n"
-  %".10" = sub i32 %"n.3", 1
+  %"n_load.1" = load i32, i32* %"n"
+  %"n_load.2" = load i32, i32* %"n"
+  %".10" = sub i32 %"n_load.2", 1
   %".11" = call i32 @"factorial"(i32 %".10")
-  %".12" = mul i32 %"n.2", %".11"
+  %".12" = mul i32 %"n_load.1", %".11"
   ret i32 %".12"
 }
 
@@ -43,14 +43,14 @@ entry:
   %"n" = alloca i32
   store i32 %".1", i32* %"n"
   ;  Source: if(n<=1){returnn;}
-  %"n.1" = load i32, i32* %"n"
-  %".5" = icmp sle i32 %"n.1", 1
+  %"n_load" = load i32, i32* %"n"
+  %".5" = icmp sle i32 %"n_load", 1
   %".6" = zext i1 %".5" to i32
   %"ifcond" = icmp ne i32 %".6", 0
   br i1 %"ifcond", label %"if.then", label %"if.end"
 if.then:
-  %"n.2" = load i32, i32* %"n"
-  ret i32 %"n.2"
+  %"n_load.1" = load i32, i32* %"n"
+  ret i32 %"n_load.1"
 if.end:
   %"prev" = alloca i32
   store i32 0, i32* %"prev"
@@ -60,33 +60,33 @@ if.end:
   store i32 2, i32* %"i"
   br label %"while.cond"
 while.cond:
-  %"i.1" = load i32, i32* %"i"
-  %"n.3" = load i32, i32* %"n"
-  %".13" = icmp sle i32 %"i.1", %"n.3"
+  %"i_load" = load i32, i32* %"i"
+  %"n_load.2" = load i32, i32* %"n"
+  %".13" = icmp sle i32 %"i_load", %"n_load.2"
   %".14" = zext i1 %".13" to i32
   %"whilecond" = icmp ne i32 %".14", 0
   br i1 %"whilecond", label %"while.body", label %"while.end"
 while.body:
   %"next" = alloca i32
-  %"prev.1" = load i32, i32* %"prev"
-  %"curr.1" = load i32, i32* %"curr"
-  %".16" = add i32 %"prev.1", %"curr.1"
+  %"prev_load" = load i32, i32* %"prev"
+  %"curr_load" = load i32, i32* %"curr"
+  %".16" = add i32 %"prev_load", %"curr_load"
   store i32 %".16", i32* %"next"
-  %"curr.2" = load i32, i32* %"curr"
-  %"prev.2" = load i32, i32* %"prev"
-  store i32 %"curr.2", i32* %"prev"
-  %"next.1" = load i32, i32* %"next"
-  %"curr.3" = load i32, i32* %"curr"
-  store i32 %"next.1", i32* %"curr"
-  %"i.2" = load i32, i32* %"i"
+  %"curr_load.1" = load i32, i32* %"curr"
+  %"prev_load.1" = load i32, i32* %"prev"
+  store i32 %"curr_load.1", i32* %"prev"
+  %"next_load" = load i32, i32* %"next"
+  %"curr_load.2" = load i32, i32* %"curr"
+  store i32 %"next_load", i32* %"curr"
+  %"i_load.1" = load i32, i32* %"i"
   %".20" = load i32, i32* %"i"
   %".21" = add i32 %".20", 1
   store i32 %".21", i32* %"i"
   br label %"while.cond"
 while.end:
   ;  Source: returncurr;
-  %"curr.4" = load i32, i32* %"curr"
-  ret i32 %"curr.4"
+  %"curr_load.3" = load i32, i32* %"curr"
+  ret i32 %"curr_load.3"
 }
 
 define i32 @"main"()

@@ -24,9 +24,9 @@ entry:
   store i8* %".4", i8** %"fp"
   %".6" = bitcast [13 x i8]* @"str.2" to i8*
   ;  Source: fp
-  %"fp.1" = load i8*, i8** %"fp"
+  %"fp_load" = load i8*, i8** %"fp"
   ;  Source: fputs("file content",fp);
-  %".9" = call i32 @"fputs"(i8* %".6", i8* %"fp.1")
+  %".9" = call i32 @"fputs"(i8* %".6", i8* %"fp_load")
   ;  Source: return0;
   ret i32 0
 }

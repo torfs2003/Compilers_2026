@@ -36,41 +36,41 @@ entry:
   store i32 %".10", i32* %"ptr2"
   %".12" = bitcast [4 x i8]* @"str" to i8*
   ;  Source: ptr1
-  %"ptr1.1" = load i32, i32* %"ptr1"
+  %"ptr1_load" = load i32, i32* %"ptr1"
   ;  Source: ptr2
-  %"ptr2.1" = load i32, i32* %"ptr2"
+  %"ptr2_load" = load i32, i32* %"ptr2"
   ;  Source: ptr1<ptr2
-  %".16" = icmp slt i32 %"ptr1.1", %"ptr2.1"
+  %".16" = icmp slt i32 %"ptr1_load", %"ptr2_load"
   %".17" = zext i1 %".16" to i32
   ;  Source: printf("%d\n",ptr1<ptr2);
   %".19" = call i32 (i8*, ...) @"printf"(i8* %".12", i32 %".17")
   %".20" = bitcast [4 x i8]* @"str.1" to i8*
   ;  Source: ptr1
-  %"ptr1.2" = load i32, i32* %"ptr1"
+  %"ptr1_load.1" = load i32, i32* %"ptr1"
   ;  Source: ptr2
-  %"ptr2.2" = load i32, i32* %"ptr2"
+  %"ptr2_load.1" = load i32, i32* %"ptr2"
   ;  Source: ptr1>ptr2
-  %".24" = icmp sgt i32 %"ptr1.2", %"ptr2.2"
+  %".24" = icmp sgt i32 %"ptr1_load.1", %"ptr2_load.1"
   %".25" = zext i1 %".24" to i32
   ;  Source: printf("%d\n",ptr1>ptr2);
   %".27" = call i32 (i8*, ...) @"printf"(i8* %".20", i32 %".25")
   %".28" = bitcast [4 x i8]* @"str.2" to i8*
   ;  Source: ptr1
-  %"ptr1.3" = load i32, i32* %"ptr1"
+  %"ptr1_load.2" = load i32, i32* %"ptr1"
   ;  Source: ptr2
-  %"ptr2.3" = load i32, i32* %"ptr2"
+  %"ptr2_load.2" = load i32, i32* %"ptr2"
   ;  Source: ptr1!=ptr2
-  %".32" = icmp ne i32 %"ptr1.3", %"ptr2.3"
+  %".32" = icmp ne i32 %"ptr1_load.2", %"ptr2_load.2"
   %".33" = zext i1 %".32" to i32
   ;  Source: printf("%d\n",ptr1!=ptr2);
   %".35" = call i32 (i8*, ...) @"printf"(i8* %".28", i32 %".33")
   %".36" = bitcast [4 x i8]* @"str.3" to i8*
   ;  Source: ptr1
-  %"ptr1.4" = load i32, i32* %"ptr1"
+  %"ptr1_load.3" = load i32, i32* %"ptr1"
   ;  Source: ptr2
-  %"ptr2.4" = load i32, i32* %"ptr2"
+  %"ptr2_load.3" = load i32, i32* %"ptr2"
   ;  Source: ptr1==ptr2
-  %".40" = icmp eq i32 %"ptr1.4", %"ptr2.4"
+  %".40" = icmp eq i32 %"ptr1_load.3", %"ptr2_load.3"
   %".41" = zext i1 %".40" to i32
   ;  Source: printf("%d\n",ptr1==ptr2);
   %".43" = call i32 (i8*, ...) @"printf"(i8* %".36", i32 %".41")

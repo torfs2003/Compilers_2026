@@ -21,25 +21,27 @@ entry:
   store i8 97, i8* %"x"
   %".3" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: x
-  %"x.1" = load i8, i8* %"x"
+  %"x_load" = load i8, i8* %"x"
   ;  Source: printf("%d",x);
-  %".6" = call i32 (i8*, ...) @"printf"(i8* %".3", i8 %"x.1")
+  %".6" = sext i8 %"x_load" to i32
+  %".7" = call i32 (i8*, ...) @"printf"(i8* %".3", i32 %".6")
   %"chr_ptr" = alloca i8*
   store i8* %"x", i8** %"chr_ptr"
   ;  Source: chr_ptr
-  %"chr_ptr.1" = load i8*, i8** %"chr_ptr"
-  %"deref_load" = load i8, i8* %"chr_ptr.1"
+  %"chr_ptr_load" = load i8*, i8** %"chr_ptr"
+  %"deref_load" = load i8, i8* %"chr_ptr_load"
   ;  Source: *chr_ptr='b';
-  store i8 98, i8* %"chr_ptr.1"
+  store i8 98, i8* %"chr_ptr_load"
   %"another_char" = alloca i8
-  %"chr_ptr.2" = load i8*, i8** %"chr_ptr"
-  %"deref_load.1" = load i8, i8* %"chr_ptr.2"
+  %"chr_ptr_load.1" = load i8*, i8** %"chr_ptr"
+  %"deref_load.1" = load i8, i8* %"chr_ptr_load.1"
   store i8 %"deref_load.1", i8* %"another_char"
-  %".12" = bitcast [3 x i8]* @"str.1" to i8*
+  %".13" = bitcast [3 x i8]* @"str.1" to i8*
   ;  Source: another_char
-  %"another_char.1" = load i8, i8* %"another_char"
+  %"another_char_load" = load i8, i8* %"another_char"
   ;  Source: printf("%d",another_char);
-  %".15" = call i32 (i8*, ...) @"printf"(i8* %".12", i8 %"another_char.1")
+  %".16" = sext i8 %"another_char_load" to i32
+  %".17" = call i32 (i8*, ...) @"printf"(i8* %".13", i32 %".16")
   ;  Source: return0;
   ret i32 0
 }

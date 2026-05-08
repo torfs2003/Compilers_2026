@@ -80,14 +80,14 @@ entry:
   store %"struct.kaas"* %"ementaler", %"struct.kaas"** %"gouda_ptr"
   %".39" = bitcast [6 x i8]* @"str.6" to i8*
   ;  Source: (*gouda_ptr).melk
-  %"gouda_ptr.1" = load %"struct.kaas"*, %"struct.kaas"** %"gouda_ptr"
-  %"gep_melk.5" = getelementptr inbounds %"struct.kaas", %"struct.kaas"* %"gouda_ptr.1", i32 0, i32 0
+  %"gouda_ptr_load" = load %"struct.kaas"*, %"struct.kaas"** %"gouda_ptr"
+  %"gep_melk.5" = getelementptr inbounds %"struct.kaas", %"struct.kaas"* %"gouda_ptr_load", i32 0, i32 0
   %"load_melk.5" = load i32, i32* %"gep_melk.5"
   ;  Source: printf("%d   ",(*gouda_ptr).melk);
   %".42" = call i32 (i8*, ...) @"printf"(i8* %".39", i32 %"load_melk.5")
   %"a" = alloca i32
-  %"gouda_ptr.2" = load %"struct.kaas"*, %"struct.kaas"** %"gouda_ptr"
-  %"gep_melk.6" = getelementptr inbounds %"struct.kaas", %"struct.kaas"* %"gouda_ptr.2", i32 0, i32 0
+  %"gouda_ptr_load.1" = load %"struct.kaas"*, %"struct.kaas"** %"gouda_ptr"
+  %"gep_melk.6" = getelementptr inbounds %"struct.kaas", %"struct.kaas"* %"gouda_ptr_load.1", i32 0, i32 0
   %"load_melk.6" = load i32, i32* %"gep_melk.6"
   %".43" = sitofp i32 %"load_melk.6" to float
   %".44" = fmul float %".43", 0x400b9999a0000000

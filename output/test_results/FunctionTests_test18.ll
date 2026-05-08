@@ -20,9 +20,9 @@ entry:
   %"x" = alloca i32
   store i32 %".1", i32* %"x"
   ;  Source: returnx*x;
-  %"x.1" = load i32, i32* %"x"
-  %"x.2" = load i32, i32* %"x"
-  %".5" = mul i32 %"x.1", %"x.2"
+  %"x_load" = load i32, i32* %"x"
+  %"x_load.1" = load i32, i32* %"x"
+  %".5" = mul i32 %"x_load", %"x_load.1"
   ret i32 %".5"
 }
 
@@ -34,10 +34,10 @@ entry:
   %"b" = alloca i32
   store i32 %".2", i32* %"b"
   ;  Source: returnsquare(a)+square(b);
-  %"a.1" = load i32, i32* %"a"
-  %".7" = call i32 @"square"(i32 %"a.1")
-  %"b.1" = load i32, i32* %"b"
-  %".8" = call i32 @"square"(i32 %"b.1")
+  %"a_load" = load i32, i32* %"a"
+  %".7" = call i32 @"square"(i32 %"a_load")
+  %"b_load" = load i32, i32* %"b"
+  %".8" = call i32 @"square"(i32 %"b_load")
   %".9" = add i32 %".7", %".8"
   ret i32 %".9"
 }

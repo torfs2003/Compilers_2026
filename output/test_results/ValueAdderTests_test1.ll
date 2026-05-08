@@ -12,8 +12,8 @@ entry:
   %".4" = bitcast float* %"e" to i32*
   store i32* %".4", i32** %"f"
   %"g" = alloca i32
-  %"f.1" = load i32*, i32** %"f"
-  %"deref_load" = load i32, i32* %"f.1"
+  %"f_load" = load i32*, i32** %"f"
+  %"deref_load" = load i32, i32* %"f_load"
   store i32 %"deref_load", i32* %"g"
   ;  Source: return0;
   ret i32 0

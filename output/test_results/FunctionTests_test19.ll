@@ -20,18 +20,18 @@ entry:
   %"a" = alloca i32
   store i32 %".1", i32* %"a"
   ;  Source: if(a==0){returna;}
-  %"a.1" = load i32, i32* %"a"
-  %".5" = icmp eq i32 %"a.1", 0
+  %"a_load" = load i32, i32* %"a"
+  %".5" = icmp eq i32 %"a_load", 0
   %".6" = zext i1 %".5" to i32
   %"ifcond" = icmp ne i32 %".6", 0
   br i1 %"ifcond", label %"if.then", label %"if.end"
 if.then:
-  %"a.2" = load i32, i32* %"a"
-  ret i32 %"a.2"
+  %"a_load.1" = load i32, i32* %"a"
+  ret i32 %"a_load.1"
 if.end:
   ;  Source: returna;
-  %"a.3" = load i32, i32* %"a"
-  ret i32 %"a.3"
+  %"a_load.2" = load i32, i32* %"a"
+  ret i32 %"a_load.2"
 }
 
 define i32 @"main"()

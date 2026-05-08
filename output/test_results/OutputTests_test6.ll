@@ -21,16 +21,18 @@ entry:
   store i8 120, i8* %"x"
   %".3" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: x
-  %"x.1" = load i8, i8* %"x"
+  %"x_load" = load i8, i8* %"x"
   ;  Source: printf("%c",x);
-  %".6" = call i32 (i8*, ...) @"printf"(i8* %".3", i8 %"x.1")
+  %".6" = sext i8 %"x_load" to i32
+  %".7" = call i32 (i8*, ...) @"printf"(i8* %".3", i32 %".6")
   %"dot" = alloca i8
   store i8 46, i8* %"dot"
-  %".8" = bitcast [3 x i8]* @"str.1" to i8*
+  %".9" = bitcast [3 x i8]* @"str.1" to i8*
   ;  Source: dot
-  %"dot.1" = load i8, i8* %"dot"
+  %"dot_load" = load i8, i8* %"dot"
   ;  Source: printf("%c",dot);
-  %".11" = call i32 (i8*, ...) @"printf"(i8* %".8", i8 %"dot.1")
+  %".12" = sext i8 %"dot_load" to i32
+  %".13" = call i32 (i8*, ...) @"printf"(i8* %".9", i32 %".12")
   ;  Source: return0;
   ret i32 0
 }

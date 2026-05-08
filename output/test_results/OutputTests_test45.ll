@@ -54,24 +54,24 @@ entry:
   store i32* %"gep_x.3", i32** %"px2"
   %".17" = bitcast [15 x i8]* @"str" to i8*
   ;  Source: px1
-  %"px1.1" = load i32*, i32** %"px1"
+  %"px1_load" = load i32*, i32** %"px1"
   ;  Source: py1
-  %"py1.1" = load i32*, i32** %"py1"
+  %"py1_load" = load i32*, i32** %"py1"
   ;  Source: px1<py1
-  %".21" = ptrtoint i32* %"px1.1" to i32
-  %".22" = ptrtoint i32* %"py1.1" to i32
+  %".21" = ptrtoint i32* %"px1_load" to i32
+  %".22" = ptrtoint i32* %"py1_load" to i32
   %".23" = icmp ult i32 %".21", %".22"
   %".24" = zext i1 %".23" to i32
   ;  Source: printf("px1 < py1: %d\n",px1<py1);
   %".26" = call i32 (i8*, ...) @"printf"(i8* %".17", i32 %".24")
   %".27" = bitcast [16 x i8]* @"str.1" to i8*
   ;  Source: px1
-  %"px1.2" = load i32*, i32** %"px1"
+  %"px1_load.1" = load i32*, i32** %"px1"
   ;  Source: px2
-  %"px2.1" = load i32*, i32** %"px2"
+  %"px2_load" = load i32*, i32** %"px2"
   ;  Source: px1==px2
-  %".31" = ptrtoint i32* %"px1.2" to i32
-  %".32" = ptrtoint i32* %"px2.1" to i32
+  %".31" = ptrtoint i32* %"px1_load.1" to i32
+  %".32" = ptrtoint i32* %"px2_load" to i32
   %".33" = icmp eq i32 %".31", %".32"
   %".34" = zext i1 %".33" to i32
   ;  Source: printf("px1 == px2: %d\n",px1==px2);

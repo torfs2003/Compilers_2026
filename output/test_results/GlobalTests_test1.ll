@@ -20,18 +20,18 @@ entry:
   %"True" = alloca i32
   store i32 -20, i32* %"True"
   %"success" = alloca i32
-  %"True.1" = load i32, i32* %"True"
-  store i32 %"True.1", i32* %"success"
+  %"True_load" = load i32, i32* %"True"
+  store i32 %"True_load", i32* %"success"
   %".4" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: success
-  %"success.1" = load i32, i32* %"success"
+  %"success_load" = load i32, i32* %"success"
   ;  Source: printf("%d",success);
-  %".7" = call i32 (i8*, ...) @"printf"(i8* %".4", i32 %"success.1")
+  %".7" = call i32 (i8*, ...) @"printf"(i8* %".4", i32 %"success_load")
   %".8" = bitcast [3 x i8]* @"str.1" to i8*
   ;  Source: True
-  %"True.2" = load i32, i32* %"True"
+  %"True_load.1" = load i32, i32* %"True"
   ;  Source: printf("%d",True);
-  %".11" = call i32 (i8*, ...) @"printf"(i8* %".8", i32 %"True.2")
+  %".11" = call i32 (i8*, ...) @"printf"(i8* %".8", i32 %"True_load.1")
   ;  Source: return0;
   ret i32 0
 }

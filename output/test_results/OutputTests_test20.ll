@@ -28,19 +28,20 @@ entry:
   store i32 5, i32* %"x"
   %".7" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: x
-  %"x.1" = load i32, i32* %"x"
+  %"x_load" = load i32, i32* %"x"
   ;  Source: printf("%d",x);
-  %".10" = call i32 (i8*, ...) @"printf"(i8* %".7", i32 %"x.1")
+  %".10" = call i32 (i8*, ...) @"printf"(i8* %".7", i32 %"x_load")
   %".11" = bitcast [3 x i8]* @"str.1" to i8*
   ;  Source: line_of_code
-  %"line_of_code.1" = load i32, i32* %"line_of_code"
+  %"line_of_code_load" = load i32, i32* %"line_of_code"
   ;  Source: printf("%d",line_of_code);
-  %".14" = call i32 (i8*, ...) @"printf"(i8* %".11", i32 %"line_of_code.1")
+  %".14" = call i32 (i8*, ...) @"printf"(i8* %".11", i32 %"line_of_code_load")
   %".15" = bitcast [3 x i8]* @"str.2" to i8*
   ;  Source: c
-  %"c.1" = load i8, i8* %"c"
+  %"c_load" = load i8, i8* %"c"
   ;  Source: printf("%c",c);
-  %".18" = call i32 (i8*, ...) @"printf"(i8* %".15", i8 %"c.1")
+  %".18" = sext i8 %"c_load" to i32
+  %".19" = call i32 (i8*, ...) @"printf"(i8* %".15", i32 %".18")
   ;  Source: return0;
   ret i32 0
 }

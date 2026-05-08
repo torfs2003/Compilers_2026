@@ -6,6 +6,14 @@ declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
 
+declare i8* @"fopen"(i8* %".1", i8* %".2")
+
+declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
+
+declare i32 @"fputs"(i8* %".1", i8* %".2")
+
+declare i32 @"fclose"(i8* %".1")
+
 define i32 @"main"()
 {
 entry:
@@ -23,19 +31,19 @@ entry:
   store i32 6, i32* %"f"
   %".8" = bitcast [13 x i8]* @"str" to i8*
   ;  Source: a
-  %"a.1" = load i32, i32* %"a"
+  %"a_load" = load i32, i32* %"a"
   ;  Source: b
-  %"b.1" = load i32, i32* %"b"
+  %"b_load" = load i32, i32* %"b"
   ;  Source: c
-  %"c.1" = load i32, i32* %"c"
+  %"c_load" = load i32, i32* %"c"
   ;  Source: d
-  %"d.1" = load i32, i32* %"d"
+  %"d_load" = load i32, i32* %"d"
   ;  Source: e
-  %"e.1" = load i32, i32* %"e"
+  %"e_load" = load i32, i32* %"e"
   ;  Source: f
-  %"f.1" = load i32, i32* %"f"
+  %"f_load" = load i32, i32* %"f"
   ;  Source: printf("%d%d%d%d%d%d",a,b,c,d,e,f);
-  %".16" = call i32 (i8*, ...) @"printf"(i8* %".8", i32 %"a.1", i32 %"b.1", i32 %"c.1", i32 %"d.1", i32 %"e.1", i32 %"f.1")
+  %".16" = call i32 (i8*, ...) @"printf"(i8* %".8", i32 %"a_load", i32 %"b_load", i32 %"c_load", i32 %"d_load", i32 %"e_load", i32 %"f_load")
   ;  Source: return0;
   ret i32 0
 }

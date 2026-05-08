@@ -137,7 +137,7 @@ digraph AST {
   node77 [label="-\n(int)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node77 -> node78 [style="solid", color="black"];
   node77 -> node79 [style="solid", color="black"];
-  node74 [label="+\n(struct mapEntry*)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node74 [label="+\n(structmapEntry*)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node74 -> node75 [style="solid", color="black"];
   node74 -> node77 [style="solid", color="black"];
   node73 [label="Access\n->map_key\n(char*)", shape=ellipse, style="filled", fillcolor="lightblue", color="black", fontcolor="black"];
@@ -154,7 +154,7 @@ digraph AST {
   node86 [label="-\n(int)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node86 -> node87 [style="solid", color="black"];
   node86 -> node88 [style="solid", color="black"];
-  node83 [label="+\n(struct mapEntry*)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node83 [label="+\n(structmapEntry*)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node83 -> node84 [style="solid", color="black"];
   node83 -> node86 [style="solid", color="black"];
   node82 [label="Access\n->map_value\n(int)", shape=ellipse, style="filled", fillcolor="lightblue", color="black", fontcolor="black"];
@@ -187,7 +187,7 @@ digraph AST {
   node106 [label="Access\n->nodes\n(struct mapEntry*)", shape=ellipse, style="filled", fillcolor="lightblue", color="black", fontcolor="black"];
   node106 -> node107 [style="solid", color="black"];
   node108 [label="ID: i\n(int)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
-  node105 [label="+\n(struct mapEntry*)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node105 [label="+\n(structmapEntry*)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node105 -> node106 [style="solid", color="black"];
   node105 -> node108 [style="solid", color="black"];
   node104 [label="Access\n->map_key\n(char*)", shape=ellipse, style="filled", fillcolor="lightblue", color="black", fontcolor="black"];
@@ -203,7 +203,7 @@ digraph AST {
   node117 [label="Access\n->nodes\n(struct mapEntry*)", shape=ellipse, style="filled", fillcolor="lightblue", color="black", fontcolor="black"];
   node117 -> node118 [style="solid", color="black"];
   node119 [label="ID: i\n(int)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
-  node116 [label="+\n(struct mapEntry*)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node116 [label="+\n(structmapEntry*)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node116 -> node117 [style="solid", color="black"];
   node116 -> node119 [style="solid", color="black"];
   node115 [label="Access\n->map_value\n(int)", shape=ellipse, style="filled", fillcolor="lightblue", color="black", fontcolor="black"];

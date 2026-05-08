@@ -82,9 +82,9 @@ entry:
   store i8* %".27", i8** %"str"
   %".29" = bitcast [3 x i8]* @"str.3" to i8*
   ;  Source: str
-  %"str.1" = load i8*, i8** %"str"
+  %"str_load" = load i8*, i8** %"str"
   ;  Source: printf("%s",str);
-  %".32" = call i32 (i8*, ...) @"printf"(i8* %".29", i8* %"str.1")
+  %".32" = call i32 (i8*, ...) @"printf"(i8* %".29", i8* %"str_load")
   ;  Source: return0;
   ret i32 0
 }

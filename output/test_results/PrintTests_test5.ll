@@ -19,7 +19,8 @@ define i32 @"main"()
 entry:
   %".2" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: printf("%x",'y');
-  %".4" = call i32 (i8*, ...) @"printf"(i8* %".2", i8 121)
+  %".4" = sext i8 121 to i32
+  %".5" = call i32 (i8*, ...) @"printf"(i8* %".2", i32 %".4")
   ;  Source: return0;
   ret i32 0
 }

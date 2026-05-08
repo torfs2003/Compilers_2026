@@ -1,7 +1,7 @@
 digraph AST {
   node [fontname="Arial"];
   node5 [label="4\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
-  node4 [label="Decl\nfloat\ne\n(float)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
+  node4 [label="Decl\nconst float\ne\n(float)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
   node4 -> node5 [style="solid", color="black", label=" init", fontcolor="blue"];
   node8 [label="ID: e\n(float)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
   node7 [label="&\n(float*)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];

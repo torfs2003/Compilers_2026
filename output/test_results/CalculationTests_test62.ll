@@ -22,40 +22,40 @@ entry:
   %"xp" = alloca i32*
   store i32* %"x", i32** %"xp"
   ;  Source: xp
-  %"xp.1" = load i32*, i32** %"xp"
-  %"deref_load" = load i32, i32* %"xp.1"
+  %"xp_load" = load i32*, i32** %"xp"
+  %"deref_load" = load i32, i32* %"xp_load"
   ;  Source: *xp=10;
-  store i32 10, i32* %"xp.1"
+  store i32 10, i32* %"xp_load"
   %".7" = bitcast [5 x i8]* @"str" to i8*
   ;  Source: x
-  %"x.1" = load i32, i32* %"x"
+  %"x_load" = load i32, i32* %"x"
   ;  Source: printf("%d; ",x);
-  %".10" = call i32 (i8*, ...) @"printf"(i8* %".7", i32 %"x.1")
+  %".10" = call i32 (i8*, ...) @"printf"(i8* %".7", i32 %"x_load")
   %".11" = bitcast [4 x i8]* @"str.1" to i8*
   ;  Source: xp
-  %"xp.2" = load i32*, i32** %"xp"
+  %"xp_load.1" = load i32*, i32** %"xp"
   ;  Source: *xp
-  %"deref_load.1" = load i32, i32* %"xp.2"
+  %"deref_load.1" = load i32, i32* %"xp_load.1"
   ;  Source: printf("%d\n",*xp);
   %".15" = call i32 (i8*, ...) @"printf"(i8* %".11", i32 %"deref_load.1")
   ;  Source: xp
-  %"xp.3" = load i32*, i32** %"xp"
+  %"xp_load.2" = load i32*, i32** %"xp"
   ;  Source: (*xp)
-  %"deref_load.2" = load i32, i32* %"xp.3"
+  %"deref_load.2" = load i32, i32* %"xp_load.2"
   ;  Source: (*xp)++;
-  %".19" = load i32, i32* %"xp.3"
+  %".19" = load i32, i32* %"xp_load.2"
   %".20" = add i32 %".19", 1
-  store i32 %".20", i32* %"xp.3"
+  store i32 %".20", i32* %"xp_load.2"
   %".22" = bitcast [5 x i8]* @"str.2" to i8*
   ;  Source: x
-  %"x.2" = load i32, i32* %"x"
+  %"x_load.1" = load i32, i32* %"x"
   ;  Source: printf("%d; ",x);
-  %".25" = call i32 (i8*, ...) @"printf"(i8* %".22", i32 %"x.2")
+  %".25" = call i32 (i8*, ...) @"printf"(i8* %".22", i32 %"x_load.1")
   %".26" = bitcast [4 x i8]* @"str.3" to i8*
   ;  Source: xp
-  %"xp.4" = load i32*, i32** %"xp"
+  %"xp_load.3" = load i32*, i32** %"xp"
   ;  Source: *xp
-  %"deref_load.3" = load i32, i32* %"xp.4"
+  %"deref_load.3" = load i32, i32* %"xp_load.3"
   ;  Source: printf("%d\n",*xp);
   %".30" = call i32 (i8*, ...) @"printf"(i8* %".26", i32 %"deref_load.3")
   ;  Source: return0;

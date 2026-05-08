@@ -23,38 +23,38 @@ entry:
   store i32 0, i32* %"y"
   %".4" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: x
-  %"x.1" = load i32, i32* %"x"
+  %"x_load" = load i32, i32* %"x"
   ;  Source: printf("%d",x);
-  %".7" = call i32 (i8*, ...) @"printf"(i8* %".4", i32 %"x.1")
+  %".7" = call i32 (i8*, ...) @"printf"(i8* %".4", i32 %"x_load")
   %".8" = bitcast [3 x i8]* @"str.1" to i8*
   ;  Source: y
-  %"y.1" = load i32, i32* %"y"
+  %"y_load" = load i32, i32* %"y"
   ;  Source: printf("%d",y);
-  %".11" = call i32 (i8*, ...) @"printf"(i8* %".8", i32 %"y.1")
+  %".11" = call i32 (i8*, ...) @"printf"(i8* %".8", i32 %"y_load")
   %"z" = alloca i32
-  %"x.2" = load i32, i32* %"x"
-  %"y.2" = load i32, i32* %"y"
-  %".12" = icmp ne i32 %"x.2", 0
-  %".13" = icmp ne i32 %"y.2", 0
+  %"x_load.1" = load i32, i32* %"x"
+  %"y_load.1" = load i32, i32* %"y"
+  %".12" = icmp ne i32 %"x_load.1", 0
+  %".13" = icmp ne i32 %"y_load.1", 0
   %".14" = and i1 %".12", %".13"
   %".15" = zext i1 %".14" to i32
   store i32 %".15", i32* %"z"
   %".17" = bitcast [3 x i8]* @"str.2" to i8*
   ;  Source: z
-  %"z.1" = load i32, i32* %"z"
+  %"z_load" = load i32, i32* %"z"
   ;  Source: printf("%d",z);
-  %".20" = call i32 (i8*, ...) @"printf"(i8* %".17", i32 %"z.1")
+  %".20" = call i32 (i8*, ...) @"printf"(i8* %".17", i32 %"z_load")
   %"b" = alloca i32
-  %"y.3" = load i32, i32* %"y"
-  %"z.2" = load i32, i32* %"z"
-  %".21" = mul i32 %"y.3", %"z.2"
+  %"y_load.2" = load i32, i32* %"y"
+  %"z_load.1" = load i32, i32* %"z"
+  %".21" = mul i32 %"y_load.2", %"z_load.1"
   %".22" = mul i32 %".21", 57809
   store i32 %".22", i32* %"b"
   %".24" = bitcast [3 x i8]* @"str.3" to i8*
   ;  Source: b
-  %"b.1" = load i32, i32* %"b"
+  %"b_load" = load i32, i32* %"b"
   ;  Source: printf("%d",b);
-  %".27" = call i32 (i8*, ...) @"printf"(i8* %".24", i32 %"b.1")
+  %".27" = call i32 (i8*, ...) @"printf"(i8* %".24", i32 %"b_load")
   ;  Source: return0;
   ret i32 0
 }

@@ -21,14 +21,14 @@ entry:
   %"i" = alloca i32
   store i32 1, i32* %"i"
   ;  Source: i
-  %"i.1" = load i32, i32* %"i"
+  %"i_load" = load i32, i32* %"i"
   ;  Source: i=1;
   store i32 1, i32* %"i"
   ;  Source: x
   ;  Source: i
-  %"i.2" = load i32, i32* %"i"
+  %"i_load.1" = load i32, i32* %"i"
   ;  Source: i+2
-  %".9" = add i32 %"i.2", 2
+  %".9" = add i32 %"i_load.1", 2
   ;  Source: x[i+2]
   %"gep_array" = getelementptr [22 x i32], [22 x i32]* %"x", i32 0, i32 %".9"
   %"array_element" = load i32, i32* %"gep_array"

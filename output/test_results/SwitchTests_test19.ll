@@ -20,22 +20,22 @@ entry:
   %"b" = alloca i32
   %"a" = alloca i32
   store i32 1, i32* %"a"
-  %"a.1" = load i32, i32* %"a"
-  switch i32 %"a.1", label %"switch.default" [i32 1, label %"switch.case1"]
+  %"a_load" = load i32, i32* %"a"
+  switch i32 %"a_load", label %"switch.default" [i32 1, label %"switch.case1"]
 switch.merge:
   %".8" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: b
-  %"b.3" = load i32, i32* %"b"
+  %"b_load.2" = load i32, i32* %"b"
   ;  Source: printf("%d",b);
-  %".11" = call i32 (i8*, ...) @"printf"(i8* %".8", i32 %"b.3")
+  %".11" = call i32 (i8*, ...) @"printf"(i8* %".8", i32 %"b_load.2")
   ;  Source: return0;
   ret i32 0
 switch.case1:
-  %"b.1" = load i32, i32* %"b"
+  %"b_load" = load i32, i32* %"b"
   store i32 1, i32* %"b"
   br label %"switch.merge"
 switch.default:
-  %"b.2" = load i32, i32* %"b"
+  %"b_load.1" = load i32, i32* %"b"
   store i32 3, i32* %"b"
   br label %"switch.merge"
 }

@@ -30,18 +30,19 @@ entry:
   store i8 99, i8* %"e"
   %".8" = bitcast [24 x i8]* @"str.1" to i8*
   ;  Source: a
-  %"a.1" = load i32, i32* %"a"
+  %"a_load" = load i32, i32* %"a"
   ;  Source: b
-  %"b.1" = load i8*, i8** %"b"
+  %"b_load" = load i8*, i8** %"b"
   ;  Source: c
-  %"c.1" = load i32, i32* %"c"
+  %"c_load" = load i32, i32* %"c"
   ;  Source: d
-  %"d.1" = load float, float* %"d"
+  %"d_load" = load float, float* %"d"
   ;  Source: e
-  %"e.1" = load i8, i8* %"e"
+  %"e_load" = load i8, i8* %"e"
   ;  Source: printf(" %d \n %s \n %x \n %f \n %c",a,b,c,d,e);
-  %".15" = fpext float %"d.1" to double
-  %".16" = call i32 (i8*, ...) @"printf"(i8* %".8", i32 %"a.1", i8* %"b.1", i32 %"c.1", double %".15", i8 %"e.1")
+  %".15" = fpext float %"d_load" to double
+  %".16" = sext i8 %"e_load" to i32
+  %".17" = call i32 (i8*, ...) @"printf"(i8* %".8", i32 %"a_load", i8* %"b_load", i32 %"c_load", double %".15", i32 %".16")
   ;  Source: return0;
   ret i32 0
 }

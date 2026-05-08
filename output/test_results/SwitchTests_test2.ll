@@ -22,45 +22,27 @@ entry:
   %"b" = alloca i32
   store i32 0, i32* %"b"
   ;  Source: a
-  %"a.1" = load i32, i32* %"a"
+  %"a_load" = load i32, i32* %"a"
   ;  Source: a=2;
   store i32 2, i32* %"a"
-  %"a.2" = load i32, i32* %"a"
-  switch i32 %"a.2", label %"switch.default" [i32 1, label %"switch.case1" i32 6, label %"switch.case6" i32 2, label %"switch.case2"]
+  %"a_load.1" = load i32, i32* %"a"
+  switch i32 %"a_load.1", label %"switch.default" [i32 1, label %"switch.case1" i32 6, label %"switch.case6"]
 switch.merge:
-  %".24" = bitcast [3 x i8]* @"str.4" to i8*
+  %".13" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: printf("%d",4);
-  %".26" = call i32 (i8*, ...) @"printf"(i8* %".24", i32 4)
+  %".15" = call i32 (i8*, ...) @"printf"(i8* %".13", i32 4)
   ;  Source: return0;
   ret i32 0
 switch.case1:
-  %"b.1" = load i32, i32* %"b"
-  store i32 1, i32* %"b"
-  %".9" = bitcast [3 x i8]* @"str" to i8*
-  %".10" = call i32 (i8*, ...) @"printf"(i8* %".9", i32 1)
-  br label %"switch.case6"
+  br label %"switch.merge"
 switch.case6:
-  %"b.2" = load i32, i32* %"b"
-  store i32 6, i32* %"b"
-  %".13" = bitcast [3 x i8]* @"str.1" to i8*
-  %".14" = call i32 (i8*, ...) @"printf"(i8* %".13", i32 6)
-  br label %"switch.case2"
-switch.case2:
-  %"b.3" = load i32, i32* %"b"
-  store i32 2, i32* %"b"
-  %".17" = bitcast [3 x i8]* @"str.2" to i8*
-  %".18" = call i32 (i8*, ...) @"printf"(i8* %".17", i32 2)
+  %"d" = alloca i32
+  store i32 0, i32* %"d"
   br label %"switch.merge"
 switch.default:
-  %"b.4" = load i32, i32* %"b"
-  store i32 3, i32* %"b"
-  %".21" = bitcast [3 x i8]* @"str.3" to i8*
-  %".22" = call i32 (i8*, ...) @"printf"(i8* %".21", i32 3)
+  %"e" = alloca i32
+  store i32 0, i32* %"e"
   br label %"switch.merge"
 }
 
 @"str" = internal constant [3 x i8] c"%d\00"
-@"str.1" = internal constant [3 x i8] c"%d\00"
-@"str.2" = internal constant [3 x i8] c"%d\00"
-@"str.3" = internal constant [3 x i8] c"%d\00"
-@"str.4" = internal constant [3 x i8] c"%d\00"

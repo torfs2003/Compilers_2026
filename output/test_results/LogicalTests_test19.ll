@@ -22,12 +22,12 @@ entry:
   %"a" = alloca i32
   store i32 3, i32* %"a"
   ;  Source: a
-  %"a.1" = load i32, i32* %"a"
+  %"a_load" = load i32, i32* %"a"
   ;  Source: b
-  %"b.1" = load i32, i32* %"b"
+  %"b_load" = load i32, i32* %"b"
   ;  Source: a||b;
-  %".7" = icmp ne i32 %"a.1", 0
-  %".8" = icmp ne i32 %"b.1", 0
+  %".7" = icmp ne i32 %"a_load", 0
+  %".8" = icmp ne i32 %"b_load", 0
   %".9" = or i1 %".7", %".8"
   %".10" = zext i1 %".9" to i32
   ;  Source: return0;

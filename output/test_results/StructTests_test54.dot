@@ -37,7 +37,7 @@ digraph AST {
   node26 [label="Access\n.b_ptr\n(struct b*)", shape=ellipse, style="filled", fillcolor="lightblue", color="black", fontcolor="black"];
   node26 -> node27 [style="solid", color="black"];
   node29 [label="ID: b2\n(struct b)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
-  node28 [label="&\n(struct b*)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node28 [label="&\n(structb*)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node28 -> node29 [style="solid", color="black"];
   node25 [label="=", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node25 -> node26 [style="solid", color="black"];

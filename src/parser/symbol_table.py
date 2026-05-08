@@ -25,10 +25,6 @@ class SymbolTable:
         return None
 
     def resolve_type(self, type_name):
-        """
-        Kijkt of een naam (bijv. 'leeftijd') een typedef is.
-        Als dat zo is, geeft hij het originele type (bijv. 'int') terug.
-        """
         if not isinstance(type_name, str):
             return type_name
 
@@ -36,11 +32,15 @@ class SymbolTable:
         total_pointers = ""
 
         while True:
-            # Splits de basisnaam en de sterretjes
+            # 1. Splits de basisnaam en de sterretjes
             base_type = current_type.replace('*', '').strip()
+            # Verzamel alle sterretjes van deze stap
             total_pointers += '*' * current_type.count('*')
 
-            # Zoek in de symbol table
+            if base_type.startswith("enum "):
+                return "int" + total_pointers
+
+            # 2. Zoek in de symbol table voor typedefs
             symbol = self.get(base_type)
             
             if symbol and symbol.get('type') == 'typedef':

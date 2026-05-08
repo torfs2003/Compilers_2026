@@ -33,10 +33,10 @@ entry:
   store i8* %".4", i8** %"fp"
   ;  Source: buffer
   ;  Source: fp
-  %"fp.1" = load i8*, i8** %"fp"
+  %"fp_load" = load i8*, i8** %"fp"
   ;  Source: fgets(buffer,5,fp);
   %".9" = getelementptr inbounds [5 x i8], [5 x i8]* %"buffer", i32 0, i32 0
-  %".10" = call i8* @"fgets"(i8* %".9", i32 5, i8* %"fp.1")
+  %".10" = call i8* @"fgets"(i8* %".9", i32 5, i8* %"fp_load")
   %".11" = bitcast [3 x i8]* @"str.2" to i8*
   ;  Source: buffer
   ;  Source: printf("%s",buffer);
@@ -49,26 +49,26 @@ entry:
   store i32 %".16", i32* %"length"
   %".18" = bitcast [3 x i8]* @"str.3" to i8*
   ;  Source: length
-  %"length.1" = load i32, i32* %"length"
+  %"length_load" = load i32, i32* %"length"
   ;  Source: printf("%d",length);
-  %".21" = call i32 (i8*, ...) @"printf"(i8* %".18", i32 %"length.1")
+  %".21" = call i32 (i8*, ...) @"printf"(i8* %".18", i32 %"length_load")
   %"c" = alloca i8*
-  %"length.2" = load i32, i32* %"length"
-  %".22" = call i8* @"malloc"(i32 %"length.2")
+  %"length_load.1" = load i32, i32* %"length"
+  %".22" = call i8* @"malloc"(i32 %"length_load.1")
   store i8* %".22", i8** %"c"
   ;  Source: c
-  %"c.1" = load i8*, i8** %"c"
+  %"c_load" = load i8*, i8** %"c"
   ;  Source: length
-  %"length.3" = load i32, i32* %"length"
+  %"length_load.2" = load i32, i32* %"length"
   ;  Source: fp
-  %"fp.2" = load i8*, i8** %"fp"
+  %"fp_load.1" = load i8*, i8** %"fp"
   ;  Source: fgets(c,length,fp);
-  %".28" = call i8* @"fgets"(i8* %"c.1", i32 %"length.3", i8* %"fp.2")
+  %".28" = call i8* @"fgets"(i8* %"c_load", i32 %"length_load.2", i8* %"fp_load.1")
   %".29" = bitcast [3 x i8]* @"str.4" to i8*
   ;  Source: c
-  %"c.2" = load i8*, i8** %"c"
+  %"c_load.1" = load i8*, i8** %"c"
   ;  Source: printf("%s",c);
-  %".32" = call i32 (i8*, ...) @"printf"(i8* %".29", i8* %"c.2")
+  %".32" = call i32 (i8*, ...) @"printf"(i8* %".29", i8* %"c_load.1")
   ;  Source: return0;
   ret i32 0
 }

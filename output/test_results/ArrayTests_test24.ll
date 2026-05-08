@@ -28,12 +28,13 @@ entry:
   store i8** %".6", i8*** %"t"
   %".8" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: t
-  %"t.1" = load i8**, i8*** %"t"
-  %"deref_load" = load i8*, i8** %"t.1"
+  %"t_load" = load i8**, i8*** %"t"
+  %"deref_load" = load i8*, i8** %"t_load"
   ;  Source: **t
   %"deref_load.1" = load i8, i8* %"deref_load"
   ;  Source: printf("%c",**t);
-  %".12" = call i32 (i8*, ...) @"printf"(i8* %".8", i8 %"deref_load.1")
+  %".12" = sext i8 %"deref_load.1" to i32
+  %".13" = call i32 (i8*, ...) @"printf"(i8* %".8", i32 %".12")
   ;  Source: return0;
   ret i32 0
 }

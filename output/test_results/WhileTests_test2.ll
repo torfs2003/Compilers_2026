@@ -19,21 +19,21 @@ define i32 @"main"()
 entry:
   %"a" = alloca i32
   ;  Source: a
-  %"a.1" = load i32, i32* %"a"
+  %"a_load" = load i32, i32* %"a"
   ;  Source: a=0
   store i32 0, i32* %"a"
   br label %"while.cond"
 while.cond:
-  %"a.2" = load i32, i32* %"a"
-  %".6" = icmp slt i32 %"a.2", 10
+  %"a_load.1" = load i32, i32* %"a"
+  %".6" = icmp slt i32 %"a_load.1", 10
   %".7" = zext i1 %".6" to i32
   %"whilecond" = icmp ne i32 %".7", 0
   br i1 %"whilecond", label %"while.body", label %"while.end"
 while.body:
   %".9" = bitcast [3 x i8]* @"str" to i8*
-  %"a.3" = load i32, i32* %"a"
-  %".10" = call i32 (i8*, ...) @"printf"(i8* %".9", i32 %"a.3")
-  %"a.4" = load i32, i32* %"a"
+  %"a_load.2" = load i32, i32* %"a"
+  %".10" = call i32 (i8*, ...) @"printf"(i8* %".9", i32 %"a_load.2")
+  %"a_load.3" = load i32, i32* %"a"
   %".11" = load i32, i32* %"a"
   %".12" = add i32 %".11", 1
   store i32 %".12", i32* %"a"

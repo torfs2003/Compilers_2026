@@ -61,9 +61,9 @@ entry:
   store %"struct.kaas"* %"gouda", %"struct.kaas"** %"ptr"
   %".15" = bitcast [3 x i8]* @"str.1" to i8*
   ;  Source: ptr
-  %"ptr.1" = load %"struct.kaas"*, %"struct.kaas"** %"ptr"
+  %"ptr_load" = load %"struct.kaas"*, %"struct.kaas"** %"ptr"
   ;  Source: mul(ptr)
-  %".18" = call i32 @"mul"(%"struct.kaas"* %"ptr.1")
+  %".18" = call i32 @"mul"(%"struct.kaas"* %"ptr_load")
   ;  Source: printf("%d",mul(ptr));
   %".20" = call i32 (i8*, ...) @"printf"(i8* %".15", i32 %".18")
   ;  Source: return0;

@@ -25,7 +25,7 @@ entry:
   %".5" = call i32 (i8*, ...) @"printf"(i8* %".3", i32 9)
   %".6" = bitcast [5 x i8]* @"str.1" to i8*
   ;  Source: x
-  %"x.1" = load i32, i32* %"x"
+  %"x_load" = load i32, i32* %"x"
   ;  Source: ++x
   %".9" = load i32, i32* %"x"
   %".10" = add i32 %".9", 1
@@ -45,7 +45,7 @@ entry:
   ;  Source: a[1]=12;
   store i32 12, i32* %"gep_array.1"
   ;  Source: x
-  %"x.2" = load i32, i32* %"x"
+  %"x_load.1" = load i32, i32* %"x"
   ;  Source: x=12;
   store i32 12, i32* %"x"
   %".25" = bitcast [5 x i8]* @"str.2" to i8*
@@ -61,7 +61,7 @@ entry:
   %".33" = call i32 (i8*, ...) @"printf"(i8* %".25", i32 %".30")
   %".34" = bitcast [5 x i8]* @"str.3" to i8*
   ;  Source: x
-  %"x.3" = load i32, i32* %"x"
+  %"x_load.2" = load i32, i32* %"x"
   ;  Source: x++
   %".37" = load i32, i32* %"x"
   %".38" = add i32 %".37", 1
@@ -70,9 +70,9 @@ entry:
   %".41" = call i32 (i8*, ...) @"printf"(i8* %".34", i32 %".37")
   %".42" = bitcast [5 x i8]* @"str.4" to i8*
   ;  Source: x
-  %"x.4" = load i32, i32* %"x"
+  %"x_load.3" = load i32, i32* %"x"
   ;  Source: printf("%d; ",x);
-  %".45" = call i32 (i8*, ...) @"printf"(i8* %".42", i32 %"x.4")
+  %".45" = call i32 (i8*, ...) @"printf"(i8* %".42", i32 %"x_load.3")
   ;  Source: a
   ;  Source: a[0]
   %"gep_array.3" = getelementptr [2 x i32], [2 x i32]* %"a", i32 0, i32 0

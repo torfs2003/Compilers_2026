@@ -8,7 +8,7 @@ entry:
   %"x" = alloca i32
   store i32 5, i32* %"x"
   ;  Source: x
-  %"x.1" = load i32, i32* %"x"
+  %"x_load" = load i32, i32* %"x"
   ;  Source: 5+&x;
   %".5" = getelementptr i32, i32* %"x", i32 5
   ;  Source: return1;

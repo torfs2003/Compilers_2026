@@ -37,7 +37,7 @@ digraph AST {
   node26 [label="Access\n.b_ptr\n(struct b*)", shape=ellipse, style="filled", fillcolor="lightblue", color="black", fontcolor="black"];
   node26 -> node27 [style="solid", color="black"];
   node29 [label="ID: b2\n(struct b)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
-  node28 [label="&\n(struct b*)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node28 [label="&\n(structb*)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node28 -> node29 [style="solid", color="black"];
   node25 [label="=", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node25 -> node26 [style="solid", color="black"];
@@ -72,7 +72,7 @@ digraph AST {
   node40 -> node41 [style="solid", color="black", label=" arg0", fontcolor="black"];
   node40 -> node42 [style="solid", color="black", label=" arg1", fontcolor="black"];
   node48 [label="ID: a1\n(struct a)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
-  node47 [label="&\n(struct a*)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node47 [label="&\n(structa*)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node47 -> node48 [style="solid", color="black"];
   node46 [label="Decl\nstruct a*\na2\n(struct a*)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
   node46 -> node47 [style="solid", color="black", label=" init", fontcolor="blue"];

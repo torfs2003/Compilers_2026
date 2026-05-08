@@ -30,17 +30,17 @@ entry:
   %".3" = bitcast i8* %".2" to i32*
   store i32* %".3", i32** %"ptr"
   ;  Source: ptr
-  %"ptr.1" = load i32*, i32** %"ptr"
+  %"ptr_load" = load i32*, i32** %"ptr"
   ;  Source: (ptr+3)
-  %".7" = getelementptr i32, i32* %"ptr.1", i32 3
+  %".7" = getelementptr i32, i32* %"ptr_load", i32 3
   %"deref_load" = load i32, i32* %".7"
   ;  Source: *(ptr+3)=1;
   store i32 1, i32* %".7"
   %".10" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: ptr
-  %"ptr.2" = load i32*, i32** %"ptr"
+  %"ptr_load.1" = load i32*, i32** %"ptr"
   ;  Source: (ptr+3)
-  %".13" = getelementptr i32, i32* %"ptr.2", i32 3
+  %".13" = getelementptr i32, i32* %"ptr_load.1", i32 3
   ;  Source: *(ptr+3)
   %"deref_load.1" = load i32, i32* %".13"
   ;  Source: printf("%c",*(ptr+3));

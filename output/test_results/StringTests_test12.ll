@@ -38,7 +38,8 @@ entry:
   %"gep_array.2" = getelementptr [2 x i8], [2 x i8]* %"z", i32 0, i32 0
   %"array_element.2" = load i8, i8* %"gep_array.2"
   ;  Source: printf("%c",z[0]);
-  %".16" = call i32 (i8*, ...) @"printf"(i8* %".12", i8 %"array_element.2")
+  %".16" = sext i8 %"array_element.2" to i32
+  %".17" = call i32 (i8*, ...) @"printf"(i8* %".12", i32 %".16")
   ;  Source: return0;
   ret i32 0
 }

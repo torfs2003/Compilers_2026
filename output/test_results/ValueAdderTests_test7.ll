@@ -8,51 +8,36 @@ entry:
   %"a" = alloca i8
   store i8 97, i8* %"a"
   %"b" = alloca i32
-  %"a.1" = load i8, i8* %"a"
-  %".3" = sext i8 %"a.1" to i32
+  %".3" = sext i8 97 to i32
   store i32 %".3", i32* %"b"
   %"c" = alloca float
-  %"b.1" = load i32, i32* %"b"
-  %".5" = sitofp i32 %"b.1" to float
+  %".5" = sitofp i8 97 to float
   store float %".5", float* %"c"
   %"d" = alloca i32
-  %"c.1" = load float, float* %"c"
-  %"b.2" = load i32, i32* %"b"
-  %".7" = sitofp i32 %"b.2" to float
-  %".8" = fadd float %"c.1", %".7"
-  %"a.2" = load i8, i8* %"a"
-  %".9" = sitofp i8 %"a.2" to float
-  %".10" = fadd float %".8", %".9"
-  %".11" = fptosi float %".10" to i32
-  store i32 %".11", i32* %"d"
+  %".7" = add i8 97, 97
+  %".8" = add i8 %".7", 97
+  %".9" = sext i8 %".8" to i32
+  store i32 %".9", i32* %"d"
   %"e" = alloca i8
-  %"d.1" = load i32, i32* %"d"
-  %"c.2" = load float, float* %"c"
-  %".13" = sitofp i32 %"d.1" to float
-  %".14" = fadd float %".13", %"c.2"
-  %"b.3" = load i32, i32* %"b"
-  %".15" = sitofp i32 %"b.3" to float
-  %".16" = fadd float %".14", %".15"
-  %"a.3" = load i8, i8* %"a"
-  %".17" = sitofp i8 %"a.3" to float
-  %".18" = fadd float %".16", %".17"
-  %".19" = fptosi float %".18" to i8
-  store i8 %".19", i8* %"e"
+  %".11" = sext i8 97 to i32
+  %".12" = add i32 %".9", %".11"
+  %".13" = sext i8 97 to i32
+  %".14" = add i32 %".12", %".13"
+  %".15" = sext i8 97 to i32
+  %".16" = add i32 %".14", %".15"
+  %".17" = trunc i32 %".16" to i8
+  store i8 %".17", i8* %"e"
   %"f" = alloca float
-  %"e.1" = load i8, i8* %"e"
-  %"d.2" = load i32, i32* %"d"
-  %".21" = sext i8 %"e.1" to i32
-  %".22" = add i32 %".21", %"d.2"
-  %"c.3" = load float, float* %"c"
-  %".23" = sitofp i32 %".22" to float
-  %".24" = fadd float %".23", %"c.3"
-  %"b.4" = load i32, i32* %"b"
-  %".25" = sitofp i32 %"b.4" to float
-  %".26" = fadd float %".24", %".25"
-  %"a.4" = load i8, i8* %"a"
-  %".27" = sitofp i8 %"a.4" to float
-  %".28" = fadd float %".26", %".27"
-  store float %".28", float* %"f"
+  %".19" = sext i8 %".17" to i32
+  %".20" = add i32 %".19", %".9"
+  %".21" = sext i8 97 to i32
+  %".22" = add i32 %".20", %".21"
+  %".23" = sext i8 97 to i32
+  %".24" = add i32 %".22", %".23"
+  %".25" = sext i8 97 to i32
+  %".26" = add i32 %".24", %".25"
+  %".27" = sitofp i32 %".26" to float
+  store float %".27", float* %"f"
   ;  Source: return0;
   ret i32 0
 }

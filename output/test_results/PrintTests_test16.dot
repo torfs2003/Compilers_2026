@@ -2,7 +2,7 @@ digraph AST {
   node [fontname="Arial"];
   node2 [label="Include\n<stdio.h>", shape=note, style="filled", fillcolor="lightyellow", color="black", fontcolor="black"];
   node6 [label="8\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
-  node5 [label="Decl\nint\np\n(int)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
+  node5 [label="Decl\nconst int\np\n(int)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
   node5 -> node6 [style="solid", color="black", label=" init", fontcolor="blue"];
   node9 [label="ID: p\n(int)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
   node8 [label="&\n(int*)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
@@ -19,7 +19,7 @@ digraph AST {
   node10 -> node13 [style="solid", color="black", label=" arg2", fontcolor="black"];
   node10 -> node14 [style="solid", color="black", label=" arg3", fontcolor="black"];
   node16 [label="ID: q\n(float*)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
-  node15 [label="Decl\nfloat*\nz\n(float*)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
+  node15 [label="Decl\nconst float*\nz\n(float*)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
   node15 -> node16 [style="solid", color="black", label=" init", fontcolor="blue"];
   node18 [label="\"%% %f %f %f  kappa kappa\"\n(char*)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node19 [label="ID: z\n(float*)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];

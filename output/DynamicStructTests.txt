@@ -8,18 +8,22 @@
   test3.c... PASSED
   test4.c... PASSED
   test5.c... PASSED
-  test6.c... PASSED
-  test7.c... FAILED
-    --> EXPECTED (code 0):
-    15-1
-    ACTUAL (code 3221225477):
-    
-    [!] LLI STDERR:
-    PLEASE submit a bug report to https://github.com/llvm/llvm-project/issues/ and include the crash backtrace.
+  test6.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
+  test7.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
   test8.c... PASSED
   test9.c... PASSED
 
 ============================================================
-  EINDTOTAAL: 8 passed, 1 failed
+  EINDTOTAAL: 7 passed, 2 failed
 ============================================================
 

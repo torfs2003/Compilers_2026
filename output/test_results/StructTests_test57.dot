@@ -85,7 +85,7 @@ digraph AST {
   node54 [label="ID: ptr\n(struct kaas*)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
   node56 [label="ID: ptr\n(struct kaas*)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
   node57 [label="2\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
-  node55 [label="+\n(struct kaas*)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node55 [label="+\n(structkaas*)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node55 -> node56 [style="solid", color="black"];
   node55 -> node57 [style="solid", color="black"];
   node53 [label="=", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];

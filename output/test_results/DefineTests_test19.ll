@@ -21,8 +21,8 @@ entry:
   store i8* %".1", i8** %"z"
   ;  Source: returnprintf("%s",z);
   %".5" = bitcast [3 x i8]* @"str" to i8*
-  %"z.1" = load i8*, i8** %"z"
-  %".6" = call i32 (i8*, ...) @"printf"(i8* %".5", i8* %"z.1")
+  %"z_load" = load i8*, i8** %"z"
+  %".6" = call i32 (i8*, ...) @"printf"(i8* %".5", i8* %"z_load")
   ret i32 %".6"
 }
 
@@ -33,8 +33,8 @@ entry:
   store i8* %".1", i8** %"z"
   ;  Source: returnprintf("%s",z);
   %".5" = bitcast [3 x i8]* @"str.1" to i8*
-  %"z.1" = load i8*, i8** %"z"
-  %".6" = call i32 (i8*, ...) @"printf"(i8* %".5", i8* %"z.1")
+  %"z_load" = load i8*, i8** %"z"
+  %".6" = call i32 (i8*, ...) @"printf"(i8* %".5", i8* %"z_load")
   ret i32 %".6"
 }
 
@@ -71,9 +71,9 @@ entry:
   %".9" = bitcast [6 x i8]* %"y" to i8*
   store i8* %".9", i8** %"z"
   ;  Source: z
-  %"z.1" = load i8*, i8** %"z"
+  %"z_load" = load i8*, i8** %"z"
   ;  Source: printthings1(z);
-  %".13" = call i32 @"printthings1"(i8* %"z.1")
+  %".13" = call i32 @"printthings1"(i8* %"z_load")
   ;  Source: y
   ;  Source: printthings1(y);
   %".16" = bitcast [6 x i8]* %"y" to i8*

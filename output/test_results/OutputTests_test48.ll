@@ -23,48 +23,48 @@ entry:
   store i32* %".2", i32** %"pb"
   %".6" = bitcast [4 x i8]* @"str" to i8*
   ;  Source: pa
-  %"pa.1" = load i32*, i32** %"pa"
+  %"pa_load" = load i32*, i32** %"pa"
   ;  Source: pb
-  %"pb.1" = load i32*, i32** %"pb"
+  %"pb_load" = load i32*, i32** %"pb"
   ;  Source: pa<pb
-  %".10" = ptrtoint i32* %"pa.1" to i32
-  %".11" = ptrtoint i32* %"pb.1" to i32
+  %".10" = ptrtoint i32* %"pa_load" to i32
+  %".11" = ptrtoint i32* %"pb_load" to i32
   %".12" = icmp ult i32 %".10", %".11"
   %".13" = zext i1 %".12" to i32
   ;  Source: printf("%d\n",pa<pb);
   %".15" = call i32 (i8*, ...) @"printf"(i8* %".6", i32 %".13")
   %".16" = bitcast [4 x i8]* @"str.1" to i8*
   ;  Source: pa
-  %"pa.2" = load i32*, i32** %"pa"
+  %"pa_load.1" = load i32*, i32** %"pa"
   ;  Source: pb
-  %"pb.2" = load i32*, i32** %"pb"
+  %"pb_load.1" = load i32*, i32** %"pb"
   ;  Source: pa>pb
-  %".20" = ptrtoint i32* %"pa.2" to i32
-  %".21" = ptrtoint i32* %"pb.2" to i32
+  %".20" = ptrtoint i32* %"pa_load.1" to i32
+  %".21" = ptrtoint i32* %"pb_load.1" to i32
   %".22" = icmp ugt i32 %".20", %".21"
   %".23" = zext i1 %".22" to i32
   ;  Source: printf("%d\n",pa>pb);
   %".25" = call i32 (i8*, ...) @"printf"(i8* %".16", i32 %".23")
   %".26" = bitcast [4 x i8]* @"str.2" to i8*
   ;  Source: pa
-  %"pa.3" = load i32*, i32** %"pa"
+  %"pa_load.2" = load i32*, i32** %"pa"
   ;  Source: pb
-  %"pb.3" = load i32*, i32** %"pb"
+  %"pb_load.2" = load i32*, i32** %"pb"
   ;  Source: pa==pb
-  %".30" = ptrtoint i32* %"pa.3" to i32
-  %".31" = ptrtoint i32* %"pb.3" to i32
+  %".30" = ptrtoint i32* %"pa_load.2" to i32
+  %".31" = ptrtoint i32* %"pb_load.2" to i32
   %".32" = icmp eq i32 %".30", %".31"
   %".33" = zext i1 %".32" to i32
   ;  Source: printf("%d\n",pa==pb);
   %".35" = call i32 (i8*, ...) @"printf"(i8* %".26", i32 %".33")
   %".36" = bitcast [4 x i8]* @"str.3" to i8*
   ;  Source: pa
-  %"pa.4" = load i32*, i32** %"pa"
+  %"pa_load.3" = load i32*, i32** %"pa"
   ;  Source: pb
-  %"pb.4" = load i32*, i32** %"pb"
+  %"pb_load.3" = load i32*, i32** %"pb"
   ;  Source: pa!=pb
-  %".40" = ptrtoint i32* %"pa.4" to i32
-  %".41" = ptrtoint i32* %"pb.4" to i32
+  %".40" = ptrtoint i32* %"pa_load.3" to i32
+  %".41" = ptrtoint i32* %"pb_load.3" to i32
   %".42" = icmp ne i32 %".40", %".41"
   %".43" = zext i1 %".42" to i32
   ;  Source: printf("%d\n",pa!=pb);

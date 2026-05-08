@@ -60,7 +60,9 @@ entry:
   %"deref_load" = load i8, i8* %"load_zeta.1"
   ;  Source: printf("%d %f %c %c",ementaler.melk,ementaler.fermtented,ementaler.lol,*(ementaler.zeta));
   %".23" = fpext float %"load_fermtented.1" to double
-  %".24" = call i32 (i8*, ...) @"printf"(i8* %".16", i32 %"load_melk.1", double %".23", i8 %"load_lol.2", i8 %"deref_load")
+  %".24" = sext i8 %"load_lol.2" to i32
+  %".25" = sext i8 %"deref_load" to i32
+  %".26" = call i32 (i8*, ...) @"printf"(i8* %".16", i32 %"load_melk.1", double %".23", i32 %".24", i32 %".25")
   ;  Source: return0;
   ret i32 0
 }

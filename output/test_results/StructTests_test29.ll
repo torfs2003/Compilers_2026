@@ -27,7 +27,7 @@ entry:
   store i32 3, i32* %"gep_melk"
   %"ptr" = alloca %"struct.kaas"*
   ;  Source: ptr
-  %"ptr.1" = load %"struct.kaas"*, %"struct.kaas"** %"ptr"
+  %"ptr_load" = load %"struct.kaas"*, %"struct.kaas"** %"ptr"
   ;  Source: gouda
   ;  Source: &gouda
   ;  Source: ptr=&gouda;
@@ -41,8 +41,8 @@ entry:
   %".14" = call i32 (i8*, ...) @"printf"(i8* %".10", i32 %"load_melk.1")
   %".15" = bitcast [3 x i8]* @"str.1" to i8*
   ;  Source: (*ptr).melk
-  %"ptr.2" = load %"struct.kaas"*, %"struct.kaas"** %"ptr"
-  %"gep_melk.2" = getelementptr inbounds %"struct.kaas", %"struct.kaas"* %"ptr.2", i32 0, i32 0
+  %"ptr_load.1" = load %"struct.kaas"*, %"struct.kaas"** %"ptr"
+  %"gep_melk.2" = getelementptr inbounds %"struct.kaas", %"struct.kaas"* %"ptr_load.1", i32 0, i32 0
   %"load_melk.2" = load i32, i32* %"gep_melk.2"
   ;  Source: printf("%d",(*ptr).melk);
   %".18" = call i32 (i8*, ...) @"printf"(i8* %".15", i32 %"load_melk.2")

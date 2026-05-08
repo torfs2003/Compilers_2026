@@ -22,9 +22,9 @@ entry:
   %"b" = alloca i32
   store i32 %".2", i32* %"b"
   ;  Source: if(a==b){return1;}
-  %"a.1" = load i32, i32* %"a"
-  %"b.1" = load i32, i32* %"b"
-  %".7" = icmp eq i32 %"a.1", %"b.1"
+  %"a_load" = load i32, i32* %"a"
+  %"b_load" = load i32, i32* %"b"
+  %".7" = icmp eq i32 %"a_load", %"b_load"
   %".8" = zext i1 %".7" to i32
   %"ifcond" = icmp ne i32 %".8", 0
   br i1 %"ifcond", label %"if.then", label %"if.end"
@@ -46,9 +46,9 @@ entry:
   store float %".3", float* %"boolean"
   %".5" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: boolean
-  %"boolean.1" = load float, float* %"boolean"
+  %"boolean_load" = load float, float* %"boolean"
   ;  Source: printf("%f",boolean);
-  %".8" = fpext float %"boolean.1" to double
+  %".8" = fpext float %"boolean_load" to double
   %".9" = call i32 (i8*, ...) @"printf"(i8* %".5", double %".8")
   ;  Source: return0;
   ret i32 0

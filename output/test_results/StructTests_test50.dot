@@ -10,7 +10,7 @@ digraph AST {
   node3 -> node6 [style="solid", color="black"];
   node9 [label="Decl\nstruct v\na\n(struct v)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
   node12 [label="ID: a\n(struct v)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
-  node11 [label="&\n(struct v*)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node11 [label="&\n(structv*)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node11 -> node12 [style="solid", color="black"];
   node10 [label="Decl\nunion v*\nc\n(union v*)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
   node10 -> node11 [style="solid", color="black", label=" init", fontcolor="blue"];

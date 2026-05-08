@@ -1,0 +1,39 @@
+
+============================================================
+  TEST MAP : example_source_files/test_set_3/LLVMTests/StringTests
+  Log file : output\StringTests.txt
+============================================================
+  test1.c... PASSED
+  test10.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
+  test11.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+    -->   File "<frozen runpy>", line 198, in _run_module_as_main
+    -->   File "<frozen runpy>", line 88, in _run_code
+    -->   File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 124, in <module>
+    -->     main()
+  test12.c... PASSED
+  test13.c... FAILED (Compiler Error)
+  test14.c... FAILED (Compiler Error)
+  test15.c... PASSED
+  test2.c... PASSED
+  test3.c... PASSED
+  test4.c... PASSED
+  test5.c... PASSED
+  test6.c... PASSED
+  test7.c... PASSED
+  test8.c... PASSED
+  test9.c... FAILED
+    --> EXPECTED (code 0):
+    1
+    ACTUAL (code 0):
+    1186332672
+
+============================================================
+  EINDTOTAAL: 10 passed, 5 failed
+============================================================
+

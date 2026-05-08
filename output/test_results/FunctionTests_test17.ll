@@ -21,7 +21,7 @@ entry:
   store i32 0, i32* %"count"
   %".3" = bitcast [4 x i8]* @"str" to i8*
   ;  Source: count
-  %"count.1" = load i32, i32* %"count"
+  %"count_load" = load i32, i32* %"count"
   ;  Source: ++count
   %".6" = load i32, i32* %"count"
   %".7" = add i32 %".6", 1

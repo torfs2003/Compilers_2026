@@ -22,7 +22,7 @@ digraph AST {
   node13 -> node14 [style="solid", color="black"];
   node13 -> node16 [style="solid", color="black"];
   node19 [label="ID: gouda\n(struct kaas)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
-  node18 [label="&\n(struct kaas*)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node18 [label="&\n(structkaas*)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node18 -> node19 [style="solid", color="black"];
   node17 [label="Decl\nstruct kaas*\nptr\n(struct kaas*)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
   node17 -> node18 [style="solid", color="black", label=" init", fontcolor="blue"];

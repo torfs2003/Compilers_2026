@@ -24,27 +24,27 @@ entry:
   %"c" = alloca i32
   store i32 6, i32* %"c"
   ;  Source: a
-  %"a.1" = load i32, i32* %"a"
+  %"a_load" = load i32, i32* %"a"
   ;  Source: a=5;
   store i32 5, i32* %"a"
   ;  Source: b
-  %"b.1" = load i32, i32* %"b"
+  %"b_load" = load i32, i32* %"b"
   ;  Source: b=9;
   store i32 9, i32* %"b"
   ;  Source: c
-  %"c.1" = load i32, i32* %"c"
+  %"c_load" = load i32, i32* %"c"
   ;  Source: c=6;
   store i32 6, i32* %"c"
   %"d" = alloca i32
-  %"a.2" = load i32, i32* %"a"
-  %"b.2" = load i32, i32* %"b"
-  %".14" = icmp ne i32 %"a.2", 0
-  %".15" = icmp ne i32 %"b.2", 0
+  %"a_load.1" = load i32, i32* %"a"
+  %"b_load.1" = load i32, i32* %"b"
+  %".14" = icmp ne i32 %"a_load.1", 0
+  %".15" = icmp ne i32 %"b_load.1", 0
   %".16" = and i1 %".14", %".15"
   %".17" = zext i1 %".16" to i32
-  %"c.2" = load i32, i32* %"c"
+  %"c_load.1" = load i32, i32* %"c"
   %".18" = icmp ne i32 %".17", 0
-  %".19" = icmp ne i32 %"c.2", 0
+  %".19" = icmp ne i32 %"c_load.1", 0
   %".20" = or i1 %".18", %".19"
   %".21" = zext i1 %".20" to i32
   %".22" = icmp eq i32 %".21", 0
@@ -52,9 +52,9 @@ entry:
   store i32 %".23", i32* %"d"
   %".25" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: d
-  %"d.1" = load i32, i32* %"d"
+  %"d_load" = load i32, i32* %"d"
   ;  Source: printf("%d",d);
-  %".28" = call i32 (i8*, ...) @"printf"(i8* %".25", i32 %"d.1")
+  %".28" = call i32 (i8*, ...) @"printf"(i8* %".25", i32 %"d_load")
   ;  Source: return0;
   ret i32 0
 }

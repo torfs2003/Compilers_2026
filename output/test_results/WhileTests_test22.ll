@@ -22,17 +22,17 @@ entry:
   ;  Source: while(i<10){printf("%d\n",i);if(i==5){break;}else{i++;continue;}i=10;}
   br label %"while.cond"
 while.cond:
-  %"i.1" = load i32, i32* %"i"
-  %".5" = icmp slt i32 %"i.1", 10
+  %"i_load" = load i32, i32* %"i"
+  %".5" = icmp slt i32 %"i_load", 10
   %".6" = zext i1 %".5" to i32
   %"whilecond" = icmp ne i32 %".6", 0
   br i1 %"whilecond", label %"while.body", label %"while.end"
 while.body:
   %".8" = bitcast [4 x i8]* @"str" to i8*
-  %"i.2" = load i32, i32* %"i"
-  %".9" = call i32 (i8*, ...) @"printf"(i8* %".8", i32 %"i.2")
-  %"i.3" = load i32, i32* %"i"
-  %".10" = icmp eq i32 %"i.3", 5
+  %"i_load.1" = load i32, i32* %"i"
+  %".9" = call i32 (i8*, ...) @"printf"(i8* %".8", i32 %"i_load.1")
+  %"i_load.2" = load i32, i32* %"i"
+  %".10" = icmp eq i32 %"i_load.2", 5
   %".11" = zext i1 %".10" to i32
   %"ifcond" = icmp ne i32 %".11", 0
   br i1 %"ifcond", label %"if.then", label %"if.else"
@@ -42,11 +42,11 @@ while.end:
 if.then:
   br label %"while.end"
 if.end:
-  %"i.5" = load i32, i32* %"i"
+  %"i_load.4" = load i32, i32* %"i"
   store i32 10, i32* %"i"
   br label %"while.cond"
 if.else:
-  %"i.4" = load i32, i32* %"i"
+  %"i_load.3" = load i32, i32* %"i"
   %".14" = load i32, i32* %"i"
   %".15" = add i32 %".14", 1
   store i32 %".15", i32* %"i"

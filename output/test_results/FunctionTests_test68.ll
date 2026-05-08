@@ -21,9 +21,9 @@ entry:
   store i32 %".1", i32* %"b"
   %".4" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: b
-  %"b.1" = load i32, i32* %"b"
+  %"b_load" = load i32, i32* %"b"
   ;  Source: printf("%d",b);
-  %".7" = call i32 (i8*, ...) @"printf"(i8* %".4", i32 %"b.1")
+  %".7" = call i32 (i8*, ...) @"printf"(i8* %".4", i32 %"b_load")
   ;  Source: return0;
   ret i32 0
 }
@@ -34,9 +34,9 @@ entry:
   %"c" = alloca i32
   store i32 2, i32* %"c"
   ;  Source: c
-  %"c.1" = load i32, i32* %"c"
+  %"c_load" = load i32, i32* %"c"
   ;  Source: a(c);
-  %".5" = call i32 @"a"(i32 %"c.1")
+  %".5" = call i32 @"a"(i32 %"c_load")
   ;  Source: return0;
   ret i32 0
 }

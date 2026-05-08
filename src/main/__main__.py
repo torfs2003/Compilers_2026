@@ -13,6 +13,7 @@ from src.parser.semantic_visitor import SemanticVisitor
 from src.llvm_target.llvm_visitor import LLVMVisitor
 from src.llvm_target.compiler import Compiler
 
+
 def main():
     # Argument Parser opzetten
     parser = argparse.ArgumentParser(description='Compiler Project')

@@ -51,18 +51,18 @@ entry:
   %".20" = bitcast [4 x i32]* %"a" to i32*
   store i32* %".20", i32** %"k"
   ;  Source: k
-  %"k.1" = load i32*, i32** %"k"
+  %"k_load" = load i32*, i32** %"k"
   ;  Source: k
-  %"k.2" = load i32*, i32** %"k"
+  %"k_load.1" = load i32*, i32** %"k"
   ;  Source: k+2
-  %".25" = getelementptr i32, i32* %"k.2", i32 2
+  %".25" = getelementptr i32, i32* %"k_load.1", i32 2
   ;  Source: k=k+2;
   store i32* %".25", i32** %"k"
   %".28" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: k
-  %"k.3" = load i32*, i32** %"k"
+  %"k_load.2" = load i32*, i32** %"k"
   ;  Source: *k
-  %"deref_load" = load i32, i32* %"k.3"
+  %"deref_load" = load i32, i32* %"k_load.2"
   ;  Source: printf("%d",*k);
   %".32" = call i32 (i8*, ...) @"printf"(i8* %".28", i32 %"deref_load")
   %".33" = bitcast [3 x i8]* @"str.1" to i8*
@@ -83,8 +83,8 @@ entry:
   store %"struct.kaas"* %".45", %"struct.kaas"** %"ptr"
   %".47" = bitcast [3 x i8]* @"str.2" to i8*
   ;  Source: (*ptr).a
-  %"ptr.1" = load %"struct.kaas"*, %"struct.kaas"** %"ptr"
-  %"gep_a.3" = getelementptr inbounds %"struct.kaas", %"struct.kaas"* %"ptr.1", i32 0, i32 0
+  %"ptr_load" = load %"struct.kaas"*, %"struct.kaas"** %"ptr"
+  %"gep_a.3" = getelementptr inbounds %"struct.kaas", %"struct.kaas"* %"ptr_load", i32 0, i32 0
   %"load_a.3" = load float, float* %"gep_a.3"
   ;  Source: printf("%f",(*ptr).a);
   %".50" = fpext float %"load_a.3" to double

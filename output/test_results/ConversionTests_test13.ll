@@ -11,10 +11,10 @@ entry:
   %".3" = inttoptr i32 5 to float*
   store float* %".3", float** %"y"
   %"v" = alloca float
-  %"x.1" = load float, float* %"x"
-  %"y.1" = load float*, float** %"y"
-  %".5" = fcmp one float %"x.1",              0x0
-  %".6" = icmp ne float* %"y.1", 0
+  %"x_load" = load float, float* %"x"
+  %"y_load" = load float*, float** %"y"
+  %".5" = fcmp one float %"x_load",              0x0
+  %".6" = icmp ne float* %"y_load", 0
   %".7" = and i1 %".5", %".6"
   %".8" = zext i1 %".7" to i32
   %".9" = sitofp i32 %".8" to float

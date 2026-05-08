@@ -26,7 +26,8 @@ entry:
   %".8" = call i32 (i8*, ...) @"printf"(i8* %".6", i32 5)
   %".9" = bitcast [3 x i8]* @"str.2" to i8*
   ;  Source: printf("%c",'a');
-  %".11" = call i32 (i8*, ...) @"printf"(i8* %".9", i8 97)
+  %".11" = sext i8 97 to i32
+  %".12" = call i32 (i8*, ...) @"printf"(i8* %".9", i32 %".11")
   ;  Source: return0;
   ret i32 0
 }

@@ -56,7 +56,9 @@ entry:
   ;  Source: *(*ptr.kaas_ptr).zeta
   %"deref_load" = load i8, i8* %"load_zeta.1"
   ;  Source: printf("%c %c",(*ptr.kaas_ptr).lol,*(*ptr.kaas_ptr).zeta);
-  %".20" = call i32 (i8*, ...) @"printf"(i8* %".15", i8 %"load_lol.2", i8 %"deref_load")
+  %".20" = sext i8 %"load_lol.2" to i32
+  %".21" = sext i8 %"deref_load" to i32
+  %".22" = call i32 (i8*, ...) @"printf"(i8* %".15", i32 %".20", i32 %".21")
   ;  Source: return0;
   ret i32 0
 }

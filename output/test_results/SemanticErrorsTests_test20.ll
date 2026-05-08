@@ -12,12 +12,12 @@ entry:
   %"x_ptr" = alloca i32*
   store i32* %"b", i32** %"x_ptr"
   ;  Source: x_ptr
-  %"x_ptr.1" = load i32*, i32** %"x_ptr"
-  %"deref_load" = load i32, i32* %"x_ptr.1"
+  %"x_ptr_load" = load i32*, i32** %"x_ptr"
+  %"deref_load" = load i32, i32* %"x_ptr_load"
   ;  Source: x
-  %"x.1" = load i32, i32* %"x"
+  %"x_load" = load i32, i32* %"x"
   ;  Source: *x_ptr=x;
-  store i32 %"x.1", i32* %"x_ptr.1"
+  store i32 %"x_load", i32* %"x_ptr_load"
   ;  User Comment: //Invalid: const assignment
   ;  Source: return0;
   ret i32 0

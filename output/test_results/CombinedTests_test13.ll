@@ -24,15 +24,15 @@ entry:
   ;  Source: while(i<=10){if(i!=toSkip){printf("%d\n",i);}i++;}
   br label %"while.cond"
 while.cond:
-  %"i.1" = load i32, i32* %"i"
-  %".7" = icmp sle i32 %"i.1", 10
+  %"i_load" = load i32, i32* %"i"
+  %".7" = icmp sle i32 %"i_load", 10
   %".8" = zext i1 %".7" to i32
   %"whilecond" = icmp ne i32 %".8", 0
   br i1 %"whilecond", label %"while.body", label %"while.end"
 while.body:
-  %"i.2" = load i32, i32* %"i"
-  %"toSkip.1" = load i32, i32* %"toSkip"
-  %".10" = icmp ne i32 %"i.2", %"toSkip.1"
+  %"i_load.1" = load i32, i32* %"i"
+  %"toSkip_load" = load i32, i32* %"toSkip"
+  %".10" = icmp ne i32 %"i_load.1", %"toSkip_load"
   %".11" = zext i1 %".10" to i32
   %"ifcond" = icmp ne i32 %".11", 0
   br i1 %"ifcond", label %"if.then", label %"if.end"
@@ -40,11 +40,11 @@ while.end:
   ret void
 if.then:
   %".13" = bitcast [4 x i8]* @"str" to i8*
-  %"i.3" = load i32, i32* %"i"
-  %".14" = call i32 (i8*, ...) @"printf"(i8* %".13", i32 %"i.3")
+  %"i_load.2" = load i32, i32* %"i"
+  %".14" = call i32 (i8*, ...) @"printf"(i8* %".13", i32 %"i_load.2")
   br label %"if.end"
 if.end:
-  %"i.4" = load i32, i32* %"i"
+  %"i_load.3" = load i32, i32* %"i"
   %".16" = load i32, i32* %"i"
   %".17" = add i32 %".16", 1
   store i32 %".17", i32* %"i"
@@ -57,17 +57,17 @@ entry:
   %"toSkip" = alloca i32
   store i32 8, i32* %"toSkip"
   ;  Source: toSkip
-  %"toSkip.1" = load i32, i32* %"toSkip"
+  %"toSkip_load" = load i32, i32* %"toSkip"
   ;  Source: count(toSkip);
-  call void @"count"(i32 %"toSkip.1")
+  call void @"count"(i32 %"toSkip_load")
   ;  Source: toSkip
-  %"toSkip.2" = load i32, i32* %"toSkip"
+  %"toSkip_load.1" = load i32, i32* %"toSkip"
   ;  Source: toSkip=3;
   store i32 3, i32* %"toSkip"
   ;  Source: toSkip
-  %"toSkip.3" = load i32, i32* %"toSkip"
+  %"toSkip_load.2" = load i32, i32* %"toSkip"
   ;  Source: count(toSkip);
-  call void @"count"(i32 %"toSkip.3")
+  call void @"count"(i32 %"toSkip_load.2")
   ;  Source: return0;
   ret i32 0
 }

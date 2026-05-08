@@ -6,6 +6,14 @@ declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
 
+declare i8* @"fopen"(i8* %".1", i8* %".2")
+
+declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
+
+declare i32 @"fputs"(i8* %".1", i8* %".2")
+
+declare i32 @"fclose"(i8* %".1")
+
 define i32 @"main"()
 {
 entry:
@@ -17,23 +25,22 @@ entry:
   store i32 0, i32* %"sum"
   %"i" = alloca i32
   ;  Source: i
-  %"i.1" = load i32, i32* %"i"
+  %"i_load" = load i32, i32* %"i"
   ;  Source: i=0
   store i32 0, i32* %"i"
   br label %"while.cond"
 while.cond:
-  %"i.2" = load i32, i32* %"i"
-  %".9" = icmp slt i32 %"i.2", 10
+  %"i_load.1" = load i32, i32* %"i"
+  %".9" = icmp slt i32 %"i_load.1", 10
   %".10" = zext i1 %".9" to i32
   %"whilecond" = icmp ne i32 %".10", 0
   br i1 %"whilecond", label %"while.body", label %"while.end"
 while.body:
-  %"sum.1" = load i32, i32* %"sum"
-  %"incr.1" = load i32, i32* %"incr"
-  %".12" = add i32 %"sum.1", %"incr.1"
-  %"sum.2" = load i32, i32* %"sum"
+  %"sum_load" = load i32, i32* %"sum"
+  %".12" = add i32 %"sum_load", 5
+  %"sum_load.1" = load i32, i32* %"sum"
   store i32 %".12", i32* %"sum"
-  %"i.3" = load i32, i32* %"i"
+  %"i_load.2" = load i32, i32* %"i"
   %".14" = load i32, i32* %"i"
   %".15" = add i32 %".14", 1
   store i32 %".15", i32* %"i"
@@ -41,9 +48,9 @@ while.body:
 while.end:
   %".18" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: sum
-  %"sum.3" = load i32, i32* %"sum"
+  %"sum_load.2" = load i32, i32* %"sum"
   ;  Source: printf("%d",sum);
-  %".21" = call i32 (i8*, ...) @"printf"(i8* %".18", i32 %"sum.3")
+  %".21" = call i32 (i8*, ...) @"printf"(i8* %".18", i32 %"sum_load.2")
   ;  Source: return0;
   ret i32 0
 }

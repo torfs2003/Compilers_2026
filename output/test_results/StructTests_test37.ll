@@ -30,9 +30,9 @@ entry:
   store i32 %"load_as_integer.1", i32* %"q"
   %".6" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: q
-  %"q.1" = load i32, i32* %"q"
+  %"q_load" = load i32, i32* %"q"
   ;  Source: printf("%d",q);
-  %".9" = call i32 (i8*, ...) @"printf"(i8* %".6", i32 %"q.1")
+  %".9" = call i32 (i8*, ...) @"printf"(i8* %".6", i32 %"q_load")
   ;  Source: return0;
   ret i32 0
 }

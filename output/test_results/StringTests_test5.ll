@@ -22,11 +22,11 @@ entry:
   store i8* %".2", i8** %"s"
   %".4" = bitcast [9 x i8]* @"str.1" to i8*
   ;  Source: s
-  %"s.1" = load i8*, i8** %"s"
+  %"s_load" = load i8*, i8** %"s"
   ;  Source: s
-  %"s.2" = load i8*, i8** %"s"
+  %"s_load.1" = load i8*, i8** %"s"
   ;  Source: printf("%s Hi %s",s,s);
-  %".8" = call i32 (i8*, ...) @"printf"(i8* %".4", i8* %"s.1", i8* %"s.2")
+  %".8" = call i32 (i8*, ...) @"printf"(i8* %".4", i8* %"s_load", i8* %"s_load.1")
   ;  Source: return0;
   ret i32 0
 }

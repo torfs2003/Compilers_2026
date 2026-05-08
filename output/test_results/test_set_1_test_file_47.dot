@@ -2,7 +2,7 @@ digraph AST {
   node [fontname="Arial"];
   node2 [label="Include\n<stdio.h>", shape=note, style="filled", fillcolor="lightyellow", color="black", fontcolor="black"];
   node6 [label="6532\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
-  node5 [label="Decl\nint\ny\n(int)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
+  node5 [label="Decl\nconst int\ny\n(int)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
   node5 -> node6 [style="solid", color="black", label=" init", fontcolor="blue"];
   node4 [label="Block", shape=diamond, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node4 -> node5 [style="solid", color="black"];

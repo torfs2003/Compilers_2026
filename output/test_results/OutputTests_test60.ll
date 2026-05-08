@@ -22,16 +22,16 @@ entry:
   %"a" = alloca i32*
   store i32* %"d", i32** %"a"
   %"b" = alloca i32*
-  %"a.1" = load i32*, i32** %"a"
-  store i32* %"a.1", i32** %"b"
+  %"a_load" = load i32*, i32** %"a"
+  store i32* %"a_load", i32** %"b"
   %"c" = alloca i32*
-  %"b.1" = load i32*, i32** %"b"
-  store i32* %"b.1", i32** %"c"
+  %"b_load" = load i32*, i32** %"b"
+  store i32* %"b_load", i32** %"c"
   ;  Source: c
-  %"c.1" = load i32*, i32** %"c"
-  %"deref_load" = load i32, i32* %"c.1"
+  %"c_load" = load i32*, i32** %"c"
+  %"deref_load" = load i32, i32* %"c_load"
   ;  Source: *c=15;
-  store i32 15, i32* %"c.1"
+  store i32 15, i32* %"c_load"
   ;  Source: return0;
   ret i32 0
 }

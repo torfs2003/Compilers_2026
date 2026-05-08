@@ -13,9 +13,8 @@ entry:
   store i32* %"b", i32** %"x_ptr"
   ;  User Comment: //*x_ptr = x; //Invalid: const assignment
   ;  Source: x_ptr
-  %"x_ptr.1" = load i32*, i32** %"x_ptr"
+  %"x_ptr_load" = load i32*, i32** %"x_ptr"
   ;  Source: x
-  %"x.1" = load i32, i32* %"x"
   ;  Source: &x
   ;  User Comment: //*x_ptr = x; //Invalid: const assignment
   ;  Source: x_ptr=&x;

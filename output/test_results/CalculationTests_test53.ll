@@ -23,12 +23,12 @@ entry:
   %"sb" = alloca i32*
   store i32* %"a", i32** %"sb"
   ;  Source: sa
-  %"sa.1" = load i32*, i32** %"sa"
+  %"sa_load" = load i32*, i32** %"sa"
   ;  Source: sb
-  %"sb.1" = load i32*, i32** %"sb"
+  %"sb_load" = load i32*, i32** %"sb"
   ;  Source: sa-sb;
-  %".7" = ptrtoint i32* %"sa.1" to i32
-  %".8" = ptrtoint i32* %"sb.1" to i32
+  %".7" = ptrtoint i32* %"sa_load" to i32
+  %".8" = ptrtoint i32* %"sb_load" to i32
   %".9" = sub i32 %".7", %".8"
   %".10" = sdiv i32 %".9", 1
   ;  Source: return0;

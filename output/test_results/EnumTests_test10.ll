@@ -15,7 +15,6 @@ declare i32 @"fputs"(i8* %".1", i8* %".2")
 
 declare i32 @"fclose"(i8* %".1")
 
-@"x" = internal global i32 1
 define i32 @"main"()
 {
 entry:
@@ -26,7 +25,7 @@ entry:
   %"union_cast_day_ptr" = bitcast i32* %"gep_day_ptr" to i32**
   %"load_day_ptr" = load i32*, i32** %"union_cast_day_ptr"
   ;  Source: day
-  %"day.1" = load i32, i32* %"day"
+  %"day_load" = load i32, i32* %"day"
   ;  Source: &day
   ;  Source: scheduler.day_ptr=&day;
   store i32* %"day", i32** %"union_cast_day_ptr"
@@ -45,8 +44,8 @@ entry:
   ;  Source: printf("%d",scheduler.day_ptr);
   %".14" = call i32 (i8*, ...) @"printf"(i8* %".11", i32* %"load_day_ptr.2")
   ;  Source: if(day==Wed){scheduler.day_ptr=Thur;}
-  %"day.2" = load i32, i32* %"day"
-  %".16" = icmp eq i32 %"day.2", 2
+  %"day_load.1" = load i32, i32* %"day"
+  %".16" = icmp eq i32 %"day_load.1", 2
   %".17" = zext i1 %".16" to i32
   %"ifcond" = icmp ne i32 %".17", 0
   br i1 %"ifcond", label %"if.then", label %"if.end"
@@ -69,5 +68,6 @@ if.end:
   ret i32 0
 }
 
+@"x" = internal global i32 1
 @"str" = internal constant [3 x i8] c"%d\00"
 @"str.1" = internal constant [3 x i8] c"%d\00"

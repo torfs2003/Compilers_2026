@@ -48,7 +48,7 @@ digraph AST {
   node25 -> node27 [style="solid", color="black", label=" arg1", fontcolor="black"];
   node25 -> node29 [style="solid", color="black", label=" arg2", fontcolor="black"];
   node33 [label="ID: gouda\n(struct kaas)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
-  node32 [label="&\n(struct kaas*)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node32 [label="&\n(structkaas*)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node32 -> node33 [style="solid", color="black"];
   node31 [label="Decl\nstruct kaas*\nptr\n(struct kaas*)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
   node31 -> node32 [style="solid", color="black", label=" init", fontcolor="blue"];

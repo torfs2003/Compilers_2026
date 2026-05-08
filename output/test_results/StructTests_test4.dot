@@ -37,7 +37,7 @@ digraph AST {
   node22 -> node23 [style="solid", color="black", label=" arg0", fontcolor="black"];
   node22 -> node24 [style="solid", color="black", label=" arg1", fontcolor="black"];
   node28 [label="ID: ementaler\n(struct kaas)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
-  node27 [label="&\n(struct kaas*)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node27 [label="&\n(structkaas*)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node27 -> node28 [style="solid", color="black"];
   node26 [label="Decl\nstruct kaas*\ngouda_ptr\n(struct kaas*)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
   node26 -> node27 [style="solid", color="black", label=" init", fontcolor="blue"];

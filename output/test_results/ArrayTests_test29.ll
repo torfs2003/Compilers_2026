@@ -21,9 +21,9 @@ entry:
   store i32** %".1", i32*** %"b"
   %".4" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: b
-  %"b.1" = load i32**, i32*** %"b"
+  %"b_load" = load i32**, i32*** %"b"
   ;  Source: (*b)
-  %"deref_load" = load i32*, i32** %"b.1"
+  %"deref_load" = load i32*, i32** %"b_load"
   ;  Source: (*b)[0]
   %"gep_ptr" = getelementptr i32, i32* %"deref_load", i32 0
   %"array_element" = load i32, i32* %"gep_ptr"
@@ -53,9 +53,9 @@ entry:
   %"b" = alloca i32**
   store i32** %"a", i32*** %"b"
   ;  Source: b
-  %"b.1" = load i32**, i32*** %"b"
+  %"b_load" = load i32**, i32*** %"b"
   ;  Source: mul(b);
-  %".17" = call float @"mul"(i32** %"b.1")
+  %".17" = call float @"mul"(i32** %"b_load")
   ;  Source: return0;
   ret i32 0
 }

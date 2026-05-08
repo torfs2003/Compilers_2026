@@ -21,20 +21,22 @@ entry:
   store i8 48, i8* %"k"
   %".3" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: k
-  %"k.1" = load i8, i8* %"k"
+  %"k_load" = load i8, i8* %"k"
   ;  Source: printf("%c",k);
-  %".6" = call i32 (i8*, ...) @"printf"(i8* %".3", i8 %"k.1")
-  %".7" = bitcast [3 x i8]* @"str.1" to i8*
+  %".6" = sext i8 %"k_load" to i32
+  %".7" = call i32 (i8*, ...) @"printf"(i8* %".3", i32 %".6")
+  %".8" = bitcast [3 x i8]* @"str.1" to i8*
   ;  Source: k
-  %"k.2" = load i8, i8* %"k"
+  %"k_load.1" = load i8, i8* %"k"
   ;  Source: &k
   ;  Source: scanf("%c",&k);
-  %".11" = call i32 (i8*, ...) @"scanf"(i8* %".7", i8* %"k")
-  %".12" = bitcast [3 x i8]* @"str.2" to i8*
+  %".12" = call i32 (i8*, ...) @"scanf"(i8* %".8", i8* %"k")
+  %".13" = bitcast [3 x i8]* @"str.2" to i8*
   ;  Source: k
-  %"k.3" = load i8, i8* %"k"
+  %"k_load.2" = load i8, i8* %"k"
   ;  Source: printf("%c",k);
-  %".15" = call i32 (i8*, ...) @"printf"(i8* %".12", i8 %"k.3")
+  %".16" = sext i8 %"k_load.2" to i32
+  %".17" = call i32 (i8*, ...) @"printf"(i8* %".13", i32 %".16")
   ;  Source: return0;
   ret i32 0
 }

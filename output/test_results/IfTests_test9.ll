@@ -22,18 +22,18 @@ entry:
   %"b" = alloca i32
   store i32 1, i32* %"b"
   ;  Source: a
-  %"a.1" = load i32, i32* %"a"
+  %"a_load" = load i32, i32* %"a"
   ;  Source: a=1;
   store i32 1, i32* %"a"
   ;  Source: b
-  %"b.1" = load i32, i32* %"b"
+  %"b_load" = load i32, i32* %"b"
   ;  Source: b=1;
   store i32 1, i32* %"b"
   ;  Source: if(a&&b){printf("%d",1);}elseif(a||b){printf("%d",2);}else{printf("%d",3);}
-  %"a.2" = load i32, i32* %"a"
-  %"b.2" = load i32, i32* %"b"
-  %".11" = icmp ne i32 %"a.2", 0
-  %".12" = icmp ne i32 %"b.2", 0
+  %"a_load.1" = load i32, i32* %"a"
+  %"b_load.1" = load i32, i32* %"b"
+  %".11" = icmp ne i32 %"a_load.1", 0
+  %".12" = icmp ne i32 %"b_load.1", 0
   %".13" = and i1 %".11", %".12"
   %".14" = zext i1 %".13" to i32
   %"ifcond" = icmp ne i32 %".14", 0
@@ -46,10 +46,10 @@ if.end:
   ;  Source: return0;
   ret i32 0
 if.else:
-  %"a.3" = load i32, i32* %"a"
-  %"b.3" = load i32, i32* %"b"
-  %".19" = icmp ne i32 %"a.3", 0
-  %".20" = icmp ne i32 %"b.3", 0
+  %"a_load.2" = load i32, i32* %"a"
+  %"b_load.2" = load i32, i32* %"b"
+  %".19" = icmp ne i32 %"a_load.2", 0
+  %".20" = icmp ne i32 %"b_load.2", 0
   %".21" = or i1 %".19", %".20"
   %".22" = zext i1 %".21" to i32
   %"ifcond.1" = icmp ne i32 %".22", 0

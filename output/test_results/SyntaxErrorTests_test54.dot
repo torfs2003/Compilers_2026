@@ -2,9 +2,9 @@ digraph AST {
   node [fontname="Arial"];
   node2 [label="Include\n<stdio.h>", shape=note, style="filled", fillcolor="lightyellow", color="black", fontcolor="black"];
   node6 [label="2\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
-  node5 [label="Decl\nint\nx\n(int)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
+  node5 [label="Decl\nconst int\nx\n(int)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
   node5 -> node6 [style="solid", color="black", label=" init", fontcolor="blue"];
-  node8 [label="ID: x\n(int)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
+  node8 [label="2\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node7 [label="POST--\n(int)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node7 -> node8 [style="solid", color="black"];
   node10 [label="0\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];

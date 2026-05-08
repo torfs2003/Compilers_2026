@@ -23,39 +23,43 @@ entry:
   store i8* %"x", i8** %"chr_ptr"
   %".4" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: chr_ptr
-  %"chr_ptr.1" = load i8*, i8** %"chr_ptr"
+  %"chr_ptr_load" = load i8*, i8** %"chr_ptr"
   ;  Source: *chr_ptr
-  %"deref_load" = load i8, i8* %"chr_ptr.1"
+  %"deref_load" = load i8, i8* %"chr_ptr_load"
   ;  Source: printf("%c",*chr_ptr);
-  %".8" = call i32 (i8*, ...) @"printf"(i8* %".4", i8 %"deref_load")
+  %".8" = sext i8 %"deref_load" to i32
+  %".9" = call i32 (i8*, ...) @"printf"(i8* %".4", i32 %".8")
   ;  Source: chr_ptr
-  %"chr_ptr.2" = load i8*, i8** %"chr_ptr"
-  %"deref_load.1" = load i8, i8* %"chr_ptr.2"
+  %"chr_ptr_load.1" = load i8*, i8** %"chr_ptr"
+  %"deref_load.1" = load i8, i8* %"chr_ptr_load.1"
   ;  Source: *chr_ptr='b';
-  store i8 98, i8* %"chr_ptr.2"
-  %".12" = bitcast [3 x i8]* @"str.1" to i8*
+  store i8 98, i8* %"chr_ptr_load.1"
+  %".13" = bitcast [3 x i8]* @"str.1" to i8*
   ;  Source: chr_ptr
-  %"chr_ptr.3" = load i8*, i8** %"chr_ptr"
+  %"chr_ptr_load.2" = load i8*, i8** %"chr_ptr"
   ;  Source: *chr_ptr
-  %"deref_load.2" = load i8, i8* %"chr_ptr.3"
+  %"deref_load.2" = load i8, i8* %"chr_ptr_load.2"
   ;  Source: printf("%c",*chr_ptr);
-  %".16" = call i32 (i8*, ...) @"printf"(i8* %".12", i8 %"deref_load.2")
+  %".17" = sext i8 %"deref_load.2" to i32
+  %".18" = call i32 (i8*, ...) @"printf"(i8* %".13", i32 %".17")
   %"another_char" = alloca i8
-  %"chr_ptr.4" = load i8*, i8** %"chr_ptr"
-  %"deref_load.3" = load i8, i8* %"chr_ptr.4"
+  %"chr_ptr_load.3" = load i8*, i8** %"chr_ptr"
+  %"deref_load.3" = load i8, i8* %"chr_ptr_load.3"
   store i8 %"deref_load.3", i8* %"another_char"
-  %".18" = bitcast [3 x i8]* @"str.2" to i8*
+  %".20" = bitcast [3 x i8]* @"str.2" to i8*
   ;  Source: chr_ptr
-  %"chr_ptr.5" = load i8*, i8** %"chr_ptr"
+  %"chr_ptr_load.4" = load i8*, i8** %"chr_ptr"
   ;  Source: *chr_ptr
-  %"deref_load.4" = load i8, i8* %"chr_ptr.5"
+  %"deref_load.4" = load i8, i8* %"chr_ptr_load.4"
   ;  Source: printf("%c",*chr_ptr);
-  %".22" = call i32 (i8*, ...) @"printf"(i8* %".18", i8 %"deref_load.4")
-  %".23" = bitcast [3 x i8]* @"str.3" to i8*
+  %".24" = sext i8 %"deref_load.4" to i32
+  %".25" = call i32 (i8*, ...) @"printf"(i8* %".20", i32 %".24")
+  %".26" = bitcast [3 x i8]* @"str.3" to i8*
   ;  Source: another_char
-  %"another_char.1" = load i8, i8* %"another_char"
+  %"another_char_load" = load i8, i8* %"another_char"
   ;  Source: printf("%c",another_char);
-  %".26" = call i32 (i8*, ...) @"printf"(i8* %".23", i8 %"another_char.1")
+  %".29" = sext i8 %"another_char_load" to i32
+  %".30" = call i32 (i8*, ...) @"printf"(i8* %".26", i32 %".29")
   ;  Source: return0;
   ret i32 0
 }

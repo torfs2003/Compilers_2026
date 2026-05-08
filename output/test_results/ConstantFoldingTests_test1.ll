@@ -17,17 +17,23 @@ entry:
   %".8" = fmul float 0x402e333340000000, %".7"
   store float %".8", float* %"c"
   %"d" = alloca i8
-  %".10" = fptosi float 0x404b8cccc0000000 to i8
-  store i8 %".10", i8* %"d"
+  %".10" = fptosi float 0x404b8cccc0000000 to i32
+  %".11" = icmp sgt i32 %".10", 127
+  %".12" = select  i1 %".11", i32 127, i32 %".10"
+  %".13" = trunc i32 %".12" to i8
+  store i8 %".13", i8* %"d"
   %"e" = alloca i8
-  %".12" = sdiv i8 101, 97
-  store i8 %".12", i8* %"e"
+  %".15" = sdiv i8 101, 97
+  store i8 %".15", i8* %"e"
   %"f1" = alloca i8
-  %".14" = sitofp i8 120 to float
-  %".15" = fadd float 0x40e63900c0000000, %".14"
-  %".16" = fadd float %".15",              0x0
-  %".17" = fptosi float %".16" to i8
-  store i8 %".17", i8* %"f1"
+  %".17" = sitofp i8 120 to float
+  %".18" = fadd float 0x40e63900c0000000, %".17"
+  %".19" = fadd float %".18",              0x0
+  %".20" = fptosi float %".19" to i32
+  %".21" = icmp sgt i32 %".20", 127
+  %".22" = select  i1 %".21", i32 127, i32 %".20"
+  %".23" = trunc i32 %".22" to i8
+  store i8 %".23", i8* %"f1"
   %"f" = alloca i32
   store i32 3, i32* %"f"
   %"g" = alloca i32

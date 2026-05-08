@@ -46,7 +46,8 @@ entry:
   %"load_lol.1" = load i8, i8* %"gep_lol.1"
   ;  Source: printf("%d %f %c",ementaler.melk,ementaler.fermtented,ementaler.lol);
   %".16" = fpext float %"load_fermtented.1" to double
-  %".17" = call i32 (i8*, ...) @"printf"(i8* %".11", i32 %"load_melk.1", double %".16", i8 %"load_lol.1")
+  %".17" = sext i8 %"load_lol.1" to i32
+  %".18" = call i32 (i8*, ...) @"printf"(i8* %".11", i32 %"load_melk.1", double %".16", i32 %".17")
   ;  Source: return0;
   ret i32 0
 }

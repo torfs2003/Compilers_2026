@@ -14,26 +14,26 @@ entry:
   %"x_ptr" = alloca i32**
   store i32** %"b_ptr", i32*** %"x_ptr"
   ;  Source: x_ptr
-  %"x_ptr.1" = load i32**, i32*** %"x_ptr"
+  %"x_ptr_load" = load i32**, i32*** %"x_ptr"
   ;  Source: b_ptr
-  %"b_ptr.1" = load i32*, i32** %"b_ptr"
+  %"b_ptr_load" = load i32*, i32** %"b_ptr"
   ;  Source: x_ptr=b_ptr;
-  %".9" = bitcast i32* %"b_ptr.1" to i32**
+  %".9" = bitcast i32* %"b_ptr_load" to i32**
   store i32** %".9", i32*** %"x_ptr"
   ;  User Comment: //Warning
   ;  Source: x_ptr
-  %"x_ptr.2" = load i32**, i32*** %"x_ptr"
+  %"x_ptr_load.1" = load i32**, i32*** %"x_ptr"
   ;  Source: b
-  %"b.1" = load i32, i32* %"b"
+  %"b_load" = load i32, i32* %"b"
   ;  User Comment: //Warning
   ;  Source: x_ptr=b;
-  %".16" = inttoptr i32 %"b.1" to i32**
+  %".16" = inttoptr i32 %"b_load" to i32**
   store i32** %".16", i32*** %"x_ptr"
   ;  User Comment: //Warning
   ;  Source: x_ptr
-  %"x_ptr.3" = load i32**, i32*** %"x_ptr"
+  %"x_ptr_load.2" = load i32**, i32*** %"x_ptr"
   ;  Source: b
-  %"b.2" = load i32, i32* %"b"
+  %"b_load.1" = load i32, i32* %"b"
   ;  Source: &b
   ;  User Comment: //Warning
   ;  Source: x_ptr=&b;

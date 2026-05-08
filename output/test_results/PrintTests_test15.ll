@@ -25,13 +25,13 @@ entry:
   store float* %".4", float** %"q"
   %".6" = bitcast [25 x i8]* @"str" to i8*
   ;  Source: p
-  %"p.1" = load i32, i32* %"p"
+  %"p_load" = load i32, i32* %"p"
   ;  Source: p
-  %"p.2" = load i32, i32* %"p"
+  %"p_load.1" = load i32, i32* %"p"
   ;  Source: q
-  %"q.1" = load float*, float** %"q"
+  %"q_load" = load float*, float** %"q"
   ;  Source: printf("%% %d %x %f  kappa kappa",p,p,q);
-  %".11" = call i32 (i8*, ...) @"printf"(i8* %".6", i32 %"p.1", i32 %"p.2", float* %"q.1")
+  %".11" = call i32 (i8*, ...) @"printf"(i8* %".6", i32 %"p_load", i32 %"p_load.1", float* %"q_load")
   ;  Source: return0;
   ret i32 0
 }

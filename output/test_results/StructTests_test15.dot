@@ -20,7 +20,7 @@ digraph AST {
   node16 [label="Access\n.kaas_ptr\n(struct kaas*)", shape=ellipse, style="filled", fillcolor="lightblue", color="black", fontcolor="black"];
   node16 -> node17 [style="solid", color="black"];
   node19 [label="ID: gouda\n(struct kaas)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
-  node18 [label="&\n(struct kaas*)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node18 [label="&\n(structkaas*)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node18 -> node19 [style="solid", color="black"];
   node15 [label="=", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node15 -> node16 [style="solid", color="black"];

@@ -25,8 +25,8 @@ while.cond:
   %"whilecond" = icmp ne i32 1, 0
   br i1 %"whilecond", label %"while.body", label %"while.end"
 while.body:
-  %"a.1" = load i32, i32* %"a"
-  %".6" = srem i32 %"a.1", 2
+  %"a_load" = load i32, i32* %"a"
+  %".6" = srem i32 %"a_load", 2
   %".7" = icmp eq i32 %".6", 1
   %".8" = zext i1 %".7" to i32
   %"ifcond" = icmp ne i32 %".8", 0
@@ -38,24 +38,24 @@ while.end:
   ;  Source: return0;
   ret i32 0
 if.then:
-  %"a.2" = load i32, i32* %"a"
+  %"a_load.1" = load i32, i32* %"a"
   %".10" = load i32, i32* %"a"
   %".11" = add i32 %".10", 1
   store i32 %".11", i32* %"a"
   br label %"while.cond"
 if.end:
   %".14" = bitcast [3 x i8]* @"str" to i8*
-  %"a.3" = load i32, i32* %"a"
-  %".15" = call i32 (i8*, ...) @"printf"(i8* %".14", i32 %"a.3")
-  %"a.4" = load i32, i32* %"a"
-  %".16" = icmp sgt i32 %"a.4", 10
+  %"a_load.2" = load i32, i32* %"a"
+  %".15" = call i32 (i8*, ...) @"printf"(i8* %".14", i32 %"a_load.2")
+  %"a_load.3" = load i32, i32* %"a"
+  %".16" = icmp sgt i32 %"a_load.3", 10
   %".17" = zext i1 %".16" to i32
   %"ifcond.1" = icmp ne i32 %".17", 0
   br i1 %"ifcond.1", label %"if.then.1", label %"if.end.1"
 if.then.1:
   br label %"while.end"
 if.end.1:
-  %"a.5" = load i32, i32* %"a"
+  %"a_load.4" = load i32, i32* %"a"
   %".20" = load i32, i32* %"a"
   %".21" = add i32 %".20", 1
   store i32 %".21", i32* %"a"

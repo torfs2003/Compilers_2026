@@ -19,7 +19,7 @@ digraph AST {
   node15 [label="Access\n.b\n(struct a*)", shape=ellipse, style="filled", fillcolor="lightblue", color="black", fontcolor="black"];
   node15 -> node16 [style="solid", color="black"];
   node18 [label="ID: d\n(struct a)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
-  node17 [label="&\n(struct a*)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node17 [label="&\n(structa*)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node17 -> node18 [style="solid", color="black"];
   node14 [label="=", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node14 -> node15 [style="solid", color="black"];

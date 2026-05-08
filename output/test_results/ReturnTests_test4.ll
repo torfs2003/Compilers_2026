@@ -21,8 +21,8 @@ entry:
   %".2" = bitcast [7 x i8]* @"str" to i8*
   store i8* %".2", i8** %"c"
   ;  Source: returnc;
-  %"c.1" = load i8*, i8** %"c"
-  ret i8* %"c.1"
+  %"c_load" = load i8*, i8** %"c"
+  ret i8* %"c_load"
 }
 
 define i32 @"main"()
@@ -32,16 +32,16 @@ entry:
   %".2" = bitcast [2 x i8]* @"str.1" to i8*
   store i8* %".2", i8** %"c"
   ;  Source: c
-  %"c.1" = load i8*, i8** %"c"
+  %"c_load" = load i8*, i8** %"c"
   ;  Source: d()
   %".6" = call i8* @"d"()
   ;  Source: c=d();
   store i8* %".6", i8** %"c"
   %".9" = bitcast [3 x i8]* @"str.2" to i8*
   ;  Source: c
-  %"c.2" = load i8*, i8** %"c"
+  %"c_load.1" = load i8*, i8** %"c"
   ;  Source: printf("%s",c);
-  %".12" = call i32 (i8*, ...) @"printf"(i8* %".9", i8* %"c.2")
+  %".12" = call i32 (i8*, ...) @"printf"(i8* %".9", i8* %"c_load.1")
   ;  Source: return0;
   ret i32 0
 }

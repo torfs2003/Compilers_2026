@@ -45,8 +45,8 @@ entry:
   store %"struct.kaas"* %"ementaler", %"struct.kaas"** %"gouda_ptr"
   %".17" = bitcast [6 x i8]* @"str.2" to i8*
   ;  Source: (*gouda_ptr).melk
-  %"gouda_ptr.1" = load %"struct.kaas"*, %"struct.kaas"** %"gouda_ptr"
-  %"gep_melk.2" = getelementptr inbounds %"struct.kaas", %"struct.kaas"* %"gouda_ptr.1", i32 0, i32 0
+  %"gouda_ptr_load" = load %"struct.kaas"*, %"struct.kaas"** %"gouda_ptr"
+  %"gep_melk.2" = getelementptr inbounds %"struct.kaas", %"struct.kaas"* %"gouda_ptr_load", i32 0, i32 0
   %"load_melk.2" = load i32, i32* %"gep_melk.2"
   ;  Source: printf("%d   ",(*gouda_ptr).melk);
   %".20" = call i32 (i8*, ...) @"printf"(i8* %".17", i32 %"load_melk.2")

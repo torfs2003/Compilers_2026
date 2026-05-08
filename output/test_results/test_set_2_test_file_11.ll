@@ -6,14 +6,22 @@ declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
 
+declare i8* @"fopen"(i8* %".1", i8* %".2")
+
+declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
+
+declare i32 @"fputs"(i8* %".1", i8* %".2")
+
+declare i32 @"fclose"(i8* %".1")
+
 define i32 @"main"()
 {
 entry:
   %"x" = alloca i32
   store i32 5, i32* %"x"
   ;  Source: if(x<5){printf("Something went wrong");// Should not print}else{printf("Hello world!\n");// Should print}
-  %"x.1" = load i32, i32* %"x"
-  %".4" = icmp slt i32 %"x.1", 5
+  %"x_load" = load i32, i32* %"x"
+  %".4" = icmp slt i32 %"x_load", 5
   %".5" = zext i1 %".4" to i32
   %"ifcond" = icmp ne i32 %".5", 0
   br i1 %"ifcond", label %"if.then", label %"if.else"
@@ -23,8 +31,8 @@ if.then:
   br label %"if.end"
 if.end:
   ;  Source: if(x==5&&1){if(x==5){printf("Hello world!\n");// Should print}else{printf("Something went wrong");// Should not print}}
-  %"x.2" = load i32, i32* %"x"
-  %".14" = icmp eq i32 %"x.2", 5
+  %"x_load.1" = load i32, i32* %"x"
+  %".14" = icmp eq i32 %"x_load.1", 5
   %".15" = zext i1 %".14" to i32
   %".16" = icmp ne i32 %".15", 0
   %".17" = icmp ne i32 1, 0
@@ -37,8 +45,8 @@ if.else:
   %".11" = call i32 (i8*, ...) @"printf"(i8* %".10")
   br label %"if.end"
 if.then.1:
-  %"x.3" = load i32, i32* %"x"
-  %".21" = icmp eq i32 %"x.3", 5
+  %"x_load.2" = load i32, i32* %"x"
+  %".21" = icmp eq i32 %"x_load.2", 5
   %".22" = zext i1 %".21" to i32
   %"ifcond.2" = icmp ne i32 %".22", 0
   br i1 %"ifcond.2", label %"if.then.2", label %"if.else.1"

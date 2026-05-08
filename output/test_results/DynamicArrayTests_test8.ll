@@ -44,9 +44,9 @@ entry:
   ;  Source: printf("%d",c->a);
   %".13" = call i32 (i8*, ...) @"printf"(i8* %".9", i32 %"load_a.1")
   ;  Source: c
-  %"c.1" = load %"struct.v"*, %"struct.v"** %"c"
+  %"c_load" = load %"struct.v"*, %"struct.v"** %"c"
   ;  Source: free(c);
-  %".16" = bitcast %"struct.v"* %"c.1" to i8*
+  %".16" = bitcast %"struct.v"* %"c_load" to i8*
   call void @"free"(i8* %".16")
   ;  Source: return0;
   ret i32 0

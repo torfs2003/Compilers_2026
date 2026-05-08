@@ -34,16 +34,16 @@ entry:
   %".6" = call i8* @"fopen"(i8* %".4", i8* %".5")
   store i8* %".6", i8** %"fp"
   ;  Source: c
-  %"c.1" = load i8*, i8** %"c"
+  %"c_load" = load i8*, i8** %"c"
   ;  Source: fp
-  %"fp.1" = load i8*, i8** %"fp"
+  %"fp_load" = load i8*, i8** %"fp"
   ;  Source: fgets(c,50,fp);
-  %".11" = call i8* @"fgets"(i8* %"c.1", i32 50, i8* %"fp.1")
+  %".11" = call i8* @"fgets"(i8* %"c_load", i32 50, i8* %"fp_load")
   %".12" = bitcast [3 x i8]* @"str.2" to i8*
   ;  Source: c
-  %"c.2" = load i8*, i8** %"c"
+  %"c_load.1" = load i8*, i8** %"c"
   ;  Source: printf("%s",c);
-  %".15" = call i32 (i8*, ...) @"printf"(i8* %".12", i8* %"c.2")
+  %".15" = call i32 (i8*, ...) @"printf"(i8* %".12", i8* %"c_load.1")
   ;  Source: return0;
   ret i32 0
 }

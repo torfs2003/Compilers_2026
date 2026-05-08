@@ -3,7 +3,7 @@
   TEST MAP : example_source_files/test_set_3/LLVMTests/CombinedTests
   Log file : output\CombinedTests.txt
 ============================================================
-  test1.c... PASSED
+  test1.c... FAILED (Compiler Error)
   test10.c... PASSED
   test11.c... PASSED
   test12.c... PASSED
@@ -21,6 +21,6 @@
   test9.c... PASSED
 
 ============================================================
-  EINDTOTAAL: 15 passed, 1 failed
+  EINDTOTAAL: 14 passed, 2 failed
 ============================================================
 

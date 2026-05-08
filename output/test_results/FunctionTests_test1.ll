@@ -25,23 +25,23 @@ entry:
   store i32 10, i32* %"u"
   %"c" = alloca i32
   ;  Source: c
-  %"c.1" = load i32, i32* %"c"
+  %"c_load" = load i32, i32* %"c"
   ;  Source: y
-  %"y.1" = load i32, i32* %"y"
+  %"y_load" = load i32, i32* %"y"
   ;  Source: u
-  %"u.1" = load i32, i32* %"u"
+  %"u_load" = load i32, i32* %"u"
   ;  Source: func(y,u)
-  %".8" = call i32 @"func"(i32 %"y.1", i32 %"u.1")
+  %".8" = call i32 @"func"(i32 %"y_load", i32 %"u_load")
   ;  Source: c=func(y,u);
   store i32 %".8", i32* %"c"
   %".11" = bitcast [4 x i8]* @"str" to i8*
   ;  Source: c
-  %"c.2" = load i32, i32* %"c"
+  %"c_load.1" = load i32, i32* %"c"
   ;  Source: printf("%d\n",c);
-  %".14" = call i32 (i8*, ...) @"printf"(i8* %".11", i32 %"c.2")
+  %".14" = call i32 (i8*, ...) @"printf"(i8* %".11", i32 %"c_load.1")
   ;  Source: returny;
-  %"y.2" = load i32, i32* %"y"
-  ret i32 %"y.2"
+  %"y_load.1" = load i32, i32* %"y"
+  ret i32 %"y_load.1"
 }
 
 @"str" = internal constant [4 x i8] c"%d\0a\00"

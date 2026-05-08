@@ -49,10 +49,12 @@ entry:
   %"gep_lol.2" = getelementptr inbounds %"struct.kaas", %"struct.kaas"* %"ementaler", i32 0, i32 2
   %"load_lol.2" = load i8, i8* %"gep_lol.2"
   ;  Source: b
-  %"b.1" = load i8, i8* %"b"
+  %"b_load" = load i8, i8* %"b"
   ;  Source: printf("%d %f %c %c",ementaler.melk,ementaler.fermtented,ementaler.lol,b);
   %".18" = fpext float %"load_fermtented.1" to double
-  %".19" = call i32 (i8*, ...) @"printf"(i8* %".12", i32 %"load_melk.1", double %".18", i8 %"load_lol.2", i8 %"b.1")
+  %".19" = sext i8 %"load_lol.2" to i32
+  %".20" = sext i8 %"b_load" to i32
+  %".21" = call i32 (i8*, ...) @"printf"(i8* %".12", i32 %"load_melk.1", double %".18", i32 %".19", i32 %".20")
   ;  Source: return0;
   ret i32 0
 }

@@ -77,22 +77,23 @@ entry:
   %"v" = alloca i8*
   store i8* %"a", i8** %"v"
   ;  Source: v
-  %"v.1" = load i8*, i8** %"v"
-  %"deref_load" = load i8, i8* %"v.1"
+  %"v_load" = load i8*, i8** %"v"
+  %"deref_load" = load i8, i8* %"v_load"
   ;  Source: *v='y';
-  store i8 121, i8* %"v.1"
+  store i8 121, i8* %"v_load"
   %".27" = bitcast [3 x i8]* @"str.1" to i8*
   ;  Source: v
-  %"v.2" = load i8*, i8** %"v"
+  %"v_load.1" = load i8*, i8** %"v"
   ;  Source: *v
-  %"deref_load.1" = load i8, i8* %"v.2"
+  %"deref_load.1" = load i8, i8* %"v_load.1"
   ;  Source: printf("%c",*v);
-  %".31" = call i32 (i8*, ...) @"printf"(i8* %".27", i8 %"deref_load.1")
-  %".32" = bitcast [3 x i8]* @"str.2" to i8*
+  %".31" = sext i8 %"deref_load.1" to i32
+  %".32" = call i32 (i8*, ...) @"printf"(i8* %".27", i32 %".31")
+  %".33" = bitcast [3 x i8]* @"str.2" to i8*
   ;  Source: s
   ;  Source: printf("%s",s);
-  %".35" = getelementptr inbounds [10 x i8], [10 x i8]* %"s", i32 0, i32 0
-  %".36" = call i32 (i8*, ...) @"printf"(i8* %".32", i8* %".35")
+  %".36" = getelementptr inbounds [10 x i8], [10 x i8]* %"s", i32 0, i32 0
+  %".37" = call i32 (i8*, ...) @"printf"(i8* %".33", i8* %".36")
   ;  Source: return0;
   ret i32 0
 }

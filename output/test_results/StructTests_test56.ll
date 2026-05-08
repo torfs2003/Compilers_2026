@@ -100,16 +100,16 @@ entry:
   %".47" = call i32 (i8*, ...) @"printf"(i8* %".43", i32 %"load_a.7")
   %".48" = bitcast [3 x i8]* @"str.6" to i8*
   ;  Source: (*a2).b_value.a
-  %"a2.1" = load %"struct.a"*, %"struct.a"** %"a2"
-  %"gep_b_value.3" = getelementptr inbounds %"struct.a", %"struct.a"* %"a2.1", i32 0, i32 1
+  %"a2_load" = load %"struct.a"*, %"struct.a"** %"a2"
+  %"gep_b_value.3" = getelementptr inbounds %"struct.a", %"struct.a"* %"a2_load", i32 0, i32 1
   %"gep_a.8" = getelementptr inbounds %"struct.b", %"struct.b"* %"gep_b_value.3", i32 0, i32 0
   %"load_a.8" = load i32, i32* %"gep_a.8"
   ;  Source: printf("%d",(*a2).b_value.a);
   %".51" = call i32 (i8*, ...) @"printf"(i8* %".48", i32 %"load_a.8")
   %".52" = bitcast [3 x i8]* @"str.7" to i8*
   ;  Source: (*a2).b_ptr->a
-  %"a2.2" = load %"struct.a"*, %"struct.a"** %"a2"
-  %"gep_b_ptr.5" = getelementptr inbounds %"struct.a", %"struct.a"* %"a2.2", i32 0, i32 0
+  %"a2_load.1" = load %"struct.a"*, %"struct.a"** %"a2"
+  %"gep_b_ptr.5" = getelementptr inbounds %"struct.a", %"struct.a"* %"a2_load.1", i32 0, i32 0
   %"load_b_ptr.5" = load %"struct.b"*, %"struct.b"** %"gep_b_ptr.5"
   %".54" = load %"struct.b"*, %"struct.b"** %"gep_b_ptr.5"
   %"gep_a.9" = getelementptr inbounds %"struct.b", %"struct.b"* %".54", i32 0, i32 0
@@ -118,8 +118,8 @@ entry:
   %".56" = call i32 (i8*, ...) @"printf"(i8* %".52", i32 %"load_a.9")
   %".57" = bitcast [3 x i8]* @"str.8" to i8*
   ;  Source: (*(*a2).b_ptr).a
-  %"a2.3" = load %"struct.a"*, %"struct.a"** %"a2"
-  %"gep_b_ptr.6" = getelementptr inbounds %"struct.a", %"struct.a"* %"a2.3", i32 0, i32 0
+  %"a2_load.2" = load %"struct.a"*, %"struct.a"** %"a2"
+  %"gep_b_ptr.6" = getelementptr inbounds %"struct.a", %"struct.a"* %"a2_load.2", i32 0, i32 0
   %"load_b_ptr.6" = load %"struct.b"*, %"struct.b"** %"gep_b_ptr.6"
   %"gep_a.10" = getelementptr inbounds %"struct.b", %"struct.b"* %"load_b_ptr.6", i32 0, i32 0
   %"load_a.10" = load i32, i32* %"gep_a.10"

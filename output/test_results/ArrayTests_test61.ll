@@ -62,16 +62,16 @@ entry:
   %".42" = bitcast [20 x i32]* %"result" to i32*
   store i32* %".42", i32** %"passed"
   ;  Source: passed
-  %"passed.1" = load i32*, i32** %"passed"
+  %"passed_load" = load i32*, i32** %"passed"
   ;  Source: passed++;
   %".46" = load i32*, i32** %"passed"
   %"ptr_incdec" = getelementptr i32, i32* %".46", i32 1
   store i32* %"ptr_incdec", i32** %"passed"
   %".48" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: passed
-  %"passed.2" = load i32*, i32** %"passed"
+  %"passed_load.1" = load i32*, i32** %"passed"
   ;  Source: *passed
-  %"deref_load" = load i32, i32* %"passed.2"
+  %"deref_load" = load i32, i32* %"passed_load.1"
   ;  Source: printf("%d",*passed);
   %".52" = call i32 (i8*, ...) @"printf"(i8* %".48", i32 %"deref_load")
   ;  Source: return0;

@@ -12,12 +12,12 @@ entry:
   %"ppf" = alloca float**
   store float** %"pf", float*** %"ppf"
   %"pi" = alloca i32*
-  %"ppf.1" = load float**, float*** %"ppf"
-  %".5" = bitcast float** %"ppf.1" to i32*
+  %"ppf_load" = load float**, float*** %"ppf"
+  %".5" = bitcast float** %"ppf_load" to i32*
   store i32* %".5", i32** %"pi"
   %"result" = alloca i32
-  %"pi.1" = load i32*, i32** %"pi"
-  %"deref_load" = load i32, i32* %"pi.1"
+  %"pi_load" = load i32*, i32** %"pi"
+  %"deref_load" = load i32, i32* %"pi_load"
   %".7" = add i32 %"deref_load", 1
   store i32 %".7", i32* %"result"
   ret i32 0

@@ -18,18 +18,18 @@ define i32 @"main"()
 {
 entry:
   %"success" = alloca i32
-  %"True" = load i32, i32* @"True"
-  store i32 %"True", i32* %"success"
+  %"True_load" = load i32, i32* @"True"
+  store i32 %"True_load", i32* %"success"
   %".3" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: success
-  %"success.1" = load i32, i32* %"success"
+  %"success_load" = load i32, i32* %"success"
   ;  Source: printf("%d",success);
-  %".6" = call i32 (i8*, ...) @"printf"(i8* %".3", i32 %"success.1")
+  %".6" = call i32 (i8*, ...) @"printf"(i8* %".3", i32 %"success_load")
   %".7" = bitcast [3 x i8]* @"str.1" to i8*
   ;  Source: True
-  %"True.1" = load i32, i32* @"True"
+  %"True_load.1" = load i32, i32* @"True"
   ;  Source: printf("%d",True);
-  %".10" = call i32 (i8*, ...) @"printf"(i8* %".7", i32 %"True.1")
+  %".10" = call i32 (i8*, ...) @"printf"(i8* %".7", i32 %"True_load.1")
   ;  Source: return0;
   ret i32 0
 }

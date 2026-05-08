@@ -31,18 +31,18 @@ entry:
   %".10" = bitcast [4 x i32]* %"a" to i32*
   store i32* %".10", i32** %"k"
   ;  Source: k
-  %"k.1" = load i32*, i32** %"k"
+  %"k_load" = load i32*, i32** %"k"
   ;  Source: k
-  %"k.2" = load i32*, i32** %"k"
+  %"k_load.1" = load i32*, i32** %"k"
   ;  Source: k+2
-  %".15" = getelementptr i32, i32* %"k.2", i32 2
+  %".15" = getelementptr i32, i32* %"k_load.1", i32 2
   ;  Source: k=k+2;
   store i32* %".15", i32** %"k"
   %".18" = bitcast [4 x i8]* @"str" to i8*
   ;  Source: k
-  %"k.3" = load i32*, i32** %"k"
+  %"k_load.2" = load i32*, i32** %"k"
   ;  Source: *k
-  %"deref_load" = load i32, i32* %"k.3"
+  %"deref_load" = load i32, i32* %"k_load.2"
   ;  Source: printf("%d ",*k);
   %".22" = call i32 (i8*, ...) @"printf"(i8* %".18", i32 %"deref_load")
   %"e" = alloca i32
@@ -56,21 +56,21 @@ entry:
   %".29" = zext i1 %".28" to i32
   store i32 %".29", i32* %"t"
   %"p" = alloca i32
-  %"k.4" = load i32*, i32** %"k"
-  %".31" = ptrtoint i32* %"k.4" to i32
+  %"k_load.3" = load i32*, i32** %"k"
+  %".31" = ptrtoint i32* %"k_load.3" to i32
   %".32" = ptrtoint [4 x i32]* %"a" to i32
   %".33" = icmp ne i32 %".31", %".32"
   %".34" = zext i1 %".33" to i32
   store i32 %".34", i32* %"p"
   %".36" = bitcast [9 x i8]* @"str.1" to i8*
   ;  Source: e
-  %"e.1" = load i32, i32* %"e"
+  %"e_load" = load i32, i32* %"e"
   ;  Source: t
-  %"t.1" = load i32, i32* %"t"
+  %"t_load" = load i32, i32* %"t"
   ;  Source: p
-  %"p.1" = load i32, i32* %"p"
+  %"p_load" = load i32, i32* %"p"
   ;  Source: printf("%d %d %d",e,t,p);
-  %".41" = call i32 (i8*, ...) @"printf"(i8* %".36", i32 %"e.1", i32 %"t.1", i32 %"p.1")
+  %".41" = call i32 (i8*, ...) @"printf"(i8* %".36", i32 %"e_load", i32 %"t_load", i32 %"p_load")
   ;  Source: return0;
   ret i32 0
 }

@@ -20,8 +20,8 @@ entry:
   %"x" = alloca i32
   store i32 %".1", i32* %"x"
   ;  Source: returnx*5;
-  %"x.1" = load i32, i32* %"x"
-  %".5" = mul i32 %"x.1", 5
+  %"x_load" = load i32, i32* %"x"
+  %".5" = mul i32 %"x_load", 5
   ret i32 %".5"
 }
 
@@ -33,23 +33,23 @@ entry:
   %".2" = call i32 @"mul"(i32 3)
   store i32 %".2", i32* %"result"
   ;  Source: result
-  %"result.1" = load i32, i32* %"result"
+  %"result_load" = load i32, i32* %"result"
   %".5" = bitcast [4 x i8]* @"str" to i8*
   ;  Source: result
-  %"result.2" = load i32, i32* %"result"
+  %"result_load.1" = load i32, i32* %"result"
   ;  Source: printf("%d ",result)
-  %".8" = call i32 (i8*, ...) @"printf"(i8* %".5", i32 %"result.2")
+  %".8" = call i32 (i8*, ...) @"printf"(i8* %".5", i32 %"result_load.1")
   ;  Source: result=printf("%d ",result);
   store i32 %".8", i32* %"result"
   %".11" = bitcast [4 x i8]* @"str.1" to i8*
   ;  Source: result
-  %"result.3" = load i32, i32* %"result"
+  %"result_load.2" = load i32, i32* %"result"
   ;  Source: printf("%d ",result);
-  %".14" = call i32 (i8*, ...) @"printf"(i8* %".11", i32 %"result.3")
+  %".14" = call i32 (i8*, ...) @"printf"(i8* %".11", i32 %"result_load.2")
   %".15" = bitcast [4 x i8]* @"str.2" to i8*
   %".16" = bitcast [4 x i8]* @"str.3" to i8*
   ;  Source: result
-  %"result.4" = load i32, i32* %"result"
+  %"result_load.3" = load i32, i32* %"result"
   ;  Source: &result
   ;  Source: scanf("%d ",&result)
   %".20" = call i32 (i8*, ...) @"scanf"(i8* %".16", i32* %"result")
@@ -59,9 +59,9 @@ entry:
   %".24" = call i32 (i8*, ...) @"printf"(i8* %".15", i32 %".22")
   %".25" = bitcast [4 x i8]* @"str.4" to i8*
   ;  Source: result
-  %"result.5" = load i32, i32* %"result"
+  %"result_load.4" = load i32, i32* %"result"
   ;  Source: mul(result)
-  %".28" = call i32 @"mul"(i32 %"result.5")
+  %".28" = call i32 @"mul"(i32 %"result_load.4")
   ;  Source: printf("%d ",mul(result));
   %".30" = call i32 (i8*, ...) @"printf"(i8* %".25", i32 %".28")
   ;  Source: return0;

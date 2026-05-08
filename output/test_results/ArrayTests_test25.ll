@@ -23,10 +23,10 @@ entry:
   store float* %"p", float** %"q"
   %".4" = bitcast [7 x i8]* @"str" to i8*
   ;  Source: p
-  %"p.1" = load float, float* %"p"
+  %"p_load" = load float, float* %"p"
   ;  Source: printf("%f %f ",3.14,p);
   %".7" = fpext float 0x40091eb860000000 to double
-  %".8" = fpext float %"p.1" to double
+  %".8" = fpext float %"p_load" to double
   %".9" = call i32 (i8*, ...) @"printf"(i8* %".4", double %".7", double %".8")
   %".10" = bitcast [9 x i8]* @"str.1" to i8*
   ;  Source: printf("True  \n ");

@@ -23,47 +23,45 @@ entry:
   store float* %"f", float** %"f_ptr"
   %".4" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: f_ptr
-  %"f_ptr.1" = load float*, float** %"f_ptr"
+  %"f_ptr_load" = load float*, float** %"f_ptr"
   ;  Source: *f_ptr
-  %"deref_load" = load float, float* %"f_ptr.1"
+  %"deref_load" = load float, float* %"f_ptr_load"
   ;  Source: printf("%f",*f_ptr);
   %".8" = fpext float %"deref_load" to double
   %".9" = call i32 (i8*, ...) @"printf"(i8* %".4", double %".8")
   %".10" = bitcast [3 x i8]* @"str.1" to i8*
   ;  Source: f
-  %"f.1" = load float, float* %"f"
   ;  Source: printf("%f",f);
-  %".13" = fpext float %"f.1" to double
+  %".13" = fpext float 0x3fe93f7ce0000000 to double
   %".14" = call i32 (i8*, ...) @"printf"(i8* %".10", double %".13")
   %"non_const_f_ptr" = alloca float*
-  %"f_ptr.2" = load float*, float** %"f_ptr"
-  store float* %"f_ptr.2", float** %"non_const_f_ptr"
+  %"f_ptr_load.1" = load float*, float** %"f_ptr"
+  store float* %"f_ptr_load.1", float** %"non_const_f_ptr"
   %".16" = bitcast [3 x i8]* @"str.2" to i8*
   ;  Source: non_const_f_ptr
-  %"non_const_f_ptr.1" = load float*, float** %"non_const_f_ptr"
+  %"non_const_f_ptr_load" = load float*, float** %"non_const_f_ptr"
   ;  Source: *non_const_f_ptr
-  %"deref_load.1" = load float, float* %"non_const_f_ptr.1"
+  %"deref_load.1" = load float, float* %"non_const_f_ptr_load"
   ;  Source: printf("%f",*non_const_f_ptr);
   %".20" = fpext float %"deref_load.1" to double
   %".21" = call i32 (i8*, ...) @"printf"(i8* %".16", double %".20")
   ;  Source: non_const_f_ptr
-  %"non_const_f_ptr.2" = load float*, float** %"non_const_f_ptr"
-  %"deref_load.2" = load float, float* %"non_const_f_ptr.2"
+  %"non_const_f_ptr_load.1" = load float*, float** %"non_const_f_ptr"
+  %"deref_load.2" = load float, float* %"non_const_f_ptr_load.1"
   ;  Source: *non_const_f_ptr=3.1492;
-  store float 0x4009318fc0000000, float* %"non_const_f_ptr.2"
+  store float 0x4009318fc0000000, float* %"non_const_f_ptr_load.1"
   %".25" = bitcast [3 x i8]* @"str.3" to i8*
   ;  Source: non_const_f_ptr
-  %"non_const_f_ptr.3" = load float*, float** %"non_const_f_ptr"
+  %"non_const_f_ptr_load.2" = load float*, float** %"non_const_f_ptr"
   ;  Source: *non_const_f_ptr
-  %"deref_load.3" = load float, float* %"non_const_f_ptr.3"
+  %"deref_load.3" = load float, float* %"non_const_f_ptr_load.2"
   ;  Source: printf("%f",*non_const_f_ptr);
   %".29" = fpext float %"deref_load.3" to double
   %".30" = call i32 (i8*, ...) @"printf"(i8* %".25", double %".29")
   %".31" = bitcast [3 x i8]* @"str.4" to i8*
   ;  Source: f
-  %"f.2" = load float, float* %"f"
   ;  Source: printf("%f",f);
-  %".34" = fpext float %"f.2" to double
+  %".34" = fpext float 0x3fe93f7ce0000000 to double
   %".35" = call i32 (i8*, ...) @"printf"(i8* %".31", double %".34")
   ;  Source: return0;
   ret i32 0

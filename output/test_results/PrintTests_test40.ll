@@ -24,15 +24,15 @@ entry:
   store i32 %".3", i32* %"result"
   %"lol" = alloca float
   %".5" = bitcast [3 x i8]* @"str.1" to i8*
-  %"result.1" = load i32, i32* %"result"
-  %".6" = call i32 (i8*, ...) @"printf"(i8* %".5", i32 %"result.1")
+  %"result_load" = load i32, i32* %"result"
+  %".6" = call i32 (i8*, ...) @"printf"(i8* %".5", i32 %"result_load")
   %".7" = sitofp i32 %".6" to float
   store float %".7", float* %"lol"
   %".9" = bitcast [3 x i8]* @"str.2" to i8*
   ;  Source: lol
-  %"lol.1" = load float, float* %"lol"
+  %"lol_load" = load float, float* %"lol"
   ;  Source: printf("%f",lol);
-  %".12" = fpext float %"lol.1" to double
+  %".12" = fpext float %"lol_load" to double
   %".13" = call i32 (i8*, ...) @"printf"(i8* %".9", double %".12")
   ;  Source: return0;
   ret i32 0

@@ -6,6 +6,14 @@ declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
 
+declare i8* @"fopen"(i8* %".1", i8* %".2")
+
+declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
+
+declare i32 @"fputs"(i8* %".1", i8* %".2")
+
+declare i32 @"fclose"(i8* %".1")
+
 define i32 @"main"()
 {
 entry:
@@ -17,19 +25,17 @@ entry:
   store i32 0, i32* %"i"
   br label %"while.cond"
 while.cond:
-  %"i.1" = load i32, i32* %"i"
-  %"loopConst.1" = load i32, i32* %"loopConst"
-  %".6" = icmp slt i32 %"i.1", %"loopConst.1"
+  %"i_load" = load i32, i32* %"i"
+  %".6" = icmp slt i32 %"i_load", 5
   %".7" = zext i1 %".6" to i32
   %"whilecond" = icmp ne i32 %".7", 0
   br i1 %"whilecond", label %"while.body", label %"while.end"
 while.body:
-  %"result.1" = load i32, i32* %"result"
-  %"loopConst.2" = load i32, i32* %"loopConst"
-  %".9" = add i32 %"result.1", %"loopConst.2"
-  %"result.2" = load i32, i32* %"result"
+  %"result_load" = load i32, i32* %"result"
+  %".9" = add i32 %"result_load", 5
+  %"result_load.1" = load i32, i32* %"result"
   store i32 %".9", i32* %"result"
-  %"i.2" = load i32, i32* %"i"
+  %"i_load.1" = load i32, i32* %"i"
   %".11" = load i32, i32* %"i"
   %".12" = add i32 %".11", 1
   store i32 %".12", i32* %"i"
@@ -37,9 +43,9 @@ while.body:
 while.end:
   %".15" = bitcast [12 x i8]* @"str" to i8*
   ;  Source: result
-  %"result.3" = load i32, i32* %"result"
+  %"result_load.2" = load i32, i32* %"result"
   ;  Source: printf("Result: %d\n",result);
-  %".18" = call i32 (i8*, ...) @"printf"(i8* %".15", i32 %"result.3")
+  %".18" = call i32 (i8*, ...) @"printf"(i8* %".15", i32 %"result_load.2")
   ;  Source: return0;
   ret i32 0
 }

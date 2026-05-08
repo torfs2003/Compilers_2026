@@ -18,8 +18,8 @@ define i32 @"main"()
 {
 entry:
   %"True" = alloca i32
-  %"True.1" = load i32, i32* %"True"
-  store i32 %"True.1", i32* %"True"
+  %"True_load" = load i32, i32* %"True"
+  store i32 %"True_load", i32* %"True"
   ;  Source: return0;
   ret i32 0
 }

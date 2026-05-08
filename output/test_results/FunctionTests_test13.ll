@@ -25,9 +25,10 @@ entry:
   %".7" = call i32 (i8*, ...) @"printf"(i8* %".4", i8* %".5")
   %".8" = bitcast [3 x i8]* @"str.2" to i8*
   ;  Source: name
-  %"name.1" = load i8, i8* %"name"
+  %"name_load" = load i8, i8* %"name"
   ;  Source: printf("%c",name);
-  %".11" = call i32 (i8*, ...) @"printf"(i8* %".8", i8 %"name.1")
+  %".11" = sext i8 %"name_load" to i32
+  %".12" = call i32 (i8*, ...) @"printf"(i8* %".8", i32 %".11")
   ret void
 }
 
@@ -37,9 +38,9 @@ entry:
   %"a" = alloca i8
   store i8 120, i8* %"a"
   ;  Source: a
-  %"a.1" = load i8, i8* %"a"
+  %"a_load" = load i8, i8* %"a"
   ;  Source: greet(a);
-  call void @"greet"(i8 %"a.1")
+  call void @"greet"(i8 %"a_load")
   ;  Source: return0;
   ret i32 0
 }

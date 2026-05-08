@@ -26,9 +26,9 @@ entry:
   store %"struct.MyStruct" %".4", %"struct.MyStruct"* %"myStruct"
   %".6" = bitcast [19 x i8]* @"str" to i8*
   ;  Source: intValue
-  %"intValue.1" = load i32, i32* %"intValue"
+  %"intValue_load" = load i32, i32* %"intValue"
   ;  Source: printf("Integer value: %d\n",intValue);
-  %".9" = call i32 (i8*, ...) @"printf"(i8* %".6", i32 %"intValue.1")
+  %".9" = call i32 (i8*, ...) @"printf"(i8* %".6", i32 %"intValue_load")
   ;  Source: return0;
   ret i32 0
 }

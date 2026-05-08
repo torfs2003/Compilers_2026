@@ -10,18 +10,18 @@ entry:
   %"y" = alloca i32
   store i32 0, i32* %"y"
   %"z" = alloca i32
-  %"x.1" = load i32, i32* %"x"
-  %"y.1" = load i32, i32* %"y"
-  %".4" = and i32 %"x.1", %"y.1"
+  %"x_load" = load i32, i32* %"x"
+  %"y_load" = load i32, i32* %"y"
+  %".4" = and i32 %"x_load", %"y_load"
   store i32 %".4", i32* %"z"
   ;  Source: z
-  %"z.1" = load i32, i32* %"z"
+  %"z_load" = load i32, i32* %"z"
   ;  Source: z
-  %"z.2" = load i32, i32* %"z"
+  %"z_load.1" = load i32, i32* %"z"
   ;  Source: y
-  %"y.2" = load i32, i32* %"y"
+  %"y_load.1" = load i32, i32* %"y"
   ;  Source: z^y
-  %".10" = xor i32 %"z.2", %"y.2"
+  %".10" = xor i32 %"z_load.1", %"y_load.1"
   ;  Source: z=z^y;
   store i32 %".10", i32* %"z"
   ret i32 0
