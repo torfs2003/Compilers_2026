@@ -652,14 +652,14 @@ class LLVMVisitor:
                 if isinstance(child_val.type, ir.PointerType):
                     target_type = child_val.type.pointee
                     
-                    if isinstance(target_type, ir.ArrayType):
-                        zero = ir.Constant(ir.IntType(32), 0)
-                        elem_ptr = self.builder.gep(child_val, [zero, zero], name="array_decay_ptr")
-                        
-                        self.results[id(node)] = self.builder.load(elem_ptr, name="deref_array_load")
-                    
-                    elif isinstance(target_type, (ir.IntType, ir.FloatType, ir.PointerType)):
-                        self.results[id(node)] = self.builder.load(child_val, name="deref_load")
+                    # CHECK: Laad geen complete structs in!
+                    if isinstance(target_type, (ir.IntType, ir.FloatType, ir.PointerType, ir.ArrayType)):
+                        if isinstance(target_type, ir.ArrayType):
+                            zero = ir.Constant(ir.IntType(32), 0)
+                            ptr = self.builder.gep(child_val, [zero, zero], name="array_deref")
+                            self.results[id(node)] = self.builder.load(ptr, name="deref_load")
+                        else:
+                            self.results[id(node)] = self.builder.load(child_val, name="deref_load")
                     else:
                         # Voor complete structs by-value
                         self.results[id(node)] = child_val
