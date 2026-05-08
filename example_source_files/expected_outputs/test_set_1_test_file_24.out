@@ -1,2 +1,0 @@
-Semantic errors found, stopping.
-[ Error ] line 9, position 0: Toewijzing aan de waarde waar 'x_ptr' naar wijst is niet toegestaan (const).

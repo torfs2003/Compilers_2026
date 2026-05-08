@@ -18,10 +18,11 @@ define i32 @"main"()
 {
 entry:
   %"b" = alloca [2 x i32]
-  %".2" = getelementptr [2 x i32], [2 x i32]* %"b", i32 0, i32 0
-  store i32 1, i32* %".2"
-  %".4" = getelementptr [2 x i32], [2 x i32]* %"b", i32 0, i32 1
-  store i32 2, i32* %".4"
+  store [2 x i32] zeroinitializer, [2 x i32]* %"b"
+  %".3" = getelementptr [2 x i32], [2 x i32]* %"b", i32 0, i32 0
+  store i32 1, i32* %".3"
+  %".5" = getelementptr [2 x i32], [2 x i32]* %"b", i32 0, i32 1
+  store i32 2, i32* %".5"
   ;  Source: return0;
   ret i32 0
 }

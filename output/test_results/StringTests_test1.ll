@@ -19,51 +19,51 @@ define i32 @"main"()
 entry:
   %"s" = alloca [10 x i8]
   %".2" = bitcast [10 x i8]* @"str" to i8*
-  %"str_src_0" = getelementptr i8, i8* %".2", i32 0
-  %"str_dst_0" = getelementptr [10 x i8], [10 x i8]* %"s", i32 0, i32 0
-  %"ch_0" = load i8, i8* %"str_src_0"
-  store i8 %"ch_0", i8* %"str_dst_0"
-  %"str_src_1" = getelementptr i8, i8* %".2", i32 1
-  %"str_dst_1" = getelementptr [10 x i8], [10 x i8]* %"s", i32 0, i32 1
-  %"ch_1" = load i8, i8* %"str_src_1"
-  store i8 %"ch_1", i8* %"str_dst_1"
-  %"str_src_2" = getelementptr i8, i8* %".2", i32 2
-  %"str_dst_2" = getelementptr [10 x i8], [10 x i8]* %"s", i32 0, i32 2
-  %"ch_2" = load i8, i8* %"str_src_2"
-  store i8 %"ch_2", i8* %"str_dst_2"
-  %"str_src_3" = getelementptr i8, i8* %".2", i32 3
-  %"str_dst_3" = getelementptr [10 x i8], [10 x i8]* %"s", i32 0, i32 3
-  %"ch_3" = load i8, i8* %"str_src_3"
-  store i8 %"ch_3", i8* %"str_dst_3"
-  %"str_src_4" = getelementptr i8, i8* %".2", i32 4
-  %"str_dst_4" = getelementptr [10 x i8], [10 x i8]* %"s", i32 0, i32 4
-  %"ch_4" = load i8, i8* %"str_src_4"
-  store i8 %"ch_4", i8* %"str_dst_4"
-  %"str_src_5" = getelementptr i8, i8* %".2", i32 5
-  %"str_dst_5" = getelementptr [10 x i8], [10 x i8]* %"s", i32 0, i32 5
-  %"ch_5" = load i8, i8* %"str_src_5"
-  store i8 %"ch_5", i8* %"str_dst_5"
-  %"str_src_6" = getelementptr i8, i8* %".2", i32 6
-  %"str_dst_6" = getelementptr [10 x i8], [10 x i8]* %"s", i32 0, i32 6
-  %"ch_6" = load i8, i8* %"str_src_6"
-  store i8 %"ch_6", i8* %"str_dst_6"
-  %"str_src_7" = getelementptr i8, i8* %".2", i32 7
-  %"str_dst_7" = getelementptr [10 x i8], [10 x i8]* %"s", i32 0, i32 7
-  %"ch_7" = load i8, i8* %"str_src_7"
-  store i8 %"ch_7", i8* %"str_dst_7"
-  %"str_src_8" = getelementptr i8, i8* %".2", i32 8
-  %"str_dst_8" = getelementptr [10 x i8], [10 x i8]* %"s", i32 0, i32 8
-  %"ch_8" = load i8, i8* %"str_src_8"
-  store i8 %"ch_8", i8* %"str_dst_8"
-  %"str_src_9" = getelementptr i8, i8* %".2", i32 9
-  %"str_dst_9" = getelementptr [10 x i8], [10 x i8]* %"s", i32 0, i32 9
-  %"ch_9" = load i8, i8* %"str_src_9"
-  store i8 %"ch_9", i8* %"str_dst_9"
-  %".13" = bitcast [3 x i8]* @"str.1" to i8*
+  %"str_char_src" = getelementptr i8, i8* %".2", i32 0
+  %"str_char_dst" = getelementptr [10 x i8], [10 x i8]* %"s", i32 0, i32 0
+  %".3" = load i8, i8* %"str_char_src"
+  store i8 %".3", i8* %"str_char_dst"
+  %"str_char_src.1" = getelementptr i8, i8* %".2", i32 1
+  %"str_char_dst.1" = getelementptr [10 x i8], [10 x i8]* %"s", i32 0, i32 1
+  %".5" = load i8, i8* %"str_char_src.1"
+  store i8 %".5", i8* %"str_char_dst.1"
+  %"str_char_src.2" = getelementptr i8, i8* %".2", i32 2
+  %"str_char_dst.2" = getelementptr [10 x i8], [10 x i8]* %"s", i32 0, i32 2
+  %".7" = load i8, i8* %"str_char_src.2"
+  store i8 %".7", i8* %"str_char_dst.2"
+  %"str_char_src.3" = getelementptr i8, i8* %".2", i32 3
+  %"str_char_dst.3" = getelementptr [10 x i8], [10 x i8]* %"s", i32 0, i32 3
+  %".9" = load i8, i8* %"str_char_src.3"
+  store i8 %".9", i8* %"str_char_dst.3"
+  %"str_char_src.4" = getelementptr i8, i8* %".2", i32 4
+  %"str_char_dst.4" = getelementptr [10 x i8], [10 x i8]* %"s", i32 0, i32 4
+  %".11" = load i8, i8* %"str_char_src.4"
+  store i8 %".11", i8* %"str_char_dst.4"
+  %"str_char_src.5" = getelementptr i8, i8* %".2", i32 5
+  %"str_char_dst.5" = getelementptr [10 x i8], [10 x i8]* %"s", i32 0, i32 5
+  %".13" = load i8, i8* %"str_char_src.5"
+  store i8 %".13", i8* %"str_char_dst.5"
+  %"str_char_src.6" = getelementptr i8, i8* %".2", i32 6
+  %"str_char_dst.6" = getelementptr [10 x i8], [10 x i8]* %"s", i32 0, i32 6
+  %".15" = load i8, i8* %"str_char_src.6"
+  store i8 %".15", i8* %"str_char_dst.6"
+  %"str_char_src.7" = getelementptr i8, i8* %".2", i32 7
+  %"str_char_dst.7" = getelementptr [10 x i8], [10 x i8]* %"s", i32 0, i32 7
+  %".17" = load i8, i8* %"str_char_src.7"
+  store i8 %".17", i8* %"str_char_dst.7"
+  %"str_char_src.8" = getelementptr i8, i8* %".2", i32 8
+  %"str_char_dst.8" = getelementptr [10 x i8], [10 x i8]* %"s", i32 0, i32 8
+  %".19" = load i8, i8* %"str_char_src.8"
+  store i8 %".19", i8* %"str_char_dst.8"
+  %"str_char_src.9" = getelementptr i8, i8* %".2", i32 9
+  %"str_char_dst.9" = getelementptr [10 x i8], [10 x i8]* %"s", i32 0, i32 9
+  %".21" = load i8, i8* %"str_char_src.9"
+  store i8 %".21", i8* %"str_char_dst.9"
+  %".23" = bitcast [3 x i8]* @"str.1" to i8*
   ;  Source: s
   ;  Source: printf("%s",s);
-  %".16" = getelementptr inbounds [10 x i8], [10 x i8]* %"s", i32 0, i32 0
-  %".17" = call i32 (i8*, ...) @"printf"(i8* %".13", i8* %".16")
+  %".26" = getelementptr inbounds [10 x i8], [10 x i8]* %"s", i32 0, i32 0
+  %".27" = call i32 (i8*, ...) @"printf"(i8* %".23", i8* %".26")
   ;  Source: return0;
   ret i32 0
 }

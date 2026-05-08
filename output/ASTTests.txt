@@ -1,96 +1,96 @@
 
 ============================================================
   TEST MAP : example_source_files/test_set_3/ASTTests
-  Log file : output\ASTTests.txt
+  Resultaten in : output
 ============================================================
 
 ──────────────────────────────────────────────────
   [ConstantFoldingTests]
 ──────────────────────────────────────────────────
-  ConstantFoldingTests\test1.c... PASSED
-  ConstantFoldingTests\test10.c... PASSED
-  ConstantFoldingTests\test11.c... PASSED
-  ConstantFoldingTests\test12.c... PASSED
-  ConstantFoldingTests\test13.c... PASSED
-  ConstantFoldingTests\test14.c... PASSED
-  ConstantFoldingTests\test15.c... PASSED
-  ConstantFoldingTests\test16.c... PASSED (Expected failure)
-  ConstantFoldingTests\test2.c... PASSED
-  ConstantFoldingTests\test3.c... PASSED
-  ConstantFoldingTests\test4.c... PASSED
-  ConstantFoldingTests\test5.c... PASSED
-  ConstantFoldingTests\test6.c... PASSED
-  ConstantFoldingTests\test7.c... PASSED
-  ConstantFoldingTests\test8.c... PASSED
-  ConstantFoldingTests\test9.c... PASSED
+  example_source_files\test_set_3\ASTTests\ConstantFoldingTests\test1.c... PASSED
+  example_source_files\test_set_3\ASTTests\ConstantFoldingTests\test2.c... PASSED
+  example_source_files\test_set_3\ASTTests\ConstantFoldingTests\test3.c... PASSED
+  example_source_files\test_set_3\ASTTests\ConstantFoldingTests\test4.c... PASSED
+  example_source_files\test_set_3\ASTTests\ConstantFoldingTests\test5.c... PASSED
+  example_source_files\test_set_3\ASTTests\ConstantFoldingTests\test6.c... PASSED
+  example_source_files\test_set_3\ASTTests\ConstantFoldingTests\test7.c... PASSED
+  example_source_files\test_set_3\ASTTests\ConstantFoldingTests\test8.c... PASSED
+  example_source_files\test_set_3\ASTTests\ConstantFoldingTests\test9.c... PASSED
+  example_source_files\test_set_3\ASTTests\ConstantFoldingTests\test10.c... PASSED
+  example_source_files\test_set_3\ASTTests\ConstantFoldingTests\test11.c... PASSED
+  example_source_files\test_set_3\ASTTests\ConstantFoldingTests\test12.c... PASSED
+  example_source_files\test_set_3\ASTTests\ConstantFoldingTests\test13.c... PASSED
+  example_source_files\test_set_3\ASTTests\ConstantFoldingTests\test14.c... PASSED
+  example_source_files\test_set_3\ASTTests\ConstantFoldingTests\test15.c... PASSED
+  example_source_files\test_set_3\ASTTests\ConstantFoldingTests\test16.c... PASSED (Expected failure)
 
   |== ConstantFoldingTests TOTAAL: 16 passed, 0 failed  [ALLES GESLAAGD] ==|
 
 ──────────────────────────────────────────────────
   [ConstraintsTests]
 ──────────────────────────────────────────────────
-  ConstraintsTests\test1.c... PASSED (Expected failure)
-  ConstraintsTests\test2.c... PASSED
-  ConstraintsTests\test3.c... PASSED (Expected failure)
-  ConstraintsTests\test4.c... PASSED (Expected failure)
-  ConstraintsTests\test5.c... PASSED (Expected failure)
-  ConstraintsTests\test6.c... PASSED
-  ConstraintsTests\test7.c... PASSED (Expected failure)
+  example_source_files\test_set_3\ASTTests\ConstraintsTests\test1.c... PASSED (Expected failure)
+  example_source_files\test_set_3\ASTTests\ConstraintsTests\test2.c... PASSED
+  example_source_files\test_set_3\ASTTests\ConstraintsTests\test3.c... PASSED (Expected failure)
+  example_source_files\test_set_3\ASTTests\ConstraintsTests\test4.c... PASSED (Expected failure)
+  example_source_files\test_set_3\ASTTests\ConstraintsTests\test5.c... PASSED (Expected failure)
+  example_source_files\test_set_3\ASTTests\ConstraintsTests\test6.c... PASSED
+  example_source_files\test_set_3\ASTTests\ConstraintsTests\test7.c... PASSED (Expected failure)
 
   |== ConstraintsTests TOTAAL: 7 passed, 0 failed  [ALLES GESLAAGD] ==|
 
 ──────────────────────────────────────────────────
   [ConversionTests]
 ──────────────────────────────────────────────────
-  ConversionTests\test1.c... PASSED
-  ConversionTests\test10.c... PASSED
-  ConversionTests\test11.c... PASSED
-  ConversionTests\test12.c... FAILED
+  example_source_files\test_set_3\ASTTests\ConversionTests\test1.c... PASSED
+  example_source_files\test_set_3\ASTTests\ConversionTests\test2.c... PASSED
+  example_source_files\test_set_3\ASTTests\ConversionTests\test3.c... PASSED
+  example_source_files\test_set_3\ASTTests\ConversionTests\test4.c... PASSED
+  example_source_files\test_set_3\ASTTests\ConversionTests\test5.c... PASSED
+  example_source_files\test_set_3\ASTTests\ConversionTests\test6.c... PASSED
+  example_source_files\test_set_3\ASTTests\ConversionTests\test7.c... PASSED (Expected failure)
+  example_source_files\test_set_3\ASTTests\ConversionTests\test8.c... PASSED
+  example_source_files\test_set_3\ASTTests\ConversionTests\test9.c... PASSED
+  example_source_files\test_set_3\ASTTests\ConversionTests\test10.c... PASSED
+  example_source_files\test_set_3\ASTTests\ConversionTests\test11.c... PASSED
+  example_source_files\test_set_3\ASTTests\ConversionTests\test12.c... FAILED
     --> EXPECTED (code 0):
     
     ACTUAL (code 1):
     
     [!] LLI STDERR:
-    lli.exe: lli: output/test_results\ConversionTests_test12.ll:17:37: error: integer constant must have integer type
-  ConversionTests\test13.c... FAILED
+    lli.exe: lli: output\test_set_3\ASTTests\ConversionTests\test12.ll:17:37: error: integer constant must have integer type
+  example_source_files\test_set_3\ASTTests\ConversionTests\test13.c... FAILED
     --> EXPECTED (code 0):
     
     ACTUAL (code 1):
     
     [!] LLI STDERR:
-    lli.exe: lli: output/test_results\ConversionTests_test13.ll:17:37: error: integer constant must have integer type
-  ConversionTests\test14.c... PASSED
-  ConversionTests\test15.c... PASSED
-  ConversionTests\test16.c... PASSED
-  ConversionTests\test17.c... PASSED
-  ConversionTests\test18.c... PASSED
-  ConversionTests\test19.c... PASSED
-  ConversionTests\test2.c... PASSED
-  ConversionTests\test20.c... PASSED
-  ConversionTests\test3.c... PASSED
-  ConversionTests\test4.c... PASSED
-  ConversionTests\test5.c... PASSED
-  ConversionTests\test6.c... PASSED
-  ConversionTests\test7.c... PASSED (Expected failure)
-  ConversionTests\test8.c... PASSED
-  ConversionTests\test9.c... PASSED
+    lli.exe: lli: output\test_set_3\ASTTests\ConversionTests\test13.ll:17:37: error: integer constant must have integer type
+  example_source_files\test_set_3\ASTTests\ConversionTests\test14.c... PASSED
+  example_source_files\test_set_3\ASTTests\ConversionTests\test15.c... PASSED
+  example_source_files\test_set_3\ASTTests\ConversionTests\test16.c... PASSED
+  example_source_files\test_set_3\ASTTests\ConversionTests\test17.c... PASSED
+  example_source_files\test_set_3\ASTTests\ConversionTests\test18.c... PASSED
+  example_source_files\test_set_3\ASTTests\ConversionTests\test19.c... PASSED
+  example_source_files\test_set_3\ASTTests\ConversionTests\test20.c... PASSED
 
   |== ConversionTests TOTAAL: 18 passed, 2 failed  [2 GEFAALD] ==|
 
 ──────────────────────────────────────────────────
   [DeadCodeRemoveTests]
 ──────────────────────────────────────────────────
-  DeadCodeRemoveTests\test1.c... FAILED
+  example_source_files\test_set_3\ASTTests\DeadCodeRemoveTests\test1.c... FAILED
     --> TIMEOUT (Mogelijke oneindige lus)
-  DeadCodeRemoveTests\test2.c... FAILED
+  example_source_files\test_set_3\ASTTests\DeadCodeRemoveTests\test2.c... FAILED
     --> TIMEOUT (Mogelijke oneindige lus)
-  DeadCodeRemoveTests\test3.c... PASSED
-  DeadCodeRemoveTests\test4.c... PASSED
-  DeadCodeRemoveTests\test5.c... PASSED
-  DeadCodeRemoveTests\test6.c... PASSED
-  DeadCodeRemoveTests\test7.c... PASSED
-  DeadCodeRemoveTests\test8.c... PASSED
-  DeadCodeRemoveTests\test9.c... FAILED
+  example_source_files\test_set_3\ASTTests\DeadCodeRemoveTests\test3.c... PASSED
+  example_source_files\test_set_3\ASTTests\DeadCodeRemoveTests\test4.c... PASSED
+  example_source_files\test_set_3\ASTTests\DeadCodeRemoveTests\test5.c... PASSED
+  example_source_files\test_set_3\ASTTests\DeadCodeRemoveTests\test6.c... PASSED
+  example_source_files\test_set_3\ASTTests\DeadCodeRemoveTests\test7.c... PASSED
+  example_source_files\test_set_3\ASTTests\DeadCodeRemoveTests\test8.c... PASSED
+  example_source_files\test_set_3\ASTTests\DeadCodeRemoveTests\test9.c... FAILED
     --> TIMEOUT (Mogelijke oneindige lus)
 
   |== DeadCodeRemoveTests TOTAAL: 6 passed, 3 failed  [3 GEFAALD] ==|
@@ -98,127 +98,131 @@
 ──────────────────────────────────────────────────
   [SemanticErrorsTests]
 ──────────────────────────────────────────────────
-  SemanticErrorsTests\test1.c... PASSED (Expected failure)
-  SemanticErrorsTests\test10.c... PASSED (Expected failure)
-  SemanticErrorsTests\test11.c... PASSED
-  SemanticErrorsTests\test12.c... PASSED
-  SemanticErrorsTests\test13.c... PASSED (Expected failure)
-  SemanticErrorsTests\test14.c... PASSED (Expected failure)
-  SemanticErrorsTests\test15.c... PASSED (Expected failure)
-  SemanticErrorsTests\test16.c... PASSED (Expected failure)
-  SemanticErrorsTests\test17.c... PASSED (Expected failure)
-  SemanticErrorsTests\test18.c... PASSED (Expected failure)
-  SemanticErrorsTests\test19.c... PASSED (Expected failure)
-  SemanticErrorsTests\test2.c... PASSED
-  SemanticErrorsTests\test20.c... PASSED (Expected failure)
-  SemanticErrorsTests\test21.c... FAILED (Compiler accepteerde ongeldige C!)
-  SemanticErrorsTests\test22.c... PASSED (Expected failure)
-  SemanticErrorsTests\test23.c... PASSED (Expected failure)
-  SemanticErrorsTests\test24.c... PASSED (Expected failure)
-  SemanticErrorsTests\test25.c... PASSED (Expected failure)
-  SemanticErrorsTests\test26.c... FAILED (Compiler Error)
-  SemanticErrorsTests\test27.c... FAILED (Compiler accepteerde ongeldige C!)
-  SemanticErrorsTests\test28.c... PASSED
-  SemanticErrorsTests\test29.c... FAILED (Compiler Error)
-  SemanticErrorsTests\test3.c... PASSED
-  SemanticErrorsTests\test30.c... PASSED
-  SemanticErrorsTests\test31.c... PASSED
-  SemanticErrorsTests\test32.c... PASSED (Expected failure)
-  SemanticErrorsTests\test33.c... FAILED (Compiler Error)
-    --> line 3:8 no viable alternative at input 'intmain'
-  SemanticErrorsTests\test34.c... PASSED
-  SemanticErrorsTests\test35.c... PASSED
-  SemanticErrorsTests\test36.c... FAILED (Compiler accepteerde ongeldige C!)
-  SemanticErrorsTests\test37.c... PASSED (Expected failure)
-  SemanticErrorsTests\test38.c... FAILED (Compiler accepteerde ongeldige C!)
-  SemanticErrorsTests\test39.c... PASSED
-  SemanticErrorsTests\test4.c... PASSED (Expected failure)
-  SemanticErrorsTests\test41.c... PASSED (Expected failure)
-  SemanticErrorsTests\test42.c... FAILED (Compiler accepteerde ongeldige C!)
-  SemanticErrorsTests\test43.c... PASSED
-  SemanticErrorsTests\test44.c... PASSED
-  SemanticErrorsTests\test45.c... PASSED (Expected failure)
-  SemanticErrorsTests\test46.c... PASSED (Expected failure)
-  SemanticErrorsTests\test5.c... PASSED (Expected failure)
-  SemanticErrorsTests\test6.c... PASSED (Expected failure)
-  SemanticErrorsTests\test7.c... PASSED (Expected failure)
-  SemanticErrorsTests\test8.c... PASSED (Expected failure)
-  SemanticErrorsTests\test9.c... PASSED (Expected failure)
+  example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test1.c... PASSED (Expected failure)
+  example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test2.c... PASSED
+  example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test3.c... PASSED
+  example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test4.c... PASSED (Expected failure)
+  example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test5.c... PASSED (Expected failure)
+  example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test6.c... PASSED (Expected failure)
+  example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test7.c... PASSED (Expected failure)
+  example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test8.c... PASSED (Expected failure)
+  example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test9.c... PASSED (Expected failure)
+  example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test10.c... PASSED (Expected failure)
+  example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test11.c... PASSED
+  example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test12.c... PASSED
+  example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test13.c... PASSED (Expected failure)
+  example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test14.c... PASSED (Expected failure)
+  example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test15.c... PASSED (Expected failure)
+  example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test16.c... PASSED (Expected failure)
+  example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test17.c... PASSED (Expected failure)
+  example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test18.c... PASSED (Expected failure)
+  example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test19.c... PASSED (Expected failure)
+  example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test20.c... PASSED (Expected failure)
+  example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test21.c... FAILED
+    --> INVALID_C_FILE
+  example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test22.c... PASSED (Expected failure)
+  example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test23.c... PASSED (Expected failure)
+  example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test24.c... PASSED (Expected failure)
+  example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test25.c... PASSED (Expected failure)
+  example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test26.c... FAILED (Compiler Error)
+  example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test27.c... FAILED
+    --> INVALID_C_FILE
+  example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test28.c... PASSED
+  example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test29.c... FAILED (Compiler Error)
+  example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test30.c... PASSED
+  example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test31.c... PASSED
+  example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test32.c... PASSED (Expected failure)
+  example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test33.c... FAILED (Compiler Error)
+  example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test34.c... PASSED
+  example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test35.c... PASSED
+  example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test36.c... FAILED
+    --> INVALID_C_FILE
+  example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test37.c... PASSED (Expected failure)
+  example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test38.c... FAILED
+    --> INVALID_C_FILE
+  example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test39.c... PASSED
+  example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test41.c... PASSED (Expected failure)
+  example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test42.c... FAILED
+    --> INVALID_C_FILE
+  example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test43.c... PASSED
+  example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test44.c... PASSED
+  example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test45.c... PASSED (Expected failure)
+  example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test46.c... PASSED (Expected failure)
 
   |== SemanticErrorsTests TOTAAL: 37 passed, 8 failed  [8 GEFAALD] ==|
 
 ──────────────────────────────────────────────────
   [SwitchTests]
 ──────────────────────────────────────────────────
-  SwitchTests\test1.c... PASSED
-  SwitchTests\test2.c... PASSED
-  SwitchTests\test3.c... PASSED
-  SwitchTests\test4.c... PASSED
-  SwitchTests\test5.c... PASSED
+  example_source_files\test_set_3\ASTTests\SwitchTests\test1.c... PASSED
+  example_source_files\test_set_3\ASTTests\SwitchTests\test2.c... PASSED
+  example_source_files\test_set_3\ASTTests\SwitchTests\test3.c... PASSED
+  example_source_files\test_set_3\ASTTests\SwitchTests\test4.c... PASSED
+  example_source_files\test_set_3\ASTTests\SwitchTests\test5.c... PASSED
 
   |== SwitchTests TOTAAL: 5 passed, 0 failed  [ALLES GESLAAGD] ==|
 
 ──────────────────────────────────────────────────
   [TypedefTests]
 ──────────────────────────────────────────────────
-  TypedefTests\test1.c... PASSED
-  TypedefTests\test10.c... PASSED
-  TypedefTests\test11.c... PASSED (Expected failure)
-  TypedefTests\test12.c... PASSED (Expected failure)
-  TypedefTests\test13.c... PASSED (Expected failure)
-  TypedefTests\test14.c... PASSED
-  TypedefTests\test15.c... PASSED
-  TypedefTests\test16.c... PASSED
-  TypedefTests\test19.c... PASSED
-  TypedefTests\test2.c... PASSED
-  TypedefTests\test20.c... PASSED (Expected failure)
-  TypedefTests\test21.c... PASSED
-  TypedefTests\test22.c... PASSED (Expected failure)
-  TypedefTests\test23.c... PASSED
-  TypedefTests\test24.c... PASSED
-  TypedefTests\test25.c... PASSED
-  TypedefTests\test26.c... PASSED (Expected failure)
-  TypedefTests\test3.c... PASSED (Expected failure)
-  TypedefTests\test4.c... PASSED
-  TypedefTests\test5.c... PASSED
-  TypedefTests\test6.c... PASSED
-  TypedefTests\test7.c... PASSED
-  TypedefTests\test8.c... PASSED (Expected failure)
-  TypedefTests\test9.c... PASSED
+  example_source_files\test_set_3\ASTTests\TypedefTests\test1.c... PASSED
+  example_source_files\test_set_3\ASTTests\TypedefTests\test2.c... PASSED
+  example_source_files\test_set_3\ASTTests\TypedefTests\test3.c... PASSED (Expected failure)
+  example_source_files\test_set_3\ASTTests\TypedefTests\test4.c... PASSED
+  example_source_files\test_set_3\ASTTests\TypedefTests\test5.c... PASSED
+  example_source_files\test_set_3\ASTTests\TypedefTests\test6.c... PASSED
+  example_source_files\test_set_3\ASTTests\TypedefTests\test7.c... PASSED
+  example_source_files\test_set_3\ASTTests\TypedefTests\test8.c... PASSED (Expected failure)
+  example_source_files\test_set_3\ASTTests\TypedefTests\test9.c... PASSED
+  example_source_files\test_set_3\ASTTests\TypedefTests\test10.c... PASSED
+  example_source_files\test_set_3\ASTTests\TypedefTests\test11.c... PASSED (Expected failure)
+  example_source_files\test_set_3\ASTTests\TypedefTests\test12.c... PASSED (Expected failure)
+  example_source_files\test_set_3\ASTTests\TypedefTests\test13.c... PASSED (Expected failure)
+  example_source_files\test_set_3\ASTTests\TypedefTests\test14.c... PASSED
+  example_source_files\test_set_3\ASTTests\TypedefTests\test15.c... PASSED
+  example_source_files\test_set_3\ASTTests\TypedefTests\test16.c... PASSED
+  example_source_files\test_set_3\ASTTests\TypedefTests\test19.c... PASSED
+  example_source_files\test_set_3\ASTTests\TypedefTests\test20.c... PASSED (Expected failure)
+  example_source_files\test_set_3\ASTTests\TypedefTests\test21.c... PASSED
+  example_source_files\test_set_3\ASTTests\TypedefTests\test22.c... PASSED (Expected failure)
+  example_source_files\test_set_3\ASTTests\TypedefTests\test23.c... PASSED
+  example_source_files\test_set_3\ASTTests\TypedefTests\test24.c... PASSED
+  example_source_files\test_set_3\ASTTests\TypedefTests\test25.c... PASSED
+  example_source_files\test_set_3\ASTTests\TypedefTests\test26.c... PASSED (Expected failure)
 
   |== TypedefTests TOTAAL: 24 passed, 0 failed  [ALLES GESLAAGD] ==|
 
 ──────────────────────────────────────────────────
   [ValueAdderTests]
 ──────────────────────────────────────────────────
-  ValueAdderTests\test1.c... PASSED
-  ValueAdderTests\test10.c... PASSED
-  ValueAdderTests\test11.c... PASSED
-  ValueAdderTests\test12.c... PASSED
-  ValueAdderTests\test13.c... PASSED
-  ValueAdderTests\test14.c... PASSED
-  ValueAdderTests\test15.c... PASSED
-  ValueAdderTests\test16.c... PASSED
-  ValueAdderTests\test17.c... PASSED
-  ValueAdderTests\test18.c... PASSED
-  ValueAdderTests\test19.c... PASSED
-  ValueAdderTests\test2.c... PASSED
-  ValueAdderTests\test20.c... PASSED
-  ValueAdderTests\test21.c... PASSED
-  ValueAdderTests\test22.c... FAILED
-    --> TIMEOUT (Mogelijke oneindige lus)
-  ValueAdderTests\test23.c... PASSED
-  ValueAdderTests\test24.c... PASSED
-  ValueAdderTests\test3.c... PASSED
-  ValueAdderTests\test4.c... PASSED
-  ValueAdderTests\test5.c... PASSED
-  ValueAdderTests\test6.c... PASSED
-  ValueAdderTests\test7.c... PASSED
-  ValueAdderTests\test8.c... PASSED
-  ValueAdderTests\test9.c... FAILED
+  example_source_files\test_set_3\ASTTests\ValueAdderTests\test1.c... PASSED
+  example_source_files\test_set_3\ASTTests\ValueAdderTests\test2.c... PASSED
+  example_source_files\test_set_3\ASTTests\ValueAdderTests\test3.c... PASSED
+  example_source_files\test_set_3\ASTTests\ValueAdderTests\test4.c... PASSED
+  example_source_files\test_set_3\ASTTests\ValueAdderTests\test5.c... PASSED
+  example_source_files\test_set_3\ASTTests\ValueAdderTests\test6.c... PASSED
+  example_source_files\test_set_3\ASTTests\ValueAdderTests\test7.c... PASSED
+  example_source_files\test_set_3\ASTTests\ValueAdderTests\test8.c... PASSED
+  example_source_files\test_set_3\ASTTests\ValueAdderTests\test9.c... FAILED
     --> EXPECTED (code 0):
     
     ACTUAL (code 3221226356):
+  example_source_files\test_set_3\ASTTests\ValueAdderTests\test10.c... PASSED
+  example_source_files\test_set_3\ASTTests\ValueAdderTests\test11.c... PASSED
+  example_source_files\test_set_3\ASTTests\ValueAdderTests\test12.c... PASSED
+  example_source_files\test_set_3\ASTTests\ValueAdderTests\test13.c... PASSED
+  example_source_files\test_set_3\ASTTests\ValueAdderTests\test14.c... PASSED
+  example_source_files\test_set_3\ASTTests\ValueAdderTests\test15.c... PASSED
+  example_source_files\test_set_3\ASTTests\ValueAdderTests\test16.c... PASSED
+  example_source_files\test_set_3\ASTTests\ValueAdderTests\test17.c... PASSED
+  example_source_files\test_set_3\ASTTests\ValueAdderTests\test18.c... PASSED
+  example_source_files\test_set_3\ASTTests\ValueAdderTests\test19.c... PASSED
+  example_source_files\test_set_3\ASTTests\ValueAdderTests\test20.c... PASSED
+  example_source_files\test_set_3\ASTTests\ValueAdderTests\test21.c... PASSED
+  example_source_files\test_set_3\ASTTests\ValueAdderTests\test22.c... FAILED
+    --> TIMEOUT (Mogelijke oneindige lus)
+  example_source_files\test_set_3\ASTTests\ValueAdderTests\test23.c... PASSED
+  example_source_files\test_set_3\ASTTests\ValueAdderTests\test24.c... PASSED
 
   |== ValueAdderTests TOTAAL: 22 passed, 2 failed  [2 GEFAALD] ==|
 

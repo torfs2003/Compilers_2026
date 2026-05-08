@@ -65,32 +65,68 @@ class LLVMVisitor:
         """Zoekt eerst in lokale variabelen, dan in globale."""
         return self.local_vars.get(name) or self.global_vars.get(name)
 
+    def _build_global_constant(self, val_node, target_type):
+        """Maakt recursief een ir.Constant aan voor globale (multi-dimensionele) arrays."""
+        if isinstance(target_type, ir.ArrayType):
+            elements = []
+            if isinstance(val_node, ArrayInitNode):
+                # Loop over de lengte van de array
+                for i in range(target_type.count):
+                    if i < len(val_node.values):
+                        elements.append(self._build_global_constant(val_node.values[i], target_type.element))
+                    else:
+                        elements.append(ir.Constant(target_type.element, None))
+            else:
+                elements.append(self._build_global_constant(val_node, target_type.element))
+                for i in range(1, target_type.count):
+                    elements.append(ir.Constant(target_type.element, None))
+            return ir.Constant(target_type, elements)
+        else:
+            # Base case: Scalar (int, float, etc.)
+            val = self._ensure_result(val_node)
+            if val is not None and val.type != target_type:
+                if isinstance(val_node, IntNode) and isinstance(target_type, ir.FloatType):
+                    return ir.Constant(target_type, float(val_node.value))
+                elif isinstance(val_node, FloatNode) and isinstance(target_type, ir.IntType):
+                    return ir.Constant(target_type, int(val_node.value))
+                elif isinstance(val_node, CharNode) and isinstance(target_type, ir.IntType):
+                    return ir.Constant(target_type, ord(val_node.value[0]))
+            
+            return val if val is not None else ir.Constant(target_type, None)
+        
     def _init_array(self, base_ptr, array_node, current_indices):
-        """Recursief initialiseren van (multi-dimensionele) arrays."""
+        """Recursief initialiseren met fix voor scalars in sub-arrays."""
         if self.builder is None: return
         zero = ir.Constant(ir.IntType(32), 0)
         
         for i, val_node in enumerate(array_node.values):
             idx = ir.Constant(ir.IntType(32), i)
-            path = [zero] + current_indices + [idx] 
             
             if isinstance(val_node, ArrayInitNode):
+                # Ga dieper de array in voor geneste accolades
                 self._init_array(base_ptr, val_node, current_indices + [idx])
             else:
+                # Bepaal het pad naar het huidige element of de huidige rij
+                path = [zero] + current_indices + [idx] 
                 ptr = self.builder.gep(base_ptr, path)
-                val = self._ensure_result(val_node)
+                
+                while isinstance(ptr.type.pointee, ir.ArrayType):
+                    ptr = self.builder.gep(ptr, [zero, zero])
+
+                val = self._ensure_result(val_node) 
+                if val is None: continue
                 
                 target_type = ptr.type.pointee
-                
                 if val.type != target_type:
                     val = self._apply_cast(val, target_type)
                 
+                # Sla de waarde op in het uiteindelijke adres
                 if not isinstance(target_type, (ir.IntType, ir.FloatType, ir.PointerType)):
                     loaded_struct = self.builder.load(val)
                     self.builder.store(loaded_struct, ptr)
                 else:
                     self.builder.store(val, ptr)
-
+                    
     def _declare_stdio(self):
         if self.stdio_declared: return
         voidptr_ty = ir.IntType(8).as_pointer()
@@ -333,35 +369,60 @@ class LLVMVisitor:
             if addr is None:
                 addr = self._allocate_variable(node)
 
-
             if getattr(node, 'init_expr', None):
                 if isinstance(node.init_expr, ArrayInitNode):
-                    self._init_array(addr, node.init_expr, [])
+                    # --- DE NIEUWE FIX VOOR GLOBALE ARRAYS ---
+                    if self.builder is None:
+                        # We zijn in de globale scope (geen functie actief)
+                        const_array = self._build_global_constant(node.init_expr, addr.type.pointee)
+                        addr.initializer = const_array
+                    else:
+                        # We zijn in de lokale scope (binnen een functie)
+                        if isinstance(addr.type.pointee, ir.ArrayType):
+                            self.builder.store(ir.Constant(addr.type.pointee, None), addr)
+                        self._init_array(addr, node.init_expr, [])
+                    # -----------------------------------------
                 else:
                     val = self._ensure_result(node.init_expr)
                     if val is not None:
                         target_type = addr.type.pointee
-
+                        
                         if (isinstance(target_type, ir.ArrayType)
                                 and target_type.element == ir.IntType(8)
                                 and isinstance(val.type, ir.PointerType)
                                 and val.type.pointee == ir.IntType(8)):
-                            zero = ir.Constant(ir.IntType(32), 0)
-                            for i in range(target_type.count):
-                                src_ptr = self.builder.gep(val, [ir.Constant(ir.IntType(32), i)], name=f"str_src_{i}")
-                                dst_ptr = self.builder.gep(addr, [zero, ir.Constant(ir.IntType(32), i)], name=f"str_dst_{i}")
-                                ch = self.builder.load(src_ptr, name=f"ch_{i}")
-                                self.builder.store(ch, dst_ptr)
-
-                        elif not isinstance(target_type, (ir.IntType, ir.FloatType, ir.PointerType)):
+                            
                             if self.builder is not None:
-                                loaded_struct = self.builder.load(val)
-                                self.builder.store(loaded_struct, addr)
+                                # LOKAAL: Kopieer letter voor letter
+                                zero = ir.Constant(ir.IntType(32), 0)
+                                for i in range(target_type.count):
+                                    idx = ir.Constant(ir.IntType(32), i)
+                                    src_ptr = self.builder.gep(val, [idx], name="str_char_src")
+                                    dst_ptr = self.builder.gep(addr, [zero, idx], name="str_char_dst")
+                                    ch = self.builder.load(src_ptr)
+                                    self.builder.store(ch, dst_ptr)
                             else:
-                                addr.initializer = val
+                                # GLOBAAL: Maak direct een constante array aan
+                                if isinstance(node.init_expr, StringNode):
+                                    str_val = node.init_expr.value.encode('utf-8').decode('unicode_escape') + '\0'
+                                    target_count = target_type.count
+                                    
+                                    # C-standaard: vul rest op met nullen (\0) of knip af
+                                    if len(str_val) < target_count:
+                                        str_val += '\0' * (target_count - len(str_val))
+                                    else:
+                                        str_val = str_val[:target_count]
+                                        
+                                    addr.initializer = ir.Constant(target_type, bytearray(str_val, 'utf-8'))
+                                else:
+                                    addr.initializer = val
+                        # ------------------------------------------------------------
                         else:
-                            if val.type != target_type:
+                            # Voor alle andere types (ints, floats, etc.)
+                            if val.type != target_type: 
                                 val = self._apply_cast(val, target_type)
+
+                            # Als we globaal zijn, stel dan in als initializer, anders store!
                             if self.builder is None:
                                 addr.initializer = val
                             else:
@@ -752,13 +813,16 @@ class LLVMVisitor:
         elif isinstance(node, StringNode):
             val = node.value.encode('utf-8').decode('unicode_escape') + '\0'
             typ = ir.ArrayType(ir.IntType(8), len(val))
-            
+
             global_str = ir.GlobalVariable(self.module, typ, name=self.module.get_unique_name("str"))
             global_str.linkage = 'internal'
             global_str.global_constant = True
             global_str.initializer = ir.Constant(typ, bytearray(val, 'utf-8'))
-            
-            self.results[id(node)] = self.builder.bitcast(global_str, ir.IntType(8).as_pointer())
+
+            if self.builder is not None:
+                self.results[id(node)] = self.builder.bitcast(global_str, ir.IntType(8).as_pointer())
+            else:
+                self.results[id(node)] = global_str.bitcast(ir.IntType(8).as_pointer())
         
         elif isinstance(node, CharNode):
             char_str = node.value.encode('utf-8').decode('unicode_escape')

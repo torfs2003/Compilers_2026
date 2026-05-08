@@ -19,50 +19,51 @@ define i32 @"main"()
 entry:
   %"b" = alloca [2 x i32]
   %"a" = alloca [4 x i32]
-  %".2" = getelementptr [4 x i32], [4 x i32]* %"a", i32 0, i32 0
-  store i32 1, i32* %".2"
-  %".4" = getelementptr [4 x i32], [4 x i32]* %"a", i32 0, i32 1
-  store i32 2, i32* %".4"
-  %".6" = getelementptr [4 x i32], [4 x i32]* %"a", i32 0, i32 2
-  store i32 3, i32* %".6"
-  %".8" = getelementptr [4 x i32], [4 x i32]* %"a", i32 0, i32 3
-  store i32 4, i32* %".8"
+  store [4 x i32] zeroinitializer, [4 x i32]* %"a"
+  %".3" = getelementptr [4 x i32], [4 x i32]* %"a", i32 0, i32 0
+  store i32 1, i32* %".3"
+  %".5" = getelementptr [4 x i32], [4 x i32]* %"a", i32 0, i32 1
+  store i32 2, i32* %".5"
+  %".7" = getelementptr [4 x i32], [4 x i32]* %"a", i32 0, i32 2
+  store i32 3, i32* %".7"
+  %".9" = getelementptr [4 x i32], [4 x i32]* %"a", i32 0, i32 3
+  store i32 4, i32* %".9"
   %"k" = alloca i32*
-  %".10" = bitcast [4 x i32]* %"a" to i32*
-  store i32* %".10", i32** %"k"
+  %".11" = bitcast [4 x i32]* %"a" to i32*
+  store i32* %".11", i32** %"k"
   ;  Source: k
   %"k_load" = load i32*, i32** %"k"
   ;  Source: k
   %"k_load.1" = load i32*, i32** %"k"
   ;  Source: k+2
-  %".15" = getelementptr i32, i32* %"k_load.1", i32 2
+  %".16" = getelementptr i32, i32* %"k_load.1", i32 2
   ;  Source: k=k+2;
-  store i32* %".15", i32** %"k"
-  %".18" = bitcast [4 x i8]* @"str" to i8*
+  store i32* %".16", i32** %"k"
+  %".19" = bitcast [4 x i8]* @"str" to i8*
   ;  Source: k
   %"k_load.2" = load i32*, i32** %"k"
   ;  Source: *k
   %"deref_load" = load i32, i32* %"k_load.2"
   ;  Source: printf("%d ",*k);
-  %".22" = call i32 (i8*, ...) @"printf"(i8* %".18", i32 %"deref_load")
+  %".23" = call i32 (i8*, ...) @"printf"(i8* %".19", i32 %"deref_load")
   %"e" = alloca i32
-  %".23" = ptrtoint [4 x i32]* %"a" to i32
-  %".24" = icmp eq i32 5, %".23"
-  %".25" = zext i1 %".24" to i32
-  store i32 %".25", i32* %"e"
+  %".24" = ptrtoint [4 x i32]* %"a" to i32
+  %".25" = icmp eq i32 5, %".24"
+  %".26" = zext i1 %".25" to i32
+  store i32 %".26", i32* %"e"
   %"t" = alloca i32
-  %".27" = ptrtoint [4 x i32]* %"a" to i32
-  %".28" = icmp ne i32 %".27", 5
-  %".29" = zext i1 %".28" to i32
-  store i32 %".29", i32* %"t"
+  %".28" = ptrtoint [4 x i32]* %"a" to i32
+  %".29" = icmp ne i32 %".28", 5
+  %".30" = zext i1 %".29" to i32
+  store i32 %".30", i32* %"t"
   %"p" = alloca i32
   %"k_load.3" = load i32*, i32** %"k"
-  %".31" = ptrtoint i32* %"k_load.3" to i32
-  %".32" = ptrtoint [4 x i32]* %"a" to i32
-  %".33" = icmp ne i32 %".31", %".32"
-  %".34" = zext i1 %".33" to i32
-  store i32 %".34", i32* %"p"
-  %".36" = bitcast [9 x i8]* @"str.1" to i8*
+  %".32" = ptrtoint i32* %"k_load.3" to i32
+  %".33" = ptrtoint [4 x i32]* %"a" to i32
+  %".34" = icmp ne i32 %".32", %".33"
+  %".35" = zext i1 %".34" to i32
+  store i32 %".35", i32* %"p"
+  %".37" = bitcast [9 x i8]* @"str.1" to i8*
   ;  Source: e
   %"e_load" = load i32, i32* %"e"
   ;  Source: t
@@ -70,7 +71,7 @@ entry:
   ;  Source: p
   %"p_load" = load i32, i32* %"p"
   ;  Source: printf("%d %d %d",e,t,p);
-  %".41" = call i32 (i8*, ...) @"printf"(i8* %".36", i32 %"e_load", i32 %"t_load", i32 %"p_load")
+  %".42" = call i32 (i8*, ...) @"printf"(i8* %".37", i32 %"e_load", i32 %"t_load", i32 %"p_load")
   ;  Source: return0;
   ret i32 0
 }

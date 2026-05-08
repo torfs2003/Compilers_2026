@@ -38,19 +38,20 @@ define i32 @"main"()
 {
 entry:
   %"z" = alloca [5 x i32]
-  %".2" = getelementptr [5 x i32], [5 x i32]* %"z", i32 0, i32 0
-  store i32 1, i32* %".2"
-  %".4" = getelementptr [5 x i32], [5 x i32]* %"z", i32 0, i32 1
-  store i32 2, i32* %".4"
-  %".6" = getelementptr [5 x i32], [5 x i32]* %"z", i32 0, i32 2
-  store i32 3, i32* %".6"
-  %".8" = getelementptr [5 x i32], [5 x i32]* %"z", i32 0, i32 3
-  store i32 4, i32* %".8"
-  %".10" = getelementptr [5 x i32], [5 x i32]* %"z", i32 0, i32 4
-  store i32 5, i32* %".10"
+  store [5 x i32] zeroinitializer, [5 x i32]* %"z"
+  %".3" = getelementptr [5 x i32], [5 x i32]* %"z", i32 0, i32 0
+  store i32 1, i32* %".3"
+  %".5" = getelementptr [5 x i32], [5 x i32]* %"z", i32 0, i32 1
+  store i32 2, i32* %".5"
+  %".7" = getelementptr [5 x i32], [5 x i32]* %"z", i32 0, i32 2
+  store i32 3, i32* %".7"
+  %".9" = getelementptr [5 x i32], [5 x i32]* %"z", i32 0, i32 3
+  store i32 4, i32* %".9"
+  %".11" = getelementptr [5 x i32], [5 x i32]* %"z", i32 0, i32 4
+  store i32 5, i32* %".11"
   %"a" = alloca i32*
-  %".12" = bitcast [5 x i32]* %"z" to i32*
-  store i32* %".12", i32** %"a"
+  %".13" = bitcast [5 x i32]* %"z" to i32*
+  store i32* %".13", i32** %"a"
   %"b" = alloca i32**
   store i32** %"a", i32*** %"b"
   ;  Source: b
@@ -58,10 +59,10 @@ entry:
   ;  Source: b
   %"b_load.1" = load i32**, i32*** %"b"
   ;  Source: mul(b)
-  %".18" = call i32** @"mul"(i32** %"b_load.1")
+  %".19" = call i32** @"mul"(i32** %"b_load.1")
   ;  Source: b=mul(b);
-  store i32** %".18", i32*** %"b"
-  %".21" = bitcast [3 x i8]* @"str.1" to i8*
+  store i32** %".19", i32*** %"b"
+  %".22" = bitcast [3 x i8]* @"str.1" to i8*
   ;  Source: b
   %"b_load.2" = load i32**, i32*** %"b"
   ;  Source: (*b)
@@ -70,7 +71,7 @@ entry:
   %"gep_ptr" = getelementptr i32, i32* %"deref_load", i32 0
   %"array_element" = load i32, i32* %"gep_ptr"
   ;  Source: printf("%d",(*b)[0]);
-  %".26" = call i32 (i8*, ...) @"printf"(i8* %".21", i32 %"array_element")
+  %".27" = call i32 (i8*, ...) @"printf"(i8* %".22", i32 %"array_element")
   ;  Source: return0;
   ret i32 0
 }

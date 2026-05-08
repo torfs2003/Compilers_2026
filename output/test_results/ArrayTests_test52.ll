@@ -18,16 +18,17 @@ define i32 @"main"()
 {
 entry:
   %"array_2" = alloca [5 x i32]
-  %".2" = getelementptr [5 x i32], [5 x i32]* %"array_2", i32 0, i32 0
-  store i32 1, i32* %".2"
-  %".4" = getelementptr [5 x i32], [5 x i32]* %"array_2", i32 0, i32 1
-  store i32 2, i32* %".4"
-  %".6" = getelementptr [5 x i32], [5 x i32]* %"array_2", i32 0, i32 2
-  store i32 3, i32* %".6"
-  %".8" = getelementptr [5 x i32], [5 x i32]* %"array_2", i32 0, i32 3
-  store i32 4, i32* %".8"
-  %".10" = getelementptr [5 x i32], [5 x i32]* %"array_2", i32 0, i32 4
-  store i32 5, i32* %".10"
+  store [5 x i32] zeroinitializer, [5 x i32]* %"array_2"
+  %".3" = getelementptr [5 x i32], [5 x i32]* %"array_2", i32 0, i32 0
+  store i32 1, i32* %".3"
+  %".5" = getelementptr [5 x i32], [5 x i32]* %"array_2", i32 0, i32 1
+  store i32 2, i32* %".5"
+  %".7" = getelementptr [5 x i32], [5 x i32]* %"array_2", i32 0, i32 2
+  store i32 3, i32* %".7"
+  %".9" = getelementptr [5 x i32], [5 x i32]* %"array_2", i32 0, i32 3
+  store i32 4, i32* %".9"
+  %".11" = getelementptr [5 x i32], [5 x i32]* %"array_2", i32 0, i32 4
+  store i32 5, i32* %".11"
   %"i" = alloca i32
   ;  Source: i
   %"i_load" = load i32, i32* %"i"
@@ -36,20 +37,20 @@ entry:
   br label %"while.cond"
 while.cond:
   %"i_load.1" = load i32, i32* %"i"
-  %".16" = icmp slt i32 %"i_load.1", 5
-  %".17" = zext i1 %".16" to i32
-  %"whilecond" = icmp ne i32 %".17", 0
+  %".17" = icmp slt i32 %"i_load.1", 5
+  %".18" = zext i1 %".17" to i32
+  %"whilecond" = icmp ne i32 %".18", 0
   br i1 %"whilecond", label %"while.body", label %"while.end"
 while.body:
-  %".19" = bitcast [4 x i8]* @"str" to i8*
+  %".20" = bitcast [4 x i8]* @"str" to i8*
   %"i_load.2" = load i32, i32* %"i"
   %"gep_array" = getelementptr [5 x i32], [5 x i32]* %"array_2", i32 0, i32 %"i_load.2"
   %"array_element" = load i32, i32* %"gep_array"
-  %".20" = call i32 (i8*, ...) @"printf"(i8* %".19", i32 %"array_element")
+  %".21" = call i32 (i8*, ...) @"printf"(i8* %".20", i32 %"array_element")
   %"i_load.3" = load i32, i32* %"i"
-  %".21" = load i32, i32* %"i"
-  %".22" = add i32 %".21", 1
-  store i32 %".22", i32* %"i"
+  %".22" = load i32, i32* %"i"
+  %".23" = add i32 %".22", 1
+  store i32 %".23", i32* %"i"
   br label %"while.cond"
 while.end:
   ;  Source: return0;

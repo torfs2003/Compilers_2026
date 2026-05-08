@@ -80,7 +80,9 @@ class Preprocessor:
         return "\n".join(output_lines)
 
     def process_file(self, filepath: str) -> str:
-        self.base_dir = os.path.dirname(filepath)
-        with open(filepath, 'r', encoding='utf-8') as f:
+        # Maak het pad absoluut zodat os.path.dirname altijd werkt
+        absolute_path = os.path.abspath(filepath)
+        self.base_dir = os.path.dirname(absolute_path)
+        with open(absolute_path, 'r', encoding='utf-8') as f:
             code = f.read()
         return self.process_code(code)

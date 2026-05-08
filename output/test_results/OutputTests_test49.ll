@@ -18,62 +18,63 @@ define i32 @"main"()
 {
 entry:
   %"array" = alloca [3 x i32]
-  %".2" = getelementptr [3 x i32], [3 x i32]* %"array", i32 0, i32 0
-  store i32 1, i32* %".2"
-  %".4" = getelementptr [3 x i32], [3 x i32]* %"array", i32 0, i32 1
-  store i32 2, i32* %".4"
-  %".6" = getelementptr [3 x i32], [3 x i32]* %"array", i32 0, i32 2
-  store i32 3, i32* %".6"
+  store [3 x i32] zeroinitializer, [3 x i32]* %"array"
+  %".3" = getelementptr [3 x i32], [3 x i32]* %"array", i32 0, i32 0
+  store i32 1, i32* %".3"
+  %".5" = getelementptr [3 x i32], [3 x i32]* %"array", i32 0, i32 1
+  store i32 2, i32* %".5"
+  %".7" = getelementptr [3 x i32], [3 x i32]* %"array", i32 0, i32 2
+  store i32 3, i32* %".7"
   %"ptr1" = alloca i32
   %"gep_array" = getelementptr [3 x i32], [3 x i32]* %"array", i32 0, i32 0
   %"array_element" = load i32, i32* %"gep_array"
-  %".8" = ptrtoint i32* %"gep_array" to i32
-  store i32 %".8", i32* %"ptr1"
+  %".9" = ptrtoint i32* %"gep_array" to i32
+  store i32 %".9", i32* %"ptr1"
   %"ptr2" = alloca i32
   %"gep_array.1" = getelementptr [3 x i32], [3 x i32]* %"array", i32 0, i32 1
   %"array_element.1" = load i32, i32* %"gep_array.1"
-  %".10" = ptrtoint i32* %"gep_array.1" to i32
-  store i32 %".10", i32* %"ptr2"
-  %".12" = bitcast [4 x i8]* @"str" to i8*
+  %".11" = ptrtoint i32* %"gep_array.1" to i32
+  store i32 %".11", i32* %"ptr2"
+  %".13" = bitcast [4 x i8]* @"str" to i8*
   ;  Source: ptr1
   %"ptr1_load" = load i32, i32* %"ptr1"
   ;  Source: ptr2
   %"ptr2_load" = load i32, i32* %"ptr2"
   ;  Source: ptr1<ptr2
-  %".16" = icmp slt i32 %"ptr1_load", %"ptr2_load"
-  %".17" = zext i1 %".16" to i32
+  %".17" = icmp slt i32 %"ptr1_load", %"ptr2_load"
+  %".18" = zext i1 %".17" to i32
   ;  Source: printf("%d\n",ptr1<ptr2);
-  %".19" = call i32 (i8*, ...) @"printf"(i8* %".12", i32 %".17")
-  %".20" = bitcast [4 x i8]* @"str.1" to i8*
+  %".20" = call i32 (i8*, ...) @"printf"(i8* %".13", i32 %".18")
+  %".21" = bitcast [4 x i8]* @"str.1" to i8*
   ;  Source: ptr1
   %"ptr1_load.1" = load i32, i32* %"ptr1"
   ;  Source: ptr2
   %"ptr2_load.1" = load i32, i32* %"ptr2"
   ;  Source: ptr1>ptr2
-  %".24" = icmp sgt i32 %"ptr1_load.1", %"ptr2_load.1"
-  %".25" = zext i1 %".24" to i32
+  %".25" = icmp sgt i32 %"ptr1_load.1", %"ptr2_load.1"
+  %".26" = zext i1 %".25" to i32
   ;  Source: printf("%d\n",ptr1>ptr2);
-  %".27" = call i32 (i8*, ...) @"printf"(i8* %".20", i32 %".25")
-  %".28" = bitcast [4 x i8]* @"str.2" to i8*
+  %".28" = call i32 (i8*, ...) @"printf"(i8* %".21", i32 %".26")
+  %".29" = bitcast [4 x i8]* @"str.2" to i8*
   ;  Source: ptr1
   %"ptr1_load.2" = load i32, i32* %"ptr1"
   ;  Source: ptr2
   %"ptr2_load.2" = load i32, i32* %"ptr2"
   ;  Source: ptr1!=ptr2
-  %".32" = icmp ne i32 %"ptr1_load.2", %"ptr2_load.2"
-  %".33" = zext i1 %".32" to i32
+  %".33" = icmp ne i32 %"ptr1_load.2", %"ptr2_load.2"
+  %".34" = zext i1 %".33" to i32
   ;  Source: printf("%d\n",ptr1!=ptr2);
-  %".35" = call i32 (i8*, ...) @"printf"(i8* %".28", i32 %".33")
-  %".36" = bitcast [4 x i8]* @"str.3" to i8*
+  %".36" = call i32 (i8*, ...) @"printf"(i8* %".29", i32 %".34")
+  %".37" = bitcast [4 x i8]* @"str.3" to i8*
   ;  Source: ptr1
   %"ptr1_load.3" = load i32, i32* %"ptr1"
   ;  Source: ptr2
   %"ptr2_load.3" = load i32, i32* %"ptr2"
   ;  Source: ptr1==ptr2
-  %".40" = icmp eq i32 %"ptr1_load.3", %"ptr2_load.3"
-  %".41" = zext i1 %".40" to i32
+  %".41" = icmp eq i32 %"ptr1_load.3", %"ptr2_load.3"
+  %".42" = zext i1 %".41" to i32
   ;  Source: printf("%d\n",ptr1==ptr2);
-  %".43" = call i32 (i8*, ...) @"printf"(i8* %".36", i32 %".41")
+  %".44" = call i32 (i8*, ...) @"printf"(i8* %".37", i32 %".42")
   ;  Source: return0;
   ret i32 0
 }

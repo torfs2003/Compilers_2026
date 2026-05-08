@@ -20,21 +20,22 @@ entry:
   %"a" = alloca i8
   store i8 97, i8* %"a"
   %"c" = alloca [1 x i8]
-  %".3" = getelementptr [1 x i8], [1 x i8]* %"c", i32 0, i32 0
-  %".4" = ptrtoint i8* %"a" to i8
-  store i8 %".4", i8* %".3"
+  store [1 x i8] zeroinitializer, [1 x i8]* %"c"
+  %".4" = getelementptr [1 x i8], [1 x i8]* %"c", i32 0, i32 0
+  %".5" = ptrtoint i8* %"a" to i8
+  store i8 %".5", i8* %".4"
   %"t" = alloca i8**
-  %".6" = bitcast [1 x i8]* %"c" to i8**
-  store i8** %".6", i8*** %"t"
-  %".8" = bitcast [3 x i8]* @"str" to i8*
+  %".7" = bitcast [1 x i8]* %"c" to i8**
+  store i8** %".7", i8*** %"t"
+  %".9" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: t
   %"t_load" = load i8**, i8*** %"t"
   %"deref_load" = load i8*, i8** %"t_load"
   ;  Source: **t
   %"deref_load.1" = load i8, i8* %"deref_load"
   ;  Source: printf("%c",**t);
-  %".12" = sext i8 %"deref_load.1" to i32
-  %".13" = call i32 (i8*, ...) @"printf"(i8* %".8", i32 %".12")
+  %".13" = sext i8 %"deref_load.1" to i32
+  %".14" = call i32 (i8*, ...) @"printf"(i8* %".9", i32 %".13")
   ;  Source: return0;
   ret i32 0
 }

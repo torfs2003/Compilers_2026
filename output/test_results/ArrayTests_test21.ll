@@ -18,25 +18,26 @@ define i32 @"main"()
 {
 entry:
   %"z" = alloca [1 x i32]
-  %".2" = getelementptr [1 x i32], [1 x i32]* %"z", i32 0, i32 0
-  store i32 5, i32* %".2"
+  store [1 x i32] zeroinitializer, [1 x i32]* %"z"
+  %".3" = getelementptr [1 x i32], [1 x i32]* %"z", i32 0, i32 0
+  store i32 5, i32* %".3"
   %"s" = alloca i32*
-  %".4" = bitcast [1 x i32]* %"z" to i32*
-  store i32* %".4", i32** %"s"
+  %".5" = bitcast [1 x i32]* %"z" to i32*
+  store i32* %".5", i32** %"s"
   %"t" = alloca i32**
   store i32** %"s", i32*** %"t"
   %"b" = alloca i32*
   %"t_load" = load i32**, i32*** %"t"
   %"deref_load" = load i32*, i32** %"t_load"
   store i32* %"deref_load", i32** %"b"
-  %".8" = bitcast [3 x i8]* @"str" to i8*
+  %".9" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: b
   %"b_load" = load i32*, i32** %"b"
   ;  Source: b[0]
   %"gep_ptr" = getelementptr i32, i32* %"b_load", i32 0
   %"array_element" = load i32, i32* %"gep_ptr"
   ;  Source: printf("%d",b[0]);
-  %".12" = call i32 (i8*, ...) @"printf"(i8* %".8", i32 %"array_element")
+  %".13" = call i32 (i8*, ...) @"printf"(i8* %".9", i32 %"array_element")
   ;  Source: return0;
   ret i32 0
 }

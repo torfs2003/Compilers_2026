@@ -39,35 +39,36 @@ entry:
   ;  Source: gouda.a=6.28;
   store float 0x40191eb860000000, float* %"gep_a.2"
   %"a" = alloca [4 x i32]
-  %".12" = getelementptr [4 x i32], [4 x i32]* %"a", i32 0, i32 0
-  store i32 1, i32* %".12"
-  %".14" = getelementptr [4 x i32], [4 x i32]* %"a", i32 0, i32 1
-  store i32 2, i32* %".14"
-  %".16" = getelementptr [4 x i32], [4 x i32]* %"a", i32 0, i32 2
-  store i32 3, i32* %".16"
-  %".18" = getelementptr [4 x i32], [4 x i32]* %"a", i32 0, i32 3
-  store i32 4, i32* %".18"
+  store [4 x i32] zeroinitializer, [4 x i32]* %"a"
+  %".13" = getelementptr [4 x i32], [4 x i32]* %"a", i32 0, i32 0
+  store i32 1, i32* %".13"
+  %".15" = getelementptr [4 x i32], [4 x i32]* %"a", i32 0, i32 1
+  store i32 2, i32* %".15"
+  %".17" = getelementptr [4 x i32], [4 x i32]* %"a", i32 0, i32 2
+  store i32 3, i32* %".17"
+  %".19" = getelementptr [4 x i32], [4 x i32]* %"a", i32 0, i32 3
+  store i32 4, i32* %".19"
   %"k" = alloca i32*
-  %".20" = bitcast [4 x i32]* %"a" to i32*
-  store i32* %".20", i32** %"k"
+  %".21" = bitcast [4 x i32]* %"a" to i32*
+  store i32* %".21", i32** %"k"
   ;  Source: k
   %"k_load" = load i32*, i32** %"k"
   ;  Source: k
   %"k_load.1" = load i32*, i32** %"k"
   ;  Source: k+2
-  %".25" = getelementptr i32, i32* %"k_load.1", i32 2
+  %".26" = getelementptr i32, i32* %"k_load.1", i32 2
   ;  Source: k=k+2;
-  store i32* %".25", i32** %"k"
-  %".28" = bitcast [3 x i8]* @"str" to i8*
+  store i32* %".26", i32** %"k"
+  %".29" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: k
   %"k_load.2" = load i32*, i32** %"k"
   ;  Source: *k
   %"deref_load" = load i32, i32* %"k_load.2"
   ;  Source: printf("%d",*k);
-  %".32" = call i32 (i8*, ...) @"printf"(i8* %".28", i32 %"deref_load")
-  %".33" = bitcast [3 x i8]* @"str.1" to i8*
+  %".33" = call i32 (i8*, ...) @"printf"(i8* %".29", i32 %"deref_load")
+  %".34" = bitcast [3 x i8]* @"str.1" to i8*
   ;  Source: printf("%d",0>1);
-  %".35" = call i32 (i8*, ...) @"printf"(i8* %".33", i32 0)
+  %".36" = call i32 (i8*, ...) @"printf"(i8* %".34", i32 0)
   ;  Source: return0;
   ret i32 0
 }

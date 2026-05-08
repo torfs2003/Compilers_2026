@@ -25,7 +25,7 @@ parameterList
     ;
 
 parameterDeclaration
-    : CONST? typeSpecifier MUL* CONST? IDENTIFIER
+    : CONST? typeSpecifier MUL* CONST? IDENTIFIER (LBRACKET expression? RBRACKET)*
     ;
 
 compoundStatement

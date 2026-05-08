@@ -85,6 +85,10 @@ class ASTVisitor:
                             p_decl = p_list.parameterDeclaration(i)
                             p_type = p_decl.typeSpecifier().getText().replace("struct", "struct ").replace("union", "union ")
                             p_stars = "*" * len(p_decl.MUL())
+                            if '[' in p_decl.getText():
+                                p_stars += '*'
+                            # --------------------------------------
+                            
                             p_name = p_decl.IDENTIFIER().getText()
                             params.append((p_type + p_stars, p_name))
                         
@@ -218,16 +222,25 @@ class ASTVisitor:
                         identifier = decl_ctx.IDENTIFIER().getText()
                         is_array = "[" in decl_ctx.getText()
 
-                        # --- FIX: Const check ---
-                        # Combineer check van basistype ('const int x') met check op specifieke declarator ('int * const x')
                         decl_has_const = decl_ctx.CONST() is not None and len(decl_ctx.CONST()) > 0
                         is_const = base_has_const or decl_has_const
 
+                        if is_array and len(sizes) == 0 and init is not None:
+                            if isinstance(init, StringNode):
+                                real_str = init.value.encode('utf-8').decode('unicode_escape')
+                                auto_size = IntNode(len(real_str) + 1)
+                                auto_size.eval_type = 'int'  # Zorg dat de SemanticVisitor dit herkent als een int
+                                sizes.append(auto_size)
+                            elif isinstance(init, ArrayInitNode):
+                                element_count = len(getattr(init, 'values', getattr(init, 'items', getattr(init, 'elements', []))))
+                                auto_size = IntNode(element_count)
+                                auto_size.eval_type = 'int'
+                                sizes.append(auto_size)
+                        
                         if is_array:
                             node = self.get_loc(ArrayDeclNode(is_const, full_type, identifier, sizes, init), decl_ctx)
                         else:
                             node = self.get_loc(DeclNode(is_const, full_type, identifier, init), decl_ctx)
-                        
                         nodes.append(node)
                     res = nodes[0] if len(nodes) == 1 else nodes
 

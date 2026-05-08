@@ -32,13 +32,14 @@ entry:
   ;  Source: gouda.melk=88;
   store i32 88, i32* %"gep_melk.1"
   %"z" = alloca [2 x %"struct.kaas"]
-  %".8" = getelementptr [2 x %"struct.kaas"], [2 x %"struct.kaas"]* %"z", i32 0, i32 0
-  %".9" = load %"struct.kaas", %"struct.kaas"* %"gouda"
-  store %"struct.kaas" %".9", %"struct.kaas"* %".8"
-  %".11" = getelementptr [2 x %"struct.kaas"], [2 x %"struct.kaas"]* %"z", i32 0, i32 1
-  %".12" = load %"struct.kaas", %"struct.kaas"* %"beemster"
-  store %"struct.kaas" %".12", %"struct.kaas"* %".11"
-  %".14" = bitcast [6 x i8]* @"str" to i8*
+  store [2 x %"struct.kaas"] zeroinitializer, [2 x %"struct.kaas"]* %"z"
+  %".9" = getelementptr [2 x %"struct.kaas"], [2 x %"struct.kaas"]* %"z", i32 0, i32 0
+  %".10" = load %"struct.kaas", %"struct.kaas"* %"gouda"
+  store %"struct.kaas" %".10", %"struct.kaas"* %".9"
+  %".12" = getelementptr [2 x %"struct.kaas"], [2 x %"struct.kaas"]* %"z", i32 0, i32 1
+  %".13" = load %"struct.kaas", %"struct.kaas"* %"beemster"
+  store %"struct.kaas" %".13", %"struct.kaas"* %".12"
+  %".15" = bitcast [6 x i8]* @"str" to i8*
   ;  Source: (z[0]).melk
   %"gep_array" = getelementptr [2 x %"struct.kaas"], [2 x %"struct.kaas"]* %"z", i32 0, i32 0
   %"array_element" = load %"struct.kaas", %"struct.kaas"* %"gep_array"
@@ -50,7 +51,7 @@ entry:
   %"gep_melk.3" = getelementptr inbounds %"struct.kaas", %"struct.kaas"* %"gep_array.1", i32 0, i32 0
   %"load_melk.3" = load i32, i32* %"gep_melk.3"
   ;  Source: printf("%d %d",(z[0]).melk,(z[1]).melk);
-  %".18" = call i32 (i8*, ...) @"printf"(i8* %".14", i32 %"load_melk.2", i32 %"load_melk.3")
+  %".19" = call i32 (i8*, ...) @"printf"(i8* %".15", i32 %"load_melk.2", i32 %"load_melk.3")
   ;  Source: return0;
   ret i32 0
 }

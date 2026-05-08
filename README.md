@@ -37,7 +37,7 @@
 |   | Array variables             | v |
 |   | multi-dimensional arrays      | v |
 |   | array initialisation              | v |
-|   | dynamic arrays/ calloc  | x |
+|   | dynamic arrays/ calloc  | v |
 |   | strings as zero-terminated character arrays              | v |
 |   | including stdio.h                 | v |
 |   | Format string               | v |
@@ -61,7 +61,7 @@
 | 5 | Function scopes           | v |
 |   | Local and global variables                 | v |
 |   | Functions               | v |
-|   | overloading of functions             | x |
+|   | overloading of functions             | v |
 |   | small pre-processor that supports #define             | v |
 |   | includes  | v |
 |   |  include guards  | v |
@@ -82,14 +82,14 @@
 | 6 | typedefs  | v |
 |   | User-defined structs             | v |
 |   |  uninitialised structs                 | v |
-|   | Nested structs               | x |
-|   | Arrays that contain structs              | x |
-|   | Dynamic allocation of structs            | x |
-|   | Unions  | x |
+|   | Nested structs               | v |
+|   | Arrays that contain structs              | v |
+|   | Dynamic allocation of structs            | v |
+|   | Unions  | v |
 |   | Function pointers  | x |
-|   | File reading using fgets          | x |
-|   | File writing using fputs                 | x |
-|   | Dynamically allocated strings and character buffers              | x |
+|   | File reading using fgets          | v |
+|   | File writing using fputs                 | v |
+|   | Dynamically allocated strings and character buffers              | v |
 |   | AST             | v |
 |   | Visualization             | v |
 |   | Semantic Analysis  | v |

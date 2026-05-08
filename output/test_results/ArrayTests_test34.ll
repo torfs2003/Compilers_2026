@@ -36,23 +36,24 @@ define i32 @"main"()
 {
 entry:
   %"z" = alloca [5 x i32]
-  %".2" = getelementptr [5 x i32], [5 x i32]* %"z", i32 0, i32 0
-  store i32 1, i32* %".2"
-  %".4" = getelementptr [5 x i32], [5 x i32]* %"z", i32 0, i32 1
-  store i32 2, i32* %".4"
-  %".6" = getelementptr [5 x i32], [5 x i32]* %"z", i32 0, i32 2
-  store i32 3, i32* %".6"
-  %".8" = getelementptr [5 x i32], [5 x i32]* %"z", i32 0, i32 3
-  store i32 4, i32* %".8"
-  %".10" = getelementptr [5 x i32], [5 x i32]* %"z", i32 0, i32 4
-  store i32 5, i32* %".10"
+  store [5 x i32] zeroinitializer, [5 x i32]* %"z"
+  %".3" = getelementptr [5 x i32], [5 x i32]* %"z", i32 0, i32 0
+  store i32 1, i32* %".3"
+  %".5" = getelementptr [5 x i32], [5 x i32]* %"z", i32 0, i32 1
+  store i32 2, i32* %".5"
+  %".7" = getelementptr [5 x i32], [5 x i32]* %"z", i32 0, i32 2
+  store i32 3, i32* %".7"
+  %".9" = getelementptr [5 x i32], [5 x i32]* %"z", i32 0, i32 3
+  store i32 4, i32* %".9"
+  %".11" = getelementptr [5 x i32], [5 x i32]* %"z", i32 0, i32 4
+  store i32 5, i32* %".11"
   %"a" = alloca i32**
-  %".12" = bitcast [5 x i32]* %"z" to i32**
-  store i32** %".12", i32*** %"a"
+  %".13" = bitcast [5 x i32]* %"z" to i32**
+  store i32** %".13", i32*** %"a"
   ;  Source: a
   %"a_load" = load i32**, i32*** %"a"
   ;  Source: mul(a);
-  %".16" = call float @"mul"(i32** %"a_load")
+  %".17" = call float @"mul"(i32** %"a_load")
   ;  Source: return0;
   ret i32 0
 }

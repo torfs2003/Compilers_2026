@@ -1,3 +1,0 @@
-Semantic errors found, stopping.
-[ Error ] line 11, position 4: Kan type 'int' niet dereferencen.
-[ Error ] line 11, position 0: Incompatibele types bij toewijzing: 'void' aan 'int*'.

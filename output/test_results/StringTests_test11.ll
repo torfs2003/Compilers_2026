@@ -26,6 +26,6 @@ entry:
   ret i32 0
 }
 
-@"e" = internal global i8* 0
+@"e" = internal global i8* bitcast ([6 x i8]* @"str" to i8*)
 @"str" = internal constant [6 x i8] c"hello\00"
 @"str.1" = internal constant [3 x i8] c"%s\00"

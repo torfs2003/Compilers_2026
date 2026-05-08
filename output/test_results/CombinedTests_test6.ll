@@ -169,36 +169,37 @@ define i32 @"main"()
 {
 entry:
   %"arr" = alloca [5 x i32]
-  %".2" = getelementptr [5 x i32], [5 x i32]* %"arr", i32 0, i32 0
-  store i32 0, i32* %".2"
-  %".4" = getelementptr [5 x i32], [5 x i32]* %"arr", i32 0, i32 1
-  store i32 23, i32* %".4"
-  %".6" = getelementptr [5 x i32], [5 x i32]* %"arr", i32 0, i32 2
-  store i32 14, i32* %".6"
-  %".8" = getelementptr [5 x i32], [5 x i32]* %"arr", i32 0, i32 3
-  store i32 12, i32* %".8"
-  %".10" = getelementptr [5 x i32], [5 x i32]* %"arr", i32 0, i32 4
-  store i32 9, i32* %".10"
+  store [5 x i32] zeroinitializer, [5 x i32]* %"arr"
+  %".3" = getelementptr [5 x i32], [5 x i32]* %"arr", i32 0, i32 0
+  store i32 0, i32* %".3"
+  %".5" = getelementptr [5 x i32], [5 x i32]* %"arr", i32 0, i32 1
+  store i32 23, i32* %".5"
+  %".7" = getelementptr [5 x i32], [5 x i32]* %"arr", i32 0, i32 2
+  store i32 14, i32* %".7"
+  %".9" = getelementptr [5 x i32], [5 x i32]* %"arr", i32 0, i32 3
+  store i32 12, i32* %".9"
+  %".11" = getelementptr [5 x i32], [5 x i32]* %"arr", i32 0, i32 4
+  store i32 9, i32* %".11"
   %"n" = alloca i32
   store i32 5, i32* %"n"
   ;  Source: arr
   ;  Source: n
   %"n_load" = load i32, i32* %"n"
   ;  Source: printArray(arr,n);
-  %".16" = bitcast [5 x i32]* %"arr" to i32*
-  call void @"printArray"(i32* %".16", i32 %"n_load")
+  %".17" = bitcast [5 x i32]* %"arr" to i32*
+  call void @"printArray"(i32* %".17", i32 %"n_load")
   ;  Source: arr
   ;  Source: n
   %"n_load.1" = load i32, i32* %"n"
   ;  Source: selectionSort(arr,n);
-  %".21" = bitcast [5 x i32]* %"arr" to i32*
-  call void @"selectionSort"(i32* %".21", i32 %"n_load.1")
+  %".22" = bitcast [5 x i32]* %"arr" to i32*
+  call void @"selectionSort"(i32* %".22", i32 %"n_load.1")
   ;  Source: arr
   ;  Source: n
   %"n_load.2" = load i32, i32* %"n"
   ;  Source: printArray(arr,n);
-  %".26" = bitcast [5 x i32]* %"arr" to i32*
-  call void @"printArray"(i32* %".26", i32 %"n_load.2")
+  %".27" = bitcast [5 x i32]* %"arr" to i32*
+  call void @"printArray"(i32* %".27", i32 %"n_load.2")
   ;  Source: return0;
   ret i32 0
 }

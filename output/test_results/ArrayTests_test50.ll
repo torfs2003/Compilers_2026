@@ -18,16 +18,17 @@ define i32 @"main"()
 {
 entry:
   %"arr" = alloca [5 x float]
-  %".2" = getelementptr [5 x float], [5 x float]* %"arr", i32 0, i32 0
-  store float 0xc024666660000000, float* %".2"
-  %".4" = getelementptr [5 x float], [5 x float]* %"arr", i32 0, i32 1
-  store float 0xc034200000000000, float* %".4"
-  %".6" = getelementptr [5 x float], [5 x float]* %"arr", i32 0, i32 2
-  store float 0x403f428f60000000, float* %".6"
-  %".8" = getelementptr [5 x float], [5 x float]* %"arr", i32 0, i32 3
-  store float              0x0, float* %".8"
-  %".10" = getelementptr [5 x float], [5 x float]* %"arr", i32 0, i32 4
-  store float 0x402e666660000000, float* %".10"
+  store [5 x float] zeroinitializer, [5 x float]* %"arr"
+  %".3" = getelementptr [5 x float], [5 x float]* %"arr", i32 0, i32 0
+  store float 0xc024666660000000, float* %".3"
+  %".5" = getelementptr [5 x float], [5 x float]* %"arr", i32 0, i32 1
+  store float 0xc034200000000000, float* %".5"
+  %".7" = getelementptr [5 x float], [5 x float]* %"arr", i32 0, i32 2
+  store float 0x403f428f60000000, float* %".7"
+  %".9" = getelementptr [5 x float], [5 x float]* %"arr", i32 0, i32 3
+  store float              0x0, float* %".9"
+  %".11" = getelementptr [5 x float], [5 x float]* %"arr", i32 0, i32 4
+  store float 0x402e666660000000, float* %".11"
   ;  Source: return0;
   ret i32 0
 }

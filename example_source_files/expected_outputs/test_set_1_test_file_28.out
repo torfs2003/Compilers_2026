@@ -1,6 +1,0 @@
-[Warning] line 8:4: Single-line comments (//) are a C99 extension.
-Semantic errors found, stopping.
-[ Error ] line 9, position 18: Optellen van twee pointers is niet toegestaan.
-[ Error ] line 9, position 4: Incompatibele types bij initialisatie: 'void' aan 'float*'.
-[ Error ] line 10, position 11: Aftrekken van pointers met verschillende types: 'int*' en 'float*'.
-[ Error ] line 10, position 4: Incompatibele types bij toewijzing: 'int' aan 'float*'.

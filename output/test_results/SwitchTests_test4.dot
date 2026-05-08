@@ -8,7 +8,7 @@ digraph AST {
   node7 [label="Decl\nint\nb\n(int)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
   node7 -> node8 [style="solid", color="black", label=" init", fontcolor="blue"];
   node10 [label="ID: a\n(int)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
-  node11 [label="2\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node11 [label="6\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node9 [label="=", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node9 -> node10 [style="solid", color="black"];
   node9 -> node11 [style="solid", color="black"];

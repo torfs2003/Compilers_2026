@@ -1,0 +1,29 @@
+# --- Project specifieke mappen  ---
+output/
+
+# --- Compiler resultaten & Tijdelijke bestanden ---
+*.ll
+*.dot
+*.s
+*.exe
+*.out
+*.obj
+*.o
+
+# --- Python rommel ---
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+
+# --- IDE & Systeem bestanden ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# --- ANTLR & Java ---
+antlr-*.jar 
+.antlr/

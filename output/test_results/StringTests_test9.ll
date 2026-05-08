@@ -28,5 +28,5 @@ entry:
   ret i32 0
 }
 
-@"e" = internal global [3 x i32] zeroinitializer
+@"e" = internal global [3 x i32] [i32 1, i32 2, i32 3]
 @"str" = internal constant [3 x i8] c"%d\00"

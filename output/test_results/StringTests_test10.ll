@@ -17,7 +17,7 @@ declare i32 @"fclose"(i8* %".1")
 define i32 @"main"()
 {
 entry:
-  %".2" = bitcast [3 x i8]* @"str" to i8*
+  %".2" = bitcast [3 x i8]* @"str.1" to i8*
   ;  Source: e
   ;  Source: printf("%s",e);
   %".5" = getelementptr inbounds [6 x i8], [6 x i8]* @"e", i32 0, i32 0
@@ -26,5 +26,6 @@ entry:
   ret i32 0
 }
 
-@"e" = internal global [6 x i8] [i8 104, i8 101, i8 108, i8 108, i8 111, i8 0]
-@"str" = internal constant [3 x i8] c"%s\00"
+@"e" = internal global [6 x i8] c"hello\00"
+@"str" = internal constant [6 x i8] c"hello\00"
+@"str.1" = internal constant [3 x i8] c"%s\00"
