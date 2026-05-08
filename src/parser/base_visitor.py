@@ -1,4 +1,6 @@
 from src.parser.AST import *
+
+
 class BaseVisitor:
     def get_children(self, node):
         """Generieke methode om de kinderen van een ASTNode op te halen."""
@@ -6,9 +8,9 @@ class BaseVisitor:
         if isinstance(node, FunctionNode): return [node.body]
         if isinstance(node, CompoundNode): return node.items
         if isinstance(node, DeclNode):
-            return [node.init_expr] if getattr(node, 'init_expr', None) else []  
+            return [node.init_expr] if getattr(node, 'init_expr', None) else []
         if isinstance(node, ArrayDeclNode):
-            children = list(node.sizes) 
+            children = list(node.sizes)
             if getattr(node, 'init_expr', None):
                 children.append(node.init_expr)
             return children
@@ -20,14 +22,13 @@ class BaseVisitor:
         if isinstance(node, ArrayInitNode): return node.values
         if isinstance(node, IfNode):
             children = [node.condition, node.scope]
-            if getattr(node, 'else_scope', None): 
+            if getattr(node, 'else_scope', None):
                 children.append(node.else_scope)
             return children
-        
-        if isinstance(node, WhileNode): 
+
+        if isinstance(node, WhileNode):
             return [node.condition, node.scope]
 
-            
         if isinstance(node, SwitchNode):
             children = [node.condition]
             for val, body in node.cases:
@@ -35,27 +36,27 @@ class BaseVisitor:
             if node.default_case:
                 children.append(node.default_case)
             return children
-        
+
         if isinstance(node, ReturnNode):
             return [node.expr] if node.expr else []
-            
+
         if isinstance(node, StructDeclNode):
             return node.members
-            
+
         if isinstance(node, MemberAccessNode):
             return [node.expr]
 
         if isinstance(node, SizeofNode):
             return [node.operand] if isinstance(node.operand, ASTNode) else []
-            
+
         if isinstance(node, (FunctionDeclNode, TypedefNode)):
             return []
 
         if isinstance(node, (BreakNode, ContinueNode, EnumNode)):
             return []
-            
+
         return []
-    
+
     def visit(self, root_node):
         stack = [(root_node, False)]
 
@@ -81,5 +82,5 @@ class BaseVisitor:
                 post_method = getattr(self, post_method_name, None)
                 if post_method:
                     post_method(node)
-                    
+
         return root_node

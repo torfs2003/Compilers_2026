@@ -42,7 +42,7 @@ class SymbolTable:
 
             # Zoek in de symbol table
             symbol = self.get(base_type)
-            
+
             if symbol and symbol.get('type') == 'typedef':
                 current_type = symbol.get('original_type')
             else:

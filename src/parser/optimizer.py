@@ -1,10 +1,11 @@
 from src.parser.base_visitor import BaseVisitor
 from src.parser.AST import *
 
+
 class ConstantFoldingVisitor(BaseVisitor):
     def __init__(self, enabled=True):
         self.enabled = enabled
-        self.constants = {} 
+        self.constants = {}
         self.results = {}
 
     def visit_IdentifierNode(self, node):
@@ -20,10 +21,10 @@ class ConstantFoldingVisitor(BaseVisitor):
     def visit_DeclNode(self, node):
         if node.init_expr:
             node.init_expr = self.results.get(id(node.init_expr), node.init_expr)
-            
+
             if node.is_const and isinstance(node.init_expr, (IntNode, FloatNode, CharNode)):
                 self.constants[node.name] = node.init_expr
-        
+
         self.results[id(node)] = node
 
     def visit_BinOpNode(self, node):
@@ -37,24 +38,42 @@ class ConstantFoldingVisitor(BaseVisitor):
             op = node.op
 
             try:
-                if op == '+':   res = l_val + r_val
-                elif op == '-': res = l_val - r_val
-                elif op == '*': res = l_val * r_val
-                elif op == '/': res = int(l_val / r_val) if isinstance(l_val, int) and isinstance(r_val, int) else l_val / r_val
-                elif op == '%': res = l_val % r_val
-                elif op == '>':  res = 1 if l_val > r_val else 0
-                elif op == '<':  res = 1 if l_val < r_val else 0
-                elif op == '==': res = 1 if l_val == r_val else 0
-                elif op == '!=': res = 1 if l_val != r_val else 0
-                elif op == '&&': res = 1 if (l_val and r_val) else 0
-                elif op == '||': res = 1 if (l_val or r_val) else 0
-                elif op == '<<': res = l_val << r_val
-                elif op == '>>': res = l_val >> r_val
-                elif op == '>=': res = 1 if l_val >= r_val else 0
-                elif op == '<=': res = 1 if l_val <= r_val else 0
-                elif op == '&':  res = l_val & r_val
-                elif op == '|':  res = l_val | r_val
-                elif op == '^':  res = l_val ^ r_val
+                if op == '+':
+                    res = l_val + r_val
+                elif op == '-':
+                    res = l_val - r_val
+                elif op == '*':
+                    res = l_val * r_val
+                elif op == '/':
+                    res = int(l_val / r_val) if isinstance(l_val, int) and isinstance(r_val, int) else l_val / r_val
+                elif op == '%':
+                    res = l_val % r_val
+                elif op == '>':
+                    res = 1 if l_val > r_val else 0
+                elif op == '<':
+                    res = 1 if l_val < r_val else 0
+                elif op == '==':
+                    res = 1 if l_val == r_val else 0
+                elif op == '!=':
+                    res = 1 if l_val != r_val else 0
+                elif op == '&&':
+                    res = 1 if (l_val and r_val) else 0
+                elif op == '||':
+                    res = 1 if (l_val or r_val) else 0
+                elif op == '<<':
+                    res = l_val << r_val
+                elif op == '>>':
+                    res = l_val >> r_val
+                elif op == '>=':
+                    res = 1 if l_val >= r_val else 0
+                elif op == '<=':
+                    res = 1 if l_val <= r_val else 0
+                elif op == '&':
+                    res = l_val & r_val
+                elif op == '|':
+                    res = l_val | r_val
+                elif op == '^':
+                    res = l_val ^ r_val
             except (ZeroDivisionError, ValueError):
                 pass
 
@@ -73,7 +92,7 @@ class ConstantFoldingVisitor(BaseVisitor):
                     del self.constants[node.child.name]
         else:
             node.child = self.results.get(id(node.child), node.child)
-        
+
         if self.enabled and isinstance(node.child, (IntNode, FloatNode)):
             if node.op == '-':
                 node.child.value = -node.child.value
@@ -89,12 +108,12 @@ class ConstantFoldingVisitor(BaseVisitor):
             elif node.op == '~':
                 self.results[id(node)] = IntNode(~int(node.child.value))
                 return
-        
+
         self.results[id(node)] = node
 
     def visit_CastNode(self, node):
         node.expr = self.results.get(id(node.expr), node.expr)
-        
+
         if self.enabled and isinstance(node.expr, (IntNode, FloatNode)):
             val = node.expr.value
             if node.target_type == 'int':
@@ -103,24 +122,24 @@ class ConstantFoldingVisitor(BaseVisitor):
             elif node.target_type == 'float':
                 self.results[id(node)] = FloatNode(float(val))
                 return
-        
+
         self.results[id(node)] = node
-    
+
     def visit_ArrayDeclNode(self, node):
         if node.init_expr:
             node.init_expr = self.results.get(id(node.init_expr), node.init_expr)
-            
+
         if hasattr(node, 'sizes'):
             for i in range(len(node.sizes)):
                 node.sizes[i] = self.results.get(id(node.sizes[i]), node.sizes[i])
-                
+
         self.results[id(node)] = node
 
     def visit_AssignNode(self, node):
         node.left = self.results.get(id(node.left), node.left)
         node.right = self.results.get(id(node.right), node.right)
         self.results[id(node)] = node
-        
+
     def visit_FuncCallNode(self, node):
         for i in range(len(node.args)):
             node.args[i] = self.results.get(id(node.args[i]), node.args[i])
@@ -137,16 +156,16 @@ class ConstantFoldingVisitor(BaseVisitor):
             optimized_item = self.results.get(id(node.items[i]), node.items[i])
             optimized_items.append(optimized_item)
             if isinstance(optimized_item, (ReturnNode, BreakNode, ContinueNode)):
-                break 
+                break
 
         node.items = optimized_items
         self.results[id(node)] = node
-        
+
     def visit_FunctionNode(self, node):
         if hasattr(node, 'body'):
             node.body = self.results.get(id(node.body), node.body)
         self.results[id(node)] = node
-        
+
     def visit_ArrayInitNode(self, node):
         for i in range(len(node.values)):
             node.values[i] = self.results.get(id(node.values[i]), node.values[i])
@@ -157,7 +176,7 @@ class ConstantFoldingVisitor(BaseVisitor):
         node.scope = self.results.get(id(node.scope), node.scope)
         if getattr(node, 'else_scope', None):
             node.else_scope = self.results.get(id(node.else_scope), node.else_scope)
-            
+
         if self.enabled and isinstance(node.condition, (IntNode, FloatNode)):
             if node.condition.value != 0:
                 self.results[id(node)] = node.scope
@@ -171,14 +190,13 @@ class ConstantFoldingVisitor(BaseVisitor):
     def visit_WhileNode(self, node):
         node.condition = self.results.get(id(node.condition), node.condition)
         node.scope = self.results.get(id(node.scope), node.scope)
-        
+
         if self.enabled and isinstance(node.condition, (IntNode, FloatNode)):
             if node.condition.value == 0:
                 self.results[id(node)] = CompoundNode([])
                 return
-                
-        self.results[id(node)] = node
 
+        self.results[id(node)] = node
 
     def visit_SwitchNode(self, node):
         node.condition = self.results.get(id(node.condition), node.condition)
@@ -194,15 +212,15 @@ class ConstantFoldingVisitor(BaseVisitor):
 
     def visit_ContinueNode(self, node):
         self.results[id(node)] = node
-        
+
     def visit_EnumNode(self, node):
         for i, val_name in enumerate(node.values):
             int_val = IntNode(i)
             int_val.eval_type = 'int'
             self.constants[val_name] = int_val
-            
+
         self.results[id(node)] = node
-    
+
     def visit_ReturnNode(self, node):
         if node.expr:
             node.expr = self.results.get(id(node.expr), node.expr)

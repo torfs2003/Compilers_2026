@@ -2,6 +2,7 @@ from antlr4.tree.Tree import TerminalNodeImpl
 from antlr4 import Token
 from src.parser.AST import *
 
+
 class ASTVisitor:
     def __init__(self, token_stream):
         self.token_stream = token_stream
@@ -22,7 +23,7 @@ class ASTVisitor:
         """Vist de comments (/* ... */ en //) op die net voor deze node in de HIDDEN channel staan."""
         if not self.token_stream or not ctx.start:
             return []
-        
+
         hidden_tokens = self.token_stream.getHiddenTokensToLeft(ctx.start.tokenIndex, channel=Token.HIDDEN_CHANNEL)
         comments = []
         if hidden_tokens:
@@ -32,7 +33,7 @@ class ASTVisitor:
                     comments.append(text)
                 elif text.startswith("//"):
                     comments.append(text)
-                    
+
                     warning_msg = f"[Warning] line {token.line}:{token.column}: Single-line comments (//) are a C99 extension."
                     if warning_msg not in self.warnings:
                         self.warnings.append(warning_msg)
@@ -61,7 +62,7 @@ class ASTVisitor:
                 # 1. High-level structures
                 if class_name == "CompilationUnitContext":
                     nodes = []
-                    
+
                     # Loop door alle blokken exact in de originele source code volgorde!
                     if ctx.children:
                         for child in ctx.children:
@@ -71,24 +72,25 @@ class ASTVisitor:
                                     nodes.extend(val)
                                 else:
                                     nodes.append(val)
-                                
+
                     res = self.get_loc(ProgramNode(nodes), ctx)
 
                 elif class_name == "FunctionDefinitionContext":
                     name = ctx.MAIN().getText() if ctx.MAIN() else ctx.IDENTIFIER().getText()
                     body = results[id(ctx.compoundStatement())]
-                    
+
+                    # Verzamel parameters: [(type, naam), ...]
                     params = []
                     if ctx.parameterList():
                         p_list = ctx.parameterList()
                         for i in range(len(p_list.parameterDeclaration())):
                             p_decl = p_list.parameterDeclaration(i)
-                            p_type = p_decl.typeSpecifier().getText().replace("struct", "struct ").replace("union", "union ")
+                            p_type = p_decl.typeSpecifier().getText()
                             p_stars = "*" * len(p_decl.MUL())
                             p_name = p_decl.IDENTIFIER().getText()
                             params.append((p_type + p_stars, p_name))
-                        
-                    base_type = ctx.typeSpecifier().getText().replace("struct", "struct ").replace("union", "union ")
+
+                    base_type = ctx.typeSpecifier().getText()
                     stars = "*" * len(ctx.MUL())
                     full_type = base_type + stars
                     node = FunctionNode(full_type, name, body, params)
@@ -96,20 +98,18 @@ class ASTVisitor:
 
                 elif class_name == "FunctionDeclarationContext":
                     name = ctx.MAIN().getText() if ctx.MAIN() else ctx.IDENTIFIER().getText()
-                    
+
                     params = []
                     if ctx.parameterList():
                         p_list = ctx.parameterList()
                         for i in range(len(p_list.parameterDeclaration())):
                             p_decl = p_list.parameterDeclaration(i)
-                            # --- FIX: Spaties voor struct/union in parameters ---
-                            p_type = p_decl.typeSpecifier().getText().replace("struct", "struct ").replace("union", "union ")
+                            p_type = p_decl.typeSpecifier().getText()
                             p_stars = "*" * len(p_decl.MUL())
                             p_name = p_decl.IDENTIFIER().getText()
                             params.append((p_type + p_stars, p_name))
-                            
-                    # --- FIX: Spaties voor struct/union in return type ---
-                    base_type = ctx.typeSpecifier().getText().replace("struct", "struct ").replace("union", "union ")
+
+                    base_type = ctx.typeSpecifier().getText()
                     stars = "*" * len(ctx.MUL())
                     full_type = base_type + stars
                     res = self.get_loc(FunctionDeclNode(full_type, name, params), ctx)
@@ -125,15 +125,15 @@ class ASTVisitor:
                                 else:
                                     items.append(val)
                     res = self.get_loc(CompoundNode(items), ctx)
-                
+
                 elif class_name == "IncludeDirectiveContext":
                     header = ctx.HEADER().getText()[1:-1]
                     res = self.get_loc(IncludeNode(header), ctx)
-                
+
                 elif class_name == "StructDeclarationContext":
                     name = ctx.IDENTIFIER().getText()
                     members = []
-                    
+
                     if hasattr(ctx, 'declaration'):
                         for decl_ctx in ctx.declaration():
                             decl_node = results.get(id(decl_ctx))
@@ -142,13 +142,13 @@ class ASTVisitor:
                                     members.extend(decl_node)
                                 else:
                                     members.append(decl_node)
-                                    
+
                     res = self.get_loc(StructDeclNode(name, members), ctx)
-                
+
                 elif class_name == "UnionDeclarationContext":
                     name = ctx.IDENTIFIER().getText()
                     members = []
-                    
+
                     if hasattr(ctx, 'declaration'):
                         for decl_ctx in ctx.declaration():
                             decl_node = results.get(id(decl_ctx))
@@ -157,20 +157,20 @@ class ASTVisitor:
                                     members.extend(decl_node)
                                 else:
                                     members.append(decl_node)
-                                    
+
                     res = self.get_loc(UnionDeclNode(name, members), ctx)
 
                 elif class_name == "TypedefDeclarationContext":
                     original_type = ctx.typeSpecifier().getText()
-                    
+
                     if ctx.MUL():
                         original_type += "*" * len(ctx.MUL())
-                        
+
                     new_name = ctx.IDENTIFIER().getText()
-                    
+
                     is_array = ctx.LBRACKET() is not None and len(ctx.LBRACKET()) > 0
                     array_size = int(ctx.INT_LITERAL(0).getText()) if is_array else 0
-                    
+
                     res = self.get_loc(TypedefNode(original_type, new_name, is_array, array_size), ctx)
 
                 # 2. Declarations
@@ -183,50 +183,45 @@ class ASTVisitor:
                         pointer_stars = "*" * len(decl_ctx.MUL())
                         full_type = base_type + pointer_stars
 
-                        # --- NIEUWE LOGICA VOOR DIMENSIES ---
-                        # We zoeken alle expressies die tussen [ ] staan in de hele declarator
+                        all_exprs = decl_ctx.expression()
                         sizes = []
-                        # Zoek in alle kinderen van de declarator naar expressies
-                        # (Dit werkt beter bij multi-dimensionele arrays zoals [30][2])
-                        all_children = []
-                        def collect_exprs(curr_ctx):
-                            if hasattr(curr_ctx, 'expression') and callable(curr_ctx.expression):
-                                # Alleen expressies die NIET na een '=' komen zijn dimensies
-                                # We checken of er een ASSIGN in de buurt is
-                                pass 
-                        
-                        # Simpeler alternatief: gebruik de bestaande results map
-                        all_expr_ids = [id(e) for e in decl_ctx.expression()]
                         init = None
-                        dimension_exprs = []
 
                         if decl_ctx.ASSIGN():
-                            # De laatste expressie is de initialisatie (bv. = 'a')
                             if decl_ctx.array_initializer():
                                 init = results[id(decl_ctx.array_initializer())]
-                                dimension_exprs = decl_ctx.expression()
+                                dimension_exprs = all_exprs
                             else:
-                                exprs = decl_ctx.expression()
-                                init = results[id(exprs[-1])]
-                                dimension_exprs = exprs[:-1]
+                                init = results[id(all_exprs[-1])]
+                                dimension_exprs = all_exprs[:-1]
                         else:
-                            dimension_exprs = decl_ctx.expression()
+                            dimension_exprs = all_exprs
 
                         for dim_ctx in dimension_exprs:
                             sizes.append(results[id(dim_ctx)])
-                        # ------------------------------------
 
+                        const_tokens = decl_ctx.CONST()
+                        is_const = False
+                        is_const_ptr = False
+
+                        if len(const_tokens) == 2:
+                            is_const = True
+                            is_const_ptr = True
+                        elif len(const_tokens) == 1:
+                            const_token_idx = const_tokens[0].getSymbol().tokenIndex
+                            ident_token_idx = decl_ctx.IDENTIFIER().getSymbol().tokenIndex
+                            if const_token_idx < ident_token_idx:
+                                is_const = True
+                            else:
+                                is_const_ptr = True
                         identifier = decl_ctx.IDENTIFIER().getText()
-                        
-                        # Check of het een array is (heeft het brackets in de broncode?)
-                        is_array = "[" in decl_ctx.getText()
 
-                        if is_array:
-                            node = self.get_loc(ArrayDeclNode(False, full_type, identifier, sizes, init), decl_ctx)
+                        if sizes or decl_ctx.LBRACKET():
+                            node = ArrayDeclNode(is_const, full_type, identifier, sizes, init)
                         else:
-                            node = self.get_loc(DeclNode(False, full_type, identifier, init), decl_ctx)
-                        
-                        nodes.append(node)
+                            node = DeclNode(is_const, full_type, identifier, init)
+                        node.is_const_ptr = is_const_ptr
+                        nodes.append(self.get_loc(node, decl_ctx))
                     res = nodes[0] if len(nodes) == 1 else nodes
 
                 elif class_name == "StatementContext":
@@ -271,25 +266,22 @@ class ASTVisitor:
                         res = results.get(id(ctx.logical_or_expression()))
 
                 # 4. Binary Operations
-                elif class_name in ["Logical_or_expressionContext", "Logical_and_expressionContext", 
-                                  "Inclusive_or_expressionContext", "Exclusive_or_expressionContext",
-                                  "And_expressionContext", "Equality_expressionContext", 
-                                  "Relational_expressionContext", "Shift_expressionContext", 
-                                  "Additive_expressionContext", "Multiplicative_expressionContext"]:
+                elif class_name in ["Logical_or_expressionContext", "Logical_and_expressionContext",
+                                    "Inclusive_or_expressionContext", "Exclusive_or_expressionContext",
+                                    "And_expressionContext", "Equality_expressionContext",
+                                    "Relational_expressionContext", "Shift_expressionContext",
+                                    "Additive_expressionContext", "Multiplicative_expressionContext"]:
                     res = self._handle_binary(ctx, results)
 
                 # 5. Casts
                 elif class_name == "Cast_expressionContext":
                     if ctx.LPAREN():
                         target = ctx.typeSpecifier().getText()
-                        
-                        if ctx.MUL():
-                            target += "*" * len(ctx.MUL())
-                        
                         inner = results[id(ctx.cast_expression())]
                         res = self.get_loc(CastNode(target, inner), ctx)
                     else:
                         res = results[id(ctx.unary_expression())]
+
                 # 6. Unary Operations
                 elif class_name == "Unary_expressionContext":
                     if ctx.getChildCount() == 1:
@@ -330,12 +322,12 @@ class ASTVisitor:
                         left = results[id(ctx.postfix_expression())]
                         index = results[id(ctx.expression())]
                         res = self.get_loc(BinOpNode(left, "[]", index), ctx)
-                        
+
                     elif ctx.DOT():
                         left = results[id(ctx.postfix_expression())]
                         member = ctx.IDENTIFIER().getText()
                         res = self.get_loc(MemberAccessNode(left, member, is_pointer=False), ctx)
-                        
+
                     elif ctx.ARROW():
                         left = results[id(ctx.postfix_expression())]
                         member = ctx.IDENTIFIER().getText()
@@ -357,22 +349,19 @@ class ASTVisitor:
                         try:
                             # Check of het een C-stijl octaal is (begint met 0, langer dan 1 karakter, geen hex)
                             if text_val.startswith('0') and len(text_val) > 1 and not text_val.lower().startswith('0x'):
-                                val = int(text_val, 8) # Forceer octaal (base 8)
+                                val = int(text_val, 8)  # Forceer octaal (base 8)
                             else:
-                                val = int(text_val, 0) # Base 0 is prima voor decimaal en hexadecimaal (0x...)
-                            
-                            if val > 2147483647 or val < -2147483648:
-                                warning_msg = f"[Warning] line {ctx.start.line}:{ctx.start.column}: Integer overflow. '{val}' exceeds 32-bit boundaries."
-                                if warning_msg not in self.warnings:
-                                    self.warnings.append(warning_msg)
-                                
-                                val = val & 0xFFFFFFFF
-                                if val > 2147483647:
-                                    val -= 4294967296
+                                val = int(text_val, 0)  # Base 0 is prima voor decimaal en hexadecimaal (0x...)
 
+                            if val > 2147483647 or val < -2147483648:
+                                print(
+                                    f"[ Error ] line {ctx.start.line}, position {ctx.start.column}: Integer overflow. '{val}' exceeds 32-bit boundaries.")
+                                import sys
+                                sys.exit(1)
                             res = self.get_loc(IntNode(val), ctx)
                         except ValueError:
-                            print(f"[Error] line {ctx.start.line}, position {ctx.start.column}: Invalid integer literal '{text_val}'")
+                            print(
+                                f"[Error] line {ctx.start.line}, position {ctx.start.column}: Invalid integer literal '{text_val}'")
                             import sys
                             sys.exit(1)
                     elif ctx.FLOAT_LITERAL():
@@ -397,7 +386,7 @@ class ASTVisitor:
                             el_node = results.get(id(el_ctx))
                             if el_node:
                                 elements.append(el_node)
-                    
+
                     # Maak de ArrayInitNode aan met de verzamelde kinderen
                     res = self.get_loc(ArrayInitNode(elements), ctx)
 
@@ -410,12 +399,12 @@ class ASTVisitor:
                             else_scope = results[id(ctx.compoundStatement(1))]
                         elif ctx.ifStatement():
                             else_scope = results[id(ctx.ifStatement())]
-                    res = self.get_loc(IfNode(condition,scope,else_scope),ctx)
+                    res = self.get_loc(IfNode(condition, scope, else_scope), ctx)
 
                 elif class_name == "WhileStatementContext":
                     condition = results[id(ctx.expression())]
                     scope = results[id(ctx.compoundStatement())]
-                    res = self.get_loc(WhileNode(condition,scope),ctx)
+                    res = self.get_loc(WhileNode(condition, scope), ctx)
 
                 elif class_name == "ForInitContext":
                     if ctx.declarationFor():
@@ -438,7 +427,7 @@ class ASTVisitor:
                     # 1. Voeg de update toe aan het einde van de body
                     if update:
                         body.items.append(update)
-                    
+
                     # 2. Maak de conditie (als er geen conditie is, is het een oneindige loop -> 1)
                     if not condition:
                         condition = IntNode(1)
@@ -446,7 +435,7 @@ class ASTVisitor:
 
                     # 3. Maak de WhileNode
                     while_node = self.get_loc(WhileNode(condition, body), ctx)
-                    
+
                     # 4. Stop alles in een Block (CompoundNode) met de init ervoor
                     wrapper_items = []
                     if init:
@@ -455,49 +444,57 @@ class ASTVisitor:
                         else:
                             wrapper_items.append(init)
                     wrapper_items.append(while_node)
-                    
+
                     res = self.get_loc(CompoundNode(wrapper_items), ctx)
 
                 elif class_name == "BreakStatementContext":
-                    res = self.get_loc(BreakNode(),ctx)
+                    res = self.get_loc(BreakNode(), ctx)
 
                 elif class_name == "ContinueStatementContext":
-                    res = self.get_loc(ContinueNode(),ctx)
+                    res = self.get_loc(ContinueNode(), ctx)
 
                 elif class_name == "EnumDeclarationContext":
                     name = ctx.IDENTIFIER().getText()
                     values = []
                     for ident in ctx.enumList().IDENTIFIER():
                         values.append(ident.getText())
-                    res = self.get_loc(EnumNode(name, values),ctx)
+                    res = self.get_loc(EnumNode(name, values), ctx)
 
 
 
 
                 elif class_name == "SwitchStatementContext":
+
                     switch_expr = results[id(ctx.expression())]
-                    ordered_cases = [] 
+
+                    cases = []
+
+                    default_body = None
+
+                    ordered_cases = []  # (val_or_None, body) in source volgorde
 
                     for case_ctx in ctx.caseBlock():
-                        case_body = results[id(case_ctx)]
-                        
-                        if case_ctx.CASE():
-                            # Haal de tekst op en parse deze slim (ondersteunt 0x, 0, etc.)
-                            val_str = case_ctx.INT_LITERAL().getText().rstrip("uUlL")
-                            try:
-                                val = int(val_str, 0) # De '0' herkent automatisch hex/octaal/decimaal
-                            except ValueError:
-                                # Als het geen int is, is het misschien een CHAR_LITERAL?
-                                # (Pas dit aan op basis van jouw specifieke grammatica)
-                                val = ord(val_str[1]) if len(val_str) >= 3 else 0
-                            
-                            ordered_cases.append((val, case_body))
-                            
-                        elif case_ctx.DEFAULT():
-                            ordered_cases.append((None, case_body)) 
 
-                    node = SwitchNode(switch_expr, [], None) # De oude 'cases' en 'default' mag je laten vervallen
-                    node.ordered_cases = ordered_cases 
+                        case_body = results[id(case_ctx)]
+
+                        if case_ctx.CASE():
+
+                            val = int(case_ctx.INT_LITERAL().getText())
+
+                            cases.append((val, case_body))
+
+                            ordered_cases.append((val, case_body))
+
+                        elif case_ctx.DEFAULT():
+
+                            default_body = case_body
+
+                            ordered_cases.append((None, case_body))  # None = default
+
+                    node = SwitchNode(switch_expr, cases, default_body)
+
+                    node.ordered_cases = ordered_cases  # bewaar source volgorde
+
                     res = self.get_loc(node, ctx)
 
                 elif class_name == "ReturnStatementContext":
@@ -512,7 +509,8 @@ class ASTVisitor:
                     res = self.get_loc(CompoundNode(statements), ctx)
 
                 if res:
-                    if class_name in ["DeclarationContext", "Assignment_expressionContext", "Postfix_expressionContext", "StatementContext"]:
+                    if class_name in ["DeclarationContext", "Assignment_expressionContext", "Postfix_expressionContext",
+                                      "StatementContext"]:
                         src = self._get_source_text(ctx)
                         comments = self._get_hidden_comments(ctx)
 
@@ -523,7 +521,7 @@ class ASTVisitor:
                         else:
                             res.original_c_code = src
                             res.user_comments = comments
-                    
+
                     results[id(ctx)] = res
 
         return results[id(root_ctx)]
@@ -532,11 +530,11 @@ class ASTVisitor:
         """Helper to flatten left-recursive binary operations iteratively."""
         if ctx.getChildCount() == 1:
             return results[id(ctx.getChild(0))]
-        
+
         left = results[id(ctx.getChild(0))]
         op = ctx.getChild(1).getText()
         right = results[id(ctx.getChild(2))]
-        
+
         node = BinOpNode(left, op, right)
         node.line = ctx.start.line
         node.column = ctx.start.column
