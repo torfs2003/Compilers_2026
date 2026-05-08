@@ -89,7 +89,7 @@
 |   | Function pointers  | x |
 |   | File reading using fgets          | v |
 |   | File writing using fputs                 | v |
-|   | Dynamically allocated strings and character buffers              | x |
+|   | Dynamically allocated strings and character buffers              | v |
 |   | AST             | v |
 |   | Visualization             | v |
 |   | Semantic Analysis  | v |
