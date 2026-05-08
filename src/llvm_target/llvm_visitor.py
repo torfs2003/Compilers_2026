@@ -912,21 +912,13 @@ class LLVMVisitor:
                     target_type = child_val.type.pointee
 
                     # CHECK: Laad geen complete structs in!
-
                     if isinstance(target_type, (ir.IntType, ir.FloatType, ir.PointerType, ir.ArrayType)):
-
                         if isinstance(target_type, ir.ArrayType):
-
                             zero = ir.Constant(ir.IntType(32), 0)
-
                             ptr = self.builder.gep(child_val, [zero, zero], name="array_deref")
-
                             self.results[id(node)] = self.builder.load(ptr, name="deref_load")
-
                         else:
-
                             self.results[id(node)] = self.builder.load(child_val, name="deref_load")
-
                     else:
 
                         self.results[id(node)] = child_val
