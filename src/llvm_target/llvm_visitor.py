@@ -902,21 +902,34 @@ class LLVMVisitor:
                         addr = self._get_symbol(node.child.name)
                 self.results[id(node)] = addr
 
-            elif node.op == '*':
-                if isinstance(child_val.type.pointee, ir.ArrayType):
-                    zero = ir.Constant(ir.IntType(32), 0)
-                    ptr = self.builder.gep(child_val, [zero, zero], name="array_decay")
-                    self.results[f"addr_{id(node)}"] = ptr
 
-                    if isinstance(ptr.type.pointee, ir.ArrayType):
-                        self.results[id(node)] = ptr
+            elif node.op == '*':
+
+                self.results[f"addr_{id(node)}"] = child_val
+
+                if isinstance(child_val.type, ir.PointerType):
+
+                    target_type = child_val.type.pointee
+
+                    # CHECK: Laad geen complete structs in!
+
+                    if isinstance(target_type, (ir.IntType, ir.FloatType, ir.PointerType, ir.ArrayType)):
+
+                        if isinstance(target_type, ir.ArrayType):
+
+                            zero = ir.Constant(ir.IntType(32), 0)
+
+                            ptr = self.builder.gep(child_val, [zero, zero], name="array_deref")
+
+                            self.results[id(node)] = self.builder.load(ptr, name="deref_load")
+
+                        else:
+
+                            self.results[id(node)] = self.builder.load(child_val, name="deref_load")
+
                     else:
-                        self.results[id(node)] = self.builder.load(ptr, name="deref_load")
-                else:
-                    # Normale pointer dereference
-                    self.results[f"addr_{id(node)}"] = child_val
-                    if isinstance(child_val.type, ir.PointerType):
-                        self.results[id(node)] = self.builder.load(child_val, name="deref_load")
+
+                        self.results[id(node)] = child_val
             elif node.op == '+':
                 self.results[id(node)] = child_val
 
