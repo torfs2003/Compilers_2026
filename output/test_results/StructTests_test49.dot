@@ -1,0 +1,24 @@
+digraph AST {
+  node [fontname="Arial"];
+  node2 [label="Include\n<stdio.h>", shape=note, style="filled", fillcolor="lightyellow", color="black", fontcolor="black"];
+  node4 [label="Decl\nint\na\n(int)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
+  node5 [label="Decl\nfloat\nb\n(float)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
+  node6 [label="Decl\nint\nc\n(int)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
+  node3 [label="StructDef\nv", shape=box, style="filled", fillcolor="lightpink", color="black", fontcolor="black"];
+  node3 -> node4 [style="solid", color="black"];
+  node3 -> node5 [style="solid", color="black"];
+  node3 -> node6 [style="solid", color="black"];
+  node9 [label="Decl\nunion v\na\n(union v)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
+  node11 [label="0\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node10 [label="Return", shape=ellipse, style="filled", fillcolor="lightpink", color="black", fontcolor="black"];
+  node10 -> node11 [style="solid", color="black"];
+  node8 [label="Block", shape=diamond, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node8 -> node9 [style="solid", color="black"];
+  node8 -> node10 [style="solid", color="black"];
+  node7 [label="Func\nint main()", shape=invhouse, style="filled", fillcolor="lightgreen", color="black", fontcolor="black"];
+  node7 -> node8 [style="solid", color="black"];
+  node1 [label="Program", shape=box, style="filled", fillcolor="lightblue", color="black", fontcolor="black"];
+  node1 -> node2 [style="solid", color="black"];
+  node1 -> node3 [style="solid", color="black"];
+  node1 -> node7 [style="solid", color="black"];
+}

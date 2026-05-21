@@ -1,16 +1,24 @@
 ; ModuleID = "cmm_module"
-target triple = "x86_64-unknown-linux-gnu"
+target triple = "x86_64-w64-windows-gnu"
 target datalayout = ""
 
 declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
 
+declare i8* @"fopen"(i8* %".1", i8* %".2")
+
+declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
+
+declare i32 @"fputs"(i8* %".1", i8* %".2")
+
+declare i32 @"fclose"(i8* %".1")
+
 define i32 @"main"()
 {
 entry:
   %"arr" = alloca [5 x float]
-  ;  Source: constfloatarr[5]={-10.20,-20.125,31.26,0.00,15.2};
+  store [5 x float] zeroinitializer, [5 x float]* %"arr"
   %".3" = getelementptr [5 x float], [5 x float]* %"arr", i32 0, i32 0
   store float 0xc024666660000000, float* %".3"
   %".5" = getelementptr [5 x float], [5 x float]* %"arr", i32 0, i32 1

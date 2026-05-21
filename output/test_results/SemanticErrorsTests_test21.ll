@@ -1,27 +1,20 @@
 ; ModuleID = "cmm_module"
-target triple = "x86_64-unknown-linux-gnu"
+target triple = "x86_64-w64-windows-gnu"
 target datalayout = ""
 
 define i32 @"main"()
 {
 entry:
   %"x" = alloca i32
-  ;  Source: constintx=4;
   store i32 4, i32* %"x"
   %"b" = alloca i32
-  ;  Source: constintb=9632;
   store i32 9632, i32* %"b"
   %"x_ptr" = alloca i32*
-  ;  Source: b
-  %"b.1" = load i32, i32* %"b"
-  ;  Source: &b
-  ;  Source: constint*x_ptr=&b;
   store i32* %"b", i32** %"x_ptr"
   ;  User Comment: //*x_ptr = x; //Invalid: const assignment
   ;  Source: x_ptr
-  %"x_ptr.1" = load i32*, i32** %"x_ptr"
+  %"x_ptr_load" = load i32*, i32** %"x_ptr"
   ;  Source: x
-  %"x.1" = load i32, i32* %"x"
   ;  Source: &x
   ;  User Comment: //*x_ptr = x; //Invalid: const assignment
   ;  Source: x_ptr=&x;

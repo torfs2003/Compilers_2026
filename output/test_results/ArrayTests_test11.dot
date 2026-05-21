@@ -18,11 +18,11 @@ digraph AST {
   node14 [label="\"%c\"\n(char*)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node17 [label="ID: x\n(char**)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
   node18 [label="0\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
-  node16 [label="[]\n(char**)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node16 [label="[]\n(char*)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node16 -> node17 [style="solid", color="black"];
   node16 -> node18 [style="solid", color="black"];
   node19 [label="0\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
-  node15 [label="[]\n(char**)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node15 [label="[]\n(char)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node15 -> node16 [style="solid", color="black"];
   node15 -> node19 [style="solid", color="black"];
   node13 [label="Call: printf()\n(int)", shape=ellipse, style="filled", fillcolor="lightpink", color="black", fontcolor="black"];

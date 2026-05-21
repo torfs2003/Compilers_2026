@@ -1,16 +1,24 @@
 ; ModuleID = "cmm_module"
-target triple = "x86_64-unknown-linux-gnu"
+target triple = "x86_64-w64-windows-gnu"
 target datalayout = ""
 
 declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
 
+declare i8* @"fopen"(i8* %".1", i8* %".2")
+
+declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
+
+declare i32 @"fputs"(i8* %".1", i8* %".2")
+
+declare i32 @"fclose"(i8* %".1")
+
 define i32 @"main"()
 {
 entry:
   %"result" = alloca [20 x i32]
-  ;  Source: intresult[20]={1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20};
+  store [20 x i32] zeroinitializer, [20 x i32]* %"result"
   %".3" = getelementptr [20 x i32], [20 x i32]* %"result", i32 0, i32 0
   store i32 1, i32* %".3"
   %".5" = getelementptr [20 x i32], [20 x i32]* %"result", i32 0, i32 1
@@ -52,23 +60,21 @@ entry:
   %".41" = getelementptr [20 x i32], [20 x i32]* %"result", i32 0, i32 19
   store i32 20, i32* %".41"
   %"passed" = alloca i32*
-  ;  Source: result
-  ;  Source: int*passed=result;
-  %".45" = bitcast [20 x i32]* %"result" to i32*
-  store i32* %".45", i32** %"passed"
+  %".43" = bitcast [20 x i32]* %"result" to i32*
+  store i32* %".43", i32** %"passed"
   ;  Source: passed
-  %"passed.1" = load i32*, i32** %"passed"
+  %"passed_load" = load i32*, i32** %"passed"
   ;  Source: passed++;
-  %".49" = load i32*, i32** %"passed"
-  %"ptr_incdec" = getelementptr i32, i32* %".49", i32 1
+  %".47" = load i32*, i32** %"passed"
+  %"ptr_incdec" = getelementptr i32, i32* %".47", i32 1
   store i32* %"ptr_incdec", i32** %"passed"
-  %".51" = bitcast [3 x i8]* @"str" to i8*
+  %".49" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: passed
-  %"passed.2" = load i32*, i32** %"passed"
+  %"passed_load.1" = load i32*, i32** %"passed"
   ;  Source: *passed
-  %"deref_load" = load i32, i32* %"passed.2"
+  %"deref_load" = load i32, i32* %"passed_load.1"
   ;  Source: printf("%d",*passed);
-  %".55" = call i32 (i8*, ...) @"printf"(i8* %".51", i32 %"deref_load")
+  %".53" = call i32 (i8*, ...) @"printf"(i8* %".49", i32 %"deref_load")
   ;  Source: return0;
   ret i32 0
 }

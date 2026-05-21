@@ -1,6 +1,0 @@
-Syntax errors found, stopping.
-line 6:11 extraneous input '.56487' expecting ';'
-line 7:9 no viable alternative at input '(64.54879.32328'
-line 7:9 missing ';' at '.32328'
-line 7:15 missing ';' at '.4897'
-line 7:20 extraneous input ')' expecting ';'

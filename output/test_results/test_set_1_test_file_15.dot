@@ -10,7 +10,7 @@ digraph AST {
   node11 [label="ID: x\n(int)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
   node10 [label="&\n(int*)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node10 -> node11 [style="solid", color="black"];
-  node9 [label="Decl\nint*\nx_ptr\n(int*)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
+  node9 [label="Decl\nconst int*\nx_ptr\n(int*)", shape=box, style="filled", fillcolor="none", color="blue", fontcolor="black"];
   node9 -> node10 [style="solid", color="black", label=" init", fontcolor="blue"];
   node13 [label="ID: x_ptr\n(int*)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
   node15 [label="ID: b\n(int)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];

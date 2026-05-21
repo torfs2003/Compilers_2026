@@ -13,6 +13,7 @@ from src.parser.semantic_visitor import SemanticVisitor
 from src.llvm_target.llvm_visitor import LLVMVisitor
 from src.llvm_target.compiler import Compiler
 
+
 def main():
     # Argument Parser opzetten
     parser = argparse.ArgumentParser(description='Compiler Project')
@@ -21,11 +22,10 @@ def main():
     parser.add_argument('--no_opt', action='store_true', help='Disable constant folding optimization')
     parser.add_argument('--target_llvm', type=str, help='Path to save the LLVM IR as a.ll file')
     parser.add_argument('--target_bin', type=str,help='Path to save the native binary executable (for example: output/prog)')
-    parser.add_argument('--target_mips', type=str,help='Path to save the MIPS assembly file for use in SPIM or MARS (for example: output/prog.s)')
+    parser.add_argument('--target_mips', type=str,help='Path to save the MIPS assembly file for use in SPIM(for example: output/prog.s)')
 
     args = parser.parse_args()
 
-    #We need the .ll disk first! (LET OP: target_binary is hier gefixt naar target_bin)
     if (args.target_bin or args.target_mips) and not args.target_llvm:
         print("[Error] --target_bin and --target_mips require --target_llvm")
         sys.exit(1)
@@ -111,7 +111,6 @@ def main():
             f.write(llvm_ir)
         print(f"LLVM IR generated at {args.target_llvm}")
 
-    # LET OP: target_binary is hier gefixt naar target_bin
     if args.target_bin or args.target_mips:
         compiler = Compiler()
         if args.target_bin:

@@ -1,55 +1,58 @@
 ; ModuleID = "cmm_module"
-target triple = "x86_64-unknown-linux-gnu"
+target triple = "x86_64-w64-windows-gnu"
 target datalayout = ""
 
 declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
 
+declare i8* @"fopen"(i8* %".1", i8* %".2")
+
+declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
+
+declare i32 @"fputs"(i8* %".1", i8* %".2")
+
+declare i32 @"fclose"(i8* %".1")
+
 define i32 @"main"()
 {
 entry:
   %"i" = alloca i32
-  ;  Source: inti=1000;
   store i32 1000, i32* %"i"
   %"a" = alloca i32*
-  ;  Source: i
-  %"i.1" = load i32, i32* %"i"
-  ;  Source: &i
-  ;  Source: int*a=&i;
   store i32* %"i", i32** %"a"
-  %".8" = bitcast [3 x i8]* @"str" to i8*
+  %".4" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: a
-  %"a.1" = load i32*, i32** %"a"
+  %"a_load" = load i32*, i32** %"a"
   ;  Source: a<0
-  %".11" = ptrtoint i32* %"a.1" to i32
-  %".12" = icmp ult i32 %".11", 0
-  %".13" = zext i1 %".12" to i32
+  %".7" = ptrtoint i32* %"a_load" to i32
+  %".8" = icmp ult i32 %".7", 0
+  %".9" = zext i1 %".8" to i32
   ;  Source: printf("%d",a<0);
-  %".15" = call i32 (i8*, ...) @"printf"(i8* %".8", i32 %".13")
-  %".16" = bitcast [3 x i8]* @"str.1" to i8*
+  %".11" = call i32 (i8*, ...) @"printf"(i8* %".4", i32 %".9")
+  %".12" = bitcast [3 x i8]* @"str.1" to i8*
   ;  Source: a
-  %"a.2" = load i32*, i32** %"a"
+  %"a_load.1" = load i32*, i32** %"a"
   ;  Source: a>0
-  %".19" = ptrtoint i32* %"a.2" to i32
-  %".20" = icmp ugt i32 %".19", 0
-  %".21" = zext i1 %".20" to i32
+  %".15" = ptrtoint i32* %"a_load.1" to i32
+  %".16" = icmp ugt i32 %".15", 0
+  %".17" = zext i1 %".16" to i32
   ;  Source: printf("%d",a>0);
-  %".23" = call i32 (i8*, ...) @"printf"(i8* %".16", i32 %".21")
-  %".24" = bitcast [3 x i8]* @"str.2" to i8*
+  %".19" = call i32 (i8*, ...) @"printf"(i8* %".12", i32 %".17")
+  %".20" = bitcast [3 x i8]* @"str.2" to i8*
   ;  Source: a
-  %"a.3" = load i32*, i32** %"a"
+  %"a_load.2" = load i32*, i32** %"a"
   ;  Source: a
-  %"a.4" = load i32*, i32** %"a"
+  %"a_load.3" = load i32*, i32** %"a"
   ;  Source: (a+1)
-  %".28" = getelementptr i32, i32* %"a.4", i32 1
+  %".24" = getelementptr i32, i32* %"a_load.3", i32 1
   ;  Source: a>(a+1)
-  %".30" = ptrtoint i32* %"a.3" to i32
-  %".31" = ptrtoint i32* %".28" to i32
-  %".32" = icmp ugt i32 %".30", %".31"
-  %".33" = zext i1 %".32" to i32
+  %".26" = ptrtoint i32* %"a_load.2" to i32
+  %".27" = ptrtoint i32* %".24" to i32
+  %".28" = icmp ugt i32 %".26", %".27"
+  %".29" = zext i1 %".28" to i32
   ;  Source: printf("%d",a>(a+1));
-  %".35" = call i32 (i8*, ...) @"printf"(i8* %".24", i32 %".33")
+  %".31" = call i32 (i8*, ...) @"printf"(i8* %".20", i32 %".29")
   ;  Source: return0;
   ret i32 0
 }

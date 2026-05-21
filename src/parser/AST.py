@@ -152,6 +152,17 @@ class FunctionDeclNode(ASTNode):
     def __repr__(self):
         return f"FunctionDeclNode({self.return_type} {self.name})"
 
+class FuncPtrDeclNode(ASTNode):
+    def __init__(self, return_type, name, param_types, init_expr=None):
+        super().__init__()
+        self.return_type = return_type
+        self.name = name
+        self.param_types = param_types
+        self.init_expr = init_expr
+        self.type_spec = f"{return_type}(*)({','.join(param_types)})"
+    def __repr__(self):
+        return f"FuncPtrDecl({self.return_type}(*){self.name}({','.join(self.param_types)}))"
+
 class ReturnNode(ASTNode):
     def __init__(self, expr=None):
         super().__init__()
@@ -226,6 +237,14 @@ class TypedefNode(ASTNode):
     def __repr__(self):
         return f"TypedefNode({self.original_type} -> {self.new_name})"
 
+class UnionDeclNode:
+    def __init__(self, name, members):
+        self.name = name
+        self.members = members
+
+    def __repr__(self):
+        return f"UnionDef({self.name})"
+
 class MemberAccessNode(ASTNode):
     def __init__(self, expr, member_name, is_pointer=False):
         super().__init__()
@@ -242,3 +261,9 @@ class ForInitNode(ASTNode):
         self.value = value
     def __repr__(self):
         return f"ForInitNode({type(self.value).__name__})"
+class SizeofNode(ASTNode):
+    def __init__(self, operand):
+        super().__init__()
+        self.operand = operand
+    def __repr__(self):
+        return f"SizeofNode({self.operand})"

@@ -1,0 +1,12 @@
+digraph AST {
+  node [fontname="Arial"];
+  node2 [label="FuncDecl\nint f()", shape=invhouse, style="filled", fillcolor="lightgreen", color="black", fontcolor="black"];
+  node3 [label="FuncDecl\nint f()", shape=invhouse, style="filled", fillcolor="lightgreen", color="black", fontcolor="black"];
+  node5 [label="Block", shape=diamond, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node4 [label="Func\nint main()", shape=invhouse, style="filled", fillcolor="lightgreen", color="black", fontcolor="black"];
+  node4 -> node5 [style="solid", color="black"];
+  node1 [label="Program", shape=box, style="filled", fillcolor="lightblue", color="black", fontcolor="black"];
+  node1 -> node2 [style="solid", color="black"];
+  node1 -> node3 [style="solid", color="black"];
+  node1 -> node4 [style="solid", color="black"];
+}

@@ -1,66 +1,50 @@
 ; ModuleID = "cmm_module"
-target triple = "x86_64-unknown-linux-gnu"
+target triple = "x86_64-w64-windows-gnu"
 target datalayout = ""
 
 define i32 @"main"()
 {
 entry:
   %"a" = alloca i8
-  ;  Source: chara='a';
   store i8 97, i8* %"a"
   %"b" = alloca i32
-  ;  Source: a
-  %"a.1" = load i8, i8* %"a"
-  ;  Source: (int)a
-  %".6" = sext i8 %"a.1" to i32
-  ;  Source: intb=(int)a;
-  store i32 %".6", i32* %"b"
+  %"a_load" = load i8, i8* %"a"
+  %".3" = sext i8 %"a_load" to i32
+  store i32 %".3", i32* %"b"
   %"c" = alloca float
-  ;  Source: b
-  %"b.1" = load i32, i32* %"b"
-  ;  Source: (float)b
-  %".11" = sitofp i32 %"b.1" to float
-  ;  Source: floatc=(float)b;
-  store float %".11", float* %"c"
+  %"b_load" = load i32, i32* %"b"
+  %".5" = sitofp i32 %"b_load" to float
+  store float %".5", float* %"c"
   %"d" = alloca float
-  ;  Source: floatd=6.7;
   store float 0x401accccc0000000, float* %"d"
   %"e" = alloca i32
-  ;  Source: inte=5;
   store i32 5, i32* %"e"
   %"q" = alloca i8
-  ;  Source: charq='b';
   store i8 98, i8* %"q"
   %"g" = alloca i8
-  ;  Source: a
-  %"a.2" = load i8, i8* %"a"
-  ;  Source: c
-  %"c.1" = load float, float* %"c"
-  %".22" = sitofp i8 %"a.2" to float
-  %".23" = fadd float %".22", %"c.1"
-  ;  Source: e
-  %"e.1" = load i32, i32* %"e"
-  %".25" = sitofp i32 %"e.1" to float
-  %".26" = fadd float %".23", %".25"
-  ;  Source: b
-  %"b.2" = load i32, i32* %"b"
-  %".28" = sitofp i32 %"b.2" to float
-  %".29" = fadd float %".26", %".28"
-  ;  Source: e
-  %"e.2" = load i32, i32* %"e"
-  %".31" = sitofp i32 %"e.2" to float
-  %".32" = fadd float %".29", %".31"
-  ;  Source: q
-  %"q.1" = load i8, i8* %"q"
-  %".34" = sitofp i8 %"q.1" to float
-  %".35" = fadd float %".32", %".34"
-  ;  Source: d
-  %"d.1" = load float, float* %"d"
-  ;  Source: a+c+e+b+e+q+d
-  %".38" = fadd float %".35", %"d.1"
-  ;  Source: charg=a+c+e+b+e+q+d;
-  %".40" = fptosi float %".38" to i8
-  store i8 %".40", i8* %"g"
+  %"a_load.1" = load i8, i8* %"a"
+  %"c_load" = load float, float* %"c"
+  %".10" = sitofp i8 %"a_load.1" to float
+  %".11" = fadd float %".10", %"c_load"
+  %"e_load" = load i32, i32* %"e"
+  %".12" = sitofp i32 %"e_load" to float
+  %".13" = fadd float %".11", %".12"
+  %"b_load.1" = load i32, i32* %"b"
+  %".14" = sitofp i32 %"b_load.1" to float
+  %".15" = fadd float %".13", %".14"
+  %"e_load.1" = load i32, i32* %"e"
+  %".16" = sitofp i32 %"e_load.1" to float
+  %".17" = fadd float %".15", %".16"
+  %"q_load" = load i8, i8* %"q"
+  %".18" = sitofp i8 %"q_load" to float
+  %".19" = fadd float %".17", %".18"
+  %"d_load" = load float, float* %"d"
+  %".20" = fadd float %".19", %"d_load"
+  %".21" = fptosi float %".20" to i32
+  %".22" = icmp sgt i32 %".21", 127
+  %".23" = select  i1 %".22", i32 127, i32 %".21"
+  %".24" = trunc i32 %".23" to i8
+  store i8 %".24", i8* %"g"
   ;  Source: return0;
   ret i32 0
 }

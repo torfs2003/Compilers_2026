@@ -1,7 +1,0 @@
-[Warning] line 2:0: Single-line comments (//) are a C99 extension.
-[Warning] line 6:16: Single-line comments (//) are a C99 extension.
-[Warning] line 9:0: Single-line comments (//) are a C99 extension.
-[Warning] line 10:0: Single-line comments (//) are a C99 extension.
-[Warning] line 12:0: Single-line comments (//) are a C99 extension.
-AST rendered to output/test_results\test_set_1_test_file_53.dot
-LLVM IR generated at output/test_results\test_set_1_test_file_53.ll

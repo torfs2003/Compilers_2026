@@ -1,3 +1,0 @@
-[ Warning ] line 10, position 4: Informatieverlies bij toewijzing van float aan int.
-AST rendered to output/test_results\test_set_1_test_file_8.dot
-LLVM IR generated at output/test_results\test_set_1_test_file_8.ll

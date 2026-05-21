@@ -1,10 +1,18 @@
 ; ModuleID = "cmm_module"
-target triple = "x86_64-unknown-linux-gnu"
+target triple = "x86_64-w64-windows-gnu"
 target datalayout = ""
 
 declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
+
+declare i8* @"fopen"(i8* %".1", i8* %".2")
+
+declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
+
+declare i32 @"fputs"(i8* %".1", i8* %".2")
+
+declare i32 @"fclose"(i8* %".1")
 
 define float @"vergelijken"(i32 %".1", i32 %".2")
 {
@@ -14,9 +22,9 @@ entry:
   %"b" = alloca i32
   store i32 %".2", i32* %"b"
   ;  Source: if(a==b){return1;}
-  %"a.1" = load i32, i32* %"a"
-  %"b.1" = load i32, i32* %"b"
-  %".7" = icmp eq i32 %"a.1", %"b.1"
+  %"a_load" = load i32, i32* %"a"
+  %"b_load" = load i32, i32* %"b"
+  %".7" = icmp eq i32 %"a_load", %"b_load"
   %".8" = zext i1 %".7" to i32
   %"ifcond" = icmp ne i32 %".8", 0
   br i1 %"ifcond", label %"if.then", label %"if.end"
@@ -33,17 +41,15 @@ define i32 @"main"()
 {
 entry:
   %"boolean" = alloca float
-  ;  Source: vergelijken('a',20)
-  %".3" = sext i8 97 to i32
-  %".4" = call float @"vergelijken"(i32 %".3", i32 20)
-  ;  Source: floatboolean=vergelijken('a',20);
-  store float %".4", float* %"boolean"
-  %".7" = bitcast [3 x i8]* @"str" to i8*
+  %".2" = sext i8 97 to i32
+  %".3" = call float @"vergelijken"(i32 %".2", i32 20)
+  store float %".3", float* %"boolean"
+  %".5" = bitcast [3 x i8]* @"str" to i8*
   ;  Source: boolean
-  %"boolean.1" = load float, float* %"boolean"
+  %"boolean_load" = load float, float* %"boolean"
   ;  Source: printf("%f",boolean);
-  %".10" = fpext float %"boolean.1" to double
-  %".11" = call i32 (i8*, ...) @"printf"(i8* %".7", double %".10")
+  %".8" = fpext float %"boolean_load" to double
+  %".9" = call i32 (i8*, ...) @"printf"(i8* %".5", double %".8")
   ;  Source: return0;
   ret i32 0
 }

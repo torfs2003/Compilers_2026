@@ -1,2 +1,0 @@
-Semantic errors found, stopping.
-[ Error ] line 8, position 0: Incompatibele types bij toewijzing: 'int' aan 'int*'.

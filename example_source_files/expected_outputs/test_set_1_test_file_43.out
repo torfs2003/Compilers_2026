@@ -1,3 +1,0 @@
-Syntax errors found, stopping.
-line 9:11 extraneous input ';' expecting {'(', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
-line 11:2 mismatched input '=' expecting ';'

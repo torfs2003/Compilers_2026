@@ -5,7 +5,7 @@ grammar Cmm;
 // ==========================================
 
 compilationUnit
-    : (includeDirective | enumDeclaration | structDeclaration | typedefDeclaration | declaration | functionDeclaration | functionDefinition)* EOF
+    : (includeDirective | enumDeclaration | structDeclaration | unionDeclaration | typedefDeclaration | declaration | functionDeclaration | functionDefinition)* EOF
     ;
 
 includeDirective
@@ -13,11 +13,11 @@ includeDirective
     ;
 
 functionDefinition
-    : typeSpecifier MUL* (MAIN | IDENTIFIER) LPAREN parameterList? RPAREN compoundStatement
+    : CONST? typeSpecifier MUL* (MAIN | IDENTIFIER) LPAREN parameterList? RPAREN compoundStatement SEMI?
     ;
 
 functionDeclaration
-    : typeSpecifier MUL* (MAIN | IDENTIFIER) LPAREN parameterList? RPAREN SEMI
+    : CONST? typeSpecifier MUL* (MAIN | IDENTIFIER) LPAREN parameterList? RPAREN SEMI
     ;
 
 parameterList
@@ -25,11 +25,11 @@ parameterList
     ;
 
 parameterDeclaration
-    : CONST? typeSpecifier MUL* CONST? IDENTIFIER
+    : CONST? typeSpecifier MUL* CONST? IDENTIFIER (LBRACKET expression? RBRACKET)*
     ;
 
 compoundStatement
-    : LBRACE (declaration | typedefDeclaration | statement)* RBRACE
+    : LBRACE (structDeclaration | unionDeclaration | enumDeclaration | declaration | typedefDeclaration | statement)* RBRACE
     ;
 
 initDeclaratorList
@@ -41,17 +41,29 @@ initDeclarator
     ;
 
 declaration
-    : CONST? typeSpecifier initDeclaratorList SEMI
+    : CONST typeSpecifier initDeclaratorList SEMI       // const int x = 5;
+    | typeSpecifier initDeclaratorList SEMI             // int x = 5;
+    | CONST initDeclaratorList SEMI                     // const x = 5; (Implicit int!)
+    | typeSpecifier LPAREN MUL IDENTIFIER RPAREN LPAREN typeList? RPAREN (ASSIGN expression)? SEMI
+    ;
+
+typeList
+    : typeSpecifier MUL* (COMMA typeSpecifier MUL*)*
+    ;
+
+typedefDeclaration
+    : TYPEDEF CONST? typeSpecifier CONST? MUL* CONST? IDENTIFIER (LBRACKET INT_LITERAL RBRACKET)* SEMI
+    | TYPEDEF SEMI
     ;
 
 structDeclaration
     : STRUCT IDENTIFIER LBRACE declaration* RBRACE SEMI
     ;
 
-typedefDeclaration
-    : TYPEDEF typeSpecifier MUL* IDENTIFIER (LBRACKET INT_LITERAL RBRACKET)* SEMI
+unionDeclaration
+    : UNION IDENTIFIER LBRACE declaration* RBRACE SEMI
     ;
-    
+
 statement
     : expression SEMI
     | compoundStatement
@@ -72,6 +84,7 @@ typeSpecifier
     | VOID 
     | ENUM IDENTIFIER
     | STRUCT IDENTIFIER
+    | UNION IDENTIFIER
     | IDENTIFIER
     ;
 
@@ -118,8 +131,8 @@ returnStatement
     ;
 
 caseBlock
-    : CASE INT_LITERAL COLON statement*
-    | DEFAULT COLON statement*
+    : CASE INT_LITERAL COLON (statement | declaration)*
+    | DEFAULT COLON (statement | declaration)*
     ;
 
 enumDeclaration
@@ -188,7 +201,7 @@ additive_expression
     ;
 
 cast_expression
-    : LPAREN typeSpecifier RPAREN cast_expression
+    : LPAREN CONST? typeSpecifier MUL* RPAREN cast_expression
     | unary_expression
     ;
 
@@ -201,6 +214,8 @@ multiplicative_expression
 
 unary_expression
     : postfix_expression
+    | SIZEOF LPAREN typeSpecifier MUL* RPAREN
+    | SIZEOF LPAREN unary_expression RPAREN
     | PLUS unary_expression
     | MINUS unary_expression
     | NOT unary_expression
@@ -235,8 +250,16 @@ primary_expression
     ;
 
 array_initializer
-    : LBRACE (expression (COMMA expression)*)? RBRACE
-    | LBRACE (array_initializer (COMMA array_initializer)*)? RBRACE
+    : LBRACE (initializer_list)? RBRACE
+    ;
+
+initializer_list
+    : initializer_element (COMMA initializer_element)* COMMA?
+    ;
+
+initializer_element
+    : expression
+    | array_initializer
     ;
 
 // ==========================================
@@ -252,6 +275,7 @@ IF        : 'if';
 ELSE      : 'else';
 WHILE     : 'while';
 FOR       : 'for';
+UNION     : 'union';
 BREAK     : 'break';
 CONTINUE  : 'continue';
 ENUM      : 'enum';
@@ -267,6 +291,7 @@ RETURN    : 'return';
 DEFAULT   : 'default';
 STRUCT    : 'struct';
 TYPEDEF   : 'typedef';
+SIZEOF    : 'sizeof';
 
 // Operators
 LPAREN    : '(' ;
@@ -316,7 +341,7 @@ DEC       : '--' ;
 
 // Characters
 CHAR_LITERAL
-    : '\'' ( ~['\\] | '\\' . ) '\''
+    : '\'' ( ~['\\] | '\\' . )+ '\''
     ;
 
 // Floats

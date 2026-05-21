@@ -98,12 +98,12 @@ class CmmListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by CmmParser#structDeclaration.
-    def enterStructDeclaration(self, ctx:CmmParser.StructDeclarationContext):
+    # Enter a parse tree produced by CmmParser#typeList.
+    def enterTypeList(self, ctx:CmmParser.TypeListContext):
         pass
 
-    # Exit a parse tree produced by CmmParser#structDeclaration.
-    def exitStructDeclaration(self, ctx:CmmParser.StructDeclarationContext):
+    # Exit a parse tree produced by CmmParser#typeList.
+    def exitTypeList(self, ctx:CmmParser.TypeListContext):
         pass
 
 
@@ -113,6 +113,24 @@ class CmmListener(ParseTreeListener):
 
     # Exit a parse tree produced by CmmParser#typedefDeclaration.
     def exitTypedefDeclaration(self, ctx:CmmParser.TypedefDeclarationContext):
+        pass
+
+
+    # Enter a parse tree produced by CmmParser#structDeclaration.
+    def enterStructDeclaration(self, ctx:CmmParser.StructDeclarationContext):
+        pass
+
+    # Exit a parse tree produced by CmmParser#structDeclaration.
+    def exitStructDeclaration(self, ctx:CmmParser.StructDeclarationContext):
+        pass
+
+
+    # Enter a parse tree produced by CmmParser#unionDeclaration.
+    def enterUnionDeclaration(self, ctx:CmmParser.UnionDeclarationContext):
+        pass
+
+    # Exit a parse tree produced by CmmParser#unionDeclaration.
+    def exitUnionDeclaration(self, ctx:CmmParser.UnionDeclarationContext):
         pass
 
 
@@ -401,6 +419,24 @@ class CmmListener(ParseTreeListener):
 
     # Exit a parse tree produced by CmmParser#array_initializer.
     def exitArray_initializer(self, ctx:CmmParser.Array_initializerContext):
+        pass
+
+
+    # Enter a parse tree produced by CmmParser#initializer_list.
+    def enterInitializer_list(self, ctx:CmmParser.Initializer_listContext):
+        pass
+
+    # Exit a parse tree produced by CmmParser#initializer_list.
+    def exitInitializer_list(self, ctx:CmmParser.Initializer_listContext):
+        pass
+
+
+    # Enter a parse tree produced by CmmParser#initializer_element.
+    def enterInitializer_element(self, ctx:CmmParser.Initializer_elementContext):
+        pass
+
+    # Exit a parse tree produced by CmmParser#initializer_element.
+    def exitInitializer_element(self, ctx:CmmParser.Initializer_elementContext):
         pass
 
 

@@ -17,6 +17,8 @@ class BaseVisitor:
         if isinstance(node, UnaryOpNode): return [node.child]
         if isinstance(node, CastNode): return [node.expr]
         if isinstance(node, FuncCallNode): return node.args
+        if isinstance(node, FuncPtrDeclNode):
+            return [node.init_expr] if getattr(node, 'init_expr', None) else []
         if isinstance(node, ArrayInitNode): return node.values
         if isinstance(node, IfNode):
             children = [node.condition, node.scope]
@@ -44,6 +46,9 @@ class BaseVisitor:
             
         if isinstance(node, MemberAccessNode):
             return [node.expr]
+
+        if isinstance(node, SizeofNode):
+            return [node.operand] if isinstance(node.operand, ASTNode) else []
             
         if isinstance(node, (FunctionDeclNode, TypedefNode)):
             return []

@@ -1,7 +1,0 @@
-Syntax errors found, stopping.
-line 3:0 extraneous input 'typedef' expecting {<EOF>, '#include', 'int', 'float', 'char', 'void'}
-line 3:16 mismatched input ';' expecting '('
-line 6:9 missing ';' at 'x'
-line 7:9 missing ';' at 'y'
-line 8:4 extraneous input 'int' expecting {'(', '{', '}', ';', '+', '-', '*', '!', '&', '~', '++', '--', CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, STRING_LITERAL, IDENTIFIER}
-line 8:10 mismatched input '=' expecting '('

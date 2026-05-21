@@ -1,5 +1,6 @@
 import os
 import re
+import sys
 
 class Preprocessor:
     def __init__(self, base_dir="."):
@@ -10,7 +11,8 @@ class Preprocessor:
     def process_code(self, code: str) -> str:
         lines = code.splitlines()
         output_lines = []
-        skip_mode = False
+        skip_mode = False        
+        if_stack = 0 
 
         for line in lines:
             stripped_line = line.strip()
@@ -18,13 +20,27 @@ class Preprocessor:
             # 0. Handle #ifndef en #endif
             if stripped_line.startswith("#ifndef"):
                 parts = stripped_line.split()
-                if len(parts) >= 2:
-                    macro_name = parts[1]
-                    if macro_name in self.defines:
-                        skip_mode = True
+                
+                if len(parts) < 2:
+                    foutmelding = "[Error] Preprocessor: '#ifndef' vereist een identifier."
+                    print(foutmelding)
+                    self.errors.append(foutmelding)
+                    sys.exit(1)
+                
+                if_stack += 1
+                macro_name = parts[1]
+                if macro_name in self.defines:
+                    skip_mode = True
                 continue
 
             elif stripped_line.startswith("#endif"):
+                if if_stack == 0:
+                    foutmelding = "[Error] Preprocessor: stray '#endif' without matching '#ifndef'."
+                    print(foutmelding)
+                    self.errors.append(foutmelding)
+                    sys.exit(1)
+                
+                if_stack -= 1
                 skip_mode = False
                 continue
 
@@ -41,11 +57,18 @@ class Preprocessor:
                     if os.path.exists(full_path):
                         with open(full_path, 'r', encoding='utf-8') as f:
                             included_code = f.read()
+                            
+                            old_base_dir = self.base_dir
+                            self.base_dir = os.path.dirname(os.path.abspath(full_path))
                             processed_include = self.process_code(included_code)
+                            self.base_dir = old_base_dir
+                            
                             output_lines.append(processed_include)
                     else:
-                        print(f"[Warning] Preprocessor kon include bestand niet vinden: {full_path}")
+                        foutmelding = f"[Error] Preprocessor kon include bestand niet vinden: {full_path}"
+                        print(foutmelding)
                         self.errors.append(foutmelding)
+                        sys.exit(1)
                 else:
                     output_lines.append(line)
 
@@ -61,12 +84,32 @@ class Preprocessor:
 
                 macro_name = parts[1]
                 
+                reserved_macros = {
+                    "NULL", "EOF", "size_t", "ptrdiff_t", "wchar_t", 
+                    "SEEK_SET", "SEEK_CUR", "SEEK_END", "RAND_MAX",
+                    "EXIT_SUCCESS", "EXIT_FAILURE", "BUFSIZ", "FOPEN_MAX"
+                }
+                
+                if macro_name in reserved_macros:
+                    foutmelding = f"[Error] Redefinition of standard macro '{macro_name}' is illegal in C89."
+                    print(foutmelding)
+                    self.errors.append(foutmelding)
+                    sys.exit(1)
+
                 if not re.match(r'^[a-zA-Z_][a-zA-Z0-9_]*$', macro_name):
                     foutmelding = f"[Error] Preprocessor: '{macro_name}' is geen geldige macro identifier."
+                    print(foutmelding)
                     self.errors.append(foutmelding)
                     continue
 
                 macro_value = " ".join(parts[2:]) if len(parts) >= 3 else ""
+                
+                if macro_name in self.defines and self.defines[macro_name] != macro_value:
+                    foutmelding = f"[Error] Preprocessor: Redefinition of macro '{macro_name}' with a different value."
+                    print(foutmelding)
+                    self.errors.append(foutmelding)
+                    sys.exit(1)
+                
                 self.defines[macro_name] = macro_value
             
             # 3. Standaard regel
@@ -80,7 +123,8 @@ class Preprocessor:
         return "\n".join(output_lines)
 
     def process_file(self, filepath: str) -> str:
-        self.base_dir = os.path.dirname(filepath)
-        with open(filepath, 'r', encoding='utf-8') as f:
+        absolute_path = os.path.abspath(filepath)
+        self.base_dir = os.path.dirname(absolute_path)
+        with open(absolute_path, 'r', encoding='utf-8') as f:
             code = f.read()
         return self.process_code(code)

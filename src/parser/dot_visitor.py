@@ -1,5 +1,3 @@
-# src/parser/dot_visitor.py
-
 from src.parser.base_visitor import BaseVisitor
 from src.parser.AST import *
 
@@ -19,7 +17,6 @@ class DOTVisitor(BaseVisitor):
             return f"{main_text}\\n({etype})"
         return main_text
 
-    # --- Helper methodes (bespaart enorm veel regels!) ---
     def _add_node(self, node, label, shape="box", fillcolor="white", style="filled", color="black", fontcolor="black"):
         my_id = self.node_ids.get(id(node))
         if my_id:
@@ -71,7 +68,7 @@ class DOTVisitor(BaseVisitor):
     def pre_visit_StructDeclNode(self, node): self.node_ids[id(node)] = self.generate_id()
     def pre_visit_MemberAccessNode(self, node): self.node_ids[id(node)] = self.generate_id()
 
-    # --- FASE 2: POST-ORDER (Terug naar jouw originele styling!) ---
+    # --- FASE 2: POST-ORDER  ---
     def visit_IncludeNode(self, node):
         self._add_node(node, f"Include\\n<{node.header}>", shape="note", fillcolor="lightyellow")
 

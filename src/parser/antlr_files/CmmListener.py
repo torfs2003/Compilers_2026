@@ -1,6 +1,6 @@
-# Generated from Cmm.g4 by ANTLR 4.13.2
+# Generated from Cmm.g4 by ANTLR 4.9.2
 from antlr4 import *
-if "." in __name__:
+if __name__ is not None and "." in __name__:
     from .CmmParser import CmmParser
 else:
     from CmmParser import CmmParser
@@ -17,12 +17,48 @@ class CmmListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by CmmParser#includeDirective.
+    def enterIncludeDirective(self, ctx:CmmParser.IncludeDirectiveContext):
+        pass
+
+    # Exit a parse tree produced by CmmParser#includeDirective.
+    def exitIncludeDirective(self, ctx:CmmParser.IncludeDirectiveContext):
+        pass
+
+
     # Enter a parse tree produced by CmmParser#functionDefinition.
     def enterFunctionDefinition(self, ctx:CmmParser.FunctionDefinitionContext):
         pass
 
     # Exit a parse tree produced by CmmParser#functionDefinition.
     def exitFunctionDefinition(self, ctx:CmmParser.FunctionDefinitionContext):
+        pass
+
+
+    # Enter a parse tree produced by CmmParser#functionDeclaration.
+    def enterFunctionDeclaration(self, ctx:CmmParser.FunctionDeclarationContext):
+        pass
+
+    # Exit a parse tree produced by CmmParser#functionDeclaration.
+    def exitFunctionDeclaration(self, ctx:CmmParser.FunctionDeclarationContext):
+        pass
+
+
+    # Enter a parse tree produced by CmmParser#parameterList.
+    def enterParameterList(self, ctx:CmmParser.ParameterListContext):
+        pass
+
+    # Exit a parse tree produced by CmmParser#parameterList.
+    def exitParameterList(self, ctx:CmmParser.ParameterListContext):
+        pass
+
+
+    # Enter a parse tree produced by CmmParser#parameterDeclaration.
+    def enterParameterDeclaration(self, ctx:CmmParser.ParameterDeclarationContext):
+        pass
+
+    # Exit a parse tree produced by CmmParser#parameterDeclaration.
+    def exitParameterDeclaration(self, ctx:CmmParser.ParameterDeclarationContext):
         pass
 
 
@@ -41,6 +77,24 @@ class CmmListener(ParseTreeListener):
 
     # Exit a parse tree produced by CmmParser#declaration.
     def exitDeclaration(self, ctx:CmmParser.DeclarationContext):
+        pass
+
+
+    # Enter a parse tree produced by CmmParser#structDeclaration.
+    def enterStructDeclaration(self, ctx:CmmParser.StructDeclarationContext):
+        pass
+
+    # Exit a parse tree produced by CmmParser#structDeclaration.
+    def exitStructDeclaration(self, ctx:CmmParser.StructDeclarationContext):
+        pass
+
+
+    # Enter a parse tree produced by CmmParser#typedefDeclaration.
+    def enterTypedefDeclaration(self, ctx:CmmParser.TypedefDeclarationContext):
+        pass
+
+    # Exit a parse tree produced by CmmParser#typedefDeclaration.
+    def exitTypedefDeclaration(self, ctx:CmmParser.TypedefDeclarationContext):
         pass
 
 
@@ -68,6 +122,96 @@ class CmmListener(ParseTreeListener):
 
     # Exit a parse tree produced by CmmParser#expression.
     def exitExpression(self, ctx:CmmParser.ExpressionContext):
+        pass
+
+
+    # Enter a parse tree produced by CmmParser#ifStatement.
+    def enterIfStatement(self, ctx:CmmParser.IfStatementContext):
+        pass
+
+    # Exit a parse tree produced by CmmParser#ifStatement.
+    def exitIfStatement(self, ctx:CmmParser.IfStatementContext):
+        pass
+
+
+    # Enter a parse tree produced by CmmParser#whileStatement.
+    def enterWhileStatement(self, ctx:CmmParser.WhileStatementContext):
+        pass
+
+    # Exit a parse tree produced by CmmParser#whileStatement.
+    def exitWhileStatement(self, ctx:CmmParser.WhileStatementContext):
+        pass
+
+
+    # Enter a parse tree produced by CmmParser#forStatement.
+    def enterForStatement(self, ctx:CmmParser.ForStatementContext):
+        pass
+
+    # Exit a parse tree produced by CmmParser#forStatement.
+    def exitForStatement(self, ctx:CmmParser.ForStatementContext):
+        pass
+
+
+    # Enter a parse tree produced by CmmParser#breakStatement.
+    def enterBreakStatement(self, ctx:CmmParser.BreakStatementContext):
+        pass
+
+    # Exit a parse tree produced by CmmParser#breakStatement.
+    def exitBreakStatement(self, ctx:CmmParser.BreakStatementContext):
+        pass
+
+
+    # Enter a parse tree produced by CmmParser#continueStatement.
+    def enterContinueStatement(self, ctx:CmmParser.ContinueStatementContext):
+        pass
+
+    # Exit a parse tree produced by CmmParser#continueStatement.
+    def exitContinueStatement(self, ctx:CmmParser.ContinueStatementContext):
+        pass
+
+
+    # Enter a parse tree produced by CmmParser#switchStatement.
+    def enterSwitchStatement(self, ctx:CmmParser.SwitchStatementContext):
+        pass
+
+    # Exit a parse tree produced by CmmParser#switchStatement.
+    def exitSwitchStatement(self, ctx:CmmParser.SwitchStatementContext):
+        pass
+
+
+    # Enter a parse tree produced by CmmParser#returnStatement.
+    def enterReturnStatement(self, ctx:CmmParser.ReturnStatementContext):
+        pass
+
+    # Exit a parse tree produced by CmmParser#returnStatement.
+    def exitReturnStatement(self, ctx:CmmParser.ReturnStatementContext):
+        pass
+
+
+    # Enter a parse tree produced by CmmParser#caseBlock.
+    def enterCaseBlock(self, ctx:CmmParser.CaseBlockContext):
+        pass
+
+    # Exit a parse tree produced by CmmParser#caseBlock.
+    def exitCaseBlock(self, ctx:CmmParser.CaseBlockContext):
+        pass
+
+
+    # Enter a parse tree produced by CmmParser#enumDeclaration.
+    def enterEnumDeclaration(self, ctx:CmmParser.EnumDeclarationContext):
+        pass
+
+    # Exit a parse tree produced by CmmParser#enumDeclaration.
+    def exitEnumDeclaration(self, ctx:CmmParser.EnumDeclarationContext):
+        pass
+
+
+    # Enter a parse tree produced by CmmParser#enumList.
+    def enterEnumList(self, ctx:CmmParser.EnumListContext):
+        pass
+
+    # Exit a parse tree produced by CmmParser#enumList.
+    def exitEnumList(self, ctx:CmmParser.EnumListContext):
         pass
 
 
@@ -194,6 +338,15 @@ class CmmListener(ParseTreeListener):
 
     # Exit a parse tree produced by CmmParser#postfix_expression.
     def exitPostfix_expression(self, ctx:CmmParser.Postfix_expressionContext):
+        pass
+
+
+    # Enter a parse tree produced by CmmParser#argumentList.
+    def enterArgumentList(self, ctx:CmmParser.ArgumentListContext):
+        pass
+
+    # Exit a parse tree produced by CmmParser#argumentList.
+    def exitArgumentList(self, ctx:CmmParser.ArgumentListContext):
         pass
 
 

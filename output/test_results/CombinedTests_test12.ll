@@ -1,10 +1,18 @@
 ; ModuleID = "cmm_module"
-target triple = "x86_64-unknown-linux-gnu"
+target triple = "x86_64-w64-windows-gnu"
 target datalayout = ""
 
 declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
+
+declare i8* @"fopen"(i8* %".1", i8* %".2")
+
+declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
+
+declare i32 @"fputs"(i8* %".1", i8* %".2")
+
+declare i32 @"fclose"(i8* %".1")
 
 define void @"printArr"(i32* %".1", i32 %".2")
 {
@@ -14,43 +22,41 @@ entry:
   %"length" = alloca i32
   store i32 %".2", i32* %"length"
   %"i" = alloca i32
-  ;  Source: inti=0;
   store i32 0, i32* %"i"
   ;  Source: i
-  %"i.1" = load i32, i32* %"i"
+  %"i_load" = load i32, i32* %"i"
   ;  Source: i=0
   store i32 0, i32* %"i"
   br label %"while.cond"
 while.cond:
-  %"i.2" = load i32, i32* %"i"
-  %"length.1" = load i32, i32* %"length"
-  %".12" = icmp slt i32 %"i.2", %"length.1"
-  %".13" = zext i1 %".12" to i32
-  %"whilecond" = icmp ne i32 %".13", 0
+  %"i_load.1" = load i32, i32* %"i"
+  %"length_load" = load i32, i32* %"length"
+  %".11" = icmp slt i32 %"i_load.1", %"length_load"
+  %".12" = zext i1 %".11" to i32
+  %"whilecond" = icmp ne i32 %".12", 0
   br i1 %"whilecond", label %"while.body", label %"while.end"
 while.body:
-  %".15" = bitcast [3 x i8]* @"str" to i8*
-  %"arr.1" = load i32*, i32** %"arr"
-  %".16" = load i32*, i32** %"arr"
-  %"ptr_incdec" = getelementptr i32, i32* %".16", i32 1
+  %".14" = bitcast [3 x i8]* @"str" to i8*
+  %"arr_load" = load i32*, i32** %"arr"
+  %".15" = load i32*, i32** %"arr"
+  %"ptr_incdec" = getelementptr i32, i32* %".15", i32 1
   store i32* %"ptr_incdec", i32** %"arr"
-  %"deref_load" = load i32, i32* %".16"
-  %".18" = call i32 (i8*, ...) @"printf"(i8* %".15", i32 %"deref_load")
-  %"i.3" = load i32, i32* %"i"
-  %".19" = load i32, i32* %"i"
-  %".20" = add i32 %".19", 1
-  store i32 %".20", i32* %"i"
+  %"deref_load" = load i32, i32* %".15"
+  %".17" = call i32 (i8*, ...) @"printf"(i8* %".14", i32 %"deref_load")
+  %"i_load.2" = load i32, i32* %"i"
+  %".18" = load i32, i32* %"i"
+  %".19" = add i32 %".18", 1
+  store i32 %".19", i32* %"i"
   br label %"while.cond"
 while.end:
   ret void
 }
 
-@"str" = internal constant [3 x i8] c"%d\00"
 define i32 @"main"()
 {
 entry:
   %"array" = alloca [12 x i32]
-  ;  Source: intarray[12]={1,2,3,4,5,6,7,8,9,10,11,12};
+  store [12 x i32] zeroinitializer, [12 x i32]* %"array"
   %".3" = getelementptr [12 x i32], [12 x i32]* %"array", i32 0, i32 0
   store i32 1, i32* %".3"
   %".5" = getelementptr [12 x i32], [12 x i32]* %"array", i32 0, i32 1
@@ -82,3 +88,5 @@ entry:
   ;  Source: return0;
   ret i32 0
 }
+
+@"str" = internal constant [3 x i8] c"%d\00"

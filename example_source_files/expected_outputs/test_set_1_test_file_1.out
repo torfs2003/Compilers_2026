@@ -1,3 +1,0 @@
-AST rendered to output/test_results\test_set_1_test_file_1.dot
-Warning: Integer overflow for -9899563254 in 32-bit
-LLVM IR generated at output/test_results\test_set_1_test_file_1.ll

@@ -1,5 +1,3 @@
-#include <stdio.h>
-
 int main() {
 int x = 5;
 float f = 33989.586265;

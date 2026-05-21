@@ -1,12 +1,19 @@
 ; ModuleID = "cmm_module"
-target triple = "x86_64-unknown-linux-gnu"
+target triple = "x86_64-w64-windows-gnu"
 target datalayout = ""
 
 declare i32 @"printf"(i8* %".1", ...)
 
 declare i32 @"scanf"(i8* %".1", ...)
 
-@"globalConst" = internal global i32 100
+declare i8* @"fopen"(i8* %".1", i8* %".2")
+
+declare i8* @"fgets"(i8* %".1", i32 %".2", i8* %".3")
+
+declare i32 @"fputs"(i8* %".1", i8* %".2")
+
+declare i32 @"fclose"(i8* %".1")
+
 define i32 @"computeSomething"()
 {
 entry:
@@ -38,5 +45,6 @@ entry:
   ret i32 0
 }
 
+@"globalConst" = internal global i32 100
 @"str" = internal constant [14 x i8] c"Result 1: %d\0a\00"
 @"str.1" = internal constant [14 x i8] c"Result 2: %d\0a\00"

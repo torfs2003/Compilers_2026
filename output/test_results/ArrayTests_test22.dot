@@ -16,10 +16,10 @@ digraph AST {
   node13 [label="\"%d\"\n(char*)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node16 [label="ID: c\n(int**)", shape=box, style="filled", fillcolor="lightgrey", color="black", fontcolor="black"];
   node17 [label="0\n(int)", shape=box, style="filled", fillcolor="none", color="black", fontcolor="black"];
-  node15 [label="[]\n(int**)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node15 [label="[]\n(int*)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node15 -> node16 [style="solid", color="black"];
   node15 -> node17 [style="solid", color="black"];
-  node14 [label="*\n(int*)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
+  node14 [label="*\n(int)", shape=circle, style="filled", fillcolor="none", color="black", fontcolor="black"];
   node14 -> node15 [style="solid", color="black"];
   node12 [label="Call: printf()\n(int)", shape=ellipse, style="filled", fillcolor="lightpink", color="black", fontcolor="black"];
   node12 -> node13 [style="solid", color="black", label=" arg0", fontcolor="black"];

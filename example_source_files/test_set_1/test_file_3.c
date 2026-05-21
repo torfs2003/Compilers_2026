@@ -1,6 +1,4 @@
-#include <stdio.h>
 
-int main() {
 
 1 +
 
@@ -18,4 +16,3 @@ int main() {
 	)
 
 ;;;
-}
