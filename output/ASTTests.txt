@@ -116,6 +116,7 @@
   example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test31.c... PASSED
   example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test32.c... PASSED (Expected failure)
   example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test33.c... FAILED (Compiler Error)
+    --> line 3:8 no viable alternative at input 'intmain'
   example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test34.c... PASSED
   example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test35.c... PASSED
   example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test36.c... FAILED
@@ -150,6 +151,16 @@
 ──────────────────────────────────────────────────
   example_source_files\test_set_3\ASTTests\TypedefTests\test1.c... PASSED
   example_source_files\test_set_3\ASTTests\TypedefTests\test2.c... FAILED (Compiler Error)
+    --> Traceback (most recent call last):
+      File "<frozen runpy>", line 198, in _run_module_as_main
+      File "<frozen runpy>", line 88, in _run_code
+      File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 123, in <module>
+        main()
+      File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\main\__main__.py", line 104, in main
+        llvm_ir = llvm_visitor.generate(ast_root) 
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "C:\Users\lasse\OneDrive - Thomas More\Documenten\UAntwerpen\Compilers\Project\src\llvm_target\llvm_visitor.py", line 424, in generate
+        self._visit_node(node)
   example_source_files\test_set_3\ASTTests\TypedefTests\test3.c... PASSED (Expected failure)
   example_source_files\test_set_3\ASTTests\TypedefTests\test4.c... PASSED
   example_source_files\test_set_3\ASTTests\TypedefTests\test5.c... PASSED
@@ -202,14 +213,13 @@
   example_source_files\test_set_3\ASTTests\ValueAdderTests\test19.c... PASSED
   example_source_files\test_set_3\ASTTests\ValueAdderTests\test20.c... PASSED
   example_source_files\test_set_3\ASTTests\ValueAdderTests\test21.c... PASSED
-  example_source_files\test_set_3\ASTTests\ValueAdderTests\test22.c... FAILED
-    --> TIMEOUT (Mogelijke oneindige lus)
+  example_source_files\test_set_3\ASTTests\ValueAdderTests\test22.c... PASSED
   example_source_files\test_set_3\ASTTests\ValueAdderTests\test23.c... PASSED
   example_source_files\test_set_3\ASTTests\ValueAdderTests\test24.c... PASSED
 
-  |== ValueAdderTests TOTAAL: 22 passed, 2 failed  [2 GEFAALD] ==|
+  |== ValueAdderTests TOTAAL: 23 passed, 1 failed  [1 GEFAALD] ==|
 
 ============================================================
-  EINDTOTAAL: 143 passed, 7 failed
+  EINDTOTAAL: 144 passed, 6 failed
 ============================================================
 

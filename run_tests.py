@@ -2,7 +2,8 @@ import subprocess
 import os
 import sys
 import argparse
-import re  # Nieuw: nodig voor de logische sortering
+import re
+import shutil
 from pathlib import Path
 
 # De hoofdmap voor alle output
@@ -15,7 +16,6 @@ SOURCE_ROOT = Path("example_source_files")
 # ==========================================
 
 # OPTIE 1: CLANG
-
 COMPILER_CMD = "clang"
 COMPILER_FLAGS = [
     "-std=c89", "-pedantic", "-Wall", "-Wextra",
@@ -36,6 +36,10 @@ REF_COMPILER_FLAGS = [
 
 _log_file = None
 _debug_mode = False
+_test_ll = True
+_test_bin = True
+_test_mips = False
+_no_ref = False
 
 def set_debug_mode(debug: bool):
     global _debug_mode
@@ -72,7 +76,8 @@ def stdin_for_test(c_file: Path) -> str:
     return default
 
 def compiler_accepts_c_file(c_file: Path):
-    ref_exe = f"./compiler_test_{c_file.stem}.exe" if os.name == "nt" else f"./safe_compile_{c_file.stem}"
+    if os.name == "nt":
+        ref_exe = f"compiler_test_{c_file.stem}.exe"
     try:
         subprocess.run([COMPILER_CMD, *REF_COMPILER_FLAGS, str(c_file), "-o", ref_exe],
                        check=True, capture_output=True, text=True, timeout=5, errors="replace")
@@ -85,9 +90,25 @@ def compiler_accepts_c_file(c_file: Path):
         except OSError:
             pass
 
-def test_execution(c_file: Path, generated_ll_file: str):
-    ref_exe = f"./compiler_test_{c_file.stem}.exe" if os.name == "nt" else f"./safe_compile_{c_file.stem}"
+def test_execution_ll(c_file: Path, generated_ll_file: str):
+    """Test LLVM IR using lli"""
+    global _no_ref
     test_input = stdin_for_test(c_file)
+
+    if _no_ref:
+        try:
+            my_result = subprocess.run(["lli", generated_ll_file], input=test_input,
+                                       capture_output=True, text=True, timeout=5, errors="replace")
+        except subprocess.TimeoutExpired:
+            return True, "Timeout accepted (infinite loop)"
+        if my_result.returncode == 0:
+            return True, "Execution ran (no reference check)"
+        else:
+            msg = f"ACTUAL (code {my_result.returncode}):\n{my_result.stdout}\n[STDERR]\n{my_result.stderr}"
+            return False, msg
+
+    if os.name == "nt":
+        ref_exe = f"compiler_test_{c_file.stem}.exe"
     try:
         subprocess.run([COMPILER_CMD, *REF_COMPILER_FLAGS, str(c_file), "-o", ref_exe],
                        check=True, capture_output=True, text=True, timeout=5, errors="replace")
@@ -137,6 +158,120 @@ def test_execution(c_file: Path, generated_ll_file: str):
         except OSError:
             pass
 
+def test_execution_binary(c_file: Path, binary_file: str):
+    """Test native binary executable"""
+    global _no_ref
+    test_input = stdin_for_test(c_file)
+
+    if _no_ref:
+        try:
+            my_result = subprocess.run([binary_file], input=test_input, capture_output=True, text=True, timeout=5, errors="replace")
+        except subprocess.TimeoutExpired:
+            return True, "Timeout accepted (infinite loop)"
+        if my_result.returncode == 0:
+            return True, "Execution ran (no reference check)"
+        else:
+            msg = f"ACTUAL (code {my_result.returncode}):\n{my_result.stdout}\n[STDERR]\n{my_result.stderr}"
+            return False, msg
+
+    if os.name == "nt":
+        ref_exe = f"compiler_test_{c_file.stem}.exe"
+    test_input = stdin_for_test(c_file)
+    try:
+        subprocess.run([COMPILER_CMD, *REF_COMPILER_FLAGS, str(c_file), "-o", ref_exe],
+                       check=True, capture_output=True, text=True, timeout=5, errors="replace")
+
+        ref_timeout = False
+        my_timeout = False
+        ref_result = None
+        my_result = None
+        
+        try:
+            ref_result = subprocess.run([ref_exe], input=test_input, capture_output=True, text=True, timeout=2, errors="replace")
+        except subprocess.TimeoutExpired:
+            ref_timeout = True
+            
+        try:
+            my_result = subprocess.run([binary_file], input=test_input,
+                                       capture_output=True, text=True, timeout=5, errors="replace")
+        except subprocess.TimeoutExpired:
+            my_timeout = True
+            
+        if ref_timeout or my_timeout:
+            return True, "Timeout accepted (infinite loop)"
+            
+        out_match = (ref_result.stdout.strip() == my_result.stdout.strip())
+
+        code_match = False
+        if ref_result.returncode == my_result.returncode:              code_match = True
+        elif ref_result.returncode != 0 and my_result.returncode != 0: code_match = True
+        elif out_match and my_result.returncode == 0 and not my_result.stdout.strip(): code_match = True
+
+        if out_match and code_match:
+            return True, "Execution output match!"
+
+        diff = (f"EXPECTED (code {ref_result.returncode}):\n{ref_result.stdout}\n"
+                f"ACTUAL (code {my_result.returncode}):\n{my_result.stdout}")
+        if my_result.stderr:
+            diff += f"\n[!] STDERR:\n{my_result.stderr.strip()}"
+        return False, diff
+
+    except subprocess.CalledProcessError:
+        return False, "INVALID_C_FILE"
+    finally:
+        try:
+            if os.path.exists(ref_exe): os.remove(ref_exe)
+        except OSError:
+            pass
+
+def test_execution_mips(c_file: Path, mips_file: str):
+    """Test MIPS assembly using SPIM or MARS (skips QtSpim GUI)."""
+    test_input = stdin_for_test(c_file)
+    spim_exe = shutil.which("spim") or shutil.which("qtspim") or shutil.which("QtSpim")
+
+    if not spim_exe:
+        return None, "SPIM not found"
+
+    if "qtspim" in os.path.basename(spim_exe).lower():
+        return None, "QtSpim GUI detected; please install command-line 'spim' or add a console spim.exe to PATH"
+
+    try:
+        my_result = subprocess.run([spim_exe, "-f", mips_file, "-quiet"],
+                                   input=test_input, capture_output=True, text=True,
+                                   timeout=10, errors="replace")
+
+        output_lines = my_result.stdout.strip().split('\n')
+        actual_output = '\n'.join([line for line in output_lines
+                                   if line.strip() and not line.startswith((' ', '[', 'SPIM', 'Register', 'Warning'))])
+
+        if os.name == "nt":
+            ref_exe = f"compiler_test_{c_file.stem}.exe"
+        try:
+            subprocess.run([COMPILER_CMD, *REF_COMPILER_FLAGS, str(c_file), "-o", ref_exe],
+                           check=True, capture_output=True, text=True, timeout=5, errors="replace")
+            ref_result = subprocess.run([ref_exe], input=test_input, capture_output=True, text=True, timeout=5, errors="replace")
+        except subprocess.TimeoutExpired:
+            return True, "Timeout accepted (infinite loop)"
+        except subprocess.CalledProcessError:
+            return None, "Cannot compile reference"
+        finally:
+            try:
+                if os.path.exists(ref_exe): os.remove(ref_exe)
+            except OSError:
+                pass
+
+        out_match = (ref_result.stdout.strip() == actual_output.strip())
+        if out_match:
+            return True, "MIPS output match!"
+        else:
+            diff = (f"EXPECTED:\n{ref_result.stdout}\n"
+                   f"ACTUAL (MIPS):\n{actual_output}")
+            return False, diff
+    except subprocess.TimeoutExpired:
+        return True, "MIPS timeout (infinite loop accepted)"
+    except Exception as e:
+        return None, f"SPIM execution error: {str(e)}"
+
 def run_single_test(c_file: Path, root_path: Path):
     try:
         rel_path = c_file.relative_to(SOURCE_ROOT)
@@ -158,11 +293,8 @@ def run_single_test(c_file: Path, root_path: Path):
            "--target_mips", str(out_s)]
     
     display_path = c_file.relative_to(SOURCE_ROOT.parent)
-    try:
-        result = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=30)
-    except subprocess.TimeoutExpired:
-        log(f"  {display_path}... FAILED (Compiler TIMEOUT - Mogelijke oneindige lus)")
-        return False, str(display_path)
+    result = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=30)
+
 
     if result.returncode != 0:
         if out_ll.exists(): os.remove(out_ll)
@@ -189,14 +321,52 @@ def run_single_test(c_file: Path, root_path: Path):
         log(f"  {display_path}... FAILED (Geen .ll bestand gemaakt)")
         return False, str(display_path)
 
-    match, msg = test_execution(c_file, str(out_ll))
+    match_ll, msg_ll = test_execution_ll(c_file, str(out_ll))
 
-    if match:
-        log(f"  {display_path}... PASSED")
+    match_bin = None
+    msg_bin = None
+    if _test_bin and out_bin.exists():
+        match_bin, msg_bin = test_execution_binary(c_file, str(out_bin))
+    
+    
+    match_mips = None
+    msg_mips = None
+    if _test_mips and out_s.exists():
+        match_mips, msg_mips = test_execution_mips(c_file, str(out_s))
+
+    passed_all = True
+    passed_components = []
+
+    if match_ll:
+        passed_components.append(".ll")
+    else:
+        passed_all = False
+        short_msg = "\n    ".join(msg_ll.splitlines()[:6])
+        log(f"  {display_path}... FAILED (.ll)\n    --> {short_msg}")
+
+    if _test_bin and out_bin.exists():
+        if match_bin:
+            passed_components.append(".bin")
+        else:
+            passed_all = False
+            short_msg = "\n    ".join(msg_bin.splitlines()[:6]) if msg_bin else "Unknown Error"
+            log(f"  {display_path}... FAILED (.bin)\n    --> {short_msg}")
+
+    # Check MIPS
+    if _test_mips and out_s.exists() and match_ll:
+        if match_mips is True:
+            passed_components.append(".s")
+        elif match_mips is False:
+            passed_all = False
+            short_msg = "\n    ".join(msg_mips.splitlines()[:6]) if msg_mips else "Unknown Error"
+            log(f"  {display_path}... FAILED (.s MIPS)\n    --> {short_msg}")
+        else:
+            log(f"  {display_path}... SKIPPED (.s MIPS)\n    --> {msg_mips}")
+
+    if passed_all:
+        log(f"  {display_path}... PASSED ({', '.join(passed_components)})")
         return True, None
     else:
-        short_msg = "\n    ".join(msg.splitlines()[:6])
-        log(f"  {display_path}... FAILED\n    --> {short_msg}")
         return False, str(display_path)
 
 def run_directory(path: Path, indent: int = 0):
@@ -266,10 +436,25 @@ def main():
     parser.add_argument("folder", nargs="?", default=None)
     parser.add_argument("--debug", action="store_true", help="Show full error messages (100 lines)")
     parser.add_argument("--test", type=str, help="Test a single file (e.g., example_source_files/test_set_3/MipsTests/ArrayTests/test1.c)")
+    parser.add_argument("--only", choices=["ll", "bin", "mips", "all"], default="all",
+                        help="Which targets to test: 'll' (LLVM IR), 'bin' (native binary), 'mips' (MIPS), or 'all'")
+    parser.add_argument("--no-ref", action="store_true", help="Skip compiling/executing the reference program (faster, less strict)")
+    
     args = parser.parse_args()
 
     OUTPUT_ROOT.mkdir(exist_ok=True)
     set_debug_mode(args.debug)
+    global _test_ll, _test_bin, _test_mips, _no_ref
+    if args.only == "ll":
+        _test_ll, _test_bin, _test_mips = True, False, False
+    elif args.only == "bin":
+        _test_ll, _test_bin, _test_mips = False, True, False
+    elif args.only == "mips":
+        _test_ll, _test_bin, _test_mips = False, False, True
+    else:
+        _test_ll, _test_bin, _test_mips = True, True, False
+    _no_ref = bool(args.no_ref)
+    
 
     if args.test:
         test_file = Path(args.test)

@@ -32,7 +32,7 @@
     --> EXPECTED (code 0):
     1
     ACTUAL (code 0):
-    -2002790308
+    341823756
   example_source_files\test_set_3\LLVMTests\ArrayTests\test23.c... FAILED
     --> EXPECTED (code 0):
     1
@@ -81,13 +81,16 @@
   example_source_files\test_set_3\LLVMTests\ArrayTests\test56.c... PASSED (Expected failure)
   example_source_files\test_set_3\LLVMTests\ArrayTests\test57.c... PASSED
   example_source_files\test_set_3\LLVMTests\ArrayTests\test58.c... PASSED
-  example_source_files\test_set_3\LLVMTests\ArrayTests\test59.c... FAILED
-    --> EXPECTED (code 3221225725):
+  example_source_files\test_set_3\LLVMTests\ArrayTests\test59.c... FAILED (Compiler Error)
+    --> [ Warning ] line 6, position 8: Array size should be strictly positive (C89 standard). Got: -1
+    AST rendered to output\test_set_3\LLVMTests\ArrayTests\test59.dot
+    LLVM IR generated at output\test_set_3\LLVMTests\ArrayTests\test59.ll
+    [Error] clang (native binary) failed (exit code 1):
     
-    ACTUAL (code 1):
-    
-    [!] LLI STDERR:
-    lli.exe: lli: output\test_set_3\LLVMTests\ArrayTests\test59.ll:21:18: error: expected number in address space
+    output\test_set_3\LLVMTests\ArrayTests\test59.ll:21:18: error: expected number in address space
+       21 |   %"a" = alloca [-1 x i32]
+          |                  ^
+    1 error generated.
   example_source_files\test_set_3\LLVMTests\ArrayTests\test60.c... PASSED
   example_source_files\test_set_3\LLVMTests\ArrayTests\test61.c... PASSED
   example_source_files\test_set_3\LLVMTests\ArrayTests\test62.c... PASSED
@@ -136,6 +139,15 @@
   example_source_files\test_set_3\LLVMTests\CalculationTests\test24.c... PASSED
   example_source_files\test_set_3\LLVMTests\CalculationTests\test25.c... PASSED
   example_source_files\test_set_3\LLVMTests\CalculationTests\test26.c... FAILED (Compiler Error)
+    --> Semantic errors found, stopping.
+    [ Error ] line 16, position 0: Kan 'POST--' niet toepassen: 'appel' is read-only (const).
+    [ Error ] line 17, position 0: Kan '--' niet toepassen: 'appel' is read-only (const).
+    [ Error ] line 19, position 0: Kan 'POST++' niet toepassen: 'appel' is read-only (const).
+    [ Error ] line 20, position 0: Kan '++' niet toepassen: 'appel' is read-only (const).
+    [ Error ] line 23, position 0: Kan 'POST--' niet toepassen: 'appel' is read-only (const).
+    [ Error ] line 25, position 0: Kan 'POST++' niet toepassen: 'appel' is read-only (const).
+    [ Error ] line 28, position 0: Kan '--' niet toepassen: 'appel' is read-only (const).
+    [ Error ] line 31, position 0: Kan '--' niet toepassen: 'appel' is read-only (const).
   example_source_files\test_set_3\LLVMTests\CalculationTests\test27.c... PASSED (Expected failure)
   example_source_files\test_set_3\LLVMTests\CalculationTests\test28.c... PASSED (Expected failure)
   example_source_files\test_set_3\LLVMTests\CalculationTests\test29.c... PASSED (Expected failure)
@@ -188,12 +200,16 @@
   [CombinedTests]
 ──────────────────────────────────────────────────
   example_source_files\test_set_3\LLVMTests\CombinedTests\test1.c... FAILED (Compiler Error)
+    --> [Error] line 8:9: Declaration in 'for' initializer is a C99 feature. C89 strictly forbids this.
   example_source_files\test_set_3\LLVMTests\CombinedTests\test2.c... FAILED (Compiler Error)
+    --> [Error] line 18:9: Declaration in 'for' initializer is a C99 feature. C89 strictly forbids this.
   example_source_files\test_set_3\LLVMTests\CombinedTests\test3.c... FAILED (Compiler Error)
+    --> [Error] Redefinition of standard macro 'NULL' is illegal in C89.
   example_source_files\test_set_3\LLVMTests\CombinedTests\test4.c... PASSED
   example_source_files\test_set_3\LLVMTests\CombinedTests\test5.c... PASSED
   example_source_files\test_set_3\LLVMTests\CombinedTests\test6.c... PASSED
   example_source_files\test_set_3\LLVMTests\CombinedTests\test7.c... FAILED (Compiler Error)
+    --> [Error] line 5:9: Declaration in 'for' initializer is a C99 feature. C89 strictly forbids this.
   example_source_files\test_set_3\LLVMTests\CombinedTests\test8.c... PASSED
   example_source_files\test_set_3\LLVMTests\CombinedTests\test9.c... PASSED
   example_source_files\test_set_3\LLVMTests\CombinedTests\test10.c... PASSED
@@ -222,9 +238,11 @@
   example_source_files\test_set_3\LLVMTests\DefineTests\define23.c... PASSED (Expected failure)
   example_source_files\test_set_3\LLVMTests\DefineTests\test1.c... PASSED
   example_source_files\test_set_3\LLVMTests\DefineTests\test2.c... FAILED (Compiler Error)
+    --> [Error] Preprocessor: Redefinition of macro 'BUFFER_SIZE' with a different value.
   example_source_files\test_set_3\LLVMTests\DefineTests\test3.c... PASSED (Expected failure)
   example_source_files\test_set_3\LLVMTests\DefineTests\test4.c... PASSED (Expected failure)
   example_source_files\test_set_3\LLVMTests\DefineTests\test5.c... FAILED (Compiler Error)
+    --> [Error] Preprocessor: Redefinition of macro 'True' with a different value.
   example_source_files\test_set_3\LLVMTests\DefineTests\test6.c... PASSED (Expected failure)
   example_source_files\test_set_3\LLVMTests\DefineTests\test7.c... PASSED (Expected failure)
   example_source_files\test_set_3\LLVMTests\DefineTests\test8.c... PASSED (Expected failure)
@@ -244,6 +262,7 @@
   example_source_files\test_set_3\LLVMTests\DefineTests\test22.c... PASSED
   example_source_files\test_set_3\LLVMTests\DefineTests\test23.c... PASSED (Expected failure)
   example_source_files\test_set_3\LLVMTests\DefineTests\test24.c... FAILED (Compiler Error)
+    --> [Error] Preprocessor: Redefinition of macro 'BUFFER_SIZE' with a different value.
   example_source_files\test_set_3\LLVMTests\DefineTests\yay1.c... PASSED (Expected failure)
   example_source_files\test_set_3\LLVMTests\DefineTests\yay2.c... PASSED (Expected failure)
   example_source_files\test_set_3\LLVMTests\DefineTests\yay3.c... PASSED (Expected failure)
@@ -273,654 +292,3 @@
 ──────────────────────────────────────────────────
   example_source_files\test_set_3\LLVMTests\DynamicStructTests\test1.c... PASSED
   example_source_files\test_set_3\LLVMTests\DynamicStructTests\test2.c... PASSED
-  example_source_files\test_set_3\LLVMTests\DynamicStructTests\test3.c... PASSED
-  example_source_files\test_set_3\LLVMTests\DynamicStructTests\test4.c... PASSED
-  example_source_files\test_set_3\LLVMTests\DynamicStructTests\test5.c... PASSED
-  example_source_files\test_set_3\LLVMTests\DynamicStructTests\test6.c... FAILED (Compiler Error)
-  example_source_files\test_set_3\LLVMTests\DynamicStructTests\test7.c... FAILED (Compiler Error)
-  example_source_files\test_set_3\LLVMTests\DynamicStructTests\test8.c... PASSED
-  example_source_files\test_set_3\LLVMTests\DynamicStructTests\test9.c... PASSED
-
-  |== DynamicStructTests TOTAAL: 7 passed, 2 failed  [2 GEFAALD] ==|
-
-──────────────────────────────────────────────────
-  [EnumTests]
-──────────────────────────────────────────────────
-  example_source_files\test_set_3\LLVMTests\EnumTests\test1.c... PASSED
-  example_source_files\test_set_3\LLVMTests\EnumTests\test2.c... PASSED
-  example_source_files\test_set_3\LLVMTests\EnumTests\test3.c... PASSED
-  example_source_files\test_set_3\LLVMTests\EnumTests\test4.c... PASSED
-  example_source_files\test_set_3\LLVMTests\EnumTests\test5.c... PASSED
-  example_source_files\test_set_3\LLVMTests\EnumTests\test6.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\EnumTests\test7.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\EnumTests\test8.c... PASSED
-  example_source_files\test_set_3\LLVMTests\EnumTests\test9.c... PASSED
-  example_source_files\test_set_3\LLVMTests\EnumTests\test10.c... PASSED
-  example_source_files\test_set_3\LLVMTests\EnumTests\test11.c... PASSED
-  example_source_files\test_set_3\LLVMTests\EnumTests\test12.c... PASSED
-
-  |== EnumTests TOTAAL: 12 passed, 0 failed  [ALLES GESLAAGD] ==|
-
-──────────────────────────────────────────────────
-  [FileIOTests]
-──────────────────────────────────────────────────
-  example_source_files\test_set_3\LLVMTests\FileIOTests\test1.c... PASSED
-  example_source_files\test_set_3\LLVMTests\FileIOTests\test2.c... PASSED
-  example_source_files\test_set_3\LLVMTests\FileIOTests\test3.c... PASSED
-  example_source_files\test_set_3\LLVMTests\FileIOTests\test4.c... PASSED
-  example_source_files\test_set_3\LLVMTests\FileIOTests\test5.c... PASSED
-  example_source_files\test_set_3\LLVMTests\FileIOTests\test6.c... PASSED
-  example_source_files\test_set_3\LLVMTests\FileIOTests\test7.c... PASSED
-  example_source_files\test_set_3\LLVMTests\FileIOTests\test8.c... PASSED
-
-  |== FileIOTests TOTAAL: 8 passed, 0 failed  [ALLES GESLAAGD] ==|
-
-──────────────────────────────────────────────────
-  [FunctionPtrTests]
-──────────────────────────────────────────────────
-  example_source_files\test_set_3\LLVMTests\FunctionPtrTests\test1.c... PASSED
-  example_source_files\test_set_3\LLVMTests\FunctionPtrTests\test2.c... PASSED
-  example_source_files\test_set_3\LLVMTests\FunctionPtrTests\test3.c... FAILED (Compiler Error)
-  example_source_files\test_set_3\LLVMTests\FunctionPtrTests\test4.c... FAILED (Compiler Error)
-  example_source_files\test_set_3\LLVMTests\FunctionPtrTests\test5.c... FAILED (Compiler Error)
-  example_source_files\test_set_3\LLVMTests\FunctionPtrTests\test6.c... PASSED
-  example_source_files\test_set_3\LLVMTests\FunctionPtrTests\test7.c... FAILED (Compiler Error)
-  example_source_files\test_set_3\LLVMTests\FunctionPtrTests\test8.c... FAILED (Compiler Error)
-  example_source_files\test_set_3\LLVMTests\FunctionPtrTests\test9.c... FAILED (Compiler Error)
-  example_source_files\test_set_3\LLVMTests\FunctionPtrTests\test10.c... FAILED (Compiler Error)
-  example_source_files\test_set_3\LLVMTests\FunctionPtrTests\test11.c... FAILED (Compiler Error)
-  example_source_files\test_set_3\LLVMTests\FunctionPtrTests\test12.c... PASSED
-  example_source_files\test_set_3\LLVMTests\FunctionPtrTests\test13.c... PASSED
-  example_source_files\test_set_3\LLVMTests\FunctionPtrTests\test14.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\FunctionPtrTests\test15.c... FAILED (Compiler Error)
-  example_source_files\test_set_3\LLVMTests\FunctionPtrTests\test16.c... PASSED
-  example_source_files\test_set_3\LLVMTests\FunctionPtrTests\test17.c... PASSED
-
-  |== FunctionPtrTests TOTAAL: 8 passed, 9 failed  [9 GEFAALD] ==|
-
-──────────────────────────────────────────────────
-  [FunctionTests]
-──────────────────────────────────────────────────
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test1.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test2.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test3.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test4.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test5.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test6.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test7.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test8.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test9.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test10.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test11.c... PASSED
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test12.c... FAILED (Compiler Error)
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test13.c... PASSED
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test14.c... PASSED
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test15.c... PASSED
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test16.c... PASSED
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test17.c... PASSED
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test18.c... PASSED
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test19.c... PASSED
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test20.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test21.c... PASSED
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test22.c... PASSED
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test23.c... PASSED
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test24.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test25.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test26.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test27.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test28.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test29.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test30.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test31.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test32.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test33.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test34.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test35.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test36.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test37.c... PASSED
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test38.c... PASSED
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test39.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test40.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test41.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test42.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test43.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test44.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test45.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test46.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test47.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test48.c... PASSED
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test49.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test50.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test51.c... PASSED
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test52.c... FAILED (Compiler Error)
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test53.c... PASSED
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test54.c... PASSED
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test55.c... PASSED
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test56.c... PASSED
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test57.c... PASSED
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test58.c... PASSED
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test59.c... PASSED
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test60.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test61.c... PASSED
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test62.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test63.c... PASSED
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test64.c... PASSED
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test65.c... FAILED (Compiler Error)
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test66.c... FAILED (Compiler Error)
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test67.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test68.c... PASSED
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test69.c... PASSED
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test70.c... FAILED
-    --> TIMEOUT (Mogelijke oneindige lus)
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test71.c... FAILED
-    --> TIMEOUT (Mogelijke oneindige lus)
-  example_source_files\test_set_3\LLVMTests\FunctionTests\test72.c... PASSED
-
-  |== FunctionTests TOTAAL: 66 passed, 6 failed  [6 GEFAALD] ==|
-
-──────────────────────────────────────────────────
-  [GlobalTests]
-──────────────────────────────────────────────────
-  example_source_files\test_set_3\LLVMTests\GlobalTests\test1.c... PASSED
-  example_source_files\test_set_3\LLVMTests\GlobalTests\test2.c... PASSED
-  example_source_files\test_set_3\LLVMTests\GlobalTests\test3.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\GlobalTests\test4.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\GlobalTests\test5.c... PASSED
-  example_source_files\test_set_3\LLVMTests\GlobalTests\test6.c... PASSED
-
-  |== GlobalTests TOTAAL: 6 passed, 0 failed  [ALLES GESLAAGD] ==|
-
-──────────────────────────────────────────────────
-  [IfTests]
-──────────────────────────────────────────────────
-  example_source_files\test_set_3\LLVMTests\IfTests\test1.c... PASSED
-  example_source_files\test_set_3\LLVMTests\IfTests\test2.c... PASSED
-  example_source_files\test_set_3\LLVMTests\IfTests\test3.c... PASSED
-  example_source_files\test_set_3\LLVMTests\IfTests\test4.c... PASSED
-  example_source_files\test_set_3\LLVMTests\IfTests\test5.c... PASSED
-  example_source_files\test_set_3\LLVMTests\IfTests\test6.c... PASSED
-  example_source_files\test_set_3\LLVMTests\IfTests\test7.c... PASSED
-  example_source_files\test_set_3\LLVMTests\IfTests\test8.c... PASSED
-  example_source_files\test_set_3\LLVMTests\IfTests\test9.c... PASSED
-  example_source_files\test_set_3\LLVMTests\IfTests\test10.c... PASSED
-  example_source_files\test_set_3\LLVMTests\IfTests\test11.c... PASSED
-  example_source_files\test_set_3\LLVMTests\IfTests\test12.c... PASSED
-  example_source_files\test_set_3\LLVMTests\IfTests\test13.c... PASSED
-  example_source_files\test_set_3\LLVMTests\IfTests\test14.c... PASSED
-  example_source_files\test_set_3\LLVMTests\IfTests\test15.c... PASSED
-  example_source_files\test_set_3\LLVMTests\IfTests\test16.c... PASSED
-  example_source_files\test_set_3\LLVMTests\IfTests\test17.c... PASSED
-  example_source_files\test_set_3\LLVMTests\IfTests\test18.c... PASSED
-  example_source_files\test_set_3\LLVMTests\IfTests\test19.c... PASSED
-
-  |== IfTests TOTAAL: 19 passed, 0 failed  [ALLES GESLAAGD] ==|
-
-──────────────────────────────────────────────────
-  [LogicalTests]
-──────────────────────────────────────────────────
-  example_source_files\test_set_3\LLVMTests\LogicalTests\test1.c... PASSED
-  example_source_files\test_set_3\LLVMTests\LogicalTests\test2.c... PASSED
-  example_source_files\test_set_3\LLVMTests\LogicalTests\test3.c... PASSED
-  example_source_files\test_set_3\LLVMTests\LogicalTests\test4.c... PASSED
-  example_source_files\test_set_3\LLVMTests\LogicalTests\test5.c... PASSED
-  example_source_files\test_set_3\LLVMTests\LogicalTests\test6.c... PASSED
-  example_source_files\test_set_3\LLVMTests\LogicalTests\test7.c... PASSED
-  example_source_files\test_set_3\LLVMTests\LogicalTests\test8.c... PASSED
-  example_source_files\test_set_3\LLVMTests\LogicalTests\test9.c... PASSED
-  example_source_files\test_set_3\LLVMTests\LogicalTests\test10.c... PASSED
-  example_source_files\test_set_3\LLVMTests\LogicalTests\test11.c... PASSED
-  example_source_files\test_set_3\LLVMTests\LogicalTests\test12.c... PASSED
-  example_source_files\test_set_3\LLVMTests\LogicalTests\test13.c... PASSED
-  example_source_files\test_set_3\LLVMTests\LogicalTests\test14.c... PASSED
-  example_source_files\test_set_3\LLVMTests\LogicalTests\test15.c... PASSED
-  example_source_files\test_set_3\LLVMTests\LogicalTests\test16.c... PASSED
-  example_source_files\test_set_3\LLVMTests\LogicalTests\test17.c... PASSED
-  example_source_files\test_set_3\LLVMTests\LogicalTests\test18.c... PASSED
-  example_source_files\test_set_3\LLVMTests\LogicalTests\test19.c... PASSED
-  example_source_files\test_set_3\LLVMTests\LogicalTests\test20.c... PASSED
-  example_source_files\test_set_3\LLVMTests\LogicalTests\test21.c... PASSED
-
-  |== LogicalTests TOTAAL: 21 passed, 0 failed  [ALLES GESLAAGD] ==|
-
-──────────────────────────────────────────────────
-  [OutputTests]
-──────────────────────────────────────────────────
-  example_source_files\test_set_3\LLVMTests\OutputTests\test1.c... PASSED
-  example_source_files\test_set_3\LLVMTests\OutputTests\test2.c... PASSED
-  example_source_files\test_set_3\LLVMTests\OutputTests\test3.c... PASSED
-  example_source_files\test_set_3\LLVMTests\OutputTests\test4.c... PASSED
-  example_source_files\test_set_3\LLVMTests\OutputTests\test5.c... PASSED
-  example_source_files\test_set_3\LLVMTests\OutputTests\test6.c... PASSED
-  example_source_files\test_set_3\LLVMTests\OutputTests\test7.c... PASSED
-  example_source_files\test_set_3\LLVMTests\OutputTests\test8.c... PASSED
-  example_source_files\test_set_3\LLVMTests\OutputTests\test9.c... PASSED
-  example_source_files\test_set_3\LLVMTests\OutputTests\test10.c... PASSED
-  example_source_files\test_set_3\LLVMTests\OutputTests\test11.c... PASSED
-  example_source_files\test_set_3\LLVMTests\OutputTests\test12.c... PASSED
-  example_source_files\test_set_3\LLVMTests\OutputTests\test13.c... PASSED
-  example_source_files\test_set_3\LLVMTests\OutputTests\test14.c... PASSED
-  example_source_files\test_set_3\LLVMTests\OutputTests\test15.c... PASSED
-  example_source_files\test_set_3\LLVMTests\OutputTests\test16.c... PASSED
-  example_source_files\test_set_3\LLVMTests\OutputTests\test17.c... PASSED
-  example_source_files\test_set_3\LLVMTests\OutputTests\test18.c... PASSED
-  example_source_files\test_set_3\LLVMTests\OutputTests\test19.c... PASSED
-  example_source_files\test_set_3\LLVMTests\OutputTests\test20.c... PASSED
-  example_source_files\test_set_3\LLVMTests\OutputTests\test21.c... PASSED
-  example_source_files\test_set_3\LLVMTests\OutputTests\test22.c... FAILED (Compiler Error)
-  example_source_files\test_set_3\LLVMTests\OutputTests\test23.c... FAILED
-    --> EXPECTED (code 0):
-    20
-    10
-    
-    ACTUAL (code 0):
-    20
-  example_source_files\test_set_3\LLVMTests\OutputTests\test24.c... FAILED
-    --> EXPECTED (code 0):
-    100
-    50
-    50
-    25
-    25
-  example_source_files\test_set_3\LLVMTests\OutputTests\test25.c... FAILED
-    --> EXPECTED (code 0):
-    1
-    ACTUAL (code 0):
-    101
-  example_source_files\test_set_3\LLVMTests\OutputTests\test26.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\OutputTests\test27.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\OutputTests\test28.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\OutputTests\test29.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\OutputTests\test30.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\OutputTests\test31.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\OutputTests\test32.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\OutputTests\test33.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\OutputTests\test34.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\OutputTests\test35.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\OutputTests\test36.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\OutputTests\test37.c... PASSED
-  example_source_files\test_set_3\LLVMTests\OutputTests\test38.c... PASSED
-  example_source_files\test_set_3\LLVMTests\OutputTests\test39.c... PASSED
-  example_source_files\test_set_3\LLVMTests\OutputTests\test40.c... PASSED
-  example_source_files\test_set_3\LLVMTests\OutputTests\test41.c... PASSED
-  example_source_files\test_set_3\LLVMTests\OutputTests\test42.c... PASSED
-  example_source_files\test_set_3\LLVMTests\OutputTests\test43.c... PASSED
-  example_source_files\test_set_3\LLVMTests\OutputTests\test44.c... PASSED
-  example_source_files\test_set_3\LLVMTests\OutputTests\test45.c... FAILED (Compiler Error)
-  example_source_files\test_set_3\LLVMTests\OutputTests\test46.c... PASSED
-  example_source_files\test_set_3\LLVMTests\OutputTests\test47.c... PASSED
-  example_source_files\test_set_3\LLVMTests\OutputTests\test48.c... PASSED
-  example_source_files\test_set_3\LLVMTests\OutputTests\test49.c... PASSED
-  example_source_files\test_set_3\LLVMTests\OutputTests\test50.c... PASSED
-  example_source_files\test_set_3\LLVMTests\OutputTests\test51.c... PASSED
-  example_source_files\test_set_3\LLVMTests\OutputTests\test52.c... FAILED
-    --> EXPECTED (code 0):
-    50
-    
-    ACTUAL (code 0):
-    42
-  example_source_files\test_set_3\LLVMTests\OutputTests\test53.c... PASSED
-  example_source_files\test_set_3\LLVMTests\OutputTests\test54.c... PASSED
-  example_source_files\test_set_3\LLVMTests\OutputTests\test55.c... PASSED
-  example_source_files\test_set_3\LLVMTests\OutputTests\test56.c... PASSED
-  example_source_files\test_set_3\LLVMTests\OutputTests\test57.c... PASSED
-  example_source_files\test_set_3\LLVMTests\OutputTests\test58.c... PASSED
-  example_source_files\test_set_3\LLVMTests\OutputTests\test59.c... FAILED
-    --> EXPECTED (code 0):
-    70
-    60
-    50
-    
-    ACTUAL (code 0):
-  example_source_files\test_set_3\LLVMTests\OutputTests\test60.c... PASSED (Expected failure)
-
-  |== OutputTests TOTAAL: 53 passed, 7 failed  [7 GEFAALD] ==|
-
-──────────────────────────────────────────────────
-  [PrintTests]
-──────────────────────────────────────────────────
-  example_source_files\test_set_3\LLVMTests\PrintTests\test1.c... PASSED
-  example_source_files\test_set_3\LLVMTests\PrintTests\test2.c... PASSED
-  example_source_files\test_set_3\LLVMTests\PrintTests\test3.c... PASSED
-  example_source_files\test_set_3\LLVMTests\PrintTests\test4.c... PASSED
-  example_source_files\test_set_3\LLVMTests\PrintTests\test5.c... PASSED
-  example_source_files\test_set_3\LLVMTests\PrintTests\test6.c... PASSED
-  example_source_files\test_set_3\LLVMTests\PrintTests\test7.c... PASSED
-  example_source_files\test_set_3\LLVMTests\PrintTests\test8.c... PASSED
-  example_source_files\test_set_3\LLVMTests\PrintTests\test9.c... PASSED
-  example_source_files\test_set_3\LLVMTests\PrintTests\test10.c... FAILED
-    --> EXPECTED (code 0):
-    3.140000 60000000 7 True -723582976 
-     
-    ACTUAL (code 0):
-    3.140000 60000000 7 True 218759168 
-     
-  example_source_files\test_set_3\LLVMTests\PrintTests\test11.c... PASSED
-  example_source_files\test_set_3\LLVMTests\PrintTests\test12.c... PASSED
-  example_source_files\test_set_3\LLVMTests\PrintTests\test13.c... PASSED
-  example_source_files\test_set_3\LLVMTests\PrintTests\test14.c... PASSED
-  example_source_files\test_set_3\LLVMTests\PrintTests\test15.c... PASSED
-  example_source_files\test_set_3\LLVMTests\PrintTests\test16.c... PASSED
-  example_source_files\test_set_3\LLVMTests\PrintTests\test17.c... PASSED
-  example_source_files\test_set_3\LLVMTests\PrintTests\test18.c... PASSED
-  example_source_files\test_set_3\LLVMTests\PrintTests\test19.c... PASSED
-  example_source_files\test_set_3\LLVMTests\PrintTests\test20.c... PASSED
-  example_source_files\test_set_3\LLVMTests\PrintTests\test21.c... PASSED
-  example_source_files\test_set_3\LLVMTests\PrintTests\test22.c... PASSED
-  example_source_files\test_set_3\LLVMTests\PrintTests\test23.c... PASSED
-  example_source_files\test_set_3\LLVMTests\PrintTests\test24.c... PASSED
-  example_source_files\test_set_3\LLVMTests\PrintTests\test25.c... PASSED
-  example_source_files\test_set_3\LLVMTests\PrintTests\test26.c... PASSED
-  example_source_files\test_set_3\LLVMTests\PrintTests\test27.c... PASSED
-  example_source_files\test_set_3\LLVMTests\PrintTests\test28.c... PASSED
-  example_source_files\test_set_3\LLVMTests\PrintTests\test29.c... FAILED
-    --> EXPECTED (code 0):
-    10;20;30;40;
-    ACTUAL (code 0):
-    0;20;30;40;
-  example_source_files\test_set_3\LLVMTests\PrintTests\test30.c... PASSED
-  example_source_files\test_set_3\LLVMTests\PrintTests\test31.c... PASSED
-  example_source_files\test_set_3\LLVMTests\PrintTests\test32.c... PASSED
-  example_source_files\test_set_3\LLVMTests\PrintTests\test33.c... PASSED
-  example_source_files\test_set_3\LLVMTests\PrintTests\test34.c... PASSED
-  example_source_files\test_set_3\LLVMTests\PrintTests\test35.c... PASSED
-  example_source_files\test_set_3\LLVMTests\PrintTests\test36.c... PASSED
-  example_source_files\test_set_3\LLVMTests\PrintTests\test37.c... PASSED
-  example_source_files\test_set_3\LLVMTests\PrintTests\test38.c... PASSED
-  example_source_files\test_set_3\LLVMTests\PrintTests\test39.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\PrintTests\test40.c... PASSED
-  example_source_files\test_set_3\LLVMTests\PrintTests\test41.c... PASSED
-  example_source_files\test_set_3\LLVMTests\PrintTests\test42.c... PASSED
-  example_source_files\test_set_3\LLVMTests\PrintTests\test43.c... PASSED
-  example_source_files\test_set_3\LLVMTests\PrintTests\test44.c... PASSED
-  example_source_files\test_set_3\LLVMTests\PrintTests\test45.c... FAILED (Compiler Error)
-  example_source_files\test_set_3\LLVMTests\PrintTests\test46.c... FAILED (Compiler Error)
-  example_source_files\test_set_3\LLVMTests\PrintTests\test47.c... FAILED
-    --> EXPECTED (code 0):
-    10
-    
-    ACTUAL (code 0):
-    20
-  example_source_files\test_set_3\LLVMTests\PrintTests\test48.c... FAILED
-    --> EXPECTED (code 0):
-    10
-    20
-    10
-    
-    ACTUAL (code 0):
-  example_source_files\test_set_3\LLVMTests\PrintTests\test49.c... PASSED
-  example_source_files\test_set_3\LLVMTests\PrintTests\test50.c... PASSED
-  example_source_files\test_set_3\LLVMTests\PrintTests\test51.c... PASSED
-  example_source_files\test_set_3\LLVMTests\PrintTests\test52.c... PASSED
-
-  |== PrintTests TOTAAL: 46 passed, 6 failed  [6 GEFAALD] ==|
-
-──────────────────────────────────────────────────
-  [ReturnTests]
-──────────────────────────────────────────────────
-  example_source_files\test_set_3\LLVMTests\ReturnTests\test1.c... PASSED
-  example_source_files\test_set_3\LLVMTests\ReturnTests\test2.c... PASSED
-  example_source_files\test_set_3\LLVMTests\ReturnTests\test3.c... PASSED
-  example_source_files\test_set_3\LLVMTests\ReturnTests\test4.c... PASSED
-  example_source_files\test_set_3\LLVMTests\ReturnTests\test5.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\ReturnTests\test6.c... PASSED
-  example_source_files\test_set_3\LLVMTests\ReturnTests\test7.c... PASSED
-  example_source_files\test_set_3\LLVMTests\ReturnTests\test8.c... PASSED
-  example_source_files\test_set_3\LLVMTests\ReturnTests\test9.c... PASSED
-  example_source_files\test_set_3\LLVMTests\ReturnTests\test10.c... PASSED
-  example_source_files\test_set_3\LLVMTests\ReturnTests\test11.c... PASSED
-  example_source_files\test_set_3\LLVMTests\ReturnTests\test12.c... PASSED
-  example_source_files\test_set_3\LLVMTests\ReturnTests\test13.c... PASSED
-  example_source_files\test_set_3\LLVMTests\ReturnTests\test14.c... PASSED
-  example_source_files\test_set_3\LLVMTests\ReturnTests\test15.c... PASSED
-  example_source_files\test_set_3\LLVMTests\ReturnTests\test16.c... PASSED
-  example_source_files\test_set_3\LLVMTests\ReturnTests\test17.c... PASSED
-  example_source_files\test_set_3\LLVMTests\ReturnTests\test18.c... PASSED
-  example_source_files\test_set_3\LLVMTests\ReturnTests\test19.c... PASSED
-
-  |== ReturnTests TOTAAL: 19 passed, 0 failed  [ALLES GESLAAGD] ==|
-
-──────────────────────────────────────────────────
-  [ScanTests]
-──────────────────────────────────────────────────
-  example_source_files\test_set_3\LLVMTests\ScanTests\test1.c... PASSED
-  example_source_files\test_set_3\LLVMTests\ScanTests\test2.c... PASSED
-  example_source_files\test_set_3\LLVMTests\ScanTests\test3.c... FAILED (Compiler Error)
-  example_source_files\test_set_3\LLVMTests\ScanTests\test4.c... PASSED
-  example_source_files\test_set_3\LLVMTests\ScanTests\test5.c... PASSED
-  example_source_files\test_set_3\LLVMTests\ScanTests\test6.c... PASSED
-  example_source_files\test_set_3\LLVMTests\ScanTests\test7.c... PASSED
-  example_source_files\test_set_3\LLVMTests\ScanTests\test8.c... PASSED
-  example_source_files\test_set_3\LLVMTests\ScanTests\test9.c... PASSED
-  example_source_files\test_set_3\LLVMTests\ScanTests\test10.c... PASSED
-  example_source_files\test_set_3\LLVMTests\ScanTests\test11.c... PASSED
-  example_source_files\test_set_3\LLVMTests\ScanTests\test12.c... PASSED
-  example_source_files\test_set_3\LLVMTests\ScanTests\test13.c... PASSED
-  example_source_files\test_set_3\LLVMTests\ScanTests\test14.c... PASSED
-  example_source_files\test_set_3\LLVMTests\ScanTests\test15.c... PASSED
-  example_source_files\test_set_3\LLVMTests\ScanTests\test16.c... FAILED (Compiler Error)
-
-  |== ScanTests TOTAAL: 14 passed, 2 failed  [2 GEFAALD] ==|
-
-──────────────────────────────────────────────────
-  [StringTests]
-──────────────────────────────────────────────────
-  example_source_files\test_set_3\LLVMTests\StringTests\test1.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StringTests\test2.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StringTests\test3.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StringTests\test4.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StringTests\test5.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StringTests\test6.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StringTests\test7.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StringTests\test8.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StringTests\test9.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StringTests\test10.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StringTests\test11.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StringTests\test12.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StringTests\test13.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StringTests\test14.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StringTests\test15.c... PASSED
-
-  |== StringTests TOTAAL: 15 passed, 0 failed  [ALLES GESLAAGD] ==|
-
-──────────────────────────────────────────────────
-  [StructTests]
-──────────────────────────────────────────────────
-  example_source_files\test_set_3\LLVMTests\StructTests\test1.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StructTests\test2.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StructTests\test3.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StructTests\test4.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StructTests\test5.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StructTests\test6.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StructTests\test7.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StructTests\test8.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StructTests\test9.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StructTests\test10.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StructTests\test11.c... FAILED (Compiler Error)
-  example_source_files\test_set_3\LLVMTests\StructTests\test12.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StructTests\test13.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StructTests\test14.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StructTests\test15.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StructTests\test16.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StructTests\test17.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\StructTests\test18.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\StructTests\test19.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StructTests\test20.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StructTests\test21.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StructTests\test22.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StructTests\test23.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\StructTests\test24.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\StructTests\test25.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StructTests\test26.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StructTests\test27.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StructTests\test28.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StructTests\test29.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StructTests\test30.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StructTests\test31.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StructTests\test32.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\StructTests\test33.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StructTests\test34.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StructTests\test35.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StructTests\test36.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StructTests\test37.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StructTests\test38.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StructTests\test39.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StructTests\test40.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\StructTests\test41.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\StructTests\test42.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StructTests\test43.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StructTests\test44.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StructTests\test45.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StructTests\test46.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StructTests\test47.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StructTests\test48.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\StructTests\test49.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\StructTests\test50.c... FAILED
-    --> INVALID_C_FILE
-  example_source_files\test_set_3\LLVMTests\StructTests\test51.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StructTests\test52.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\StructTests\test53.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StructTests\test54.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StructTests\test55.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StructTests\test56.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StructTests\test57.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StructTests\test58.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StructTests\test59.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StructTests\test60.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StructTests\test61.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StructTests\test62.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\StructTests\test63.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\StructTests\test64.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\StructTests\test65.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StructTests\test66.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StructTests\test67.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\StructTests\test68.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\StructTests\test69.c... PASSED
-  example_source_files\test_set_3\LLVMTests\StructTests\test70.c... PASSED
-
-  |== StructTests TOTAAL: 68 passed, 2 failed  [2 GEFAALD] ==|
-
-──────────────────────────────────────────────────
-  [SwitchTests]
-──────────────────────────────────────────────────
-  example_source_files\test_set_3\LLVMTests\SwitchTests\test1.c... PASSED
-  example_source_files\test_set_3\LLVMTests\SwitchTests\test2.c... PASSED
-  example_source_files\test_set_3\LLVMTests\SwitchTests\test3.c... PASSED
-  example_source_files\test_set_3\LLVMTests\SwitchTests\test4.c... PASSED
-  example_source_files\test_set_3\LLVMTests\SwitchTests\test5.c... PASSED
-  example_source_files\test_set_3\LLVMTests\SwitchTests\test6.c... PASSED
-  example_source_files\test_set_3\LLVMTests\SwitchTests\test7.c... PASSED
-  example_source_files\test_set_3\LLVMTests\SwitchTests\test8.c... PASSED
-  example_source_files\test_set_3\LLVMTests\SwitchTests\test9.c... PASSED
-  example_source_files\test_set_3\LLVMTests\SwitchTests\test10.c... PASSED
-  example_source_files\test_set_3\LLVMTests\SwitchTests\test11.c... PASSED
-  example_source_files\test_set_3\LLVMTests\SwitchTests\test12.c... PASSED
-  example_source_files\test_set_3\LLVMTests\SwitchTests\test13.c... PASSED
-  example_source_files\test_set_3\LLVMTests\SwitchTests\test14.c... PASSED
-  example_source_files\test_set_3\LLVMTests\SwitchTests\test15.c... PASSED
-  example_source_files\test_set_3\LLVMTests\SwitchTests\test16.c... PASSED
-  example_source_files\test_set_3\LLVMTests\SwitchTests\test17.c... PASSED
-  example_source_files\test_set_3\LLVMTests\SwitchTests\test18.c... PASSED
-  example_source_files\test_set_3\LLVMTests\SwitchTests\test19.c... PASSED
-
-  |== SwitchTests TOTAAL: 19 passed, 0 failed  [ALLES GESLAAGD] ==|
-
-──────────────────────────────────────────────────
-  [SyntaxErrorTests]
-──────────────────────────────────────────────────
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\define2.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test1.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test2.c... PASSED
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test3.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test4.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test5.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test6.c... FAILED (Compiler Error)
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test7.c... PASSED
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test8.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test9.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test10.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test11.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test12.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test13.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test14.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test15.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test16.c... PASSED
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test17.c... FAILED
-    --> INVALID_C_FILE
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test18.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test19.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test20.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test21.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test22.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test23.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test24.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test25.c... FAILED
-    --> INVALID_C_FILE
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test26.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test27.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test28.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test29.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test30.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test31.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test32.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test33.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test34.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test35.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test36.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test37.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test38.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test39.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test40.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test41.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test42.c... FAILED (Compiler Error)
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test43.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test44.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test45.c... PASSED
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test46.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test47.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test48.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test49.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test50.c... PASSED
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test51.c... PASSED
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test52.c... PASSED
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test53.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test54.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test55.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test56.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\SyntaxErrorTests\test57.c... PASSED (Expected failure)
-
-  |== SyntaxErrorTests TOTAAL: 54 passed, 4 failed  [4 GEFAALD] ==|
-
-──────────────────────────────────────────────────
-  [WhileTests]
-──────────────────────────────────────────────────
-  example_source_files\test_set_3\LLVMTests\WhileTests\test1.c... PASSED
-  example_source_files\test_set_3\LLVMTests\WhileTests\test2.c... PASSED
-  example_source_files\test_set_3\LLVMTests\WhileTests\test3.c... PASSED
-  example_source_files\test_set_3\LLVMTests\WhileTests\test4.c... PASSED
-  example_source_files\test_set_3\LLVMTests\WhileTests\test5.c... PASSED
-  example_source_files\test_set_3\LLVMTests\WhileTests\test6.c... PASSED
-  example_source_files\test_set_3\LLVMTests\WhileTests\test7.c... PASSED
-  example_source_files\test_set_3\LLVMTests\WhileTests\test8.c... PASSED
-  example_source_files\test_set_3\LLVMTests\WhileTests\test9.c... PASSED
-  example_source_files\test_set_3\LLVMTests\WhileTests\test10.c... PASSED
-  example_source_files\test_set_3\LLVMTests\WhileTests\test11.c... PASSED
-  example_source_files\test_set_3\LLVMTests\WhileTests\test12.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\WhileTests\test13.c... PASSED
-  example_source_files\test_set_3\LLVMTests\WhileTests\test14.c... PASSED
-  example_source_files\test_set_3\LLVMTests\WhileTests\test15.c... PASSED
-  example_source_files\test_set_3\LLVMTests\WhileTests\test16.c... FAILED (Compiler Error)
-  example_source_files\test_set_3\LLVMTests\WhileTests\test17.c... PASSED
-  example_source_files\test_set_3\LLVMTests\WhileTests\test18.c... FAILED (Compiler Error)
-  example_source_files\test_set_3\LLVMTests\WhileTests\test19.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\WhileTests\test20.c... PASSED (Expected failure)
-  example_source_files\test_set_3\LLVMTests\WhileTests\test21.c... PASSED
-  example_source_files\test_set_3\LLVMTests\WhileTests\test22.c... PASSED
-  example_source_files\test_set_3\LLVMTests\WhileTests\test23.c... PASSED
-  example_source_files\test_set_3\LLVMTests\WhileTests\test24.c... PASSED
-
-  |== WhileTests TOTAAL: 22 passed, 2 failed  [2 GEFAALD] ==|
-
-============================================================
-  EINDTOTAAL: 637 passed, 56 failed
-============================================================
-
