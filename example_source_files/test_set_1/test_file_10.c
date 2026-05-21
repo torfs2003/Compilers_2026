@@ -1,14 +1,12 @@
-#include <stdio.h>
-
 int main() {
-    int number = -55;
-    int n;
+int number = -55;
 
-    number++;
-    number = number++;
-    n = number++;
+number++;
+number = number++;
 
-    n = n - n++;
+int n = number++;
 
-    ++n;
+n = n - n++;
+
+++n;
 }

@@ -1,10 +1,11 @@
+
+
+typedef int bool;
+
 int main() {
-    int sum = 0;
-    int i;
-    
-    for (i = 0; i < 5; i = i + 1) {
-        sum = sum + i;
-    }
-    
-    return sum;
+    bool x = 1;
+    bool y = 0;
+    int z = x && y;
+
+    bool b = y * z * 57809;
 }

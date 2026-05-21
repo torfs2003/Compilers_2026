@@ -3,10 +3,10 @@
   TEST MAP : example_source_files/test_set_1
   Resultaten in : output
 ============================================================
-  example_source_files\test_set_1\test_file_0.c... PASSED
-  example_source_files\test_set_1\test_file_1.c... PASSED
-  example_source_files\test_set_1\test_file_2.c... PASSED
-  example_source_files\test_set_1\test_file_3.c... PASSED
+  example_source_files\test_set_1\test_file_0.c... PASSED (Expected failure)
+  example_source_files\test_set_1\test_file_1.c... PASSED (Expected failure)
+  example_source_files\test_set_1\test_file_2.c... PASSED (Expected failure)
+  example_source_files\test_set_1\test_file_3.c... PASSED (Expected failure)
   example_source_files\test_set_1\test_file_4.c... PASSED (Expected failure)
   example_source_files\test_set_1\test_file_5.c... PASSED (Expected failure)
   example_source_files\test_set_1\test_file_6.c... PASSED
@@ -41,7 +41,8 @@
   example_source_files\test_set_1\test_file_35.c... PASSED (Expected failure)
   example_source_files\test_set_1\test_file_36.c... PASSED
   example_source_files\test_set_1\test_file_37.c... PASSED (Expected failure)
-  example_source_files\test_set_1\test_file_38.c... PASSED (Expected failure)
+  example_source_files\test_set_1\test_file_38.c... FAILED
+    --> INVALID_C_FILE
   example_source_files\test_set_1\test_file_39.c... PASSED (Expected failure)
   example_source_files\test_set_1\test_file_40.c... PASSED (Expected failure)
   example_source_files\test_set_1\test_file_41.c... PASSED (Expected failure)
@@ -49,7 +50,8 @@
   example_source_files\test_set_1\test_file_43.c... PASSED (Expected failure)
   example_source_files\test_set_1\test_file_44.c... PASSED (Expected failure)
   example_source_files\test_set_1\test_file_45.c... PASSED (Expected failure)
-  example_source_files\test_set_1\test_file_46.c... PASSED (Expected failure)
+  example_source_files\test_set_1\test_file_46.c... FAILED
+    --> INVALID_C_FILE
   example_source_files\test_set_1\test_file_47.c... PASSED
   example_source_files\test_set_1\test_file_48.c... PASSED (Expected failure)
   example_source_files\test_set_1\test_file_49.c... PASSED (Expected failure)
@@ -73,9 +75,9 @@
   example_source_files\test_set_1\test_file_67.c... PASSED (Expected failure)
   example_source_files\test_set_1\test_file_68.c... PASSED
   example_source_files\test_set_1\test_file_69.c... PASSED
-  example_source_files\test_set_1\test_file_70.c... PASSED
+  example_source_files\test_set_1\test_file_70.c... PASSED (Expected failure)
 
 ============================================================
-  EINDTOTAAL: 71 passed, 0 failed
+  EINDTOTAAL: 69 passed, 2 failed
 ============================================================
 

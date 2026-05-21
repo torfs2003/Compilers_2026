@@ -1,10 +1,10 @@
-#include <stdio.h>
-
 int main() {
-    char x = 'a';
-    char* chr_ptr = &x;
-    char another_char;
 
-    *chr_ptr = 'b';
-    another_char = *chr_ptr;
+char x = 'a';
+
+char* chr_ptr = &x;
+
+*chr_ptr = 'b';
+
+char another_char = *chr_ptr;
 }

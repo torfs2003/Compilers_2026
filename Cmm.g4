@@ -5,7 +5,7 @@ grammar Cmm;
 // ==========================================
 
 compilationUnit
-    : (includeDirective | enumDeclaration | structDeclaration | unionDeclaration | typedefDeclaration | declaration | functionDeclaration | functionDefinition | SEMI)* EOF
+    : (includeDirective | enumDeclaration | structDeclaration | unionDeclaration | typedefDeclaration | declaration | functionDeclaration | functionDefinition)* EOF
     ;
 
 includeDirective
@@ -13,11 +13,11 @@ includeDirective
     ;
 
 functionDefinition
-    : typeSpecifier MUL* (MAIN | IDENTIFIER) LPAREN parameterList? RPAREN compoundStatement
+    : CONST? typeSpecifier MUL* (MAIN | IDENTIFIER) LPAREN parameterList? RPAREN compoundStatement SEMI?
     ;
 
 functionDeclaration
-    : typeSpecifier MUL* (MAIN | IDENTIFIER) LPAREN parameterList? RPAREN SEMI
+    : CONST? typeSpecifier MUL* (MAIN | IDENTIFIER) LPAREN parameterList? RPAREN SEMI
     ;
 
 parameterList
@@ -41,8 +41,10 @@ initDeclarator
     ;
 
 declaration
-    : CONST? typeSpecifier initDeclaratorList SEMI
-    | typeSpecifier LPAREN MUL IDENTIFIER RPAREN LPAREN typeList? RPAREN (ASSIGN expression)? SEMI  // <-- NIEUW: Function Pointer
+    : CONST typeSpecifier initDeclaratorList SEMI       // const int x = 5;
+    | typeSpecifier initDeclaratorList SEMI             // int x = 5;
+    | CONST initDeclaratorList SEMI                     // const x = 5; (Implicit int!)
+    | typeSpecifier LPAREN MUL IDENTIFIER RPAREN LPAREN typeList? RPAREN (ASSIGN expression)? SEMI
     ;
 
 typeList
@@ -339,7 +341,7 @@ DEC       : '--' ;
 
 // Characters
 CHAR_LITERAL
-    : '\'' ( ~['\\] | '\\' . ) '\''
+    : '\'' ( ~['\\] | '\\' . )+ '\''
     ;
 
 // Floats

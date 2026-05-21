@@ -1,17 +1,19 @@
-#include <stdio.h>
-
 int main() {
-    const int b = -6250;
-    const int x = 5;
-    int* non_const_pointer = &x;
-    
-    char c = 'x';
-    char nl = '\n';
-    char* char_ptr = &c;
+const int b = -6250;
+const int x = 5;
 
-    *non_const_pointer = 36941;
-    non_const_pointer = &b;
+int* non_const_pointer = &x;
 
-    *char_ptr = '\t';
-    char_ptr = &nl;
+*non_const_pointer = 36941;
+
+non_const_pointer = &b;
+
+
+char c = 'x';
+char nl = '\n';
+
+char* char_ptr = &c;
+
+*char_ptr = '\t';
+char_ptr = &nl;
 }

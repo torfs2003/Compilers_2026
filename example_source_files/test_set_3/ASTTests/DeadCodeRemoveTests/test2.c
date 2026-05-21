@@ -3,8 +3,8 @@
 int main(){
 
     while(1){
-        int a = 0;         
-        if (a % 2 == 1){        
+        int a = 0;
+        if (a % 2 == 1){
             continue;
             int c = 0;
             if (a > 4){
@@ -12,8 +12,9 @@ int main(){
             }
         }
 
-        printf("%d", a);        
-        if (a > 10){            
+        printf("%d", a);
+        if (a > 10){
+
             if (a > 4){
                 printf("%d", 2);
                 break;
@@ -23,10 +24,10 @@ int main(){
             }
         }
 
-        a++;                
+        a++;
 
-    }                          
+    }
     printf("%d", 1);
 
-    return 0;
+	return 0;
 }

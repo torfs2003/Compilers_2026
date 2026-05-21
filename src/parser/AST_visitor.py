@@ -33,14 +33,12 @@ class ASTVisitor:
                 elif text.startswith("//"):
                     comments.append(text)
                     
-                    warning_msg = f"[Warning] line {token.line}:{token.column}: Single-line comments (//) are a C99 extension."
-                    if warning_msg not in self.warnings:
-                        self.warnings.append(warning_msg)
+                    column = getattr(token, 'column', getattr(token, 'charPositionInLine', 0))
+                    print(f"[Warning] line {token.line}:{column}: Single-line comments (//) are a C99 extension. C89 only allows /* */.")
         return comments
 
     def visit(self, root_ctx):
         stack = [(root_ctx, False)]
-        # Map to store generated AST nodes: id(CST_context) -> AST_node
         results = {}
 
         while stack:
@@ -62,9 +60,13 @@ class ASTVisitor:
                 if class_name == "CompilationUnitContext":
                     nodes = []
                     
-                    # Loop door alle blokken exact in de originele source code volgorde!
                     if ctx.children:
                         for child in ctx.children:
+                            if isinstance(child, TerminalNodeImpl) and child.getText() == ';':
+                                print(f"[Error] line {child.symbol.line}, position {child.symbol.column}: ISO C does not allow extra ';' outside of a function")
+                                import sys
+                                sys.exit(1)
+
                             if id(child) in results and results[id(child)] is not None:
                                 val = results[id(child)]
                                 if isinstance(val, list):
@@ -83,14 +85,26 @@ class ASTVisitor:
                         p_list = ctx.parameterList()
                         for i in range(len(p_list.parameterDeclaration())):
                             p_decl = p_list.parameterDeclaration(i)
-                            p_type = p_decl.typeSpecifier().getText().replace("struct", "struct ").replace("union", "union ")
-                            p_stars = "*" * len(p_decl.MUL())
+                            
+                            type_parts = []
+                            for child in p_decl.getChildren():
+                                if child == p_decl.IDENTIFIER():
+                                    break
+                                
+                                if child.getText() == 'const':
+                                    type_parts.append('const ')
+                                elif child == p_decl.typeSpecifier():
+                                    type_parts.append(child.getText().replace("struct", "struct ").replace("union", "union "))
+                                elif child.getText() == '*':
+                                    type_parts.append('*')
+                                    
+                            full_p_type = "".join(type_parts).strip()
+                            
                             if '[' in p_decl.getText():
-                                p_stars += '*'
-                            # --------------------------------------
+                                full_p_type += '*'
                             
                             p_name = p_decl.IDENTIFIER().getText()
-                            params.append((p_type + p_stars, p_name))
+                            params.append((full_p_type, p_name))
                         
                     base_type = ctx.typeSpecifier().getText().replace("struct", "struct ").replace("union", "union ")
                     stars = "*" * len(ctx.MUL())
@@ -106,13 +120,27 @@ class ASTVisitor:
                         p_list = ctx.parameterList()
                         for i in range(len(p_list.parameterDeclaration())):
                             p_decl = p_list.parameterDeclaration(i)
-                            # --- FIX: Spaties voor struct/union in parameters ---
-                            p_type = p_decl.typeSpecifier().getText().replace("struct", "struct ").replace("union", "union ")
-                            p_stars = "*" * len(p_decl.MUL())
-                            p_name = p_decl.IDENTIFIER().getText()
-                            params.append((p_type + p_stars, p_name))
                             
-                    # --- FIX: Spaties voor struct/union in return type ---
+                            type_parts = []
+                            for child in p_decl.getChildren():
+                                if child == p_decl.IDENTIFIER():
+                                    break
+                                
+                                if child.getText() == 'const':
+                                    type_parts.append('const ')
+                                elif child == p_decl.typeSpecifier():
+                                    type_parts.append(child.getText().replace("struct", "struct ").replace("union", "union "))
+                                elif child.getText() == '*':
+                                    type_parts.append('*')
+                                    
+                            full_p_type = "".join(type_parts).strip()
+                            
+                            if '[' in p_decl.getText():
+                                full_p_type += '*'
+                            
+                            p_name = p_decl.IDENTIFIER().getText()
+                            params.append((full_p_type, p_name))
+                            
                     base_type = ctx.typeSpecifier().getText().replace("struct", "struct ").replace("union", "union ")
                     stars = "*" * len(ctx.MUL())
                     full_type = base_type + stars
@@ -167,7 +195,6 @@ class ASTVisitor:
                 elif class_name == "TypedefDeclarationContext":
                     # 1. Vang lege 'typedef;' op!
                     if ctx.typeSpecifier() is None:
-                        # Geef None mee, dit wordt afgevangen in SemanticVisitor
                         res = self.get_loc(TypedefNode(None, None, False, 0), ctx)
                     
                     # 2. Normale geldige typedef
@@ -186,61 +213,83 @@ class ASTVisitor:
 
                 # 2. Declarations
                 elif class_name in ["DeclarationContext", "DeclarationForContext"]:
-                    # Kijk of de HELE regel het woord 'const' bevat (zoals 'const int x = 2;')
                     base_has_const = ctx.CONST() is not None
 
-                    # Strip 'const' uit het basistype voor schonere AST, we slaan de status op in is_const
-                    base_type = ctx.typeSpecifier().getText().replace('const', '').strip()
+                    if ctx.typeSpecifier():
+                        base_type = ctx.typeSpecifier().getText().replace('const', '').strip()
+                    else:
+                        base_type = "int"
+                        print(f"[Warning] line {ctx.start.line}:{ctx.start.column}: Implicit 'int' type for declaration. (Valid in C89, removed in C99)")
 
                     nodes = []
                     init_list = ctx.initDeclaratorList()
-                    for decl_ctx in init_list.initDeclarator():
-                        pointer_stars = "*" * len(decl_ctx.MUL())
-                        full_type = base_type + pointer_stars
+                    if init_list is not None:
+                        for decl_ctx in init_list.initDeclarator():
+                            pointer_stars = "*" * len(decl_ctx.MUL())
+                            full_type = base_type + pointer_stars
 
-                        # --- NIEUWE DIMENSIE LOGICA ---
-                        sizes = []
-                        all_expr_ids = [id(e) for e in decl_ctx.expression()]
-                        init = None
-                        dimension_exprs = []
+                            sizes = []
+                            all_expr_ids = [id(e) for e in decl_ctx.expression()]
+                            init = None
+                            dimension_exprs = []
 
-                        if decl_ctx.ASSIGN():
-                            if decl_ctx.array_initializer():
-                                init = results[id(decl_ctx.array_initializer())]
-                                dimension_exprs = decl_ctx.expression()
+                            if decl_ctx.ASSIGN():
+                                if decl_ctx.array_initializer():
+                                    init = results[id(decl_ctx.array_initializer())]
+                                    dimension_exprs = decl_ctx.expression()
+                                else:
+                                    exprs = decl_ctx.expression()
+                                    init = results[id(exprs[-1])]
+                                    dimension_exprs = exprs[:-1]
                             else:
-                                exprs = decl_ctx.expression()
-                                init = results[id(exprs[-1])]
-                                dimension_exprs = exprs[:-1]
-                        else:
-                            dimension_exprs = decl_ctx.expression()
+                                dimension_exprs = decl_ctx.expression()
 
-                        for dim_ctx in dimension_exprs:
-                            sizes.append(results[id(dim_ctx)])
-                        # ------------------------------------
+                            for dim_ctx in dimension_exprs:
+                                sizes.append(results[id(dim_ctx)])
 
-                        identifier = decl_ctx.IDENTIFIER().getText()
-                        is_array = "[" in decl_ctx.getText()
+                            identifier = decl_ctx.IDENTIFIER().getText()
+                            is_array = (hasattr(decl_ctx, 'LBRACKET') and decl_ctx.LBRACKET() is not None and len(decl_ctx.LBRACKET()) > 0)
 
-                        decl_has_const = decl_ctx.CONST() is not None and len(decl_ctx.CONST()) > 0
-                        is_const = base_has_const or decl_has_const
+                            decl_has_const = decl_ctx.CONST() is not None and len(decl_ctx.CONST()) > 0
+                            is_const = base_has_const or decl_has_const
 
-                        if is_array and len(sizes) == 0 and init is not None:
-                            if isinstance(init, StringNode):
-                                real_str = init.value.encode('utf-8').decode('unicode_escape')
-                                auto_size = IntNode(len(real_str) + 1)
-                                auto_size.eval_type = 'int'  # Zorg dat de SemanticVisitor dit herkent als een int
-                                sizes.append(auto_size)
-                            elif isinstance(init, ArrayInitNode):
-                                element_count = len(getattr(init, 'values', getattr(init, 'items', getattr(init, 'elements', []))))
-                                auto_size = IntNode(element_count)
-                                auto_size.eval_type = 'int'
-                                sizes.append(auto_size)
-                        
-                        if is_array:
-                            node = self.get_loc(ArrayDeclNode(is_const, full_type, identifier, sizes, init), decl_ctx)
-                        else:
-                            node = self.get_loc(DeclNode(is_const, full_type, identifier, init), decl_ctx)
+                            if is_array and len(sizes) == 0 and init is not None:
+                                if isinstance(init, StringNode):
+                                    real_str = init.value.encode('utf-8').decode('unicode_escape')
+                                    auto_size = IntNode(len(real_str) + 1)
+                                    auto_size.eval_type = 'int'
+                                    sizes.append(auto_size)
+                                elif isinstance(init, ArrayInitNode):
+                                    element_count = len(getattr(init, 'values', getattr(init, 'items', getattr(init, 'elements', []))))
+                                    auto_size = IntNode(element_count)
+                                    auto_size.eval_type = 'int'
+                                    sizes.append(auto_size)
+                            
+                            if is_array:
+                                node = self.get_loc(ArrayDeclNode(is_const, full_type, identifier, sizes, init), decl_ctx)
+                            else:
+                                node = self.get_loc(DeclNode(is_const, full_type, identifier, init), decl_ctx)
+                            nodes.append(node)
+                    else:
+                        identifier = ctx.IDENTIFIER().getText()
+                        init = None
+                        if ctx.ASSIGN():
+                            exprs = ctx.expression()
+                            if exprs:
+                                if isinstance(exprs, list):
+                                    init = results[id(exprs[0])]
+                                else:
+                                    init = results[id(exprs)]
+
+                        param_types = []
+                        if ctx.typeList():
+                            raw_types = ctx.typeList().getText().split(',')
+                            for raw in raw_types:
+                                raw_type = raw.replace('struct', 'struct ').replace('union', 'union ').strip()
+                                if raw_type:
+                                    param_types.append(raw_type)
+
+                        node = self.get_loc(FuncPtrDeclNode(base_type, identifier, param_types, init), ctx)
                         nodes.append(node)
                     res = nodes[0] if len(nodes) == 1 else nodes
 
@@ -339,7 +388,18 @@ class ASTVisitor:
                             for child in arg_ctx.getChildren():
                                 if id(child) in results:
                                     args.append(results[id(child)])
-                        res = self.get_loc(FuncCallNode(func_name_node.name, args), ctx)
+                        
+                        if isinstance(func_name_node, IdentifierNode):
+                            func_name = func_name_node.name
+                        elif isinstance(func_name_node, UnaryOpNode) and func_name_node.op == '*':
+                            if isinstance(func_name_node.child, IdentifierNode):
+                                func_name = func_name_node.child.name
+                            else:
+                                func_name = "unknown_func_ptr"
+                        else:
+                            func_name = getattr(func_name_node, 'name', "unknown_func")
+                        
+                        res = self.get_loc(FuncCallNode(func_name, args), ctx)
 
                     elif ctx.LBRACKET():
                         left = results[id(ctx.postfix_expression())]
@@ -370,12 +430,17 @@ class ASTVisitor:
                     elif ctx.INT_LITERAL():
                         text_val = ctx.INT_LITERAL().getText().rstrip("uUlL")
                         try:
-                            # Check of het een C-stijl octaal is (begint met 0, langer dan 1 karakter, geen hex)
                             if text_val.startswith('0') and len(text_val) > 1 and not text_val.lower().startswith('0x'):
-                                val = int(text_val, 8) # Forceer octaal (base 8)
+                                val = int(text_val, 8)
                             else:
-                                val = int(text_val, 0) # Base 0 is prima voor decimaal en hexadecimaal (0x...)
+                                val = int(text_val, 0)
                             
+                            if val > 4294967295:
+                                warning_msg = f"[Warning] line {ctx.start.line}:{ctx.start.column}: Integer constant '{text_val}' exceeds 32-bit limits. Treated as 64-bit."
+                                if warning_msg not in self.warnings:
+                                    self.warnings.append(warning_msg)
+                                    print(warning_msg)
+                                
                             if val > 2147483647 or val < -2147483648:
                                 warning_msg = f"[Warning] line {ctx.start.line}:{ctx.start.column}: Integer overflow. '{val}' exceeds 32-bit boundaries."
                                 if warning_msg not in self.warnings:
@@ -405,15 +470,12 @@ class ASTVisitor:
 
                 elif class_name == "Array_initializerContext":
                     elements = []
-                    # De nieuwe grammatica gebruikt een initializer_list
                     if ctx.initializer_list():
-                        # Loop door de elementen in de lijst
                         for el_ctx in ctx.initializer_list().initializer_element():
                             el_node = results.get(id(el_ctx))
                             if el_node:
                                 elements.append(el_node)
                     
-                    # Maak de ArrayInitNode aan met de verzamelde kinderen
                     res = self.get_loc(ArrayInitNode(elements), ctx)
 
                 elif class_name == "IfStatementContext":
@@ -439,22 +501,21 @@ class ASTVisitor:
                         res = results.get(id(ctx.expression()))
 
                 elif class_name == "ForStatementContext":
-                    # Let op het gebruik van .get() omdat delen van de for-loop (zoals init) leeg kunnen zijn
                     init = results.get(id(ctx.forInit())) if ctx.forInit else None
                     if ctx.forInit() and ctx.forInit().declarationFor():
-                        self.warnings.append(
-                            f"[Warning] line {ctx.forInit().start.line}:{ctx.forInit().start.column}: "
-                            f"Declaration in 'for' initializer is a C99 feature."
-                        )
+                        print(f"[Error] line {ctx.forInit().start.line}:{ctx.forInit().start.column}: "
+                            f"Declaration in 'for' initializer is a C99 feature. C89 strictly forbids this.")
+                        import sys
+                        sys.exit(1)
+
                     condition = results.get(id(ctx.expression(0))) if ctx.expression(0) else None
                     update = results.get(id(ctx.expression(1))) if ctx.expression(1) else None
                     body = results[id(ctx.compoundStatement())]
 
-                    # 1. Voeg de update toe aan het einde van de body
                     if update:
                         body.items.append(update)
                     
-                    # 2. Maak de conditie (als er geen conditie is, is het een oneindige loop -> 1)
+                    # 2. Maak de conditie
                     if not condition:
                         condition = IntNode(1)
                         condition.eval_type = 'int'
@@ -497,13 +558,10 @@ class ASTVisitor:
                         case_body = results[id(case_ctx)]
                         
                         if case_ctx.CASE():
-                            # Haal de tekst op en parse deze slim (ondersteunt 0x, 0, etc.)
                             val_str = case_ctx.INT_LITERAL().getText().rstrip("uUlL")
                             try:
-                                val = int(val_str, 0) # De '0' herkent automatisch hex/octaal/decimaal
+                                val = int(val_str, 0)
                             except ValueError:
-                                # Als het geen int is, is het misschien een CHAR_LITERAL?
-                                # (Pas dit aan op basis van jouw specifieke grammatica)
                                 val = ord(val_str[1]) if len(val_str) >= 3 else 0
                             
                             ordered_cases.append((val, case_body))
@@ -511,7 +569,7 @@ class ASTVisitor:
                         elif case_ctx.DEFAULT():
                             ordered_cases.append((None, case_body)) 
 
-                    node = SwitchNode(switch_expr, [], None) # De oude 'cases' en 'default' mag je laten vervallen
+                    node = SwitchNode(switch_expr, [], None)
                     node.ordered_cases = ordered_cases 
                     res = self.get_loc(node, ctx)
 

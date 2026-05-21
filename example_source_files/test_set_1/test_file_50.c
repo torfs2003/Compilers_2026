@@ -1,5 +1,3 @@
-#include <stdio.h>
-
 int main() {
 const char c = 'a';
 const char* chr_ptr = &c;

@@ -53,20 +53,8 @@
   example_source_files\test_set_3\ASTTests\ConversionTests\test9.c... PASSED
   example_source_files\test_set_3\ASTTests\ConversionTests\test10.c... PASSED
   example_source_files\test_set_3\ASTTests\ConversionTests\test11.c... PASSED
-  example_source_files\test_set_3\ASTTests\ConversionTests\test12.c... FAILED
-    --> EXPECTED (code 0):
-    
-    ACTUAL (code 1):
-    
-    [!] LLI STDERR:
-    lli.exe: lli: output\test_set_3\ASTTests\ConversionTests\test12.ll:17:37: error: integer constant must have integer type
-  example_source_files\test_set_3\ASTTests\ConversionTests\test13.c... FAILED
-    --> EXPECTED (code 0):
-    
-    ACTUAL (code 1):
-    
-    [!] LLI STDERR:
-    lli.exe: lli: output\test_set_3\ASTTests\ConversionTests\test13.ll:17:37: error: integer constant must have integer type
+  example_source_files\test_set_3\ASTTests\ConversionTests\test12.c... PASSED
+  example_source_files\test_set_3\ASTTests\ConversionTests\test13.c... PASSED
   example_source_files\test_set_3\ASTTests\ConversionTests\test14.c... PASSED
   example_source_files\test_set_3\ASTTests\ConversionTests\test15.c... PASSED
   example_source_files\test_set_3\ASTTests\ConversionTests\test16.c... PASSED
@@ -75,25 +63,22 @@
   example_source_files\test_set_3\ASTTests\ConversionTests\test19.c... PASSED
   example_source_files\test_set_3\ASTTests\ConversionTests\test20.c... PASSED
 
-  |== ConversionTests TOTAAL: 18 passed, 2 failed  [2 GEFAALD] ==|
+  |== ConversionTests TOTAAL: 20 passed, 0 failed  [ALLES GESLAAGD] ==|
 
 ──────────────────────────────────────────────────
   [DeadCodeRemoveTests]
 ──────────────────────────────────────────────────
-  example_source_files\test_set_3\ASTTests\DeadCodeRemoveTests\test1.c... FAILED
-    --> TIMEOUT (Mogelijke oneindige lus)
-  example_source_files\test_set_3\ASTTests\DeadCodeRemoveTests\test2.c... FAILED
-    --> TIMEOUT (Mogelijke oneindige lus)
+  example_source_files\test_set_3\ASTTests\DeadCodeRemoveTests\test1.c... PASSED
+  example_source_files\test_set_3\ASTTests\DeadCodeRemoveTests\test2.c... PASSED
   example_source_files\test_set_3\ASTTests\DeadCodeRemoveTests\test3.c... PASSED
   example_source_files\test_set_3\ASTTests\DeadCodeRemoveTests\test4.c... PASSED
   example_source_files\test_set_3\ASTTests\DeadCodeRemoveTests\test5.c... PASSED
   example_source_files\test_set_3\ASTTests\DeadCodeRemoveTests\test6.c... PASSED
   example_source_files\test_set_3\ASTTests\DeadCodeRemoveTests\test7.c... PASSED
   example_source_files\test_set_3\ASTTests\DeadCodeRemoveTests\test8.c... PASSED
-  example_source_files\test_set_3\ASTTests\DeadCodeRemoveTests\test9.c... FAILED
-    --> TIMEOUT (Mogelijke oneindige lus)
+  example_source_files\test_set_3\ASTTests\DeadCodeRemoveTests\test9.c... PASSED
 
-  |== DeadCodeRemoveTests TOTAAL: 6 passed, 3 failed  [3 GEFAALD] ==|
+  |== DeadCodeRemoveTests TOTAAL: 9 passed, 0 failed  [ALLES GESLAAGD] ==|
 
 ──────────────────────────────────────────────────
   [SemanticErrorsTests]
@@ -118,17 +103,15 @@
   example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test18.c... PASSED (Expected failure)
   example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test19.c... PASSED (Expected failure)
   example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test20.c... PASSED (Expected failure)
-  example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test21.c... FAILED
-    --> INVALID_C_FILE
+  example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test21.c... PASSED
   example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test22.c... PASSED (Expected failure)
   example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test23.c... PASSED (Expected failure)
   example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test24.c... PASSED (Expected failure)
   example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test25.c... PASSED (Expected failure)
-  example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test26.c... FAILED (Compiler Error)
-  example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test27.c... FAILED
-    --> INVALID_C_FILE
+  example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test26.c... PASSED
+  example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test27.c... PASSED (Expected failure)
   example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test28.c... PASSED
-  example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test29.c... FAILED (Compiler Error)
+  example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test29.c... PASSED
   example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test30.c... PASSED
   example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test31.c... PASSED
   example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test32.c... PASSED (Expected failure)
@@ -149,7 +132,7 @@
   example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test45.c... PASSED (Expected failure)
   example_source_files\test_set_3\ASTTests\SemanticErrorsTests\test46.c... PASSED (Expected failure)
 
-  |== SemanticErrorsTests TOTAAL: 37 passed, 8 failed  [8 GEFAALD] ==|
+  |== SemanticErrorsTests TOTAAL: 41 passed, 4 failed  [4 GEFAALD] ==|
 
 ──────────────────────────────────────────────────
   [SwitchTests]
@@ -166,7 +149,7 @@
   [TypedefTests]
 ──────────────────────────────────────────────────
   example_source_files\test_set_3\ASTTests\TypedefTests\test1.c... PASSED
-  example_source_files\test_set_3\ASTTests\TypedefTests\test2.c... PASSED
+  example_source_files\test_set_3\ASTTests\TypedefTests\test2.c... FAILED (Compiler Error)
   example_source_files\test_set_3\ASTTests\TypedefTests\test3.c... PASSED (Expected failure)
   example_source_files\test_set_3\ASTTests\TypedefTests\test4.c... PASSED
   example_source_files\test_set_3\ASTTests\TypedefTests\test5.c... PASSED
@@ -190,7 +173,7 @@
   example_source_files\test_set_3\ASTTests\TypedefTests\test25.c... PASSED
   example_source_files\test_set_3\ASTTests\TypedefTests\test26.c... PASSED (Expected failure)
 
-  |== TypedefTests TOTAAL: 24 passed, 0 failed  [ALLES GESLAAGD] ==|
+  |== TypedefTests TOTAAL: 23 passed, 1 failed  [1 GEFAALD] ==|
 
 ──────────────────────────────────────────────────
   [ValueAdderTests]
@@ -227,6 +210,6 @@
   |== ValueAdderTests TOTAAL: 22 passed, 2 failed  [2 GEFAALD] ==|
 
 ============================================================
-  EINDTOTAAL: 135 passed, 15 failed
+  EINDTOTAAL: 143 passed, 7 failed
 ============================================================
 

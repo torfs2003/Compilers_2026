@@ -1,11 +1,9 @@
-#include <stdio.h>
-
 int main() {
-    int x = 5;
-    int z;
+int x = 5;
+x--;
 
-    x--;
-    z = x--;
-    x = x-- + z--;
-    --x;
+int z = x--;
+x = x-- + z--;
+
+--x;
 }

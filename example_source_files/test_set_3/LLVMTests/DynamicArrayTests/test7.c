@@ -15,7 +15,7 @@ int main(){
     *(f+9) = 5;
     printf("%d", *(f+9));
 
-    f = (int*) realloc(f, 40);
+    f = (int*) realloc(f, 20);
 
 
     printf("%d", *(f+9));

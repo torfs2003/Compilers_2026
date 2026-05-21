@@ -154,11 +154,12 @@ class FunctionDeclNode(ASTNode):
 
 class FuncPtrDeclNode(ASTNode):
     def __init__(self, return_type, name, param_types, init_expr=None):
+        super().__init__()
         self.return_type = return_type
         self.name = name
         self.param_types = param_types
         self.init_expr = init_expr
-        self.type_spec = f"{return_type}(*)({','.join(param_types)})"  # Handig voor semantiek en LLVM
+        self.type_spec = f"{return_type}(*)({','.join(param_types)})"
     def __repr__(self):
         return f"FuncPtrDecl({self.return_type}(*){self.name}({','.join(self.param_types)}))"
 
@@ -239,7 +240,7 @@ class TypedefNode(ASTNode):
 class UnionDeclNode:
     def __init__(self, name, members):
         self.name = name
-        self.members = members  # Dit wordt een lijst van declaraties (de velden)
+        self.members = members
 
     def __repr__(self):
         return f"UnionDef({self.name})"
@@ -263,6 +264,6 @@ class ForInitNode(ASTNode):
 class SizeofNode(ASTNode):
     def __init__(self, operand):
         super().__init__()
-        self.operand = operand  # string (type) of ASTNode (expressie)
+        self.operand = operand
     def __repr__(self):
         return f"SizeofNode({self.operand})"
