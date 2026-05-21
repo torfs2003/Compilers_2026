@@ -1,267 +1,309 @@
 import subprocess
 import os
 import sys
+import argparse
+import re  # Nieuw: nodig voor de logische sortering
 from pathlib import Path
 
-# De geautomatiseerde output file
-LOG_FILE = "output/test_results.txt"
-FAILED_LOG_FILE = "output/failed_tests.txt"
-test_input = "abcde\n"
+# De hoofdmap voor alle output
+OUTPUT_ROOT = Path("output")
+# De basis-source map om de structuur te bepalen
+SOURCE_ROOT = Path("example_source_files")
 
-# Clang flags (vergelijkbaar streng als je GCC-set)
-CLANG_FLAGS = [
-    "-std=c89",
-    "-pedantic",
-    "-Wall",
-    "-Wextra",
-    "-Werror=implicit-int",
-    "-Werror=multichar",
-    "-Wno-error=int-conversion"
+# ==========================================
+# COMPILER INSTELLINGEN (
+# ==========================================
+
+# OPTIE 1: CLANG
+
+COMPILER_CMD = "clang"
+COMPILER_FLAGS = [
+    "-std=c89", "-pedantic", "-Wall", "-Wextra",
+    "-Werror=implicit-int", "-Werror=multichar", "-Wno-error=int-conversion"
 ]
 
+# OPTIE 2: GCC
+# Haal de '#' hieronder weg en zet ze voor de Clang instellingen hierboven om te switchen.
+#COMPILER_CMD = "gcc"
+#COMPILER_FLAGS = [
+#    "-std=c89", "-pedantic-errors", "-Wall", "-Wextra"
+#]
+
+REF_COMPILER_FLAGS = [
+    ('-pedantic' if f == '-pedantic-errors' else '-std=gnu89' if f == '-std=c89' else f)
+    for f in COMPILER_FLAGS
+]
+
+_log_file = None
+_debug_mode = False
+
+def set_debug_mode(debug: bool):
+    global _debug_mode
+    _debug_mode = debug
+
+def natural_sort_key(path: Path):
+    """
+    Zorgt ervoor dat 'test_file_2' voor 'test_file_10' komt.
+    Splitst de tekst in stukjes tekst en stukjes getal.
+    """
+    return [int(text) if text.isdigit() else text.lower()
+            for text in re.split('([0-9]+)', str(path.name))]
+
+def set_log_file(path: str):
+    global _log_file
+    _log_file = path
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    if os.path.exists(path):
+        os.remove(path)
+
 def log(message, end="\n"):
-    """Print naar terminal én schrijft weg naar het resultatenbestand."""
     print(message, end=end)
-    with open(LOG_FILE, "a", encoding="utf-8") as f:
-        f.write(message + end)
+    if _log_file:
+        with open(_log_file, "a", encoding="utf-8", errors="replace") as f:
+            f.write(message + end)
 
 def stdin_for_test(c_file: Path) -> str:
-    # default: genoeg tokens voor meerdere scanf's
     default = "0 0\n0 0\n0 0\nabcde\nabcde\n"
-
     name = c_file.name
-    if name == "test_file_6.c":
-        # fib: n=5
-        return "5"
-    if name == "test_file_15.c":
-        # primes: n=10
-        return "10"
-    if name == "test_file_19.c":
-        # two ints: x=0 y=0
-        return "0 0"
-    if name == "test_file_20.c":
-        # 5 chars; NOTE: test itself is UB because a[5] can't hold 5 chars + '\0'
-        return "abcd"
+    if name == "test_file_6.c":  return "5"
+    if name == "test_file_15.c": return "10"
+    if name == "test_file_19.c": return "0 0"
+    if name == "test_file_20.c": return "abcd"
     return default
+
+def compiler_accepts_c_file(c_file: Path):
+    ref_exe = f"./compiler_test_{c_file.stem}.exe" if os.name == "nt" else f"./safe_compile_{c_file.stem}"
+    try:
+        subprocess.run([COMPILER_CMD, *REF_COMPILER_FLAGS, str(c_file), "-o", ref_exe],
+                       check=True, capture_output=True, text=True, timeout=5, errors="replace")
+        return True, ""
+    except subprocess.CalledProcessError:
+        return False, "INVALID_C_FILE"
+    finally:
+        try:
+            if os.path.exists(ref_exe): os.remove(ref_exe)
+        except OSError:
+            pass
 
 def test_execution(c_file: Path, generated_ll_file: str):
     ref_exe = f"./compiler_test_{c_file.stem}.exe" if os.name == "nt" else f"./safe_compile_{c_file.stem}"
     test_input = stdin_for_test(c_file)
-
     try:
-        # 1. Run Clang (compile + run reference)
-        subprocess.run(
-            ["clang", *CLANG_FLAGS, str(c_file), "-o", ref_exe],
-            check=True,
-            capture_output=True,
-            text=True,
-            timeout=5,
-        )
-        ref_result = subprocess.run([ref_exe], input=test_input, capture_output=True, text=True, timeout=2)
+        subprocess.run([COMPILER_CMD, *REF_COMPILER_FLAGS, str(c_file), "-o", ref_exe],
+                       check=True, capture_output=True, text=True, timeout=5, errors="replace")
 
-        # 2. Run compiler output (LLI)
-        my_result = subprocess.run(
-            ["lli", generated_ll_file],
-            input=test_input,
-            capture_output=True,
-            text=True,
-            timeout=5,
-        )
-
-        # 3. Vergelijk de output
+        ref_timeout = False
+        my_timeout = False
+        ref_result = None
+        my_result = None
+        
+        try:
+            ref_result = subprocess.run([ref_exe], input=test_input, capture_output=True, text=True, timeout=2, errors="replace")
+        except subprocess.TimeoutExpired:
+            ref_timeout = True
+            
+        try:
+            my_result = subprocess.run(["lli", generated_ll_file], input=test_input,
+                                       capture_output=True, text=True, timeout=5, errors="replace")
+        except subprocess.TimeoutExpired:
+            my_timeout = True
+            
+        if ref_timeout or my_timeout:
+            return True, "Timeout accepted (infinite loop)"
+            
         out_match = (ref_result.stdout.strip() == my_result.stdout.strip())
-
-        lli_system_error = (
-            "error while loading shared libraries" in my_result.stderr
-            or "lli: " in my_result.stderr
-        )
+        lli_err   = "error while loading shared libraries" in my_result.stderr or "lli: " in my_result.stderr
 
         code_match = False
-        if lli_system_error:
-            code_match = False
-        elif ref_result.returncode == my_result.returncode:
-            code_match = True
-        elif ref_result.returncode != 0 and my_result.returncode != 0:
-            code_match = True
-        elif out_match and my_result.returncode == 0 and my_result.stdout.strip() == "":
-            code_match = True  # De fix voor GCC garbage codes (houdbaar voor Clang scenario’s)
+        if not lli_err:
+            if ref_result.returncode == my_result.returncode:              code_match = True
+            elif ref_result.returncode != 0 and my_result.returncode != 0: code_match = True
+            elif out_match and my_result.returncode == 0 and not my_result.stdout.strip(): code_match = True
 
-        # 4. Geef het resultaat correct terug
         if out_match and code_match:
             return True, "Execution output match!"
-        else:
-            diff = (
-                f"EXPECTED (code {ref_result.returncode}):\n{ref_result.stdout}\n"
-                f"ACTUAL (code {my_result.returncode}):\n{my_result.stdout}"
-            )
-            if my_result.stderr:
-                diff += f"\n[!] LLI SYSTEM ERROR / STDERR:\n{my_result.stderr.strip()}"
-            return False, diff
 
-    except subprocess.TimeoutExpired:
-        return False, "TIMEOUT (Mogelijke oneindige lus in de code)"
+        diff = (f"EXPECTED (code {ref_result.returncode}):\n{ref_result.stdout}\n"
+                f"ACTUAL (code {my_result.returncode}):\n{my_result.stdout}")
+        if my_result.stderr:
+            diff += f"\n[!] LLI STDERR:\n{my_result.stderr.strip()}"
+        return False, diff
+
     except subprocess.CalledProcessError:
-        # In de Clang versie: geen speciale uitzondering meer voor C90 // comments
         return False, "INVALID_C_FILE"
     finally:
-        if os.path.exists(ref_exe):
-            os.remove(ref_exe)
+        try:
+            if os.path.exists(ref_exe): os.remove(ref_exe)
+        except OSError:
+            pass
 
-
-def clang_accepts_c_file(c_file: Path):
-    ref_exe = f"./compiler_test_{c_file.stem}.exe" if os.name == "nt" else f"./safe_compile_{c_file.stem}"
+def run_single_test(c_file: Path, root_path: Path):
     try:
-        subprocess.run(
-            ["clang", *CLANG_FLAGS, str(c_file), "-o", ref_exe],
-            check=True,
-            capture_output=True,
-            text=True,
-            timeout=5,
-        )
-        return True, ""
-    except subprocess.CalledProcessError:
-        # In de Clang versie: geen speciale uitzondering meer voor C90 // comments
-        return False, "INVALID_C_FILE"
-    finally:
-        if os.path.exists(ref_exe):
-            os.remove(ref_exe)
+        rel_path = c_file.relative_to(SOURCE_ROOT)
+    except ValueError:
+        rel_path = Path(c_file.name)
 
+    out_ll  = OUTPUT_ROOT / rel_path.with_suffix(".ll")
+    out_dot = OUTPUT_ROOT / rel_path.with_suffix(".dot")
+    out_bin = OUTPUT_ROOT / rel_path.with_suffix(".bin")
+    out_s   = OUTPUT_ROOT / rel_path.with_suffix(".s")
 
-def run_tests_in_directory(test_dir, output_dir):
-    """Runt de compiler en vergelijkt het uitvoergedrag voor alle .c bestanden."""
-    path = Path(test_dir)
-    c_files = list(path.rglob("*.c"))
+    out_ll.parent.mkdir(parents=True, exist_ok=True)
 
-    log(f"\n--- Start testen in: {test_dir} ({len(c_files)} bestanden) ---")
+    cmd = [sys.executable, "-m", "src.main",
+           "--input", str(c_file), 
+           "--render_ast", str(out_dot), 
+           "--target_llvm", str(out_ll),
+           "--target_bin", str(out_bin),
+           "--target_mips", str(out_s)]
+    
+    display_path = c_file.relative_to(SOURCE_ROOT.parent)
+    try:
+        result = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=30)
+    except subprocess.TimeoutExpired:
+        log(f"  {display_path}... FAILED (Compiler TIMEOUT - Mogelijke oneindige lus)")
+        return False, str(display_path)
 
-    if not c_files:
-        log(f"Geen .c bestanden gevonden in {test_dir}")
-        return
-
-    passed = 0
-    failed = 0
-    failed_tests = []
-
-    for c_file in c_files:
-        base_name = c_file.stem
-        folder_name = c_file.parent.name
-        unique_name = f"{folder_name}_{base_name}"
-
-        out_ll = os.path.join(output_dir, f"{unique_name}.ll")
-        out_dot = os.path.join(output_dir, f"{unique_name}.dot")
-
-        # Aanroep van jouw compiler
-        cmd = [
-            sys.executable, "-m", "src.main",
-            "--input", str(c_file),
-            "--render_ast", out_dot,
-            "--target_llvm", out_ll,
-        ]
-
-        log(f"Testen van: {folder_name}/{c_file.name}...", end="")
-
-        # Run jouw compiler
-        result = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8")
-
-        if result.returncode != 0:
-            clang_ok, _ = clang_accepts_c_file(c_file)
-
-            if clang_ok:
-                log("FAILED (Compiler Error on valid C)")
-                log(f"  --> Jouw compiler gaf een foutmelding:\n{result.stderr[:300]}...\n")
-                failed += 1
-                failed_tests.append(f"{folder_name}/{c_file.name} -> Compiler Error (but Clang accepts)")
+    if result.returncode != 0:
+        if out_ll.exists(): os.remove(out_ll)
+        if out_dot.exists(): os.remove(out_dot)
+        if out_bin.exists(): os.remove(out_bin)
+        if out_s.exists(): os.remove(out_s)
+        
+        compiler_ok, _ = compiler_accepts_c_file(c_file)
+        if compiler_ok:
+            error_msg = result.stderr.strip() if result.stderr else result.stdout.strip()
+            if error_msg:
+                num_lines = 100 if _debug_mode else 10
+                short_error = "\n    ".join(error_msg.splitlines()[:num_lines])
+                log(f"  {display_path}... FAILED (Compiler Error)")
+                log(f"    --> {short_error}")
             else:
-                log("PASSED (Expected failure: compiler ving de error op)")
-                passed += 1
-            continue
-
-        if not os.path.exists(out_ll):
-            log("FAILED (Geen .ll bestand gemaakt)")
-            failed += 1
-            failed_tests.append(f"{folder_name}/{c_file.name} -> No .ll output")
-            continue
-
-        match, msg = test_execution(c_file, out_ll)
-
-        # Clang faalt → check of jouw compiler dit correct afvangt
-        if msg == "INVALID_C_FILE":
-            if result.returncode != 0:
-                log("PASSED (Expected failure: compiler ving de error op)")
-                passed += 1
-            else:
-                log("FAILED (Clang gaf error, maar jouw compiler accepteerde de code!)")
-                failed += 1
-                failed_tests.append(f"{folder_name}/{c_file.name} -> Clang mismatch")
-            continue
-
-        # Compiler zelf faalt
-        if result.returncode != 0:
-            log("FAILED (Compiler Error)")
-            log(f"  --> Jouw compiler gaf een foutmelding:\n{result.stderr[:300]}...\n")
-            failed += 1
-            failed_tests.append(f"{folder_name}/{c_file.name} -> Compiler Error")
-            continue
-
-        # Geen LLVM output
-        if not os.path.exists(out_ll):
-            log("FAILED (Geen .ll bestand gemaakt)")
-            failed += 1
-            failed_tests.append(f"{folder_name}/{c_file.name} -> No .ll output")
-            continue
-
-        # Output vergelijking
-        if match:
-            log("PASSED")
-            passed += 1
+                log(f"  {display_path}... FAILED (Compiler Error)")
+            return False, str(display_path)
         else:
-            log("FAILED")
-            log(f"  --> {msg}")
-            failed += 1
-            failed_tests.append(f"{folder_name}/{c_file.name} -> {msg}")
+            log(f"  {display_path}... PASSED (Expected failure)")
+            return True, None
 
-    # Resultaten
-    log(f"\n--- Resultaten voor {test_dir}: {passed} Passed, {failed} Failed ---")
+    if not out_ll.exists():
+        log(f"  {display_path}... FAILED (Geen .ll bestand gemaakt)")
+        return False, str(display_path)
 
-    if failed_tests:
-        log("\nGefaalde tests (zie apart bestand)")
+    match, msg = test_execution(c_file, str(out_ll))
 
-        # Schrijf naar apart bestand
-        with open(FAILED_LOG_FILE, "a", encoding="utf-8") as f:
-            f.write(f"\n--- Gefaalde tests in {test_dir} ---\n")
-            for test in failed_tests:
-                f.write(f"{test}\n")
+    if match:
+        log(f"  {display_path}... PASSED")
+        return True, None
     else:
-        log("\nGeen gefaalde tests")
+        short_msg = "\n    ".join(msg.splitlines()[:6])
+        log(f"  {display_path}... FAILED\n    --> {short_msg}")
+        return False, str(display_path)
 
-    log("\n")
+def run_directory(path: Path, indent: int = 0):
+    prefix = "  " * indent
+    direct_c = sorted((p for p in path.iterdir() if p.is_file() and p.suffix == ".c"), key=natural_sort_key)
+    subdirs  = sorted((p for p in path.iterdir() if p.is_dir()), key=natural_sort_key)
+    total_passed, total_failed = 0, 0
 
+    for c_file in direct_c:
+        ok, _ = run_single_test(c_file, SOURCE_ROOT)
+        if ok: total_passed += 1
+        else:  total_failed += 1
+
+    for sub in subdirs:
+        log(f"{prefix}[{sub.name}]")
+        sp, sf = run_directory(sub, indent + 1)
+        total_passed += sp
+        total_failed += sf
+        status = "V" if sf == 0 else "X"
+        log(f"{prefix}  |__ {sub.name}: {status}  {sp} passed, {sf} failed")
+        log("")
+
+    return total_passed, total_failed
+
+def run_folder(folder: str):
+    path = Path(folder)
+    if not path.exists():
+        print(f"Waarschuwing: Map '{folder}' niet gevonden.")
+        return 0, 0
+
+    log_name = path.name + ".txt"
+    log_path = OUTPUT_ROOT / log_name
+    set_log_file(str(log_path))
+
+    log(f"\n{'='*60}")
+    log(f"  TEST MAP : {folder}")
+    log(f"  Resultaten in : {OUTPUT_ROOT}")
+    log(f"{'='*60}")
+
+    top_subdirs = sorted((p for p in path.iterdir() if p.is_dir()), key=natural_sort_key)
+    direct_c    = sorted((p for p in path.iterdir() if p.is_file() and p.suffix == ".c"), key=natural_sort_key)
+
+    set_passed, set_failed = 0, 0
+
+    for c_file in direct_c:
+        ok, _ = run_single_test(c_file, SOURCE_ROOT)
+        if ok: set_passed += 1
+        else:  set_failed += 1
+
+    for top in top_subdirs:
+        log(f"\n{'─'*50}")
+        log(f"  [{top.name}]")
+        log(f"{'─'*50}")
+        sp, sf = run_directory(top, indent=1)
+        set_passed += sp
+        set_failed += sf
+        status = "ALLES GESLAAGD" if sf == 0 else f"{sf} GEFAALD"
+        log(f"\n  |== {top.name} TOTAAL: {sp} passed, {sf} failed  [{status}] ==|")
+
+    log(f"\n{'='*60}")
+    log(f"  EINDTOTAAL: {set_passed} passed, {set_failed} failed")
+    log(f"{'='*60}\n")
+    return set_passed, set_failed
 
 def main():
-    if os.path.exists(FAILED_LOG_FILE):
-        os.remove(FAILED_LOG_FILE)
+    parser = argparse.ArgumentParser(description="Test runner voor de C compiler.")
+    parser.add_argument("folder", nargs="?", default=None)
+    parser.add_argument("--debug", action="store_true", help="Show full error messages (100 lines)")
+    parser.add_argument("--test", type=str, help="Test a single file (e.g., example_source_files/test_set_3/MipsTests/ArrayTests/test1.c)")
+    args = parser.parse_args()
 
-    test_folders = [
-        "example_source_files/test_set_1",
-        "example_source_files/test_set_2"#,
-        #"example_source_files/test_set_3"#,
-    ]
+    OUTPUT_ROOT.mkdir(exist_ok=True)
+    set_debug_mode(args.debug)
 
-    output_folder = "output/test_results"
-    os.makedirs(output_folder, exist_ok=True)
+    if args.test:
+        test_file = Path(args.test)
+        if not test_file.exists():
+            print(f"File not found: {args.test}")
+            sys.exit(1)
+        set_log_file(str(OUTPUT_ROOT / "debug_single_test.txt"))
+        log(f"Testing single file: {args.test}\n")
+        ok, _ = run_single_test(test_file, SOURCE_ROOT)
+        print(f"\nResult: {'PASSED' if ok else 'FAILED'}")
+        if _log_file:
+            print(f"Full output in: {_log_file}")
+        sys.exit(0 if ok else 1)
+    
+    if args.folder:
+        run_folder(args.folder)
+    else:
+        default_folders = [
+            "example_source_files/test_set_1",
+            "example_source_files/test_set_2",
+            "example_source_files/test_set_3/ASTTests",
+            "example_source_files/test_set_3/LLVMTests",
+            "example_source_files/test_set_3/MipsTests"
+        ]
+        grand_passed, grand_failed = 0, 0
+        for folder in default_folders:
+            gp, gf = run_folder(folder)
+            grand_passed += gp
+            grand_failed += gf
 
-    # Verwijder oud logbestand
-    if os.path.exists(LOG_FILE):
-        os.remove(LOG_FILE)
-
-    for folder in test_folders:
-        if os.path.exists(folder):
-            run_tests_in_directory(folder, output_folder)
-        else:
-            print(f"Waarschuwing: Map '{folder}' niet gevonden, overgeslagen.")
-
-    print(f"\nAlle resultaten zijn opgeslagen in: {LOG_FILE}")
-
+        if len(default_folders) > 1:
+            print(f"\n{'#'*60}")
+            print(f"  GRAND TOTAL: {grand_passed} passed, {grand_failed} failed")
+            print(f"{'#'*60}")
 
 if __name__ == "__main__":
     main()

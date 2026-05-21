@@ -41,9 +41,9 @@ initDeclarator
     ;
 
 declaration
-    : CONST typeSpecifier initDeclaratorList SEMI       // const int x = 5;
-    | typeSpecifier initDeclaratorList SEMI             // int x = 5;
-    | CONST initDeclaratorList SEMI                     // const x = 5; (Implicit int!)
+    : CONST typeSpecifier initDeclaratorList SEMI
+    | typeSpecifier initDeclaratorList SEMI
+    | CONST initDeclaratorList SEMI
     | typeSpecifier LPAREN MUL IDENTIFIER RPAREN LPAREN typeList? RPAREN (ASSIGN expression)? SEMI
     ;
 
