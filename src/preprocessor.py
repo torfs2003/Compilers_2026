@@ -74,6 +74,9 @@ class Preprocessor:
 
             # 2. Handle #define A B
             elif stripped_line.startswith("#define"):
+                if '//' in stripped_line:
+                    stripped_line = stripped_line[:stripped_line.index('//')]
+                
                 parts = stripped_line.split()
                 
                 if len(parts) < 2:
@@ -103,12 +106,6 @@ class Preprocessor:
                     continue
 
                 macro_value = " ".join(parts[2:]) if len(parts) >= 3 else ""
-                
-                if macro_name in self.defines and self.defines[macro_name] != macro_value:
-                    foutmelding = f"[Error] Preprocessor: Redefinition of macro '{macro_name}' with a different value."
-                    print(foutmelding)
-                    self.errors.append(foutmelding)
-                    sys.exit(1)
                 
                 self.defines[macro_name] = macro_value
             

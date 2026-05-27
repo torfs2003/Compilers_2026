@@ -76,7 +76,8 @@ class Compiler:
             )
 
         self._mkdir(output_path)
-
+        
+        # https://llvm.org/docs/CommandGuide/llc.html
         self._run(
             [
                 self.llc,
